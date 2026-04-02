@@ -797,7 +797,7 @@ function showAbilityPopup(baseId, e) {
   document.getElementById('ap-desc').textContent=info.desc;
 
   var skinEl=document.getElementById('ap-skin');
-  if(info.skin){skinEl.textContent=info.skin;skinEl.style.display='block';}
+  if(info.skinEffect){skinEl.textContent=info.skinEffect;skinEl.style.display='block';}
   else{skinEl.style.display='none';}
 
   document.getElementById('ability-popup-overlay').classList.add('active');
@@ -1582,11 +1582,11 @@ function showTooltip(baseId,rect,cardEl){
     html+='<div class="tt-ability">';
     html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
     html+='<div class="tt-desc">'+info.desc+'</div>';
-    if(info.skin) html+='<div class="tt-skin">'+info.skin+'</div>';
+    if(info.skinEffect) html+='<div class="tt-skin">'+info.skinEffect+'</div>';
     html+='</div>';
-  } else if(info&&info.skin){
+  } else if(info&&info.skinEffect){
     html+='<div class="tt-ability">';
-    if(info.skin) html+='<div class="tt-skin">'+info.skin+'</div>';
+    if(info.skinEffect) html+='<div class="tt-skin">'+info.skinEffect+'</div>';
     html+='</div>';
   }
   // 버프 이력 표시

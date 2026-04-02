@@ -618,7 +618,7 @@ function showAbilityPopup(baseId, e, isSkin) {
 
   document.getElementById('ap-name').textContent=charName;
   var descEl=document.getElementById('ap-desc');
-  if(isSkin&&info.skinDesc){descEl.innerHTML=info.skinDesc;}
+  if(isSkin&&info.skinEffectDesc){descEl.innerHTML=info.skinEffectDesc;}
   else{descEl.textContent=info.desc;}
 
   var skinEl=document.getElementById('ap-skin');
@@ -1149,7 +1149,7 @@ function showTooltip(baseId,rect,cardEl){
     html+='<div class="tt-ability">';
     html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
     var isSkin=unitData&&unitData.isSkin;
-    if(isSkin&&info.skinDesc) html+='<div class="tt-desc">'+info.skinDesc+'</div>';
+    if(isSkin&&info.skinEffectDesc) html+='<div class="tt-desc">'+info.skinEffectDesc+'</div>';
     else html+='<div class="tt-desc">'+info.desc+'</div>';
     html+='</div>';
   }
