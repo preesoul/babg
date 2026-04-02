@@ -391,9 +391,22 @@ img.tutorial-highlight{border-radius:50%!important}
 .tutorial-bubble.tut-center.sz4{bottom:435px!important;font-size:34px}
 .tutorial-bubble.tut-center.sz4 .tut-text{font-size:34px;line-height:1.5}
 .tutorial-bubble.tut-center.sz4 .tut-name{font-size:34px}
+.pc-notice-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:1;transition:opacity 0.6s ease;pointer-events:none}
+.pc-notice-overlay.fade-out{opacity:0}
+.pc-notice-bubble{position:relative;background:#fff;border-radius:20px;padding:24px 32px;max-width:420px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.4);animation:popIn 0.4s ease}
+.pc-notice-bubble::after{content:'';position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);border:10px solid transparent;border-top-color:#fff}
+.pc-notice-bubble p{margin:0;font-size:15px;color:#1a2a3a;line-height:1.6;font-weight:600}
+.pc-notice-arona{width:180px;margin-top:20px;border-radius:50%;border:3px solid #4a9ff5;animation:popIn 0.4s ease 0.15s both}
+@keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
+<div class="pc-notice-overlay" id="pc-notice">
+  <div class="pc-notice-bubble">
+    <p>이 게임은 PC 해상도에 맞게<br>만들어져 있어요.<br>PC로 플레이해 주세요, 선생님!</p>
+  </div>
+  <img src="img/Icon/arona.jpg" alt="아로나" class="pc-notice-arona">
+</div>
 <div id="app">
 <div class="schale-frame" id="schale-frame" style="background-image:url('img/UI/wallpaper01.jpg');background-size:cover;background-position:center">
   <div id="title-screen" class="screen active">
@@ -4585,6 +4598,9 @@ function fadeSwitch(from,to,cb){
     if(cb)cb();
   },400);
 }
+// PC 안내 팝업 자동 닫기
+(function(){var n=document.getElementById('pc-notice');if(!n)return;setTimeout(function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);},3000);n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
+
 document.getElementById('btn-play').addEventListener('click',function(){
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
