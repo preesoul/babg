@@ -952,7 +952,7 @@ var ABILITY_DESCS = {
   gehenna_traingun:       {type:'개전 / 패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n개전: 상대 전체에 6의 광역 데미지.\n살아남은 전투마다 개전 발동 횟수가 증가합니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
   trinity_mika:           {type:'패시브',desc:'능력/효과로 인한 데미지와 쓰러짐에 면역입니다.\n전투 데미지로만 쓰러뜨릴 수 있습니다.',gold:''},
   trinity_nagisa:         {type:'개전',desc:'마리(아이돌), 사쿠라코(아이돌), 미네(아이돌)에게\n+5/+5를 부여합니다.',gold:''},
-  trinity_seia:           {type:'패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n세이아를 제외한 아군 트리니티 학생 전체에게 무적을 부여합니다.\n세이아가 쓰러지면 아군 전체 능력이 영구 삭제됩니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
+  trinity_seia:           {type:'패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n아군 트리니티 학생들은 방어 시 전투 데미지를 받지 않습니다.\n세이아가 쓰러지면 아군 전체 능력이 삭제됩니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
   millennium_nameless:    {type:'개전',desc:'자신을 파괴합니다.\n공격력+체력 총합으로 적 왼쪽부터 순차 데미지.\n보호막은 0 소비로 벗깁니다.',gold:''},
   millennium_malkuth:     {type:'선제 / 패시브',desc:'선제: 스위퍼 2체를 소환해 순차 공격시킵니다.\n스위퍼가 적을 처치하면 공격하지 않습니다.\n패시브: 모든 밀레니엄 토큰이 스위퍼로 대체됩니다.',gold:''},
   millennium_death_momoi: {type:'히든 / 개전 / 선제',desc:'샬레의 모든 모모이를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 모모이들의 공격력 합, 체력 합을 각각 더합니다.\n개전: 적 전체의 도발을 삭제합니다.\n선제: 적 스탯이 기본보다 높으면\n부여 수치를 제거하고 공격합니다.',gold:''},
@@ -2862,7 +2862,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         for(var _se=0;_se<myArr.length;_se++){
           if(myArr[_se].alive) stripAbilities(myArr[_se],log2);
         }
-        log2.push({cls:'kill',text:'세이아 사망! 모든 아군 능력이 영구 삭제됩니다!'});
+        log2.push({cls:'kill',text:'세이아 사망! 모든 아군 능력이 삭제됩니다!'});
         unit._permanentlyDestroyed=true;
       }
       // 열차포 영구 소멸
@@ -2872,14 +2872,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
   }
 
-  function dealHit(src,dst,log2,dmgOverride){
+  function dealHit(src,dst,log2,dmgOverride,isCombatDefense){
     var dmg=dmgOverride!==undefined?dmgOverride:src.atk;
-    // 세이아 무적: 트리니티 학생이 맞을 때, 같은 편에 세이아 생존 시 데미지 무효
+    // invincible 키워드 (일반 무적)
     if(hasKw(dst,'invincible')){
       log2.push({cls:'shield',text:dst.name+': 무적! 데미지 무효'});
       return {blocked:true,overflow:0};
     }
-    if(dst.school==='트리니티'&&dst._mySide&&dst.baseId!=='trinity_seia'){
+    // 세이아 예지: 방어 시 전투 데미지만 무효 (능력/효과 데미지는 통과)
+    if(isCombatDefense&&dst.school==='트리니티'&&dst._mySide&&dst.baseId!=='trinity_seia'){
       for(var _sv=0;_sv<dst._mySide.length;_sv++){
         if(dst._mySide[_sv].alive&&dst._mySide[_sv].baseId==='trinity_seia'&&dst._mySide[_sv]!==dst){
           log2.push({cls:'shield',text:dst.name+': 세이아의 예지로 회피했다!'});
@@ -3145,7 +3146,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   function dealDamage(attacker,atkArr,defender,defArr,log2,isCleave,dmgOverride){
-    var hitResult=dealHit(attacker,defender,log2,dmgOverride);
+    var hitResult=dealHit(attacker,defender,log2,dmgOverride,true);
     // 방어자가 맞고 살아남았으면 생존 체크
     checkSurvive(defender,defArr,log2,attacker);
     // 치세 패시브: 공격자 능력 제거
@@ -3244,7 +3245,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
           var msKillCount=0;
           for(var ms=0;ms<msHits;ms++){
             if(!target.alive)break;
-            var msHit=dealHit(attacker,target,stepLog);
+            var msHit=dealHit(attacker,target,stepLog,undefined,true);
             checkSurvive(target,defArr2,stepLog,attacker);
             // 나구사: 타격당 계승전 카운터 (아군만)
             if(attacker.baseId==='nagusa'&&!msHit.blocked&&attacker._mySide===a){
