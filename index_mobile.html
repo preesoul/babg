@@ -978,7 +978,7 @@ var ABILITY_DESCS = {
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',gold:'인터뷰 하이네: +4/+4'},
   momoka:   {type:'패시브',desc:'매 턴 리롤이 1회 무료입니다.\n(2명이면 2회)',gold:'승무원 모모카: 리롤 2회 무료'},
   ayumu:    {type:'패시브',desc:'액션카드의 수치 증가에 +2/+2가 추가됩니다.',gold:'승무원 아유무: +4/+4 추가'},
-  aoi:      {type:'패시브',desc:'매 턴 골드를 +2 추가로 얻습니다.',gold:'인터뷰 아오이: +4 추가'},
+  aoi:      {type:'패시브',desc:'매 턴 <img src="img/UI/stone.png" style="width:14px;height:14px;vertical-align:middle">을 +2 추가로 얻습니다.',gold:'인터뷰 아오이: +4 추가'},
   kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n공격력과 체력을 흡수합니다. (가장 마지막에 발동)',gold:'쿠데타 카야: 흡수량 x2'},
   lin:      {type:'패시브',desc:'아군의 죽음의 메아리와 전투의 함성이\n한 번 더 발동합니다.',gold:'승무원 린: 2번 더 발동'},
 };
@@ -1051,7 +1051,7 @@ var SPELLS = [
       return true;}},
   {id:'gold_bullet',name:'골드탄',cost:1,tier:1,desc:'선택 학생 공격력 +4',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;if(ab>0){p.board[idx].hp+=ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+ab;}logBuff(p.board[idx],'골드탄',4+ab,ab);return true;}},
-  {id:'savings',name:'비상금',cost:1,tier:2,desc:'다음 리롤/턴 시 골드 +2',target:'auto',
+  {id:'savings',name:'비상금',cost:1,tier:2,desc:'다음 리롤/턴 시 <img src="img/UI/stone.png" style="width:14px;height:14px;vertical-align:middle"> +2',target:'auto',
     effect:function(G){G.bonusGold=(G.bonusGold||0)+2;}},
   {id:'visit_plan',name:'방문 예정',cost:2,tier:2,desc:'다음 스케쥴 학생 공/체 +2',target:'auto',
     effect:function(G){var ab=getAyumuBonus();G.shopBuff=(G.shopBuff||0)+2+ab;}},
