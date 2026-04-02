@@ -399,9 +399,31 @@ img.tutorial-highlight{border-radius:50%!important}
 .pc-notice-bubble p{margin:0;font-size:15px;color:#1a2a3a;line-height:1.6;font-weight:600}
 .pc-notice-arona{width:180px;margin-top:20px;border-radius:50%;border:3px solid #4a9ff5;animation:popIn 0.4s ease 0.15s both}
 @keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes screen-shake{
+  0%{transform:translate(0,0) rotate(0deg)}
+  10%{transform:translate(-12px,8px) rotate(-1.5deg)}
+  20%{transform:translate(10px,-10px) rotate(1.2deg)}
+  30%{transform:translate(-8px,6px) rotate(-0.8deg)}
+  40%{transform:translate(8px,-4px) rotate(1deg)}
+  50%{transform:translate(-6px,3px) rotate(-0.5deg)}
+  60%{transform:translate(4px,-2px) rotate(0.3deg)}
+  70%{transform:translate(-3px,2px) rotate(-0.2deg)}
+  80%{transform:translate(2px,-1px) rotate(0.1deg)}
+  90%{transform:translate(-1px,1px) rotate(0deg)}
+  100%{transform:translate(0,0) rotate(0deg)}
+}
+@keyframes impact-ring{0%{transform:translate(-50%,-50%) scale(0);opacity:1}60%{opacity:0.6}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
+@keyframes screen-flash{0%{opacity:0.7}100%{opacity:0}}
+@keyframes crack-line{0%{opacity:1;transform:scaleX(0)}30%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+.shaking{animation:screen-shake 0.5s ease-out}
+#elim-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(255,100,100,0.8),rgba(200,50,50,0.4));pointer-events:none;opacity:0;z-index:9999}
+#elim-flash.active{animation:screen-flash 0.5s ease-out forwards}
+.elim-ring{position:fixed;width:200px;height:200px;border:4px solid rgba(255,80,80,0.9);border-radius:50%;pointer-events:none;z-index:9998;animation:impact-ring 0.6s ease-out forwards}
+.elim-crack{position:fixed;height:3px;background:linear-gradient(90deg,transparent,rgba(255,100,100,0.9),transparent);pointer-events:none;z-index:9997;transform-origin:center;animation:crack-line 0.7s ease-out forwards}
 </style>
 </head>
 <body>
+<div id="elim-flash"></div>
 <div class="pc-notice-overlay" id="pc-notice">
   <div class="pc-notice-bubble">
     <p>이 게임은 PC 해상도에 맞게<br>만들어져 있어요.<br>PC로 플레이해 주세요, 선생님!</p>
@@ -3275,11 +3297,11 @@ function startBattle() {
         var dmg=0;for(var i=0;i<chosen.survivorsA.length;i++)dmg+=chosen.survivorsA[i].tier;
         dmg+=p.tier;if(dmg>dmgCap)dmg=dmgCap;opp.hp-=dmg;
         chosen.damageText='승리! '+opp.name+'에게 '+dmg+' 피해';
-        if(opp.hp<=0){opp.dead=true;G.aliveCount--;for(var k=0;k<opp.board.length;k++)returnToPool(opp.board[k].baseId,opp.board[k].golden?3:1);opp.board=[];}
+        if(opp.hp<=0){opp.dead=true;G.aliveCount--;for(var k=0;k<opp.board.length;k++)returnToPool(opp.board[k].baseId,opp.board[k].golden?3:1);opp.board=[];chosen._eliminated=true;}
       } else {
         chosen.damageText='무승부!';
       }
-      if(p.hp<=0){p.dead=true;G.placement=G.aliveCount;G.aliveCount--;}
+      if(p.hp<=0){p.dead=true;G.placement=G.aliveCount;G.aliveCount--;chosen._eliminated=true;}
       var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia'];
       if(chosen.steps.length>0){
         var finalSnap=chosen.steps[chosen.steps.length-1].snap;
@@ -3932,22 +3954,59 @@ function reinjectCoinOverlay(){
   injectTokenRow(enemyRow,'b',true);
 }
 
+var _elimPlaying=false;
+function playEliminationEffect(cb){
+  if(_elimPlaying){if(cb)cb();return;}
+  _elimPlaying=true;
+  var flash=document.getElementById('elim-flash');
+  // 이전 잔여물 정리
+  flash.classList.remove('active');
+  document.body.classList.remove('shaking');
+  var oldRings=document.querySelectorAll('.elim-ring');for(var r=0;r<oldRings.length;r++)oldRings[r].remove();
+  var oldCracks=document.querySelectorAll('.elim-crack');for(var c=0;c<oldCracks.length;c++)oldCracks[c].remove();
+  void flash.offsetWidth; // reflow 강제 — CSS 애니메이션 재트리거 보장
+  document.body.classList.add('shaking');
+  flash.classList.add('active');
+  var ring=document.createElement('div');ring.className='elim-ring';
+  ring.style.left='50%';ring.style.top='45%';document.body.appendChild(ring);
+  for(var i=0;i<5;i++){
+    var crack=document.createElement('div');crack.className='elim-crack';
+    crack.style.left=(40+Math.random()*20)+'%';crack.style.top=(35+Math.random()*20)+'%';
+    crack.style.width=(100+Math.random()*200)+'px';
+    crack.style.transform='rotate('+(Math.random()*360)+'deg) scaleX(0)';
+    document.body.appendChild(crack);
+  }
+  setTimeout(function(){
+    document.body.classList.remove('shaking');
+    flash.classList.remove('active');
+    var rings=document.querySelectorAll('.elim-ring');for(var r=0;r<rings.length;r++)rings[r].remove();
+    var cracks=document.querySelectorAll('.elim-crack');for(var c=0;c<cracks.length;c++)cracks[c].remove();
+    _elimPlaying=false;
+    if(cb)cb();
+  },750);
+}
+
 function finishBattle(result) {
   _activeCoinOverlay=null;
   document.getElementById('btn-skip').style.display='none';
-  document.getElementById('battle-result-box').style.display='block';
-  document.getElementById('btn-continue').style.display='';
-  var resEl=document.getElementById('battle-result');
-  resEl.className='battle-result '+result.result;
-  resEl.textContent=result.result==='win'?'승리!':result.result==='lose'?'패배...':'무승부';
-  document.getElementById('battle-damage').textContent=result.damageText;
-  // 튜토리얼: 결과창 뜨면 다음 스텝 진행
-  if(TUT.active && TUT.waitingFor==='battleResult'){
-    TUT.waitingFor=null;
-    // 결과창 위에 튜토리얼 띄우기 위해 continue 숨김 (튜토리얼이 관리)
-    document.getElementById('btn-continue').style.display='none';
-    setTimeout(function(){tutNext();},500);
+  var eliminated=result._eliminated;
+  function _showResult(){
+    document.getElementById('battle-result-box').style.display='block';
+    document.getElementById('btn-continue').style.display='';
+    var resEl=document.getElementById('battle-result');
+    resEl.className='battle-result '+result.result;
+    resEl.textContent=result.result==='win'?'승리!':result.result==='lose'?'패배...':'무승부';
+    document.getElementById('battle-damage').textContent=result.damageText;
+    // 튜토리얼: 결과창 뜨면 다음 스텝 진행
+    if(TUT.active && TUT.waitingFor==='battleResult'){
+      TUT.waitingFor=null;
+      // 결과창 위에 튜토리얼 띄우기 위해 continue 숨김 (튜토리얼이 관리)
+      document.getElementById('btn-continue').style.display='none';
+      setTimeout(function(){tutNext();},500);
+    }
   }
+  if(eliminated){playEliminationEffect(_showResult);}
+  else{_showResult();}
 }
 
 function miniCardHtml(m){
