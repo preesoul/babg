@@ -3310,12 +3310,15 @@ function runBattleCoinPhase(snap,callback){
   var aliveAlly=collectCards(allyRow);
   var aliveEnemy=collectCards(enemyRow);
   var nA=aliveAlly.length,nB=aliveEnemy.length;
-  for(var j=0;j<aliveAlly.length;j++)aliveAlly[j].sid='a'+j;
-  for(var j=0;j<aliveEnemy.length;j++)aliveEnemy[j].sid='b'+j;
+  // snap에서 살아있는 유닛만 필터 → DOM 카드와 인덱스 일치시킴
+  var aliveSnapA=[];for(var j=0;j<snap.a.length;j++)if(snap.a[j].alive)aliveSnapA.push(snap.a[j]);
+  var aliveSnapB=[];for(var j=0;j<snap.b.length;j++)if(snap.b[j].alive)aliveSnapB.push(snap.b[j]);
+  for(var j=0;j<aliveAlly.length;j++){aliveAlly[j].sid='a'+j;aliveAlly[j].baseId=aliveSnapA[j]?aliveSnapA[j].baseId:'';}
+  for(var j=0;j<aliveEnemy.length;j++){aliveEnemy[j].sid='b'+j;aliveEnemy[j].baseId=aliveSnapB[j]?aliveSnapB[j].baseId:'';}
 
-  // snap에서 coinOff 정보 가져오기
+  // snap에서 coinOff 정보 가져오기 (alive 필터된 인덱스 기준)
   var coinOffMap={};
-  for(var j=0;j<snap.a.length;j++)if(snap.a[j].alive&&snap.a[j].coinOff)coinOffMap['a'+j]=true;
+  for(var j=0;j<aliveSnapA.length;j++)if(aliveSnapA[j].coinOff)coinOffMap['a'+j]=true;
 
   var coinsInjected=false;
   function injectCoin(ci,isEnemy){
