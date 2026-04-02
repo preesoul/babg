@@ -2090,6 +2090,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   // 토라마루(이로하 변신)는 baseId가 'iroha'지만 토라마루 DR이 있음
   if(unit.irohaRef) id='toramaru';
   // 아카네 C4 부여 뒤끝
+  console.log('[DEBUG C4]',unit.name,'baseId='+id,'_akaneC4DR='+!!unit._akaneC4DR,'stripped='+!!unit._abilitiesStripped,'permBan='+!!G.permanentAbilityBan);
   if(unit._akaneC4DR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
     var c4Count=unit._akaneC4Golden?2:1;
     for(var _c4=0;_c4<c4Count;_c4++){
@@ -3372,7 +3373,7 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);}
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);if(_isAsuna)console.log('[DEBUG ASUNA]',_u.name,'baseId='+_u.baseId,'coinOff='+!!coinOffMap[_u.sid],'result='+cr[_u.sid]);}
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       for(var j=0;j<aliveAlly.length;j++){if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);}
 
