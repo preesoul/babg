@@ -771,6 +771,7 @@ function abilityTag(baseId) {
   if(SOC_IDS[baseId])  tags+='<span class="ability-tag soc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">개전</span>';
   if(SURV_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">생존</span>';
   if(PASSIVE_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">패시브</span>';
+  if(PRE_IDS[baseId])     tags+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">선제</span>';
   return tags;
 }
 
