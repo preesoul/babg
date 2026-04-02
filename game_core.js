@@ -5,7 +5,7 @@
 var CHARS = [
   // ===== Tier 1 (밸류5) =====
   // 게헨나 1학년
-  {id:'kayoko', name:'카요코', school:'게헨나',  tier:1,atk:3,hp:1,kw:[],            skin:'카요코(드레스)',   img:'Kayoko.png',         imgGold:'Kayoko_(Dress).png'},
+  {id:'kayoko', name:'카요코', school:'게헨나',  tier:5,atk:4,hp:5,kw:[],            skin:'카요코(드레스)',   img:'Kayoko.png',         imgGold:'Kayoko_(Dress).png'},
   {id:'junko',  name:'준코',   school:'게헨나',  tier:1,atk:1,hp:3,kw:['selfdestruct'],            skin:'준코(새해)',       img:'Junko.png',          imgGold:'Junko_(New_Year).png'},
   // 밀레니엄 1학년
   {id:'toki',   name:'토키',   school:'밀레니엄',tier:1,atk:1,hp:3,kw:['survive'],   skin:'토키(메이드)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
@@ -27,7 +27,7 @@ var CHARS = [
 
   // ===== Tier 3 (밸류9) =====
   // 게헨나 2학년
-  {id:'aru',     name:'아루',   school:'게헨나',  tier:3,atk:4,hp:2,kw:[],            skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
+  {id:'aru',     name:'아루',   school:'게헨나',  tier:4,atk:5,hp:3,kw:['preemptive'], skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
   {id:'kasumi',  name:'카스미', school:'게헨나',  tier:3,atk:4,hp:2,kw:[],            skin:'카스미(수영복)',   img:'Kasumi.png',         imgGold:'Kasumi_(Swimsuit).png'},  // +개전(SOC)
   {id:'sena',    name:'세나',   school:'게헨나',  tier:3,atk:6,hp:2,kw:['pierce'],    skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
   // 밀레니엄 1학년
@@ -53,7 +53,7 @@ var CHARS = [
   // ===== Tier 5 (밸류15) =====
   // 게헨나 3학년
   {id:'ako',     name:'아코',   school:'게헨나',  tier:5,atk:6,hp:5,kw:['taunt'],     skin:'아코(드레스)',     img:'Ako.png',            imgGold:'Ako_(Dress).png'},
-  {id:'satsuki', name:'사츠키', school:'게헨나',  tier:5,atk:5,hp:5,kw:[],            skin:'사츠키(수영복)',   img:'Satsuki.png',        imgGold:'Satsuki_(Swinsuit).png'},
+  {id:'satsuki', name:'사츠키', school:'게헨나',  tier:5,atk:3,hp:8,kw:[],            skin:'사츠키(수영복)',   img:'Satsuki.png',        imgGold:'Satsuki_(Swinsuit).png'},
   // 밀레니엄 3학년
   {id:'himari',  name:'히마리', school:'밀레니엄',tier:5,atk:7,hp:7,kw:[],            skin:'히마리(임전)',     img:'Himari.png',         imgGold:'Himari_(Battle).png'},
   {id:'rio',     name:'리오',   school:'밀레니엄',tier:5,atk:7,hp:7,kw:[],            skin:'리오(임전)',       img:'Rio.png',            imgGold:'Rio_(Battle).png'},
@@ -72,6 +72,21 @@ var CHARS = [
   {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:5,hp:5,kw:[],            skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:9,hp:5,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
 
+  // ===== 게헨나 신규 =====
+  {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(신년)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
+  {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['multistrike'],   skin:'하루카(신년)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
+  {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:1,hp:1,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
+  {id:'chiaki',  name:'치아키', school:'게헨나',  tier:3,atk:5,hp:3,kw:['ranged'],        skin:'치아키(수영복)',   img:'Chiaki.png',         imgGold:'Chiaki_(Swimsuit).png'},
+  // ===== 밀레니엄 신규 =====
+  {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
+  {id:'akane',   name:'아카네', school:'밀레니엄',tier:3,atk:2,hp:4,kw:[],               skin:'아카네(버니걸)',   img:'Akane.png',          imgGold:'Akane_(Bunny_Girl).png'},
+  {id:'karin',   name:'카린',   school:'밀레니엄',tier:5,atk:6,hp:5,kw:['ranged','pierce'],skin:'카린(버니걸)',   img:'Karin.png',          imgGold:'Karin_(Bunny_Girl).png'},
+  {id:'asuna',   name:'아스나', school:'밀레니엄',tier:5,atk:8,hp:6,kw:[],               skin:'아스나(버니걸)',   img:'Asuna.png',          imgGold:'Asuna_(Bunny_Girl).png'},
+  // ===== 트리니티 신규 =====
+  {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:2,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
+  {id:'hasumi',  name:'하스미', school:'트리니티',tier:5,atk:5,hp:7,kw:[],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
+  {id:'suzumi',  name:'스즈미', school:'트리니티',tier:4,atk:3,hp:7,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
+  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:5,hp:3,kw:[],               skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_(Magical).png'},
   // ===== 총학생회 (중립) =====
   {id:'haine',   name:'하이네', school:'총학생회',tier:1,atk:3,hp:2,kw:[],            skin:'하이네(인터뷰)',   img:'Haine.png',          imgGold:'Haine_(Interview).png'},
   {id:'momoka',  name:'모모카', school:'총학생회',tier:2,atk:4,hp:3,kw:[],            skin:'모모카(승무원)',   img:'Momoka.png',         imgGold:'Momoka_(flight).png'},
@@ -173,19 +188,20 @@ var MAX_GOLD = 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, himari:1, gehenna_pandemonium:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};       // 전투의 함성
 var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1}; // 죽음의 메아리
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, aru:1, kasumi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1}; // 개전
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 생존
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1}; // 패시브 (영입 턴/상시)
+var PRE_IDS = {aru:1, koyuki:1, koharu:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
   juri:     {type:'죽음의 메아리',desc:'<팬짱>을 부릅니다.\n팬짱은 게임 내 주리의 사망 수만큼 강화됩니다.',gold:'황금: 사망 수 x +2/+2'},
   chinatsu: {type:'죽음의 메아리',desc:'아군 게헨나 학생 무작위 1인에게 보호막을 부여합니다.',gold:'온천 치나츠: 게헨나 학생 두 명에게 부여'},
-  kayoko:   {type:'개전',desc:'적 가장 왼쪽 학생을 가장 오른쪽으로 이동시킵니다.',gold:''},
+  kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',gold:'드레스 카요코: 동일'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +1/+1',gold:'메이드 미도리: 수×+2/+2\n둘 다 메이드: 수×+4/+4'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +1/+1',gold:'메이드 모모이: 수×+2/+2\n둘 다 메이드: 수×+4/+4'},
   mari:     {type:'개전',desc:'아군 트리니티 학생들 +1/+1',gold:'아이돌 마리: +2/+2'},
-  aru:      {type:'개전',desc:'<무츠키> 또는 <하루카>를 무작위로 한 명 소환합니다. (4/1)\n무츠키: 킬러 오른쪽에 자신 공격력만큼 데미지\n하루카: 킬러 왼쪽에 자신 공격력만큼 데미지',gold:'드레스 아루: 둘 다 소환'},
+  aru:      {type:'선제',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',gold:'드레스 아루: 동일'},
   kasumi:   {type:'개전 / 죽음의 메아리',desc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n메아리: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',gold:''},
   iroha:    {type:'전투의 함성',desc:'<토라마루>로 교체됩니다. (5/1)',gold:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하 귀환'},
   himari:   {type:'전투의 함성',desc:'아군 밀레니엄 학생들 +3/+3',gold:'임전 히마리: +6/+6'},
@@ -244,6 +260,19 @@ var ABILITY_DESCS = {
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',gold:''},
   hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독성을 부여합니다.\n이후 상대 전체의 독성을 제거합니다.',gold:''},
   hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 질풍, 환생, 연격을 부여합니다.\n(수영복 포함)',gold:''},
+  // ===== 신규 캐릭터 =====
+  ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',gold:'수영복 이부키: +10/+10'},
+  chiaki:   {type:'원거리',desc:'원거리 공격. 반격을 받지 않습니다.',gold:'수영복 치아키: 동일'},
+  koyuki:   {type:'선제',desc:'공격 시, 이번 전투 동안 공격 대상의\n공격력과 체력 수치를 뒤집습니다.\n(이미 교환된 대상은 중복 적용 안 됨)',gold:'파자마 코유키: 동일'},
+  akane:    {type:'개전',desc:'아군 네루, 카린, 아스나, 아카네, 토키에게\n"죽음의 메아리: C4(5/5 자폭) 소환"을 부여합니다.',gold:'버니걸 아카네: 2마리 소환'},
+  karin:    {type:'원거리+관통',desc:'원거리 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.',gold:'버니걸 카린: 동일'},
+  asuna:    {type:'패시브',desc:'이번 전투에서 코인 토스가 무조건 성공합니다.\n(아군 전체의 코인이 앞면이 됩니다)',gold:'버니걸 아스나: 동일'},
+  koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',gold:'수영복 코하루: 확률 20%'},
+  hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',gold:'수영복 하스미: 두 번 흡수'},
+  suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n1회 공격 동안 0으로 만듭니다.',gold:'마법소녀 스즈미: 2회 공격 동안'},
+  shimiko:  {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 질풍 + 보호막을 얻습니다.',gold:'악의 간부 시미코: 질풍 + 보호막'},
+  mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',gold:'신년 무츠키: 동일'},
+  haruka:   {type:'연격',desc:'1~2회 연격 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',gold:'신년 하루카: 2~4회 / 조건 시 10회'},
   // 총학생회
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',gold:'인터뷰 하이네: +4/+4'},
   momoka:   {type:'패시브',desc:'매 턴 리롤이 1회 무료입니다.\n(2명이면 2회)',gold:'승무원 모모카: 리롤 2회 무료'},
@@ -269,6 +298,7 @@ var TOKENS = {
   thunder_e: {id:'thunder_e', name:'천둥이',     school:'밀레니엄', tier:6, atk:8, hp:2, kw:['shield'],  img:'token/Thunder_E.png'},
   sweeper:   {id:'sweeper',  name:'스위퍼',     school:'밀레니엄', tier:7, atk:10,hp:10,kw:['selfdestruct'], img:'token/Sweeper.png'},
   hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:6, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
+  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:3, atk:5, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
 };
 
 function makeToken(tokenId) {
@@ -366,7 +396,7 @@ var SPELLS = [
   {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독성 부여',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
   {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,
-    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.golden)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.golden=true;m.img=tmpl.imgGold;return true;}},
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.golden)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.golden=true;m.img=tmpl.imgGold;if(tmpl.id==='shimiko'){if(m.kw.indexOf('windfury')===-1)m.kw.push('windfury');if(m.kw.indexOf('shield')===-1)m.kw.push('shield');}return true;}},
   {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',
@@ -812,6 +842,11 @@ function buyMinion(idx, insertIdx) {
     for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===m.baseId&&!p.board[i].golden&&removed<2){removed++;}else{newBoard.push(p.board[i]);}}
     p.board=newBoard;
     var golden=makeMinion(tmpl,true);golden.kw=mergedKw;golden.atk+=bonusAtk;golden.hp+=bonusHp;golden.maxHp=golden.hp;
+    // 시미코 황금: 질풍+보호막 추가
+    if(tmpl.id==='shimiko'){
+      if(golden.kw.indexOf('windfury')===-1)golden.kw.push('windfury');
+      if(golden.kw.indexOf('shield')===-1)golden.kw.push('shield');
+    }
     p.board.push(golden);
     addedUnit=golden;
   } else {
@@ -978,6 +1013,7 @@ function addToBoard(p, m) {
     }
     p.board=newBoard;
     var golden=makeMinion(tmpl,true);golden.kw=mergedKw;golden.atk+=bonusAtk;golden.hp+=bonusHp;golden.maxHp=golden.hp;
+    if(tmpl.id==='shimiko'){if(golden.kw.indexOf('windfury')===-1)golden.kw.push('windfury');if(golden.kw.indexOf('shield')===-1)golden.kw.push('shield');}
     p.board.push(golden);
     triggerBattlecry(golden,p);
     // 플레이어면 발견 (AI는 aiDiscover 별도 호출)
@@ -1278,6 +1314,7 @@ function moveFromBench() {
       var newBoard=[];var removed=0;
       for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===m.baseId&&!p.board[i].golden&&removed<2){removed++;}else{newBoard.push(p.board[i]);}}
       p.board=newBoard;var golden=makeMinion(tmpl,true);golden.kw=mergedKw;golden.atk+=bonusAtk;golden.hp+=bonusHp;golden.maxHp=golden.hp;
+      if(tmpl.id==='shimiko'){if(golden.kw.indexOf('windfury')===-1)golden.kw.push('windfury');if(golden.kw.indexOf('shield')===-1)golden.kw.push('shield');}
       p.board.push(golden);triggerBattlecry(golden,p);showDiscover(p);return;
     }
   }
@@ -1564,13 +1601,14 @@ function aiCheckHidden(p) {
 function triggerSOC(u, mySide, otherSide, log) {
   var id=u.baseId;
   if(id==='kayoko'){
-    // 적 가장 왼쪽 → 맨 뒤로 이동
-    var alive=[];for(var i=0;i<otherSide.length;i++)if(otherSide[i].alive)alive.push(i);
-    if(alive.length>1){
-      var fIdx=alive[0];
-      var unit=otherSide.splice(fIdx,1)[0];
-      otherSide.push(unit);
-      log.push({cls:'soc',text:'[개전] '+u.name+': 적 '+unit.name+' 맨 뒤로 이동!'});
+    // 적 1~5번째 배치 역순
+    var aliveIdx=[];for(var i=0;i<otherSide.length;i++)if(otherSide[i].alive)aliveIdx.push(i);
+    var toRev=aliveIdx.slice(0,5);
+    if(toRev.length>1){
+      var units=toRev.map(function(idx){return otherSide[idx];});
+      units.reverse();
+      for(var i=0;i<toRev.length;i++)otherSide[toRev[i]]=units[i];
+      log.push({cls:'soc',text:'[개전] '+u.name+': 적 1~'+toRev.length+'번 배치 역순!'});
     }
   }
   else if(id==='midori'){
@@ -1656,15 +1694,28 @@ function triggerSOC(u, mySide, otherSide, log) {
       log.push({cls:'soc',text:'[개전] '+u.name+': '+bestTarget.name+'(HP:'+bestTarget.hp+')을 노립니다!'});
     }
   }
-  else if(id==='aru'){
-    // 아루 개전: 무츠키/하루카 중 랜덤 1 소환 (황금: 둘 다)
-    var picks=u.golden?['mutsuki','haruka']:[Math.random()<0.5?'mutsuki':'haruka'];
-    for(var i=0;i<picks.length;i++){
-      var tk=makeToken(picks[i]);
-      tk.alive=true;tk.poisonImmune=false;tk._mySide=mySide;
-      mySide.push(tk);
+  else if(id==='ibuki'){
+    // 이부키 개전: 마코토/치아키/사츠키/이로하 +5/+5
+    var ibukiTargets=['makoto','chiaki','satsuki','iroha'];
+    var ibukiBuff=u.golden?10:5;var ibukiCount=0;
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive&&ibukiTargets.indexOf(mySide[i].baseId)!==-1){
+        mySide[i].atk+=ibukiBuff;mySide[i].hp+=ibukiBuff;ibukiCount++;
+      }
     }
-    log.push({cls:'soc',text:'[개전] '+u.name+': '+(picks.length>1?'무츠키와 하루카':picks[0]==='mutsuki'?'무츠키':'하루카')+' 소환!'});
+    if(ibukiCount>0)log.push({cls:'soc',text:'[개전] '+u.name+': '+ibukiCount+'명에게 +'+ibukiBuff+'/+'+ibukiBuff+'!'});
+    else log.push({cls:'soc',text:'[개전] '+u.name+': 대상 없음'});
+  }
+  else if(id==='akane'){
+    // 아카네 개전: 네루/카린/아스나/아카네/토키에게 C4 메아리 부여
+    var akaneTargets=['neru','karin','asuna','akane','toki'];
+    var akaneCount=0;
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive&&akaneTargets.indexOf(mySide[i].baseId)!==-1){
+        mySide[i]._akaneC4DR=true;mySide[i]._akaneC4Golden=u.golden;akaneCount++;
+      }
+    }
+    if(akaneCount>0)log.push({cls:'soc',text:'[개전] '+u.name+': '+akaneCount+'명에게 C4 메아리 부여!'});
   }
   else if(id==='kaya'){
     // 맨 왼쪽 생존 아군을 쓰러뜨리고 스탯 흡수 (황금: x2)
@@ -1841,12 +1892,25 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   var id=unit.baseId;
   // 토라마루(이로하 변신)는 baseId가 'iroha'지만 토라마루 DR이 있음
   if(unit.irohaRef) id='toramaru';
-  if(!DR_IDS[id]) return;
+  // 아카네 C4 부여 메아리
+  if(unit._akaneC4DR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
+    var c4Count=unit._akaneC4Golden?2:1;
+    for(var _c4=0;_c4<c4Count;_c4++){
+      if(countAlive(mySide)<BATTLE_MAX){
+        var c4tk=makeToken('c4');c4tk.alive=true;c4tk.poisonImmune=false;c4tk._mySide=mySide;
+        mySide.push(c4tk);
+        log.push({cls:'soc',text:'[메아리] '+unit.name+': C4 소환! ('+c4tk.atk+'/'+c4tk.hp+')'});
+      }
+    }
+  }
+  if(!DR_IDS[id]&&!unit._akaneC4DR) return;
   if(unit._abilitiesStripped) return;
   if(G.permanentAbilityBan) return;
-  var linRepeat=1+getLinExtra(mySide);
-  for(var _lr=0;_lr<linRepeat;_lr++){
-  _doDR(unit,mySide,otherSide,log);
+  if(DR_IDS[id]){
+    var linRepeat=1+getLinExtra(mySide);
+    for(var _lr=0;_lr<linRepeat;_lr++){
+      _doDR(unit,mySide,otherSide,log);
+    }
   }
 }
 function _doDR(unit, mySide, otherSide, log) {
@@ -1883,8 +1947,8 @@ function _doDR(unit, mySide, otherSide, log) {
       }
     }
   }
-  else if(id==='mutsuki'){
-    // 무츠키 DR: 자신 공격력만큼 킬러 오른쪽에 데미지
+  else if(id==='mutsuki'&&unit.isToken){
+    // 무츠키 토큰 DR: 자신 공격력만큼 킬러 오른쪽에 데미지
     if(unit._killedBy){
       var killer=unit._killedBy;
       var kIdx=-1;for(var i=0;i<otherSide.length;i++)if(otherSide[i]===killer){kIdx=i;break;}
@@ -1900,8 +1964,8 @@ function _doDR(unit, mySide, otherSide, log) {
       }
     }
   }
-  else if(id==='haruka'){
-    // 하루카 DR: 자신 공격력만큼 킬러 왼쪽에 데미지
+  else if(id==='haruka'&&unit.isToken){
+    // 하루카 토큰 DR: 자신 공격력만큼 킬러 왼쪽에 데미지
     if(unit._killedBy){
       var killer=unit._killedBy;
       var kIdx=-1;for(var i=0;i<otherSide.length;i++)if(otherSide[i]===killer){kIdx=i;break;}
@@ -2147,6 +2211,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
     } else {
       unit.alive=false;
       if(killedBy) unit._killedBy=killedBy;
+      // 하스미 패시브: 첫 처치 공/체 흡수
+      var hasumiMax=killedBy&&killedBy.golden?2:1;
+      if(killedBy&&killedBy.baseId==='hasumi'&&(killedBy._hasumiAbsorbed||0)<hasumiMax){
+        killedBy._hasumiAbsorbed=(killedBy._hasumiAbsorbed||0)+1;
+        killedBy.atk+=unit.atk;killedBy.hp+=unit.hp;killedBy.maxHp=killedBy.hp;
+        log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 흡수! +'+unit.atk+'/+'+unit.hp});
+      }
       // 아리스 사망 추적
       if(unit.baseId==='arisu') G.arisuDeathCount=(G.arisuDeathCount||0)+1;
       // 세이아 사망 페널티: 아군 전체 능력 영구 삭제
@@ -2167,6 +2238,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   function dealHit(src,dst,log2,dmgOverride,isCombatDefense){
     var dmg=dmgOverride!==undefined?dmgOverride:src.atk;
+    // 하루카 추적: 무츠키/카요코/아루를 공격한 유닛 마킹
+    if(['mutsuki','kayoko','aru'].indexOf(dst.baseId)!==-1) src._attackedHarukaAlly=true;
     // invincible 키워드 (일반 무적)
     if(hasKw(dst,'invincible')){
       log2.push({cls:'shield',text:dst.name+': 무적! 데미지 무효'});
@@ -2179,6 +2252,14 @@ function runBattle(boardA, boardB, startWithA, opts) {
           log2.push({cls:'shield',text:dst.name+': 세이아의 예지로 회피했다!'});
           return {blocked:true,overflow:0};
         }
+      }
+    }
+    // 스즈미 패시브: 자신을 공격한 적 atk 0으로 (1~2회 공격 동안)
+    if(dst.baseId==='suzumi'&&dst.alive&&!dst._abilitiesStripped&&!G.permanentAbilityBan&&src!==dst){
+      var suzTurns=dst.golden?2:1;
+      if(!src._suzumiDebuff||src._suzumiDebuff<=0){
+        src._suzumiOrigAtk=src.atk;src._suzumiDebuff=suzTurns;src.atk=0;
+        log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! ('+suzTurns+'회)'});
       }
     }
     if(hasKw(dst,'shield')){
@@ -2305,8 +2386,39 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   function triggerPreemptive(attacker,target,defArr,atkArr,log2){
-    if(!hasKw(attacker,'preemptive')) return false;
+    if(!hasKw(attacker,'preemptive')&&!PRE_IDS[attacker.baseId]) return false;
     if(G.permanentAbilityBan) return false;
+    // ===== 선제 능력 (PRE_IDS) =====
+    if(attacker.baseId==='aru'){
+      var tTier=target.tier||1;
+      var origAtk=attacker.atk;var newAtk=origAtk;
+      if(tTier>=5) newAtk=origAtk*2;
+      else if(tTier<=2) newAtk=Math.max(1,Math.floor(origAtk/2));
+      if(newAtk!==origAtk){
+        attacker._aruOrigAtk=origAtk;attacker.atk=newAtk;
+        log2.push({cls:'soc',text:'[선제] '+attacker.name+': T'+tTier+' 대상 → 공격력 '+origAtk+'→'+newAtk});
+      }
+      return false;
+    }
+    if(attacker.baseId==='koyuki'){
+      if(!target._koyukiSwapped){
+        var oldAtk=target.atk,oldHp=target.hp;
+        target.atk=oldHp;target.hp=oldAtk;target._koyukiSwapped=true;
+        log2.push({cls:'soc',text:'[선제] '+attacker.name+': '+target.name+' 공/체 교환! ('+oldAtk+'/'+oldHp+'→'+target.atk+'/'+target.hp+')'});
+      }
+      return false;
+    }
+    if(attacker.baseId==='koharu'){
+      var chance=attacker.golden?0.2:0.1;
+      if(Math.random()<chance){
+        stripAbilities(target,log2);
+        target.alive=false;target._killedBy=attacker;
+        log2.push({cls:'kill',text:'[선제] '+attacker.name+': '+target.name+' 사형 집행! 즉사!'});
+        resolveDeath(target,defArr,atkArr,log2,attacker);
+        return true;
+      }
+      return false;
+    }
     if(attacker.baseId==='ui'){
       stripAbilities(target,log2);
       // 황금(수영복 우이): 타겟 왼쪽 또는 오른쪽 1인도 능력 삭제
@@ -2531,8 +2643,20 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(!skipMain){
         // 연격: 단일 대상 다회 공격
         if(hasKw(attacker,'multistrike')){
-          var msMin=attacker.golden?4:2,msMax=attacker.golden?10:5;
-          var msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
+          var msMin,msMax,msHits;
+          if(attacker.baseId==='haruka'){
+            // 하루카: 무츠키/카요코/아루를 공격한 적 → 5회(황금:10회), 아니면 1~2회(황금:2~4회)
+            if(target._attackedHarukaAlly){
+              msHits=attacker.golden?10:5;
+              stepLog.push({cls:'hit',text:'[연격] '+attacker.name+': 흥신소68 추적! '+msHits+'회 공격!'});
+            }else{
+              msMin=attacker.golden?2:1;msMax=attacker.golden?4:2;
+              msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
+            }
+          }else{
+            msMin=attacker.golden?4:2;msMax=attacker.golden?10:5;
+            msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
+          }
           stepMultiHits=msHits;
           stepLog.push({cls:'hit',text:attacker.name+'의 연격! '+msHits+'회 공격!'});
           var msKillCount=0;
@@ -2624,6 +2748,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
 
+      // 아루 선제 공격력 복원
+      if(attacker._aruOrigAtk!==undefined){attacker.atk=attacker._aruOrigAtk;delete attacker._aruOrigAtk;}
+      // 스즈미 debuff 턴 감소
+      if(attacker._suzumiDebuff>0){
+        attacker._suzumiDebuff--;
+        if(attacker._suzumiDebuff<=0&&attacker._suzumiOrigAtk!==undefined){
+          attacker.atk=attacker._suzumiOrigAtk;delete attacker._suzumiOrigAtk;delete attacker._suzumiDebuff;
+        }
+      }
       if(stepLog.length>0){
         for(var sl=0;sl<stepLog.length;sl++)log.push(stepLog[sl]);
         var stepObj={atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:defI,atkId:attacker.id,defId:target.id,log:stepLog,snap:snapshot()};
@@ -2977,7 +3110,8 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      for(var j=0;j<aliveAlly.length;j++)cr[aliveAlly[j].sid]=coinOffMap[aliveAlly[j].sid]?false:Math.random()<0.5;
+      var asunaActive=aliveAlly.some(function(u){return u.baseId==='asuna';});
+      for(var j=0;j<aliveAlly.length;j++)cr[aliveAlly[j].sid]=coinOffMap[aliveAlly[j].sid]?false:(asunaActive?true:Math.random()<0.5);
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       for(var j=0;j<aliveAlly.length;j++){if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);}
 
