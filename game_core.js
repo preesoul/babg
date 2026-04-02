@@ -987,7 +987,7 @@ function showDiscover(p) {
   html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
   for(var i=0;i<choices.length;i++){
     var c = choices[i];
-    var kwt = (c.kw||[]).map(function(k){return KW_LABELS[k]||k;}).join(' ');
+    var kwt = (c.kw||[]).filter(function(k){return k!=='survive'&&k!=='preemptive'&&k!=='multistrike';}).map(function(k){return KW_LABELS[k]||k;}).join(' ');
     var aTag = '';
     if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
