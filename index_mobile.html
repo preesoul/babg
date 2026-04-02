@@ -420,19 +420,19 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .player-chip{font-size:9px!important;padding:2px 4px!important}
 .arona-deco{display:none!important}
 
-/* 벤치: 사이드패널 안에서 작게 */
+/* 벤치: 사이드패널 안에서 */
 .side-panel>[style*="margin-top"]{margin-top:0!important;flex:0 0 auto}
 .side-panel .section-label{display:none!important}
-#ui-bench{height:70px!important;width:65px!important;padding:2px!important;flex-shrink:0}
-.bench-empty-slot{width:55px!important;font-size:7px!important}
-.bench-card-wrap .card{width:55px!important;height:65px!important}
+#ui-bench{height:100px!important;width:80px!important;padding:2px!important;flex-shrink:0}
+.bench-empty-slot{width:70px!important;font-size:7px!important}
+.bench-card-wrap .card{width:65px!important;height:80px!important}
 .bench-card-wrap .card .name-banner{font-size:7px!important;padding:1px 2px!important}
 .bench-card-wrap .card .stat-atk,.bench-card-wrap .card .stat-hp{width:16px!important;height:16px!important;font-size:10px!important}
 .bench-card-wrap .card .stat-atk::before,.bench-card-wrap .card .stat-hp::before{width:12px!important;height:12px!important}
 .bench-card-wrap .card .card-bg img{width:90%!important}
 .bench-card-wrap .card .tier-stars{display:none!important}
-.bench-btns{gap:2px!important}
-.bench-btns .btn{padding:2px 4px!important;font-size:8px!important}
+.bench-btns{gap:2px!important;flex-direction:row!important}
+.bench-btns .btn{padding:2px 6px!important;font-size:8px!important}
 
 /* 메인 콘텐츠 */
 .main-content{overflow-y:visible!important;overflow-x:hidden!important}
@@ -555,9 +555,14 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 /* 모바일 전용: 벤치 보관 버튼 */
 .m-bench-btn{position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:rgba(22,147,222,0.85);border:1px solid rgba(100,180,255,0.5);color:#fff;font-size:9px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
 
-/* 모바일 전용: 탭 선택 & 스왑 선택 */
-.card.tap-selected{border-color:#00c8ff!important;box-shadow:0 0 10px rgba(0,200,255,0.6)!important}
-.card.swap-selected{border:2px solid #fbbf24!important;box-shadow:0 0 12px rgba(251,191,36,0.6)!important}
+/* 모바일 전용: 이동 모드 */
+.card.move-selected{border:2px solid #fbbf24!important;box-shadow:0 0 12px rgba(251,191,36,0.6)!important}
+.card.move-selected .m-move-bubble{display:block!important}
+.m-move-bubble{display:none;position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:#fbbf24;color:#1a1a2e;font-size:8px;font-weight:900;padding:2px 6px;border-radius:8px;white-space:nowrap;z-index:10}
+.m-move-bubble::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #fbbf24}
+.m-insert-line{display:flex;align-items:center;justify-content:center;width:20px;height:100%;cursor:pointer;flex-shrink:0;position:relative}
+.m-insert-line::before{content:'';position:absolute;top:8px;bottom:8px;left:50%;transform:translateX(-50%);width:2px;background:#fbbf24;border-radius:1px}
+.m-insert-label{font-size:7px;color:#fbbf24;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:1px;font-weight:700;z-index:1;background:rgba(26,26,46,0.8);padding:2px 0;border-radius:3px}
 
 /* 키워드 가이드 패널 */
 .kw-guide-panel{max-height:60vh!important;overflow-y:auto!important}
@@ -4155,6 +4160,7 @@ function showAbilityPopup(baseId, e) {
 }
 
 function renderAll() {
+  window._mobileMoveSrc=undefined;
   var p=G.players[0];
   // 보드 정리: undefined/null 제거
   p.board=p.board.filter(function(u){return !!u;});
@@ -4226,18 +4232,15 @@ function renderAll() {
         for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
         if(cardIdx<0)return;
         if(G.pendingSpell){applyPendingSpell(cardIdx);return;}
-        // 모바일: 보드 카드 탭 → 순서 변경 (두 번째 탭으로 스왑)
-        if(typeof window._mobileSwapSrc==='number'){
-          var src=window._mobileSwapSrc;window._mobileSwapSrc=undefined;
-          boardEl.querySelectorAll('.card').forEach(function(c){c.classList.remove('swap-selected');});
-          if(src!==cardIdx){
-            var p2=G.players[0];var tmp=p2.board[src];p2.board[src]=p2.board[cardIdx];p2.board[cardIdx]=tmp;renderAll();
-          }
-          return;
+        // 모바일: 보드 카드 탭 → 이동 모드
+        if(typeof window._mobileMoveSrc==='number'){
+          // 삽입선 클릭은 별도 핸들러에서 처리, 카드 재클릭 시 취소
+          clearMobileMoveUI();
+          if(window._mobileMoveSrc===cardIdx){window._mobileMoveSrc=undefined;return;}
+          window._mobileMoveSrc=undefined;
         }
-        window._mobileSwapSrc=cardIdx;
-        boardEl.querySelectorAll('.card').forEach(function(c){c.classList.remove('swap-selected');});
-        card.classList.add('swap-selected');
+        window._mobileMoveSrc=cardIdx;
+        showMobileMoveUI(boardEl,cardIdx);
       });
       // 우클릭으로 보관 (PC 폴백)
       boardEl.addEventListener('contextmenu',function(e){
@@ -4383,7 +4386,7 @@ function cardHtml(m,idx,isBoard){
   var dragAttr=isBoard?' data-board-idx="'+idx+'"':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
   var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
-  if(isBoard){html+='<button class="sell-x sell-btn" data-idx="'+idx+'">✕</button>';html+='<button class="m-bench-btn" data-bench-idx="'+idx+'">B</button>';}
+  if(isBoard){html+='<button class="sell-x sell-btn" data-idx="'+idx+'">✕</button>';html+='<button class="m-bench-btn" data-bench-idx="'+idx+'">B</button>';html+='<div class="m-move-bubble">이동준비</div>';}
   // 계승전/호버크래프트/열차포 카운터 표시
   var counterStyle='position:absolute;top:4px;right:28px;z-index:3;color:#fff;font-size:11px;font-weight:900;padding:2px 6px;border-radius:4px;line-height:1.3;min-width:18px;text-align:center';
   var keiTargets=['yukari','renge','kikyou','nagusa'];
@@ -4415,6 +4418,43 @@ var dropInsertIdx=-1;
 function initBoardDrag(boardEl){
   // 모바일: 드래그 비활성화, 탭으로 대체
   return;
+}
+
+// 모바일: 이동 모드 UI
+function showMobileMoveUI(boardEl,srcIdx){
+  clearMobileMoveUI();
+  var cards=boardEl.querySelectorAll('.card');
+  if(cards[srcIdx]) cards[srcIdx].classList.add('move-selected');
+  // 카드 사이에 삽입선 추가
+  var p=G.players[0];
+  for(var i=0;i<=p.board.length;i++){
+    if(i===srcIdx||i===srcIdx+1) continue; // 자기 위치 양옆은 무의미
+    var line=document.createElement('div');
+    line.className='m-insert-line';
+    line.setAttribute('data-insert-pos',''+i);
+    line.innerHTML='<span class="m-insert-label">위치</span>';
+    line.addEventListener('click',function(e){
+      e.stopPropagation();
+      var pos=parseInt(this.getAttribute('data-insert-pos'));
+      var src=window._mobileMoveSrc;
+      if(typeof src!=='number') return;
+      var p2=G.players[0];
+      var unit=p2.board.splice(src,1)[0];
+      var insertAt=pos>src?pos-1:pos;
+      p2.board.splice(insertAt,0,unit);
+      window._mobileMoveSrc=undefined;
+      clearMobileMoveUI();
+      renderAll();
+    });
+    // 삽입 위치: i번째 카드 앞에
+    if(i<cards.length) boardEl.insertBefore(line,cards[i]);
+    else boardEl.appendChild(line);
+  }
+}
+function clearMobileMoveUI(){
+  var boardEl=document.getElementById('ui-board');
+  boardEl.querySelectorAll('.card').forEach(function(c){c.classList.remove('move-selected');});
+  boardEl.querySelectorAll('.m-insert-line').forEach(function(l){l.remove();});
 }
 
 function onDragStart(e){
@@ -4741,34 +4781,30 @@ function hideTooltip(){
   if(tooltipTimer){clearTimeout(tooltipTimer);tooltipTimer=null;}
 }
 
-// 전역 마우스 이벤트: 카드 호버 시 툴팁 (mousemove 기반)
+// 모바일: 꾹 누르기(long press)로 툴팁 표시
 var tooltipCard=null;
-document.addEventListener('mousemove',function(e){
-  // 보드/상점 카드
+var _longPressTimer=null;
+document.addEventListener('touchstart',function(e){
   var card=e.target.closest('.card[data-base-id]');
-  // 전투 미니카드
   if(!card) card=e.target.closest('.minicard[data-base-id]');
   if(card){
     var baseId=card.getAttribute('data-base-id');
     if(baseId){
-      if(tooltipCard!==card){
+      _longPressTimer=setTimeout(function(){
         tooltipCard=card;
-        hideTooltip();
-        tooltipTimer=setTimeout(function(){
-          if(tooltipCard===card){
-            var rect=card.getBoundingClientRect();
-            showTooltip(baseId,rect,card);
-          }
-        },200);
-      }
-      return;
+        var rect=card.getBoundingClientRect();
+        showTooltip(baseId,rect,card);
+      },400);
     }
   }
-  if(tooltipCard){
-    tooltipCard=null;
-    hideTooltip();
-  }
-});
+},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(_longPressTimer){clearTimeout(_longPressTimer);_longPressTimer=null;}
+  if(tooltipCard){setTimeout(function(){tooltipCard=null;hideTooltip();},100);}
+},{passive:true});
+document.addEventListener('touchmove',function(e){
+  if(_longPressTimer){clearTimeout(_longPressTimer);_longPressTimer=null;}
+},{passive:true});
 
 // ========== INIT ==========
 function fadeSwitch(from,to,cb){
