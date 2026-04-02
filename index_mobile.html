@@ -441,7 +441,9 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .schale-label-icon{width:14px!important;height:14px!important}
 .hp-bar-wrap{max-width:none!important;flex:1!important}
 .hp-bar-label{font-size:11px!important}
+.kw-guide{position:fixed!important;top:4px!important;left:4px!important;z-index:50!important}
 .kw-guide-btn{font-size:10px!important;padding:4px 8px!important}
+.kw-guide-panel{position:fixed!important;top:30px!important;left:4px!important;max-height:70vh!important;overflow-y:auto!important;width:280px!important}
 
 /* 보드 카드: 5장이 모바일에 맞게 */
 .board{min-height:100px!important;padding:3px 4px!important;gap:3px!important;border-radius:8px!important;margin-bottom:2px!important}
@@ -518,8 +520,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .battle-result{font-size:22px!important}
 .battle-damage{font-size:12px!important}
 .battle-controls{gap:4px!important;flex-wrap:wrap!important}
-.battle-log{width:100%!important;min-width:0!important;height:auto!important;max-height:200px!important;border-right:none!important;border-bottom:1px solid rgba(0,200,255,0.15)!important;font-size:10px!important;padding:6px!important}
-.battle-overlay{flex-direction:column!important}
+.battle-log{width:100%!important;min-width:0!important;height:120px!important;max-height:120px!important;overflow-y:auto!important;border-right:none!important;border-top:1px solid rgba(0,200,255,0.15)!important;border-bottom:none!important;font-size:10px!important;padding:6px!important;flex-shrink:0!important}
+.battle-overlay{flex-direction:column!important;overflow-y:auto!important}
 
 /* 코인 */
 .bcoin-ow{width:20px!important;height:20px!important}
@@ -667,7 +669,6 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 <img src="img/Icon/arona.jpg" class="tut-center-arona" id="tut-center-arona">
 
 <div class="battle-overlay" id="battle-overlay">
-  <div class="battle-log" id="battle-log" style="display:none"></div>
   <div class="battle-main">
     <div id="battle-intro-area"></div>
     <div class="battle-arena" id="battle-arena" style="display:none">
@@ -677,6 +678,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
       <div class="battle-row" id="ally-row"></div>
       <div class="battle-side-label" id="ally-label"></div>
     </div>
+    <div class="battle-log" id="battle-log" style="display:none"></div>
     <div class="battle-result-box" id="battle-result-box" style="display:none">
       <div class="battle-result" id="battle-result"></div>
       <div class="battle-damage" id="battle-damage"></div>
