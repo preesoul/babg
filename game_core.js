@@ -179,7 +179,7 @@ function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
 function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; if(k==='multistrike') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
-var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',multistrike:'연격',selfdestruct:'자폭',invincible:'무적'};
+var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',invincible:'무적'};
 var KW_DESCS = {
   invincible:'피해를 입지 않습니다.',
   taunt:'이 학생부터 공격합니다.',
@@ -2715,9 +2715,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
         log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' ('+attacker.baseId+': '+G.keiseisenCounters[attacker.baseId]+')'});
       }
     }
-    // 나구사: 연격 루프에서 처리
+    // 나구사: 선제 루프에서 처리
     else if(attacker.baseId==='nagusa'){}
-    // 와카모: 연격 킬 후에 처리
+    // 와카모: 선제 킬 후에 처리
     else if(attacker.baseId==='wakamo'){}
     else if(attacker.baseId==='millennium_malkuth'){
       // 말쿠트 선제: 스위퍼 2체 소환 후 순차 공격
@@ -2887,7 +2887,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       var skipMain=triggerPreemptive(attacker,target,defArr2,atkArr2,stepLog);
 
       if(!skipMain){
-        // 연격: 단일 대상 다회 공격
+        // 선제 다회 공격 (multistrike)
         if(hasKw(attacker,'multistrike')){
           var msMin,msMax,msHits;
           if(attacker.baseId==='haruka'){
@@ -2934,7 +2934,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
               stepLog.push({cls:'soc',text:'[패시브] '+attacker.name+': 호버크래프트 소환! ('+hc.atk+'/'+hc.hp+')'});
             }
           }
-          // 연격 후 반격 1회
+          // 다회 공격 후 반격 1회
           if(target.alive){
             var msCounter=dealHit(target,attacker,stepLog);
             checkSurvive(attacker,atkArr2,stepLog,target);
@@ -3569,7 +3569,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       setTimeout(function(){
         if(battleState.skip){stepIdx=steps.length;nextStep();return;}
 
-        // 연격: 바바박 다회 타격 애니메이션
+        // 다회 타격 애니메이션
         var mHits=step.multiHits||0;
         if(mHits>0&&atkCard){
           atkCard.classList.remove('slam');
