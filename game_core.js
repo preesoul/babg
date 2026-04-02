@@ -95,7 +95,7 @@ var CHARS = [
   // ===== 트리니티 신규 =====
   // 트리니티 1학년
   {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:2,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
-  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:5,hp:3,kw:[],               skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_(Magical).png'},
+  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:5,hp:3,kw:[],               skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
   // 트리니티 2학년
   {id:'suzumi',  name:'스즈미', school:'트리니티',tier:4,atk:3,hp:7,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   // 트리니티 3학년
@@ -148,11 +148,11 @@ var HIDDEN_CHARS = [
   {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:50, hp:50, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
   {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/HKYK_Kuzunoha.png'},
   // 신규 7성
-  {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.jpg'},
+  {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.png'},
   {id:'millennium_seminar',      name:'밀레니엄 세미나',      school:'밀레니엄', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/Seminar.png'},
   {id:'millennium_cc',           name:'Cleaning&Clearing',    school:'밀레니엄', tier:7, atk:12, hp:12, kw:['ranged','shield'],                     img:'unique/Cleaning_Clearing.png'},
   {id:'trinity_makeup',          name:'보충수업부',           school:'트리니티', tier:7, atk:10, hp:10, kw:[],                                     img:'unique/Make_Up_Work_Club.png'},
-  {id:'trinity_justice',         name:'정의실현부',           school:'트리니티', tier:7, atk:10, hp:10, kw:['shield','windfury'],                   img:'unique/Justice_Task_Force.jpg'},
+  {id:'trinity_justice',         name:'정의실현부',           school:'트리니티', tier:7, atk:10, hp:10, kw:['shield','windfury'],                   img:'unique/Justice_Task_Force.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -179,7 +179,7 @@ function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
 function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; if(k==='multistrike') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
-var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'환생',windfury:'질풍',poison:'독성',pierce:'관통',survive:'생존',preemptive:'선제',ranged:'원거리',multistrike:'연격',selfdestruct:'자폭',invincible:'무적'};
+var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',multistrike:'연격',selfdestruct:'자폭',invincible:'무적'};
 var KW_DESCS = {
   invincible:'피해를 입지 않습니다.',
   taunt:'이 학생부터 공격합니다.',
@@ -226,14 +226,14 @@ var ABILITY_DESCS = {
   himari:   {type:'첫인사',desc:'아군 밀레니엄 학생들 +3/+3',gold:'임전 히마리: +6/+6'},
   rio:      {type:'개전',desc:'아군의 모든 첫인사를 발동합니다.\n전투가 끝나면 원래대로 돌아갑니다.',gold:'임전 리오: 두 번 발동'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',gold:'드레스 아코: +8/+8'},
-  kazusa:   {type:'뒤끝',desc:'<카스팔루스>로 교체됩니다. (1/1, 독성)',gold:'밴드 카즈사: 환생 추가'},
+  kazusa:   {type:'뒤끝',desc:'<카스팔루스>로 교체됩니다. (1/1, 독사굴)',gold:'밴드 카즈사: 부활 추가'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (2/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',gold:'수영복 히후미: 페로로님 4/2'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',gold:'수영복 아즈사: -4 데미지'},
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',gold:'아이돌 사쿠라코: 두 번 더 발동'},
   tsurugi:  {type:'개전',desc:'자신에게 +10/+10',gold:'수영복 츠루기: +20/+20'},
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',gold:''},
-  toki:     {type:'생존',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',gold:'메이드 토키: 스케쥴 레벨×4'},
-  neru:     {type:'생존',desc:'기본 능력 중 하나를 무작위로 얻습니다.',gold:'바니걸 네루: 두 가지를 무작위로 얻습니다.'},
+  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',gold:'메이드 토키: 스케쥴 레벨×4'},
+  neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',gold:'바니걸 네루: 두 가지를 무작위로 얻습니다.'},
   toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',gold:'황금 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',gold:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',gold:'황금 준코: 당고 2개 소환'},
@@ -243,9 +243,9 @@ var ABILITY_DESCS = {
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',gold:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',gold:'치어리더 히비키: -2/-2'},
   yuzu:     {type:'뒤끝',desc:'쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',gold:'메이드 유즈: 쓰러진 아군 수×4'},
-  noa:      {type:'생존',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',gold:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여'},
+  noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',gold:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여'},
   utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',gold:'치어리더 우타하: 천둥이 두 번 소환'},
-  mashiro:  {type:'원거리',desc:'',gold:''},
+  mashiro:  {type:'저격',desc:'',gold:''},
   hinata:   {type:'선제',desc:'한 번에 2~5회 공격합니다.',gold:'수영복 히나타: 4~10회'},
   mutsuki:  {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 오른쪽에 데미지.',gold:''},
   haruka:   {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 왼쪽에 데미지.',gold:''},
@@ -265,7 +265,7 @@ var ABILITY_DESCS = {
   izuna:    {type:'첫인사',desc:'아군 백귀야행 학생들 공격력 +1 (자신 포함)',gold:'수영복 이즈나: +1/+1'},
   tsukuyo:  {type:'첫인사',desc:'아군 백귀야행 학생들 +1/+1 (자신 포함)',gold:'드레스 츠쿠요: +2/+2'},
   yukari:   {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 유카리: 동일'},
-  mimori:   {type:'생존',desc:'이번 전투 동안 상대 전체 공격력 -1\n(공격력 0이면 공격하지 않습니다.)',gold:'수영복 미모리: -2'},
+  mimori:   {type:'버티기',desc:'이번 전투 동안 상대 전체 공격력 -1\n(공격력 0이면 공격하지 않습니다.)',gold:'수영복 미모리: -2'},
   renge:    {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 렌게: 동일'},
   shizuko:  {type:'패시브',desc:'첫인사가 2회 발동합니다.',gold:'수영복 시즈코: 4회 발동'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',gold:'가이드 츠바키: +4/+4'},
@@ -273,12 +273,12 @@ var ABILITY_DESCS = {
   chise:    {type:'패시브',desc:'공격한 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',gold:'수영복 치세: 무작위 2개 제거'},
   michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',gold:'드레스 미치루: 추가로 두 번 발동'},
   nagusa:   {type:'선제',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 나구사: 동일'},
-  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 원거리)',gold:'수영복 와카모: 4~10회 공격'},
+  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',gold:'수영복 와카모: 4~10회 공격'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',gold:'황금 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',gold:''},
-  hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독성을 부여합니다.\n이후 상대 전체의 독성을 제거합니다.',gold:''},
-  hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 질풍, 환생, 연격을 부여합니다.\n(수영복 포함)',gold:''},
+  hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독사굴을 부여합니다.\n이후 상대 전체의 독사굴을 제거합니다.',gold:''},
+  hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 연사, 부활, 연격을 부여합니다.\n(수영복 포함)',gold:''},
   // 신규 7성
   gehenna_p68:            {type:'패시브 / 개전',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n도발을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.',gold:''},
   millennium_seminar:     {type:'패시브 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',gold:''},
@@ -287,15 +287,15 @@ var ABILITY_DESCS = {
   trinity_justice:        {type:'패시브 / 개전',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n개전: 자신의 공격력과 체력을 2배로 합니다.',gold:''},
   // ===== 신규 캐릭터 =====
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',gold:'수영복 이부키: +10/+10'},
-  chiaki:   {type:'원거리',desc:'원거리 공격. 반격을 받지 않습니다.',gold:'수영복 치아키: 동일'},
+  chiaki:   {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',gold:'수영복 치아키: 동일'},
   koyuki:   {type:'선제',desc:'공격 대상의 공격력과 체력 수치를\n이번 전투 동안 뒤집습니다.',gold:'파자마 코유키: 동일'},
   akane:    {type:'개전',desc:'아군 네루, 카린, 아스나, 아카네, 토키에게\n"뒤끝: C4(5/5 자폭) 소환"을 부여합니다.',gold:'버니걸 아카네: 2마리 소환'},
-  karin:    {type:'원거리+관통',desc:'원거리 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.',gold:'버니걸 카린: 동일'},
+  karin:    {type:'저격+관통',desc:'저격 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.',gold:'버니걸 카린: 동일'},
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',gold:'버니걸 아스나: 동일'},
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',gold:'수영복 코하루: 확률 20%'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',gold:'수영복 하스미: 두 배로 흡수'},
   suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',gold:'마법소녀 스즈미: 이번 전투 동안'},
-  shimiko:  {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 질풍 + 보호막을 얻습니다.',gold:'악의 간부 시미코: 질풍 + 보호막'},
+  shimiko:  {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 연사 + 보호막을 얻습니다.',gold:'악의 간부 시미코: 연사 + 보호막'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',gold:'신년 무츠키: 동일'},
   haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',gold:'새해 하루카: 2~5회 / 조건 시 10회'},
   // 총학생회
@@ -308,7 +308,7 @@ var ABILITY_DESCS = {
   // ===== 스킨 전용 효과 =====
   yuuka:    {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 개전 - 자신에게 +2/+2',gold:'체육복 유우카: 개전 +2/+2'},
   arisu:    {type:'황금 효과',desc:'기본: 관통\n황금: 관통이 삭제되고 광역으로 변경',gold:'메이드 아리스: 광역'},
-  hina:     {type:'황금 효과',desc:'기본: 광역\n황금: 광역이 삭제되고 보호막, 질풍으로 변경',gold:'드레스 히나: 보호막, 질풍'},
+  hina:     {type:'황금 효과',desc:'기본: 광역\n황금: 광역이 삭제되고 보호막, 연사로 변경',gold:'드레스 히나: 보호막, 연사'},
 };
 
 // ========== TOKENS ==========
@@ -422,7 +422,7 @@ var SPELLS = [
       p.board.push(copy);triggerBattlecry(copy,p);return true;}},
   {id:'clover',name:'행운의 클로버',cost:4,tier:4,desc:'선택 학생에게 보호막 부여',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'shield');return true;}},
-  {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독성 부여',target:'select_ally',
+  {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
   {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.golden)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.golden=true;m.img=tmpl.imgGold;if(tmpl.id==='shimiko'){if(m.kw.indexOf('windfury')===-1)m.kw.push('windfury');if(m.kw.indexOf('shield')===-1)m.kw.push('shield');}return true;}},
@@ -582,7 +582,7 @@ function checkHiddenConditionsFor(p) {
 
 // 백화요란 계승전: 히든 액션카드
 var HKYK_SHOWDOWN_SPELL = {
-  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 질풍, 환생, 연격',target:'auto',once:true,
+  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 연사, 부활, 연격',target:'auto',once:true,
   effect:function(G2){
     var p=G2.players[0];
     var targets=['yukari','renge','kikyou','nagusa'];
@@ -992,7 +992,7 @@ function showDiscover(p) {
     if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
     if(SOC_IDS[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
-    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">생존</span>';
+    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&(c.kw.indexOf('preemptive')!==-1||c.kw.indexOf('multistrike')!==-1))) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
     html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
@@ -1903,7 +1903,7 @@ function triggerSOC(u, mySide, otherSide, log) {
         otherSide[i].kw.splice(otherSide[i].kw.indexOf('poison'),1);
       }
     }
-    log.push({cls:'soc',text:'[개전] '+u.name+': 아군 백귀야행 전체 독성! 상대 독성 제거!'});
+    log.push({cls:'soc',text:'[개전] '+u.name+': 아군 백귀야행 전체 독사굴! 상대 독사굴 제거!'});
   }
   else if(id==='millennium_death_momoi'){
     // 데스 모모이 개전: 적 전체 도발 삭제
@@ -2202,7 +2202,7 @@ function _doDR(unit, mySide, otherSide, log) {
     var cp={id:'cp_'+Math.random().toString(36).substr(2,4),baseId:'cathpalug',isToken:true,
       name:'카스팔루스',school:'트리니티',tier:6,atk:atk,hp:hp2,kw:['poison'],img:'token/CathPalug.png',golden:false,alive:true,poisonImmune:false};
     mySide.push(cp);
-    log.push({cls:'soc',text:'[뒤끝] 카스팔루스 소환! ('+atk+'/'+hp2+', 독성)'});
+    log.push({cls:'soc',text:'[뒤끝] 카스팔루스 소환! ('+atk+'/'+hp2+', 독사굴)'});
   }
   else if(id==='hifumi'){
     if(countAlive(mySide)>=BATTLE_MAX) return;
@@ -2428,7 +2428,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(hasKw(unit,'reborn')){
       unit.kw.splice(unit.kw.indexOf('reborn'),1);
       unit.hp=1;var shIdx=unit.kw.indexOf('shield');if(shIdx!==-1)unit.kw.splice(shIdx,1);
-      log2.push({cls:'shield',text:unit.name+'이(가) 환생했다! (HP:1)'});
+      log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:1)'});
     } else {
       unit.alive=false;
       if(killedBy) unit._killedBy=killedBy;
@@ -2493,7 +2493,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       log2.push({cls:'hit',text:src.name+'가 '+dst.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,dst.hp)+')'});
       if(hasKw(src,'poison')&&dmg>=1&&dst.hp>0&&!dst.poisonImmune&&!dst.abilityImmune){
         dst.hp=0;
-        log2.push({cls:'kill',text:src.name+'의 독성! '+dst.name+' 즉사!'});
+        log2.push({cls:'kill',text:src.name+'의 독사굴! '+dst.name+' 즉사!'});
       }
       var overflow=dmg-hpBefore;
       return {blocked:false,overflow:overflow>0?overflow:0};
@@ -2537,7 +2537,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       applyEimiBonus(ae,side);
       side.push(ae);
       G.millenniumTokenSummons=(G.millenniumTokenSummons||0)+1;
-      log2.push({cls:'soc',text:'[생존] '+unit.name+': '+ae.name+' 소환! ('+ae.atk+'/'+ae.hp+')'});
+      log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+ae.name+' 소환! ('+ae.atk+'/'+ae.hp+')'});
       surviveEffects.push({type:'summon',token:ae.baseId,golden:unit.golden});
     }
     else if(unit.baseId==='neru'){
@@ -2550,7 +2550,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(available.length===0) break;
         var pick=available[Math.floor(Math.random()*available.length)];
         addKw(unit,pick);
-        log2.push({cls:'soc',text:'[생존] '+unit.name+': '+(KW_LABELS[pick]||pick)+' 획득!'});
+        log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+(KW_LABELS[pick]||pick)+' 획득!'});
         surviveEffects.push({type:'keyword',baseId:'neru',kw:pick});
       }
     }
@@ -2561,7 +2561,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       for(var i=0;i<oppSide.length;i++){
         if(oppSide[i].alive) oppSide[i].atk=Math.max(0,oppSide[i].atk-debuff);
       }
-      log2.push({cls:'soc',text:'[생존] '+unit.name+': 상대 전체 공격력 -'+debuff});
+      log2.push({cls:'soc',text:'[버티기] '+unit.name+': 상대 전체 공격력 -'+debuff});
       surviveEffects.push({type:'debuff',baseId:'mimori',amount:debuff});
     }
     else if(unit.baseId==='noa'&&hitBy){
@@ -2572,7 +2572,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(!hasKw(unit,kk)){addKw(unit,kk);copied.push(KW_LABELS[kk]||kk);}
       }
       if(copied.length>0){
-        log2.push({cls:'soc',text:'[생존] '+unit.name+': '+hitBy.name+'의 능력 복사! ('+copied.join(', ')+')'});
+        log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+hitBy.name+'의 능력 복사! ('+copied.join(', ')+')'});
         // 유우카가 있으면 유우카에게도 부여 (황금: 밀레니엄 전체)
         var targets=[];
         if(unit.golden){
@@ -3667,7 +3667,7 @@ function applyHitEffects(changes,step,atkIsAlly){
         }
       }
       if(c.reborn){
-        setTimeout(function(cd){spawnDmgNum(cd,'환생!',true);}.bind(null,card),400);
+        setTimeout(function(cd){spawnDmgNum(cd,'부활!',true);}.bind(null,card),400);
       }
     }
   });
@@ -3853,7 +3853,7 @@ function miniCardHtml(m){
   if(BC_IDS[bid]) miniAbilTag+='<span class="ability-tag bc" style="font-size:8px;padding:0 3px">첫인사</span>';
   if(DR_IDS[bid]) miniAbilTag+='<span class="ability-tag dr" style="font-size:8px;padding:0 3px">뒤끝</span>';
   if(SOC_IDS[bid]) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
-  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">생존</span>';
+  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">버티기</span>';
   if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
   if(PRE_IDS[bid]||(m.kw&&(m.kw.indexOf('preemptive')!==-1||m.kw.indexOf('multistrike')!==-1))) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선제</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
