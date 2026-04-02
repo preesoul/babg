@@ -1168,8 +1168,7 @@ function _doBC(m, p) {
     for(var i=0;i<p.board.length;i++){
       p.board[i].atk+=buff;p.board[i].hp+=buff;
       p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp);p.board[i].maxHp+=buff;
-        logBuff(p.board[i],m.name,buff,buff);
-      }
+      logBuff(p.board[i],m.name,buff,buff);
     }
   }
   else if(id==='tsubaki') {
