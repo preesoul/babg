@@ -208,7 +208,7 @@ var MAX_GOLD = 10;
 var BC_IDS  = {iroha:1, himari:1, gehenna_pandemonium:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};       // 첫인사
 var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
-var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 생존
+var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
@@ -226,14 +226,14 @@ var ABILITY_DESCS = {
   himari:   {type:'첫인사',desc:'아군 밀레니엄 학생들 +3/+3',gold:'임전 히마리: +6/+6',goldDesc:'첫인사: 아군 밀레니엄 학생들에게 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
   rio:      {type:'개전',desc:'아군의 모든 첫인사를 발동합니다.\n전투가 끝나면 원래대로 돌아갑니다.',gold:'임전 리오: 두 번 발동',goldDesc:'개전: 아군의 모든 첫인사를 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.\n전투가 끝나면 원래대로 돌아갑니다.'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',gold:'드레스 아코: +8/+8',goldDesc:'뒤끝: 이번 전투에서 게헨나 학생들에게 <span style="color:#ffd700;font-weight:700">+8/+8</span>을 부여합니다.'},
-  kazusa:   {type:'뒤끝',desc:'<카스팔루스>로 교체됩니다. (1/1, 독사굴)',gold:'밴드 카즈사: 부활 추가',goldDesc:'<span style="color:#ffd700;font-weight:700">부활</span>, 뒤끝: <카스팔루스>로 교체됩니다.\n(카스팔루그: 1/1, 독성)'},
+  kazusa:   {type:'뒤끝',desc:'<카스팔루스>로 교체됩니다. (1/1, 독사굴)',gold:'밴드 카즈사: 부활 추가',goldDesc:'<span style="color:#ffd700;font-weight:700">부활</span>, 뒤끝: <카스팔루스>로 교체됩니다.\n(카스팔루그: 1/1, 독사굴)'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (2/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',gold:'수영복 히후미: 페로로님 4/2',goldDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">4/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',gold:'수영복 아즈사: -4 데미지',goldDesc:'뒤끝: 적 전체에게 <span style="color:#ffd700;font-weight:700">-4</span>의 데미지를 줍니다.'},
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',gold:'아이돌 사쿠라코: 두 번 더 발동',goldDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   tsurugi:  {type:'개전',desc:'자신에게 +10/+10',gold:'수영복 츠루기: +20/+20',goldDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+20/+20</span>을 부여합니다.'},
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',gold:'아이돌 미네: 동일'},
-  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',gold:'메이드 토키: 스케쥴 레벨×4',goldDesc:'생존: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 가집니다.'},
-  neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',gold:'바니걸 네루: 두 가지를 무작위로 얻습니다.',goldDesc:'생존: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
+  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',gold:'메이드 토키: 스케쥴 레벨×4',goldDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 가집니다.'},
+  neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',gold:'바니걸 네루: 두 가지를 무작위로 얻습니다.',goldDesc:'버티기: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
   toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',gold:'황금 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',gold:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',goldDesc:'선제: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',gold:'새해 준코: 당고 2개 소환',goldDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
@@ -243,7 +243,7 @@ var ABILITY_DESCS = {
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',gold:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환',goldDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공격력/체력, 자폭)'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',gold:'치어리더 히비키: -2/-2',goldDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',gold:'메이드 유즈: 쓰러진 아군 수×4',goldDesc:'뒤끝: 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
-  noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',gold:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',goldDesc:'생존: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
+  noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',gold:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',goldDesc:'버티기: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
   utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',gold:'치어리더 우타하: 천둥이 두 번 소환',goldDesc:'선제: <천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n<span style="color:#ffd700;font-weight:700">두 번 시행합니다.</span>\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.'},
   mashiro:  {type:'저격',desc:'',gold:''},
   hinata:   {type:'선제',desc:'한 번에 2~5회 공격합니다.',gold:'수영복 히나타: 4~10회',goldDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.'},
@@ -265,7 +265,7 @@ var ABILITY_DESCS = {
   izuna:    {type:'첫인사',desc:'아군 전체 공격력 +1 (자신 포함)',gold:'수영복 이즈나: +1/+1',goldDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+1/+1</span> (자신 포함)'},
   tsukuyo:  {type:'첫인사',desc:'아군 전체 +1/+1 (자신 포함)',gold:'드레스 츠쿠요: +2/+2',goldDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>을 부여합니다. (자신 포함)'},
   yukari:   {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 유카리: 동일'},
-  mimori:   {type:'버티기',desc:'이번 전투 동안 상대 전체 공격력 -1\n(공격력 0이면 공격하지 않습니다.)',gold:'수영복 미모리: -2',goldDesc:'생존: 이번 전투 동안 상대 전체 공격력 <span style="color:#ffd700;font-weight:700">-2</span>\n(공격력 0이면 공격하지 않습니다.)'},
+  mimori:   {type:'버티기',desc:'이번 전투 동안 상대 전체 공격력 -1\n(공격력 0이면 공격하지 않습니다.)',gold:'수영복 미모리: -2',goldDesc:'버티기: 이번 전투 동안 상대 전체 공격력 <span style="color:#ffd700;font-weight:700">-2</span>\n(공격력 0이면 공격하지 않습니다.)'},
   renge:    {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 렌게: 동일'},
   shizuko:  {type:'패시브',desc:'첫인사가 2회 발동합니다.',gold:'수영복 시즈코: 4회 발동',goldDesc:'패시브: 첫인사가 <span style="color:#ffd700;font-weight:700">4회</span> 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',gold:'가이드 츠바키: +4/+4',goldDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
@@ -273,7 +273,7 @@ var ABILITY_DESCS = {
   chise:    {type:'패시브',desc:'공격한 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',gold:'수영복 치세: 무작위 2개 제거',goldDesc:'패시브: 공격한 상대의 능력 중\n무작위 <span style="color:#ffd700;font-weight:700">2개</span>를 이번 전투 동안 제거합니다.'},
   michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',gold:'드레스 미치루: 추가로 두 번 발동',goldDesc:'첫인사: 샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)',gold:'수영복 나구사: 동일'},
-  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',gold:'수영복 와카모: 4~10회 공격',goldDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 원거리)'},
+  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',gold:'수영복 와카모: 4~10회 공격',goldDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',gold:'황금 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',gold:''},
@@ -926,7 +926,7 @@ function buyMinion(idx, insertIdx) {
     for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===m.baseId&&!p.board[i].golden&&removed<2){removed++;}else{newBoard.push(p.board[i]);}}
     p.board=newBoard;
     var golden=makeMinion(tmpl,true);golden.kw=mergedKw;golden.atk+=bonusAtk;golden.hp+=bonusHp;golden.maxHp=golden.hp;
-    // 시미코 황금: 질풍+보호막 추가
+    // 시미코 황금: 연사+보호막 추가
     if(tmpl.id==='shimiko'){
       if(golden.kw.indexOf('windfury')===-1)golden.kw.push('windfury');
       if(golden.kw.indexOf('shield')===-1)golden.kw.push('shield');
@@ -1839,7 +1839,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   // ===== 7성 히든 개전 =====
   else if(id==='gehenna_traingun'){
-    // 열차포: 상대 전체에 6 원거리 데미지 × (1+생존전투수)
+    // 열차포: 상대 전체에 6 저격 데미지 × (1+생존전투수)
     var repeat=1+(u._battlesSurvived||0);
     for(var r=0;r<repeat;r++){
       var trainKills=[];
@@ -1890,7 +1890,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
   }
   else if(id==='hkyk_kuzunoha'){
-    // 쿠즈노하: 아군 백귀야행 전체 독성 부여 + 상대 독성 제거
+    // 쿠즈노하: 아군 백귀야행 전체 독사굴 부여 + 상대 독사굴 제거
     for(var i=0;i<mySide.length;i++){
       if(mySide[i].alive&&mySide[i].school==='백귀야행') addKw(mySide[i],'poison');
     }
@@ -2518,7 +2518,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
   }
-  // 생존 트리거: 맞았는데 안 죽었을 때 (피격당할 때마다 체크)
+  // 버티기 트리거: 맞았는데 안 죽었을 때 (피격당할 때마다 체크)
   function checkSurvive(unit,side,log2,hitBy){
     if(!unit.alive||unit.hp<=0) return;
     var hasCopiedSurv=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='surv';});
@@ -2552,7 +2552,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     else if(unit.baseId==='mimori'){
-      // 미모리 생존: 상대 전체 공격력 -1 (황금 -2)
+      // 미모리 버티기: 상대 전체 공격력 -1 (황금 -2)
       var debuff=unit.golden?2:1;
       var oppSide=(side===a)?b:a;
       for(var i=0;i<oppSide.length;i++){
@@ -2798,13 +2798,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   function dealDamage(attacker,atkArr,defender,defArr,log2,isCleave,dmgOverride){
     var hitResult=dealHit(attacker,defender,log2,dmgOverride,true);
-    // 방어자가 맞고 살아남았으면 생존 체크
+    // 방어자가 맞고 살아남았으면 버티기 체크
     checkSurvive(defender,defArr,log2,attacker);
     // 치세 패시브: 공격자 능력 제거
     if(!hitResult.blocked&&defender.alive) checkChisePassive(attacker,defender,log2);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')){
       var counterResult=dealHit(defender,attacker,log2);
-      // 공격자가 반격 맞고 살아남았으면 생존 체크
+      // 공격자가 반격 맞고 살아남았으면 버티기 체크
       checkSurvive(attacker,atkArr,log2,defender);
     }
     resolveDeath(defender,defArr,atkArr,log2,attacker);
@@ -2813,7 +2813,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     return hitResult;
   }
 
-  // 생존 효과 추적 (실제 보드 반영용)
+  // 버티기 효과 추적 (실제 보드 반영용)
   var surviveEffects=[];
 
   // 초기 스냅샷 (개전 전 상태)
@@ -3636,7 +3636,7 @@ function findChanges(prevSnap,currSnap){
       if(prev.hp>curr.hp)c.hpLost=prev.hp-curr.hp;
       if(prev.kw.indexOf('shield')!==-1&&curr.kw.indexOf('shield')===-1)c.shieldBroken=true;
       if(prev.alive&&!curr.alive)c.newlyDead=true;
-      // 환생 감지: shield 있었는데 사라지고 hp=1이 된 경우
+      // 부활 감지: shield 있었는데 사라지고 hp=1이 된 경우
       if(prev.kw.indexOf('reborn')!==-1&&curr.kw.indexOf('reborn')===-1&&curr.alive&&curr.hp===1)c.reborn=true;
       if(c.hpLost>0||c.shieldBroken||c.newlyDead||c.reborn)changes[side].push(c);
     }
