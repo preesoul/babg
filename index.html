@@ -2598,6 +2598,7 @@ function makeSweeper(){
 }
 
 function runBattle(boardA, boardB, startWithA, opts) {
+  G.permanentAbilityBan=false;
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
