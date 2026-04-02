@@ -765,7 +765,7 @@ function showGameOver() {
 // ========== RENDER ==========
 function abilityTag(baseId) {
   var tags='';
-  if(BC_IDS[baseId])   tags+='<span class="ability-tag bc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">전함</span>';
+  if(BC_IDS[baseId])   tags+='<span class="ability-tag bc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">첫인사</span>';
   if(DR_IDS[baseId])   tags+='<span class="ability-tag dr" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">뒤끝</span>';
   if(SOC_IDS[baseId])  tags+='<span class="ability-tag soc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">개전</span>';
   if(SURV_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">버티기</span>';
@@ -1051,7 +1051,7 @@ function cardHtml(m,idx,isBoard){
   var allLabels=[];
   if(kwArr.length>0){for(var ki=0;ki<kwArr.length;ki++){allLabels.push({t:KW_LABELS[kwArr[ki]]||kwArr[ki],c:'#8ab0cc'});}}
   var bid=m.baseId||'';
-  if(BC_IDS[bid])allLabels.push({t:'전함',c:'#fbbf24'});
+  if(BC_IDS[bid])allLabels.push({t:'첫인사',c:'#fbbf24'});
   if(DR_IDS[bid])allLabels.push({t:'뒤끝',c:'#fca5a5'});
   if(SOC_IDS[bid])allLabels.push({t:'개전',c:'#93c5fd'});
   if(SURV_IDS[bid])allLabels.push({t:'버티기',c:'#6ee7b7'});
