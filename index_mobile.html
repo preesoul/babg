@@ -423,7 +423,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 /* 벤치: 사이드패널 안에서 */
 .side-panel>[style*="margin-top"]{margin-top:0!important;flex:0 0 auto}
 .side-panel .section-label{display:none!important}
-#ui-bench{height:100px!important;width:80px!important;padding:2px!important;flex-shrink:0}
+#ui-bench{height:120px!important;width:80px!important;padding:2px!important;flex-shrink:0}
 .bench-empty-slot{width:70px!important;font-size:7px!important}
 .bench-card-wrap .card{width:65px!important;height:80px!important}
 .bench-card-wrap .card .name-banner{font-size:7px!important;padding:1px 2px!important}
@@ -561,9 +561,9 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .card.move-selected .m-move-bubble{display:block!important}
 .m-move-bubble{display:none;position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:#fbbf24;color:#1a1a2e;font-size:8px;font-weight:900;padding:2px 6px;border-radius:8px;white-space:nowrap;z-index:10}
 .m-move-bubble::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #fbbf24}
-.m-insert-line{display:flex;align-items:center;justify-content:center;width:20px;height:100%;cursor:pointer;flex-shrink:0;position:relative}
-.m-insert-line::before{content:'';position:absolute;top:8px;bottom:8px;left:50%;transform:translateX(-50%);width:2px;background:#fbbf24;border-radius:1px}
-.m-insert-label{font-size:7px;color:#fbbf24;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:1px;font-weight:700;z-index:1;background:rgba(26,26,46,0.8);padding:2px 0;border-radius:3px}
+.m-insert-line{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:28px;min-height:80px;cursor:pointer;flex-shrink:0;position:relative;padding:4px 0}
+.m-insert-label{font-size:7px;color:#fbbf24;font-weight:700;z-index:1;background:rgba(26,26,46,0.9);padding:2px 3px;border-radius:3px;white-space:nowrap;margin-bottom:2px}
+.m-insert-bar{flex:1;width:2px;background:#fbbf24;border-radius:1px;min-height:30px}
 
 /* 키워드 가이드 패널 */
 .kw-guide-panel{max-height:60vh!important;overflow-y:auto!important}
@@ -4433,7 +4433,7 @@ function showMobileMoveUI(boardEl,srcIdx){
     var line=document.createElement('div');
     line.className='m-insert-line';
     line.setAttribute('data-insert-pos',''+i);
-    line.innerHTML='<span class="m-insert-label">위치</span>';
+    line.innerHTML='<span class="m-insert-label">위치</span><div class="m-insert-bar"></div>';
     line.addEventListener('click',function(e){
       e.stopPropagation();
       var pos=parseInt(this.getAttribute('data-insert-pos'));
