@@ -952,7 +952,7 @@ var ABILITY_DESCS = {
   gehenna_traingun:       {type:'개전 / 패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n개전: 상대 전체에 6의 광역 데미지.\n살아남은 전투마다 개전 발동 횟수가 증가합니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
   trinity_mika:           {type:'패시브',desc:'능력/효과로 인한 데미지와 쓰러짐에 면역입니다.\n전투 데미지로만 쓰러뜨릴 수 있습니다.',gold:''},
   trinity_nagisa:         {type:'개전',desc:'마리(아이돌), 사쿠라코(아이돌), 미네(아이돌)에게\n+5/+5를 부여합니다.',gold:''},
-  trinity_seia:           {type:'패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n아군 트리니티 학생 전체에 무적을 부여합니다.\n세이아가 쓰러지면 아군 전체 능력이 영구 삭제됩니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
+  trinity_seia:           {type:'패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n세이아를 제외한 아군 트리니티 학생 전체에게 무적을 부여합니다.\n세이아가 쓰러지면 아군 전체 능력이 영구 삭제됩니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
   millennium_nameless:    {type:'개전',desc:'자신을 파괴합니다.\n공격력+체력 총합으로 적 왼쪽부터 순차 데미지.\n보호막은 0 소비로 벗깁니다.',gold:''},
   millennium_malkuth:     {type:'선제 / 패시브',desc:'선제: 스위퍼 2체를 소환해 순차 공격시킵니다.\n스위퍼가 적을 처치하면 공격하지 않습니다.\n패시브: 모든 밀레니엄 토큰이 스위퍼로 대체됩니다.',gold:''},
   millennium_death_momoi: {type:'히든 / 개전 / 선제',desc:'샬레의 모든 모모이를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 모모이들의 공격력 합, 체력 합을 각각 더합니다.\n개전: 적 전체의 도발을 삭제합니다.\n선제: 적 스탯이 기본보다 높으면\n부여 수치를 제거하고 공격합니다.',gold:''},
@@ -1076,7 +1076,19 @@ var SPELLS = [
           var newBoard=[];var removed=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===orig.baseId&&!p.board[j].golden&&removed<2){removed++;}else{newBoard.push(p.board[j]);}}
           if(p.bench&&p.bench.baseId===orig.baseId&&!p.bench.golden){p.bench=null;removed++;}
           p.board=newBoard;var gld=makeMinion(tmpl,true);gld.kw=mKw;gld.atk+=bAtk;gld.hp+=bHp;gld.maxHp=gld.hp;p.board.push(gld);triggerBattlecry(gld,p);showDiscover(G.players[0]);return true;}}
-      if(p.board.length>=MAX_BOARD)return false;
+      if(p.board.length>=MAX_BOARD){
+        if(!orig.golden){var cnt2=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===orig.baseId&&!p.board[j].golden)cnt2++;}
+          if(p.bench&&p.bench.baseId===orig.baseId&&!p.bench.golden)cnt2++;
+          if(cnt2>=2){var tmpl2=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===orig.baseId){tmpl2=CHARS[j];break;}
+            if(tmpl2){var mKw2=[],bAtk2=0,bHp2=0;
+              var srcs=[];for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===orig.baseId&&!p.board[j].golden)srcs.push(p.board[j]);}
+              if(p.bench&&p.bench.baseId===orig.baseId&&!p.bench.golden)srcs.push(p.bench);
+              for(var j=0;j<srcs.length;j++){var u=srcs[j];for(var k=0;k<(u.kw||[]).length;k++){if(mKw2.indexOf(u.kw[k])===-1)mKw2.push(u.kw[k]);}bAtk2+=u.atk-tmpl2.atk;bHp2+=u.hp-tmpl2.hp;}
+              bAtk2+=orig.atk-tmpl2.atk;bHp2+=orig.hp-tmpl2.hp;
+              if(p.bench&&p.bench.baseId===orig.baseId&&!p.bench.golden)p.bench=null;
+              var newBoard2=[];var removed2=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===orig.baseId&&!p.board[j].golden&&removed2<2){removed2++;}else{newBoard2.push(p.board[j]);}}
+              p.board=newBoard2;var gld2=makeMinion(tmpl2,true);gld2.kw=mKw2;gld2.atk+=bAtk2;gld2.hp+=bHp2;gld2.maxHp=gld2.hp;p.board.push(gld2);triggerBattlecry(gld2,p);showDiscover(G.players[0]);return true;}}}
+        return false;}
       var copy={id:orig.id+'_c'+Math.random().toString(36).substr(2,3),baseId:orig.baseId,name:orig.name,school:orig.school,tier:orig.tier,atk:orig.atk,hp:orig.hp,maxHp:orig.hp,kw:(orig.kw||[]).slice(),golden:orig.golden,img:orig.img,copies:1};
       p.board.push(copy);triggerBattlecry(copy,p);return true;}},
   {id:'clover',name:'행운의 클로버',cost:4,tier:4,desc:'선택 학생에게 보호막 부여',target:'select_ally',
@@ -1381,7 +1393,9 @@ function buySpell(idx) {
   if(spell.id==='gacha'&&isGachaBlocked())return;
   if(spell.target==='select_ally'){
     if(p.board.length===0)return;
-    if(spell.id==='mirror'&&p.board.length>=MAX_BOARD)return;
+    if(spell.id==='mirror'&&p.board.length>=MAX_BOARD){
+      var canTriple=false;var bCounts={};for(var _mi=0;_mi<p.board.length;_mi++){var _bid=p.board[_mi].baseId;if(!p.board[_mi].golden){bCounts[_bid]=(bCounts[_bid]||0)+1;if(bCounts[_bid]>=2)canTriple=true;}}
+      if(!canTriple)return;}
     p.gold-=item.cost;G.shop[idx]=null;
     if(spell.once){if(!G.usedOnceSpells)G.usedOnceSpells={};G.usedOnceSpells[spell.id]=true;}
     G.pendingSpell=spell;renderAll();return;
@@ -2322,7 +2336,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       if(otherSide[i].alive&&!otherSide[i].abilityImmune){
         otherSide[i].atk=Math.max(1,otherSide[i].atk-debuff);
         otherSide[i].hp-=debuff;
-        if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;log.push({cls:'kill',text:otherSide[i].name+' 디버프로 처치!'});hibikiKills.push(otherSide[i]);}
+        if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;log.push({cls:'kill',text:otherSide[i].name+' 디버프로 쓰러졌다!'});hibikiKills.push(otherSide[i]);}
       }
     }
     for(var i=0;i<hibikiKills.length;i++) triggerDeathrattle(hibikiKills[i],otherSide,mySide,log);
@@ -2415,7 +2429,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       }
       if(enemy.hp<=remaining){
         remaining-=enemy.hp;enemy.hp=0;enemy.alive=false;
-        log.push({cls:'kill',text:enemy.name+' 처치! (남은: '+remaining+')'});
+        log.push({cls:'kill',text:enemy.name+'은(는) 쓰러졌다! (남은: '+remaining+')'});
         triggerDeathrattle(enemy,otherSide,mySide,log);
       } else {
         enemy.hp-=remaining;
@@ -2588,7 +2602,7 @@ function _doDR(unit, mySide, otherSide, log) {
         if(rightTarget){
           rightTarget.hp-=unit.atk;
           log.push({cls:'hit',text:'[메아리] 무츠키: '+rightTarget.name+'에게 '+unit.atk+' 데미지!'});
-          if(rightTarget.hp<=0){rightTarget.alive=false;log.push({cls:'kill',text:rightTarget.name+' 처치!'});triggerDeathrattle(rightTarget,otherSide,mySide,log);}
+          if(rightTarget.hp<=0){rightTarget.alive=false;log.push({cls:'kill',text:rightTarget.name+'은(는) 쓰러졌다!'});triggerDeathrattle(rightTarget,otherSide,mySide,log);}
         }
       }
     }
@@ -2605,7 +2619,7 @@ function _doDR(unit, mySide, otherSide, log) {
         if(leftTarget){
           leftTarget.hp-=unit.atk;
           log.push({cls:'hit',text:'[메아리] 하루카: '+leftTarget.name+'에게 '+unit.atk+' 데미지!'});
-          if(leftTarget.hp<=0){leftTarget.alive=false;log.push({cls:'kill',text:leftTarget.name+' 처치!'});triggerDeathrattle(leftTarget,otherSide,mySide,log);}
+          if(leftTarget.hp<=0){leftTarget.alive=false;log.push({cls:'kill',text:leftTarget.name+'은(는) 쓰러졌다!'});triggerDeathrattle(leftTarget,otherSide,mySide,log);}
         }
       }
     }
@@ -2645,7 +2659,7 @@ function _doDR(unit, mySide, otherSide, log) {
     for(var i=0;i<otherSide.length;i++){
       if(otherSide[i].hp<=0&&otherSide[i].alive){
         otherSide[i].alive=false;
-        log.push({cls:'kill',text:otherSide[i].name+' 디버프로 처치!'});
+        log.push({cls:'kill',text:otherSide[i].name+' 디버프로 쓰러졌다!'});
         triggerDeathrattle(otherSide[i],otherSide,mySide,log);
       }
     }
@@ -2853,7 +2867,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
       // 열차포 영구 소멸
       if(unit.baseId==='gehenna_traingun') unit._permanentlyDestroyed=true;
-      log2.push({cls:'kill',text:unit.name+' 처치!'});
+      log2.push({cls:'kill',text:unit.name+'은(는) 쓰러졌다!'});
       triggerDeathrattle(unit,myArr,oppArr,log2);
     }
   }
@@ -2865,10 +2879,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
       log2.push({cls:'shield',text:dst.name+': 무적! 데미지 무효'});
       return {blocked:true,overflow:0};
     }
-    if(dst.school==='트리니티'&&dst._mySide){
+    if(dst.school==='트리니티'&&dst._mySide&&dst.baseId!=='trinity_seia'){
       for(var _sv=0;_sv<dst._mySide.length;_sv++){
         if(dst._mySide[_sv].alive&&dst._mySide[_sv].baseId==='trinity_seia'&&dst._mySide[_sv]!==dst){
-          log2.push({cls:'shield',text:dst.name+': 세이아의 무적!'});
+          log2.push({cls:'shield',text:dst.name+': 세이아의 예지로 회피했다!'});
           return {blocked:true,overflow:0};
         }
       }
@@ -2907,7 +2921,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         var idx=atkArr.indexOf(attacker);
         if(idx!==-1){atkArr[idx]=hif;attacker.alive=false;}
         else{atkArr.push(hif);}
-        log2.push({cls:'soc',text:'[페로로님] 적 처치! → '+hif.name+'(으)로 교체!'});
+        log2.push({cls:'soc',text:'[페로로님] 적을 쓰러뜨렸다! → '+hif.name+'(으)로 교체!'});
       }
     }
   }
@@ -3046,7 +3060,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
           resolveDeath(te,atkArr,defArr,teLog,target);
         }
         if(!target.alive){
-          teLog.push({cls:'soc',text:'[선제] '+te.name+'가 처치! '+attacker.name+'는 공격하지 않습니다.'});
+          teLog.push({cls:'soc',text:'[선제] '+te.name+'이(가) 쓰러뜨렸다! '+attacker.name+'는 공격하지 않습니다.'});
         }
         for(var tl=0;tl<teLog.length;tl++) log.push(teLog[tl]);
         steps.push({atkSide:teAtkSide,atkIdx:atkArr.indexOf(te),defSide:teDefSide,defIdx:defArr.indexOf(target),atkId:te.id,defId:target.id,log:teLog,snap:snapshot()});
@@ -3082,7 +3096,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         swp.alive=false; // 자폭
       }
       if(!target.alive){
-        log2.push({cls:'soc',text:'[선제] 스위퍼가 처치! '+attacker.name+'는 공격하지 않습니다.'});
+        log2.push({cls:'soc',text:'[선제] 스위퍼가 쓰러뜨렸다! '+attacker.name+'는 공격하지 않습니다.'});
         return true;
       }
     }
