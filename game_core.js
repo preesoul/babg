@@ -206,7 +206,7 @@ var MAX_GOLD = 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, himari:1, gehenna_pandemonium:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};       // 첫인사
-var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
+var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 패시브 (영입 턴/상시)
@@ -247,8 +247,6 @@ var ABILITY_DESCS = {
   utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',gold:'치어리더 우타하: 천둥이 두 번 소환',goldDesc:'선제: <천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n<span style="color:#ffd700;font-weight:700">두 번 시행합니다.</span>\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.'},
   mashiro:  {type:'저격',desc:'',gold:''},
   hinata:   {type:'선제',desc:'한 번에 2~5회 공격합니다.',gold:'수영복 히나타: 4~10회',goldDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.'},
-  mutsuki_token:  {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 오른쪽에 데미지.',gold:''},
-  haruka_token:   {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 왼쪽에 데미지.',gold:''},
   airship:  {type:'뒤끝',desc:'<파마머리 마코토>를 소환합니다.',gold:''},
   // 7성 히든
   gehenna_prefect:        {type:'패시브',desc:'샬레의 히나, 이오리, 아코, 치나츠를 흡수하며 등장합니다.\n기본 능력치 20/20에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.',gold:''},
@@ -317,8 +315,6 @@ var TOKENS = {
   toramaru:  {id:'toramaru',  name:'토라마루',   school:'게헨나',   tier:0, atk:5, hp:1, kw:[],          img:'token/toramaru.png'},
   cathpalug: {id:'cathpalug', name:'카스팔루스', school:'트리니티', tier:0, atk:1, hp:1, kw:['poison'],  img:'token/CathPalug.png'},
   perorosama:{id:'perorosama',name:'페로로님',   school:'트리니티', tier:0, atk:2, hp:1, kw:[],          img:'token/perorosama.png'},
-  mutsuki:   {id:'mutsuki',   name:'무츠키',     school:'게헨나',   tier:0, atk:4, hp:1, kw:[],          img:'token/Mutsuki.png'},
-  haruka:    {id:'haruka',    name:'하루카',     school:'게헨나',   tier:0, atk:4, hp:1, kw:[],          img:'token/Haruka.png'},
   abi_eshuh: {id:'abi_eshuh', name:'아비 에슈흐',school:'밀레니엄', tier:0, atk:2, hp:2, kw:[],          img:'token/Abi_Eshuh.png'},
   dango:     {id:'dango',     name:'당고',       school:'게헨나',   tier:0, atk:1, hp:1, kw:[],          img:'token/Dango.png'},
   airship:   {id:'airship',   name:'비행선',     school:'게헨나',   tier:0, atk:1, hp:1, kw:['selfdestruct'], img:'token/Airship.png'},
@@ -2151,40 +2147,6 @@ function _doDR(unit, mySide, otherSide, log) {
         killer.hp=0;killer.alive=false;
         log.push({cls:'kill',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
         triggerDeathrattle(killer,otherSide,mySide,log);
-      }
-    }
-  }
-  else if(id==='mutsuki'&&unit.isToken){
-    // 무츠키 토큰 DR: 자신 공격력만큼 킬러 오른쪽에 데미지
-    if(unit._killedBy){
-      var killer=unit._killedBy;
-      var kIdx=-1;for(var i=0;i<otherSide.length;i++)if(otherSide[i]===killer){kIdx=i;break;}
-      if(kIdx!==-1){
-        // 킬러의 오른쪽 (인덱스+1)
-        var rightTarget=null;
-        for(var i=kIdx+1;i<otherSide.length;i++){if(otherSide[i].alive){rightTarget=otherSide[i];break;}}
-        if(rightTarget){
-          rightTarget.hp-=unit.atk;
-          log.push({cls:'hit',text:'[뒤끝] 무츠키: '+rightTarget.name+'에게 '+unit.atk+' 데미지!'});
-          if(rightTarget.hp<=0){rightTarget.alive=false;log.push({cls:'kill',text:rightTarget.name+'은(는) 쓰러졌다!'});triggerDeathrattle(rightTarget,otherSide,mySide,log);}
-        }
-      }
-    }
-  }
-  else if(id==='haruka'&&unit.isToken){
-    // 하루카 토큰 DR: 자신 공격력만큼 킬러 왼쪽에 데미지
-    if(unit._killedBy){
-      var killer=unit._killedBy;
-      var kIdx=-1;for(var i=0;i<otherSide.length;i++)if(otherSide[i]===killer){kIdx=i;break;}
-      if(kIdx!==-1){
-        // 킬러의 왼쪽 (인덱스-1)
-        var leftTarget=null;
-        for(var i=kIdx-1;i>=0;i--){if(otherSide[i].alive){leftTarget=otherSide[i];break;}}
-        if(leftTarget){
-          leftTarget.hp-=unit.atk;
-          log.push({cls:'hit',text:'[뒤끝] 하루카: '+leftTarget.name+'에게 '+unit.atk+' 데미지!'});
-          if(leftTarget.hp<=0){leftTarget.alive=false;log.push({cls:'kill',text:leftTarget.name+'은(는) 쓰러졌다!'});triggerDeathrattle(leftTarget,otherSide,mySide,log);}
-        }
       }
     }
   }
