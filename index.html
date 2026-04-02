@@ -1734,6 +1734,29 @@ function undoSell() {
   renderAll();
 }
 
+function showSellConfirm(onConfirm){
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center';
+  var box=document.createElement('div');
+  box.style.cssText='background:#1e293b;border:2px solid #475569;border-radius:12px;padding:24px 32px;text-align:center;min-width:220px';
+  var msg=document.createElement('div');
+  msg.style.cssText='color:#f1f5f9;font-size:16px;margin-bottom:18px';
+  msg.textContent='정말로 돌려 보내나요?';
+  var btnRow=document.createElement('div');
+  btnRow.style.cssText='display:flex;gap:12px;justify-content:center';
+  var yesBtn=document.createElement('button');
+  yesBtn.style.cssText='padding:8px 24px;border:none;border-radius:8px;font-size:15px;font-weight:bold;background:#ef4444;color:#fff;cursor:pointer';
+  yesBtn.textContent='응';
+  yesBtn.addEventListener('click',function(e){e.stopPropagation();overlay.remove();onConfirm();});
+  var noBtn=document.createElement('button');
+  noBtn.style.cssText='padding:8px 24px;border:none;border-radius:8px;font-size:15px;font-weight:bold;background:#475569;color:#fff;cursor:pointer';
+  noBtn.textContent='아니';
+  noBtn.addEventListener('click',function(e){e.stopPropagation();overlay.remove();});
+  btnRow.appendChild(yesBtn);btnRow.appendChild(noBtn);
+  box.appendChild(msg);box.appendChild(btnRow);overlay.appendChild(box);
+  overlay.addEventListener('click',function(e){if(e.target===overlay){overlay.remove();}});
+  document.body.appendChild(overlay);
+}
 function sellMinion(idx) {
   var p=G.players[0];
   if(!p.board[idx])return;
@@ -4082,7 +4105,7 @@ function renderAll() {
         var coinBtn=e.target.closest('.coin-toggle');
         if(coinBtn){var ci=parseInt(coinBtn.getAttribute('data-idx'));var p2=G.players[0];if(p2.board[ci]){p2.board[ci].coinOff=!p2.board[ci].coinOff;renderAll();if(TUT.active&&typeof TUT.coinToggleCount==='number'){TUT.coinToggleCount++;if(TUT.coinToggleCount>=2){var ts=TUTORIAL_STEPS[TUT.step];if(ts&&ts.action==='waitCoinToggle')setTimeout(function(){tutNext();},300);}}}return;}
         var btn=e.target.closest('.sell-btn');
-        if(btn){sellMinion(parseInt(btn.getAttribute('data-idx')));return;}
+        if(btn){var _si=parseInt(btn.getAttribute('data-idx'));showSellConfirm(function(){sellMinion(_si);});return;}
         var card=e.target.closest('.card');if(!card)return;
         var allCards=boardEl.querySelectorAll('.card');var cardIdx=-1;
         for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
@@ -4128,7 +4151,7 @@ function renderAll() {
     if(!benchEl._bound){
       benchEl._bound=true;
       benchEl.addEventListener('click',function(e){
-        if(e.target.closest('#bench-sell')){sellBench();return;}
+        if(e.target.closest('#bench-sell')){showSellConfirm(function(){sellBench();});return;}
       });
     }
   } else {
