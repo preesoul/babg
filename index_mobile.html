@@ -456,11 +456,14 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .card .keywords{display:none!important}
 .card .ability-tag{display:none!important}
 .m-ability-summary{font-size:6px;text-align:center;padding:1px 2px;background:rgba(0,0,0,0.4);color:#a0c4e0;line-height:1.3;min-height:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* 탭 메뉴 */
-.m-tap-menu{position:absolute;top:-30px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:20;white-space:nowrap}
-.m-tap-menu-btn{padding:3px 8px;font-size:9px;font-weight:700;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4)}
-.m-tap-menu-btn.move{background:#fbbf24;color:#1a1a2e}
+/* 탭 메뉴 (세로) */
+.m-tap-menu{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:3px;z-index:20;white-space:nowrap;margin-bottom:4px}
+.m-tap-menu-btn{padding:4px 10px;font-size:9px;font-weight:700;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4);min-width:60px;text-align:center}
 .m-tap-menu-btn.detail{background:#60a5fa;color:#fff}
+.m-tap-menu-btn.bench{background:#1a9b6a;color:#fff}
+.m-tap-menu-btn.sell{background:#ef4444;color:#fff}
+.m-tap-menu-btn.buy{background:#fbbf24;color:#1a1a2e}
+.m-tap-menu-btn.move{background:#a78bfa;color:#fff}
 .card .stat-row{padding:1px 3px 2px!important}
 .card .stat-atk,.card .stat-hp{width:18px!important;height:18px!important;font-size:11px!important}
 .card .stat-atk::before{width:14px!important;height:14px!important}
@@ -4228,7 +4231,7 @@ function renderAll() {
       fullHint=document.createElement('div');
       fullHint.id='fullboard-hint';
       fullHint.style.cssText='font-size:12px;color:#fbbf24;padding:4px 8px;margin-bottom:4px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:8px;text-align:center';
-      fullHint.textContent='우클릭으로 최대 1명까지 샬레의 학생을 벤치에 보낼 수 있습니다.';
+      fullHint.textContent='카드를 터치하여 벤치로 보낼 수 있습니다.';
       boardEl.parentNode.insertBefore(fullHint,boardEl);
     }
     fullHint.style.display='block';
@@ -4251,13 +4254,9 @@ function renderAll() {
     if(!boardEl._bound){
       boardEl._bound=true;
       boardEl.addEventListener('click',function(e){
-        // 모바일: 벤치 버튼
-        var benchBtn=e.target.closest('.m-bench-btn');
-        if(benchBtn){moveToBench(parseInt(benchBtn.getAttribute('data-bench-idx')));return;}
+        if(e.target.closest('.m-tap-menu-btn'))return; // 메뉴 버튼 클릭은 무시
         var coinBtn=e.target.closest('.coin-toggle');
         if(coinBtn){var ci=parseInt(coinBtn.getAttribute('data-idx'));var p2=G.players[0];if(p2.board[ci]){p2.board[ci].coinOff=!p2.board[ci].coinOff;renderAll();if(TUT.active&&typeof TUT.coinToggleCount==='number'){TUT.coinToggleCount++;if(TUT.coinToggleCount>=2){var ts=TUTORIAL_STEPS[TUT.step];if(ts&&ts.action==='waitCoinToggle')setTimeout(function(){tutNext();},300);}}}return;}
-        var btn=e.target.closest('.sell-btn');
-        if(btn){sellMinion(parseInt(btn.getAttribute('data-idx')));return;}
         var card=e.target.closest('.card');if(!card)return;
         var allCards=boardEl.querySelectorAll('.card');var cardIdx=-1;
         for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
@@ -4346,14 +4345,12 @@ function renderAll() {
       e.dataTransfer.setData('text/plain','shop:'+idx);
       dragSource='shop';dragSrcIdx=parseInt(idx);
     });
-    // 모바일: 탭으로 구매 (캐릭터/스펠/히든 모두)
+    // 모바일: 탭 메뉴 (영입/자세히)
     shopEl.addEventListener('click',function(e){
       var card=e.target.closest('[data-shop]');if(!card)return;
+      if(e.target.closest('.m-tap-menu-btn'))return; // 메뉴 버튼 클릭은 무시
       var idx=parseInt(card.getAttribute('data-shop'));
-      var item=G.shop[idx];
-      if(item&&item.isSpell)buySpell(idx);
-      else if(item&&item.isHidden)buyHiddenCard(idx);
-      else if(item)buyMinion(idx);
+      showShopTapMenu(card,idx);
     });
   }
   // 보드 드래그 이벤트는 initBoardDrag에서 처리
@@ -4416,7 +4413,7 @@ function cardHtml(m,idx,isBoard){
   var dragAttr=isBoard?' data-board-idx="'+idx+'"':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
   var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
-  if(isBoard){html+='<button class="sell-x sell-btn" data-idx="'+idx+'">✕</button>';html+='<button class="m-bench-btn" data-bench-idx="'+idx+'">B</button>';html+='<div class="m-move-bubble">이동준비</div>';}
+  if(isBoard){html+='<div class="m-move-bubble">이동준비</div>';}
   // 계승전/호버크래프트/열차포 카운터 표시
   var counterStyle='position:absolute;top:4px;right:28px;z-index:3;color:#fff;font-size:11px;font-weight:900;padding:2px 6px;border-radius:4px;line-height:1.3;min-width:18px;text-align:center';
   var keiTargets=['yukari','renge','kikyou','nagusa'];
@@ -4504,12 +4501,56 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
   dismissTapMenu();
   var menu=document.createElement('div');
   menu.className='m-tap-menu';
+  // 자세히
+  var detailBtn=document.createElement('button');
+  detailBtn.className='m-tap-menu-btn detail';detailBtn.textContent='자세히';
+  detailBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();
+    var baseId=cardEl.getAttribute('data-base-id');
+    if(baseId){var rect=cardEl.getBoundingClientRect();showTooltip(baseId,rect,cardEl);}
+  });
+  // 벤치로
+  var benchBtn=document.createElement('button');
+  benchBtn.className='m-tap-menu-btn bench';benchBtn.textContent='벤치로';
+  benchBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();moveToBench(cardIdx);
+  });
+  // 돌려보냄 (판매)
+  var sellBtn=document.createElement('button');
+  sellBtn.className='m-tap-menu-btn sell';sellBtn.textContent='돌려보냄';
+  sellBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();sellMinion(cardIdx);
+  });
+  // 이동
   var moveBtn=document.createElement('button');
   moveBtn.className='m-tap-menu-btn move';moveBtn.textContent='이동';
   moveBtn.addEventListener('click',function(e){
     e.stopPropagation();dismissTapMenu();
     window._mobileMoveSrc=cardIdx;
     showMobileMoveUI(boardEl,cardIdx);
+  });
+  menu.appendChild(detailBtn);menu.appendChild(benchBtn);menu.appendChild(sellBtn);menu.appendChild(moveBtn);
+  cardEl.style.position='relative';
+  cardEl.appendChild(menu);
+  setTimeout(function(){
+    document.addEventListener('click',function _dismiss(ev){
+      if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
+    });
+  },10);
+}
+// 상점 카드 탭 메뉴 (영입/자세히)
+function showShopTapMenu(cardEl,shopIdx){
+  dismissTapMenu();
+  var menu=document.createElement('div');
+  menu.className='m-tap-menu';
+  var buyBtn=document.createElement('button');
+  buyBtn.className='m-tap-menu-btn buy';buyBtn.textContent='영입';
+  buyBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();
+    var item=G.shop[shopIdx];
+    if(item&&item.isSpell)buySpell(shopIdx);
+    else if(item&&item.isHidden)buyHiddenCard(shopIdx);
+    else if(item)buyMinion(shopIdx);
   });
   var detailBtn=document.createElement('button');
   detailBtn.className='m-tap-menu-btn detail';detailBtn.textContent='자세히';
@@ -4518,10 +4559,9 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
     var baseId=cardEl.getAttribute('data-base-id');
     if(baseId){var rect=cardEl.getBoundingClientRect();showTooltip(baseId,rect,cardEl);}
   });
-  menu.appendChild(moveBtn);menu.appendChild(detailBtn);
+  menu.appendChild(buyBtn);menu.appendChild(detailBtn);
   cardEl.style.position='relative';
   cardEl.appendChild(menu);
-  // 다른 곳 클릭 시 메뉴 닫기
   setTimeout(function(){
     document.addEventListener('click',function _dismiss(ev){
       if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
@@ -4845,6 +4885,12 @@ function showTooltip(baseId,rect,cardEl){
   tt.style.left=x+'px';
   tt.style.top=y+'px';
   tt.classList.add('visible');
+  // 모바일: 외부 터치 시 툴팁 닫기
+  setTimeout(function(){
+    document.addEventListener('click',function _ttDismiss(ev){
+      if(!tt.contains(ev.target)){hideTooltip();document.removeEventListener('click',_ttDismiss);}
+    });
+  },10);
 }
 
 function hideTooltip(){
