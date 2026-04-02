@@ -15,8 +15,8 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 /* 게임 레이아웃 */
 .game-layout{display:flex;gap:8px;align-items:stretch;height:auto}
 .side-panel{width:195px;min-width:195px;display:flex;flex-direction:column;gap:6px;overflow:hidden;padding:6px;background:#141e28;border-radius:10px;border:1px solid #1c2838}
-.gold-display{display:flex;align-items:center;justify-content:center;gap:6px;padding:18px 0 6px;position:relative;z-index:1}
-.gold-display .gold-num{font-size:28px;font-weight:900;color:#fff}
+.stone-display{display:flex;align-items:center;justify-content:center;gap:6px;padding:18px 0 6px;position:relative;z-index:1}
+.stone-display .stone-num{font-size:28px;font-weight:900;color:#fff}
 .stone-icon.xl{width:36px;height:36px}
 .bench-empty-slot{width:120px;height:100%;border:2px dashed #3a5a6e;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#5a7a8e;font-size:10px;line-height:1.4;margin:0 auto}
 .bench-card-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -32,7 +32,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .top-bar{display:flex;flex-direction:column;gap:4px;padding:6px 8px;position:relative;z-index:50}
 .top-bar .turn{font-size:15px;font-weight:900;color:#e0eaf4;display:flex;align-items:center;gap:6px}
 .turn-circle{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1a6a9e,#2888c0);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;box-shadow:0 1px 4px rgba(40,120,180,0.5);flex-shrink:0}
-.top-bar .gold{color:#e0eaf4;font-weight:700;font-size:12px;display:flex;align-items:center;gap:3px}
+.top-bar .stone{color:#e0eaf4;font-weight:700;font-size:12px;display:flex;align-items:center;gap:3px}
 .stone-icon{display:inline-block;width:27px;height:27px;vertical-align:middle;object-fit:contain}
 .stone-icon.lg{width:22px;height:22px}
 .top-bar .hp{color:#ff6b6b;font-weight:700;font-size:12px}
@@ -75,13 +75,13 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .board.compact .card .tier-bar .star{width:10px;height:10px}
 .card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
 .card.tier1{border-color:#6a8090}.card.tier2{border-color:#3a8a4a}.card.tier3{border-color:#3070cc}.card.tier4{border-color:#7a50c0}.card.tier5{border-color:#c88a10}.card.tier6{border-color:#cc3030}.card.tier7{border-color:#c030d0;box-shadow:0 0 15px rgba(192,48,208,0.4);background:linear-gradient(180deg,#2a1838,#1a1028)}
-.card.golden{border-color:#c8a010;box-shadow:0 0 12px rgba(200,160,16,0.3)}
+.card.skin{border-color:#c8a010;box-shadow:0 0 12px rgba(200,160,16,0.3)}
 .card.token-card{border-color:#6a8090}
 .card.swap-selected{border-color:#00c8ff!important;box-shadow:0 0 14px rgba(0,200,255,0.5)!important}
 .card .card-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;border-radius:3px}
 .card .card-bg img{width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)}
 .card .card-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(14,24,38,0.98) 0%,rgba(16,28,42,0.75) 40%,transparent 100%)}
-.card.golden .card-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 35%,transparent 100%)}
+.card.skin .card-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 35%,transparent 100%)}
 .card.tier7 .card-bg::after{background:linear-gradient(to top,rgba(30,16,40,0.95) 0%,rgba(30,16,40,0.6) 35%,transparent 100%)}
 .card-inner{position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:0;overflow:hidden;border-radius:3px}
 .school-logo{position:absolute;bottom:28px;right:6px;width:40px;height:40px;opacity:0.18;filter:invert(1);pointer-events:none;z-index:0}
@@ -116,12 +116,12 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .frozen-badge{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1693de,#00c8ff);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 2px 6px rgba(22,147,222,0.3)}
 /* 미니카드 (전투용) */
 .minicard{width:140px;height:195px;background:#1e2d3d;border:2.5px solid #3a5a6e;border-radius:5px;padding:0;text-align:center;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
-.minicard.golden{border-color:#c8a010;box-shadow:0 0 10px rgba(200,160,16,0.3)}
+.minicard.skin{border-color:#c8a010;box-shadow:0 0 10px rgba(200,160,16,0.3)}
 .minicard.tier7{border-color:#c030d0;box-shadow:0 0 8px rgba(192,48,208,0.35)}
 .minicard .mini-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
 .minicard .mini-bg img{width:85%;height:auto;object-fit:contain;position:absolute;top:2px;left:50%;transform:translateX(-50%)}
 .minicard .mini-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(20,32,48,0.95) 0%,rgba(20,32,48,0.6) 30%,transparent 100%)}
-.minicard.golden .mini-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 30%,transparent 100%)}
+.minicard.skin .mini-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 30%,transparent 100%)}
 .minicard .mini-portrait{display:none}
 .minicard .mini-inner{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
 .minicard .name{font-size:13px;font-weight:700;margin-top:auto;padding:1px 5px;background:rgba(10,20,35,0.65);color:#e0eaf4;text-shadow:0 1px 2px rgba(0,0,0,0.5)}
@@ -147,7 +147,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .btn-inner{display:inline-flex;align-items:center;gap:4px;transform:skewX(8deg)}
 .btn:hover{box-shadow:0 4px 14px rgba(0,0,0,0.25);background:#f0f4f8}
 .btn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
-.btn-gold{background:#e8ecf0;color:#1a2a3a;border:2px solid #d0d8e0}
+.btn-stone{background:#e8ecf0;color:#1a2a3a;border:2px solid #d0d8e0}
 .btn-blue{background:#4a9ad5;color:#fff;border:2px solid #5aabe6}
 .btn-blue:hover{background:#5aabe6;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
 .btn-red{background:#8b3a3a;color:#f0d0d0;border:2px solid #a04848}
@@ -290,7 +290,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .hover-tooltip .tt-type.surv{background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.12)}
 .hover-tooltip .tt-type.passive{background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.12)}
 .hover-tooltip .tt-desc{color:#b0c8d8;line-height:1.5;white-space:pre-line;margin-bottom:4px;font-size:12px}
-.hover-tooltip .tt-gold{font-size:11px;color:#ffd700;line-height:1.4;white-space:pre-line;padding:6px 10px;background:linear-gradient(135deg,rgba(14,106,158,0.2),rgba(14,152,192,0.1));border-radius:8px;border:1px solid rgba(0,200,255,0.12);margin-top:6px}
+.hover-tooltip .tt-skin{font-size:11px;color:#ffd700;line-height:1.4;white-space:pre-line;padding:6px 10px;background:linear-gradient(135deg,rgba(14,106,158,0.2),rgba(14,152,192,0.1));border-radius:8px;border:1px solid rgba(0,200,255,0.12);margin-top:6px}
 
 .empty-hint{color:#8aa8c8;font-size:13px;padding:20px;text-align:center;width:100%}
 .shake{animation:shake 0.3s ease}
@@ -313,7 +313,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .ability-popup .ap-type.soc{background:rgba(96,192,232,0.15);color:#60c0e8;border:1px solid rgba(96,192,232,0.2)}
 .ability-popup .ap-name{font-size:18px;font-weight:900;margin-bottom:10px;color:#e0eaf4}
 .ability-popup .ap-desc{font-size:14px;line-height:1.6;color:#b0c8d8;white-space:pre-line;margin-bottom:8px}
-.ability-popup .ap-gold{font-size:12px;color:#ffd700;line-height:1.5;white-space:pre-line;padding:6px 10px;background:rgba(255,215,0,0.08);border-radius:8px;border:1px solid rgba(255,215,0,0.15)}
+.ability-popup .ap-skin{font-size:12px;color:#ffd700;line-height:1.5;white-space:pre-line;padding:6px 10px;background:rgba(255,215,0,0.08);border-radius:8px;border:1px solid rgba(255,215,0,0.15)}
 .ability-popup .ap-close{display:block;margin:12px auto 0;padding:8px 24px;border-radius:22px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
 .ability-popup .ap-close:hover{background:#f0f4f8;color:#1a2a3a}
 
@@ -413,7 +413,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .turn-circle{width:22px!important;height:22px!important;font-size:12px!important}
 .top-bar .tier{font-size:10px!important}
 .top-bar .hp{font-size:10px!important}
-.top-bar .gold{font-size:11px!important}
+.top-bar .stone{font-size:11px!important}
 .stone-icon{width:18px!important;height:18px!important}
 .stone-icon.lg{width:16px!important;height:16px!important}
 .players-bar{flex-direction:row!important;flex-wrap:wrap!important;gap:2px!important}
@@ -497,8 +497,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .schedule-icon{width:16px!important;height:18px!important}
 .schedule-icon::after{font-size:7px!important;margin-top:2px!important}
 .schedule-icon::before{height:5px!important}
-.gold-display{padding:8px 0 2px!important}
-.gold-display .gold-num{font-size:20px!important}
+.stone-display{padding:8px 0 2px!important}
+.stone-display .stone-num{font-size:20px!important}
 .stone-icon.xl{width:24px!important;height:24px!important}
 .ba-logo-deco{height:40px!important;bottom:2px!important;right:4px!important}
 .shop-actions{gap:4px!important;margin-top:8px!important;flex-wrap:wrap!important}
@@ -679,9 +679,9 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
         <div class="shop-inner">
         <div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div>
         <div class="shop-row" id="ui-shop"></div>
-        <div class="gold-display" id="ui-gold"><img src="img/UI/stone.png" class="stone-icon xl"><span class="gold-num">3</span></div>
+        <div class="stone-display" id="ui-stone"><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
         <div class="shop-actions">
-          <button class="btn btn-gold" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
+          <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
           <button class="btn btn-blue" id="btn-freeze"><span class="btn-inner">스케쥴 고정</span></button>
           <button class="btn btn-purple" id="btn-upgrade"><span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">5</span></button>
           <button class="btn btn-green btn-big" id="btn-fight"><span class="btn-inner">전투 시작</span></button>
@@ -728,7 +728,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
       <div class="battle-damage" id="battle-damage"></div>
     </div>
     <div class="battle-controls">
-      <button class="btn btn-gold" id="btn-skip" style="display:none"><span class="btn-inner">건너뛰기</span></button>
+      <button class="btn btn-stone" id="btn-skip" style="display:none"><span class="btn-inner">건너뛰기</span></button>
       <button class="btn btn-blue btn-big" id="btn-continue" style="display:none"><span class="btn-inner">계속</span></button>
     </div>
   </div>
@@ -739,7 +739,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
     <div class="ap-type" id="ap-type"></div>
     <div class="ap-name" id="ap-name"></div>
     <div class="ap-desc" id="ap-desc"></div>
-    <div class="ap-gold" id="ap-gold" style="display:none"></div>
+    <div class="ap-skin" id="ap-skin" style="display:none"></div>
     <button class="ap-close" id="ap-close">닫기</button>
   </div>
 </div>
@@ -749,7 +749,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 <div class="game-over" id="game-over">
   <h1 id="go-title"></h1>
   <div class="placement" id="go-placement"></div>
-  <button class="btn btn-gold btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
+  <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
 <script src="game_core.js"></script>
@@ -796,9 +796,9 @@ function showAbilityPopup(baseId, e) {
   document.getElementById('ap-name').textContent=charName;
   document.getElementById('ap-desc').textContent=info.desc;
 
-  var goldEl=document.getElementById('ap-gold');
-  if(info.gold){goldEl.textContent=info.gold;goldEl.style.display='block';}
-  else{goldEl.style.display='none';}
+  var skinEl=document.getElementById('ap-skin');
+  if(info.skin){skinEl.textContent=info.skin;skinEl.style.display='block';}
+  else{skinEl.style.display='none';}
 
   document.getElementById('ability-popup-overlay').classList.add('active');
 }
@@ -811,7 +811,7 @@ function renderAll() {
   var turnNumEl=document.getElementById('ui-turn-num');if(turnNumEl)turnNumEl.textContent=G.turn;
   document.getElementById('ui-tier').textContent='스케쥴 Lv.'+p.tier;
   var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
-  document.getElementById('ui-gold').innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="gold-num">'+p.gold+'</span>';
+  document.getElementById('ui-stone').innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';
   document.getElementById('ui-hp').textContent='HP: '+p.hp;
   // HP 바 업데이트
   var hpPct=Math.max(0,Math.min(100,p.hp/40*100));
@@ -898,9 +898,9 @@ function renderAll() {
   if(p.bench){
     var bm=p.bench;
     var tierCls='tier'+Math.min(bm.tier||1,7);
-    var goldCls=bm.golden?' golden':'';
+    var skinCls=bm.isSkin?' skin':'';
     var benchHtml='<div class="bench-card-wrap">';
-    benchHtml+='<div class="card '+tierCls+goldCls+'" style="width:120px;height:176px">';
+    benchHtml+='<div class="card '+tierCls+skinCls+'" style="width:120px;height:176px">';
     benchHtml+='<div class="card-bg">';
     if(bm.img) benchHtml+='<img src="img/'+bm.img+'" onerror="this.parentElement.style.display=\'none\'">';
     benchHtml+='</div>';
@@ -994,10 +994,10 @@ function renderAll() {
   else{freezeBtn.textContent='스케쥴 고정';freezeBtn.style.background='';shopEl.style.border='';}
   var rerollBtn=document.getElementById('btn-reroll');
   if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">리롤 (무료 '+G.freeRerolls+'회)</span>';rerollBtn.disabled=false;}
-  else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.gold<1;}
+  else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}
   var upgradeBtn=document.getElementById('btn-upgrade');
   upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
-  upgradeBtn.disabled=p.tier>=6||p.gold<p.upgradeCost;
+  upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
 }
 
 function spellCardHtml(item,idx){
@@ -1029,7 +1029,7 @@ function starStr(tier){var s='<div class="tier-bar">';for(var i=0;i<7;i++){var s
 function cardHtml(m,idx,isBoard){
   if(!m) return '<div style="width:150px;height:220px"></div>';
   var isToken=m.isToken||false;
-  var cls='card tier'+m.tier+(m.golden?' golden':'')+(isToken?' token-card':'')+(m.hkykBuffed?' hkyk-buffed':'');
+  var cls='card tier'+m.tier+(m.isSkin?' skin':'')+(isToken?' token-card':'')+(m.hkykBuffed?' hkyk-buffed':'');
   var dragAttr=isBoard?' data-board-idx="'+idx+'"':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
   var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
@@ -1500,7 +1500,7 @@ function showTooltip(baseId,rect,cardEl){
         kw:kwStr?kwStr.split(','):[],
         name:cardEl.getAttribute('data-mini-name')||charData.name,
         img:cardEl.getAttribute('data-mini-img')||charData.img,
-        golden:cardEl.getAttribute('data-mini-golden')==='1',
+        skin:cardEl.getAttribute('data-mini-golden')==='1',
         school:charData.school
       };
     }
@@ -1510,12 +1510,12 @@ function showTooltip(baseId,rect,cardEl){
   var displayKw=unitData?(unitData.kw||[]):(charData.kw||[]);
   var displayName=unitData?unitData.name:charData.name;
   var displayImg=unitData?unitData.img:charData.img;
-  var displayGolden=unitData?unitData.golden:false;
+  var displaySkin=unitData?unitData.isSkin:false;
   var displaySchool=charData.school||'';
 
   var tt=getTooltipEl();
   // 초상화
-  var html='<div class="tt-portrait'+(displayGolden?' golden':'')+'">';
+  var html='<div class="tt-portrait'+(displaySkin?' skin':'')+'">';
   if(displayImg) html+='<img src="img/'+displayImg+'" onerror="this.style.display=\'none\'">';
   html+='</div>';
   // 헤더: 이름, 학교, 스탯
@@ -1582,11 +1582,11 @@ function showTooltip(baseId,rect,cardEl){
     html+='<div class="tt-ability">';
     html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
     html+='<div class="tt-desc">'+info.desc+'</div>';
-    if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
+    if(info.skin) html+='<div class="tt-skin">'+info.skin+'</div>';
     html+='</div>';
-  } else if(info&&info.gold){
+  } else if(info&&info.skin){
     html+='<div class="tt-ability">';
-    if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
+    if(info.skin) html+='<div class="tt-skin">'+info.skin+'</div>';
     html+='</div>';
   }
   // 버프 이력 표시
@@ -1701,7 +1701,7 @@ var TUTORIAL_STEPS = [
   // 1. 인사
   {text:'안녕하세요, 선생님!\n<b>블루아카이브 전장</b>에 오신 것을 환영해요.\n지금부터, 아로나가 선생님께\n이곳의 룰에 대해 알려드릴게요!',
    target:'#arona-face', action:'next', bubbleMode:'arona-big',
-   onEnter:function(){ G.players[0].gold=3; G.players[0].turnGold=3; tutSetShop(['junko','midori','mari']); }},
+   onEnter:function(){ G.players[0].stone=3; G.players[0].turnStone=3; tutSetShop(['junko','midori','mari']); }},
 
   // 2. 8인 경쟁
   {text:'이 게임은 총 <b>8명</b>이 참여하고,\n최후의 1인이 될 때까지 경쟁해\n마지막으로 남은 사람이 이기는 게임이에요!',
@@ -1733,7 +1733,7 @@ var TUTORIAL_STEPS = [
 
   // 8.1 청휘석 증가 설명
   {text:'청휘석은 첫 1턴에 <b style="color:#fbbf24">\'3\'</b>으로 시작해서, 매 턴마다 4, 5, 6... 최대 <b style="color:#fbbf24">10</b>까지 올라요. 뒤로 갈수록 더 과감한 영입과 운용을 할 수 있으니 참고해 주세요!',
-   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-gold'},
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-stone'},
 
   // 9. 영입 실습 — 아로나가 말한다
   {text:'이제 한 명을 선택해서 샬레로 옮겨 볼까요?\n스케쥴에서 샬레로 <b style="color:#fbbf24">\'드래그\'</b> 해주세요!',
@@ -2022,7 +2022,7 @@ var TUTORIAL_STEPS = [
   {text:'보여드리기 위해 임시로 청휘석을 더 드리며\n스케쥴을 정리할게요.',
    target:'#arona-face', action:'next', bubbleMode:'arona-big',
    onEnter:function(){
-     G.players[0].gold=9;
+     G.players[0].stone=9;
      tutSetShop(['chinatsu','chinatsu','chinatsu']);
    }},
 
@@ -2037,7 +2037,7 @@ var TUTORIAL_STEPS = [
      // 골든 치나츠가 보드에 있으면 완료
      var p=G.players[0];
      for(var i=0;i<p.board.length;i++){
-       if(p.board[i].baseId==='chinatsu'&&p.board[i].golden) return true;
+       if(p.board[i].baseId==='chinatsu'&&p.board[i].isSkin) return true;
      }
      return false;
    }},
@@ -2128,8 +2128,8 @@ function startTutorial(){
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),function(){
     newGame();
     G.isTutorial=true;
-    G.players[0].gold=3;
-    G.players[0].turnGold=3;
+    G.players[0].stone=3;
+    G.players[0].turnStone=3;
     // 1턴 적: 하이네
     for(var i=1;i<G.players.length;i++){
       G.players[i].board=[makeMinion(findAnyChar('haine'),false)];
@@ -2388,7 +2388,7 @@ continueBattle=function(){
       // 2턴 진입 시 상점 세팅 + 골드 6
       if(G.turn===2){
         setTimeout(function(){
-          G.players[0].gold=6;
+          G.players[0].stone=6;
           tutSetShop(['mari','mari','momoi','chinatsu']);
           renderAll();
           tutNext();
@@ -2439,10 +2439,10 @@ document.getElementById('btn-fight').addEventListener('click',startBattle);
 var _origDoReroll=doReroll;
 doReroll=function(){
   // 튜토리얼 중 골드 최소 4 보장 (업그레이드 비용 확보)
-  if(TUT.active && G.players[0].gold<=4){G.players[0].gold=4;renderAll();return;}
+  if(TUT.active && G.players[0].stone<=4){G.players[0].stone=4;renderAll();return;}
   _origDoReroll();
   if(TUT.active){
-    if(G.players[0].gold<4) G.players[0].gold=4;
+    if(G.players[0].stone<4) G.players[0].stone=4;
     var s=TUTORIAL_STEPS[TUT.step];
     if(s&&s.action==='waitClick'&&s.target==='#btn-reroll'){
       setTimeout(function(){tutNext();},300);
