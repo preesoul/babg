@@ -539,9 +539,10 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .hover-tooltip{width:240px!important;max-height:60vh!important;overflow-y:auto!important}
 .hover-tooltip .tt-portrait{height:160px!important}
 
-/* 타이틀 화면 */
-.title-logo{max-width:200px!important}
-.sub{font-size:16px!important}
+/* 타이틀 화면: 원본 비율 유지, 좌우 잘림 허용 */
+#title-screen.active,#title-screen.fading{overflow:hidden!important;min-height:100vh!important;padding-bottom:40px!important}
+.title-logo{height:280px!important;width:auto!important;max-width:none!important}
+.sub{font-size:24px!important;margin-bottom:40px!important}
 
 /* 능력 팝업 */
 .ability-popup{max-width:90%!important;padding:14px!important}
