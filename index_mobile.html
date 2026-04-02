@@ -924,8 +924,11 @@ function renderAll() {
       benchEl.addEventListener('click',function(e){
         if(e.target.closest('#bench-place')){
           var p2=G.players[0];
-          if(p2.bench&&p2.board.length<MAX_BOARD){
+          if(!p2.bench) return;
+          if(p2.board.length<MAX_BOARD){
             p2.board.push(p2.bench);triggerBattlecry(p2.bench,p2);p2.bench=null;renderAll();
+          } else {
+            showBenchSwapModal(p2);
           }
           return;
         }
@@ -1139,6 +1142,50 @@ function showSellConfirm(onConfirm){
   noBtn.addEventListener('click',function(e){e.stopPropagation();overlay.remove();});
   btnRow.appendChild(yesBtn);btnRow.appendChild(noBtn);
   box.appendChild(msg);box.appendChild(btnRow);overlay.appendChild(box);
+  overlay.addEventListener('click',function(e){if(e.target===overlay){overlay.remove();}});
+  document.body.appendChild(overlay);
+}
+function showBenchSwapModal(p){
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center';
+  var box=document.createElement('div');
+  box.style.cssText='background:#1e293b;border:2px solid #475569;border-radius:12px;padding:20px;text-align:center;min-width:260px;max-width:90vw';
+  var msg=document.createElement('div');
+  msg.style.cssText='color:#fbbf24;font-size:15px;font-weight:bold;margin-bottom:14px';
+  msg.textContent='누구와 교체?';
+  box.appendChild(msg);
+  var list=document.createElement('div');
+  list.style.cssText='display:flex;flex-direction:column;gap:8px';
+  for(var i=0;i<p.board.length;i++){
+    (function(idx){
+      var m=p.board[idx];
+      if(!m) return;
+      var row=document.createElement('button');
+      row.style.cssText='display:flex;align-items:center;gap:10px;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px 12px;color:#f1f5f9;font-size:13px;cursor:pointer;width:100%;text-align:left';
+      var thumb=document.createElement('img');
+      thumb.src='img/'+(m.img||'');
+      thumb.style.cssText='width:36px;height:36px;object-fit:cover;border-radius:4px;flex-shrink:0';
+      thumb.onerror=function(){this.style.display='none';};
+      var info=document.createElement('span');
+      info.textContent=m.name+'  '+m.atk+'/'+m.hp;
+      row.appendChild(thumb);row.appendChild(info);
+      row.addEventListener('click',function(e){
+        e.stopPropagation();
+        var benched=p.bench;
+        p.board[idx]=benched;
+        p.bench=m;
+        overlay.remove();
+        renderAll();
+      });
+      list.appendChild(row);
+    })(i);
+  }
+  var cancelBtn=document.createElement('button');
+  cancelBtn.style.cssText='margin-top:12px;padding:7px 24px;border:none;border-radius:8px;font-size:14px;background:#475569;color:#fff;cursor:pointer';
+  cancelBtn.textContent='취소';
+  cancelBtn.addEventListener('click',function(e){e.stopPropagation();overlay.remove();});
+  box.appendChild(list);box.appendChild(cancelBtn);
+  overlay.appendChild(box);
   overlay.addEventListener('click',function(e){if(e.target===overlay){overlay.remove();}});
   document.body.appendChild(overlay);
 }
