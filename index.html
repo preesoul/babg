@@ -4599,7 +4599,7 @@ function fadeSwitch(from,to,cb){
   },400);
 }
 // PC 안내 팝업 자동 닫기
-(function(){var n=document.getElementById('pc-notice');if(!n)return;setTimeout(function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);},3000);n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
+(function(){var n=document.getElementById('pc-notice');if(!n)return;n.style.pointerEvents='auto';n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
 
 document.getElementById('btn-play').addEventListener('click',function(){
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
