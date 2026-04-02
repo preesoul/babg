@@ -1447,7 +1447,13 @@ function showDiscover(p) {
     // 선택한 캐릭터를 풀에서 빼고 보드에 추가 (트리플 체크 포함)
     var tmpl = choices[idx];
     if(takeFromPool(tmpl.id)){
-      addToBoard(p, makeMinion(tmpl, false));
+      var added = addToBoard(p, makeMinion(tmpl, false));
+      // 풀보드라 추가 실패 시 벤치 or 강제 추가
+      if(!added){
+        var newUnit = makeMinion(tmpl, false);
+        if(!p.bench){p.bench=newUnit;}
+        else{p.board.push(newUnit);triggerBattlecry(newUnit,p);}
+      }
     }
     overlay.style.zIndex=''; // z-index 복원
     renderAll();
