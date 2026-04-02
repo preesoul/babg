@@ -4334,12 +4334,15 @@ function renderAll() {
   if(!_benchDragBound){_benchDragBound=true;initBenchDrag();}
 
   var shopEl=document.getElementById('ui-shop');
-  var sHtml='';
+  var sHtml='';var prevWasSpell=false;
   for(var i=0;i<G.shop.length;i++){
     if(G.shop[i]===null) continue;
-    else if(G.shop[i].isSpell)sHtml+=spellCardHtml(G.shop[i],i);
+    var isSpellItem=G.shop[i].isSpell;
+    if(sHtml!==''&&isSpellItem!==prevWasSpell)sHtml+='<div style="width:8px;flex-shrink:0"></div>';
+    if(isSpellItem)sHtml+=spellCardHtml(G.shop[i],i);
     else if(G.shop[i].isHidden)sHtml+=cardHtml(G.shop[i],i,false);
     else sHtml+=cardHtml(G.shop[i],i,false);
+    prevWasSpell=isSpellItem;
   }
   shopEl.innerHTML=sHtml;
   if(!shopEl._bound){
@@ -4438,14 +4441,19 @@ function cardHtml(m,idx,isBoard){
   // 모바일: 능력 한줄 요약
   var mAbilParts=[];
   var kwArr=m.kw||[];
-  if(kwArr.length>0){var kwNames=[];for(var ki=0;ki<kwArr.length;ki++){kwNames.push(KW_LABELS[kwArr[ki]]||kwArr[ki]);}mAbilParts.push('<span style="color:#8ab0cc">'+kwNames.join(' ')+'</span>');}
+  var allLabels=[];
+  if(kwArr.length>0){for(var ki=0;ki<kwArr.length;ki++){allLabels.push({t:KW_LABELS[kwArr[ki]]||kwArr[ki],c:'#8ab0cc'});}}
   var bid=m.baseId||'';
-  if(BC_IDS[bid])mAbilParts.push('<span style="color:#fbbf24">전함</span>');
-  if(DR_IDS[bid])mAbilParts.push('<span style="color:#fca5a5">메아리</span>');
-  if(SOC_IDS[bid])mAbilParts.push('<span style="color:#93c5fd">개전</span>');
-  if(SURV_IDS[bid])mAbilParts.push('<span style="color:#6ee7b7">생존</span>');
-  if(PASSIVE_IDS[bid])mAbilParts.push('<span style="color:#c084fc">패시브</span>');
-  html+='<div class="m-ability-summary">'+(mAbilParts.length>0?mAbilParts.join(' '):'&nbsp;')+'</div>';
+  if(BC_IDS[bid])allLabels.push({t:'전함',c:'#fbbf24'});
+  if(DR_IDS[bid])allLabels.push({t:'메아리',c:'#fca5a5'});
+  if(SOC_IDS[bid])allLabels.push({t:'개전',c:'#93c5fd'});
+  if(SURV_IDS[bid])allLabels.push({t:'생존',c:'#6ee7b7'});
+  if(PASSIVE_IDS[bid])allLabels.push({t:'패시브',c:'#c084fc'});
+  var maxShow=3;var hasEtc=allLabels.length>maxShow;
+  var showLabels=hasEtc?allLabels.slice(0,maxShow):allLabels;
+  var mAbilStr='';for(var li=0;li<showLabels.length;li++){mAbilStr+=(li>0?' ':'')+'<span style="color:'+showLabels[li].c+'">'+showLabels[li].t+'</span>';}
+  if(hasEtc)mAbilStr+=' <span style="color:#888">등</span>';
+  html+='<div class="m-ability-summary">'+(mAbilStr||'&nbsp;')+'</div>';
   html+='<div class="name-banner">'+m.name+'</div>';
   var kwt=kwText(m);html+='<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
   var aTag=abilityTag(m.baseId);if(aTag)html+='<div class="m-abil-tag" style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
