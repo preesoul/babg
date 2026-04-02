@@ -435,6 +435,9 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .bench-btns .btn{padding:2px 6px!important;font-size:8px!important}
 
 .hover-tooltip.visible{pointer-events:auto!important}
+/* 백화요란 계승전 버프 효과 */
+.card.hkyk-buffed{border-color:#ff4060!important;box-shadow:0 0 8px 2px rgba(255,64,96,0.6),0 0 16px 4px rgba(255,160,60,0.3),inset 0 0 6px rgba(255,64,96,0.15)!important;animation:hkyk-glow 2s ease-in-out infinite alternate}
+@keyframes hkyk-glow{0%{box-shadow:0 0 8px 2px rgba(255,64,96,0.6),0 0 16px 4px rgba(255,160,60,0.3)}100%{box-shadow:0 0 12px 4px rgba(255,64,96,0.8),0 0 24px 6px rgba(255,160,60,0.5)}}
 /* 메인 콘텐츠 */
 .main-content{overflow-y:visible!important;overflow-x:hidden!important}
 .main-top-row{gap:4px!important;margin-bottom:2px!important;flex-wrap:wrap!important}
@@ -1230,6 +1233,7 @@ var HKYK_SHOWDOWN_SPELL = {
       if(targets.indexOf(p.board[i].baseId)!==-1){
         p.board[i].atk+=10;p.board[i].hp+=10;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+10;
         addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');addKw(p.board[i],'multistrike');
+        p.board[i].hkykBuffed=true;
       }
     }
     G2.hiddenCardsEverOwned['hkyk_showdown']=true;
@@ -4412,7 +4416,7 @@ function starStr(tier){var s='<div class="tier-bar">';for(var i=0;i<7;i++){var s
 function cardHtml(m,idx,isBoard){
   if(!m) return '<div style="width:150px;height:220px"></div>';
   var isToken=m.isToken||false;
-  var cls='card tier'+m.tier+(m.golden?' golden':'')+(isToken?' token-card':'');
+  var cls='card tier'+m.tier+(m.golden?' golden':'')+(isToken?' token-card':'')+(m.hkykBuffed?' hkyk-buffed':'');
   var dragAttr=isBoard?' data-board-idx="'+idx+'"':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
   var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
@@ -4544,23 +4548,41 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
     });
   },10);
 }
-// 스펠 카드 상세 팝업
+// 스펠 카드 상세 팝업 (학생 카드 툴팁과 동일 스타일)
 function showSpellDetail(item,cardEl){
   hideTooltip();
-  var tt=document.querySelector('.hover-tooltip');if(!tt)return;
-  tt.innerHTML='';
-  var h='<div style="padding:12px;max-width:220px;text-align:center">';
-  h+='<div style="font-size:14px;font-weight:700;color:#80d0ff;margin-bottom:6px">⚡ '+item.name+'</div>';
-  h+='<div style="font-size:11px;color:#ccc;line-height:1.5">'+item.desc+'</div>';
+  var tt=getTooltipEl();if(!tt)return;
   var targetNames={select_ally:'아군 학생 선택',select_school:'학교 선택',auto:'자동',all_allies:'아군 전체',shop:'상점',next_turn:'다음 턴'};
   var tgtLabel=item.target?targetNames[item.target]||item.target:'';
-  if(tgtLabel)h+='<div style="font-size:10px;color:#888;margin-top:6px">대상: '+tgtLabel+'</div>';
-  h+='<div style="font-size:10px;color:#fbbf24;margin-top:4px">비용: '+item.cost+'</div>';
+  var isHidden=item.isHidden;
+  var borderColor=isHidden?'#c030d0':'#1693de';
+  var h='';
+  // 포트레이트 영역 (이미지 자리)
+  if(isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
+    h+='<div class="tt-portrait" style="height:180px;background:linear-gradient(180deg,#2a1038,#1a0828)"><img src="img/unique/HKYK_Showdown.png" style="width:70%;top:10px"></div>';
+  } else {
+    h+='<div class="tt-portrait" style="height:120px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,'+borderColor+'22,#0e1c2a)"><div style="font-size:64px;opacity:0.3">⚡</div></div>';
+  }
+  // 헤더
+  h+='<div class="tt-header" style="border-color:'+borderColor+'44">';
+  h+='<div class="tt-name" style="color:'+borderColor+'">'+item.name+'</div>';
+  h+='<div class="tt-school" style="color:#80d0ff">액션 카드</div>';
+  h+='</div>';
+  // 설명
+  h+='<div style="padding:10px 14px">';
+  h+='<div style="font-size:12px;color:#c0d8e8;line-height:1.6;white-space:pre-line">'+item.desc+'</div>';
+  if(tgtLabel)h+='<div style="font-size:11px;color:#6a98b8;margin-top:8px">대상: '+tgtLabel+'</div>';
+  h+='<div style="font-size:11px;color:#fbbf24;margin-top:4px">비용: '+item.cost+'</div>';
   h+='</div>';
   tt.innerHTML=h;
+  tt.style.display='block';
+  tt.style.borderColor=borderColor;
   var rect=cardEl.getBoundingClientRect();
-  tt.style.left=Math.max(4,rect.left+rect.width/2-110)+'px';
-  tt.style.top=Math.max(4,rect.top-160)+'px';
+  var vw=window.innerWidth,vh=window.innerHeight;
+  var ttW=tt.offsetWidth||280;
+  tt.style.left=Math.max(4,Math.min(vw-ttW-4,rect.left+rect.width/2-ttW/2))+'px';
+  tt.style.top=Math.max(4,rect.top-tt.offsetHeight-8)+'px';
+  if(parseInt(tt.style.top)<4)tt.style.top=Math.min(vh-tt.offsetHeight-4,rect.bottom+8)+'px';
   tt.classList.add('visible');
   setTimeout(function(){
     document.addEventListener('click',function _ttDismiss(ev){
