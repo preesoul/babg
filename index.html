@@ -875,7 +875,7 @@ var SPELLS = [
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;p.board[idx].hp+=4+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+4+ab;logBuff(p.board[idx],'방문 예정',4+ab,4+ab);return true;}},
   {id:'aggro',name:'어그로꾼',cost:2,tier:3,desc:'선택 학생에게 도발 부여',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'taunt');return true;}},
-  {id:'promotion',name:'학년 진급',cost:4,tier:3,desc:'업그레이드 비용 -5',target:'auto',
+  {id:'promotion',name:'스케쥴 진급',cost:4,tier:3,desc:'업그레이드 비용 -5',target:'auto',
     effect:function(G){var p=G.players[0];p.upgradeCost=Math.max(0,p.upgradeCost-5);}},
   {id:'unity_mt',name:'단합 MT',cost:4,tier:3,desc:'선택 학교 학생들 +4/+4',target:'select_school',
     effect:function(G,school){var p=G.players[0];var ab=getAyumuBonus();var found=false;for(var i=0;i<p.board.length;i++){if(p.board[i].school===school){p.board[i].atk+=4+ab;p.board[i].hp+=4+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+4+ab;logBuff(p.board[i],'단합 MT',4+ab,4+ab);found=true;}}return found;}},
