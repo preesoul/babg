@@ -622,7 +622,8 @@ function showAbilityPopup(baseId, e, isGolden) {
   else{descEl.textContent=info.desc;}
 
   var goldEl=document.getElementById('ap-gold');
-  if(info.gold){goldEl.textContent=info.gold;goldEl.style.display='block';}
+  var _apCh=findAnyChar(baseId);
+  if(_apCh&&_apCh.skin&&_apCh.tier<7){goldEl.innerHTML='3장 모으면 <span style="color:#ffd700">'+_apCh.skin+'</span>이(가) 됩니다!';goldEl.style.display='block';}
   else{goldEl.style.display='none';}
 
   document.getElementById('ability-popup-overlay').classList.add('active');
@@ -1150,16 +1151,11 @@ function showTooltip(baseId,rect,cardEl){
     var isGolden=unitData&&unitData.golden;
     if(isGolden&&info.goldDesc) html+='<div class="tt-desc">'+info.goldDesc+'</div>';
     else html+='<div class="tt-desc">'+info.desc+'</div>';
-    if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
-    html+='</div>';
-  } else if(info&&info.gold){
-    html+='<div class="tt-ability">';
-    if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
     html+='</div>';
   }
-  // 트리플 안내 문구
+  // 트리플 안내 (gold 칸 자리에 표시, 히든 제외)
   if(charData&&charData.skin&&charData.tier<7){
-    html+='<div style="padding:6px 14px 8px;font-size:12px;color:#8ab4c8;line-height:1.5">3장 모으면 <span style="color:#ffd700;font-weight:700">'+charData.skin+'</span>이 됩니다!</div>';
+    html+='<div class="tt-gold">3장 모으면 <span style="color:#ffd700">'+charData.skin+'</span>이(가) 됩니다!</div>';
   }
   // 버프 이력 표시
   var buffLog=unitData&&unitData._buffLog?unitData._buffLog:null;
