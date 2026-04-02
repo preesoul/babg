@@ -9,7 +9,7 @@ var CHARS = [
   // 게헨나 1학년
   {id:'junko',  name:'준코',   school:'게헨나',  tier:1,atk:1,hp:3,kw:['selfdestruct'],            skin:'준코(새해)',       img:'Junko.png',          imgGold:'Junko_(New_Year).png'},
   // 밀레니엄 1학년
-  {id:'toki',   name:'토키',   school:'밀레니엄',tier:1,atk:1,hp:3,kw:['survive'],   skin:'토키(메이드)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
+  {id:'toki',   name:'토키',   school:'밀레니엄',tier:1,atk:1,hp:3,kw:['survive'],   skin:'토키(바니걸)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
   {id:'midori', name:'미도리', school:'밀레니엄',tier:1,atk:3,hp:2,kw:[],            skin:'미도리(메이드)',   img:'Midori.png',         imgGold:'Midori_(Maid).png'},
   // 트리니티 1학년
   {id:'mari',   name:'마리',   school:'트리니티',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'마리(아이돌)',     img:'Mari.png',           imgGold:'Mari_(Idol).png'},
@@ -209,7 +209,7 @@ var BC_IDS  = {iroha:1, himari:1, gehenna_pandemonium:1, izuna:1, tsukuyo:1, tsu
 var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 생존
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -247,8 +247,8 @@ var ABILITY_DESCS = {
   utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',gold:'치어리더 우타하: 천둥이 두 번 소환'},
   mashiro:  {type:'저격',desc:'',gold:''},
   hinata:   {type:'선제',desc:'한 번에 2~5회 공격합니다.',gold:'수영복 히나타: 4~10회'},
-  mutsuki:  {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 오른쪽에 데미지.',gold:''},
-  haruka:   {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 왼쪽에 데미지.',gold:''},
+  mutsuki_token:  {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 오른쪽에 데미지.',gold:''},
+  haruka_token:   {type:'뒤끝',desc:'자신의 공격력만큼\n킬러 왼쪽에 데미지.',gold:''},
   airship:  {type:'뒤끝',desc:'<파마머리 마코토>를 소환합니다.',gold:''},
   // 7성 히든
   gehenna_prefect:        {type:'패시브',desc:'샬레의 히나, 이오리, 아코, 치나츠를 흡수하며 등장합니다.\n기본 능력치 20/20에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.',gold:''},
@@ -278,7 +278,7 @@ var ABILITY_DESCS = {
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',gold:''},
   hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독사굴을 부여합니다.\n이후 상대 전체의 독사굴을 제거합니다.',gold:''},
-  hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 연사, 부활, 연격을 부여합니다.\n(수영복 포함)',gold:''},
+  hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 연사, 부활을 부여합니다.\n(수영복 포함)',gold:''},
   // 신규 7성
   gehenna_p68:            {type:'패시브 / 개전',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n도발을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.',gold:''},
   millennium_seminar:     {type:'패시브 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',gold:''},
@@ -295,7 +295,7 @@ var ABILITY_DESCS = {
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',gold:'수영복 코하루: 확률 20%'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',gold:'수영복 하스미: 두 배로 흡수'},
   suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',gold:'마법소녀 스즈미: 이번 전투 동안'},
-  shimiko:  {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 연사 + 보호막을 얻습니다.',gold:'악의 간부 시미코: 연사 + 보호막'},
+  shimiko:  {type:'황금 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 보호막 + 연사를 얻습니다.',gold:'악의 간부 시미코: 보호막 + 연사'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',gold:'신년 무츠키: 동일'},
   haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',gold:'새해 하루카: 2~5회 / 조건 시 10회'},
   // 총학생회
@@ -582,7 +582,7 @@ function checkHiddenConditionsFor(p) {
 
 // 백화요란 계승전: 히든 액션카드
 var HKYK_SHOWDOWN_SPELL = {
-  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 연사, 부활, 연격',target:'auto',once:true,
+  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 연사, 부활',target:'auto',once:true,
   effect:function(G2){
     var p=G2.players[0];
     var targets=['yukari','renge','kikyou','nagusa'];
@@ -2897,7 +2897,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
             // 하루카: 무츠키/카요코/아루를 공격한 적 → 5회(황금:10회), 아니면 1~2회(황금:2~4회)
             if(target._attackedHarukaAlly){
               msHits=attacker.golden?10:5;
-              stepLog.push({cls:'hit',text:'[연격] '+attacker.name+': 흥신소68 추적! '+msHits+'회 공격!'});
+              stepLog.push({cls:'hit',text:'[선제] '+attacker.name+': 흥신소68 추적! '+msHits+'회 공격!'});
             }else{
               msMin=attacker.golden?2:1;msMax=attacker.golden?4:2;
               msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
@@ -2907,7 +2907,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
             msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
           }
           stepMultiHits=msHits;
-          stepLog.push({cls:'hit',text:attacker.name+'의 연격! '+msHits+'회 공격!'});
+          stepLog.push({cls:'hit',text:attacker.name+'의 선제! '+msHits+'회 공격!'});
           var msKillCount=0;
           for(var ms=0;ms<msHits;ms++){
             if(!target.alive)break;
