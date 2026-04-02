@@ -4182,7 +4182,7 @@ function renderAll() {
 function spellCardHtml(item,idx){
   var borderColor=item.isHidden?'#c030d0':'#1693de';
   var blocked=item.spell&&item.spell.id==='gacha'&&isGachaBlocked();
-  var html='<div class="card'+(item.tier>=7?' tier7':'')+(blocked?' spell-blocked':'')+'" data-shop="'+idx+'" draggable="true" style="width:150px;background:linear-gradient(180deg,#162838,#0e1c2a);border-color:'+borderColor+(blocked?';opacity:0.4;pointer-events:none':'')+'">';
+  var html='<div class="card'+(item.tier>=7?' tier7':'')+(blocked?' spell-blocked':'')+'" data-shop="'+idx+'" draggable="true" style="background:linear-gradient(180deg,#162838,#0e1c2a);border-color:'+borderColor+(blocked?';opacity:0.4;pointer-events:none':'')+'">';
   if(item.isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
     html+='<div class="card-bg"><img src="img/unique/HKYK_Showdown.png" style="width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
   } else {
