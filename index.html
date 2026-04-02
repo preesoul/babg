@@ -1148,6 +1148,10 @@ function showTooltip(baseId,rect,cardEl){
     if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
     html+='</div>';
   }
+  // 트리플 안내 문구
+  if(charData&&charData.skin&&charData.tier<7){
+    html+='<div style="padding:6px 14px 8px;font-size:12px;color:#8ab4c8;line-height:1.5">3장 모으면 <span style="color:#ffd700;font-weight:700">'+charData.skin+'</span>이 됩니다!</div>';
+  }
   // 버프 이력 표시
   var buffLog=unitData&&unitData._buffLog?unitData._buffLog:null;
   if(!buffLog&&unitData){
