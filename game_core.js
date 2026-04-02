@@ -53,7 +53,7 @@ var CHARS = [
   // 트리니티 2학년
   {id:'azusa',   name:'아즈사', school:'트리니티',tier:4,atk:5,hp:3,kw:[],            skin:'아즈사(수영복)',   img:'Azusa.png',          imgGold:'Azusa_(Swimsuit).png'},
   // 트리니티 3학년
-  {id:'hinata',  name:'히나타', school:'트리니티',tier:4,atk:2,hp:8,kw:['multistrike','preemptive'],skin:'히나타(수영복)',   img:'Hinata.png',         imgGold:'Hinata_(Swimsuit).png'},
+  {id:'hinata',  name:'히나타', school:'트리니티',tier:4,atk:2,hp:8,kw:['preemptive'],skin:'히나타(수영복)',   img:'Hinata.png',         imgGold:'Hinata_(Swimsuit).png'},
 
   // ===== Tier 5 (밸류15) =====
   // 게헨나 3학년
@@ -79,7 +79,7 @@ var CHARS = [
 
   // ===== 게헨나 신규 =====
   // 게헨나 1학년
-  {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['multistrike','preemptive'],   skin:'하루카(새해)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
+  {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'하루카(새해)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
   {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:1,hp:1,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
   // 게헨나 2학년
   {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(새해)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
@@ -125,8 +125,8 @@ var CHARS = [
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:5,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
   {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
-  {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:9,kw:['multistrike','preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
-  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:3,hp:8,kw:['multistrike','preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
+  {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:9,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
+  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:3,hp:8,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
 ];
 
@@ -177,7 +177,7 @@ function logBuff(unit, source, atkDelta, hpDelta) {
 // 키워드 헬퍼
 function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
-function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; if(k==='multistrike') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
+function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
 var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',invincible:'무적'};
 var KW_DESCS = {
@@ -192,7 +192,6 @@ var KW_DESCS = {
   survive:'피격 후 살아남으면 발동합니다.',
   preemptive:'공격 시 발동합니다.',
   ranged:'반격을 받지 않습니다.',
-  multistrike:'한 대상을 여러 번 공격합니다.',
   selfdestruct:'공격력과 체력을 더하여 공격 후 쓰러집니다.'
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
@@ -585,7 +584,7 @@ var HKYK_SHOWDOWN_SPELL = {
     for(var i=0;i<p.board.length;i++){
       if(targets.indexOf(p.board[i].baseId)!==-1){
         p.board[i].atk+=10;p.board[i].hp+=10;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+10;
-        addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');addKw(p.board[i],'multistrike');
+        addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');
       }
     }
     G2.hiddenCardsEverOwned['hkyk_showdown']=true;
@@ -983,14 +982,14 @@ function showDiscover(p) {
   html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
   for(var i=0;i<choices.length;i++){
     var c = choices[i];
-    var kwt = (c.kw||[]).filter(function(k){return k!=='survive'&&k!=='preemptive'&&k!=='multistrike';}).map(function(k){return KW_LABELS[k]||k;}).join(' ');
+    var kwt = (c.kw||[]).filter(function(k){return k!=='survive'&&k!=='preemptive';}).map(function(k){return KW_LABELS[k]||k;}).join(' ');
     var aTag = '';
     if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
     if(SOC_IDS[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
     if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
-    if(PRE_IDS[c.id]||(c.kw&&(c.kw.indexOf('preemptive')!==-1||c.kw.indexOf('multistrike')!==-1))) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
+    if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
     html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
     if(c.img) html += '<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html += '<div class="card-inner">';
@@ -1931,7 +1930,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   else if(id==='millennium_seminar'){
     // 밀레니엄 세미나: 상대 능력 수집 → 삭제 → 공체 뒤집기 → 능력 복사
-    var basicKws=['taunt','shield','reborn','invincible','windfury','cleave','poison','pierce','multistrike','ranged','selfdestruct'];
+    var basicKws=['taunt','shield','reborn','invincible','windfury','cleave','poison','pierce','ranged','selfdestruct'];
     var collectedBasic=[];
     var collectedSpecial=[];
     // 수집
@@ -2849,8 +2848,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       var skipMain=triggerPreemptive(attacker,target,defArr2,atkArr2,stepLog);
 
       if(!skipMain){
-        // 선제 다회 공격 (multistrike)
-        if(hasKw(attacker,'multistrike')){
+        // 선제 다회 공격 (하루카/히나타/나구사/와카모)
+        if(['haruka','hinata','nagusa','wakamo'].indexOf(attacker.baseId)!==-1){
           var msMin,msMax,msHits;
           if(attacker.baseId==='haruka'){
             // 하루카: 무츠키/카요코/아루를 공격한 적 → 5회(황금:10회), 아니면 1~2회(황금:2~4회)
@@ -3833,7 +3832,7 @@ function miniCardHtml(m){
   if(SOC_IDS[bid]) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
   if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">버티기</span>';
   if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
-  if(PRE_IDS[bid]||(m.kw&&(m.kw.indexOf('preemptive')!==-1||m.kw.indexOf('multistrike')!==-1))) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선제</span>';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선제</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
