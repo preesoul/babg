@@ -313,21 +313,21 @@ var ABILITY_DESCS = {
 
 // ========== TOKENS ==========
 var TOKENS = {
-  panchan:   {id:'panchan',   name:'팬짱',       school:'게헨나',   tier:1, atk:1, hp:1, kw:[],          img:'token/panchan.png'},
-  toramaru:  {id:'toramaru',  name:'토라마루',   school:'게헨나',   tier:4, atk:5, hp:1, kw:[],          img:'token/toramaru.png'},
-  cathpalug: {id:'cathpalug', name:'카스팔루스', school:'트리니티', tier:6, atk:1, hp:1, kw:['poison'],  img:'token/CathPalug.png'},
-  perorosama:{id:'perorosama',name:'페로로님',   school:'트리니티', tier:3, atk:2, hp:1, kw:[],          img:'token/perorosama.png'},
-  mutsuki:   {id:'mutsuki',   name:'무츠키',     school:'게헨나',   tier:3, atk:4, hp:1, kw:[],          img:'token/Mutsuki.png'},
-  haruka:    {id:'haruka',    name:'하루카',     school:'게헨나',   tier:3, atk:4, hp:1, kw:[],          img:'token/Haruka.png'},
-  abi_eshuh: {id:'abi_eshuh', name:'아비 에슈흐',school:'밀레니엄', tier:1, atk:2, hp:2, kw:[],          img:'token/Abi_Eshuh.png'},
-  dango:     {id:'dango',     name:'당고',       school:'게헨나',   tier:1, atk:1, hp:1, kw:[],          img:'token/Dango.png'},
-  airship:   {id:'airship',   name:'비행선',     school:'게헨나',   tier:6, atk:1, hp:1, kw:['selfdestruct'], img:'token/Airship.png'},
-  makoto_perma:{id:'makoto_perma',name:'파마머리 마코토',school:'게헨나',tier:6,atk:6,hp:6,kw:[],       img:'token/Makoto_(perma).png'},
-  avant_garde:{id:'avant_garde',name:'아방가르드군',school:'밀레니엄',tier:3, atk:1, hp:1, kw:[],        img:'token/Avant_garde.png'},
-  thunder_e: {id:'thunder_e', name:'천둥이',     school:'밀레니엄', tier:6, atk:8, hp:2, kw:['shield'],  img:'token/Thunder_E.png'},
-  sweeper:   {id:'sweeper',  name:'스위퍼',     school:'밀레니엄', tier:7, atk:10,hp:10,kw:['selfdestruct'], img:'token/Sweeper.png'},
-  hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:6, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
-  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:3, atk:5, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
+  panchan:   {id:'panchan',   name:'팬짱',       school:'게헨나',   tier:0, atk:1, hp:1, kw:[],          img:'token/panchan.png'},
+  toramaru:  {id:'toramaru',  name:'토라마루',   school:'게헨나',   tier:0, atk:5, hp:1, kw:[],          img:'token/toramaru.png'},
+  cathpalug: {id:'cathpalug', name:'카스팔루스', school:'트리니티', tier:0, atk:1, hp:1, kw:['poison'],  img:'token/CathPalug.png'},
+  perorosama:{id:'perorosama',name:'페로로님',   school:'트리니티', tier:0, atk:2, hp:1, kw:[],          img:'token/perorosama.png'},
+  mutsuki:   {id:'mutsuki',   name:'무츠키',     school:'게헨나',   tier:0, atk:4, hp:1, kw:[],          img:'token/Mutsuki.png'},
+  haruka:    {id:'haruka',    name:'하루카',     school:'게헨나',   tier:0, atk:4, hp:1, kw:[],          img:'token/Haruka.png'},
+  abi_eshuh: {id:'abi_eshuh', name:'아비 에슈흐',school:'밀레니엄', tier:0, atk:2, hp:2, kw:[],          img:'token/Abi_Eshuh.png'},
+  dango:     {id:'dango',     name:'당고',       school:'게헨나',   tier:0, atk:1, hp:1, kw:[],          img:'token/Dango.png'},
+  airship:   {id:'airship',   name:'비행선',     school:'게헨나',   tier:0, atk:1, hp:1, kw:['selfdestruct'], img:'token/Airship.png'},
+  makoto_perma:{id:'makoto_perma',name:'파마머리 마코토',school:'게헨나',tier:0,atk:6,hp:6,kw:[],       img:'token/Makoto_(perma).png'},
+  avant_garde:{id:'avant_garde',name:'아방가르드군',school:'밀레니엄',tier:0, atk:1, hp:1, kw:[],        img:'token/Avant_garde.png'},
+  thunder_e: {id:'thunder_e', name:'천둥이',     school:'밀레니엄', tier:0, atk:8, hp:2, kw:['shield'],  img:'token/Thunder_E.png'},
+  sweeper:   {id:'sweeper',  name:'스위퍼',     school:'밀레니엄', tier:0, atk:10,hp:10,kw:['selfdestruct'], img:'token/Sweeper.png'},
+  hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:0, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
+  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:5, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
 };
 
 function makeToken(tokenId) {
@@ -2623,10 +2623,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(G.permanentAbilityBan) return false;
     // ===== 선제 능력 (PRE_IDS) =====
     if(attacker.baseId==='aru'){
-      var tTier=target.tier||1;
+      var tTier=target.tier||0;
       var origAtk=attacker.atk;var newAtk=origAtk;
       if(tTier>=5) newAtk=origAtk*2;
-      else if(tTier<=2) newAtk=Math.max(1,Math.floor(origAtk/2));
+      else if(tTier>=1&&tTier<=2) newAtk=Math.max(1,Math.floor(origAtk/2));
       if(newAtk!==origAtk){
         attacker._aruOrigAtk=origAtk;attacker.atk=newAtk;
         log2.push({cls:'soc',text:'[선제] '+attacker.name+': T'+tTier+' 대상 → 공격력 '+origAtk+'→'+newAtk});
