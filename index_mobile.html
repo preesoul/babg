@@ -4269,6 +4269,7 @@ function renderAll() {
           window._mobileMoveSrc=undefined;
         }
         // 모바일: 탭 메뉴 표시
+        e.stopPropagation();
         showCardTapMenu(card,cardIdx,boardEl);
       });
       // 우클릭으로 보관 (PC 폴백)
@@ -4322,7 +4323,7 @@ function renderAll() {
       });
     }
   } else {
-    benchEl.innerHTML='<div class="bench-empty-slot"><span>샬레에서 B 버튼으로<br>여기로 보관</span></div>';
+    benchEl.innerHTML='<div class="bench-empty-slot"><span>샬레에서 \'벤치로\'를 눌러<br>여기로 보관</span></div>';
   }
   if(!_benchDragBound){_benchDragBound=true;initBenchDrag();}
 
@@ -4350,6 +4351,7 @@ function renderAll() {
       var card=e.target.closest('[data-shop]');if(!card)return;
       if(e.target.closest('.m-tap-menu-btn'))return; // 메뉴 버튼 클릭은 무시
       var idx=parseInt(card.getAttribute('data-shop'));
+      e.stopPropagation();
       showShopTapMenu(card,idx);
     });
   }
