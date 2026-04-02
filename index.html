@@ -1795,6 +1795,17 @@ function sellBench() {
   var p=G.players[0];
   if(p.bench===null) return;
   var m=p.bench;
+  // 하이네 패시브: 벤치에서 팔아도 아군 전체 버프
+  if(m.baseId==='haine'){
+    var buff=m.golden?4:2;
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i]){
+        p.board[i].atk+=buff;p.board[i].hp+=buff;
+        if(!p.board[i].maxHp)p.board[i].maxHp=p.board[i].hp; else p.board[i].maxHp+=buff;
+        logBuff(p.board[i],m.name+' 판매',buff,buff);
+      }
+    }
+  }
   p.gold+=1;
   if(m.isHidden){delete G.hiddenCardsOwned[m.baseId];}
   else{returnToPool(m.baseId,m.golden?3:1);}

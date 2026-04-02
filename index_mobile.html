@@ -455,6 +455,12 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .card .name-banner{font-size:8px!important;padding:1px 2px!important}
 .card .keywords{display:none!important}
 .card .ability-tag{display:none!important}
+.m-ability-summary{font-size:6px;text-align:center;padding:1px 2px;background:rgba(0,0,0,0.4);color:#a0c4e0;line-height:1.3;min-height:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 탭 메뉴 */
+.m-tap-menu{position:absolute;top:-30px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:20;white-space:nowrap}
+.m-tap-menu-btn{padding:3px 8px;font-size:9px;font-weight:700;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4)}
+.m-tap-menu-btn.move{background:#fbbf24;color:#1a1a2e}
+.m-tap-menu-btn.detail{background:#60a5fa;color:#fff}
 .card .stat-row{padding:1px 3px 2px!important}
 .card .stat-atk,.card .stat-hp{width:18px!important;height:18px!important;font-size:11px!important}
 .card .stat-atk::before{width:14px!important;height:14px!important}
@@ -507,6 +513,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .minicard .mini-hp::before{width:11px!important;height:11px!important}
 .minicard .keywords{display:none!important}
 .minicard .school-logo{display:none!important}
+.m-mini-abil{font-size:5px;text-align:center;background:rgba(0,0,0,0.5);color:#a0c4e0;padding:0 1px;line-height:1.2;white-space:nowrap;overflow:hidden}
 .minicard .stripped-x{font-size:24px!important}
 .battle-row.compact .minicard{width:42px!important;height:60px!important}
 .battle-row.compact .minicard .mini-atk,.battle-row.compact .minicard .mini-hp{width:14px!important;height:14px!important;font-size:9px!important}
@@ -1966,6 +1973,17 @@ function sellBench() {
   var p=G.players[0];
   if(p.bench===null) return;
   var m=p.bench;
+  // 하이네 패시브: 벤치에서 팔아도 아군 전체 버프
+  if(m.baseId==='haine'){
+    var buff=m.golden?4:2;
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i]){
+        p.board[i].atk+=buff;p.board[i].hp+=buff;
+        if(!p.board[i].maxHp)p.board[i].maxHp=p.board[i].hp; else p.board[i].maxHp+=buff;
+        logBuff(p.board[i],m.name+' 판매',buff,buff);
+      }
+    }
+  }
   p.gold+=1;
   if(m.isHidden){delete G.hiddenCardsOwned[m.baseId];}
   else{returnToPool(m.baseId,m.golden?3:1);}
@@ -4086,9 +4104,19 @@ function miniCardHtml(m){
   if(DR_IDS[bid]) miniAbilTag+='<span class="ability-tag dr" style="font-size:8px;padding:0 3px">메아리</span>';
   if(SOC_IDS[bid]) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
+  // 모바일: 미니카드 능력 한줄 요약
+  var mMiniAbil=[];
+  var mkw=m.kw||[];
+  if(mkw.length>0){var mkn=[];for(var ki=0;ki<mkw.length;ki++){mkn.push(KW_LABELS[mkw[ki]]||mkw[ki]);}mMiniAbil.push(mkn.join(' '));}
+  if(BC_IDS[bid])mMiniAbil.push('<span style="color:#fbbf24">전함</span>');
+  if(DR_IDS[bid])mMiniAbil.push('<span style="color:#fca5a5">메아리</span>');
+  if(SOC_IDS[bid])mMiniAbil.push('<span style="color:#93c5fd">개전</span>');
+  if(SURV_IDS[bid])mMiniAbil.push('<span style="color:#6ee7b7">생존</span>');
+  if(PASSIVE_IDS[bid])mMiniAbil.push('<span style="color:#c084fc">패시브</span>');
+  var mMiniAbilHtml=mMiniAbil.length>0?'<div class="m-mini-abil">'+mMiniAbil.join(' ')+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
-    kwHtml+miniAbilHtml+'</div></div>';
+    kwHtml+miniAbilHtml+mMiniAbilHtml+'</div></div>';
 }
 
 function continueBattle() {
@@ -4235,15 +4263,14 @@ function renderAll() {
         for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
         if(cardIdx<0)return;
         if(G.pendingSpell){applyPendingSpell(cardIdx);return;}
-        // 모바일: 보드 카드 탭 → 이동 모드
+        // 모바일: 이동 모드 중이면 취소
         if(typeof window._mobileMoveSrc==='number'){
-          // 삽입선 클릭은 별도 핸들러에서 처리, 카드 재클릭 시 취소
           clearMobileMoveUI();
           if(window._mobileMoveSrc===cardIdx){window._mobileMoveSrc=undefined;return;}
           window._mobileMoveSrc=undefined;
         }
-        window._mobileMoveSrc=cardIdx;
-        showMobileMoveUI(boardEl,cardIdx);
+        // 모바일: 탭 메뉴 표시
+        showCardTapMenu(card,cardIdx,boardEl);
       });
       // 우클릭으로 보관 (PC 폴백)
       boardEl.addEventListener('contextmenu',function(e){
@@ -4401,6 +4428,17 @@ function cardHtml(m,idx,isBoard){
   var sIcon=SCHOOL_ICONS[m.school];if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
   html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
   html+='<div class="card-spacer"></div>';
+  // 모바일: 능력 한줄 요약
+  var mAbilParts=[];
+  var kwArr=m.kw||[];
+  if(kwArr.length>0){var kwNames=[];for(var ki=0;ki<kwArr.length;ki++){kwNames.push(KW_LABELS[kwArr[ki]]||kwArr[ki]);}mAbilParts.push('<span style="color:#8ab0cc">'+kwNames.join(' ')+'</span>');}
+  var bid=m.baseId||'';
+  if(BC_IDS[bid])mAbilParts.push('<span style="color:#fbbf24">전함</span>');
+  if(DR_IDS[bid])mAbilParts.push('<span style="color:#fca5a5">메아리</span>');
+  if(SOC_IDS[bid])mAbilParts.push('<span style="color:#93c5fd">개전</span>');
+  if(SURV_IDS[bid])mAbilParts.push('<span style="color:#6ee7b7">생존</span>');
+  if(PASSIVE_IDS[bid])mAbilParts.push('<span style="color:#c084fc">패시브</span>');
+  html+='<div class="m-ability-summary">'+(mAbilParts.length>0?mAbilParts.join(' '):'&nbsp;')+'</div>';
   html+='<div class="name-banner">'+m.name+'</div>';
   var kwt=kwText(m);html+='<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
   var aTag=abilityTag(m.baseId);if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
@@ -4458,6 +4496,37 @@ function clearMobileMoveUI(){
   var boardEl=document.getElementById('ui-board');
   boardEl.querySelectorAll('.card').forEach(function(c){c.classList.remove('move-selected');});
   boardEl.querySelectorAll('.m-insert-line').forEach(function(l){l.remove();});
+}
+function dismissTapMenu(){
+  document.querySelectorAll('.m-tap-menu').forEach(function(m){m.remove();});
+}
+function showCardTapMenu(cardEl,cardIdx,boardEl){
+  dismissTapMenu();
+  var menu=document.createElement('div');
+  menu.className='m-tap-menu';
+  var moveBtn=document.createElement('button');
+  moveBtn.className='m-tap-menu-btn move';moveBtn.textContent='이동';
+  moveBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();
+    window._mobileMoveSrc=cardIdx;
+    showMobileMoveUI(boardEl,cardIdx);
+  });
+  var detailBtn=document.createElement('button');
+  detailBtn.className='m-tap-menu-btn detail';detailBtn.textContent='자세히';
+  detailBtn.addEventListener('click',function(e){
+    e.stopPropagation();dismissTapMenu();
+    var baseId=cardEl.getAttribute('data-base-id');
+    if(baseId){var rect=cardEl.getBoundingClientRect();showTooltip(baseId,rect,cardEl);}
+  });
+  menu.appendChild(moveBtn);menu.appendChild(detailBtn);
+  cardEl.style.position='relative';
+  cardEl.appendChild(menu);
+  // 다른 곳 클릭 시 메뉴 닫기
+  setTimeout(function(){
+    document.addEventListener('click',function _dismiss(ev){
+      if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
+    });
+  },10);
 }
 
 function onDragStart(e){
@@ -4784,30 +4853,8 @@ function hideTooltip(){
   if(tooltipTimer){clearTimeout(tooltipTimer);tooltipTimer=null;}
 }
 
-// 모바일: 꾹 누르기(long press)로 툴팁 표시
+// 모바일: 툴팁은 "자세히 보기" 메뉴에서 수동 호출
 var tooltipCard=null;
-var _longPressTimer=null;
-document.addEventListener('touchstart',function(e){
-  var card=e.target.closest('.card[data-base-id]');
-  if(!card) card=e.target.closest('.minicard[data-base-id]');
-  if(card){
-    var baseId=card.getAttribute('data-base-id');
-    if(baseId){
-      _longPressTimer=setTimeout(function(){
-        tooltipCard=card;
-        var rect=card.getBoundingClientRect();
-        showTooltip(baseId,rect,card);
-      },400);
-    }
-  }
-},{passive:true});
-document.addEventListener('touchend',function(e){
-  if(_longPressTimer){clearTimeout(_longPressTimer);_longPressTimer=null;}
-  if(tooltipCard){setTimeout(function(){tooltipCard=null;hideTooltip();},100);}
-},{passive:true});
-document.addEventListener('touchmove',function(e){
-  if(_longPressTimer){clearTimeout(_longPressTimer);_longPressTimer=null;}
-},{passive:true});
 
 // ========== INIT ==========
 function fadeSwitch(from,to,cb){
