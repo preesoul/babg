@@ -592,10 +592,15 @@ function abilityTag(baseId) {
   return tags;
 }
 
-function showAbilityPopup(baseId, e) {
+function showAbilityPopup(baseId, e, isGolden) {
   e.stopPropagation();
   var info = ABILITY_DESCS[baseId];
   if(!info) return;
+  // 골든 여부: 인자로 안 오면 이벤트 소스 카드에서 추적
+  if(isGolden===undefined){
+    var card=e.target.closest('.card,.minicard');
+    if(card) isGolden=card.classList.contains('golden')||(card.getAttribute('data-mini-golden')==='1');
+  }
   // 캐릭터 이름 찾기
   var charName = baseId;
   var _ch=findAnyChar(baseId);
@@ -612,7 +617,9 @@ function showAbilityPopup(baseId, e) {
   else if(info.type==='패시브'){typeEl.style.background='rgba(168,85,247,0.2)';typeEl.style.color='#c084fc';typeEl.style.border='1px solid rgba(168,85,247,0.3)';}
 
   document.getElementById('ap-name').textContent=charName;
-  document.getElementById('ap-desc').textContent=info.desc;
+  var descEl=document.getElementById('ap-desc');
+  if(isGolden&&info.goldDesc){descEl.innerHTML=info.goldDesc;}
+  else{descEl.textContent=info.desc;}
 
   var goldEl=document.getElementById('ap-gold');
   if(info.gold){goldEl.textContent=info.gold;goldEl.style.display='block';}
@@ -1140,7 +1147,9 @@ function showTooltip(baseId,rect,cardEl){
     else if(info.type==='패시브') typeCls='passive';
     html+='<div class="tt-ability">';
     html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
-    html+='<div class="tt-desc">'+info.desc+'</div>';
+    var isGolden=unitData&&unitData.golden;
+    if(isGolden&&info.goldDesc) html+='<div class="tt-desc">'+info.goldDesc+'</div>';
+    else html+='<div class="tt-desc">'+info.desc+'</div>';
     if(info.gold) html+='<div class="tt-gold">'+info.gold+'</div>';
     html+='</div>';
   } else if(info&&info.gold){
