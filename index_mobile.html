@@ -4396,7 +4396,8 @@ function spellCardHtml(item,idx){
   if(item.isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
     html+='<div class="card-bg"><img src="img/unique/HKYK_Showdown.png" style="width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
   } else {
-    html+='<div class="card-bg" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a3048,#0e2030)"><div style="font-size:48px;opacity:0.4;filter:saturate(0.5)">⚡</div></div>';
+    var spellId=item.spell?item.spell.id:(item.id||'');
+    html+='<div class="card-bg"><img src="img/spell/'+spellId+'.png" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'" style="width:100%;height:100%;object-fit:cover"></div>';
   }
   html+='<div class="card-inner">';
   html+='<div class="tier-stars">'+starStr(item.tier)+'</div>';
@@ -4558,10 +4559,11 @@ function showSpellDetail(item,cardEl){
   var borderColor=isHidden?'#c030d0':'#1693de';
   var h='';
   // 포트레이트 영역 (이미지 자리)
+  var spellId=item.spell?item.spell.id:(item.id||'');
   if(isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
     h+='<div class="tt-portrait" style="height:180px;background:linear-gradient(180deg,#2a1038,#1a0828)"><img src="img/unique/HKYK_Showdown.png" style="width:70%;top:10px"></div>';
   } else {
-    h+='<div class="tt-portrait" style="height:120px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,'+borderColor+'22,#0e1c2a)"><div style="font-size:64px;opacity:0.3">⚡</div></div>';
+    h+='<div class="tt-portrait" style="height:180px;background:linear-gradient(180deg,'+borderColor+'22,#0e1c2a)"><img src="img/spell/'+spellId+'.png" style="width:85%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
   }
   // 헤더
   h+='<div class="tt-header" style="border-color:'+borderColor+'44">';
