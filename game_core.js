@@ -3374,7 +3374,15 @@ function runBattleCoinPhase(snap,callback){
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
       for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);if(_isAsuna)console.log('[DEBUG ASUNA]',_u.name,'baseId='+_u.baseId,'coinOff='+!!coinOffMap[_u.sid],'result='+cr[_u.sid]);}
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
-      for(var j=0;j<aliveAlly.length;j++){if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);}
+      var _asunaCoinMsg=false;
+      for(var j=0;j<aliveAlly.length;j++){
+        if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);
+        if((aliveAlly[j].baseId==='asuna'||aliveAlly[j].baseId==='millennium_cc')&&cr[aliveAlly[j].sid])_asunaCoinMsg=true;
+      }
+      if(_asunaCoinMsg){
+        var logEl3=document.getElementById('battle-log');
+        if(logEl3){var amsg=document.createElement('div');amsg.style.cssText='text-align:center;color:#fbbf24;font-weight:700;font-size:13px;padding:4px';amsg.textContent='⭐ 아스나가 행운의 코인토스를 굴렸다!';logEl3.appendChild(amsg);logEl3.scrollTop=logEl3.scrollHeight;}
+      }
 
       setTimeout(function(){
         var calcResult=bCalcTurnOrder(cr,nA,nB);
