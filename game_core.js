@@ -134,6 +134,12 @@ var HIDDEN_CHARS = [
   // 백귀야행
   {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:50, hp:50, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
   {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/HKYK_Kuzunoha.png'},
+  // 신규 7성
+  {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.jpg'},
+  {id:'millennium_seminar',      name:'밀레니엄 세미나',      school:'밀레니엄', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/Seminar.png'},
+  {id:'millennium_cc',           name:'Cleaning&Clearing',    school:'밀레니엄', tier:7, atk:12, hp:12, kw:['ranged','shield'],                     img:'unique/Cleaning_Clearing.png'},
+  {id:'trinity_makeup',          name:'보충수업부',           school:'트리니티', tier:7, atk:10, hp:10, kw:[],                                     img:'unique/Make_Up_Work_Club.png'},
+  {id:'trinity_justice',         name:'정의실현부',           school:'트리니티', tier:7, atk:10, hp:10, kw:['shield','windfury'],                   img:'unique/Justice_Task_Force.jpg'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -187,10 +193,10 @@ var MAX_GOLD = 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, himari:1, gehenna_pandemonium:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};       // 전투의 함성
-var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1}; // 죽음의 메아리
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1}; // 개전
+var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, mutsuki:1, haruka:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 죽음의 메아리
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 생존
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, millennium_malkuth:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -233,7 +239,7 @@ var ABILITY_DESCS = {
   airship:  {type:'죽음의 메아리',desc:'<파마머리 마코토>를 소환합니다.',gold:''},
   // 7성 히든
   gehenna_prefect:        {type:'히든',desc:'샬레의 히나, 이오리, 아코, 치나츠를 흡수하며 등장합니다.\n기본 능력치 20/20에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.',gold:''},
-  gehenna_pandemonium:    {type:'히든 / 전투의 함성 / 죽음의 메아리',desc:'샬레의 마코토, 사츠키, 이로하를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n전함: 황금 비행선(도발)과 황금 토라마루(도발)를 소환합니다.\n메아리: 상대 무작위 2인을 2턴간 빼앗습니다.',gold:''},
+  gehenna_pandemonium:    {type:'히든 / 전투의 함성 / 죽음의 메아리',desc:'샬레의 마코토, 사츠키, 이로하, 이부키, 치아키를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n전함: 황금 비행선(도발)과 황금 토라마루(도발)를 소환합니다.\n메아리: 상대 무작위 2인을 2턴간 빼앗습니다.',gold:''},
   gehenna_traingun:       {type:'개전 / 패시브 / 죽음의 메아리',desc:'공격하지 않습니다.\n개전: 상대 전체에 6의 광역 데미지.\n살아남은 전투마다 개전 발동 횟수가 증가합니다.\n메아리: 이번 게임에서 완전히 사라집니다.',gold:''},
   trinity_mika:           {type:'패시브',desc:'능력/효과로 인한 데미지와 쓰러짐에 면역입니다.\n전투 데미지로만 쓰러뜨릴 수 있습니다.',gold:''},
   trinity_nagisa:         {type:'개전',desc:'마리(아이돌), 사쿠라코(아이돌), 미네(아이돌)에게\n+5/+5를 부여합니다.',gold:''},
@@ -260,6 +266,12 @@ var ABILITY_DESCS = {
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',gold:''},
   hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독성을 부여합니다.\n이후 상대 전체의 독성을 제거합니다.',gold:''},
   hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 질풍, 환생, 연격을 부여합니다.\n(수영복 포함)',gold:''},
+  // 신규 7성
+  gehenna_p68:            {type:'히든 / 개전',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n관통. 개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n도발이 아닌 적 1명을 강제 타겟으로 지정합니다.',gold:''},
+  millennium_seminar:     {type:'히든 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',gold:''},
+  millennium_cc:          {type:'히든 / 패시브 / 죽음의 메아리',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n원거리, 보호막. 패시브: 코인 토스가 항상 성공합니다.\n메아리: 아비 에슈흐(스케쥴×2/스케쥴×2)를 소환합니다.',gold:''},
+  trinity_makeup:         {type:'히든 / 패시브',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n패시브: 전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',gold:''},
+  trinity_justice:        {type:'히든 / 개전',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n보호막, 질풍. 개전: 자신의 공격력과 체력을 2배로 합니다.',gold:''},
   // ===== 신규 캐릭터 =====
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',gold:'수영복 이부키: +10/+10'},
   chiaki:   {type:'원거리',desc:'원거리 공격. 반격을 받지 않습니다.',gold:'수영복 치아키: 동일'},
@@ -502,8 +514,8 @@ function checkHiddenConditionsFor(p) {
   // 게헨나 선도부: 히나+이오리+아코+치나츠 보드
   if(notOwned('gehenna_prefect')&&inPool('gehenna_prefect')&&p.tier>=6&&boardHas('hina')&&boardHas('iori')&&boardHas('ako')&&boardHas('chinatsu'))
     eligible.push('gehenna_prefect');
-  // 만마전: 마코토+사츠키+이로하 보드
-  if(notOwned('gehenna_pandemonium')&&inPool('gehenna_pandemonium')&&p.tier>=6&&boardHas('makoto')&&boardHas('satsuki')&&boardHas('iroha'))
+  // 만마전: 마코토+사츠키+이로하+이부키+치아키 보드
+  if(notOwned('gehenna_pandemonium')&&inPool('gehenna_pandemonium')&&p.tier>=6&&boardHas('makoto')&&boardHas('satsuki')&&boardHas('iroha')&&boardHas('ibuki')&&boardHas('chiaki'))
     eligible.push('gehenna_pandemonium');
   // 열차포: 게헨나 온리 + 스케쥴6
   if(notOwned('gehenna_traingun')&&inPool('gehenna_traingun')&&onlySchool('게헨나')&&p.tier>=6)
@@ -532,6 +544,21 @@ function checkHiddenConditionsFor(p) {
   // 쿠즈노하: 백귀야행 온리 구매 + 스케쥴6
   if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')&&onlySchool('백귀야행')&&p.tier>=6)
     eligible.push('hkyk_kuzunoha');
+  // 흥신소 68: 카요코+무츠키+하루카+아루 보드
+  if(notOwned('gehenna_p68')&&inPool('gehenna_p68')&&p.tier>=6&&boardHas('kayoko')&&boardHas('mutsuki')&&boardHas('haruka')&&boardHas('aru'))
+    eligible.push('gehenna_p68');
+  // 밀레니엄 세미나: 유우카+노아+코유키+리오 보드
+  if(notOwned('millennium_seminar')&&inPool('millennium_seminar')&&p.tier>=6&&boardHas('yuuka')&&boardHas('noa')&&boardHas('koyuki')&&boardHas('rio'))
+    eligible.push('millennium_seminar');
+  // C&C: 네루+아스나+아카네+카린+토키 보드
+  if(notOwned('millennium_cc')&&inPool('millennium_cc')&&p.tier>=6&&boardHas('neru')&&boardHas('asuna')&&boardHas('akane')&&boardHas('karin')&&boardHas('toki'))
+    eligible.push('millennium_cc');
+  // 보충수업부: 히후미+코하루+하나코+아즈사 보드
+  if(notOwned('trinity_makeup')&&inPool('trinity_makeup')&&p.tier>=6&&boardHas('hifumi')&&boardHas('koharu')&&boardHas('hanako')&&boardHas('azusa'))
+    eligible.push('trinity_makeup');
+  // 정의실현부: 하스미+츠루기+마시로+이치카 보드
+  if(notOwned('trinity_justice')&&inPool('trinity_justice')&&p.tier>=6&&boardHas('hasumi')&&boardHas('tsurugi')&&boardHas('mashiro')&&boardHas('ichika'))
+    eligible.push('trinity_justice');
 
   return eligible;
 }
@@ -747,7 +774,7 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.gold-=3;
@@ -772,7 +799,7 @@ function buyHiddenCard(idx) {
     m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
   }
   else if(bid==='gehenna_pandemonium'){
-    var absorb=['makoto','satsuki','iroha'];
+    var absorb=['makoto','satsuki','iroha','ibuki','chiaki'];
     var bonusAtk=0,bonusHp=0;
     var newBoard=[];
     for(var i=0;i<p.board.length;i++){
@@ -798,6 +825,46 @@ function buyHiddenCard(idx) {
     m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
     // 상점 제외
     if(G.shopExclusions.indexOf('momoi')===-1) G.shopExclusions.push('momoi');
+  }
+  else if(bid==='gehenna_p68'){
+    var absorb=['kayoko','mutsuki','haruka','aru'];
+    var bonusAtk=0,bonusHp=0;var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].golden?3:1);}else{newBoard.push(p.board[i]);}
+    }
+    p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+  }
+  else if(bid==='millennium_seminar'){
+    var absorb=['yuuka','noa','koyuki','rio'];
+    var bonusAtk=0,bonusHp=0;var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].golden?3:1);}else{newBoard.push(p.board[i]);}
+    }
+    p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+  }
+  else if(bid==='millennium_cc'){
+    var absorb=['neru','asuna','akane','karin','toki'];
+    var bonusAtk=0,bonusHp=0;var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].golden?3:1);}else{newBoard.push(p.board[i]);}
+    }
+    p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+  }
+  else if(bid==='trinity_makeup'){
+    var absorb=['hifumi','koharu','hanako','azusa'];
+    var bonusAtk=0,bonusHp=0;var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].golden?3:1);}else{newBoard.push(p.board[i]);}
+    }
+    p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+  }
+  else if(bid==='trinity_justice'){
+    var absorb=['hasumi','tsurugi','mashiro','ichika'];
+    var bonusAtk=0,bonusHp=0;var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].golden?3:1);}else{newBoard.push(p.board[i]);}
+    }
+    p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
   }
 
   // 왕녀: 아리스 상점 제외
@@ -1575,7 +1642,7 @@ function aiCheckHidden(p) {
         }
         p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
       } else if(hid==='gehenna_pandemonium'){
-        var absorb=['makoto','satsuki','iroha'];
+        var absorb=['makoto','satsuki','iroha','ibuki','chiaki'];
         var bAtk=0,bHp=0,nb=[];
         for(var j=0;j<p.board.length;j++){
           if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}
@@ -1588,6 +1655,31 @@ function aiCheckHidden(p) {
           if(p.board[j].baseId==='momoi'){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}
           else nb.push(p.board[j]);
         }
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='gehenna_p68'){
+        var absorb=['kayoko','mutsuki','haruka','aru'];
+        var bAtk=0,bHp=0,nb=[];
+        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}else nb.push(p.board[j]);}
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='millennium_seminar'){
+        var absorb=['yuuka','noa','koyuki','rio'];
+        var bAtk=0,bHp=0,nb=[];
+        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}else nb.push(p.board[j]);}
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='millennium_cc'){
+        var absorb=['neru','asuna','akane','karin','toki'];
+        var bAtk=0,bHp=0,nb=[];
+        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}else nb.push(p.board[j]);}
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='trinity_makeup'){
+        var absorb=['hifumi','koharu','hanako','azusa'];
+        var bAtk=0,bHp=0,nb=[];
+        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}else nb.push(p.board[j]);}
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='trinity_justice'){
+        var absorb=['hasumi','tsurugi','mashiro','ichika'];
+        var bAtk=0,bHp=0,nb=[];
+        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].golden?3:1);}else nb.push(p.board[j]);}
         p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
       }
       if(p.board.length<MAX_BOARD) p.board.push(unit);
@@ -1803,6 +1895,92 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
     log.push({cls:'soc',text:'[개전] '+u.name+': 적 전체 도발 삭제!'});
   }
+  // ===== 신규 7성 개전 =====
+  else if(id==='gehenna_p68'){
+    // 흥신소 68: 상대 배치 완전 역순 + 비도발 강제 타겟
+    var aliveIdx=[];for(var i=0;i<otherSide.length;i++)if(otherSide[i].alive)aliveIdx.push(i);
+    if(aliveIdx.length>1){
+      var units=aliveIdx.map(function(idx){return otherSide[idx];});
+      units.reverse();
+      for(var i=0;i<aliveIdx.length;i++)otherSide[aliveIdx[i]]=units[i];
+    }
+    log.push({cls:'soc',text:'[개전] '+u.name+': 상대 배치 완전 역순!'});
+    var nonTaunt=[];
+    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive&&!hasKw(otherSide[i],'taunt'))nonTaunt.push(otherSide[i]);}
+    if(nonTaunt.length>0){
+      var pick=nonTaunt[Math.floor(Math.random()*nonTaunt.length)];
+      u._forcedTarget=pick;
+      log.push({cls:'soc',text:'[개전] '+u.name+': '+pick.name+'을(를) 강제 타겟!'});
+    }
+  }
+  else if(id==='trinity_justice'){
+    // 정의실현부: 공체 2배
+    u.atk*=2;u.hp*=2;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 공격력/체력 2배! ('+u.atk+'/'+u.hp+')'});
+  }
+  else if(id==='millennium_seminar'){
+    // 밀레니엄 세미나: 상대 능력 수집 → 삭제 → 공체 뒤집기 → 능력 복사
+    var basicKws=['taunt','shield','reborn','invincible','windfury','cleave','poison','pierce','multistrike','ranged','selfdestruct'];
+    var collectedBasic=[];
+    var collectedSpecial=[];
+    // 수집
+    for(var i=0;i<otherSide.length;i++){
+      var e=otherSide[i];if(!e.alive)continue;
+      // 기본 키워드 수집
+      for(var k=0;k<e.kw.length;k++){
+        if(basicKws.indexOf(e.kw[k])!==-1&&collectedBasic.indexOf(e.kw[k])===-1) collectedBasic.push(e.kw[k]);
+      }
+      // 특수능력 수집
+      var eid=e.baseId;
+      if(SOC_IDS[eid]&&collectedSpecial.indexOf(eid+'_soc')===-1) collectedSpecial.push({baseId:eid,type:'soc'});
+      if(BC_IDS[eid]&&collectedSpecial.indexOf(eid+'_bc')===-1) collectedSpecial.push({baseId:eid,type:'bc'});
+      if(DR_IDS[eid]&&collectedSpecial.indexOf(eid+'_dr')===-1) collectedSpecial.push({baseId:eid,type:'dr'});
+      if(SURV_IDS[eid]&&collectedSpecial.indexOf(eid+'_surv')===-1) collectedSpecial.push({baseId:eid,type:'surv'});
+      if(PRE_IDS[eid]&&collectedSpecial.indexOf(eid+'_pre')===-1) collectedSpecial.push({baseId:eid,type:'pre'});
+      if(PASSIVE_IDS[eid]&&collectedSpecial.indexOf(eid+'_passive')===-1) collectedSpecial.push({baseId:eid,type:'passive'});
+    }
+    // 상대 전체 능력 삭제 (인라인)
+    for(var i=0;i<otherSide.length;i++){
+      if(otherSide[i].alive){
+        var _t=otherSide[i],_rm=[],_kp=[];
+        for(var _k=0;_k<_t.kw.length;_k++){if(_t.kw[_k]==='preemptive')_kp.push(_t.kw[_k]);else _rm.push(KW_LABELS[_t.kw[_k]]||_t.kw[_k]);}
+        _t.kw=_kp;_t._abilitiesStripped=true;
+        if(_rm.length>0)log.push({cls:'kill',text:'[개전] 세미나: '+_t.name+'의 능력 삭제: '+_rm.join(', ')});
+      }
+    }
+    // 상대 전체 공/체 뒤집기
+    for(var i=0;i<otherSide.length;i++){
+      if(otherSide[i].alive){
+        var tmpA=otherSide[i].atk;otherSide[i].atk=otherSide[i].hp;otherSide[i].hp=tmpA;
+        log.push({cls:'soc',text:'[개전] 세미나: '+otherSide[i].name+' 공/체 뒤집기 → '+otherSide[i].atk+'/'+otherSide[i].hp});
+      }
+    }
+    // 기본능력 복사 (최대 3개)
+    var shuffledBasic=collectedBasic.sort(function(){return Math.random()-0.5;});
+    var copyBasicCount=Math.min(3,shuffledBasic.length);
+    for(var i=0;i<copyBasicCount;i++){
+      addKw(u,shuffledBasic[i]);
+      log.push({cls:'soc',text:'[개전] 세미나: 기본능력 복사 → '+(KW_LABELS[shuffledBasic[i]]||shuffledBasic[i])});
+    }
+    // 특수능력 복사 (최대 3개)
+    var shuffledSpecial=collectedSpecial.sort(function(){return Math.random()-0.5;});
+    var copySpecialCount=Math.min(3,shuffledSpecial.length);
+    u._copiedAbilities=[];
+    for(var i=0;i<copySpecialCount;i++){
+      u._copiedAbilities.push(shuffledSpecial[i]);
+      log.push({cls:'soc',text:'[개전] 세미나: 특수능력 복사 → '+shuffledSpecial[i].baseId+' ('+shuffledSpecial[i].type+')'});
+    }
+    // 복사된 개전 즉시 발동
+    for(var i=0;i<u._copiedAbilities.length;i++){
+      var ca=u._copiedAbilities[i];
+      if(ca.type==='soc'){
+        var proxy={baseId:ca.baseId,name:u.name,atk:u.atk,hp:u.hp,kw:u.kw,alive:u.alive,golden:u.golden,school:u.school,sid:u.sid,_mySide:u._mySide,_forcedTarget:u._forcedTarget,_copiedAbilities:null};
+        triggerSOC(proxy,mySide,otherSide,log);
+        u.atk=proxy.atk;u.hp=proxy.hp;u._forcedTarget=proxy._forcedTarget;
+      }
+    }
+    log.push({cls:'soc',text:'[개전] '+u.name+': 상대 능력 삭제+공체 뒤집기+능력 복사!'});
+  }
 }
 
 // 리오 개전용: 전투 시 전투의 함성 효과 (임시 버프, 전투 후 원복)
@@ -1903,7 +2081,8 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
       }
     }
   }
-  if(!DR_IDS[id]&&!unit._akaneC4DR) return;
+  var hasCopiedDR=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='dr';});
+  if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR) return;
   if(unit._abilitiesStripped) return;
   if(G.permanentAbilityBan) return;
   if(DR_IDS[id]){
@@ -1911,6 +2090,18 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     for(var _lr=0;_lr<linRepeat;_lr++){
       _doDR(unit,mySide,otherSide,log);
     }
+  }
+  // 세미나 복사 DR 실행
+  if(hasCopiedDR&&!unit._drProxyRunning){
+    unit._drProxyRunning=true;
+    for(var _ca=0;_ca<unit._copiedAbilities.length;_ca++){
+      var ca=unit._copiedAbilities[_ca];
+      if(ca.type==='dr'){
+        var proxy={baseId:ca.baseId,name:unit.name,atk:unit.atk,hp:unit.hp,kw:unit.kw,alive:unit.alive,golden:unit.golden,school:unit.school,sid:unit.sid,_mySide:mySide,_copiedAbilities:null,_akaneC4DR:false};
+        _doDR(proxy,mySide,otherSide,log);
+      }
+    }
+    unit._drProxyRunning=false;
   }
 }
 function _doDR(unit, mySide, otherSide, log) {
@@ -2142,6 +2333,17 @@ function _doDR(unit, mySide, otherSide, log) {
       }
     }
   }
+  else if(id==='millennium_cc'){
+    // C&C 메아리: 아비 에슈흐 소환
+    if(countAlive(mySide)<BATTLE_MAX){
+      var tierLvl=G.players[0].tier||1;
+      var ae=makeToken('abi_eshuh');ae.atk=tierLvl*2;ae.hp=tierLvl*2;
+      ae.alive=true;ae.poisonImmune=false;ae._mySide=mySide;
+      applyEimiBonus(ae,mySide);
+      mySide.push(ae);
+      log.push({cls:'soc',text:'[메아리] '+unit.name+': 아비 에슈흐 소환! ('+ae.atk+'/'+ae.hp+')'});
+    }
+  }
 }
 
 // 말쿠트 헬퍼 (전역)
@@ -2303,7 +2505,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   // 생존 트리거: 맞았는데 안 죽었을 때 (피격당할 때마다 체크)
   function checkSurvive(unit,side,log2,hitBy){
     if(!unit.alive||unit.hp<=0) return;
-    if(!hasKw(unit,'survive')||!SURV_IDS[unit.baseId]) return;
+    var hasCopiedSurv=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='surv';});
+    if((!hasKw(unit,'survive')||!SURV_IDS[unit.baseId])&&!hasCopiedSurv) return;
     if(unit._abilitiesStripped) return;
     if(G.permanentAbilityBan) return;
     if(unit.baseId==='toki'){
@@ -2369,6 +2572,19 @@ function runBattle(boardA, boardB, startWithA, opts) {
         surviveEffects.push({type:'keyword',baseId:'noa',kw:copied.join(',')});
       }
     }
+    // 세미나 복사 SURV 실행
+    if(hasCopiedSurv&&!unit._survProxyRunning){
+      unit._survProxyRunning=true;
+      for(var _ca=0;_ca<unit._copiedAbilities.length;_ca++){
+        var ca=unit._copiedAbilities[_ca];
+        if(ca.type==='surv'){
+          var proxy={baseId:ca.baseId,name:unit.name,atk:unit.atk,hp:unit.hp,kw:unit.kw.concat(['survive']),alive:unit.alive,golden:unit.golden,school:unit.school,sid:unit.sid,_mySide:unit._mySide,_copiedAbilities:null};
+          checkSurvive(proxy,side,log2,hitBy);
+          unit.atk=proxy.atk;unit.hp=proxy.hp;
+        }
+      }
+      unit._survProxyRunning=false;
+    }
   }
 
   function stripAbilities(target,log2){
@@ -2386,7 +2602,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   function triggerPreemptive(attacker,target,defArr,atkArr,log2){
-    if(!hasKw(attacker,'preemptive')&&!PRE_IDS[attacker.baseId]) return false;
+    var hasCopiedPre=attacker._copiedAbilities&&attacker._copiedAbilities.some(function(c){return c.type==='pre';});
+    if(!hasKw(attacker,'preemptive')&&!PRE_IDS[attacker.baseId]&&!hasCopiedPre) return false;
     if(G.permanentAbilityBan) return false;
     // ===== 선제 능력 (PRE_IDS) =====
     if(attacker.baseId==='aru'){
@@ -2518,6 +2735,19 @@ function runBattle(boardA, boardB, startWithA, opts) {
           log2.push({cls:'kill',text:'[선제] '+attacker.name+': '+target.name+' 부여 수치 제거! ('+oldAtk+'/'+oldHp+' → '+target.atk+'/'+target.hp+')'});
         }
       }
+    }
+    // 세미나 복사 PRE 실행
+    if(hasCopiedPre&&!attacker._preProxyRunning){
+      attacker._preProxyRunning=true;
+      for(var _ca=0;_ca<attacker._copiedAbilities.length;_ca++){
+        var ca=attacker._copiedAbilities[_ca];
+        if(ca.type==='pre'){
+          var proxy={baseId:ca.baseId,name:attacker.name,atk:attacker.atk,hp:attacker.hp,kw:attacker.kw,alive:attacker.alive,golden:attacker.golden,school:attacker.school,sid:attacker.sid,_mySide:attacker._mySide,_copiedAbilities:null};
+          triggerPreemptive(proxy,target,defArr,atkArr,log2);
+          attacker.atk=proxy.atk;attacker.hp=proxy.hp;
+        }
+      }
+      attacker._preProxyRunning=false;
     }
     return false;
   }
@@ -2782,7 +3012,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var damage=0;
   if(result==='lose'){for(var i=0;i<survivorsB.length;i++)damage+=survivorsB[i].tier;}
 
-  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a};
+  // 보충수업부 패시브: 승리 시 생존해 있으면 상대 HP 즉사
+  var makeupInstakill=false;
+  if(result==='win'){
+    for(var i=0;i<survivorsA.length;i++){
+      if(survivorsA[i].baseId==='trinity_makeup'){makeupInstakill=true;break;}
+    }
+  }
+
+  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill};
 }
 
 function startBattle() {
@@ -2859,9 +3097,14 @@ function startBattle() {
         G.totalDamageTaken=(G.totalDamageTaken||0)+dmg;
         chosen.damageText='패배! '+dmg+' 피해를 받았다 (스케쥴 '+opp.tier+' + 미니언 '+(chosen.damage)+')';
       } else if(chosen.result==='win'){
-        var dmg=0;for(var i=0;i<chosen.survivorsA.length;i++)dmg+=chosen.survivorsA[i].tier;
-        dmg+=p.tier;if(dmg>dmgCap)dmg=dmgCap;opp.hp-=dmg;
-        chosen.damageText='승리! '+opp.name+'에게 '+dmg+' 피해';
+        if(chosen._makeupInstakill){
+          opp.hp=0;
+          chosen.damageText='승리! 보충수업부의 패시브: '+opp.name+'의 HP를 0으로!';
+        } else {
+          var dmg=0;for(var i=0;i<chosen.survivorsA.length;i++)dmg+=chosen.survivorsA[i].tier;
+          dmg+=p.tier;if(dmg>dmgCap)dmg=dmgCap;opp.hp-=dmg;
+          chosen.damageText='승리! '+opp.name+'에게 '+dmg+' 피해';
+        }
         if(opp.hp<=0){opp.dead=true;G.aliveCount--;for(var k=0;k<opp.board.length;k++)returnToPool(opp.board[k].baseId,opp.board[k].golden?3:1);opp.board=[];chosen._eliminated=true;}
       } else {
         chosen.damageText='무승부!';
@@ -3110,7 +3353,7 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      var asunaActive=aliveAlly.some(function(u){return u.baseId==='asuna';});
+      var asunaActive=aliveAlly.some(function(u){return u.baseId==='asuna'||u.baseId==='millennium_cc';});
       for(var j=0;j<aliveAlly.length;j++)cr[aliveAlly[j].sid]=coinOffMap[aliveAlly[j].sid]?false:(asunaActive?true:Math.random()<0.5);
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       for(var j=0;j<aliveAlly.length;j++){if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);}
