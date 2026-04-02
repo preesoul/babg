@@ -434,6 +434,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .bench-btns{gap:2px!important;flex-direction:row!important}
 .bench-btns .btn{padding:2px 6px!important;font-size:8px!important}
 
+.hover-tooltip.visible{pointer-events:auto!important}
 /* 메인 콘텐츠 */
 .main-content{overflow-y:visible!important;overflow-x:hidden!important}
 .main-top-row{gap:4px!important;margin-bottom:2px!important;flex-wrap:wrap!important}
@@ -457,7 +458,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .card .ability-tag{display:none!important}
 .m-ability-summary{font-size:6px;text-align:center;padding:1px 2px;background:rgba(0,0,0,0.4);color:#a0c4e0;line-height:1.3;min-height:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* 탭 메뉴 (세로) */
-.m-tap-menu{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:3px;z-index:20;white-space:nowrap;margin-bottom:4px}
+.m-tap-menu{position:fixed;display:flex;flex-direction:column;gap:3px;z-index:999;white-space:nowrap}
 .m-tap-menu-btn{padding:4px 10px;font-size:9px;font-weight:700;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4);min-width:60px;text-align:center}
 .m-tap-menu-btn.detail{background:#60a5fa;color:#fff}
 .m-tap-menu-btn.bench{background:#1a9b6a;color:#fff}
@@ -4532,24 +4533,52 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
     showMobileMoveUI(boardEl,cardIdx);
   });
   menu.appendChild(detailBtn);menu.appendChild(benchBtn);menu.appendChild(sellBtn);menu.appendChild(moveBtn);
-  cardEl.style.position='relative';
-  cardEl.appendChild(menu);
+  var rect=cardEl.getBoundingClientRect();
+  document.body.appendChild(menu);
+  var menuH=menu.offsetHeight;
+  menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
+  menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
   setTimeout(function(){
     document.addEventListener('click',function _dismiss(ev){
       if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
     });
   },10);
 }
-// 상점 카드 탭 메뉴 (영입/자세히)
+// 스펠 카드 상세 팝업
+function showSpellDetail(item,cardEl){
+  hideTooltip();
+  var tt=document.querySelector('.hover-tooltip');if(!tt)return;
+  tt.innerHTML='';
+  var h='<div style="padding:12px;max-width:220px;text-align:center">';
+  h+='<div style="font-size:14px;font-weight:700;color:#80d0ff;margin-bottom:6px">⚡ '+item.name+'</div>';
+  h+='<div style="font-size:11px;color:#ccc;line-height:1.5">'+item.desc+'</div>';
+  var targetNames={select_ally:'아군 학생 선택',select_school:'학교 선택',auto:'자동',all_allies:'아군 전체',shop:'상점',next_turn:'다음 턴'};
+  var tgtLabel=item.target?targetNames[item.target]||item.target:'';
+  if(tgtLabel)h+='<div style="font-size:10px;color:#888;margin-top:6px">대상: '+tgtLabel+'</div>';
+  h+='<div style="font-size:10px;color:#fbbf24;margin-top:4px">비용: '+item.cost+'</div>';
+  h+='</div>';
+  tt.innerHTML=h;
+  var rect=cardEl.getBoundingClientRect();
+  tt.style.left=Math.max(4,rect.left+rect.width/2-110)+'px';
+  tt.style.top=Math.max(4,rect.top-160)+'px';
+  tt.classList.add('visible');
+  setTimeout(function(){
+    document.addEventListener('click',function _ttDismiss(ev){
+      if(!tt.contains(ev.target)){hideTooltip();document.removeEventListener('click',_ttDismiss);}
+    });
+  },10);
+}
+// 상점 카드 탭 메뉴 (영입or구입/자세히)
 function showShopTapMenu(cardEl,shopIdx){
   dismissTapMenu();
+  var item=G.shop[shopIdx];
+  var isAction=item&&(item.isSpell||item.isHidden);
   var menu=document.createElement('div');
   menu.className='m-tap-menu';
   var buyBtn=document.createElement('button');
-  buyBtn.className='m-tap-menu-btn buy';buyBtn.textContent='영입';
+  buyBtn.className='m-tap-menu-btn buy';buyBtn.textContent=isAction?'구입':'영입';
   buyBtn.addEventListener('click',function(e){
     e.stopPropagation();dismissTapMenu();
-    var item=G.shop[shopIdx];
     if(item&&item.isSpell)buySpell(shopIdx);
     else if(item&&item.isHidden)buyHiddenCard(shopIdx);
     else if(item)buyMinion(shopIdx);
@@ -4560,10 +4589,14 @@ function showShopTapMenu(cardEl,shopIdx){
     e.stopPropagation();dismissTapMenu();
     var baseId=cardEl.getAttribute('data-base-id');
     if(baseId){var rect=cardEl.getBoundingClientRect();showTooltip(baseId,rect,cardEl);}
+    else if(item&&(item.isSpell||item.isHidden)){showSpellDetail(item,cardEl);}
   });
   menu.appendChild(buyBtn);menu.appendChild(detailBtn);
-  cardEl.style.position='relative';
-  cardEl.appendChild(menu);
+  var rect=cardEl.getBoundingClientRect();
+  document.body.appendChild(menu);
+  var menuH=menu.offsetHeight;
+  menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
+  menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
   setTimeout(function(){
     document.addEventListener('click',function _dismiss(ev){
       if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
