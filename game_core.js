@@ -4,8 +4,9 @@
 // ========== DATA ==========
 var CHARS = [
   // ===== Tier 1 (밸류5) =====
-  // 게헨나 1학년
+  // 게헨나 3학년
   {id:'kayoko', name:'카요코', school:'게헨나',  tier:5,atk:4,hp:5,kw:[],            skin:'카요코(드레스)',   img:'Kayoko.png',         imgGold:'Kayoko_(Dress).png'},
+  // 게헨나 1학년
   {id:'junko',  name:'준코',   school:'게헨나',  tier:1,atk:1,hp:3,kw:['selfdestruct'],            skin:'준코(새해)',       img:'Junko.png',          imgGold:'Junko_(New_Year).png'},
   // 밀레니엄 1학년
   {id:'toki',   name:'토키',   school:'밀레니엄',tier:1,atk:1,hp:3,kw:['survive'],   skin:'토키(메이드)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
@@ -20,6 +21,7 @@ var CHARS = [
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:4,hp:2,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:2,atk:3,hp:3,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
+  // 밀레니엄 2학년
   {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:2,atk:4,hp:4,kw:['taunt'],     skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
   // 트리니티 1학년
   {id:'kazusa',  name:'카즈사', school:'트리니티',tier:2,atk:1,hp:1,kw:[],            skin:'카즈사(밴드)',     img:'Kazusa.png',         imgGold:'Kazusa_(Band).png'},
@@ -29,6 +31,7 @@ var CHARS = [
   // 게헨나 2학년
   {id:'aru',     name:'아루',   school:'게헨나',  tier:4,atk:5,hp:3,kw:['preemptive'], skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
   {id:'kasumi',  name:'카스미', school:'게헨나',  tier:3,atk:4,hp:2,kw:[],            skin:'카스미(수영복)',   img:'Kasumi.png',         imgGold:'Kasumi_(Swimsuit).png'},  // +개전(SOC)
+  // 게헨나 3학년
   {id:'sena',    name:'세나',   school:'게헨나',  tier:3,atk:6,hp:2,kw:['pierce'],    skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
   // 밀레니엄 1학년
   {id:'arisu',   name:'아리스', school:'밀레니엄',tier:4,atk:9,hp:2,kw:['pierce'],    skin:'아리스(메이드)',   img:'Arisu.png',          imgGold:'Arisu_(Maid).png'},
@@ -45,9 +48,11 @@ var CHARS = [
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:4,atk:3,hp:2,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:2,atk:4,hp:3,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
+  // 밀레니엄 2학년
   {id:'noa',     name:'노아',   school:'밀레니엄',tier:3,atk:3,hp:7,kw:['survive'],   skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
   // 트리니티 2학년
   {id:'azusa',   name:'아즈사', school:'트리니티',tier:4,atk:5,hp:3,kw:[],            skin:'아즈사(수영복)',   img:'Azusa.png',          imgGold:'Azusa_(Swimsuit).png'},
+  // 트리니티 3학년
   {id:'hinata',  name:'히나타', school:'트리니티',tier:4,atk:2,hp:8,kw:['multistrike'],skin:'히나타(수영복)',   img:'Hinata.png',         imgGold:'Hinata_(Swimsuit).png'},
 
   // ===== Tier 5 (밸류15) =====
@@ -73,48 +78,56 @@ var CHARS = [
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:9,hp:5,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
 
   // ===== 게헨나 신규 =====
-  {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(신년)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
+  // 게헨나 1학년
   {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['multistrike'],   skin:'하루카(신년)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
   {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:1,hp:1,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
+  // 게헨나 2학년
+  {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(신년)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
   {id:'chiaki',  name:'치아키', school:'게헨나',  tier:3,atk:5,hp:3,kw:['ranged'],        skin:'치아키(수영복)',   img:'Chiaki.png',         imgGold:'Chiaki_(Swimsuit).png'},
   // ===== 밀레니엄 신규 =====
+  // 밀레니엄 1학년
   {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
+  // 밀레니엄 2학년
   {id:'akane',   name:'아카네', school:'밀레니엄',tier:3,atk:2,hp:4,kw:[],               skin:'아카네(버니걸)',   img:'Akane.png',          imgGold:'Akane_(Bunny_Girl).png'},
   {id:'karin',   name:'카린',   school:'밀레니엄',tier:5,atk:6,hp:5,kw:['ranged','pierce'],skin:'카린(버니걸)',   img:'Karin.png',          imgGold:'Karin_(Bunny_Girl).png'},
+  // 밀레니엄 3학년
   {id:'asuna',   name:'아스나', school:'밀레니엄',tier:5,atk:8,hp:6,kw:[],               skin:'아스나(버니걸)',   img:'Asuna.png',          imgGold:'Asuna_(Bunny_Girl).png'},
   // ===== 트리니티 신규 =====
+  // 트리니티 1학년
   {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:2,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
-  {id:'hasumi',  name:'하스미', school:'트리니티',tier:5,atk:5,hp:7,kw:[],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
-  {id:'suzumi',  name:'스즈미', school:'트리니티',tier:4,atk:3,hp:7,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:5,hp:3,kw:[],               skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_(Magical).png'},
+  // 트리니티 2학년
+  {id:'suzumi',  name:'스즈미', school:'트리니티',tier:4,atk:3,hp:7,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
+  // 트리니티 3학년
+  {id:'hasumi',  name:'하스미', school:'트리니티',tier:5,atk:5,hp:7,kw:[],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
   // ===== 총학생회 (중립) =====
+  // 총학생회 1학년
   {id:'haine',   name:'하이네', school:'총학생회',tier:1,atk:3,hp:2,kw:[],            skin:'하이네(인터뷰)',   img:'Haine.png',          imgGold:'Haine_(Interview).png'},
   {id:'momoka',  name:'모모카', school:'총학생회',tier:2,atk:4,hp:3,kw:[],            skin:'모모카(승무원)',   img:'Momoka.png',         imgGold:'Momoka_(flight).png'},
+  // 총학생회 2학년
   {id:'ayumu',   name:'아유무', school:'총학생회',tier:3,atk:5,hp:2,kw:[],            skin:'아유무(승무원)',   img:'Ayumu.png',          imgGold:'Ayumu_(flight).png'},
   {id:'aoi',     name:'아오이', school:'총학생회',tier:4,atk:5,hp:4,kw:[],            skin:'아오이(인터뷰)',   img:'Aoi.png',            imgGold:'Aoi_(Interview).png'},
+  // 총학생회 3학년
   {id:'kaya',    name:'카야',   school:'총학생회',tier:5,atk:5,hp:10,kw:[],           skin:'카야(쿠데타)',     img:'Kaya.png',           imgGold:'Kaya_(Coup).png'},
   {id:'lin',     name:'린',     school:'총학생회',tier:6,atk:2,hp:8,kw:[],            skin:'린(승무원)',       img:'Lin.png',            imgGold:'Lin_(flight).png'},
 
   // ===== 백귀야행 =====
-  // Tier 1
+  // 백귀야행 1학년
   {id:'izuna',   name:'이즈나', school:'백귀야행',tier:1,atk:1,hp:2,kw:[],            skin:'이즈나(수영복)',   img:'Izuna.png',          imgGold:'Izuna_(Swimsuit).png'},
   {id:'pina',    name:'피나',   school:'백귀야행',tier:1,atk:2,hp:2,kw:['taunt','reborn'],skin:'피나(가이드)',  img:'Pina.png',           imgGold:'Pina_(Guide).png'},
-  // Tier 2
   {id:'yukari',  name:'유카리', school:'백귀야행',tier:2,atk:4,hp:3,kw:['reborn','preemptive'],skin:'유카리(수영복)',img:'Yukari.png',     imgGold:'Yukari_(Swimsuit).png'},
   {id:'tsukuyo', name:'츠쿠요', school:'백귀야행',tier:2,atk:3,hp:2,kw:[],            skin:'츠쿠요(드레스)',   img:'Tsukuyo.png',        imgGold:'Tsukuyo_(Dress).png'},
-  // Tier 3
+  // 백귀야행 2학년
   {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:4,kw:['taunt','survive'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:4,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:4,hp:4,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
-  // Tier 4
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:5,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
-  // Tier 5
   {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
-  {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
-  // Tier 6
+  // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:2,hp:9,kw:['multistrike','preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
   {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:3,hp:8,kw:['multistrike','preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
+  {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -164,7 +177,7 @@ function logBuff(unit, source, atkDelta, hpDelta) {
 // 키워드 헬퍼
 function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
-function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive'&&SURV_IDS[bid]) return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
+function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
 var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'긁기',reborn:'환생',windfury:'질풍',poison:'독성',pierce:'관통',survive:'생존',preemptive:'선제',ranged:'원거리',multistrike:'연격',selfdestruct:'자폭',invincible:'무적'};
 var KW_DESCS = {
@@ -278,7 +291,7 @@ var ABILITY_DESCS = {
   koyuki:   {type:'선제',desc:'공격 시, 이번 전투 동안 공격 대상의\n공격력과 체력 수치를 뒤집습니다.\n(이미 교환된 대상은 중복 적용 안 됨)',gold:'파자마 코유키: 동일'},
   akane:    {type:'개전',desc:'아군 네루, 카린, 아스나, 아카네, 토키에게\n"죽음의 메아리: C4(5/5 자폭) 소환"을 부여합니다.',gold:'버니걸 아카네: 2마리 소환'},
   karin:    {type:'원거리+관통',desc:'원거리 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.',gold:'버니걸 카린: 동일'},
-  asuna:    {type:'패시브',desc:'이번 전투에서 코인 토스가 무조건 성공합니다.\n(아군 전체의 코인이 앞면이 됩니다)',gold:'버니걸 아스나: 동일'},
+  asuna:    {type:'패시브',desc:'이번 전투에서 아스나의 코인 토스가 무조건 성공합니다.',gold:'버니걸 아스나: 동일'},
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',gold:'수영복 코하루: 확률 20%'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',gold:'수영복 하스미: 두 번 흡수'},
   suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n1회 공격 동안 0으로 만듭니다.',gold:'마법소녀 스즈미: 2회 공격 동안'},
@@ -972,10 +985,12 @@ function showDiscover(p) {
     var c = choices[i];
     var kwt = (c.kw||[]).map(function(k){return KW_LABELS[k]||k;}).join(' ');
     var aTag = '';
-    if(BC_IDS[c.id]) aTag='<span class="ability-tag bc" style="cursor:default">전함</span>';
-    else if(DR_IDS[c.id]) aTag='<span class="ability-tag dr" style="cursor:default">메아리</span>';
-    else if(SOC_IDS[c.id]) aTag='<span class="ability-tag soc" style="cursor:default">개전</span>';
-    else if(PASSIVE_IDS[c.id]) aTag='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
+    if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">전함</span>';
+    if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">메아리</span>';
+    if(SOC_IDS[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
+    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">생존</span>';
+    if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
+    if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
     html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
     if(c.img) html += '<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html += '<div class="card-inner">';
@@ -3353,8 +3368,7 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      var asunaActive=aliveAlly.some(function(u){return u.baseId==='asuna'||u.baseId==='millennium_cc';});
-      for(var j=0;j<aliveAlly.length;j++)cr[aliveAlly[j].sid]=coinOffMap[aliveAlly[j].sid]?false:(asunaActive?true:Math.random()<0.5);
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);}
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       for(var j=0;j<aliveAlly.length;j++){if(!coinOffMap[aliveAlly[j].sid])bSettleCoin(aliveAlly[j].sid,cr[aliveAlly[j].sid]);}
 
@@ -3835,6 +3849,9 @@ function miniCardHtml(m){
   if(BC_IDS[bid]) miniAbilTag+='<span class="ability-tag bc" style="font-size:8px;padding:0 3px">전함</span>';
   if(DR_IDS[bid]) miniAbilTag+='<span class="ability-tag dr" style="font-size:8px;padding:0 3px">메아리</span>';
   if(SOC_IDS[bid]) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
+  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">생존</span>';
+  if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선제</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
