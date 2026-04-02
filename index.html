@@ -3564,6 +3564,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   function nextStep(){
     if(battleState.skip||stepIdx>=steps.length){
       if(steps.length>0)renderBattleSnap(steps[steps.length-1].snap);
+      if(!coinPhaseShown&&onCoinResult){onCoinResult(activeResult);}
       finishBattle(activeResult);return;
     }
     var prevSnap=steps[stepIdx-1].snap;
