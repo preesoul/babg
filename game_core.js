@@ -3577,6 +3577,9 @@ function aiAutoBattles() {
     for(var j=0;j<b2.board.length;j++)strB+=b2.board[j].atk+b2.board[j].hp;
     var total=strA+strB+1;
     var aiCap=9999;if(G.turn<=5)aiCap=10;else if(G.aliveCount>4)aiCap=15;
+    // AI 팬짱 카운터 추정: 주리 보유 시 전투당 팬짱 1회 사망 추정
+    for(var j=0;j<a2.board.length;j++){if(a2.board[j].baseId==='juri'){a2.panchanDeaths=(a2.panchanDeaths||0)+1;break;}}
+    for(var j=0;j<b2.board.length;j++){if(b2.board[j].baseId==='juri'){b2.panchanDeaths=(b2.panchanDeaths||0)+1;break;}}
     if(Math.random()<strA/total){var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0){b2.dead=true;G.aliveCount--;for(var k=0;k<b2.board.length;k++)returnToPool(b2.board[k].baseId,b2.board[k].isSkin?3:1);b2.board=[];}}
     else{var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0){a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}}
   }
