@@ -213,6 +213,7 @@ var CHAR_GRADES = {
   nagusa:3, wakamo:3, michiru:3
 };
 var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
+if(typeof window!=='undefined') localStorage.removeItem('babg_sandbox');
 var UPGRADE_COSTS = [0,5,7,8,9,11];
 var SHOP_SIZE = [0,3,4,4,5,5,6];
 var MAX_BOARD = 5;

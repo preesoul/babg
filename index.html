@@ -1314,7 +1314,6 @@ function fadeSwitch(from,to,cb){
 (function(){var n=document.getElementById('pc-notice');if(!n)return;n.style.pointerEvents='auto';n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
 
 document.getElementById('btn-play').addEventListener('click',function(){
-  if(!SANDBOX) localStorage.removeItem('babg_sandbox');
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
 });
