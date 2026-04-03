@@ -1663,12 +1663,29 @@ function aiSpendRemainder(p){
 }
 
 function aiSortBoard(board){
+  // 배치 우선순위: 도발 맨앞 → 뒤끝/자폭 앞쪽 → 일반 중간 → 선제/저격/버티기 뒤쪽
+  function posScore(u){
+    var s=50;
+    var bid=u.baseId||'';
+    var kw=u.kw||[];
+    // 앞배치 (낮을수록 앞)
+    if(kw.indexOf('taunt')!==-1) s=10; // 도발 맨앞
+    if(kw.indexOf('selfdestruct')!==-1) s=Math.min(s,15); // 자폭 앞쪽
+    if(DR_IDS[bid]) s=Math.min(s,20); // 뒤끝 유닛 앞쪽
+    if(kw.indexOf('reborn')!==-1) s=Math.min(s,25); // 부활 앞쪽
+    // 뒤배치 (높을수록 뒤)
+    if(kw.indexOf('survive')!==-1) s=Math.max(s,70); // 버티기 뒤쪽
+    if(SURV_IDS[bid]) s=Math.max(s,70);
+    if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75); // 선제 뒤쪽
+    if(kw.indexOf('ranged')!==-1) s=Math.max(s,80); // 저격 맨뒤
+    // 보호막은 앞쪽에 두면 1히트 흡수 가치 높음
+    if(kw.indexOf('shield')!==-1&&s>30) s=Math.min(s,30);
+    return s;
+  }
   board.sort(function(a,b){
-    var aKw=50,bKw=50;
-    for(var k=0;k<(a.kw||[]).length;k++){var v=KW_SORT_ORDER[a.kw[k]];if(v!==undefined&&v<aKw)aKw=v;}
-    for(var k=0;k<(b.kw||[]).length;k++){var v=KW_SORT_ORDER[b.kw[k]];if(v!==undefined&&v<bKw)bKw=v;}
-    if(aKw!==bKw)return aKw-bKw;
-    return b.atk-a.atk;
+    var pa=posScore(a),pb=posScore(b);
+    if(pa!==pb) return pa-pb;
+    return b.hp-a.hp; // 같은 우선순위면 체력 높은 유닛 앞
   });
 }
 
@@ -1796,9 +1813,15 @@ function aiTurns() {
           var hasCopy=false;for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===c.id&&!p.board[k].isSkin){hasCopy=true;break;}}
           if(hasCopy)s+=5;
           if(!aiStrat.giveUp){
-            if(aiStrat.dominantSchool&&c.school===aiStrat.dominantSchool)s+=5;
+            // 학교 시너지: 통일도가 높을수록 보너스 증가
+            if(aiStrat.dominantSchool&&c.school===aiStrat.dominantSchool){
+              var schoolUnity=0;for(var _su=0;_su<p.board.length;_su++){if(p.board[_su].school===aiStrat.dominantSchool)schoolUnity++;}
+              s+=3+schoolUnity*2; // 기본3 + 아군 동일학교당 +2 (최대 3+10=13)
+            }
             if(aiStrat.targetUnits.indexOf(c.id)!==-1)s+=12;
             if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&c.school!==aiStrat.dominantSchool)s-=10;
+            // 보드에 없는 학교 유닛은 소폭 감점 (학교 분산 방지)
+            if(p.board.length>=3&&aiStrat.dominantSchool&&c.school!==aiStrat.dominantSchool&&!aiStrat.avoidOtherSchools)s-=3;
           }
           // 덱 패턴 보너스
           if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
@@ -1831,6 +1854,36 @@ function aiTurns() {
         var newUnit=makeMinion(tmpl,false);p.board.push(newUnit);p.stone-=3;
         triggerBattlecry(newUnit,p);
       } else {returnToPool(tmpl.id);break;}
+    }
+
+    // Phase 4b: 트리플 리롤 (보드 풀 + 골드 남음 + 2장 있는 유닛)
+    if(p.board.length>=MAX_BOARD&&p.stone>=4){
+      var tripleNeed=null;
+      var bc2={};for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)bc2[p.board[j].baseId]=(bc2[p.board[j].baseId]||0)+1;}
+      for(var bid in bc2){if(bc2[bid]>=2&&G.pool[bid]>0){tripleNeed=bid;break;}}
+      if(tripleNeed&&p.stone>=4){ // 1 reroll + 3 buy
+        // 풀에 남아있으면 리롤해서 찾을 확률 존재 — 최대 2회 리롤 시도
+        var rerollAttempts=Math.min(2,Math.floor((p.stone-3)/1));
+        for(var ra=0;ra<rerollAttempts;ra++){
+          if(G.pool[tripleNeed]<=0) break;
+          p.stone-=1; // reroll cost
+          // 리롤로 찾았다고 가정 (확률 = pool수/전체pool * shop수)
+          var totalPool=0;for(var pid in G.pool)totalPool+=G.pool[pid];
+          var findChance=G.pool[tripleNeed]/Math.max(1,totalPool)*SHOP_SIZE[p.tier];
+          if(Math.random()<findChance&&takeFromPool(tripleNeed)){
+            // 트리플 완성!
+            var ttmpl=null;for(var j=0;j<CHARS.length;j++){if(CHARS[j].id===tripleNeed){ttmpl=CHARS[j];break;}}
+            if(ttmpl){
+              var nb=[];var rm=0;
+              for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tripleNeed&&!p.board[j].isSkin&&rm<2){rm++;}else{nb.push(p.board[j]);}}
+              p.board=nb;
+              var su=makeMinion(ttmpl,true);p.board.push(su);p.stone-=3;
+              triggerBattlecry(su,p);aiDiscover(p);
+            }
+            break;
+          }
+        }
+      }
     }
 
     // Phase 5: 매각+교체 (개선된 버전)
