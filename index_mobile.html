@@ -617,7 +617,10 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .roster-school-name{font-size:14px;font-weight:700;color:#93c5fd}
 .roster-cards-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:4px}
 .roster-tier-chunk{display:flex;flex-wrap:nowrap;gap:5px;align-items:flex-start}
-.rt-sep{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:22px;height:232px;border-right:2px solid #2a5070;padding-right:3px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;color:#7a98b8}
+.rt-sep{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px;height:232px;border-right:2px solid #2a5070;padding-right:4px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:16px;font-weight:800;color:#7a98b8}
+.roster-filters{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.roster-filter{background:#0f2236;color:#93c5fd;border:1px solid #1e3a5f;border-radius:5px;padding:5px 8px;font-size:12px;cursor:pointer;outline:none;font-family:inherit}
+.roster-filter:focus{border-color:#3a9abf}
 .roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:155px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
 .roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
 .roster-card:hover{filter:brightness(1.2)}
@@ -647,6 +650,30 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <div id="roster-overlay" class="roster-overlay">
     <div class="roster-hdr">
       <div class="roster-title">학생명부</div>
+      <div class="roster-filters">
+        <select id="filter-kw" class="roster-filter">
+          <option value="">기본능력</option>
+          <option value="taunt">도발</option>
+          <option value="shield">보호막</option>
+          <option value="cleave">광역</option>
+          <option value="reborn">부활</option>
+          <option value="windfury">연사</option>
+          <option value="poison">독사굴</option>
+          <option value="pierce">관통</option>
+          <option value="ranged">저격</option>
+          <option value="selfdestruct">자폭</option>
+          <option value="invincible">무적</option>
+        </select>
+        <select id="filter-abil" class="roster-filter">
+          <option value="">특수능력</option>
+          <option value="bc">첫인사</option>
+          <option value="dr">뒤끝</option>
+          <option value="soc">개전</option>
+          <option value="surv">버티기</option>
+          <option value="passive">패시브</option>
+          <option value="pre">선제</option>
+        </select>
+      </div>
       <button class="roster-close" id="btn-roster-close">닫기</button>
     </div>
     <div id="roster-content"></div>
@@ -2482,12 +2509,26 @@ doReroll=function(){
 document.getElementById('btn-reroll').addEventListener('click',doReroll);
 document.getElementById('btn-continue').addEventListener('click',continueBattle);
 
-function showRoster(){
+function renderRoster(){
+  var kwFilter=document.getElementById('filter-kw').value;
+  var abilFilter=document.getElementById('filter-abil').value;
   var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','총학생회'];
   var bySchool={};
   SCHOOL_ORDER.forEach(function(s){bySchool[s]=[];});
   CHARS.forEach(function(c){
-    if(c.tier>=1&&c.tier<=6&&bySchool[c.school]!==undefined) bySchool[c.school].push(c);
+    if(c.tier<1||c.tier>6||bySchool[c.school]===undefined) return;
+    if(kwFilter&&(!c.kw||c.kw.indexOf(kwFilter)===-1)) return;
+    if(abilFilter){
+      var id=c.id,has=false;
+      if(abilFilter==='bc') has=!!BC_IDS[id];
+      else if(abilFilter==='dr') has=!!DR_IDS[id];
+      else if(abilFilter==='soc') has=!!SOC_IDS[id];
+      else if(abilFilter==='surv') has=!!SURV_IDS[id];
+      else if(abilFilter==='passive') has=!!PASSIVE_IDS[id];
+      else if(abilFilter==='pre') has=!!PRE_IDS[id];
+      if(!has) return;
+    }
+    bySchool[c.school].push(c);
   });
   var html='';
   SCHOOL_ORDER.forEach(function(school){
@@ -2515,6 +2556,7 @@ function showRoster(){
     }
     html+='</div>';
   });
+  if(!html) html='<div style="color:#4a6880;padding:60px;text-align:center;font-size:14px">해당하는 학생이 없습니다.</div>';
   var content=document.getElementById('roster-content');
   content.innerHTML=html;
   content.querySelectorAll('.roster-card').forEach(function(el){
@@ -2524,6 +2566,11 @@ function showRoster(){
       var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
     });
   });
+}
+function showRoster(){
+  document.getElementById('filter-kw').value='';
+  document.getElementById('filter-abil').value='';
+  renderRoster();
   document.getElementById('roster-overlay').classList.add('active');
 }
 
@@ -2538,6 +2585,8 @@ document.getElementById('btn-roster-close').addEventListener('click',function(){
 document.getElementById('roster-overlay').addEventListener('click',function(e){
   if(!e.target.closest('.roster-card')) hideTooltip();
 });
+document.getElementById('filter-kw').addEventListener('change',renderRoster);
+document.getElementById('filter-abil').addEventListener('change',renderRoster);
 </script>
 </body>
 </html>
