@@ -516,7 +516,7 @@ function newGame() {
   players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
   for(var i=0;i<aiCount;i++) players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0});
-  G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),juriDeaths:0,rioSchool:null,freeRerolls:0,
+  G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0};
   rollShop();
   aiTurns();
@@ -2314,15 +2314,16 @@ function _doDR(unit, mySide, otherSide, log) {
 
   // 주리 뒤끝으로 부여된 팬짱 소환
   if(unit._juriDR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
-    var bonus=unit._juriSkin?G.juriDeaths*2:G.juriDeaths;
+    var jdCount=mySide._juriDeaths||0;
+    var bonus=unit._juriSkin?jdCount*2:jdCount;
     var pc={id:'panchan_'+Math.random().toString(36).substr(2,4),baseId:'panchan',isToken:true,
       name:'팬짱',school:G.rioSchool||'게헨나',tier:1,atk:1+bonus,hp:1+bonus,kw:[],img:'token/panchan.png',isSkin:false,alive:true,poisonImmune:false};
     if(countAlive(mySide)<BATTLE_MAX)mySide.push(pc);
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+' → 팬짱 소환! ('+pc.atk+'/'+pc.hp+')'});
   }
   if(id==='juri'){
-    // 주리 뒤끝: 죽으면 아군 1인에게 팬짱 소환 뒤끝 부여 + 사망 카운터 증가
-    G.juriDeaths=(G.juriDeaths||0)+1;
+    // 주리 뒤끝: 죽으면 아군 1인에게 팬짱 소환 뒤끝 부여 + 사이드별 사망 카운터 증가
+    mySide._juriDeaths=(mySide._juriDeaths||0)+1;
     var juriCands=[];
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)juriCands.push(mySide[i]);}
     if(juriCands.length>0){
@@ -3424,12 +3425,12 @@ var _activeCoinOverlay=null;
 var _gBattleCounterSave=null;
 function saveGBattleCounters(){
   return{millenniumTokenSummons:G.millenniumTokenSummons||0,arisuDeathCount:G.arisuDeathCount||0,
-    permanentAbilityBan:!!G.permanentAbilityBan,juriDeaths:G.juriDeaths||0,
+    permanentAbilityBan:!!G.permanentAbilityBan,
     keiseisenCounters:JSON.parse(JSON.stringify(G.keiseisenCounters||{}))};
 }
 function restoreGBattleCounters(s){
   G.millenniumTokenSummons=s.millenniumTokenSummons;G.arisuDeathCount=s.arisuDeathCount;
-  G.permanentAbilityBan=s.permanentAbilityBan;G.juriDeaths=s.juriDeaths;G.keiseisenCounters=s.keiseisenCounters;
+  G.permanentAbilityBan=s.permanentAbilityBan;G.keiseisenCounters=s.keiseisenCounters;
 }
 var BCOIN_BASE='img/Icon/';
 var BCOIN_SG='img/UI/sunglasses.png';
