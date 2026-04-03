@@ -196,6 +196,22 @@ var KW_DESCS = {
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
 var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png'};
+var CHAR_GRADES = {
+  kayoko:3, junko:1, toki:1, midori:1, mari:1, reisa:1,
+  juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
+  aru:2, kasumi:2, sena:3, arisu:1, hibiki:1, yuzu:1,
+  ichika:2, hanako:2, hifumi:2,
+  iori:2, iroha:2, eimi:1, noa:2, azusa:2, hinata:3,
+  ako:3, satsuki:3, himari:3, rio:3, sakurako:3, ui:3,
+  hina:3, makoto:3, neru:3, utaha:3, tsurugi:3, mine:3,
+  haruka:1, ibuki:1, mutsuki:2, chiaki:2,
+  koyuki:1, akane:2, karin:2, asuna:3,
+  koharu:1, shimiko:1, suzumi:2, hasumi:3,
+  haine:1, momoka:1, ayumu:2, aoi:2, kaya:3, lin:3,
+  izuna:1, pina:1, yukari:1, tsukuyo:1,
+  mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
+  nagusa:3, wakamo:3, michiru:3
+};
 var UPGRADE_COSTS = [0,5,7,8,9,11];
 var SHOP_SIZE = [0,3,4,4,5,5,6];
 var MAX_BOARD = 5;
@@ -233,7 +249,7 @@ var ABILITY_DESCS = {
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',skinEffect:'아이돌 미네: 동일'},
   toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',skinEffect:'메이드 토키: 스케쥴 레벨×4',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 가집니다.'},
   neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',skinEffect:'바니걸 네루: 두 가지를 무작위로 얻습니다.',skinEffectDesc:'버티기: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
-  toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',skinEffect:'황금 토라마루: 수영복 이로하 소환'},
+  toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',skinEffect:'스킨 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',skinEffect:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
   eimi:     {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨×2의 공/체를 추가합니다.',skinEffect:'수영복 에이미: 스케쥴 레벨×4',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 추가합니다.'},
@@ -241,7 +257,7 @@ var ABILITY_DESCS = {
   satsuki:  {type:'뒤끝',desc:'자신을 죽인 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗음',skinEffectDesc:'뒤끝: 자신을 죽인 상대를 <span style="color:#ffd700;font-weight:700">2턴간</span> 빼앗습니다.'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',skinEffect:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공격력/체력, 자폭)'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
-  yuzu:     {type:'뒤끝',desc:'쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
+  yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
   noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',skinEffect:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',skinEffectDesc:'버티기: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
   utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',skinEffect:'치어리더 우타하: 천둥이 두 번 소환',skinEffectDesc:'선제: <천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n<span style="color:#ffd700;font-weight:700">두 번 시행합니다.</span>\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.'},
   mashiro:  {type:'저격',desc:'',skinEffect:''},
@@ -271,7 +287,7 @@ var ABILITY_DESCS = {
   michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 추가로 두 번 발동',skinEffectDesc:'첫인사: 샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 나구사: 동일'},
   wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',skinEffect:'수영복 와카모: 4~10회 공격',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)'},
-  hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',skinEffect:'황금 호버크래프트: 20/20\n와카모(수영복) 소환'},
+  hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',skinEffect:''},
   hkyk_kuzunoha: {type:'개전',desc:'아군 백귀야행 학생 전체에게 독사굴을 부여합니다.\n이후 상대 전체의 독사굴을 제거합니다.',skinEffect:''},
@@ -292,7 +308,6 @@ var ABILITY_DESCS = {
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 20%',skinEffectDesc:'선제: 공격 시, <span style="color:#ffd700;font-weight:700">20%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
   suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'마법소녀 스즈미: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
-  shimiko:  {type:'스킨 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 보호막, 연사를 얻습니다.',skinEffect:'악의 간부 시미코: 보호막, 연사'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 동일'},
   haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',skinEffect:'새해 하루카: 2~5회 / 조건 시 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">2~5회</span> 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 <span style="color:#ffd700;font-weight:700">10회</span> 공격합니다.'},
   // 총학생회
@@ -302,10 +317,11 @@ var ABILITY_DESCS = {
   aoi:      {type:'패시브',desc:'매 턴 (청휘석)+2를 추가로 얻습니다.',skinEffect:'인터뷰 아오이: +4 추가',skinEffectDesc:'패시브: 매 턴 (청휘석아이콘)<span style="color:#ffd700;font-weight:700">+4</span>를 추가로 얻습니다.'},
   kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n공격력과 체력을 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 두 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.\n(가장 마지막에 발동)'},
   lin:      {type:'패시브',desc:'아군의 뒤끝과 첫인사가\n한 번 더 발동합니다.',skinEffect:'승무원 린: 두 번 더 발동',skinEffectDesc:'패시브: 아군의 뒤끝과 첫인사가\n<span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
-  // ===== 스킨 전용 효과 =====
-  yuuka:    {type:'스킨 효과',desc:'기본: 바닐라 (효과 없음)\n황금: 개전 - 자신에게 +2/+2',skinEffect:'체육복 유우카: 개전 +2/+2',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">개전: 자신에게 +2/+2</span>'},
-  arisu:    {type:'스킨 효과',desc:'기본: 관통\n황금: 관통이 삭제되고 광역으로 변경',skinEffect:'메이드 아리스: 광역',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">광역</span>'},
-  hina:     {type:'스킨 효과',desc:'기본: 광역\n황금: 광역이 삭제되고 보호막, 연사로 변경',skinEffect:'드레스 히나: 보호막, 연사'},
+  // ===== 스킨 전용 효과 (기본 능력 없이 스킨만 추가) =====
+  shimiko:  {type:'',desc:'',skinEffect:'악의 간부 시미코: 보호막, 광역'},
+  yuuka:    {type:'',desc:'',skinEffect:'체육복 유우카: 개전 자신에게 +2/+2'},
+  arisu:    {type:'',desc:'',skinEffect:'메이드 아리스: 관통 → 광역으로 변경'},
+  hina:     {type:'',desc:'',skinEffect:'드레스 히나: 광역 → 보호막, 연사로 변경'},
 };
 
 // ========== TOKENS ==========
@@ -2281,11 +2297,11 @@ function _doDR(unit, mySide, otherSide, log) {
     }
   }
   else if(id==='yuzu'){
-    // 이번 전투 쓰러진 아군 수 x2(황금x4)의 아방가르드군 소환
+    // 이번 전투 쓰러진 아군 수 x2(스킨x4)의 아방가르드군 소환
     var deadCount=0;
     for(var i=0;i<mySide.length;i++)if(!mySide[i].alive)deadCount++;
     deadCount++; // 유즈 자신도 포함
-    var mult=unit.isSkin?6:3;
+    var mult=unit.isSkin?4:2;
     var agAtk=deadCount*mult,agHp=deadCount*mult;
     if(countAlive(mySide)<BATTLE_MAX){
       var ag;

@@ -676,8 +676,7 @@ function showAbilityPopup(baseId, e, isSkin) {
 
   document.getElementById('ap-name').textContent=charName;
   var descEl=document.getElementById('ap-desc');
-  if(isSkin&&info.skinEffectDesc){descEl.innerHTML=info.skinEffectDesc;}
-  else{descEl.textContent=info.desc;}
+  descEl.textContent=info.desc;
 
   var skinEl=document.getElementById('ap-skin');
   var _apCh=findAnyChar(baseId);
@@ -1148,7 +1147,8 @@ function showTooltip(baseId,rect,cardEl){
   html+='<div class="tt-header" style="position:relative;overflow:hidden">';
   if(ttIcon) html+='<img src="'+ttIcon+'" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);width:50px;height:50px;opacity:0.12;filter:invert(1);pointer-events:none">';
   html+='<div class="tt-name">'+displayName+'</div>';
-  html+='<div class="tt-school">'+displaySchool+'</div>';
+  var gradeStr=CHAR_GRADES[baseId]?CHAR_GRADES[baseId]+'학년':'';
+  html+='<div class="tt-school">'+displaySchool+(gradeStr?' · '+gradeStr:'')+'</div>';
   html+='<div class="tt-stats-row">';
   html+='<div class="tt-stat tier"><img src="img/UI/star.png" style="width:16px;height:16px;vertical-align:middle">'+charData.tier+'</div>';
   html+='<div class="tt-stat atk">'+displayAtk+'</div>';
@@ -1206,9 +1206,12 @@ function showTooltip(baseId,rect,cardEl){
     else if(info.type==='패시브') typeCls='passive';
     html+='<div class="tt-ability">';
     html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
-    var isSkin=unitData&&unitData.isSkin;
-    if(isSkin&&info.skinEffectDesc) html+='<div class="tt-desc">'+info.skinEffectDesc+'</div>';
-    else html+='<div class="tt-desc">'+info.desc+'</div>';
+    html+='<div class="tt-desc">'+info.desc+'</div>';
+    if(info.skinEffect) html+='<div class="tt-skin">'+info.skinEffect+'</div>';
+    html+='</div>';
+  } else if(info&&info.skinEffect){
+    html+='<div class="tt-ability">';
+    html+='<div class="tt-skin">'+info.skinEffect+'</div>';
     html+='</div>';
   }
   // 트리플 안내 (gold 칸 자리에 표시, 히든 제외)
