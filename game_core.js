@@ -74,7 +74,7 @@ var CHARS = [
   {id:'neru',    name:'네루',   school:'밀레니엄',tier:6,atk:9,hp:7,kw:['shield','survive'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
   {id:'utaha',   name:'우타하', school:'밀레니엄',tier:6,atk:4,hp:4,kw:['preemptive'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
   // 트리니티 3학년
-  {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:5,hp:5,kw:[],            skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
+  {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:10,hp:10,kw:[],           skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:9,hp:5,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
 
   // ===== 게헨나 신규 =====
@@ -245,7 +245,7 @@ var ABILITY_DESCS = {
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (2/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',skinEffect:'수영복 히후미: 페로로님 4/2',skinEffectDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">4/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',skinEffect:'수영복 아즈사: -4 데미지',skinEffectDesc:'뒤끝: 적 전체에게 <span style="color:#ffd700;font-weight:700">-4</span>의 데미지를 줍니다.'},
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 두 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
-  tsurugi:  {type:'개전',desc:'자신에게 +10/+10',skinEffect:'수영복 츠루기: +20/+20',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+20/+20</span>을 부여합니다.'},
+  tsurugi:  {type:'개전',desc:'공/체가 두 배가 됩니다.\n개전 마지막에 발동됩니다.',skinEffect:'수영복 츠루기: 세 배',skinEffectDesc:'개전: 공/체가 <span style="color:#ffd700;font-weight:700">세 배</span>가 됩니다.'},
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',skinEffect:'아이돌 미네: 동일'},
   toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',skinEffect:'메이드 토키: 스케쥴 레벨×4',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 가집니다.'},
   neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',skinEffect:'바니걸 네루: 두 가지를 무작위로 얻습니다.',skinEffectDesc:'버티기: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
@@ -1802,9 +1802,9 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +'+buff+'/+'+buff});
   }
   else if(id==='tsurugi'){
-    var buff=u.isSkin?14:7;
-    u.atk+=buff;u.hp+=buff;
-    log.push({cls:'soc',text:'[개전] '+u.name+': +'+buff+'/+'+buff});
+    var mult=u.isSkin?3:2;
+    u.atk=u.atk*mult; u.hp=u.hp*mult;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 공/체 '+mult+'배! ('+u.atk+'/'+u.hp+')'});
   }
   else if(id==='rio'){
     // 아군의 모든 첫인사 발동 (황금: 두 번)
@@ -2123,9 +2123,13 @@ function resolveStartOfCombat(a, b, log) {
       }
     }
     for(var i=0;i<side.length;i++){
-      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya') continue;
+      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi') continue;
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
+    }
+    // 츠루기: 다른 개전 효과를 모두 받은 후 마지막에 발동 (카야 제외)
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&side[i].baseId==='tsurugi') triggerSOC(side[i],side,other,log);
     }
     // 카야는 개전 중 가장 마지막에 발동
     for(var i=0;i<side.length;i++){
