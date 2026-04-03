@@ -47,9 +47,9 @@ var CHARS = [
   {id:'iori',    name:'이오리', school:'게헨나',  tier:4,atk:7,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:4,atk:3,hp:2,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
-  {id:'eimi',    name:'에이미', school:'밀레니엄',tier:2,atk:4,hp:3,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
+  {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:5,hp:4,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
   // 밀레니엄 2학년
-  {id:'noa',     name:'노아',   school:'밀레니엄',tier:3,atk:3,hp:7,kw:['survive'],   skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
+  {id:'noa',     name:'노아',   school:'밀레니엄',tier:2,atk:2,hp:5,kw:['survive'],   skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
   // 트리니티 2학년
   {id:'azusa',   name:'아즈사', school:'트리니티',tier:4,atk:5,hp:3,kw:[],            skin:'아즈사(수영복)',   img:'Azusa.png',          imgGold:'Azusa_(Swimsuit).png'},
   // 트리니티 3학년
@@ -201,7 +201,7 @@ var CHAR_GRADES = {
   juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
   aru:2, kasumi:2, sena:3, arisu:1, hibiki:1, yuzu:1,
   ichika:2, hanako:2, hifumi:2,
-  iori:2, iroha:2, eimi:1, noa:2, azusa:2, hinata:3,
+  iori:2, iroha:2, eimi:2, noa:1, azusa:2, hinata:3,
   ako:3, satsuki:3, himari:3, rio:3, sakurako:3, ui:3,
   hina:3, makoto:3, neru:3, utaha:3, tsurugi:3, mine:3,
   haruka:1, ibuki:1, mutsuki:2, chiaki:2,
