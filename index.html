@@ -1318,6 +1318,16 @@ document.getElementById('btn-play').addEventListener('click',function(){
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
 });
+// test.html 경유 시 타이틀 건너뛰고 바로 게임 시작
+if(SANDBOX){
+  setTimeout(function(){
+    var ts=document.getElementById('title-screen');
+    var gs=document.getElementById('game-screen');
+    if(ts)ts.classList.remove('active');
+    if(gs)gs.classList.add('active');
+    newGame();
+  },100);
+}
 // 능력 팝업 닫기
 document.getElementById('ap-close').addEventListener('click',function(){document.getElementById('ability-popup-overlay').classList.remove('active');});
 document.getElementById('ability-popup-overlay').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});

@@ -511,7 +511,8 @@ function newGame() {
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
   var startStone=SANDBOX?20:3;
   players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
-  for(var i=0;i<aiCount;i++) players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:3,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:UPGRADE_COSTS[1],turnStone:3,purchasedSchools:{},totalDamageTaken:0});
+  var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
+  for(var i=0;i<aiCount;i++) players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0});
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),juriDeaths:0,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0};
   rollShop();
@@ -4105,10 +4106,11 @@ function nextTurn() {
   if(p.upgradeCost>0)p.upgradeCost=Math.max(0,p.upgradeCost-1);
   for(var i=1;i<G.players.length;i++){
     var ai=G.players[i];if(ai.dead)continue;
-    ai.turnStone=Math.min(MAX_STONE,ai.turnStone+1);
+    if(SANDBOX){ai.turnStone=MAX_STONE;ai.stone=MAX_STONE;ai.upgradeCost=0;}
+    else{ai.turnStone=Math.min(MAX_STONE,ai.turnStone+1);
     var aiAoiBonus=0;for(var j=0;j<ai.board.length;j++){if(ai.board[j]&&ai.board[j].baseId==='aoi')aiAoiBonus+=ai.board[j].isSkin?4:2;}
     ai.stone=ai.turnStone+aiAoiBonus;
-    if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);
+    if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);}
   }
   aiTurns();rollShop();renderAll();
 }
