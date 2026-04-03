@@ -212,12 +212,13 @@ var CHAR_GRADES = {
   mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
   nagusa:3, wakamo:3, michiru:3
 };
+var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
 var UPGRADE_COSTS = [0,5,7,8,9,11];
 var SHOP_SIZE = [0,3,4,4,5,5,6];
 var MAX_BOARD = 5;
 var BATTLE_MAX = 7;
 var START_HP = 40;
-var MAX_STONE = 10;
+var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, himari:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};                               // 첫인사
@@ -506,16 +507,18 @@ var swapFirst = -1;
 
 function newGame() {
   var players=[];
+  var aiCount=SANDBOX?5:7;
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
-  players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:3,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:UPGRADE_COSTS[1],turnStone:3});
-  for(var i=0;i<7;i++) players.push({id:i+1,name:aiNames[i],hp:START_HP,tier:1,stone:3,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:UPGRADE_COSTS[1],turnStone:3,purchasedSchools:{},totalDamageTaken:0});
-  G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),juriDeaths:0,freeRerolls:0,
+  var startStone=SANDBOX?20:3;
+  players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
+  for(var i=0;i<aiCount;i++) players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:3,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:UPGRADE_COSTS[1],turnStone:3,purchasedSchools:{},totalDamageTaken:0});
+  G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),juriDeaths:0,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0};
   rollShop();
   aiTurns();
   renderAll();
   // 백그라운드 자가대전 시뮬 (20판) — UI 비블로킹
-  setTimeout(function(){ runSimBatch(20); }, 500);
+  if(!SANDBOX) setTimeout(function(){ runSimBatch(20); }, 500);
 }
 
 // 스킨(황금) 키워드 변환: 각 캐릭터 스킨 효과 (원본 능력은 유지됨)
@@ -1460,12 +1463,15 @@ function sellBench() {
 function doReroll() {
   var p=G.players[0];
   lastSold=null;
+  if(SANDBOX){rollShop(true);renderAll();return;}
   if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;rollShop(true);renderAll();return;}
   if(p.stone<1)return;p.stone-=1;rollShop(true);renderAll();
 }
 function doUpgrade() {
-  var p=G.players[0];if(p.tier>=6)return;if(p.stone<p.upgradeCost)return;
-  p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;renderAll();
+  var p=G.players[0];if(p.tier>=6)return;
+  if(SANDBOX){p.tier++;p.upgradeCost=p.tier<6?0:99;renderAll();}
+  else{if(p.stone<p.upgradeCost)return;
+  p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;renderAll();}
   if(TUT.active){
     var s=TUTORIAL_STEPS[TUT.step];
     if(s&&s.action==='waitUpgrade') setTimeout(function(){tutNext();},300);
@@ -4092,8 +4098,9 @@ function continueBattle() {
 
 function nextTurn() {
   G.turn++;var p=G.players[0];
-  p.turnStone=Math.min(MAX_STONE,p.turnStone+1);
-  p.stone=p.turnStone+(G.bonusStone||0)+getAoiBonusStone();G.bonusStone=0;
+  if(SANDBOX){p.stone=20;p.turnStone=20;p.upgradeCost=0;G.bonusStone=0;}
+  else{p.turnStone=Math.min(MAX_STONE,p.turnStone+1);
+  p.stone=p.turnStone+(G.bonusStone||0)+getAoiBonusStone();G.bonusStone=0;}
   G.freeRerolls=getMomokaFreeRerolls();
   if(p.upgradeCost>0)p.upgradeCost=Math.max(0,p.upgradeCost-1);
   for(var i=1;i<G.players.length;i++){
