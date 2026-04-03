@@ -824,6 +824,9 @@ function buySpell(idx) {
   if(p.stone<item.cost)return;
   var spell=item.spell;
   if(spell.id==='gacha'&&isGachaBlocked())return;
+  // 발견 계열 auto 주문: 보드 풀이면 차단
+  var DISCOVER_SPELLS={arona_cheat:1,on_duty:1};
+  if(DISCOVER_SPELLS[spell.id]&&p.board.length>=MAX_BOARD)return;
   if(spell.target==='select_ally'){
     if(p.board.length===0)return;
     if(spell.id==='mirror'&&p.board.length>=MAX_BOARD){
