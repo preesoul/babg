@@ -146,7 +146,7 @@ var HIDDEN_CHARS = [
   {id:'millennium_death_momoi', name:'데스 모모이',          school:'밀레니엄', tier:7, atk:10, hp:10, kw:['shield','windfury','preemptive'],      img:'unique/Millennium_Death_momoi.png'},
   // 백귀야행
   {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:50, hp:50, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
-  {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/HKYK_Kuzunoha.png'},
+  {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:1, hp:1, kw:['shield','poison'],                    img:'unique/HKYK_Kuzunoha.png'},
   // 신규 7성
   {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.png'},
   {id:'millennium_seminar',      name:'밀레니엄 세미나',      school:'밀레니엄', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/Seminar.png'},
@@ -227,7 +227,7 @@ var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1}; // 패시브 (영입 턴/상시)
-var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
+var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
@@ -292,7 +292,7 @@ var ABILITY_DESCS = {
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.\n(황금 호버크래프트: 와카모(수영복) 소환)',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',skinEffect:'',quote:'???: 하여튼 뭔가 엄청나게 사악한 모습이었다……'},
-  hkyk_kuzunoha: {type:'개전',desc:'적 전체의 독사굴을 제거합니다.\n이번 게임 동안, 적에게 붙는 독사굴은 즉시 제거됩니다.\n이번 전투 동안 아군 백귀야행 학생 전체에게 독사굴을 부여합니다.',skinEffect:'',quote:'쿠즈노하: 늦으나 빠르나… 지금의 자신이 아니게 될 것임은 분명할 게야.'},
+  hkyk_kuzunoha: {type:'개전 / 선제',desc:'영입 시 샬레의 모든 학생을 삭제합니다.\n개전: 쿠즈노하와 상대 1번 학생을 제외한\n모든 학생을 효과 삭제 후 처치합니다.\n이 효과는 가장 먼저 발동합니다.\n선제: 공격 대상의 모든 효과를 삭제합니다.',skinEffect:'',quote:'쿠즈노하: 늦으나 빠르나… 지금의 자신이 아니게 될 것임은 분명할 게야.'},
   hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 연사, 부활을 부여합니다.\n(수영복 포함)',skinEffect:''},
   // 신규 7성
   gehenna_p68:            {type:'패시브 / 개전',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n도발을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.',skinEffect:'',quote:'아루: 우릴 고용하는 비용은 꽤 비싸다고? 선생님.'},
@@ -520,7 +520,7 @@ function newGame() {
     players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
-    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0};
+    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{}};
   rollShop();
   aiTurns();
   renderAll();
@@ -616,8 +616,12 @@ function checkHiddenConditionsFor(p) {
   if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
     eligible.push('hkyk_saikyo');
   // 쿠즈노하: 백귀야행 온리 구매 + 스케쥴6
-  if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')&&onlySchool('백귀야행')&&p.tier>=6)
-    eligible.push('hkyk_kuzunoha');
+  // 쿠즈노하: 모든 백귀야행 학생을 1회 이상 판매 + T6 + 60%
+  if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')&&p.tier>=6){
+    var allHkykSold=true;
+    for(var _hi=0;_hi<HKYK_ALL_IDS.length;_hi++){if(!G.soldHkyk[HKYK_ALL_IDS[_hi]]){allHkykSold=false;break;}}
+    if(allHkykSold) eligible.push('hkyk_kuzunoha');
+  }
   // 흥신소 68: 카요코+무츠키+하루카+아루 보드
   if(notOwned('gehenna_p68')&&inPool('gehenna_p68')&&p.tier>=6&&boardHas('kayoko')&&boardHas('mutsuki')&&boardHas('haruka')&&boardHas('aru'))
     eligible.push('gehenna_p68');
@@ -677,7 +681,8 @@ function injectHiddenToShop() {
     var hid=eligible[h];
     var rate=0.30;
     if(hid==='hkyk_saikyo') rate=0.05;
-    else if(hid==='hkyk_kuzunoha'||hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
+    else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
+    else if(hid==='hkyk_kuzunoha') rate=0.60;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(htmpl&&G.pool[htmpl.id]>0){
@@ -848,7 +853,7 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.stone-=3;
@@ -939,6 +944,12 @@ function buyHiddenCard(idx) {
       if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);}else{newBoard.push(p.board[i]);}
     }
     p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+  }
+
+  // 쿠즈노하: 샬레의 모든 학생을 삭제하고 등장
+  else if(bid==='hkyk_kuzunoha'){
+    for(var i=0;i<p.board.length;i++){returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);}
+    p.board=[];
   }
 
   // 왕녀: 아리스 상점 제외
@@ -1380,6 +1391,8 @@ function sellMinion(idx) {
     }
   }
   p.stone+=1;
+  // 백귀야행 판매 추적 (쿠즈노하 등장 조건)
+  if(HKYK_ALL_IDS.indexOf(m.baseId)!==-1) G.soldHkyk[m.baseId]=true;
   // 히든 카드: 풀 반환하지 않고, 소유 해제 + 상점제외 해제
   if(m.isHidden){
     delete G.hiddenCardsOwned[m.baseId];
@@ -1490,6 +1503,7 @@ var AI_PERSONALITIES={
   greedy:{levelBias:5,buyThreshold:3,sellThreshold:0.8,hpDesperate:15,powerTurnSave:true}
 };
 var AI_PERSONALITY_KEYS=['aggressive','standard','tempo','greedy'];
+var HKYK_ALL_IDS=['izuna','pina','yukari','tsukuyo','mimori','renge','shizuko','tsubaki','kikyou','chise','nagusa','wakamo','michiru'];
 
 // AI용 마법카드 효과 (G.players[0] 하드코딩 우회 — p: AI 플레이어)
 var AI_SPELL_EFFECTS={
@@ -1909,7 +1923,8 @@ function aiCheckHidden(p) {
     var hid=eligible[h];
     var rate=0.30;
     if(hid==='hkyk_saikyo') rate=0.05;
-    else if(hid==='hkyk_kuzunoha'||hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
+    else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
+    else if(hid==='hkyk_kuzunoha') rate=0.60;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(!htmpl||G.pool[htmpl.id]<=0) continue;
@@ -2365,6 +2380,31 @@ function triggerSOC_battlecry_inner(u, mySide, log){
 function resolveStartOfCombat(a, b, log) {
   var aFirst=(a.length>b.length)?true:(b.length>a.length)?false:(Math.random()<0.5);
   function processSide(side, other){
+    // 쿠즈노하: 모든 개전보다 먼저 발동 — 자신+적1번 제외 전원 효과삭제+처치
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&side[i].baseId==='hkyk_kuzunoha'){
+        log.push({cls:'soc',text:'[개전] '+side[i].name+': 깨달음의 일격!'});
+        // 아군: 쿠즈노하 제외 전원 처치
+        for(var j=0;j<side.length;j++){
+          if(j!==i&&side[j].alive){
+            stripAbilities(side[j],log);
+            side[j].hp=0;side[j].alive=false;
+            log.push({cls:'kill',text:side[j].name+'은(는) 쓰러졌다!'});
+          }
+        }
+        // 적군: 1번(인덱스 0) 제외 전원 처치
+        var firstEnemy=true;
+        for(var j=0;j<other.length;j++){
+          if(other[j].alive){
+            if(firstEnemy){firstEnemy=false;continue;} // 1번 살림
+            stripAbilities(other[j],log);
+            other[j].hp=0;other[j].alive=false;
+            log.push({cls:'kill',text:other[j].name+'은(는) 쓰러졌다!'});
+          }
+        }
+        break;
+      }
+    }
     // 리오: 다른 모든 개전보다 먼저 발동 (학교 통일)
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='rio') triggerSOC(side[i],side,other,log);
@@ -2379,7 +2419,7 @@ function resolveStartOfCombat(a, b, log) {
       }
     }
     for(var i=0;i<side.length;i++){
-      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio') continue;
+      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha') continue;
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
     }
@@ -3112,6 +3152,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
         _G.keiseisenCounters[attacker.baseId]=Math.min(7,(_G.keiseisenCounters[attacker.baseId]||0)+kAdd);
         log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' (현재: '+_G.keiseisenCounters[attacker.baseId]+')'});
       }
+    }
+    // 쿠즈노하 선제: 공격 대상의 모든 효과(키워드) 삭제
+    else if(attacker.baseId==='hkyk_kuzunoha'){
+      if(target.kw&&target.kw.length>0){
+        var removed=target.kw.map(function(k){return KW_LABELS[k]||k;}).join(', ');
+        target.kw=[];
+        log2.push({cls:'kill',text:'[선제] '+attacker.name+': '+target.name+'의 모든 효과 삭제! ('+removed+')'});
+      }
+      stripAbilities(target,log2);
     }
     // 나구사: 선제 루프에서 처리
     else if(attacker.baseId==='nagusa'){}
