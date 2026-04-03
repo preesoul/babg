@@ -1444,6 +1444,32 @@ function boardSwap(idx) {
 
 // ========== AI ==========
 var AI_LEVEL_TARGETS={2:2,3:5,4:7,5:9,6:11};
+
+// AI용 마법카드 효과 (G.players[0] 하드코딩 우회 — p: AI 플레이어)
+var AI_SPELL_EFFECTS={
+  encourage: function(p){for(var i=0;i<p.board.length;i++){p.board[i].atk+=1;p.board[i].hp+=1;}},
+  gold_bullet: function(p){
+    var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk<best.atk)best=p.board[i];
+    if(best)best.atk+=4;},
+  visit_buff: function(p){
+    var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp>best.atk+best.hp)best=p.board[i];
+    if(best){best.atk+=4;best.hp+=4;best.maxHp=(best.maxHp||best.hp)+4;}},
+  unity_mt: function(p){
+    var sc={};for(var i=0;i<p.board.length;i++){sc[p.board[i].school]=(sc[p.board[i].school]||0)+1;}
+    var dom=null,dc=0;for(var s in sc)if(sc[s]>dc){dc=sc[s];dom=s;}
+    if(dom)for(var i=0;i<p.board.length;i++)if(p.board[i].school===dom){p.board[i].atk+=4;p.board[i].hp+=4;}},
+  aggro: function(p){
+    var weak=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp<weak.atk+weak.hp)weak=p.board[i];
+    if(weak&&weak.kw.indexOf('taunt')===-1)weak.kw.push('taunt');},
+  clover: function(p){
+    var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp>best.atk+best.hp)best=p.board[i];
+    if(best&&best.kw.indexOf('shield')===-1)best.kw.push('shield');},
+  venom: function(p){
+    var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk>best.atk)best=p.board[i];
+    if(best&&best.kw.indexOf('poison')===-1)best.kw.push('poison');},
+  sensei: function(p){
+    for(var r=0;r<2;r++)for(var i=0;i<p.board.length;i++){p.board[i].atk+=5;p.board[i].hp+=5;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5;}},
+};
 var KW_SORT_ORDER={cleave:0,pierce:0,poison:1,windfury:2,shield:3,survive:4,reborn:5,taunt:99};
 
 function aiUnitScore(u){
@@ -1544,10 +1570,18 @@ function aiTurns() {
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
-    var aiSpells=getAvailableSpells(p.tier);
-    if(aiSpells.length>0&&p.stone>=1&&p.board.length>0){
-      if(p.stone>=5&&p.board.length>=4&&p.tier>=6){for(var j=0;j<p.board.length;j++){p.board[j].atk+=4;p.board[j].hp+=4;}p.stone-=5;}
-      else if(p.stone>=1&&p.stone<3&&p.board.length>=3){for(var j=0;j<p.board.length;j++){p.board[j].atk+=1;p.board[j].hp+=1;}p.stone-=1;}
+    // AI 마법카드 사용: 실제 스펠 목록 기반으로 가성비 높은 것 선택
+    if(p.board.length>0){
+      var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
+      // 가성비(효과/비용) 기준 정렬: 비용 대비 효과 높은 것 우선
+      aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
+      for(var si=0;si<aiSpells.length;si++){
+        var sp=aiSpells[si];
+        if(sp.cost>p.stone)continue;
+        AI_SPELL_EFFECTS[sp.id](p);
+        p.stone-=sp.cost;
+        break; // 턴당 1개만
+      }
     }
 
     var aiBuyLoop=0;
@@ -1567,11 +1601,18 @@ function aiTurns() {
         var scored=candidates.map(function(c){
           var s=c.atk+c.hp+c.tier*1.5;
           for(var k=0;k<(c.kw||[]).length;k++){if(c.kw[k]==='poison')s+=4;else if(c.kw[k]==='cleave')s+=3;else if(c.kw[k]==='pierce')s+=2;else if(c.kw[k]==='shield')s+=2;else if(c.kw[k]==='windfury')s+=3;else if(c.kw[k]==='survive')s+=1;}
+          // 특수능력 보너스 (뒤끝/개전/첫인사/선제/버티기/패시브)
+          if(DR_IDS[c.id])s+=5;
+          if(SOC_IDS[c.id])s+=4;
+          if(BC_IDS[c.id])s+=4;
+          if(PRE_IDS[c.id])s+=3;
+          if(SURV_IDS[c.id])s+=3;
+          if(PASSIVE_IDS[c.id])s+=3;
           var hasCopy=false;for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===c.id&&!p.board[k].isSkin){hasCopy=true;break;}}
           if(hasCopy)s+=5;
           if(!aiStrat.giveUp){
-            if(aiStrat.dominantSchool&&c.school===aiStrat.dominantSchool)s+=3;
-            if(aiStrat.targetUnits.indexOf(c.id)!==-1)s+=6;
+            if(aiStrat.dominantSchool&&c.school===aiStrat.dominantSchool)s+=5;
+            if(aiStrat.targetUnits.indexOf(c.id)!==-1)s+=12;
             if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&c.school!==aiStrat.dominantSchool)s-=10;
           }
           return{tmpl:c,score:s+Math.random()*2};
