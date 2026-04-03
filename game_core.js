@@ -17,7 +17,7 @@ var CHARS = [
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
-  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:1,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
+  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:2,atk:3,hp:3,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
@@ -231,7 +231,7 @@ var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1}; // 선제 능력 (공
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
-  juri:     {type:'뒤끝',desc:'다른 아군 학생에게\n"뒤끝: <팬짱>을 부릅니다"를 부여합니다.\n팬짱은 주리의 사망 수만큼 강화됩니다.',skinEffect:'웨이트리스 주리: 사망 수 x2',skinEffectDesc:'뒤끝: 다른 아군 학생에게\n"뒤끝: <팬짱>을 부릅니다"를 부여합니다.\n팬짱은 주리의 사망 수<span style="color:#ffd700;font-weight:700">x2</span>만큼 강화됩니다.'},
+  juri:     {type:'뒤끝',desc:'다른 아군이 남아 있다면\n<팬짱>을 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.',skinEffect:'웨이트리스 주리: 팬짱 2마리 소환',skinEffectDesc:'뒤끝: 다른 아군이 남아 있다면\n<팬짱>을 <span style="color:#ffd700;font-weight:700">2마리</span> 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.'},
   chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 아군 두 명에게 부여',skinEffectDesc:'뒤끝: 아군 무작위 <span style="color:#ffd700;font-weight:700">2인에게</span> 보호막을 부여합니다.'},
   kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 동일'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +1/+1',skinEffect:'메이드 미도리: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
@@ -2268,6 +2268,8 @@ function countAlive(side){var c=0;for(var i=0;i<side.length;i++)if(side[i].alive
 
 function triggerDeathrattle(unit, mySide, otherSide, log) {
   var id=unit.baseId;
+  // 팬짱 사망 카운터 (주리 뒤끝용)
+  if(id==='panchan') mySide._panchanDeaths=(mySide._panchanDeaths||0)+1;
   // 토라마루(이로하 변신)는 baseId가 'iroha'지만 토라마루 DR이 있음
   if(unit.irohaRef) id='toramaru';
   // 아카네 C4 부여 뒤끝
@@ -2291,7 +2293,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     }
   }
   var hasCopiedDR=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='dr';});
-  if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR&&!unit._juriDR) return;
+  if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR) return;
   if(unit._abilitiesStripped) return;
   if(G.permanentAbilityBan) return;
   if(DR_IDS[id]){
@@ -2299,10 +2301,6 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     for(var _lr=0;_lr<linRepeat;_lr++){
       _doDR(unit,mySide,otherSide,log);
     }
-  }
-  // 주리 개전으로 부여된 팬짱 뒤끝 (자체 뒤끝이 없는 유닛만 별도 호출 — DR_IDS 유닛은 위에서 이미 _doDR 실행됨)
-  if(unit._juriDR&&!DR_IDS[id]){
-    _doDR(unit,mySide,otherSide,log);
   }
   // 세미나 복사 DR 실행
   if(hasCopiedDR&&!unit._drProxyRunning){
@@ -2321,25 +2319,23 @@ function _doDR(unit, mySide, otherSide, log) {
   var id=unit.baseId;
   if(unit.irohaRef) id='toramaru';
 
-  // 주리 뒤끝으로 부여된 팬짱 소환
-  if(unit._juriDR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
-    var jdCount=mySide._juriDeaths||0;
-    var bonus=unit._juriSkin?jdCount*2:jdCount;
-    var pc={id:'panchan_'+Math.random().toString(36).substr(2,4),baseId:'panchan',isToken:true,
-      name:'팬짱',school:G.rioSchool||'게헨나',tier:1,atk:1+bonus,hp:1+bonus,kw:[],img:'token/panchan.png',isSkin:false,alive:true,poisonImmune:false};
-    if(countAlive(mySide)<BATTLE_MAX)mySide.push(pc);
-    log.push({cls:'soc',text:'[뒤끝] '+unit.name+' → 팬짱 소환! ('+pc.atk+'/'+pc.hp+')'});
-  }
   if(id==='juri'){
-    // 주리 뒤끝: 죽으면 아군 1인에게 팬짱 소환 뒤끝 부여 + 사이드별 사망 카운터 증가
-    mySide._juriDeaths=(mySide._juriDeaths||0)+1;
-    var juriCands=[];
-    for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)juriCands.push(mySide[i]);}
-    if(juriCands.length>0){
-      var jt=juriCands[Math.floor(Math.random()*juriCands.length)];
-      jt._juriDR=true;
-      jt._juriSkin=unit.isSkin;
-      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+jt.name+'에게 팬짱 소환 능력 부여!'});
+    // 주리 뒤끝: 다른 아군이 남아 있다면 팬짱 소환
+    var allyCount=0;
+    for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)allyCount++;}
+    if(allyCount>0){
+      var pcCount=unit.isSkin?2:1;
+      var bonus=mySide._panchanDeaths||0;
+      for(var pc_i=0;pc_i<pcCount;pc_i++){
+        if(countAlive(mySide)>=BATTLE_MAX) break;
+        var pc={id:'panchan_'+Math.random().toString(36).substr(2,4),baseId:'panchan',isToken:true,
+          name:'팬짱',school:G.rioSchool||'게헨나',tier:1,atk:1+bonus,hp:1+bonus,kw:[],img:'token/panchan.png',isSkin:false,alive:true,poisonImmune:false};
+        pc._mySide=mySide;
+        mySide.push(pc);
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+' → 팬짱 소환! ('+pc.atk+'/'+pc.hp+')'});
+      }
+    } else {
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다른 아군이 없어 팬짱을 부르지 못했다!'});
     }
   }
   else if(id==='chinatsu'){
@@ -2590,7 +2586,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       isSkin:m.isSkin,tier:m.tier,school:m.school||'',baseId:m.baseId||'',
       alive:skipSOC?(m.alive!==undefined?m.alive:true):true,
       _abilitiesStripped:skipSOC?(!!m.stripped):false,
-      poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,_juriDR:m._juriDR||false,_juriSkin:m._juriSkin||false,
+      poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,
       noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'),
       abilityImmune:(m.baseId==='trinity_mika'),
       _battlesSurvived:m._battlesSurvived||0,
@@ -2600,8 +2596,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   var a=boardA.map(copyUnit);
   var b=boardB.map(copyUnit);
-  a._juriDeaths=(opts&&opts.juriDeathsA)||0;
-  b._juriDeaths=(opts&&opts.juriDeathsB)||0;
+  a._panchanDeaths=(opts&&opts.panchanDeathsA)||0;
+  b._panchanDeaths=(opts&&opts.panchanDeathsB)||0;
   // 사이드 참조 설정 (세이아 무적 등에 필요)
   for(var _si=0;_si<a.length;_si++) a[_si]._mySide=a;
   for(var _si=0;_si<b.length;_si++) b[_si]._mySide=b;
@@ -2616,7 +2612,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var maxRounds=200;
 
   function snapshot(){
-    function snapUnit(u){return{id:u.id,name:u.name,baseId:u.baseId||'',atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:u._keiseisenCounter||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0,_juriDR:u._juriDR||false,_juriSkin:u._juriSkin||false};}
+    function snapUnit(u){return{id:u.id,name:u.name,baseId:u.baseId||'',atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:u._keiseisenCounter||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0};}
     return{a:a.map(snapUnit),b:b.map(snapUnit)};
   }
   function getAlive(side){return side.filter(function(m){return m.alive;});}
@@ -3275,7 +3271,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   G.rioSchool=null;
-  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill,juriDeathsA:a._juriDeaths||0,juriDeathsB:b._juriDeaths||0};
+  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill,panchanDeathsA:a._panchanDeaths||0,panchanDeathsB:b._panchanDeaths||0};
 }
 
 function startBattle() {
@@ -3292,12 +3288,12 @@ function startBattle() {
 
   // 선/후공 두 경우 미리 계산 (코인 결과에 따라 선택) — 글로벌 카운터는 resultC만 반영
   _gBattleCounterSave=saveGBattleCounters();
-  var jdA=p.juriDeaths||0, jdB=opp.juriDeaths||0;
-  var resultA=runBattle(p.board,opp.board,true,{juriDeathsA:jdA,juriDeathsB:jdB});
+  var pdA=p.panchanDeaths||0, pdB=opp.panchanDeaths||0;
+  var resultA=runBattle(p.board,opp.board,true,{panchanDeathsA:pdA,panchanDeathsB:pdB});
   restoreGBattleCounters(_gBattleCounterSave);
-  var resultB=runBattle(p.board,opp.board,false,{juriDeathsA:jdA,juriDeathsB:jdB});
+  var resultB=runBattle(p.board,opp.board,false,{panchanDeathsA:pdA,panchanDeathsB:pdB});
   restoreGBattleCounters(_gBattleCounterSave);
-  resultA._initJdA=jdA;resultA._initJdB=jdB;
+  resultA._initPdA=pdA;resultA._initPdB=pdB;
 
   battleState.skip=false;
   var overlay=document.getElementById('battle-overlay');
@@ -3334,8 +3330,8 @@ function startBattle() {
 
     function _battleChosenCallback(chosen){
       // 주리 사망 카운터 플레이어에 반영
-      p.juriDeaths=chosen.juriDeathsA||0;
-      opp.juriDeaths=chosen.juriDeathsB||0;
+      p.panchanDeaths=chosen.panchanDeathsA||0;
+      opp.panchanDeaths=chosen.panchanDeathsB||0;
       // 코인 무승부: 데미지 없이 넘어가기
       if(chosen.coinDraw){
         chosen.damageText='코인 무승부! 전투 없이 넘어갑니다.';
@@ -3772,7 +3768,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 카운터에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,juriDeathsA:result._initJdA||0,juriDeathsB:result._initJdB||0});
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);
