@@ -4100,15 +4100,28 @@ function simStatBonus(cardId) {
   return Math.max(-3, Math.min(3, (wr - 0.5) * 6));
 }
 
-// 3단계: 게임 결과 집계 (1등 덱 win++, 나머지 loss++)
+// 3단계: 게임 결과 집계 — 상위 50% win, 하위 50% loss
+// 승자: 유일 생존자 or HP 내림차순 (동점 시 board 유닛 수 우선)
 function simCollectStats(players) {
-  var winner = null;
+  var alive = [];
+  var dead = [];
   for(var i = 1; i < players.length; i++) {
-    if(!players[i].dead) { winner = players[i]; break; }
+    if(!players[i].dead) alive.push(players[i]);
+    else dead.push(players[i]);
   }
-  for(var i = 1; i < players.length; i++) {
-    var p = players[i];
-    var isWin = (p === winner);
+  // 살아있는 AI: HP 내림차순, 동점이면 board 크기 내림차순
+  alive.sort(function(a, b){
+    if(b.hp !== a.hp) return b.hp - a.hp;
+    return b.board.length - a.board.length;
+  });
+  // 죽은 AI: totalDamageTaken 적은 순(더 오래 버틴 순)으로 뒤에 붙임
+  dead.sort(function(a, b){ return (a.totalDamageTaken||0) - (b.totalDamageTaken||0); });
+  var ranked = alive.concat(dead); // 1등~4등 순서
+  var total = ranked.length;
+  var winCut = Math.ceil(total / 2); // 상위 50% (4명이면 1~2등)
+  for(var r = 0; r < ranked.length; r++) {
+    var p = ranked[r];
+    var isWin = (r < winCut);
     for(var j = 0; j < p.board.length; j++) {
       var bid = p.board[j].baseId;
       if(!bid) continue;
@@ -4138,10 +4151,12 @@ function simBattlePhase() {
     if(res.result === 'win') {
       var dmg = pa.tier + Math.min(res.damage, 8);
       pb.hp -= dmg;
+      pb.totalDamageTaken = (pb.totalDamageTaken||0) + dmg;
       if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.board=[];}
     } else if(res.result === 'lose') {
       var dmg2 = pb.tier + Math.min(res.damage, 8);
       pa.hp -= dmg2;
+      pa.totalDamageTaken = (pa.totalDamageTaken||0) + dmg2;
       if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.board=[];}
     }
   }
@@ -4183,8 +4198,8 @@ function runSimGame() {
     G.bonusStone = 0; G.freeRerolls = 0;
     G.phase = 'recruit'; G.shop = [];
 
-    // 최대 12턴 시뮬
-    for(var t = 0; t < 12 && G.aliveCount > 1; t++) {
+    // 최대 25턴 시뮬
+    for(var t = 0; t < 25 && G.aliveCount > 1; t++) {
       G.turn = t + 1;
       for(var pi = 1; pi < G.players.length; pi++) {
         var sp = G.players[pi];
