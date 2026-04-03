@@ -452,14 +452,42 @@ var SPELLS = [
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',
     effect:function(G){var p=G.players[0];var ab=getAyumuBonus();for(var r=0;r<2;r++){for(var i=0;i<p.board.length;i++){p.board[i].atk+=5+ab;p.board[i].hp+=5+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5+ab;logBuff(p.board[i],'선생님의 지휘',5+ab,5+ab);}}}},
+  // ===== 신규 액션카드 =====
+  {id:'higher_body',name:'상체 중심',cost:1,tier:1,desc:'선택 학생 +3/+1',target:'select_ally',img:'img/spell/higher_body.png',
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=3+ab;p.board[idx].hp+=1+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+1+ab;logBuff(p.board[idx],'상체 중심',3+ab,1+ab);return true;}},
+  {id:'lower_body',name:'하체 중심',cost:1,tier:1,desc:'선택 학생 +1/+3',target:'select_ally',img:'img/spell/lower_body.png',
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=1+ab;p.board[idx].hp+=3+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+3+ab;logBuff(p.board[idx],'하체 중심',1+ab,3+ab);return true;}},
+  {id:'surveillance',name:'감시망',cost:1,tier:2,desc:'다음 2회 리롤 무료',target:'auto',img:'img/spell/surveillance.png',
+    effect:function(G){G.freeRerolls=(G.freeRerolls||0)+2;}},
+  {id:'two_hands',name:'쌍수',cost:2,tier:2,desc:'선택 학생에게 연사 부여',target:'select_ally',img:'img/spell/Two_hands.png',
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'windfury');return true;}},
+  {id:'arona_cheat',name:'도전, 33%!',cost:2,tier:3,desc:'33% 확률로 현재 티어 학생 발견!\n(67% 확률로 실패)',target:'auto',img:'img/spell/Arona_cheat.png',
+    effect:function(G){if(Math.random()<0.33){var p=G.players[0];var cands=[];for(var i=0;i<CHARS.length;i++){if(CHARS[i].tier===p.tier&&G.pool[CHARS[i].id]>0)cands.push(CHARS[i]);}if(cands.length===0)return true;cands.sort(function(){return Math.random()-0.5;});showDiscoverCustom(cands.slice(0,3));return true;}return true;}},
+  {id:'revive_standby',name:'부활 대기중',cost:2,tier:3,desc:'선택 학생에게 부활 부여',target:'select_ally',img:'img/spell/Momoi_revive.jpg',
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'reborn');return true;}},
+  {id:'on_duty',name:'누가 가장 자주 왔어?',cost:4,tier:4,desc:'최다 학교 학생을 발견!',target:'auto',img:'img/spell/on_duty.png',
+    effect:function(G){var p=G.players[0];var sc={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;sc[s]=(sc[s]||0)+1;}var best=null,bc=0;for(var s in sc){if(sc[s]>bc){bc=sc[s];best=s;}}if(!best)return false;var cands=[];for(var i=0;i<CHARS.length;i++){if(CHARS[i].school===best&&CHARS[i].tier<=p.tier&&G.pool[CHARS[i].id]>0)cands.push(CHARS[i]);}if(cands.length===0)return false;cands.sort(function(){return Math.random()-0.5;});showDiscoverCustom(cands.slice(0,3));return true;}},
+  {id:'get_set_go',name:'겟, 셋, 고!',cost:4,tier:4,desc:'학교당 무작위 1명에게 +8/+8',target:'auto',img:'img/spell/get_set_go.jpg',
+    effect:function(G){var p=G.players[0];var ab=getAyumuBonus();var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];p.board[pick].atk+=8+ab;p.board[pick].hp+=8+ab;p.board[pick].maxHp=(p.board[pick].maxHp||p.board[pick].hp)+8+ab;logBuff(p.board[pick],'겟, 셋, 고!',8+ab,8+ab);}return true;}},
+  {id:'twins',name:'우린 서로 닮았어요',cost:4,tier:5,desc:'2장 있는 학생을 스킨으로 합체',target:'auto',img:'img/spell/Twins.png',
+    effect:function(G){var p=G.players[0];var counts={};for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin){var bid=p.board[i].baseId;counts[bid]=(counts[bid]||0)+1;}}var target=null;for(var bid in counts){if(counts[bid]>=2){target=bid;break;}}if(!target)return false;var tmpl=null;for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===target){tmpl=CHARS[i];break;}if(!tmpl)return false;var mKw=[],bAtk=0,bHp=0,newBoard=[],removed=0;for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===target&&!p.board[i].isSkin&&removed<2){var u=p.board[i];for(var k=0;k<(u.kw||[]).length;k++){if(mKw.indexOf(u.kw[k])===-1)mKw.push(u.kw[k]);}bAtk+=u.atk-tmpl.atk;bHp+=u.hp-tmpl.hp;removed++;}else{newBoard.push(p.board[i]);}}p.board=newBoard;var gld=makeMinion(tmpl,true);gld.kw=mKw;gld.atk+=bAtk;gld.hp+=bHp;gld.maxHp=gld.hp;applySkinKwTransform(tmpl,gld);p.board.push(gld);triggerBattlecry(gld,p);showDiscover(p);return true;}},
+  {id:'on_your_mark',name:'온 유어 마크',cost:3,tier:5,desc:'학교당 1명에게 무작위 기본 능력 부여\n(중복 없음)',target:'auto',img:'img/spell/On_your_mark.png',
+    effect:function(G){var p=G.players[0];var basicPool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct','preemptive'];var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}var usedKw={};for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];var u=p.board[pick];var avail=basicPool.filter(function(k){return !hasKw(u,k)&&!usedKw[k];});if(avail.length===0)continue;var kw=avail[Math.floor(Math.random()*avail.length)];addKw(u,kw);usedKw[kw]=true;}return true;}},
+  {id:'bunny_toss',name:'바니 토스',cost:3,tier:6,desc:'다음 전투 코인토스 성공률 +30%',target:'auto',img:'img/spell/bunny_toss.png',
+    effect:function(G){G.bunnyTossBonus=(G.bunnyTossBonus||0)+0.30;}},
 ];
 
 function getAvailableSpells(tier) {
   var p=G.players[0];
   return SPELLS.filter(function(s){
     if(s.tier>tier)return false;
-    // 6티어면 학년진급 제외
     if(s.id==='promotion'&&p.tier>=6)return false;
+    // 우린 서로 닮았어요: 2장 있는 유닛이 있어야 표시
+    if(s.id==='twins'){
+      var counts={};for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin){counts[p.board[i].baseId]=(counts[p.board[i].baseId]||0)+1;}}
+      var hasPair=false;for(var bid in counts){if(counts[bid]>=2){hasPair=true;break;}}
+      if(!hasPair)return false;
+    }
     return true;
   });
 }
@@ -477,7 +505,7 @@ function addSpellToShop() {
   var available=getAvailableSpells(p.tier).filter(function(s){return !s.once||!G.usedOnceSpells[s.id];});
   if(available.length>0){
     var spell=available[Math.floor(Math.random()*available.length)];
-    G.shop.push({isSpell:true,spell:spell,name:spell.name,cost:spell.cost,desc:spell.desc,tier:spell.tier,target:spell.target});
+    G.shop.push({isSpell:true,spell:spell,name:spell.name,cost:spell.cost,desc:spell.desc,tier:spell.tier,target:spell.target,img:spell.img||null});
   }
 }
 
@@ -1120,6 +1148,60 @@ function showDiscover(p) {
   });
 }
 
+// 커스텀 발견: 특정 후보 목록으로 발견 UI 표시
+function showDiscoverCustom(choices) {
+  if(!choices||choices.length===0){renderAll();return;}
+  var p=G.players[0];
+  var overlay=document.getElementById('battle-overlay');
+  var html='<div class="battle-intro"><h3 style="margin-bottom:4px;color:#ffd700">발견!</h3>';
+  html+='<p style="color:#aab;font-size:13px;margin-bottom:16px">1명을 선택하세요</p>';
+  html+='<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
+  for(var i=0;i<choices.length;i++){
+    var c=choices[i];
+    var kwt=(c.kw||[]).filter(function(k){return k!=='survive'&&k!=='preemptive';}).map(function(k){return KW_LABELS[k]||k;}).join(' ');
+    var aTag='';
+    if(BC_IDS[c.id])aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
+    if(DR_IDS[c.id])aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
+    if(SOC_IDS[c.id])aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
+    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
+    if(PASSIVE_IDS[c.id])aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
+    if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
+    html+='<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
+    if(c.img)html+='<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
+    html+='<div class="card-inner">';
+    var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
+    html+='<div class="tier-stars">'+starStr(c.tier)+'</div><div class="card-spacer"></div>';
+    html+='<div class="name-banner">'+c.name+'</div><div class="keywords">'+(kwt||'&nbsp;')+'</div>';
+    if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
+    else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
+    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div></div>';
+  }
+  html+='</div></div>';
+  document.getElementById('battle-intro-area').innerHTML=html;
+  document.getElementById('battle-arena').style.display='none';
+  document.getElementById('battle-log').style.display='none';
+  document.getElementById('battle-result-box').style.display='none';
+  document.getElementById('btn-continue').style.display='none';
+  document.getElementById('btn-skip').style.display='none';
+  overlay.classList.add('active');
+  document.getElementById('battle-intro-area').addEventListener('click',function handler(e){
+    var pick=e.target.closest('.discover-pick');if(!pick)return;
+    var idx=parseInt(pick.getAttribute('data-discover'));
+    overlay.classList.remove('active');
+    document.getElementById('battle-intro-area').innerHTML='';
+    document.getElementById('battle-intro-area').removeEventListener('click',handler);
+    var chosen=choices[idx];if(!chosen){renderAll();return;}
+    takeFromPool(chosen.id);
+    var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin)count++;}
+    if(count>=2){
+      var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===chosen.id){tmpl=CHARS[j];break;}
+      if(tmpl){var nb=[],rm=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin&&rm<2){rm++;}else{nb.push(p.board[j]);}}p.board=nb;var gld=makeMinion(tmpl,true);p.board.push(gld);triggerBattlecry(gld,p);showDiscover(p);return;}
+    }
+    if(p.board.length<MAX_BOARD){var m=makeMinion(chosen,false);p.board.push(m);triggerBattlecry(m,p);}
+    renderAll();
+  });
+}
+
 function aiDiscover(p) {
   var choices = getDiscoverChoices(p);
   if(choices.length === 0) return;
@@ -1529,6 +1611,13 @@ var AI_SPELL_EFFECTS={
     if(best&&best.kw.indexOf('poison')===-1)best.kw.push('poison');},
   sensei: function(p){
     for(var r=0;r<2;r++)for(var i=0;i<p.board.length;i++){p.board[i].atk+=5;p.board[i].hp+=5;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5;}},
+  higher_body: function(p){var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk<best.atk)best=p.board[i];if(best){best.atk+=3;best.hp+=1;}},
+  lower_body: function(p){var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].hp<best.hp)best=p.board[i];if(best){best.atk+=1;best.hp+=3;}},
+  surveillance: function(p){/* AI는 리롤 안 함 — 스킵 */},
+  two_hands: function(p){var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk>best.atk)best=p.board[i];if(best&&best.kw.indexOf('windfury')===-1)best.kw.push('windfury');},
+  revive_standby: function(p){var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp>best.atk+best.hp)best=p.board[i];if(best&&best.kw.indexOf('reborn')===-1)best.kw.push('reborn');},
+  get_set_go: function(p){var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];p.board[pick].atk+=8;p.board[pick].hp+=8;}},
+  on_your_mark: function(p){var basicPool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct','preemptive'];var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}var used={};for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];var u=p.board[pick];var avail=basicPool.filter(function(k){return u.kw.indexOf(k)===-1&&!used[k];});if(avail.length>0){var kw=avail[Math.floor(Math.random()*avail.length)];u.kw.push(kw);used[kw]=true;}}},
 };
 var KW_SORT_ORDER={cleave:0,pierce:0,poison:1,windfury:2,shield:3,survive:4,reborn:5,taunt:99};
 
@@ -3601,6 +3690,7 @@ function startBattle() {
         }
       }
       restoreBoardFromSnapshot(p,boardSnapshot);
+      G.bunnyTossBonus=0; // 바니 토스 전투 후 리셋
       aiAutoBattles();
     }
   },1500);
@@ -3828,8 +3918,9 @@ function runBattleCoinPhase(snap,callback){
 
     setTimeout(function(){
       var cr={};
+      var _btBonus=G.bunnyTossBonus||0;
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);}
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<(0.5+_btBonus));}
       // 버니걸 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인토스 성공
       var _asunaGold=aliveAlly.some(function(u){return (u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
       if(_asunaGold){for(var _aj=0;_aj<aliveAlly.length;_aj++){var _lu=aliveAlly[_aj];if(_lu.baseId!=='asuna'&&_lu.baseId!=='millennium_cc'&&!coinOffMap[_lu.sid]){cr[_lu.sid]=true;break;}}}
