@@ -288,7 +288,7 @@ var ABILITY_DESCS = {
   chise:    {type:'패시브',desc:'공격한 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',skinEffect:'수영복 치세: 무작위 2개 제거',skinEffectDesc:'패시브: 공격한 상대의 능력 중\n무작위 <span style="color:#ffd700;font-weight:700">2개</span>를 이번 전투 동안 제거합니다.'},
   michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 추가로 두 번 발동',skinEffectDesc:'첫인사: 샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선제: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
-  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',skinEffect:'수영복 와카모: 4~10회 공격',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)'},
+  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20)'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',skinEffect:'',quote:'???: 하여튼 뭔가 엄청나게 사악한 모습이었다……'},
@@ -3145,9 +3145,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
             }
             if(target.hp<=0){msKillCount++;break;}
           }
-          // 와카모: 적 처치당 호버크래프트 카운터
-          if(attacker.baseId==='wakamo'&&msKillCount>0){
-            var hcAdd=attacker.isSkin?msKillCount*2:msKillCount;
+          // 와카모: 타격 수만큼 호버크래프트 카운터
+          if(attacker.baseId==='wakamo'&&msHits>0){
+            var actualHits=Math.min(msHits,ms+1); // 실제 타격 횟수 (킬로 조기종료 포함)
+            var hcAdd=attacker.isSkin?actualHits*2:actualHits;
             attacker._hovercraftCounter=Math.min(4,(attacker._hovercraftCounter||0)+hcAdd);
             stepLog.push({cls:'soc',text:'[선제] '+attacker.name+': 호버크래프트 카운터 +'+hcAdd+' (현재: '+attacker._hovercraftCounter+')'});
             if(attacker._hovercraftCounter>=4){
