@@ -374,9 +374,9 @@ function makeToken(tokenId) {
 
 // ========== MAGIC CARDS ==========
 var SPELLS = [
-  {id:'encourage',name:'격려하기',cost:1,tier:1,desc:'스케쥴 학생 전체 공/체 +1',target:'auto',
+  {id:'encourage',name:'격려하기',cost:1,tier:1,desc:'스케쥴 학생 전체 공/체 +1',target:'auto',img:'img/spell/encourage.png',
     effect:function(G){var ab=getAyumuBonus();for(var i=0;i<G.shop.length;i++){if(G.shop[i]&&!G.shop[i].isSpell){G.shop[i].atk+=1+ab;G.shop[i].hp+=1+ab;}}}},
-  {id:'gacha',name:'가챠 티켓 +1',cost:2,tier:1,desc:'스케쥴 학생 1장 랜덤 획득',target:'auto',
+  {id:'gacha',name:'가챠 티켓 +1',cost:2,tier:1,desc:'스케쥴 학생 1장 랜덤 획득',target:'auto',img:'img/spell/gacha.png',
     effect:function(G){var p=G.players[0];var avail=[];for(var i=0;i<G.shop.length;i++){if(G.shop[i]&&!G.shop[i].isSpell)avail.push(i);}if(avail.length===0)return false;var pick=avail[Math.floor(Math.random()*avail.length)];var m=G.shop[pick];G.shop[pick]=null;
       // 트리플 체크 (보드+벤치)
       var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===m.baseId&&!p.board[j].isSkin)count++;}
@@ -400,21 +400,21 @@ var SPELLS = [
         p.board.push(m);triggerBattlecry(m,p);
       }
       return true;}},
-  {id:'gold_bullet',name:'골드탄',cost:1,tier:1,desc:'선택 학생 공격력 +4',target:'select_ally',
+  {id:'gold_bullet',name:'골드탄',cost:1,tier:1,desc:'선택 학생 공격력 +4',target:'select_ally',img:'img/spell/gold_bullet.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;if(ab>0){p.board[idx].hp+=ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+ab;}logBuff(p.board[idx],'골드탄',4+ab,ab);return true;}},
-  {id:'savings',name:'비상금',cost:1,tier:2,desc:'다음 리롤/턴 시 골드 +2',target:'auto',
+  {id:'savings',name:'비상금',cost:1,tier:2,desc:'다음 리롤/턴 시 골드 +2',target:'auto',img:'img/spell/savings.png',
     effect:function(G){G.bonusStone=(G.bonusStone||0)+2;}},
-  {id:'visit_plan',name:'방문 예정',cost:2,tier:2,desc:'다음 스케쥴 학생 공/체 +2',target:'auto',
+  {id:'visit_plan',name:'방문 예정',cost:2,tier:2,desc:'다음 스케쥴 학생 공/체 +2',target:'auto',img:'img/spell/visit_plan.png',
     effect:function(G){var ab=getAyumuBonus();G.shopBuff=(G.shopBuff||0)+2+ab;}},
-  {id:'visit_buff',name:'방문 예정',cost:3,tier:2,desc:'선택 학생 +4/+4',target:'select_ally',
+  {id:'visit_buff',name:'방문 예정',cost:3,tier:2,desc:'선택 학생 +4/+4',target:'select_ally',img:'img/spell/visit_buff.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;p.board[idx].hp+=4+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+4+ab;logBuff(p.board[idx],'방문 예정',4+ab,4+ab);return true;}},
-  {id:'aggro',name:'어그로꾼',cost:2,tier:3,desc:'선택 학생에게 도발 부여',target:'select_ally',
+  {id:'aggro',name:'어그로꾼',cost:2,tier:3,desc:'선택 학생에게 도발 부여',target:'select_ally',img:'img/spell/aggro.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'taunt');return true;}},
-  {id:'promotion',name:'스케쥴 진급',cost:4,tier:3,desc:'업그레이드 비용 -5',target:'auto',
+  {id:'promotion',name:'스케쥴 진급',cost:4,tier:3,desc:'업그레이드 비용 -5',target:'auto',img:'img/spell/promotion.png',
     effect:function(G){var p=G.players[0];p.upgradeCost=Math.max(0,p.upgradeCost-5);}},
-  {id:'unity_mt',name:'단합 MT',cost:4,tier:3,desc:'선택 학교 학생들 +4/+4',target:'select_school',
+  {id:'unity_mt',name:'단합 MT',cost:4,tier:3,desc:'선택 학교 학생들 +4/+4',target:'select_school',img:'img/spell/unity_mt.png',
     effect:function(G,school){var p=G.players[0];var ab=getAyumuBonus();var found=false;for(var i=0;i<p.board.length;i++){if(p.board[i].school===school){p.board[i].atk+=4+ab;p.board[i].hp+=4+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+4+ab;logBuff(p.board[i],'단합 MT',4+ab,4+ab);found=true;}}return found;}},
-  {id:'mirror',name:'거울의 세계',cost:6,tier:6,desc:'선택 학생 복제 (게임당 1회)',target:'select_ally',once:true,
+  {id:'mirror',name:'거울의 세계',cost:6,tier:6,desc:'선택 학생 복제 (게임당 1회)',target:'select_ally',once:true,img:'img/spell/mirror.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var orig=p.board[idx];
       if(!orig.isSkin){var cnt=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===orig.baseId&&!p.board[j].isSkin)cnt++;}
         if(p.bench&&p.bench.baseId===orig.baseId&&!p.bench.isSkin)cnt++;
@@ -442,15 +442,15 @@ var SPELLS = [
         return false;}
       var copy={id:orig.id+'_c'+Math.random().toString(36).substr(2,3),baseId:orig.baseId,name:orig.name,school:orig.school,tier:orig.tier,atk:orig.atk,hp:orig.hp,maxHp:orig.hp,kw:(orig.kw||[]).slice(),isSkin:orig.isSkin,img:orig.img,copies:1};
       p.board.push(copy);triggerBattlecry(copy,p);return true;}},
-  {id:'clover',name:'행운의 클로버',cost:4,tier:4,desc:'선택 학생에게 보호막 부여',target:'select_ally',
+  {id:'clover',name:'행운의 클로버',cost:4,tier:4,desc:'선택 학생에게 보호막 부여',target:'select_ally',img:'img/spell/clover.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'shield');return true;}},
-  {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',
+  {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',img:'img/spell/venom.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
-  {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,
+  {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,img:'img/spell/dressing.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;applySkinKwTransform(tmpl,m);return true;}},
-  {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',
+  {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',img:'img/spell/school_visit.png',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
-  {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',
+  {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',img:'img/spell/sensei.png',
     effect:function(G){var p=G.players[0];var ab=getAyumuBonus();for(var r=0;r<2;r++){for(var i=0;i<p.board.length;i++){p.board[i].atk+=5+ab;p.board[i].hp+=5+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5+ab;logBuff(p.board[i],'선생님의 지휘',5+ab,5+ab);}}}},
   // ===== 신규 액션카드 =====
   {id:'higher_body',name:'상체 중심',cost:1,tier:1,desc:'선택 학생 +3/+1',target:'select_ally',img:'img/spell/higher_body.png',
