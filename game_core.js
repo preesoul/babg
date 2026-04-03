@@ -240,8 +240,8 @@ var ABILITY_DESCS = {
   aru:      {type:'선제',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',skinEffect:'드레스 아루: 3배',skinEffectDesc:'선제: 공격 시, 5~6티어 학생에게는 공격력이 <span style="color:#ffd700;font-weight:700">3배</span>가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.'},
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   iroha:    {type:'첫인사',desc:'<토라마루>로 교체됩니다. (토라마루: 5/1)\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffect:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffectDesc:'첫인사: <토라마루>로 교체됩니다. (토라마루: <span style="color:#ffd700;font-weight:700">10/2</span>)\n토라마루 파괴 시 이로하로 돌아옵니다.'},
-  himari:   {type:'개전',desc:'아군 밀레니엄 학생의 공격력과 체력을\n각각 둘 중 높은 값으로 설정합니다.',skinEffect:'임전 히마리: 두 번 적용',skinEffectDesc:'개전: 아군 밀레니엄 학생의 공격력과 체력을\n각각 둘 중 높은 값으로 설정합니다.\n<span style="color:#ffd700;font-weight:700">두 번</span> 적용합니다.'},
-  rio:      {type:'개전',desc:'아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.',skinEffect:'임전 리오: 스탯 +2/+2 추가',skinEffectDesc:'개전: 아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.\n추가로 아군 전체 <span style="color:#ffd700;font-weight:700">+2/+2</span>.'},
+  himari:   {type:'개전',desc:'아군 밀레니엄 학생의 공격력과 체력을\n각각 둘 중 높은 값으로 설정합니다.',skinEffect:'임전 히마리: 최고 공/체를 히마리에게 적용',skinEffectDesc:'개전: 아군 밀레니엄 학생의 공격력과 체력을\n각각 둘 중 높은 값으로 설정합니다.\n이후, 아군에서 <span style="color:#ffd700;font-weight:700">가장 높은 공격력과 가장 높은 체력</span>을\n히마리에게 적용합니다.'},
+  rio:      {type:'개전',desc:'아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.',skinEffect:'임전 리오: 적 학교 태그 삭제',skinEffectDesc:'개전: 아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.\n<span style="color:#ffd700;font-weight:700">적의 학교 태그를 삭제합니다.</span>\n이 효과는 가장 먼저 발동합니다.'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',skinEffect:'드레스 아코: +8/+8',skinEffectDesc:'뒤끝: 이번 전투에서 게헨나 학생들에게 <span style="color:#ffd700;font-weight:700">+8/+8</span>을 부여합니다.'},
   kazusa:   {type:'뒤끝',desc:'<카스팔루스>로 교체됩니다. (1/1, 독사굴)',skinEffect:'밴드 카즈사: 부활 추가',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">부활</span>, 뒤끝: <카스팔루스>로 교체됩니다.\n(카스팔루그: 1/1, 독사굴)'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (2/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',skinEffect:'수영복 히후미: 페로로님 4/2',skinEffectDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">4/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
@@ -1885,23 +1885,27 @@ function triggerSOC(u, mySide, otherSide, log) {
       for(var i=0;i<mySide.length;i++){if(mySide[i].alive)mySide[i].school=leftSchool;}
       log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 학교를 '+leftSchool+'(으)로 통일!'});
       if(u.isSkin){
-        for(var i=0;i<mySide.length;i++){if(mySide[i].alive){mySide[i].atk+=2;mySide[i].hp+=2;}}
-        log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +2/+2'});
+        for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)otherSide[i].school='';}
+        log.push({cls:'soc',text:'[개전] '+u.name+': 적 학교 태그 삭제!'});
       }
     }
   }
   else if(id==='himari'){
-    // 아군 밀레니엄 학생의 공/체를 각각 max(atk,hp)로 설정 (황금: 두 번)
-    var repeat=u.isSkin?2:1;
-    for(var r=0;r<repeat;r++){
-      for(var i=0;i<mySide.length;i++){
-        if(mySide[i].alive&&mySide[i].school==='밀레니엄'){
-          var mx=Math.max(mySide[i].atk,mySide[i].hp);
-          mySide[i].atk=mx;mySide[i].hp=mx;
-        }
+    // 아군 밀레니엄 학생의 공/체를 각각 max(atk,hp)로 설정
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive&&mySide[i].school==='밀레니엄'){
+        var mx=Math.max(mySide[i].atk,mySide[i].hp);
+        mySide[i].atk=mx;mySide[i].hp=mx;
       }
     }
-    log.push({cls:'soc',text:'[개전] '+u.name+': 밀레니엄 공/체 → max값으로!'+(u.isSkin?' (2회)':'')});
+    log.push({cls:'soc',text:'[개전] '+u.name+': 밀레니엄 공/체 → max값으로!'});
+    // 황금: 아군 최고 공격력과 최고 체력을 히마리에게 적용
+    if(u.isSkin){
+      var bestAtk=0,bestHp=0;
+      for(var i=0;i<mySide.length;i++){if(mySide[i].alive){if(mySide[i].atk>bestAtk)bestAtk=mySide[i].atk;if(mySide[i].hp>bestHp)bestHp=mySide[i].hp;}}
+      u.atk=bestAtk;u.hp=bestHp;
+      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 최고 스탯 흡수! ('+bestAtk+'/'+bestHp+')'});
+    }
   }
   else if(id==='mine'){
     for(var i=0;i<mySide.length;i++){
