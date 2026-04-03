@@ -2748,7 +2748,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       surviveEffects.push({type:'summon',token:ae.baseId,isSkin:unit.isSkin});
     }
     else if(unit.baseId==='neru'){
-      var pool=['taunt','shield','poison','reborn'];
+      var pool=['taunt','shield','poison','reborn','cleave','pierce','sniper','windfury','selfdestruct','preemptive'];
       var available=pool.filter(function(k){return !hasKw(unit,k);});
       if(available.length===0) return;
       var times=unit.isSkin?2:1;
