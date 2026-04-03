@@ -2266,7 +2266,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     }
   }
   var hasCopiedDR=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='dr';});
-  if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR) return;
+  if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR&&!unit._juriDR) return;
   if(unit._abilitiesStripped) return;
   if(G.permanentAbilityBan) return;
   if(DR_IDS[id]){
@@ -2274,6 +2274,10 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     for(var _lr=0;_lr<linRepeat;_lr++){
       _doDR(unit,mySide,otherSide,log);
     }
+  }
+  // 주리 개전으로 부여된 팬짱 뒤끝 (DR_IDS에 없는 유닛도 발동)
+  if(unit._juriDR&&!DR_IDS[id]){
+    _doDR(unit,mySide,otherSide,log);
   }
   // 세미나 복사 DR 실행
   if(hasCopiedDR&&!unit._drProxyRunning){
