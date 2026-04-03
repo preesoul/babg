@@ -2239,7 +2239,6 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   // 토라마루(이로하 변신)는 baseId가 'iroha'지만 토라마루 DR이 있음
   if(unit.irohaRef) id='toramaru';
   // 아카네 C4 부여 뒤끝
-  console.log('[DEBUG C4]',unit.name,'baseId='+id,'_akaneC4DR='+!!unit._akaneC4DR,'stripped='+!!unit._abilitiesStripped,'permBan='+!!G.permanentAbilityBan);
   if(unit._akaneC4DR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
     var c4Count=unit._akaneC4Golden?2:1;
     for(var _c4=0;_c4<c4Count;_c4++){
@@ -4100,8 +4099,9 @@ function simStatBonus(cardId) {
   return Math.max(-3, Math.min(3, (wr - 0.5) * 6));
 }
 
-// 3단계: 게임 결과 집계 — 상위 50% win, 하위 50% loss
-// 승자: 유일 생존자 or HP 내림차순 (동점 시 board 유닛 수 우선)
+// 3단계: 게임 결과 집계
+// 1등 board의 카드 → win++, 나머지 모든 플레이어 board의 카드 → loss++
+// (같은 카드가 1등과 2등 모두 가지고 있으면 win 1 + loss 1로 50% 수렴)
 function simCollectStats(players) {
   var alive = [];
   var dead = [];
@@ -4109,21 +4109,21 @@ function simCollectStats(players) {
     if(!players[i].dead) alive.push(players[i]);
     else dead.push(players[i]);
   }
-  // 살아있는 AI: HP 내림차순, 동점이면 board 크기 내림차순
   alive.sort(function(a, b){
     if(b.hp !== a.hp) return b.hp - a.hp;
     return b.board.length - a.board.length;
   });
-  // 죽은 AI: totalDamageTaken 적은 순(더 오래 버틴 순)으로 뒤에 붙임
   dead.sort(function(a, b){ return (a.totalDamageTaken||0) - (b.totalDamageTaken||0); });
-  var ranked = alive.concat(dead); // 1등~4등 순서
-  var total = ranked.length;
-  var winCut = Math.ceil(total / 2); // 상위 50% (4명이면 1~2등)
+  var ranked = alive.concat(dead);
+  if(ranked.length === 0) return;
+  // 상위 50% → win, 하위 50% → loss (모든 AI 카드 집계)
+  var half = Math.ceil(ranked.length / 2);
   for(var r = 0; r < ranked.length; r++) {
     var p = ranked[r];
-    var isWin = (r < winCut);
-    for(var j = 0; j < p.board.length; j++) {
-      var bid = p.board[j].baseId;
+    var isWin = (r < half);
+    var cards = (p.dead && p.finalBoard) ? p.finalBoard : p.board;
+    for(var j = 0; j < cards.length; j++) {
+      var bid = cards[j].baseId;
       if(!bid) continue;
       if(!SIM_STATS[bid]) SIM_STATS[bid] = {win:0, loss:0};
       if(isWin) SIM_STATS[bid].win++; else SIM_STATS[bid].loss++;
@@ -4152,12 +4152,12 @@ function simBattlePhase() {
       var dmg = pa.tier + Math.min(res.damage, 8);
       pb.hp -= dmg;
       pb.totalDamageTaken = (pb.totalDamageTaken||0) + dmg;
-      if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.board=[];}
+      if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.finalBoard=pb.board.slice();pb.board=[];}
     } else if(res.result === 'lose') {
       var dmg2 = pb.tier + Math.min(res.damage, 8);
       pa.hp -= dmg2;
       pa.totalDamageTaken = (pa.totalDamageTaken||0) + dmg2;
-      if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.board=[];}
+      if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.finalBoard=pa.board.slice();pa.board=[];}
     }
   }
 }
