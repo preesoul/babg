@@ -2410,11 +2410,23 @@ function resolveStartOfCombat(a, b, log) {
       }
     }
   }
+  // 백화요란 계승전 대사: 버프 받은 나구사가 아군에 있을 때
+  function outputShowdownQuote(side,isEnemy){
+    if(!_G.hiddenCardsEverOwned||!_G.hiddenCardsEverOwned['hkyk_showdown']) return;
+    var hasKeiseisen=false;
+    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='nagusa'){hasKeiseisen=true;break;}}
+    if(hasKeiseisen&&!quotedBids['hkyk_showdown']){
+      quotedBids['hkyk_showdown']=true;
+      var cls=isEnemy?'chat chat-fatal':'chat';
+      log.push({cls:cls,text:'나구사: 백 가지 꽃이 함께 만발하는 그 순간을 기다리며.'});
+      log.push({cls:cls,text:'나구사: ……너에게 계승전을 신청한다.'});
+    }
+  }
   // 적에 7성 카드 존재 시 빨간 경고
   if(b.some(function(u){return u.isHidden;}))
     log.push({cls:'chat chat-fatal',text:'⚠ 적 편에 7성 카드가 있습니다!'});
-  if(aFirst){outputQuotes(a,false);outputQuotes(b,true);}
-  else{outputQuotes(b,true);outputQuotes(a,false);}
+  if(aFirst){outputQuotes(a,false);outputShowdownQuote(a,false);outputQuotes(b,true);outputShowdownQuote(b,true);}
+  else{outputQuotes(b,true);outputShowdownQuote(b,true);outputQuotes(a,false);outputShowdownQuote(a,false);}
 }
 
 // 뒤끝 트리거
