@@ -628,7 +628,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404i"></script>
+<script src="game_core.js?v=20260404j"></script>
 <script>
 
 function showGameOver() {
@@ -2224,7 +2224,7 @@ function renderRoster(){
       });
     }
   });
-  // 액션카드 클릭 → 간단 툴팁
+  // 액션카드 클릭 → 툴팁
   content.querySelectorAll('.rt-spell').forEach(function(el){
     var sid=el.getAttribute('data-spell-id');
     el.addEventListener('click',function(e){
@@ -2232,14 +2232,14 @@ function renderRoster(){
       var sp=null;for(var i=0;i<SPELLS.length;i++){if(SPELLS[i].id===sid){sp=SPELLS[i];break;}}
       if(!sp)return;
       hideTooltip();
-      var rect=el.getBoundingClientRect();
-      var tip=document.getElementById('char-tooltip');
+      var tip=getTooltipEl();if(!tip)return;
       tip.innerHTML='<div style="padding:12px;max-width:280px"><div style="font-size:16px;font-weight:700;color:#fbbf24;margin-bottom:6px">'+sp.name+'</div><div style="font-size:12px;color:#888;margin-bottom:8px">'+sp.cost+'코스트 · '+sp.tier+'티어</div>'+(sp.img?'<img src="'+sp.img+'" style="width:80px;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block">':'')+'<div style="font-size:13px;color:#d0d8e0;white-space:pre-line">'+sp.desc+'</div>'+(sp.once?'<div style="margin-top:6px;font-size:11px;color:#fca5a5">게임당 1회</div>':'')+'</div>';
-      tip.style.display='block';
+      tip.style.display='block';tip.classList.add('visible');
+      var rect2=el.getBoundingClientRect();
       var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
-      var left=rect.left+rect.width/2-tipW/2;
-      var top=rect.top-tipH-8;
-      if(top<0)top=rect.bottom+8;
+      var left=rect2.left+rect2.width/2-tipW/2;
+      var top=rect2.top-tipH-8;
+      if(top<0)top=rect2.bottom+8;
       if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
       tip.style.left=left+'px';tip.style.top=top+'px';
     });
