@@ -1641,7 +1641,11 @@ function aiSellReplace(p,aiStrat,aiPool){
     if(s>bestScore){bestScore=s;bestTmpl=highPool[j];}
   }
   if(!bestTmpl) return;
-  if(bestScore>weakScore+4&&weakIdx>=0&&!p.board[weakIdx].isSkin){
+  // 교체 후보가 주력 학교면 보너스, 약한 유닛이 학교 불일치면 마진 감소
+  if(aiStrat.dominantSchool&&bestTmpl.school===aiStrat.dominantSchool) bestScore+=5;
+  var replaceMargin=4;
+  if(weakIdx>=0&&aiStrat.dominantSchool&&p.board[weakIdx].school!==aiStrat.dominantSchool) replaceMargin=1;
+  if(bestScore>weakScore+replaceMargin&&weakIdx>=0&&!p.board[weakIdx].isSkin){
     if(p.board[weakIdx].baseId==='haine'){
       var hBuff=p.board[weakIdx].isSkin?4:2;
       for(var j2=0;j2<p.board.length;j2++){if(p.board[j2]&&j2!==weakIdx){p.board[j2].atk+=hBuff;p.board[j2].hp+=hBuff;}}
@@ -1764,17 +1768,16 @@ function aiTurns() {
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
-    // AI 마법카드 사용: 실제 스펠 목록 기반으로 가성비 높은 것 선택
+    // AI 마법카드 사용: 가성비 높은 순으로 최대 2회
     if(p.board.length>0){
-      var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
-      // 가성비(효과/비용) 기준 정렬: 비용 대비 효과 높은 것 우선
-      aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
-      for(var si=0;si<aiSpells.length;si++){
-        var sp=aiSpells[si];
-        if(sp.cost>p.stone)continue;
-        AI_SPELL_EFFECTS[sp.id](p);
-        p.stone-=sp.cost;
-        break; // 턴당 1개만
+      var aiSpellCasts=0;
+      while(aiSpellCasts<2){
+        var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
+        if(aiSpells.length===0) break;
+        aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
+        AI_SPELL_EFFECTS[aiSpells[0].id](p);
+        p.stone-=aiSpells[0].cost;
+        aiSpellCasts++;
       }
     }
 
