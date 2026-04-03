@@ -2585,7 +2585,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var maxRounds=200;
 
   function snapshot(){
-    function snapUnit(u){return{id:u.id,name:u.name,baseId:u.baseId||'',atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:u._keiseisenCounter||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0};}
+    function snapUnit(u){return{id:u.id,name:u.name,baseId:u.baseId||'',atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:u._keiseisenCounter||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0,_juriDR:u._juriDR||false,_juriSkin:u._juriSkin||false};}
     return{a:a.map(snapUnit),b:b.map(snapUnit)};
   }
   function getAlive(side){return side.filter(function(m){return m.alive;});}
