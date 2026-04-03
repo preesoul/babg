@@ -2591,6 +2591,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   var a=boardA.map(copyUnit);
   var b=boardB.map(copyUnit);
+  a._juriDeaths=(opts&&opts.juriDeathsA)||0;
+  b._juriDeaths=(opts&&opts.juriDeathsB)||0;
   // 사이드 참조 설정 (세이아 무적 등에 필요)
   for(var _si=0;_si<a.length;_si++) a[_si]._mySide=a;
   for(var _si=0;_si<b.length;_si++) b[_si]._mySide=b;
@@ -3264,7 +3266,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   G.rioSchool=null;
-  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill};
+  return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill,juriDeathsA:a._juriDeaths||0,juriDeathsB:b._juriDeaths||0};
 }
 
 function startBattle() {
@@ -3281,9 +3283,10 @@ function startBattle() {
 
   // 선/후공 두 경우 미리 계산 (코인 결과에 따라 선택) — 글로벌 카운터는 resultC만 반영
   _gBattleCounterSave=saveGBattleCounters();
-  var resultA=runBattle(p.board,opp.board,true);
+  var jdA=p.juriDeaths||0, jdB=opp.juriDeaths||0;
+  var resultA=runBattle(p.board,opp.board,true,{juriDeathsA:jdA,juriDeathsB:jdB});
   restoreGBattleCounters(_gBattleCounterSave);
-  var resultB=runBattle(p.board,opp.board,false);
+  var resultB=runBattle(p.board,opp.board,false,{juriDeathsA:jdA,juriDeathsB:jdB});
   restoreGBattleCounters(_gBattleCounterSave);
 
   battleState.skip=false;
@@ -3320,6 +3323,9 @@ function startBattle() {
     startBattleAnimation(resultA,opp,resultB,_battleChosenCallback);
 
     function _battleChosenCallback(chosen){
+      // 주리 사망 카운터 플레이어에 반영
+      p.juriDeaths=chosen.juriDeathsA||0;
+      opp.juriDeaths=chosen.juriDeathsB||0;
       // 코인 무승부: 데미지 없이 넘어가기
       if(chosen.coinDraw){
         chosen.damageText='코인 무승부! 전투 없이 넘어갑니다.';
@@ -3756,7 +3762,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 카운터에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq});
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,juriDeathsA:p.juriDeaths||0,juriDeathsB:opp.juriDeaths||0});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);
