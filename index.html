@@ -628,7 +628,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404e"></script>
+<script src="game_core.js?v=20260404f"></script>
 <script>
 
 function showGameOver() {
@@ -2186,14 +2186,59 @@ function renderRoster(){
     }
     html+='</div>';
   });
+  // 액션카드 섹션 (필터 미적용 시에만 표시)
+  if(!kwFilter&&!abilFilter&&typeof SPELLS!=='undefined'){
+    html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(251,191,36,0.3);padding-top:12px">';
+    html+='<span class="roster-school-name" style="color:#fbbf24">📜 액션 카드</span></div>';
+    var spellsByTier={};
+    SPELLS.forEach(function(s){if(!spellsByTier[s.tier])spellsByTier[s.tier]=[];spellsByTier[s.tier].push(s);});
+    html+='<div class="roster-cards-flow">';
+    for(var t=1;t<=6;t++){
+      var ts=spellsByTier[t];
+      if(!ts||!ts.length)continue;
+      html+='<div class="roster-tier-chunk">';
+      html+='<div class="rt-sep">'+t+'T</div>';
+      ts.forEach(function(s){
+        html+='<div class="roster-card rt-spell" data-spell-id="'+s.id+'" style="border-color:#c8a010;background:linear-gradient(135deg,#2a2a1a,#1a2a2a)">';
+        if(s.img)html+='<img class="r-portrait" src="'+s.img+'" onerror="this.style.display=\'none\'">';
+        html+='<div class="r-name" style="color:#fbbf24">'+s.name+'</div>';
+        html+='<div style="font-size:9px;color:#888;text-align:center">'+s.cost+'코</div>';
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  }
   if(!html) html='<div style="color:#4a6880;padding:60px;text-align:center;font-size:14px">해당하는 학생이 없습니다.</div>';
   var content=document.getElementById('roster-content');
   content.innerHTML=html;
   content.querySelectorAll('.roster-card').forEach(function(el){
     var bid=el.getAttribute('data-rid');
+    if(bid){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+      });
+    }
+  });
+  // 액션카드 클릭 → 간단 툴팁
+  content.querySelectorAll('.rt-spell').forEach(function(el){
+    var sid=el.getAttribute('data-spell-id');
     el.addEventListener('click',function(e){
       e.stopPropagation();
-      var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+      var sp=null;for(var i=0;i<SPELLS.length;i++){if(SPELLS[i].id===sid){sp=SPELLS[i];break;}}
+      if(!sp)return;
+      hideTooltip();
+      var rect=el.getBoundingClientRect();
+      var tip=document.getElementById('char-tooltip');
+      tip.innerHTML='<div style="padding:12px;max-width:280px"><div style="font-size:16px;font-weight:700;color:#fbbf24;margin-bottom:6px">'+sp.name+'</div><div style="font-size:12px;color:#888;margin-bottom:8px">'+sp.cost+'코스트 · '+sp.tier+'티어</div>'+(sp.img?'<img src="'+sp.img+'" style="width:80px;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block">':'')+'<div style="font-size:13px;color:#d0d8e0;white-space:pre-line">'+sp.desc+'</div>'+(sp.once?'<div style="margin-top:6px;font-size:11px;color:#fca5a5">게임당 1회</div>':'')+'</div>';
+      tip.style.display='block';
+      var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+      var left=rect.left+rect.width/2-tipW/2;
+      var top=rect.top-tipH-8;
+      if(top<0)top=rect.bottom+8;
+      if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+      tip.style.left=left+'px';tip.style.top=top+'px';
     });
   });
 }
