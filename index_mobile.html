@@ -615,7 +615,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .roster-school-hdr{display:flex;align-items:center;gap:8px;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid #1e3a5f}
 .roster-school-icon{width:26px;height:26px;filter:invert(1);opacity:0.85}
 .roster-school-name{font-size:14px;font-weight:700;color:#93c5fd}
-.roster-cards-flow{display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start;margin-bottom:4px}
+.roster-cards-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:4px}
+.roster-tier-chunk{display:flex;flex-wrap:nowrap;gap:5px;align-items:flex-start}
 .rt-sep{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:22px;height:232px;border-right:2px solid #2a5070;padding-right:3px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;color:#7a98b8}
 .roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:155px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
 .roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
@@ -2502,6 +2503,7 @@ function showRoster(){
     for(var t=1;t<=6;t++){
       var tc=byTier[t];
       if(!tc||!tc.length)continue;
+      html+='<div class="roster-tier-chunk">';
       html+='<div class="rt-sep">'+t+'T</div>';
       tc.forEach(function(c){
         html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
@@ -2509,6 +2511,7 @@ function showRoster(){
         html+='<div class="r-name">'+c.name+'</div>';
         html+='</div>';
       });
+      html+='</div>';
     }
     html+='</div>';
   });
