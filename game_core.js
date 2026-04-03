@@ -2146,7 +2146,8 @@ function triggerSOC(u, mySide, otherSide, log) {
     for(var i=0;i<copySpecialCount;i++){
       u._copiedAbilities.push(shuffledSpecial[i]);
       var _spName=(findAnyChar(shuffledSpecial[i].baseId)||{}).name||shuffledSpecial[i].baseId;
-      log.push({cls:'soc',text:'[개전] 세미나: 특수능력 복사 → '+_spName+' ('+shuffledSpecial[i].type+')'});
+      var _spType={soc:'개전',dr:'뒤끝',surv:'버티기',pre:'선제',bc:'첫인사',passive:'패시브'}[shuffledSpecial[i].type]||shuffledSpecial[i].type;
+      log.push({cls:'soc',text:'[개전] 세미나: 특수능력 복사 → '+_spName+' ('+_spType+')'});
     }
     // 복사된 개전 즉시 발동
     for(var i=0;i<u._copiedAbilities.length;i++){
@@ -2945,7 +2946,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         var kAdd=attacker.isSkin?2:1;
         if(!_G.keiseisenCounters) _G.keiseisenCounters={};
         _G.keiseisenCounters[attacker.baseId]=Math.min(7,(_G.keiseisenCounters[attacker.baseId]||0)+kAdd);
-        log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' ('+attacker.baseId+': '+_G.keiseisenCounters[attacker.baseId]+')'});
+        log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' (현재: '+_G.keiseisenCounters[attacker.baseId]+')'});
       }
     }
     // 나구사: 선제 루프에서 처리
@@ -3612,7 +3613,7 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);if(_isAsuna)console.log('[DEBUG ASUNA]',_u.name,'baseId='+_u.baseId,'coinOff='+!!coinOffMap[_u.sid],'result='+cr[_u.sid]);}
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<0.5);}
       // 버니걸 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인토스 성공
       var _asunaGold=aliveAlly.some(function(u){return (u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
       if(_asunaGold){for(var _aj=0;_aj<aliveAlly.length;_aj++){var _lu=aliveAlly[_aj];if(_lu.baseId!=='asuna'&&_lu.baseId!=='millennium_cc'&&!coinOffMap[_lu.sid]){cr[_lu.sid]=true;break;}}}
