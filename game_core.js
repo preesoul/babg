@@ -2282,7 +2282,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
       _doDR(unit,mySide,otherSide,log);
     }
   }
-  // 주리 개전으로 부여된 팬짱 뒤끝 (DR_IDS에 없는 유닛도 발동)
+  // 주리 개전으로 부여된 팬짱 뒤끝 (자체 뒤끝이 없는 유닛만 별도 호출 — DR_IDS 유닛은 위에서 이미 _doDR 실행됨)
   if(unit._juriDR&&!DR_IDS[id]){
     _doDR(unit,mySide,otherSide,log);
   }
