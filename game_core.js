@@ -3426,12 +3426,12 @@ var _activeCoinOverlay=null;
 var _gBattleCounterSave=null;
 function saveGBattleCounters(){
   return{millenniumTokenSummons:G.millenniumTokenSummons||0,arisuDeathCount:G.arisuDeathCount||0,
-    permanentAbilityBan:!!G.permanentAbilityBan,
+    permanentAbilityBan:!!G.permanentAbilityBan,juriDeaths:G.juriDeaths||0,
     keiseisenCounters:JSON.parse(JSON.stringify(G.keiseisenCounters||{}))};
 }
 function restoreGBattleCounters(s){
   G.millenniumTokenSummons=s.millenniumTokenSummons;G.arisuDeathCount=s.arisuDeathCount;
-  G.permanentAbilityBan=s.permanentAbilityBan;G.keiseisenCounters=s.keiseisenCounters;
+  G.permanentAbilityBan=s.permanentAbilityBan;G.juriDeaths=s.juriDeaths;G.keiseisenCounters=s.keiseisenCounters;
 }
 var BCOIN_BASE='img/Icon/';
 var BCOIN_SG='img/UI/sunglasses.png';
