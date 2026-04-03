@@ -442,7 +442,7 @@ var SPELLS = [
   {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
   {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,
-    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;if(tmpl.id==='shimiko'){if(m.kw.indexOf('windfury')===-1)m.kw.push('windfury');if(m.kw.indexOf('shield')===-1)m.kw.push('shield');}return true;}},
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;if(tmpl.id==='shimiko'){if(m.kw.indexOf('cleave')===-1)m.kw.push('cleave');if(m.kw.indexOf('shield')===-1)m.kw.push('shield');}return true;}},
   {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',
@@ -943,7 +943,7 @@ function buyMinion(idx, insertIdx) {
     for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin&&removed<2){removed++;}else{newBoard.push(p.board[i]);}}
     p.board=newBoard;
     var skinUnit=makeMinion(tmpl,true);skinUnit.kw=mergedKw;skinUnit.atk+=bonusAtk;skinUnit.hp+=bonusHp;skinUnit.maxHp=skinUnit.hp;
-    // 시미코 황금: 연사+보호막 추가
+    // 시미코 스킨: 광역+보호막 추가
     if(tmpl.id==='shimiko'){
       if(skinUnit.kw.indexOf('windfury')===-1)skinUnit.kw.push('windfury');
       if(skinUnit.kw.indexOf('shield')===-1)skinUnit.kw.push('shield');
@@ -1116,7 +1116,7 @@ function addToBoard(p, m) {
     }
     p.board=newBoard;
     var skinUnit=makeMinion(tmpl,true);skinUnit.kw=mergedKw;skinUnit.atk+=bonusAtk;skinUnit.hp+=bonusHp;skinUnit.maxHp=skinUnit.hp;
-    if(tmpl.id==='shimiko'){if(skinUnit.kw.indexOf('windfury')===-1)skinUnit.kw.push('windfury');if(skinUnit.kw.indexOf('shield')===-1)skinUnit.kw.push('shield');}
+    if(tmpl.id==='shimiko'){if(skinUnit.kw.indexOf('cleave')===-1)skinUnit.kw.push('cleave');if(skinUnit.kw.indexOf('shield')===-1)skinUnit.kw.push('shield');}
     p.board.push(skinUnit);
     triggerBattlecry(skinUnit,p);
     // 플레이어면 발견 (AI는 aiDiscover 별도 호출)
@@ -1413,7 +1413,7 @@ function moveFromBench() {
       var newBoard=[];var removed=0;
       for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin&&removed<2){removed++;}else{newBoard.push(p.board[i]);}}
       p.board=newBoard;var skinUnit=makeMinion(tmpl,true);skinUnit.kw=mergedKw;skinUnit.atk+=bonusAtk;skinUnit.hp+=bonusHp;skinUnit.maxHp=skinUnit.hp;
-      if(tmpl.id==='shimiko'){if(skinUnit.kw.indexOf('windfury')===-1)skinUnit.kw.push('windfury');if(skinUnit.kw.indexOf('shield')===-1)skinUnit.kw.push('shield');}
+      if(tmpl.id==='shimiko'){if(skinUnit.kw.indexOf('cleave')===-1)skinUnit.kw.push('cleave');if(skinUnit.kw.indexOf('shield')===-1)skinUnit.kw.push('shield');}
       p.board.push(skinUnit);triggerBattlecry(skinUnit,p);showDiscover(p);return;
     }
   }
