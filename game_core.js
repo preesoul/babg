@@ -514,6 +514,8 @@ function newGame() {
   rollShop();
   aiTurns();
   renderAll();
+  // 백그라운드 자가대전 시뮬 (20판) — UI 비블로킹
+  setTimeout(function(){ runSimBatch(20); }, 500);
 }
 
 // 스킨(황금) 키워드 변환: 각 캐릭터 스킨 효과 (원본 능력은 유지됨)
@@ -1685,6 +1687,8 @@ function aiTurns() {
             for(var _bk=0;_bk<p.board.length;_bk++){if(p.board[_bk].baseId==='momoi')_hM=true;if(p.board[_bk].baseId==='midori')_hD=true;}
             if((_hM&&c.id==='midori')||(_hD&&c.id==='momoi'))s+=8;
           }
+          // 자가대전 시뮬 통계 기반 보정 (10판 이상 데이터 있는 카드만)
+          s+=simStatBonus(c.id);
           return{tmpl:c,score:s+Math.random()*2};
         });
         scored.sort(function(a,b){return b.score-a.score;});
@@ -2516,8 +2520,9 @@ function makeSweeper(){
 }
 
 function runBattle(boardA, boardB, startWithA, opts) {
-  G.permanentAbilityBan=false;
-  G.battleSchoolBuff={};
+  var _G=(opts&&opts.simCtx)||G;
+  _G.permanentAbilityBan=false;
+  _G.battleSchoolBuff={};
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
@@ -2542,7 +2547,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   for(var _si=0;_si<a.length;_si++) a[_si]._mySide=a;
   for(var _si=0;_si<b.length;_si++) b[_si]._mySide=b;
   // 쿠즈노하 영구 차단: 이전 게임에서 쿠즈노하가 발동했으면 b(적)의 독사굴 제거
-  if(G.kuzunohaActive){
+  if(_G.kuzunohaActive){
     for(var _kz=0;_kz<b.length;_kz++){var _pi=b[_kz].kw.indexOf('poison');if(_pi!==-1)b[_kz].kw.splice(_pi,1);}
   }
   var log=[];
@@ -2595,10 +2600,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
         log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 처치! +'+gainAtk+'/+'+gainHp+' 흡수!'});
       }
       // 아리스 사망 추적
-      if(unit.baseId==='arisu') G.arisuDeathCount=(G.arisuDeathCount||0)+1;
+      if(unit.baseId==='arisu') _G.arisuDeathCount=(_G.arisuDeathCount||0)+1;
       // 세이아 사망 페널티: 아군 전체 능력 영구 삭제
       if(unit.baseId==='trinity_seia'){
-        G.permanentAbilityBan=true;
+        _G.permanentAbilityBan=true;
         for(var _se=0;_se<myArr.length;_se++){
           if(myArr[_se].alive) stripAbilities(myArr[_se],log2);
         }
@@ -2631,7 +2636,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     // 스즈미 패시브: 자신을 공격한 적 atk 0으로 (1~2회 공격 동안)
-    if(dst.baseId==='suzumi'&&dst.alive&&!dst._abilitiesStripped&&!G.permanentAbilityBan&&src!==dst){
+    if(dst.baseId==='suzumi'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&src!==dst){
       var suzTurns=dst.isSkin?2:1;
       if(!src._suzumiDebuff||src._suzumiDebuff<=0){
         src._suzumiOrigAtk=src.atk;src._suzumiDebuff=suzTurns;src.atk=0;
@@ -2682,15 +2687,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
     var hasCopiedSurv=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='surv';});
     if((!hasKw(unit,'survive')||!SURV_IDS[unit.baseId])&&!hasCopiedSurv) return;
     if(unit._abilitiesStripped) return;
-    if(G.permanentAbilityBan) return;
+    if(_G.permanentAbilityBan) return;
     if(unit.baseId==='toki'){
       var ae;
-      var tierLvl=G.players[0].tier||1;
+      var tierLvl=(_G.players&&_G.players[0]?_G.players[0].tier:1)||1;
       ae=makeToken('abi_eshuh');var mult=unit.isSkin?4:2;ae.atk=tierLvl*mult;ae.hp=tierLvl*mult;ae.maxHp=ae.hp;
       ae.alive=true;ae.poisonImmune=false;ae._mySide=side;
       applyEimiBonus(ae,side);
       side.push(ae);
-      G.millenniumTokenSummons=(G.millenniumTokenSummons||0)+1;
+      _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
       log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+ae.name+' 소환! ('+ae.atk+'/'+ae.hp+')'});
       surviveEffects.push({type:'summon',token:ae.baseId,isSkin:unit.isSkin});
     }
@@ -2777,7 +2782,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   function triggerPreemptive(attacker,target,defArr,atkArr,log2){
     var hasCopiedPre=attacker._copiedAbilities&&attacker._copiedAbilities.some(function(c){return c.type==='pre';});
     if(!hasKw(attacker,'preemptive')&&!PRE_IDS[attacker.baseId]&&!hasCopiedPre) return false;
-    if(G.permanentAbilityBan) return false;
+    if(_G.permanentAbilityBan) return false;
     // ===== 선제 능력 (PRE_IDS) =====
     if(attacker.baseId==='aru'){
       var tTier=target.tier||0;
@@ -2853,7 +2858,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         te=makeToken('thunder_e');te.atk=8;te.hp=2;te.alive=true;te.poisonImmune=false;te.isToken=true;te.baseId='thunder_e';te._mySide=atkArr;
         applyEimiBonus(te,atkArr);
         atkArr.push(te);
-        G.millenniumTokenSummons=(G.millenniumTokenSummons||0)+1;
+        _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
         var teLog=[];
         teLog.push({cls:'soc',text:'[선제] '+attacker.name+': '+te.name+' 소환! ('+te.atk+'/'+te.hp+')'});
         if(hasKw(te,'selfdestruct')){
@@ -2882,9 +2887,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
     else if(attacker.baseId==='yukari'||attacker.baseId==='renge'||attacker.baseId==='kikyou'){
       if(attacker._mySide===a){
         var kAdd=attacker.isSkin?2:1;
-        if(!G.keiseisenCounters) G.keiseisenCounters={};
-        G.keiseisenCounters[attacker.baseId]=Math.min(7,(G.keiseisenCounters[attacker.baseId]||0)+kAdd);
-        log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' ('+attacker.baseId+': '+G.keiseisenCounters[attacker.baseId]+')'});
+        if(!_G.keiseisenCounters) _G.keiseisenCounters={};
+        _G.keiseisenCounters[attacker.baseId]=Math.min(7,(_G.keiseisenCounters[attacker.baseId]||0)+kAdd);
+        log2.push({cls:'soc',text:'[선제] '+attacker.name+': 계승전 +'+kAdd+' ('+attacker.baseId+': '+_G.keiseisenCounters[attacker.baseId]+')'});
       }
     }
     // 나구사: 선제 루프에서 처리
@@ -2900,7 +2905,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(!target.alive) break;
         var swp=makeSweeper();swp._mySide=atkArr;swp.alive=true;
         atkArr.push(swp);
-        G.millenniumTokenSummons=(G.millenniumTokenSummons||0)+1;
+        _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
         log2.push({cls:'soc',text:'[선제] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+', 보호막)'});
         // 스위퍼 자폭 공격 (보호막 있어도 자폭 후 사라짐)
         var swDmg=swp.atk+swp.hp;
@@ -2948,7 +2953,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   // 치세 패시브: 공격당하면 상대 능력 무작위 제거
   function checkChisePassive(attacker,defender,log2){
     if(defender.baseId!=='chise'||!defender.alive||defender.hp<=0) return;
-    if(defender._abilitiesStripped||G.permanentAbilityBan) return;
+    if(defender._abilitiesStripped||_G.permanentAbilityBan) return;
     var count=defender.isSkin?2:1;
     var removable=[];
     for(var i=0;i<(attacker.kw||[]).length;i++){
@@ -3088,8 +3093,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
             // 나구사: 타격당 계승전 카운터 (아군만)
             if(attacker.baseId==='nagusa'&&!msHit.blocked&&attacker._mySide===a){
               var kAdd2=attacker.isSkin?2:1;
-              if(!G.keiseisenCounters) G.keiseisenCounters={};
-              G.keiseisenCounters['nagusa']=Math.min(7,(G.keiseisenCounters['nagusa']||0)+kAdd2);
+              if(!_G.keiseisenCounters) _G.keiseisenCounters={};
+              _G.keiseisenCounters['nagusa']=Math.min(7,(_G.keiseisenCounters['nagusa']||0)+kAdd2);
             }
             if(target.hp<=0){msKillCount++;break;}
           }
@@ -4079,4 +4084,147 @@ function nextTurn() {
     if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);
   }
   aiTurns();rollShop();renderAll();
+}
+
+// ===== 자가대전 온라인 학습 시스템 =====
+
+// 3단계: 카드별 승패 통계
+var SIM_STATS = {};
+var SIM_RUNNING = false;
+
+// 4단계: 시뮬 통계 기반 구매 점수 보정 (winRate 0.5 기준 ±3)
+function simStatBonus(cardId) {
+  var s = SIM_STATS[cardId];
+  if(!s || (s.win + s.loss) < 10) return 0;
+  var wr = s.win / (s.win + s.loss);
+  return Math.max(-3, Math.min(3, (wr - 0.5) * 6));
+}
+
+// 3단계: 게임 결과 집계 (1등 덱 win++, 나머지 loss++)
+function simCollectStats(players) {
+  var winner = null;
+  for(var i = 1; i < players.length; i++) {
+    if(!players[i].dead) { winner = players[i]; break; }
+  }
+  for(var i = 1; i < players.length; i++) {
+    var p = players[i];
+    var isWin = (p === winner);
+    for(var j = 0; j < p.board.length; j++) {
+      var bid = p.board[j].baseId;
+      if(!bid) continue;
+      if(!SIM_STATS[bid]) SIM_STATS[bid] = {win:0, loss:0};
+      if(isWin) SIM_STATS[bid].win++; else SIM_STATS[bid].loss++;
+    }
+  }
+}
+
+// 2단계: 실전투 기반 배틀 페이즈
+function simBattlePhase() {
+  var alive = [];
+  for(var i = 1; i < G.players.length; i++) {
+    if(!G.players[i].dead) alive.push(G.players[i]);
+  }
+  var shuffled = alive.slice().sort(function(){return Math.random()-0.5;});
+  var simCtx = {
+    permanentAbilityBan:false, battleSchoolBuff:{},
+    kuzunohaActive:false, millenniumTokenSummons:0,
+    arisuDeathCount:0, keiseisenCounters:{},
+    players:G.players
+  };
+  for(var i = 0; i+1 < shuffled.length; i += 2) {
+    var pa = shuffled[i], pb = shuffled[i+1];
+    if(!pa.board.length && !pb.board.length) continue;
+    var res = runBattle(pa.board, pb.board, true, {simCtx:simCtx, skipSOC:false});
+    if(res.result === 'win') {
+      var dmg = pa.tier + Math.min(res.damage, 8);
+      pb.hp -= dmg;
+      if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.board=[];}
+    } else if(res.result === 'lose') {
+      var dmg2 = pb.tier + Math.min(res.damage, 8);
+      pa.hp -= dmg2;
+      if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.board=[];}
+    }
+  }
+}
+
+// 1게임 시뮬레이션 실행 (G 저장→교체→시뮬→복원)
+function runSimGame() {
+  var saved = {
+    players:G.players, pool:G.pool, turn:G.turn, aliveCount:G.aliveCount,
+    hiddenCardsEverOwned:G.hiddenCardsEverOwned, kuzunohaActive:G.kuzunohaActive,
+    permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
+    millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
+    keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
+    phase:G.phase, shop:G.shop
+  };
+  try {
+    // 시뮬 풀: 모든 카드 각 6장
+    var simPool = {};
+    for(var ci = 0; ci < CHARS.length; ci++) simPool[CHARS[ci].id] = 6;
+    G.pool = simPool;
+
+    // 더미(index 0) + AI 4명 구성
+    var simPlayers = [{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
+    for(var si = 0; si < 4; si++) {
+      simPlayers.push({
+        id:'sim_'+si, name:'SimAI_'+si,
+        hp:40, stone:3, turnStone:2,
+        tier:1, upgradeCost:UPGRADE_COSTS[1],
+        board:[], dead:false, isPlayer:false,
+        purchasedSchools:{}, totalDamageTaken:0
+      });
+    }
+    G.players = simPlayers;
+    G.turn = 1; G.aliveCount = 4;
+    G.hiddenCardsEverOwned = {};
+    G.kuzunohaActive = false; G.permanentAbilityBan = false;
+    G.battleSchoolBuff = {}; G.millenniumTokenSummons = 0;
+    G.arisuDeathCount = 0; G.keiseisenCounters = {};
+    G.bonusStone = 0; G.freeRerolls = 0;
+    G.phase = 'recruit'; G.shop = [];
+
+    // 최대 12턴 시뮬
+    for(var t = 0; t < 12 && G.aliveCount > 1; t++) {
+      G.turn = t + 1;
+      for(var pi = 1; pi < G.players.length; pi++) {
+        var sp = G.players[pi];
+        if(sp.dead) continue;
+        sp.turnStone = Math.min(MAX_STONE, sp.turnStone + 1);
+        sp.stone = sp.turnStone;
+        if(sp.upgradeCost > 0) sp.upgradeCost = Math.max(0, sp.upgradeCost - 1);
+      }
+      aiTurns();      // 기존 AI 로직 재활용 (i=1부터)
+      simBattlePhase();
+    }
+    simCollectStats(G.players);
+  } catch(e) {
+    console.warn('[SIM] 게임 오류:', e);
+  } finally {
+    G.players = saved.players; G.pool = saved.pool; G.turn = saved.turn;
+    G.aliveCount = saved.aliveCount; G.hiddenCardsEverOwned = saved.hiddenCardsEverOwned;
+    G.kuzunohaActive = saved.kuzunohaActive; G.permanentAbilityBan = saved.permanentAbilityBan;
+    G.battleSchoolBuff = saved.battleSchoolBuff; G.millenniumTokenSummons = saved.millenniumTokenSummons;
+    G.arisuDeathCount = saved.arisuDeathCount; G.keiseisenCounters = saved.keiseisenCounters;
+    G.bonusStone = saved.bonusStone; G.freeRerolls = saved.freeRerolls;
+    G.phase = saved.phase; G.shop = saved.shop;
+  }
+}
+
+// 5단계: N판 비동기 배치 실행
+function runSimBatch(N, onDone) {
+  if(SIM_RUNNING) return;
+  SIM_RUNNING = true;
+  var count = 0;
+  function step() {
+    if(count >= N) {
+      SIM_RUNNING = false;
+      console.log('[SIM] '+N+'판 완료. 통계 업데이트됨.');
+      if(onDone) onDone(SIM_STATS);
+      return;
+    }
+    runSimGame();
+    count++;
+    setTimeout(step, 0);
+  }
+  setTimeout(step, 0);
 }
