@@ -3328,6 +3328,11 @@ function startBattle() {
         return;
       }
     }
+    // 양쪽 모두 무승부면 코인 페이즈 없이 바로 무승부 처리
+    if(resultA.result==='draw'&&resultB.result==='draw'){
+      startBattleAnimation(resultA,opp,null,_battleChosenCallback);
+      return;
+    }
     // 개전 이후, 첫 공격 전에 코인 페이즈 삽입
     startBattleAnimation(resultA,opp,resultB,_battleChosenCallback);
 
