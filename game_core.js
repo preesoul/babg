@@ -2541,7 +2541,7 @@ function resolveStartOfCombat(a, b, log) {
   }
   // 백화요란 계승전 대사: 버프 받은 나구사가 아군에 있을 때
   function outputShowdownQuote(side,isEnemy){
-    if(!_G.hiddenCardsEverOwned||!_G.hiddenCardsEverOwned['hkyk_showdown']) return;
+    if(!G.hiddenCardsEverOwned||!G.hiddenCardsEverOwned['hkyk_showdown']) return;
     var hasKeiseisen=false;
     for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='nagusa'){hasKeiseisen=true;break;}}
     if(hasKeiseisen&&!quotedBids['hkyk_showdown']){
