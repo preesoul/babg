@@ -2614,7 +2614,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var maxRounds=200;
 
   function snapshot(){
-    function snapUnit(u){return{id:u.id,name:u.name,baseId:u.baseId||'',atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:u._keiseisenCounter||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0};}
+    function snapUnit(u){var bid=u.baseId||'';return{id:u.id,name:u.name,baseId:bid,atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:(_G.keiseisenCounters&&_G.keiseisenCounters[bid])||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0};}
     return{a:a.map(snapUnit),b:b.map(snapUnit)};
   }
   function getAlive(side){return side.filter(function(m){return m.alive;});}
@@ -4117,9 +4117,17 @@ function miniCardHtml(m){
   if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
   if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선제</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
+  // 전투 중 카운터 표시
+  var counterHtml='';
+  if(bid==='wakamo'&&m._hovercraftCounter>0){
+    counterHtml='<div class="battle-counter" style="background:rgba(59,130,246,0.3);border:1px solid rgba(59,130,246,0.6);color:#93c5fd">🚁 '+m._hovercraftCounter+'/4</div>';
+  }
+  if((bid==='nagusa'||bid==='yukari'||bid==='renge'||bid==='kikyou')&&m._keiseisenCounter>0){
+    counterHtml='<div class="battle-counter" style="background:rgba(251,191,36,0.3);border:1px solid rgba(251,191,36,0.6);color:#fde68a">⚔ '+m._keiseisenCounter+'</div>';
+  }
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
-    kwHtml+miniAbilHtml+'</div></div>';
+    kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }
 
 function continueBattle() {
