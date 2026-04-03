@@ -628,7 +628,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404f"></script>
+<script src="game_core.js?v=20260404g"></script>
 <script>
 
 function showGameOver() {
@@ -873,8 +873,10 @@ function spellCardHtml(item,idx){
   if(item.isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
     html+='<div class="card-bg"><img src="img/unique/HKYK_Showdown.png" style="width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
   } else {
+    var spellImg=item.img||(item.spell&&item.spell.img)||null;
     var spellId=item.spell?item.spell.id:(item.id||'');
-    html+='<div class="card-bg"><img src="img/spell/'+spellId+'.png" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'"></div>';
+    var imgSrc=spellImg||('img/spell/'+spellId+'.png');
+    html+='<div class="card-bg"><img src="'+imgSrc+'" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'"></div>';
   }
   html+='<div class="card-inner">';
   html+='<div class="tier-stars">'+starStr(item.tier)+'</div>';
