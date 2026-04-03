@@ -68,7 +68,7 @@ var CHARS = [
 
   // ===== Tier 6 (밸류18) =====
   // 게헨나 3학년
-  {id:'hina',    name:'히나',   school:'게헨나',  tier:6,atk:13,hp:3,kw:['cleave'],   skin:'히나(드레스)',     img:'Hina.png',           imgGold:'Hina_(Dress).png'},
+  {id:'hina',    name:'히나',   school:'게헨나',  tier:6,atk:15,hp:5,kw:['cleave'],   skin:'히나(드레스)',     img:'Hina.png',           imgGold:'Hina_(Dress).png'},
   {id:'makoto',  name:'마코토', school:'게헨나',  tier:6,atk:6,hp:6,kw:[],            skin:'마코토(수영복)',   img:'Makoto.png',         imgGold:'Makoto_(Swimsuit).png'},
   // 밀레니엄 3학년
   {id:'neru',    name:'네루',   school:'밀레니엄',tier:5,atk:9,hp:7,kw:['shield','survive'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
@@ -126,7 +126,7 @@ var CHARS = [
   {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:9,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
-  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:3,hp:8,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
+  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:4,hp:10,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
 ];
 
@@ -270,7 +270,7 @@ var ABILITY_DESCS = {
   gehenna_pandemonium:    {type:'패시브 / 뒤끝',desc:'샬레의 마코토, 사츠키, 이로하, 이부키, 치아키를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n뒤끝: 상대 무작위 2인을 이번 전투동안 빼앗습니다.\n황금 비행선(도발)과 황금 토라마루(도발)를 소환합니다.',skinEffect:'',quote:'마코토: 이번에야말로 트리니티를 키보토스의 지도에서 없애버릴 때다!'},
   gehenna_traingun:       {type:'패시브 / 개전 / 뒤끝',desc:'공격하지 않습니다.\n개전: 상대 전체에 6의 광역 데미지.\n살아남은 전투마다 개전 발동 횟수가 증가합니다.\n뒤끝: 이번 게임에서 완전히 사라집니다.',skinEffect:'',quote:'…<뇌제>가 남긴 조각 하나, 파편 하나 남기지 마라.'},
   trinity_mika:           {type:'패시브 / 선제',desc:'패시브: 능력/효과로 인한 데미지와 쓰러짐에 면역입니다.\n전투 데미지로만 쓰러뜨릴 수 있습니다.\n선제: 공격 시 상대가 게헨나 출신이면 공격력이 두 배가 됩니다.',skinEffect:'',quote:'미카: 응! 오래 기다렸지? 이제 내가 활약할 차례인 거네☆'},
-  trinity_nagisa:         {type:'패시브 / 개전',desc:'패시브: 트리니티 학생들을 대상으로 하는\n능력치 추가 효과에 +10/+10을 추가합니다.\n개전: 마리(아이돌), 사쿠라코(아이돌), 미네(아이돌)에게\n+10/+10를 부여합니다.',skinEffect:'',quote:'나기사: 트리니티를 대표하여 인사드립니다.'},
+  trinity_nagisa:         {type:'패시브 / 개전',desc:'패시브: 트리니티 학생들을 대상으로 하는\n능력치 추가 효과에 +10/+10을 추가합니다.\n패시브: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.\n개전: 마리(아이돌), 사쿠라코(아이돌), 미네(아이돌)에게\n+10/+10를 부여합니다.',skinEffect:'',quote:'나기사: 트리니티를 대표하여 인사드립니다.'},
   trinity_seia:           {type:'패시브 / 뒤끝',desc:'공격하지 않습니다.\n아군 트리니티 학생들은 방어 시 전투 데미지를 받지 않습니다.\n뒤끝: 아군 전체 능력이 삭제됩니다.\n세이아가 이번 게임에서 완전히 사라집니다.',skinEffect:'',quote:'세이아: 이렇듯, 모든 길은 하나로 이어지게 마련입니다.'},
   millennium_nameless:    {type:'개전',desc:'자신을 파괴합니다.\n공격력+체력 총합으로 적 왼쪽부터 순차 데미지.\n보호막을 무시하고 체력에 직접 데미지를 줍니다.',skinEffect:'',quote:'???: 결국… 언젠가는 모두가 다치게 된다는 걸.'},
   millennium_malkuth:     {type:'선제',desc:'선제: 자신은 공격하지 않습니다.\n대신 스위퍼(10/10, 보호막, 자폭)를\n아군 밀레니엄 학생 수만큼 소환합니다.\n스위퍼로 적이 쓰러지면 말쿠트는 공격하지 않습니다.',skinEffect:'',quote:'말쿠트: 깃발 아래 창조된 하나의 의지. 세상에 끝네 도달한 왕국의 순례자.',quote2:'말쿠트: …말쿠트라고 합니다.'},
@@ -288,7 +288,7 @@ var ABILITY_DESCS = {
   chise:    {type:'패시브',desc:'공격한 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',skinEffect:'수영복 치세: 무작위 2개 제거',skinEffectDesc:'패시브: 공격한 상대의 능력 중\n무작위 <span style="color:#ffd700;font-weight:700">2개</span>를 이번 전투 동안 제거합니다.'},
   michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 추가로 두 번 발동',skinEffectDesc:'첫인사: 샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선제: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
-  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',skinEffect:'수영복 와카모: 4~10회 공격',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 5개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)'},
+  wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)',skinEffect:'수영복 와카모: 4~10회 공격',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 1회당 <호버크래프트> 카운터를 1 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 저격)'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
   // 백귀야행 7성
   hkyk_saikyo:   {type:'히든',desc:'순수한 힘. 50/50 바닐라 스탯.',skinEffect:'',quote:'???: 하여튼 뭔가 엄청나게 사악한 모습이었다……'},
@@ -2279,6 +2279,15 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
       }
     }
   }
+  // 나구사 패시브: 자신을 쓰러뜨린 상대를 쓰러뜨림
+  if(id==='trinity_nagisa'&&unit._killedBy){
+    var killer=unit._killedBy;
+    if(killer.alive&&!killer.abilityImmune){
+      killer.hp=0;killer.alive=false;
+      log.push({cls:'kill',text:'[패시브] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
+      triggerDeathrattle(killer,otherSide,mySide,log);
+    }
+  }
   var hasCopiedDR=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='dr';});
   if(!DR_IDS[id]&&!unit._akaneC4DR&&!hasCopiedDR&&!unit._juriDR) return;
   if(unit._abilitiesStripped) return;
@@ -3135,11 +3144,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
           // 와카모: 적 처치당 호버크래프트 카운터
           if(attacker.baseId==='wakamo'&&msKillCount>0){
             var hcAdd=attacker.isSkin?msKillCount*2:msKillCount;
-            attacker._hovercraftCounter=Math.min(5,(attacker._hovercraftCounter||0)+hcAdd);
+            attacker._hovercraftCounter=Math.min(4,(attacker._hovercraftCounter||0)+hcAdd);
             stepLog.push({cls:'soc',text:'[선제] '+attacker.name+': 호버크래프트 카운터 +'+hcAdd+' (현재: '+attacker._hovercraftCounter+')'});
-            // 10 도달 시 호버크래프트 소환
-            if(attacker._hovercraftCounter>=5){
-              attacker._hovercraftCounter-=5;
+            if(attacker._hovercraftCounter>=4){
+              attacker._hovercraftCounter-=4;
               var hc=makeToken('hovercraft');
               hc.atk=attacker.isSkin?20:10;hc.hp=attacker.isSkin?20:10;
               hc.alive=true;hc.poisonImmune=false;hc._mySide=atkArr2;
