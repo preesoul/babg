@@ -3297,6 +3297,7 @@ function startBattle() {
   restoreGBattleCounters(_gBattleCounterSave);
   var resultB=runBattle(p.board,opp.board,false,{juriDeathsA:jdA,juriDeathsB:jdB});
   restoreGBattleCounters(_gBattleCounterSave);
+  resultA._initJdA=jdA;resultA._initJdB=jdB;
 
   battleState.skip=false;
   var overlay=document.getElementById('battle-overlay');
@@ -3327,11 +3328,6 @@ function startBattle() {
         tutShowStep();
         return;
       }
-    }
-    // 양쪽 모두 무승부면 코인 페이즈 없이 바로 무승부 처리
-    if(resultA.result==='draw'&&resultB.result==='draw'){
-      startBattleAnimation(resultA,opp,null,_battleChosenCallback);
-      return;
     }
     // 개전 이후, 첫 공격 전에 코인 페이즈 삽입
     startBattleAnimation(resultA,opp,resultB,_battleChosenCallback);
@@ -3776,7 +3772,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 카운터에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,juriDeathsA:p.juriDeaths||0,juriDeathsB:opp.juriDeaths||0});
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,juriDeathsA:result._initJdA||0,juriDeathsB:result._initJdB||0});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);
