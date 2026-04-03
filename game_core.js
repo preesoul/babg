@@ -2152,6 +2152,8 @@ function _doDR(unit, mySide, otherSide, log) {
   else if(id==='ako'){
     var buff=unit.isSkin?10:5;
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i].school==='게헨나'){mySide[i].atk+=buff;mySide[i].hp+=buff;}}
+    // '이번 전투 동안' 지속 버프 등록 — 전투 중 새로 등장하는 게헨나 학생에게도 적용
+    G.battleSchoolBuff['게헨나']=(G.battleSchoolBuff['게헨나']||0)+buff;
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아군 게헨나 +'+buff+'/+'+buff});
   }
   else if(id==='kazusa'){
@@ -2201,6 +2203,10 @@ function _doDR(unit, mySide, otherSide, log) {
           atk:isGold?tmpl.atk*2+1:tmpl.atk,hp:isGold?tmpl.hp*2+1:tmpl.hp,
           kw:(tmpl.kw||[]).slice(),isSkin:isGold,img:isGold?tmpl.imgGold:tmpl.img,
           alive:true,poisonImmune:false,baseId:'iroha'};
+        if(G.battleSchoolBuff&&G.battleSchoolBuff[newIroha.school]){
+          var sbuff=G.battleSchoolBuff[newIroha.school];
+          newIroha.atk+=sbuff;newIroha.hp+=sbuff;
+        }
         mySide.push(newIroha);
         log.push({cls:'soc',text:'[뒤끝] 토라마루: '+newIroha.name+' 소환!'});
       }
@@ -2258,6 +2264,7 @@ function _doDR(unit, mySide, otherSide, log) {
       var mk={id:'mk_'+Math.random().toString(36).substr(2,4),baseId:'makoto_perma',isToken:true,
         name:'파마머리 마코토',school:'게헨나',tier:6,atk:6,hp:6,kw:[],img:'token/Makoto_(perma).png',isSkin:false,alive:true,poisonImmune:false};
       if(unit.makotoGolden){mk.atk=12;mk.hp=12;}
+      if(G.battleSchoolBuff&&G.battleSchoolBuff[mk.school]){var mbuff=G.battleSchoolBuff[mk.school];mk.atk+=mbuff;mk.hp+=mbuff;}
       mk._mySide=mySide;
       mySide.push(mk);
       log.push({cls:'soc',text:'[뒤끝] 비행선 자폭! 파마머리 마코토 소환! ('+mk.atk+'/'+mk.hp+')'});
@@ -2336,6 +2343,7 @@ function makeSweeper(){
 
 function runBattle(boardA, boardB, startWithA, opts) {
   G.permanentAbilityBan=false;
+  G.battleSchoolBuff={};
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
@@ -2868,7 +2876,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
           stepLog.push({cls:'hit',text:attacker.name+'의 선제! '+msHits+'회 공격!'});
           var msKillCount=0;
           for(var ms=0;ms<msHits;ms++){
-            if(!target.alive)break;
+            if(!target.alive||target.hp<=0)break;
             var msHit=dealHit(attacker,target,stepLog,undefined,true);
             checkSurvive(target,defArr2,stepLog,attacker);
             // 나구사: 타격당 계승전 카운터 (아군만)
@@ -2877,7 +2885,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
               if(!G.keiseisenCounters) G.keiseisenCounters={};
               G.keiseisenCounters['nagusa']=Math.min(7,(G.keiseisenCounters['nagusa']||0)+kAdd2);
             }
-            if(!target.alive) msKillCount++;
+            if(target.hp<=0){msKillCount++;break;}
           }
           // 와카모: 적 처치당 호버크래프트 카운터
           if(attacker.baseId==='wakamo'&&msKillCount>0){
