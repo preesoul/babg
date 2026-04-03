@@ -17,7 +17,7 @@ var CHARS = [
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
-  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:2,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
+  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:4,hp:2,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:2,atk:3,hp:3,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
@@ -247,12 +247,12 @@ var ABILITY_DESCS = {
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 두 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   tsurugi:  {type:'개전',desc:'공/체가 두 배가 됩니다.\n개전 마지막에 발동됩니다.',skinEffect:'수영복 츠루기: 세 배',skinEffectDesc:'개전: 공/체가 <span style="color:#ffd700;font-weight:700">세 배</span>가 됩니다.'},
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',skinEffect:'아이돌 미네: 동일'},
-  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',skinEffect:'메이드 토키: 스케쥴 레벨×4',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 가집니다.'},
+  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',skinEffect:'메이드 토키: 스케쥴 레벨×3',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×3</span>의 공/체를 가집니다.'},
   neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',skinEffect:'바니걸 네루: 두 가지를 무작위로 얻습니다.',skinEffectDesc:'버티기: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
   toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',skinEffect:'스킨 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',skinEffect:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
-  eimi:     {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨×2의 공/체를 추가합니다.',skinEffect:'수영복 에이미: 스케쥴 레벨×4',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×4</span>의 공/체를 추가합니다.'},
+  eimi:     {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨만큼의 공/체를 추가합니다.',skinEffect:'수영복 에이미: 스케쥴 레벨×2',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>만큼의 공/체를 추가합니다.'},
   sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.\n(전투당 1회)',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.\n(전투당 1회)'},
   satsuki:  {type:'뒤끝',desc:'자신을 죽인 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗음',skinEffectDesc:'뒤끝: 자신을 죽인 상대를 <span style="color:#ffd700;font-weight:700">2턴간</span> 빼앗습니다.'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',skinEffect:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공격력/체력, 자폭)'},
@@ -1280,9 +1280,9 @@ function getEimiSummonBonus(side){
   var bonus=0;
   // side가 배열(전투중)이면 전투용, player 객체면 영입용
   if(Array.isArray(side)){
-    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='eimi')bonus+=side[i].isSkin?4:2;}
+    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='eimi')bonus+=side[i].isSkin?2:1;}
   } else {
-    for(var i=0;i<side.board.length;i++){if(side.board[i]&&side.board[i].baseId==='eimi')bonus+=side.board[i].isSkin?4:2;}
+    for(var i=0;i<side.board.length;i++){if(side.board[i]&&side.board[i].baseId==='eimi')bonus+=side.board[i].isSkin?2:1;}
   }
   return bonus;
 }
@@ -2695,7 +2695,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(unit.baseId==='toki'){
       var ae;
       var tierLvl=(_G.players&&_G.players[0]?_G.players[0].tier:1)||1;
-      ae=makeToken('abi_eshuh');var mult=unit.isSkin?4:2;ae.atk=tierLvl*mult;ae.hp=tierLvl*mult;ae.maxHp=ae.hp;
+      ae=makeToken('abi_eshuh');var mult=unit.isSkin?3:2;ae.atk=tierLvl*mult;ae.hp=tierLvl*mult;ae.maxHp=ae.hp;
       ae.alive=true;ae.poisonImmune=false;ae._mySide=side;
       applyEimiBonus(ae,side);
       side.push(ae);
@@ -4232,6 +4232,106 @@ function runSimGame() {
 }
 
 // 5단계: N판 비동기 배치 실행
+// 순수 랜덤 AI — 전략/점수 없이 구매 가능한 카드 중 무작위 선택
+function simRandomTurns() {
+  for(var i = 1; i < G.players.length; i++) {
+    var p = G.players[i];
+    if(p.dead) continue;
+    // 티어 업: 40% 확률 + 스톤 여유 있을 때
+    if(p.tier < 6 && p.stone >= p.upgradeCost && Math.random() < 0.4) {
+      p.stone -= p.upgradeCost;
+      p.tier++;
+      p.upgradeCost = p.tier < 6 ? UPGRADE_COSTS[p.tier] : 99;
+    }
+    // 구매: 스톤 있고 보드 자리 있으면 랜덤 카드 구매
+    var buyLoop = 0;
+    while(p.stone >= 3 && p.board.length < MAX_BOARD && buyLoop < 20) {
+      buyLoop++;
+      var avail = CHARS.filter(function(c){ return c.tier <= p.tier && G.pool[c.id] > 0; });
+      if(avail.length === 0) break;
+      var tmpl = avail[Math.floor(Math.random() * avail.length)];
+      if(!takeFromPool(tmpl.id)) break;
+      // 트리플 체크
+      var baseCount = 0;
+      for(var j = 0; j < p.board.length; j++) {
+        if(p.board[j].baseId === tmpl.id && !p.board[j].isSkin) baseCount++;
+      }
+      if(baseCount >= 2) {
+        var newBoard = []; var removed = 0;
+        for(var j = 0; j < p.board.length; j++) {
+          if(p.board[j].baseId === tmpl.id && !p.board[j].isSkin && removed < 2) removed++;
+          else newBoard.push(p.board[j]);
+        }
+        p.board = newBoard;
+        var skinUnit = makeMinion(tmpl, true); p.board.push(skinUnit); p.stone -= 3;
+      } else if(p.board.length < MAX_BOARD) {
+        var newUnit = makeMinion(tmpl, false); p.board.push(newUnit); p.stone -= 3;
+      } else {
+        returnToPool(tmpl.id); break;
+      }
+    }
+  }
+}
+
+// 순수 랜덤 AI로 돌리는 시뮬 (전략 편향 없이 카드 자체 성능 측정용)
+function runSimGameRandom() {
+  var saved = {
+    players:G.players, pool:G.pool, turn:G.turn, aliveCount:G.aliveCount,
+    hiddenCardsEverOwned:G.hiddenCardsEverOwned, kuzunohaActive:G.kuzunohaActive,
+    permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
+    millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
+    keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
+    phase:G.phase, shop:G.shop
+  };
+  try {
+    var simPool = {};
+    for(var ci = 0; ci < CHARS.length; ci++) simPool[CHARS[ci].id] = 6;
+    G.pool = simPool;
+    var simPlayers = [{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
+    for(var si = 0; si < 4; si++) {
+      simPlayers.push({
+        id:'sim_'+si, name:'RandAI_'+si,
+        hp:40, stone:3, turnStone:2,
+        tier:1, upgradeCost:UPGRADE_COSTS[1],
+        board:[], dead:false, isPlayer:false,
+        purchasedSchools:{}, totalDamageTaken:0
+      });
+    }
+    G.players = simPlayers;
+    G.turn = 1; G.aliveCount = 4;
+    G.hiddenCardsEverOwned = {};
+    G.kuzunohaActive = false; G.permanentAbilityBan = false;
+    G.battleSchoolBuff = {}; G.millenniumTokenSummons = 0;
+    G.arisuDeathCount = 0; G.keiseisenCounters = {};
+    G.bonusStone = 0; G.freeRerolls = 0;
+    G.phase = 'recruit'; G.shop = [];
+
+    for(var t = 0; t < 25 && G.aliveCount > 1; t++) {
+      G.turn = t + 1;
+      for(var pi = 1; pi < G.players.length; pi++) {
+        var sp = G.players[pi];
+        if(sp.dead) continue;
+        sp.turnStone = Math.min(MAX_STONE, sp.turnStone + 1);
+        sp.stone = sp.turnStone;
+        if(sp.upgradeCost > 0) sp.upgradeCost = Math.max(0, sp.upgradeCost - 1);
+      }
+      simRandomTurns();   // 전략 없이 순수 랜덤
+      simBattlePhase();
+    }
+    simCollectStats(G.players);
+  } catch(e) {
+    console.warn('[SIM-RAND] 게임 오류:', e);
+  } finally {
+    G.players = saved.players; G.pool = saved.pool; G.turn = saved.turn;
+    G.aliveCount = saved.aliveCount; G.hiddenCardsEverOwned = saved.hiddenCardsEverOwned;
+    G.kuzunohaActive = saved.kuzunohaActive; G.permanentAbilityBan = saved.permanentAbilityBan;
+    G.battleSchoolBuff = saved.battleSchoolBuff; G.millenniumTokenSummons = saved.millenniumTokenSummons;
+    G.arisuDeathCount = saved.arisuDeathCount; G.keiseisenCounters = saved.keiseisenCounters;
+    G.bonusStone = saved.bonusStone; G.freeRerolls = saved.freeRerolls;
+    G.phase = saved.phase; G.shop = saved.shop;
+  }
+}
+
 function runSimBatch(N, onDone) {
   if(SIM_RUNNING) return;
   SIM_RUNNING = true;
