@@ -2325,7 +2325,8 @@ function _doDR(unit, mySide, otherSide, log) {
 
   // 주리 개전으로 부여된 팬짱 소환 뒤끝
   if(unit._juriDR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
-    G.juriDeaths=(G.juriDeaths||0)+1;
+    // 주리 본인이 죽을 때만 카운터 증가 (다른 유닛은 팬짱만 소환)
+    if(unit.baseId==='juri') G.juriDeaths=(G.juriDeaths||0)+1;
     var bonus=unit._juriSkin?G.juriDeaths*2:G.juriDeaths;
     var pc={id:'panchan_'+Math.random().toString(36).substr(2,4),baseId:'panchan',isToken:true,
       name:'팬짱',school:G.rioSchool||'게헨나',tier:1,atk:1+bonus,hp:1+bonus,kw:[],img:'token/panchan.png',isSkin:false,alive:true,poisonImmune:false};
