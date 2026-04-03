@@ -17,7 +17,7 @@ var CHARS = [
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
-  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
+  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:4,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:4,hp:2,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:2,atk:3,hp:3,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
@@ -221,20 +221,20 @@ var MAX_STONE = 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, himari:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};                               // 첫인사
-var DR_IDS  = {juri:1, chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
+var SOC_IDS = {juri:1, kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
-  juri:     {type:'뒤끝',desc:'<팬짱>을 부릅니다.\n팬짱은 게임 내 주리의 사망 수만큼 강화됩니다.',skinEffect:'웨이트리스 주리: 사망 수 x2',skinEffectDesc:'뒤끝: <팬짱>을 부릅니다.\n팬짱은 게임 내 주리의 사망 수<span style="color:#ffd700;font-weight:700">x2</span>만큼 강화됩니다.'},
+  juri:     {type:'개전',desc:'다른 아군 학생에게\n"뒤끝: <팬짱>을 부릅니다"를 부여합니다.\n팬짱은 게임 내 사망 수만큼 강화됩니다.',skinEffect:'웨이트리스 주리: 사망 수 x2',skinEffectDesc:'개전: 다른 아군 학생에게\n"뒤끝: <팬짱>을 부릅니다"를 부여합니다.\n팬짱은 게임 내 사망 수<span style="color:#ffd700;font-weight:700">x2</span>만큼 강화됩니다.'},
   chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 아군 두 명에게 부여',skinEffectDesc:'뒤끝: 아군 무작위 <span style="color:#ffd700;font-weight:700">2인에게</span> 보호막을 부여합니다.'},
   kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 동일'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +1/+1',skinEffect:'메이드 미도리: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +1/+1',skinEffect:'메이드 모모이: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
-  mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+3',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+3</span>'},
+  mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+2',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+2</span>'},
   aru:      {type:'선제',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',skinEffect:'드레스 아루: 3배',skinEffectDesc:'선제: 공격 시, 5~6티어 학생에게는 공격력이 <span style="color:#ffd700;font-weight:700">3배</span>가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.'},
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   iroha:    {type:'첫인사',desc:'<토라마루>로 교체됩니다. (토라마루: 5/1)\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffect:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffectDesc:'첫인사: <토라마루>로 교체됩니다. (토라마루: <span style="color:#ffd700;font-weight:700">10/2</span>)\n토라마루 파괴 시 이로하로 돌아옵니다.'},
@@ -1855,8 +1855,19 @@ function triggerSOC(u, mySide, otherSide, log) {
       }
     }
   }
+  else if(id==='juri'){
+    // 다른 아군 학생 1인에게 "뒤끝: 팬짱 소환" 부여
+    var juriCands=[];
+    for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==u)juriCands.push(mySide[i]);}
+    if(juriCands.length>0){
+      var jt=juriCands[Math.floor(Math.random()*juriCands.length)];
+      jt._juriDR=true;
+      jt._juriSkin=u.isSkin;
+      log.push({cls:'soc',text:'[개전] '+u.name+': '+jt.name+'에게 팬짱 소환 능력 부여!'});
+    }
+  }
   else if(id==='mari'){
-    var atkBuff=u.isSkin?3:2,hpBuff=u.isSkin?3:1;
+    var atkBuff=u.isSkin?3:2,hpBuff=u.isSkin?2:1;
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive){mySide[i].atk+=atkBuff;mySide[i].hp+=hpBuff;}}
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +'+atkBuff+'/+'+hpBuff});
   }
@@ -2281,15 +2292,16 @@ function _doDR(unit, mySide, otherSide, log) {
   var id=unit.baseId;
   if(unit.irohaRef) id='toramaru';
 
-  if(id==='juri'){
+  // 주리 개전으로 부여된 팬짱 소환 뒤끝
+  if(unit._juriDR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
     G.juriDeaths=(G.juriDeaths||0)+1;
-    var bonus=unit.isSkin?G.juriDeaths*2:G.juriDeaths;
+    var bonus=unit._juriSkin?G.juriDeaths*2:G.juriDeaths;
     var pc={id:'panchan_'+Math.random().toString(36).substr(2,4),baseId:'panchan',isToken:true,
       name:'팬짱',school:'게헨나',tier:1,atk:1+bonus,hp:1+bonus,kw:[],img:'token/panchan.png',isSkin:false,alive:true,poisonImmune:false};
     if(countAlive(mySide)<BATTLE_MAX)mySide.push(pc);
-    log.push({cls:'soc',text:'[뒤끝] 팬짱 소환! ('+pc.atk+'/'+pc.hp+')'});
+    log.push({cls:'soc',text:'[뒤끝] '+unit.name+' → 팬짱 소환! ('+pc.atk+'/'+pc.hp+')'});
   }
-  else if(id==='chinatsu'){
+  if(id==='chinatsu'){
     // 아군 무작위 1인에게 보호막 부여 (황금: 2인) — 학교 제한 해제
     var count=unit.isSkin?2:1;
     var candidates=[];
