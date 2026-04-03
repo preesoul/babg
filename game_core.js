@@ -2219,6 +2219,9 @@ function resolveStartOfCombat(a, b, log) {
       }
     }
   }
+  // 적에 7성 카드 존재 시 빨간 경고
+  if(b.some(function(u){return u.isHidden;}))
+    log.push({cls:'chat chat-fatal',text:'⚠ 적 편에 7성 카드가 있습니다!'});
   if(aFirst){outputQuotes(a);outputQuotes(b);}
   else{outputQuotes(b);outputQuotes(a);}
 }
