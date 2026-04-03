@@ -3,9 +3,9 @@ G={players:[],pool:{},turn:1,aliveCount:0,phase:'recruit',shop:[],
   battleSchoolBuff:{},millenniumTokenSummons:0,arisuDeathCount:0,
   keiseisenCounters:{},bonusStone:0,freeRerolls:0,
   shopExclusions:[],shopBuff:0,juriDeaths:0};
-SIM_STATS={};SIM_RUNNING=false;
+SIM_STATS={};SIM_RUNNING=false;SIM_EXPLORE=true;
 
-var N=500;
+var N=1000;
 process.stdout.write('[SIM] '+N+'\ud310 \uc2dc\ubc00 \uc2dc\uc791...\n');
 var st=Date.now();
 for(var i=0;i<N;i++){

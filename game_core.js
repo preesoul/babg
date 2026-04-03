@@ -1662,6 +1662,10 @@ function aiTurns() {
         var candidates=aiPool.filter(function(c){return c.tier>=Math.max(1,p.tier-1)&&G.pool[c.id]>0;});
         if(candidates.length===0)candidates=aiPool.filter(function(c){return G.pool[c.id]>0;});
         if(candidates.length===0)break;
+        // ε-greedy: 시뮬 탐색 모드에서 10% 확률로 완전 랜덤 구매
+        if(SIM_EXPLORE&&Math.random()<0.10){
+          tmpl=candidates[Math.floor(Math.random()*candidates.length)];
+        } else {
         var scored=candidates.map(function(c){
           var s=c.atk+c.hp+c.tier*1.5;
           for(var k=0;k<(c.kw||[]).length;k++){if(c.kw[k]==='poison')s+=4;else if(c.kw[k]==='cleave')s+=3;else if(c.kw[k]==='pierce')s+=2;else if(c.kw[k]==='shield')s+=2;else if(c.kw[k]==='windfury')s+=3;else if(c.kw[k]==='survive')s+=1;}
@@ -1693,6 +1697,7 @@ function aiTurns() {
         });
         scored.sort(function(a,b){return b.score-a.score;});
         tmpl=scored[0].tmpl;
+        } // end ε-greedy else
       }
       if(!takeFromPool(tmpl.id))break;
       if(p.purchasedSchools) p.purchasedSchools[tmpl.school]=true;
@@ -4090,6 +4095,7 @@ function nextTurn() {
 // 3단계: 카드별 승패 통계
 var SIM_STATS = {};
 var SIM_RUNNING = false;
+var SIM_EXPLORE = false; // ε-greedy 탐색 모드 (runSimBatch 내부에서만 true)
 
 // 4단계: 시뮬 통계 기반 구매 점수 보정 (winRate 0.5 기준 ±3)
 function simStatBonus(cardId) {
@@ -4229,10 +4235,12 @@ function runSimGame() {
 function runSimBatch(N, onDone) {
   if(SIM_RUNNING) return;
   SIM_RUNNING = true;
+  SIM_EXPLORE = true; // 탐색 모드 ON (시뮬 전용)
   var count = 0;
   function step() {
     if(count >= N) {
       SIM_RUNNING = false;
+      SIM_EXPLORE = false; // 탐색 모드 OFF (실제 게임 복귀)
       console.log('[SIM] '+N+'판 완료. 통계 업데이트됨.');
       if(onDone) onDone(SIM_STATS);
       return;
