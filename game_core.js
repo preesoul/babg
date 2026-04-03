@@ -2961,10 +2961,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
         resolveDeath(target,defArr,atkArr,log2,swp);
         swp.alive=false; // 자폭
       }
-      if(!target.alive){
-        log2.push({cls:'soc',text:'[선제] 스위퍼가 쓰러뜨렸다! '+attacker.name+'는 공격하지 않습니다.'});
-        return true;
-      }
+      // 말쿠트는 직접 공격하지 않음 — 항상 스킵
+      return true;
     }
     else if(attacker.baseId==='millennium_death_momoi'){
       // 데스 모모이 선제: 적 부여 수치 초기화
