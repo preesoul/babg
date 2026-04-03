@@ -249,7 +249,7 @@ var ABILITY_DESCS = {
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 두 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   tsurugi:  {type:'개전',desc:'공/체가 두 배가 됩니다.\n개전 마지막에 발동됩니다.',skinEffect:'수영복 츠루기: 세 배',skinEffectDesc:'개전: 공/체가 <span style="color:#ffd700;font-weight:700">세 배</span>가 됩니다.'},
   mine:     {type:'개전',desc:'아군의 모든 도발을 제거합니다.',skinEffect:'아이돌 미네: 동일'},
-  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨×2의 공/체를 가집니다.',skinEffect:'메이드 토키: 스케쥴 레벨×3',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×3</span>의 공/체를 가집니다.'},
+  toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨만큼의 공/체를 가집니다.',skinEffect:'바니걸 토키: 스케쥴 레벨×2',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>의 공/체를 가집니다.'},
   neru:     {type:'버티기',desc:'기본 능력 중 하나를 무작위로 얻습니다.',skinEffect:'바니걸 네루: 두 가지를 무작위로 얻습니다.',skinEffectDesc:'버티기: 기본 능력 중 <span style="color:#ffd700;font-weight:700">두 가지</span>를 무작위로 얻습니다.'},
   toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',skinEffect:'스킨 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',skinEffect:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
@@ -2738,7 +2738,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(unit.baseId==='toki'){
       var ae;
       var tierLvl=(_G.players&&_G.players[0]?_G.players[0].tier:1)||1;
-      ae=makeToken('abi_eshuh');var mult=unit.isSkin?3:2;ae.atk=tierLvl*mult;ae.hp=tierLvl*mult;ae.maxHp=ae.hp;
+      ae=makeToken('abi_eshuh');var mult=unit.isSkin?2:1;ae.atk=tierLvl*mult;ae.hp=tierLvl*mult;ae.maxHp=ae.hp;
       ae.alive=true;ae.poisonImmune=false;ae._mySide=side;
       applyEimiBonus(ae,side);
       side.push(ae);
