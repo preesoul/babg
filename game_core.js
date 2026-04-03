@@ -515,7 +515,10 @@ function newGame() {
   var startStone=SANDBOX?20:3;
   players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
-  for(var i=0;i<aiCount;i++) players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0});
+  for(var i=0;i<aiCount;i++){
+    var pType=i<4?AI_PERSONALITY_KEYS[i]:AI_PERSONALITY_KEYS[Math.floor(Math.random()*4)];
+    players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
+  }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0};
   rollShop();
@@ -1479,7 +1482,14 @@ function boardSwap(idx) {
 }
 
 // ========== AI ==========
-var AI_LEVEL_TARGETS={2:2,3:5,4:7,5:9,6:11};
+var AI_LEVEL_TARGETS={2:2,3:5,4:7,5:9,6:11}; // aiShouldUpgrade의 idealTurns 참조용으로 유지
+var AI_PERSONALITIES={
+  aggressive:{levelBias:15,buyThreshold:0,sellThreshold:0.7,hpDesperate:20,powerTurnSave:false},
+  standard:{levelBias:0,buyThreshold:3,sellThreshold:0.85,hpDesperate:15,powerTurnSave:false},
+  tempo:{levelBias:-10,buyThreshold:6,sellThreshold:0.9,hpDesperate:12,powerTurnSave:false},
+  greedy:{levelBias:5,buyThreshold:3,sellThreshold:0.8,hpDesperate:15,powerTurnSave:true}
+};
+var AI_PERSONALITY_KEYS=['aggressive','standard','tempo','greedy'];
 
 // AI용 마법카드 효과 (G.players[0] 하드코딩 우회 — p: AI 플레이어)
 var AI_SPELL_EFFECTS={
@@ -1541,6 +1551,115 @@ function aiUnitScore(u){
     else if(u.kw[k]==='survive')s+=2;else if(u.kw[k]==='taunt')s+=2;
   }
   return s;
+}
+
+function aiShouldUpgrade(p){
+  if(p.tier>=6) return false;
+  if(p.stone<p.upgradeCost) return false;
+  var pers=p.personality||AI_PERSONALITIES.standard;
+  var goldAfterLevel=p.stone-p.upgradeCost;
+  var canBuyAfter=Math.floor(goldAfterLevel/3);
+  var boardStrength=0;
+  for(var j=0;j<p.board.length;j++) boardStrength+=aiUnitScore(p.board[j]);
+
+  var score=0;
+  // 턴 압박: 이상적 턴 대비 얼마나 늦는지
+  var idealTurns=[0,0,2,5,7,9,11];
+  var turnDelta=G.turn-idealTurns[p.tier+1];
+  score+=turnDelta*3;
+  // 레벨업 후 잔여 골드
+  if(canBuyAfter>=2) score+=10;
+  else if(canBuyAfter>=1) score+=3;
+  else score-=8;
+  // 보드 상태
+  if(p.board.length>=MAX_BOARD) score+=5;
+  if(p.board.length<=2) score-=10;
+  // HP 압박
+  if(p.hp<=pers.hpDesperate) score-=15;
+  else if(p.hp>=30) score+=3;
+  // 성격 바이어스
+  score+=pers.levelBias;
+  // greedy 파워턴: 지금 0골드인데 다음 턴이면 레벨+구매 가능
+  if(pers.powerTurnSave){
+    var nextStone=Math.min(MAX_STONE,(p.turnStone||p.stone)+1);
+    var nextCost=Math.max(0,p.upgradeCost-1);
+    var nextGoldAfter=nextStone-nextCost;
+    if(goldAfterLevel<3&&nextGoldAfter>=3) score-=12;
+  }
+  // 무료/1골드 업그레이드는 무조건
+  if(p.upgradeCost<=1) score+=20;
+  return score>0;
+}
+
+function aiProactiveSell(p,aiStrat){
+  if(p.board.length<MAX_BOARD) return;
+  if(p.stone>=3) return;
+  var pers=p.personality||AI_PERSONALITIES.standard;
+  var weakIdx=-1,weakScore=999;
+  for(var j=0;j<p.board.length;j++){
+    var sc=aiUnitScore(p.board[j]);
+    if(!aiStrat.giveUp&&aiStrat.targetUnits.indexOf(p.board[j].baseId)!==-1) sc+=20;
+    if(!aiStrat.giveUp&&aiStrat.dominantSchool&&p.board[j].school===aiStrat.dominantSchool) sc+=10;
+    if(!aiStrat.giveUp&&aiStrat.deckPattern) sc+=aiStrat.deckPattern.sellProtect(p.board[j]);
+    if(p.board[j].isSkin) sc+=30;
+    if(sc<weakScore){weakScore=sc;weakIdx=j;}
+  }
+  var tierBaseline=p.tier*3+4;
+  var sellBar=tierBaseline*pers.sellThreshold;
+  if(weakIdx>=0&&weakScore<sellBar&&p.stone+1>=3){
+    if(p.board[weakIdx].baseId==='haine'){
+      var hBuff=p.board[weakIdx].isSkin?4:2;
+      for(var j2=0;j2<p.board.length;j2++){if(p.board[j2]&&j2!==weakIdx){p.board[j2].atk+=hBuff;p.board[j2].hp+=hBuff;}}
+    }
+    returnToPool(p.board[weakIdx].baseId);p.stone+=1;p.board.splice(weakIdx,1);
+  }
+}
+
+function aiSellReplace(p,aiStrat,aiPool){
+  if(p.board.length<MAX_BOARD||p.stone<2) return;
+  var pers=p.personality||AI_PERSONALITIES.standard;
+  var weakIdx=-1,weakScore=999;
+  for(var j=0;j<p.board.length;j++){
+    var sc=aiUnitScore(p.board[j]);
+    if(!aiStrat.giveUp&&aiStrat.targetUnits.indexOf(p.board[j].baseId)!==-1) sc+=20;
+    if(!aiStrat.giveUp&&aiStrat.dominantSchool&&p.board[j].school===aiStrat.dominantSchool) sc+=10;
+    if(!aiStrat.giveUp&&aiStrat.deckPattern) sc+=aiStrat.deckPattern.sellProtect(p.board[j]);
+    if(p.board[j].isSkin) sc+=30;
+    if(sc<weakScore){weakScore=sc;weakIdx=j;}
+  }
+  var highPool=aiPool.filter(function(c){return c.tier>=Math.max(1,p.tier-1)&&G.pool[c.id]>0;});
+  if(highPool.length===0) highPool=aiPool.filter(function(c){return G.pool[c.id]>0;});
+  if(highPool.length===0) return;
+  var bestScore=0,bestTmpl=null;
+  for(var j=0;j<highPool.length;j++){
+    var s=highPool[j].atk+highPool[j].hp+highPool[j].tier*1.5;
+    for(var k=0;k<(highPool[j].kw||[]).length;k++){
+      if(highPool[j].kw[k]==='poison')s+=4;else if(highPool[j].kw[k]==='cleave')s+=3;
+      else if(highPool[j].kw[k]==='shield')s+=2;else if(highPool[j].kw[k]==='windfury')s+=3;
+    }
+    if(DR_IDS[highPool[j].id])s+=5;if(SOC_IDS[highPool[j].id])s+=4;
+    if(s>bestScore){bestScore=s;bestTmpl=highPool[j];}
+  }
+  if(!bestTmpl) return;
+  if(bestScore>weakScore+4&&weakIdx>=0&&!p.board[weakIdx].isSkin){
+    if(p.board[weakIdx].baseId==='haine'){
+      var hBuff=p.board[weakIdx].isSkin?4:2;
+      for(var j2=0;j2<p.board.length;j2++){if(p.board[j2]&&j2!==weakIdx){p.board[j2].atk+=hBuff;p.board[j2].hp+=hBuff;}}
+    }
+    returnToPool(p.board[weakIdx].baseId);p.stone+=1;p.board.splice(weakIdx,1);
+    if(p.stone>=3&&takeFromPool(bestTmpl.id)){
+      var nu=makeMinion(bestTmpl,false);p.board.push(nu);p.stone-=3;triggerBattlecry(nu,p);
+    }
+  }
+}
+
+function aiSpendRemainder(p){
+  if(p.board.length===0||p.stone<2) return;
+  var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
+  if(aiSpells.length===0) return;
+  aiSpells.sort(function(a,b){return a.cost-b.cost;});
+  var sp=aiSpells[0];
+  AI_SPELL_EFFECTS[sp.id](p);p.stone-=sp.cost;
 }
 
 function aiSortBoard(board){
@@ -1623,14 +1742,8 @@ function aiGetStrategy(p) {
 function aiTurns() {
   for(var i=1;i<G.players.length;i++){
     var p=G.players[i];if(p.dead)continue;
-    var personality=(i%3)-1;
-    var shouldUpgrade=false;
-    if(p.tier<6){
-      var targetTurn=AI_LEVEL_TARGETS[p.tier+1];
-      if(targetTurn!==undefined){var hpBonus=p.hp>30?-1:(p.hp<15?2:0);if(G.turn>=targetTurn+personality+hpBonus)shouldUpgrade=true;}
-      if(p.stone>=p.upgradeCost+3&&p.hp>20)shouldUpgrade=true;
-    }
-    if(shouldUpgrade&&p.tier<6&&p.stone>=p.upgradeCost){p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;}
+    // Phase 1: 레벨업 판단 (스코어링)
+    if(aiShouldUpgrade(p)){p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;}
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
@@ -1648,6 +1761,10 @@ function aiTurns() {
       }
     }
 
+    // Phase 3: 선제적 매각 (보드 풀 + 골드 부족 시)
+    aiProactiveSell(p,aiStrat);
+
+    // Phase 4: 구매 루프
     var aiBuyLoop=0;
     while(p.stone>=3&&aiBuyLoop<20){
       aiBuyLoop++;
@@ -1716,32 +1833,11 @@ function aiTurns() {
       } else {returnToPool(tmpl.id);break;}
     }
 
-    if(p.board.length>=MAX_BOARD&&p.stone>=2){
-      var weakIdx=0,weakScore=999;
-      for(var j=0;j<p.board.length;j++){
-        var score=aiUnitScore(p.board[j]);
-        // Protect units needed for 7-star combo
-        if(!aiStrat.giveUp&&aiStrat.targetUnits.indexOf(p.board[j].baseId)!==-1)score+=20;
-        if(!aiStrat.giveUp&&aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&p.board[j].school===aiStrat.dominantSchool)score+=10;
-        // 덱 패턴 매각 보호
-        if(!aiStrat.giveUp&&aiStrat.deckPattern)score+=aiStrat.deckPattern.sellProtect(p.board[j]);
-        if(score<weakScore){weakScore=score;weakIdx=j;}
-      }
-      var avgTierStat=p.tier*3+4;
-      if(weakScore<avgTierStat&&!p.board[weakIdx].isSkin){
-        // AI 하이네 판매 시 아군 버프
-        if(p.board[weakIdx].baseId==='haine'){
-          var hBuff=p.board[weakIdx].isSkin?4:2;
-          for(var j2=0;j2<p.board.length;j2++){if(p.board[j2]&&j2!==weakIdx){p.board[j2].atk+=hBuff;p.board[j2].hp+=hBuff;}}
-        }
-        returnToPool(p.board[weakIdx].baseId);p.stone+=1;p.board.splice(weakIdx,1);
-        if(p.stone>=3){
-          var highPool=aiPool.filter(function(c){return c.tier>=p.tier-1&&G.pool[c.id]>0;});
-          if(highPool.length===0)highPool=aiPool.filter(function(c){return G.pool[c.id]>0;});
-          if(highPool.length>0){var best=highPool.sort(function(a,b){return(b.atk+b.hp)-(a.atk+a.hp);})[0];takeFromPool(best.id);var nu=makeMinion(best,false);p.board.push(nu);p.stone-=3;triggerBattlecry(nu,p);}
-        }
-      }
-    }
+    // Phase 5: 매각+교체 (개선된 버전)
+    aiSellReplace(p,aiStrat,aiPool);
+
+    // Phase 6: 잔여 골드 소비 (남은 골드로 주문)
+    aiSpendRemainder(p);
     p.board=p.board.filter(function(u){return !!u;});
     aiSortBoard(p.board);
 
@@ -4253,12 +4349,14 @@ function runSimGame() {
     // 더미(index 0) + AI 4명 구성
     var simPlayers = [{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
     for(var si = 0; si < 4; si++) {
+      var simPType=AI_PERSONALITY_KEYS[si%4];
       simPlayers.push({
         id:'sim_'+si, name:'SimAI_'+si,
         hp:40, stone:3, turnStone:2,
         tier:1, upgradeCost:UPGRADE_COSTS[1],
         board:[], dead:false, isPlayer:false,
-        purchasedSchools:{}, totalDamageTaken:0
+        purchasedSchools:{}, totalDamageTaken:0,
+        personality:AI_PERSONALITIES[simPType], personalityType:simPType
       });
     }
     G.players = simPlayers;
@@ -4360,7 +4458,8 @@ function runSimGameRandom() {
         hp:40, stone:3, turnStone:2,
         tier:1, upgradeCost:UPGRADE_COSTS[1],
         board:[], dead:false, isPlayer:false,
-        purchasedSchools:{}, totalDamageTaken:0
+        purchasedSchools:{}, totalDamageTaken:0,
+        personality:AI_PERSONALITIES.standard, personalityType:'standard'
       });
     }
     G.players = simPlayers;
