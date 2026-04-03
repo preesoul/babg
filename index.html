@@ -420,6 +420,19 @@ img.tutorial-highlight{border-radius:50%!important}
 #elim-flash.active{animation:screen-flash 0.5s ease-out forwards}
 .elim-ring{position:fixed;width:200px;height:200px;border:4px solid rgba(255,80,80,0.9);border-radius:50%;pointer-events:none;z-index:9998;animation:impact-ring 0.6s ease-out forwards}
 .elim-crack{position:fixed;height:3px;background:linear-gradient(90deg,transparent,rgba(255,100,100,0.9),transparent);pointer-events:none;z-index:9997;transform-origin:center;animation:crack-line 0.7s ease-out forwards}
+.btn-teal{background:#2d7d9a;color:#e0f4ff;border:2px solid #3a9abf}
+.btn-teal:hover{background:#3a9abf;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.roster-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,20,0.97);z-index:2000;overflow-y:auto;padding:14px 10px;box-sizing:border-box}
+.roster-overlay.active{display:block}
+.roster-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #1e3a5f}
+.roster-title{font-size:18px;font-weight:700;color:#e2e8f0;letter-spacing:1px}
+.roster-close{background:none;border:1px solid #334155;color:#94a3b8;font-size:14px;cursor:pointer;padding:5px 12px;border-radius:6px}
+.roster-school-hdr{display:flex;align-items:center;gap:8px;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid #1e3a5f}
+.roster-school-icon{width:26px;height:26px;opacity:0.9}
+.roster-school-name{font-size:14px;font-weight:700;color:#93c5fd}
+.roster-grid{display:flex;flex-wrap:wrap;gap:6px}
+.roster-card{cursor:pointer;width:90px;height:132px;position:relative;flex:0 0 90px}
+.roster-card .card{transform:scale(0.6);transform-origin:top left;pointer-events:none}
 </style>
 </head>
 <body>
@@ -436,7 +449,16 @@ img.tutorial-highlight{border-radius:50%!important}
     <img src="img/UI/bluearchive2.png" class="title-logo">
     <p class="sub">Battle Grounds</p>
     <button class="btn btn-blue btn-big" id="btn-play"><span class="btn-inner">게임 시작</span></button>
+    <button class="btn btn-teal" id="btn-roster" style="margin-top:8px"><span class="btn-inner">학생명부</span></button>
     <button class="btn btn-purple" id="btn-tutorial" style="margin-top:8px"><span class="btn-inner">튜토리얼</span></button>
+  </div>
+
+  <div id="roster-overlay" class="roster-overlay">
+    <div class="roster-hdr">
+      <div class="roster-title">학생명부</div>
+      <button class="roster-close" id="btn-roster-close">닫기</button>
+    </div>
+    <div id="roster-content"></div>
   </div>
 
   <div id="game-screen" class="screen">
@@ -2042,9 +2064,63 @@ doReroll=function(){
 document.getElementById('btn-reroll').addEventListener('click',doReroll);
 document.getElementById('btn-continue').addEventListener('click',continueBattle);
 
+function showRoster(){
+  var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','총학생회'];
+  var bySchool={};
+  SCHOOL_ORDER.forEach(function(s){bySchool[s]=[];});
+  CHARS.forEach(function(c){
+    if(c.tier>=1&&c.tier<=6&&bySchool[c.school]!==undefined) bySchool[c.school].push(c);
+  });
+  var html='';
+  SCHOOL_ORDER.forEach(function(school){
+    var chars=bySchool[school];
+    if(!chars||!chars.length)return;
+    chars.sort(function(a,b){return a.tier-b.tier;});
+    var icon=SCHOOL_ICONS[school]||'';
+    html+='<div class="roster-school-hdr">';
+    if(icon)html+='<img src="'+icon+'" class="roster-school-icon">';
+    html+='<span class="roster-school-name">'+school+'</span></div>';
+    html+='<div class="roster-grid">';
+    chars.forEach(function(c){
+      var sIcon=SCHOOL_ICONS[c.school]||'';
+      html+='<div class="roster-card" data-rid="'+c.id+'">';
+      html+='<div class="card tier'+c.tier+'" data-base-id="'+c.id+'">';
+      if(c.img)html+='<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
+      html+='<div class="card-inner">';
+      if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
+      html+='<div class="tier-stars">'+starStr(c.tier)+'</div>';
+      html+='<div class="card-spacer"></div>';
+      html+='<div class="name-banner">'+c.name+'</div>';
+      html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div>';
+      html+='</div></div></div>';
+    });
+    html+='</div>';
+  });
+  var content=document.getElementById('roster-content');
+  content.innerHTML=html;
+  var cards=content.querySelectorAll('.roster-card');
+  cards.forEach(function(el){
+    var bid=el.getAttribute('data-rid');
+    el.addEventListener('mouseenter',function(){
+      var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+    });
+    el.addEventListener('mouseleave',function(){
+      var tt=document.getElementById('hover-tooltip');if(tt)tt.style.display='none';
+    });
+    el.addEventListener('click',function(){
+      var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+    });
+  });
+  document.getElementById('roster-overlay').classList.add('active');
+}
+
 // 튜토리얼 버튼 & 건너뛰기
 document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
 document.getElementById('tut-skip').addEventListener('click',tutEnd);
+document.getElementById('btn-roster').addEventListener('click',showRoster);
+document.getElementById('btn-roster-close').addEventListener('click',function(){
+  document.getElementById('roster-overlay').classList.remove('active');
+});
 </script>
 </body>
 </html>
