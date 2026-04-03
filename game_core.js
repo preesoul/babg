@@ -17,7 +17,7 @@ var CHARS = [
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
-  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:2,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
+  {id:'juri',    name:'주리',   school:'게헨나',  tier:2,atk:1,hp:5,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:2,atk:3,hp:3,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
@@ -2553,7 +2553,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       isSkin:m.isSkin,tier:m.tier,school:m.school||'',baseId:m.baseId||'',
       alive:skipSOC?(m.alive!==undefined?m.alive:true):true,
       _abilitiesStripped:skipSOC?(!!m.stripped):false,
-      poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,
+      poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,_juriDR:m._juriDR||false,_juriSkin:m._juriSkin||false,
       noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'),
       abilityImmune:(m.baseId==='trinity_mika'),
       _battlesSurvived:m._battlesSurvived||0,
