@@ -2206,24 +2206,25 @@ function resolveStartOfCombat(a, b, log) {
   else{processSide(b,a);processSide(a,b);}
   // 개전 완료 후 7성 히든 캐릭터 대사 출력
   var quotedBids={};
-  function outputQuotes(side){
+  function outputQuotes(side,isEnemy){
     for(var i=0;i<side.length;i++){
       var u=side[i];
       if(!u.isHidden||quotedBids[u.baseId]) continue;
       var info=ABILITY_DESCS[u.baseId];
       if(info&&info.quote){
         quotedBids[u.baseId]=true;
-        var cls=info.quoteCls?('chat '+info.quoteCls):'chat';
+        var baseCls=info.quoteCls?('chat '+info.quoteCls):'chat';
+        var cls=isEnemy?(baseCls+' chat-fatal'):baseCls;
         log.push({cls:cls,text:info.quote});
-        if(info.quote2) log.push({cls:'chat',text:info.quote2});
+        if(info.quote2) log.push({cls:isEnemy?'chat chat-fatal':'chat',text:info.quote2});
       }
     }
   }
   // 적에 7성 카드 존재 시 빨간 경고
   if(b.some(function(u){return u.isHidden;}))
     log.push({cls:'chat chat-fatal',text:'⚠ 적 편에 7성 카드가 있습니다!'});
-  if(aFirst){outputQuotes(a);outputQuotes(b);}
-  else{outputQuotes(b);outputQuotes(a);}
+  if(aFirst){outputQuotes(a,false);outputQuotes(b,true);}
+  else{outputQuotes(b,true);outputQuotes(a,false);}
 }
 
 // 뒤끝 트리거
