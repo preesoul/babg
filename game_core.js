@@ -2145,7 +2145,8 @@ function triggerSOC(u, mySide, otherSide, log) {
     u._copiedAbilities=[];
     for(var i=0;i<copySpecialCount;i++){
       u._copiedAbilities.push(shuffledSpecial[i]);
-      log.push({cls:'soc',text:'[개전] 세미나: 특수능력 복사 → '+shuffledSpecial[i].baseId+' ('+shuffledSpecial[i].type+')'});
+      var _spName=(findAnyChar(shuffledSpecial[i].baseId)||{}).name||shuffledSpecial[i].baseId;
+      log.push({cls:'soc',text:'[개전] 세미나: 특수능력 복사 → '+_spName+' ('+shuffledSpecial[i].type+')'});
     }
     // 복사된 개전 즉시 발동
     for(var i=0;i<u._copiedAbilities.length;i++){
@@ -3149,23 +3150,22 @@ function runBattle(boardA, boardB, startWithA, opts) {
               if(!_G.keiseisenCounters) _G.keiseisenCounters={};
               _G.keiseisenCounters['nagusa']=Math.min(7,(_G.keiseisenCounters['nagusa']||0)+kAdd2);
             }
-            if(target.hp<=0){msKillCount++;break;}
-          }
-          // 와카모: 타격 수만큼 호버크래프트 카운터
-          if(attacker.baseId==='wakamo'&&msHits>0){
-            var actualHits=Math.min(msHits,ms+1); // 실제 타격 횟수 (킬로 조기종료 포함)
-            var hcAdd=attacker.isSkin?actualHits*2:actualHits;
-            attacker._hovercraftCounter=Math.min(4,(attacker._hovercraftCounter||0)+hcAdd);
-            stepLog.push({cls:'soc',text:'[선제] '+attacker.name+': 호버크래프트 카운터 +'+hcAdd+' (현재: '+attacker._hovercraftCounter+')'});
-            if(attacker._hovercraftCounter>=4){
-              attacker._hovercraftCounter-=4;
-              var hc=makeToken('hovercraft');
-              hc.atk=attacker.isSkin?20:10;hc.hp=attacker.isSkin?20:10;
-              hc.alive=true;hc.poisonImmune=false;hc._mySide=atkArr2;
-              hc.isSkin=attacker.isSkin;hc._wakamoGolden=attacker.isSkin;
-              if(countAlive(atkArr2)<BATTLE_MAX){atkArr2.push(hc);}
-              stepLog.push({cls:'soc',text:'[패시브] '+attacker.name+': 호버크래프트 소환! ('+hc.atk+'/'+hc.hp+')'});
+            // 와카모: 타격당 호버크래프트 카운터
+            if(attacker.baseId==='wakamo'&&!msHit.blocked){
+              var hcAdd=attacker.isSkin?2:1;
+              attacker._hovercraftCounter=Math.min(4,(attacker._hovercraftCounter||0)+hcAdd);
+              stepLog.push({cls:'soc',text:'[선제] '+attacker.name+': 호버크래프트 카운터 +'+hcAdd+' (현재: '+attacker._hovercraftCounter+')'});
+              if(attacker._hovercraftCounter>=4){
+                attacker._hovercraftCounter-=4;
+                var hc=makeToken('hovercraft');
+                hc.atk=attacker.isSkin?20:10;hc.hp=attacker.isSkin?20:10;
+                hc.alive=true;hc.poisonImmune=false;hc._mySide=atkArr2;
+                hc.isSkin=attacker.isSkin;hc._wakamoGolden=attacker.isSkin;
+                if(countAlive(atkArr2)<BATTLE_MAX){atkArr2.push(hc);}
+                stepLog.push({cls:'soc',text:'[패시브] '+attacker.name+': 호버크래프트 소환! ('+hc.atk+'/'+hc.hp+')'});
+              }
             }
+            if(target.hp<=0){msKillCount++;break;}
           }
           // 다회 공격 후 반격 1회
           if(target.alive){
