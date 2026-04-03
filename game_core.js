@@ -493,7 +493,7 @@ function initPool() {
   }
   return pool;
 }
-function takeFromPool(charId) { if(G.pool[charId]>0){G.pool[charId]--;return true;} return false; }
+function takeFromPool(charId) { if(SANDBOX)return true; if(G.pool[charId]>0){G.pool[charId]--;return true;} return false; }
 function returnToPool(charId,count) {
   if(!count)count=1;
   var max=0;
