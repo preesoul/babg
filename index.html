@@ -430,15 +430,14 @@ img.tutorial-highlight{border-radius:50%!important}
 .roster-school-hdr{display:flex;align-items:center;gap:8px;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid #1e3a5f}
 .roster-school-icon{width:26px;height:26px;filter:invert(1);opacity:0.85}
 .roster-school-name{font-size:14px;font-weight:700;color:#93c5fd}
-.roster-tier-row{display:flex;align-items:stretch;margin-bottom:6px}
-.roster-tier-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:700;color:#4a6880;padding:3px 4px;border-right:2px solid #1e3a5f;margin-right:8px;display:flex;align-items:center;justify-content:center;min-width:18px}
-.roster-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;flex:1}
-.roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;aspect-ratio:2/3;border:1.5px solid #1e3a5f}
+.roster-cards-flow{display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start;margin-bottom:4px}
+.rt-sep{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:22px;height:150px;border-right:2px solid #2a5070;padding-right:3px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;color:#7a98b8}
+.roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:100px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
 .roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
 .roster-card:hover{filter:brightness(1.2)}
 .r-portrait{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .r-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.82);color:#e0e8f0;font-size:9px;font-weight:700;text-align:center;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:600px){.roster-grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:600px){.roster-card{width:60px}.rt-sep{height:90px}}
 </style>
 </head>
 <body>
@@ -2087,20 +2086,19 @@ function showRoster(){
     html+='<span class="roster-school-name">'+school+'</span></div>';
     var byTier={};
     chars.forEach(function(c){if(!byTier[c.tier])byTier[c.tier]=[];byTier[c.tier].push(c);});
+    html+='<div class="roster-cards-flow">';
     for(var t=1;t<=6;t++){
       var tc=byTier[t];
       if(!tc||!tc.length)continue;
-      html+='<div class="roster-tier-row">';
-      html+='<div class="roster-tier-label">'+t+'T</div>';
-      html+='<div class="roster-grid">';
+      html+='<div class="rt-sep">'+t+'T</div>';
       tc.forEach(function(c){
         html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
         if(c.img)html+='<img class="r-portrait" src="img/'+c.img+'" onerror="this.style.display=\'none\'">';
         html+='<div class="r-name">'+c.name+'</div>';
         html+='</div>';
       });
-      html+='</div></div>';
     }
+    html+='</div>';
   });
   var content=document.getElementById('roster-content');
   content.innerHTML=html;
@@ -2119,7 +2117,11 @@ document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
 document.getElementById('tut-skip').addEventListener('click',tutEnd);
 document.getElementById('btn-roster').addEventListener('click',showRoster);
 document.getElementById('btn-roster-close').addEventListener('click',function(){
+  hideTooltip();
   document.getElementById('roster-overlay').classList.remove('active');
+});
+document.getElementById('roster-overlay').addEventListener('click',function(e){
+  if(!e.target.closest('.roster-card')) hideTooltip();
 });
 </script>
 </body>
