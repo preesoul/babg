@@ -447,7 +447,7 @@ var SPELLS = [
   {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',img:'img/spell/venom.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
   {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,img:'img/spell/dressing.png',
-    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;m.name=tmpl.skin;m.atk=tmpl.atk*2+1;m.hp=tmpl.hp*2+1;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;applySkinKwTransform(tmpl,m);return true;}},
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;var bonusAtk=m.atk-tmpl.atk;var bonusHp=m.hp-tmpl.hp;m.name=tmpl.skin;m.atk=tmpl.atk*2+1+bonusAtk;m.hp=tmpl.hp*2+1+bonusHp;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;applySkinKwTransform(tmpl,m);return true;}},
   {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',img:'img/spell/school_visit.png',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',img:'img/spell/sensei.png',
@@ -2873,6 +2873,11 @@ function makeSweeper(){
 
 function runBattle(boardA, boardB, startWithA, opts) {
   var _G=(opts&&opts.simCtx)||G;
+  // 전투 중 획득 키워드가 보드에 잔존하지 않도록 _baseKw 스냅샷 (시뮬 제외)
+  if(!opts||!opts.simCtx){
+    for(var _bk=0;_bk<boardA.length;_bk++) boardA[_bk]._baseKw=(boardA[_bk].kw||[]).slice();
+    for(var _bk=0;_bk<boardB.length;_bk++) boardB[_bk]._baseKw=(boardB[_bk].kw||[]).slice();
+  }
   _G.permanentAbilityBan=false;
   _G.battleSchoolBuff={};
   var skipSOC=!!(opts&&opts.skipSOC);
@@ -3578,6 +3583,11 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   G.rioSchool=null;
+  // 전투 종료 후 보드 원본 kw 복원 (시뮬 제외)
+  if(!opts||!opts.simCtx){
+    for(var _bk=0;_bk<boardA.length;_bk++) if(boardA[_bk]._baseKw!==undefined){boardA[_bk].kw=boardA[_bk]._baseKw.slice();delete boardA[_bk]._baseKw;}
+    for(var _bk=0;_bk<boardB.length;_bk++) if(boardB[_bk]._baseKw!==undefined){boardB[_bk].kw=boardB[_bk]._baseKw.slice();delete boardB[_bk]._baseKw;}
+  }
   return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill,panchanDeathsA:a._panchanDeaths||0,panchanDeathsB:b._panchanDeaths||0};
 }
 
