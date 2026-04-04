@@ -1036,7 +1036,8 @@ function buyMinion(idx, insertIdx) {
     addedUnit=m;
   }
   triggerBattlecry(addedUnit,p);
-  // 영입 보이스 재생
+  // 영입 효과음
+  playCardDrop();
   playRecruitVoice(addedUnit.baseId);
   // 5~6성 영입 시 화면 흔들림
   if(addedUnit.tier>=5) shakeScreen(addedUnit.tier>=6?'heavy':'light');
@@ -1071,6 +1072,10 @@ var RECRUIT_VOICES = {
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
   if(src){try{var a=new Audio(src);a.volume=0.7;a.play();}catch(e){}}
+}
+var _cardDropSfx=null;
+function playCardDrop(){
+  try{if(!_cardDropSfx)_cardDropSfx=new Audio('sfx/card_drop.mp3');_cardDropSfx.currentTime=0;_cardDropSfx.volume=0.5;_cardDropSfx.play();}catch(e){}
 }
 function shakeScreen(intensity){
   var el=document.querySelector('.main-content')||document.body;
