@@ -1038,6 +1038,8 @@ function buyMinion(idx, insertIdx) {
   triggerBattlecry(addedUnit,p);
   // 영입 보이스 재생
   playRecruitVoice(addedUnit.baseId);
+  // 5~6성 영입 시 화면 흔들림
+  if(addedUnit.tier>=5) shakeScreen(addedUnit.tier>=6?'heavy':'light');
   if(willTriple) { showDiscover(p); } else { renderAll(); }
 }
 
@@ -1069,6 +1071,14 @@ var RECRUIT_VOICES = {
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
   if(src){try{var a=new Audio(src);a.volume=0.7;a.play();}catch(e){}}
+}
+function shakeScreen(intensity){
+  var el=document.querySelector('.main-content')||document.body;
+  var cls=intensity==='heavy'?'shake-heavy':'shake-light';
+  el.classList.remove('shake-light','shake-heavy');
+  void el.offsetWidth; // reflow로 애니메이션 리셋
+  el.classList.add(cls);
+  setTimeout(function(){el.classList.remove(cls);},500);
 }
 
 // ========== DISCOVER (발견) ==========
