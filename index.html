@@ -445,7 +445,18 @@ img.tutorial-highlight{border-radius:50%!important}
 .roster-card:hover{filter:brightness(1.2)}
 .r-portrait{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .r-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.82);color:#e0e8f0;font-size:9px;font-weight:700;text-align:center;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:600px){.roster-card{width:78px}.rt-sep{height:117px}}
+@media(max-width:600px){
+  .roster-card{width:78px}.rt-sep{height:117px}
+  body{padding:0 6px}
+  .game-layout{gap:4px}
+  .side-panel{width:160px;min-width:160px;padding:4px}
+  .board{padding:4px 6px;gap:6px}
+  .board .card{min-width:60px}
+  .shop-row{gap:4px;padding:0 2px}
+  .shop .card{flex-shrink:1}
+  .shop-actions{gap:4px;padding:0 2px}
+  .shop-actions .btn{font-size:11px;padding:6px 8px}
+}
 </style>
 </head>
 <body>
@@ -628,7 +639,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404j"></script>
+<script src="game_core.js?v=20260404k"></script>
 <script>
 
 function showGameOver() {
