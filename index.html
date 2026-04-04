@@ -19,6 +19,11 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .stone-display{display:flex;align-items:center;justify-content:center;gap:6px;padding:18px 0 6px;position:relative;z-index:1}
 .stone-display .stone-num{font-size:28px;font-weight:900;color:#fff}
 .stone-icon.xl{width:36px;height:36px}
+.side-panel-right{width:140px;flex-shrink:0;display:flex;flex-direction:column;padding:0 4px}
+.sell-zone{height:180px;border:2px dashed #5a3a3a;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(40,20,20,0.3);transition:all 0.2s;cursor:default}
+.sell-zone.drag-hover{border-color:#e04040;background:rgba(220,40,40,0.15);box-shadow:0 0 12px rgba(220,40,40,0.3)}
+.sell-zone-inner{text-align:center;color:#8a6a6a;font-size:24px;line-height:1.6;pointer-events:none}
+@media(max-width:900px){.side-panel-right{display:none}}
 .bench-empty-slot{width:120px;height:100%;border:2px dashed #3a5a6e;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#5a7a8e;font-size:10px;line-height:1.4;margin:0 auto}
 .bench-card-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
 .bench-btns{display:flex;gap:4px;width:100%}
@@ -589,6 +594,14 @@ img.tutorial-highlight{border-radius:50%!important}
         </div>
       </div>
     </div>
+    <div class="side-panel-right" id="side-panel-right">
+      <div style="margin-top:20px">
+        <div class="section-label" style="margin:0 0 2px 0;font-size:10px">돌려보냄</div>
+        <div id="ui-sell-zone" class="sell-zone">
+          <div class="sell-zone-inner">🔄<br><span style="font-size:11px">여기에 드래그<br>하면 판매</span></div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>
@@ -831,6 +844,7 @@ function renderAll() {
     benchEl.innerHTML='<div class="bench-empty-slot"><span>샬레에서 우클릭 해<br>여기로 보관</span></div>';
   }
   if(!_benchDragBound){_benchDragBound=true;initBenchDrag();}
+  initSellZone();
 
   var shopEl=document.getElementById('ui-shop');
   var sHtml='';var prevWasSpell=false;
@@ -1138,6 +1152,27 @@ function initBenchDrag(){
     benchEl.classList.remove('drag-over');
     var all=document.querySelectorAll('.drag-over');
     for(var i=0;i<all.length;i++)all[i].classList.remove('drag-over');
+    dragSrcIdx=-1;dragSource='';
+  });
+}
+var _sellZoneBound=false;
+function initSellZone(){
+  if(_sellZoneBound)return;
+  var sz=document.getElementById('ui-sell-zone');
+  if(!sz)return;
+  _sellZoneBound=true;
+  sz.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';});
+  sz.addEventListener('dragenter',function(e){e.preventDefault();sz.classList.add('drag-hover');});
+  sz.addEventListener('dragleave',function(e){
+    if(!sz.contains(e.relatedTarget))sz.classList.remove('drag-hover');
+  });
+  sz.addEventListener('drop',function(e){
+    e.preventDefault();sz.classList.remove('drag-hover');
+    if(dragSource==='board'&&dragSrcIdx>=0){
+      sellMinion(dragSrcIdx);
+    } else if(dragSource==='bench'){
+      sellBench();
+    }
     dragSrcIdx=-1;dragSource='';
   });
 }
