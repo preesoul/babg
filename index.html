@@ -852,6 +852,7 @@ function renderAll() {
       var idx=card.getAttribute('data-shop');
       e.dataTransfer.setData('text/plain','shop:'+idx);
       dragSource='shop';dragSrcIdx=parseInt(idx);
+      playCardPick();
     });
     // 스펠/히든카드는 여전히 클릭으로 구매
     shopEl.addEventListener('click',function(e){
@@ -995,6 +996,7 @@ function onDragStart(e){
   e.dataTransfer.effectAllowed='move';
   e.dataTransfer.setData('text/plain','board:'+dragSrcIdx);
   hideTooltip();
+  playCardPick();
 }
 function onDragEnd(e){
   this.classList.remove('dragging');

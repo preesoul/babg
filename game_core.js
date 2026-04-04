@@ -1077,6 +1077,10 @@ var _cardDropSfx=null;
 function playCardDrop(){
   try{if(!_cardDropSfx)_cardDropSfx=new Audio('sfx/card_drop.mp3');_cardDropSfx.currentTime=0;_cardDropSfx.volume=0.5;_cardDropSfx.play();}catch(e){}
 }
+var _cardPickSfx=null;
+function playCardPick(){
+  try{if(!_cardPickSfx)_cardPickSfx=new Audio('sfx/card_pick.mp3');_cardPickSfx.currentTime=0;_cardPickSfx.volume=0.4;_cardPickSfx.play();}catch(e){}
+}
 function shakeScreen(intensity){
   var el=document.querySelector('.main-content')||document.body;
   var cls=intensity==='heavy'?'shake-heavy':'shake-light';
