@@ -1133,6 +1133,8 @@ function playSfx(name,vol){
     battlecry:'sfx/Battlecry_1.ogg',
     buff:'sfx/Spell_Swordsmith_Missile_1.ogg',
     coin_toggle:'sfx/tutorial_mission_hero_coin_mouse_over.ogg',
+    hero_explode:'sfx/hero_portrait_explode_1.ogg',
+    aoe_damage:'sfx/Arrow_Targeted_Explode_01.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
     drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
     drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'
@@ -4274,6 +4276,12 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       renderBattleSnap(currSnap);
       appendLog(step.log,logEl);
       playSfx('soc_trigger',0.3);
+      // 광역 데미지 감지 (히비키/아즈사/열차포 등) → AoE 효과음
+      var hasAoeDmg=false;
+      if(step.log){for(var _l=0;_l<step.log.length;_l++){var _t=step.log[_l].text||'';if(_t.indexOf('적 전체')!==-1||_t.indexOf('광역 데미지')!==-1||_t.indexOf('디버프로 쓰러')!==-1){hasAoeDmg=true;break;}}}
+      if(hasAoeDmg) setTimeout(function(){playSfx('aoe_damage',0.4);},200);
+      // 사망 감지 → 히어로 폭발
+      ['a','b'].forEach(function(side){for(var i=0;i<currSnap[side].length;i++){var prev2=prevSnap[side]&&prevSnap[side][i];var curr2=currSnap[side][i];if(prev2&&prev2.alive&&curr2&&!curr2.alive){playSfx('aoe_damage',0.3);break;}}});
       // 스탯 변화 감지 → 반짝 이펙트
       applySocEffects(prevSnap,currSnap);
       // 기습 부여 감지 → 은신음
@@ -4409,6 +4417,8 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
           if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('pierce')!==-1){
             setTimeout(function(){playSfx('pierce',0.3);},300);
           }
+          // 뒤끝 등 광역 데미지 로그 감지 (아즈사 등)
+          if(step.log){for(var _al=0;_al<step.log.length;_al++){var _at=step.log[_al].text||'';if(_at.indexOf('적 전체')!==-1){setTimeout(function(){playSfx('aoe_damage',0.4);},300);break;}}}
           renderBattleSnap(currSnap);
           // 공격자 원위치 복귀
           var atkRow2=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
@@ -4656,7 +4666,7 @@ function finishBattle(result) {
       setTimeout(function(){tutNext();},500);
     }
   }
-  if(eliminated){playEliminationEffect(_showResult);}
+  if(eliminated){playSfx('hero_explode',0.6);shakeScreen('heavy');playEliminationEffect(_showResult);}
   else{_showResult();}
 }
 
