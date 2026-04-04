@@ -374,6 +374,7 @@ function makeToken(tokenId) {
 }
 
 // ========== MAGIC CARDS ==========
+var BUFF_SPELL_IDS={encourage:1,gold_bullet:1,visit_plan:1,visit_buff:1,unity_mt:1,sensei:1,higher_body:1,lower_body:1,get_set_go:1};
 var SPELLS = [
   {id:'encourage',name:'격려하기',cost:1,tier:1,desc:'스케쥴 학생 전체 공/체 +1',target:'auto',img:'img/spell/encourage.png',
     effect:function(G){var ab=getAyumuBonus();for(var i=0;i<G.shop.length;i++){if(G.shop[i]&&!G.shop[i].isSpell){G.shop[i].atk+=1+ab;G.shop[i].hp+=1+ab;}}}},
@@ -843,14 +844,14 @@ function buySpell(idx) {
   if(spell.once){if(!G.usedOnceSpells)G.usedOnceSpells={};G.usedOnceSpells[spell.id]=true;}
   var result=spell.effect(G);
   if(result===false){p.stone+=item.cost;if(spell.once)delete G.usedOnceSpells[spell.id];}
-  else{playSfx('buff',0.3);}
+  else if(BUFF_SPELL_IDS[spell.id]){playSfx('buff',0.3);}
   renderAll();
 }
 
 function applyPendingSpell(idx) {
   if(!G.pendingSpell)return;
   var result=G.pendingSpell.effect(G,idx);
-  if(result!==false) playSfx('buff',0.3);
+  if(result!==false&&BUFF_SPELL_IDS[G.pendingSpell.id]) playSfx('buff',0.3);
   G.pendingSpell=null;
   renderAll();
 }
