@@ -1030,22 +1030,16 @@ var HIDDEN_CARD_ENTRANCE = {
         var cards=boardEl.querySelectorAll('.card');
         var lastCard=cards[cards.length-1];
         if(lastCard){
-          lastCard.style.transition='none';
-          lastCard.style.transform='translateY(-500px) scale(1.3)';
-          lastCard.style.opacity='0';
+          lastCard.style.transition='transform 0.06s ease-in-out';
+          lastCard.style.transform='scale(1.15)';
           setTimeout(function(){
-            lastCard.style.transition='transform 0.15s ease-in, opacity 0.15s ease-in';
-            lastCard.style.transform='translateY(0) scale(1)';
-            lastCard.style.opacity='1';
-            // 착지 후 흔들림
-            setTimeout(function(){
-              lastCard.style.transition='transform 0.08s ease-in-out';
-              lastCard.style.transform='translateX(-6px) rotate(-2deg)';
-              setTimeout(function(){lastCard.style.transform='translateX(5px) rotate(1.5deg)';
-              setTimeout(function(){lastCard.style.transform='translateX(-3px) rotate(-1deg)';
-              setTimeout(function(){lastCard.style.transform='translateX(0) rotate(0)';},80);},80);},80);
-            },150);
-          },50);
+            lastCard.style.transform='translateX(-12px) rotate(-4deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(10px) rotate(3deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(-8px) rotate(-2.5deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(6px) rotate(2deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(-4px) rotate(-1deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(0) rotate(0) scale(1)';},60);},60);},60);},60);},60);
+          },100);
         }
         return;
       }
