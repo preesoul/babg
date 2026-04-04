@@ -1040,7 +1040,7 @@ function buyMinion(idx, insertIdx) {
   }
   triggerBattlecry(addedUnit,p);
   // 영입 효과음
-  playCardDrop();
+  playCardDrop(addedUnit.tier);
   playRecruitVoice(addedUnit.baseId);
   // 5~6성 영입 시 화면 흔들림
   if(addedUnit.tier>=5) shakeScreen(addedUnit.tier>=6?'heavy':'light');
@@ -1076,9 +1076,11 @@ function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
   if(src){try{var a=new Audio(src);a.volume=0.7;a.play();}catch(e){}}
 }
-var _cardDropSfx=null;
-function playCardDrop(){
-  try{if(!_cardDropSfx)_cardDropSfx=new Audio('sfx/card_drop.mp3');_cardDropSfx.currentTime=0;_cardDropSfx.volume=0.5;_cardDropSfx.play();}catch(e){}
+function playCardDrop(tier){
+  tier=tier||1;
+  if(tier>=5) playSfx('drop_high',0.5);
+  else if(tier>=3) playSfx('drop_mid',0.5);
+  else playSfx('drop_low',0.5);
 }
 var _cardPickSfx=null;
 function playCardPick(){
@@ -1128,7 +1130,10 @@ function playSfx(name,vol){
     airship_explode:'sfx/Shared_Fire_Impact_Large.ogg',
     stealth_on:'sfx/stealth_on.ogg',
     battlecry:'sfx/Battlecry_1.ogg',
-    buff:'sfx/Spell_Swordsmith_Missile_1.ogg'
+    buff:'sfx/Spell_Swordsmith_Missile_1.ogg',
+    drop_low:'sfx/FX_MinionSummon_Drop.ogg',
+    drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
+    drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'
   };
   var src=paths[name];if(!src)return;
   try{
@@ -1336,7 +1341,7 @@ function aiDiscover(p) {
 // ========== ADD TO BOARD (트리플 체크 포함) ==========
 function addToBoard(p, m) {
   // 영입 효과음 (모든 경로 공통)
-  if(p.isPlayer){playCardDrop();playRecruitVoice(m.baseId);if(m.tier>=5)shakeScreen(m.tier>=6?'heavy':'light');}
+  if(p.isPlayer){playCardDrop(m.tier);playRecruitVoice(m.baseId);if(m.tier>=5)shakeScreen(m.tier>=6?'heavy':'light');}
   // 트리플 체크
   var count=0;
   for(var i=0;i<p.board.length;i++){
