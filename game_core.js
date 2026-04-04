@@ -2812,6 +2812,8 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
           applyEimiBonus(c4tk,mySide);
           mySide.push(c4tk);
           log.push({cls:'soc',text:'[뒤끝] '+unit.name+': C4 소환! ('+c4tk.atk+'/'+c4tk.hp+')'+(_c4lr>0?' (린 추가)':'')});
+        } else {
+          log.push({cls:'soc',text:'[뒤끝] '+unit.name+': C4 소환 실패 (필드 가득)'});
         }
       }
     }
