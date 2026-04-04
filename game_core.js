@@ -39,13 +39,13 @@ var CHARS = [
   {id:'yuzu',    name:'유즈',   school:'밀레니엄',tier:3,atk:3,hp:3,kw:[],            skin:'유즈(메이드)',     img:'Yuzu.png',           imgGold:'Yuzu_(Maid).png'},
   // 트리니티 2학년
   {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:5,hp:1,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
-  {id:'hanako',  name:'하나코', school:'트리니티',tier:3,atk:3,hp:5,kw:['poison'],    skin:'하나코(수영복)',   img:'Hanako.png',         imgGold:'Hanako_(Swimsuit).png'},
+  {id:'hanako',  name:'하나코', school:'트리니티',tier:3,atk:2,hp:5,kw:['poison'],    skin:'하나코(수영복)',   img:'Hanako.png',         imgGold:'Hanako_(Swimsuit).png'},
   {id:'hifumi',  name:'히후미', school:'트리니티',tier:3,atk:4,hp:4,kw:['reborn'],    skin:'히후미(수영복)',   img:'Hifumi.png',         imgGold:'Hifumi_(Swimsuit).png'},
 
   // ===== Tier 4 (밸류12) =====
   // 게헨나 2학년
   {id:'iori',    name:'이오리', school:'게헨나',  tier:4,atk:7,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
-  {id:'iroha',   name:'이로하', school:'게헨나',  tier:4,atk:3,hp:2,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
+  {id:'iroha',   name:'이로하', school:'게헨나',  tier:4,atk:5,hp:4,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:5,hp:4,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
   // 밀레니엄 2학년
@@ -68,19 +68,19 @@ var CHARS = [
 
   // ===== Tier 6 (밸류18) =====
   // 게헨나 3학년
-  {id:'hina',    name:'히나',   school:'게헨나',  tier:6,atk:15,hp:5,kw:['cleave'],   skin:'히나(드레스)',     img:'Hina.png',           imgGold:'Hina_(Dress).png'},
-  {id:'makoto',  name:'마코토', school:'게헨나',  tier:6,atk:6,hp:6,kw:[],            skin:'마코토(수영복)',   img:'Makoto.png',         imgGold:'Makoto_(Swimsuit).png'},
+  {id:'hina',    name:'히나',   school:'게헨나',  tier:6,atk:13,hp:3,kw:['cleave'],   skin:'히나(드레스)',     img:'Hina.png',           imgGold:'Hina_(Dress).png'},
+  {id:'makoto',  name:'마코토', school:'게헨나',  tier:6,atk:7,hp:7,kw:[],            skin:'마코토(수영복)',   img:'Makoto.png',         imgGold:'Makoto_(Swimsuit).png'},
   // 밀레니엄 3학년
-  {id:'neru',    name:'네루',   school:'밀레니엄',tier:5,atk:9,hp:7,kw:['shield','survive'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
-  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:4,hp:4,kw:['preemptive'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
+  {id:'neru',    name:'네루',   school:'밀레니엄',tier:5,atk:7,hp:7,kw:['shield','survive'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
+  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:7,hp:7,kw:['preemptive'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
   // 트리니티 3학년
-  {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:10,hp:10,kw:[],           skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
+  {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:9,hp:10,kw:[],            skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:9,hp:5,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
 
   // ===== 게헨나 신규 =====
   // 게헨나 1학년
   {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'하루카(새해)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
-  {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:1,hp:1,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
+  {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:2,hp:2,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
   // 게헨나 2학년
   {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(새해)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
   {id:'chiaki',  name:'치아키', school:'게헨나',  tier:3,atk:5,hp:3,kw:['ranged'],        skin:'치아키(수영복)',   img:'Chiaki.png',         imgGold:'Chiaki_(Swimsuit).png'},
@@ -108,13 +108,13 @@ var CHARS = [
   {id:'ayumu',   name:'아유무', school:'총학생회',tier:3,atk:5,hp:2,kw:[],            skin:'아유무(승무원)',   img:'Ayumu.png',          imgGold:'Ayumu_(flight).png'},
   {id:'aoi',     name:'아오이', school:'총학생회',tier:4,atk:5,hp:4,kw:[],            skin:'아오이(인터뷰)',   img:'Aoi.png',            imgGold:'Aoi_(Interview).png'},
   // 총학생회 3학년
-  {id:'kaya',    name:'카야',   school:'총학생회',tier:5,atk:5,hp:10,kw:[],           skin:'카야(쿠데타)',     img:'Kaya.png',           imgGold:'Kaya_(Coup).png'},
-  {id:'lin',     name:'린',     school:'총학생회',tier:6,atk:2,hp:8,kw:[],            skin:'린(승무원)',       img:'Lin.png',            imgGold:'Lin_(flight).png'},
+  {id:'kaya',    name:'카야',   school:'총학생회',tier:5,atk:5,hp:5,kw:[],            skin:'카야(쿠데타)',     img:'Kaya.png',           imgGold:'Kaya_(Coup).png'},
+  {id:'lin',     name:'린',     school:'총학생회',tier:6,atk:8,hp:8,kw:[],            skin:'린(승무원)',       img:'Lin.png',            imgGold:'Lin_(flight).png'},
 
   // ===== 백귀야행 =====
   // 백귀야행 1학년
   {id:'izuna',   name:'이즈나', school:'백귀야행',tier:1,atk:1,hp:2,kw:[],            skin:'이즈나(수영복)',   img:'Izuna.png',          imgGold:'Izuna_(Swimsuit).png'},
-  {id:'pina',    name:'피나',   school:'백귀야행',tier:1,atk:2,hp:2,kw:['taunt','reborn'],skin:'피나(가이드)',  img:'Pina.png',           imgGold:'Pina_(Guide).png'},
+  {id:'pina',    name:'피나',   school:'백귀야행',tier:1,atk:2,hp:2,kw:['taunt'],        skin:'피나(가이드)',  img:'Pina.png',           imgGold:'Pina_(Guide).png'},
   {id:'yukari',  name:'유카리', school:'백귀야행',tier:2,atk:3,hp:2,kw:['reborn','preemptive'],skin:'유카리(수영복)',img:'Yukari.png',     imgGold:'Yukari_(Swimsuit).png'},
   {id:'tsukuyo', name:'츠쿠요', school:'백귀야행',tier:2,atk:3,hp:2,kw:[],            skin:'츠쿠요(드레스)',   img:'Tsukuyo.png',        imgGold:'Tsukuyo_(Dress).png'},
   // 백귀야행 2학년
@@ -122,7 +122,7 @@ var CHARS = [
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:4,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:6,hp:6,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
-  {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:5,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
+  {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:4,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
   {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:9,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
@@ -317,7 +317,7 @@ var ABILITY_DESCS = {
   momoka:   {type:'패시브',desc:'매 턴 추가 리롤이 1회 무료입니다.',skinEffect:'승무원 모모카: 2회 무료',skinEffectDesc:'패시브: 매 턴 추가 리롤이 <span style="color:#ffd700;font-weight:700">2회</span> 무료입니다.'},
   ayumu:    {type:'패시브',desc:'액션카드의 수치 증가에 +2/+2가 추가됩니다.',skinEffect:'승무원 아유무: +4/+4 추가',skinEffectDesc:'패시브: 액션카드의 수치 증가에 <span style="color:#ffd700;font-weight:700">+4/+4</span> 추가됩니다.'},
   aoi:      {type:'패시브',desc:'매 턴 (청휘석)+2를 추가로 얻습니다.',skinEffect:'인터뷰 아오이: +4 추가',skinEffectDesc:'패시브: 매 턴 (청휘석아이콘)<span style="color:#ffd700;font-weight:700">+4</span>를 추가로 얻습니다.'},
-  kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n공격력과 체력을 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 두 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.\n(가장 마지막에 발동)'},
+  kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 2배로 적용하여 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 네 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 <span style="color:#ffd700;font-weight:700">네 배로</span> 적용하여 흡수합니다.\n(가장 마지막에 발동)'},
   lin:      {type:'패시브',desc:'아군의 뒤끝과 첫인사가\n한 번 더 발동합니다.',skinEffect:'승무원 린: 두 번 더 발동',skinEffectDesc:'패시브: 아군의 뒤끝과 첫인사가\n<span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
@@ -2275,7 +2275,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     var target=null;
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==u){target=mySide[i];break;}}
     if(target){
-      var mult=u.isSkin?2:1;
+      var mult=u.isSkin?4:2;
       var gainAtk=target.atk*mult,gainHp=target.hp*mult;
       target.alive=false;target._killedBy=u;
       u.atk+=gainAtk;u.hp+=gainHp;
