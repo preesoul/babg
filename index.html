@@ -1506,6 +1506,8 @@ document.getElementById('btn-freeze').addEventListener('click',doFreeze);
 document.getElementById('btn-upgrade').addEventListener('click',doUpgrade);
 document.getElementById('btn-skip').addEventListener('click',function(){battleState.skip=true;});
 document.getElementById('btn-restart').addEventListener('click',function(){
+  if(_endMusic){_endMusic.pause();_endMusic=null;}
+  if(_celebInterval){clearInterval(_celebInterval);_celebInterval=null;}
   document.getElementById('game-over').classList.remove('active');
   document.getElementById('battle-overlay').classList.remove('active');
   var sf2=document.getElementById('schale-frame');sf2.style.backgroundImage="url('img/UI/wallpaper01.jpg')";sf2.style.backgroundSize='cover';sf2.style.backgroundPosition='center';
