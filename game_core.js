@@ -3735,6 +3735,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
                 hc.atk=attacker.isSkin?20:10;hc.hp=attacker.isSkin?20:10;
                 hc.alive=true;hc.poisonImmune=false;hc._mySide=atkArr2;
                 hc.isSkin=attacker.isSkin;hc._wakamoGolden=attacker.isSkin;
+                applyEimiBonus(hc,atkArr2);
                 if(countAlive(atkArr2)<BATTLE_MAX){atkArr2.push(hc);}
                 stepLog.push({cls:'soc',text:'[패시브] '+attacker.name+': 호버크래프트 소환! ('+hc.atk+'/'+hc.hp+')'});
               }
