@@ -1131,6 +1131,7 @@ function playSfx(name,vol){
     stealth_on:'sfx/stealth_on.ogg',
     battlecry:'sfx/Battlecry_1.ogg',
     buff:'sfx/Spell_Swordsmith_Missile_1.ogg',
+    coin_toggle:'sfx/tutorial_mission_hero_coin_mouse_over.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
     drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
     drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'
