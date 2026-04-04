@@ -18,8 +18,8 @@ global.document={
   addEventListener:_n,removeEventListener:_n,
   body:_d
 };
-global.window={addEventListener:_n,removeEventListener:_n,location:{reload:_n}};
+global.window={addEventListener:_n,removeEventListener:_n,location:{reload:_n,search:'',href:''}};
 global.Image=function(){return _d;};
-global.localStorage={getItem:function(){return null;},setItem:_n};
+global.localStorage={getItem:function(){return null;},setItem:_n,removeItem:_n};
 global.alert=_n;
 global.confirm=function(){return false;};

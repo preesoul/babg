@@ -5,7 +5,7 @@ G={players:[],pool:{},turn:1,aliveCount:0,phase:'recruit',shop:[],
   shopExclusions:[],shopBuff:0,juriDeaths:0};
 SIM_STATS={};SIM_RUNNING=false;SIM_EXPLORE=true;
 
-var N=1000;
+var N=5000;
 process.stdout.write('[SIM] '+N+'\ud310 \uc2dc\ubc00 \uc2dc\uc791...\n');
 var st=Date.now();
 for(var i=0;i<N;i++){
@@ -26,17 +26,17 @@ rows.sort(function(a,b){return parseFloat(b.wr)-parseFloat(a.wr)||b.total-a.tota
 function pad(s,n){s=String(s);while(s.length<n)s+=' ';return s;}
 function lp(s,n){s=String(s);while(s.length<n)s=' '+s;return s;}
 
-process.stdout.write('\n== \uc2b9\ub960 \uc0c1\uc704 15 (total>=10 \uc81c\ud55c) ==\n');
+process.stdout.write('\n== \uc2b9\ub960 \uc0c1\uc704 15 (total>=50 \uc81c\ud55c) ==\n');
 process.stdout.write(pad('\uce74\ub4dcID',26)+lp('\uc2b9',4)+lp('\ud328',5)+lp('\ucd1d',5)+lp('\uc2b9\ub960',7)+'\n');
 process.stdout.write('-'.repeat(50)+'\n');
-rows.filter(function(r){return r.total>=10;}).slice(0,15).forEach(function(r){
+rows.filter(function(r){return r.total>=50;}).slice(0,15).forEach(function(r){
   process.stdout.write(pad(r.id,26)+lp(r.win,4)+lp(r.loss,5)+lp(r.total,5)+lp(r.wr+'%',7)+'\n');
 });
 
-process.stdout.write('\n== \uc2b9\ub960 \ud558\uc704 15 (total>=10 \uc81c\ud55c) ==\n');
+process.stdout.write('\n== \uc2b9\ub960 \ud558\uc704 15 (total>=50 \uc81c\ud55c) ==\n');
 process.stdout.write(pad('\uce74\ub4dcID',26)+lp('\uc2b9',4)+lp('\ud328',5)+lp('\ucd1d',5)+lp('\uc2b9\ub960',7)+'\n');
 process.stdout.write('-'.repeat(50)+'\n');
-var highRows=rows.filter(function(r){return r.total>=10;});
+var highRows=rows.filter(function(r){return r.total>=50;});
 highRows.slice().reverse().slice(0,15).forEach(function(r){
   process.stdout.write(pad(r.id,26)+lp(r.win,4)+lp(r.loss,5)+lp(r.total,5)+lp(r.wr+'%',7)+'\n');
 });
