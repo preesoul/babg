@@ -843,12 +843,14 @@ function buySpell(idx) {
   if(spell.once){if(!G.usedOnceSpells)G.usedOnceSpells={};G.usedOnceSpells[spell.id]=true;}
   var result=spell.effect(G);
   if(result===false){p.stone+=item.cost;if(spell.once)delete G.usedOnceSpells[spell.id];}
+  else{playSfx('buff',0.3);}
   renderAll();
 }
 
 function applyPendingSpell(idx) {
   if(!G.pendingSpell)return;
   var result=G.pendingSpell.effect(G,idx);
+  if(result!==false) playSfx('buff',0.3);
   G.pendingSpell=null;
   renderAll();
 }
@@ -1089,32 +1091,44 @@ function playSfx(name,vol){
   var paths={
     levelup:'sfx/wow_levelup.ogg',
     coinflip:'sfx/FX_MulliganCoin03_CoinFlip.ogg',
-    shield_on:'sfx/spell_DivineShield_target_1.ogg',
-    shield_break:'sfx/taunt_shield_break.ogg',
+    shield_on:'sfx/taunt_shield_up.ogg',
+    shield_break:'sfx/Shared_Armor_Destroyed_1.ogg',
     taunt_on:'sfx/taunt_shield_up.ogg',
     reroll:'sfx/FX_MulliganCoin09_DeckShuffle.ogg',
     sell:'sfx/GadgetzanAuctioneer_card_spawn_coins.ogg',
-    triple:'sfx/Battlecry_1.ogg',
+    triple:'sfx/wow_levelup.ogg',
     battle_start:'sfx/Brawl_Start_Bell.ogg',
     victory:'sfx/the_coin_card.ogg',
     defeat:'sfx/defeat_thunder_rumble_loop.ogg',
     heal:'sfx/Holy_Heal_Cast_01.ogg',
-    freeze:'sfx/FX_FreezeEvent_SpellCast.ogg',
-    unfreeze:'sfx/FX_FreezeEvent_StateEnd.ogg',
+    freeze:'sfx/FrostBoltHit1.ogg',
+    unfreeze:'sfx/FrostArmorTarget1.ogg',
     hit:'sfx/Brawl_punch_minion_out_1.ogg',
-    deathrattle:'sfx/FeignDeath_trigger_1.ogg',
+    deathrattle:'sfx/Warlock_DrainLife_Cast_1.ogg',
     enrage:'sfx/enrage.ogg',
     bomb:'sfx/Bomb_Missile_Dynamite_Sound_01.ogg',
     secret:'sfx/FX_Secret_Trigger.ogg',
     frost:'sfx/FrostBoltHit1.ogg',
     coin_drop:'sfx/FX_MulliganCoin01_HeroCoinDrop.ogg',
-    attack_launch:'sfx/FX_Minion_AttackLaunch.ogg',
+    attack_launch:'sfx/Charge_Summon.ogg',
     attack_impact:'sfx/FX_Minion_AttackImpact.ogg',
+    attack_impact_mid:'sfx/FX_Minion_AttackImpactMid.ogg',
     attack_impact_large:'sfx/FX_Minion_AttackImpactLarge.ogg',
     whoosh:'sfx/Lightning_Targeted_Whoosh_01.ogg',
     arrow_hit:'sfx/Arrow_Targeted_Impact_01.ogg',
     backstab:'sfx/backstab_impact_chestdru.ogg',
-    fireball_impact:'sfx/FX_FireballEvent04_SpellImpact_01.ogg'
+    fireball_impact:'sfx/FX_FireballEvent04_SpellImpact_01.ogg',
+    selfdestruct:'sfx/Barrel_exp_base.ogg',
+    poison:'sfx/CrazedAlchemist_Transmute_Impact_1.ogg',
+    soc_trigger:'sfx/Generic_Untargeted_Cast_01.ogg',
+    token_spawn:'sfx/Nerubian_custom_spawn.ogg',
+    cleave:'sfx/Shared_ClawSlash_Impact_2.ogg',
+    pierce:'sfx/Shared_ClawSlash_Impact_1.ogg',
+    windfury_hit:'sfx/Shared_DoubleClawSlash_Impact_1.ogg',
+    airship_explode:'sfx/Shared_Fire_Impact_Large.ogg',
+    stealth_on:'sfx/stealth_on.ogg',
+    battlecry:'sfx/Battlecry_1.ogg',
+    buff:'sfx/Spell_Swordsmith_Missile_1.ogg'
   };
   var src=paths[name];if(!src)return;
   try{
@@ -1367,6 +1381,7 @@ function triggerBattlecry(m, p) {
   var id=m.baseId;
   if(!BC_IDS[id]) return;
   if(G.permanentAbilityBan) return;
+  if(p===G.players[0]) playSfx('battlecry',0.3);
   // 미치루 연쇄 중이면 순수 1회만 발동 (시즈코/린 증폭 안 됨)
   if(G._michiruChaining){
     _doBC(m,p);
@@ -4114,7 +4129,7 @@ function runBattleCoinPhase(snap,callback){
 
   function doToss(){
     attempt++;
-    if(attempt===1){injectCoinsOnce();startAllSpins();}
+    if(attempt===1){injectCoinsOnce();startAllSpins();playSfx('coinflip',0.4);}
     else{restartSpins();}
 
     setTimeout(function(){
@@ -4244,8 +4259,11 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
     if(step.atkSide===null){
       renderBattleSnap(currSnap);
       appendLog(step.log,logEl);
+      playSfx('soc_trigger',0.3);
       // 스탯 변화 감지 → 반짝 이펙트
       applySocEffects(prevSnap,currSnap);
+      // 기습 부여 감지 → 은신음
+      ['a','b'].forEach(function(side){for(var i=0;i<currSnap[side].length;i++){var prev=prevSnap[side]&&prevSnap[side][i];var curr=currSnap[side][i];if(curr&&curr.kw&&curr.kw.indexOf('ambush')!==-1&&(!prev||!prev.kw||prev.kw.indexOf('ambush')===-1))playSfx('stealth_on',0.3);}});
       stepIdx++;setTimeout(nextStep,battleState.speed);return;
     }
     // 코인 페이즈: 개전 완료 후, 첫 공격 직전 1회
@@ -4313,13 +4331,14 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       atkCard.style.setProperty('--slam-x',slamVars.x);
       atkCard.style.setProperty('--slam-y',slamVars.y);
       atkCard.classList.add('lift');
-      playSfx('attack_launch',0.3);
+      var atkSnap=prevSnap[step.atkSide]&&prevSnap[step.atkSide][step.atkIdx];
+      if(atkSnap&&atkSnap.kw&&atkSnap.kw.indexOf('ambush')!==-1&&!atkSnap._hasAttacked) playSfx('backstab',0.4);
+      else playSfx('attack_launch',0.3);
     }
     setTimeout(function(){
       if(battleState.skip){stepIdx=steps.length;nextStep();return;}
       // Phase 2: 폭발적으로 상대 카드까지 돌진 (200ms)
       if(atkCard){atkCard.classList.remove('lift');atkCard.classList.add('slam');}
-      playSfx('whoosh',0.3);
       setTimeout(function(){
         if(battleState.skip){stepIdx=steps.length;nextStep();return;}
 
@@ -4356,7 +4375,26 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
 
         function doPhase3(){
           // Phase 3: 임팩트! 플래시 + 넉백 + 데미지 (500ms)
-          playSfx('attack_impact',0.4);
+          var atkSnap2=prevSnap[step.atkSide]&&prevSnap[step.atkSide][step.atkIdx];
+          // 자폭 전용
+          if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('selfdestruct')!==-1){playSfx('selfdestruct',0.5);}
+          // 연사 전용
+          else if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('windfury')!==-1){playSfx('windfury_hit',0.4);}
+          // 공격력 기반 충돌음
+          else{
+            var atkVal=atkSnap2?atkSnap2.atk:5;
+            if(atkVal>=11) playSfx('attack_impact_large',0.5);
+            else if(atkVal>=6) playSfx('attack_impact_mid',0.4);
+            else playSfx('attack_impact',0.4);
+          }
+          // 독사굴 추가음
+          if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('poison')!==-1) playSfx('poison',0.4);
+          // 광역 0.3초 후
+          if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('cleave')!==-1) setTimeout(function(){playSfx('cleave',0.3);},300);
+          // 관통 0.3초 후
+          if(atkSnap2&&atkSnap2.kw&&atkSnap2.kw.indexOf('pierce')!==-1){
+            setTimeout(function(){playSfx('pierce',0.3);},300);
+          }
           renderBattleSnap(currSnap);
           // 공격자 원위치 복귀
           var atkRow2=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
