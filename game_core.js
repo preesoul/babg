@@ -997,11 +997,59 @@ function buyHiddenCard(idx) {
     if(G.shopExclusions.indexOf('arisu')===-1) G.shopExclusions.push('arisu');
   }
 
+  // 7성 고유 연출
+  if(HIDDEN_CARD_ENTRANCE[bid]){
+    HIDDEN_CARD_ENTRANCE[bid](m,p,bid);
+    return;
+  }
   p.board.push(m);
   // BC 트리거 (만마전)
   if(BC_IDS[bid]) triggerBattlecry(m,p);
+  playCardDrop(7);playRecruitVoice(bid);shakeScreen('heavy');
   renderAll();
 }
+
+// 7성 고유 등장 연출
+var HIDDEN_CARD_ENTRANCE = {
+  trinity_mika: function(m,p){
+    var footSfx=new Audio('sfx/mika_footstep.webm');
+    footSfx.volume=0.5;
+    var step=0;
+    function doStep(){
+      if(step>=3){
+        // 착지!
+        p.board.push(m);
+        if(BC_IDS[m.baseId]) triggerBattlecry(m,p);
+        var landing=new Audio('sfx/mika_landing.webm');
+        landing.volume=0.7;landing.play().catch(function(){});
+        playSfx('attack_impact_large',0.5);
+        shakeScreen('heavy');
+        // 하늘에서 떨어지는 카드 이펙트
+        renderAll();
+        var boardEl=document.getElementById('ui-board');
+        var cards=boardEl.querySelectorAll('.card');
+        var lastCard=cards[cards.length-1];
+        if(lastCard){
+          lastCard.style.transition='none';
+          lastCard.style.transform='translateY(-300px) scale(1.3)';
+          lastCard.style.opacity='0';
+          setTimeout(function(){
+            lastCard.style.transition='transform 0.3s ease-in, opacity 0.3s ease-in';
+            lastCard.style.transform='translateY(0) scale(1)';
+            lastCard.style.opacity='1';
+          },50);
+        }
+        return;
+      }
+      // 발소리 쿵
+      footSfx.currentTime=0;footSfx.play().catch(function(){});
+      shakeScreen('light');
+      step++;
+      setTimeout(doStep,1500);
+    }
+    doStep();
+  }
+};
 
 function buyMinion(idx, insertIdx) {
   var p=G.players[0];
@@ -1139,6 +1187,8 @@ function playSfx(name,vol){
     coin_toggle:'sfx/tutorial_mission_hero_coin_mouse_over.ogg',
     hero_explode:'sfx/hero_portrait_explode_1.ogg',
     aoe_damage:'sfx/Arrow_Targeted_Explode_01.ogg',
+    mika_footstep:'sfx/mika_footstep.webm',
+    mika_landing:'sfx/mika_landing.webm',
     spell_low:'sfx/Arrow_Targeted_Explode_01.ogg',
     spell_high:'sfx/spell_HolyLight_cast_1.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
