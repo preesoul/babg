@@ -4541,7 +4541,7 @@ function miniCardHtml(m){
   if(BC_IDS[bid]) mIconBar+='🔔';
   if(DR_IDS[bid]) mIconBar+='💀';
   if(PASSIVE_IDS[bid]) mIconBar+='✨';
-  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='🥊';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='👊';
   if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='💪';
   if(hasKw(m,'reborn')) mIconBar+='🌱';
   if(hasKw(m,'poison')) mIconBar+='🐍';
