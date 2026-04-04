@@ -1043,7 +1043,8 @@ function buyMinion(idx, insertIdx) {
 
 // 캐릭터 영입 보이스
 var RECRUIT_VOICES = {
-  satsuki: 'sfx/satsuki_recruit.webm'
+  satsuki: 'sfx/satsuki_recruit.webm',
+  arisu: 'sfx/arisu_recruit.webm'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
