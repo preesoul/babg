@@ -4546,7 +4546,7 @@ function miniCardHtml(m){
   if(hasKw(m,'reborn')) mIconBar+='🌱';
   if(hasKw(m,'poison')) mIconBar+='🐍';
   if(hasKw(m,'selfdestruct')) mIconBar+='🧨';
-  if(hasKw(m,'taunt')) mIconBar+='🎭';
+  if(hasKw(m,'taunt')) mIconBar+='🛡️';
   if(hasKw(m,'cleave')) mIconBar+='🌊';
   if(hasKw(m,'windfury')) mIconBar+='⚡';
   if(hasKw(m,'pierce')) mIconBar+='💥';
