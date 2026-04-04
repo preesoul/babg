@@ -3138,7 +3138,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(hasKw(unit,'reborn')){
       unit.kw.splice(unit.kw.indexOf('reborn'),1);
       // 레이사 마법소녀: 최대 체력으로 부활
-      unit.hp=(unit.isSkin&&unit.baseId==='reisa')?(unit.maxHp||1):1;
+      if(unit.isSkin&&unit.baseId==='reisa'){
+        // 레이사 마법소녀: 전투 시작 시 최대 체력으로 부활
+        unit.hp=unit._reisaFullHp||unit.maxHp||1;
+      } else {unit.hp=1;}
       var shIdx=unit.kw.indexOf('shield');if(shIdx!==-1)unit.kw.splice(shIdx,1);
       log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:'+unit.hp+')'});
       // 카즈사 밴드: 부활해도 DR 발동 (한 게임에 카스팔루스 2기 소환)
@@ -3573,6 +3576,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
     return{unit:null,pos:startPos};
   }
+
+  // 레이사 마법소녀: 개전 버프 후 풀 hp 기록
+  for(var _r=0;_r<a.length;_r++)if(a[_r].isSkin&&a[_r].baseId==='reisa')a[_r]._reisaFullHp=a[_r].hp;
+  for(var _r=0;_r<b.length;_r++)if(b[_r].isSkin&&b[_r].baseId==='reisa')b[_r]._reisaFullHp=b[_r].hp;
 
   for(var round=0;round<maxRounds;round++){
     var aliveA=getAlive(a),aliveB=getAlive(b);
