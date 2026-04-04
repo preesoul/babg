@@ -1036,7 +1036,18 @@ function buyMinion(idx, insertIdx) {
     addedUnit=m;
   }
   triggerBattlecry(addedUnit,p);
+  // 영입 보이스 재생
+  playRecruitVoice(addedUnit.baseId);
   if(willTriple) { showDiscover(p); } else { renderAll(); }
+}
+
+// 캐릭터 영입 보이스
+var RECRUIT_VOICES = {
+  satsuki: 'sfx/satsuki_recruit.webm'
+};
+function playRecruitVoice(baseId){
+  var src=RECRUIT_VOICES[baseId];
+  if(src){try{var a=new Audio(src);a.volume=0.7;a.play();}catch(e){}}
 }
 
 // ========== DISCOVER (발견) ==========
