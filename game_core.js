@@ -1555,9 +1555,9 @@ function getEimiSummonBonus(side){
   var bonus=0;
   // side가 배열(전투중)이면 전투용, player 객체면 영입용
   if(Array.isArray(side)){
-    for(var i=0;i<side.length;i++){if(side[i].alive&&(side[i].baseId==='eimi'||side[i].baseId==='utaha'))bonus+=side[i].isSkin?2:1;}
+    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='utaha')bonus+=side[i].isSkin?2:1;}
   } else {
-    for(var i=0;i<side.board.length;i++){if(side.board[i]&&(side.board[i].baseId==='eimi'||side.board[i].baseId==='utaha'))bonus+=side.board[i].isSkin?2:1;}
+    for(var i=0;i<side.board.length;i++){if(side.board[i]&&side.board[i].baseId==='utaha')bonus+=side.board[i].isSkin?2:1;}
   }
   return bonus;
 }
@@ -2807,6 +2807,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
     for(var _c4=0;_c4<c4Count;_c4++){
       if(countAlive(mySide)<BATTLE_MAX){
         var c4tk=makeToken('c4');c4tk.alive=true;c4tk.poisonImmune=false;c4tk._mySide=mySide;
+        applyEimiBonus(c4tk,mySide);
         mySide.push(c4tk);
         log.push({cls:'soc',text:'[뒤끝] '+unit.name+': C4 소환! ('+c4tk.atk+'/'+c4tk.hp+')'});
       }
