@@ -670,6 +670,8 @@ img.tutorial-highlight{border-radius:50%!important}
 var _endMusic=null;
 function showGameOver() {
   deleteSave();
+  // 전투 중 잔여 SFX 정지
+  for(var k in SFX_CACHE){try{SFX_CACHE[k].pause();SFX_CACHE[k].currentTime=0;}catch(e){}}
   if(_endMusic){_endMusic.pause();_endMusic=null;}
   var isWin=G.placement===1;
   _endMusic=new Audio(isWin?'sfx/victory_music.webm':'sfx/defeat_music.webm');
