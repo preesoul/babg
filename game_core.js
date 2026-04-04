@@ -1063,7 +1063,8 @@ var RECRUIT_VOICES = {
   lin: 'sfx/lin_recruit.webm',
   hasumi: 'sfx/hasumi_recruit.webm',
   sena: 'sfx/sena_recruit.webm',
-  aru: 'sfx/aru_recruit.m4a'
+  aru: 'sfx/aru_recruit.m4a',
+  kaya: 'sfx/kaya_recruit.webm'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
