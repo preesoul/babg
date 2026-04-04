@@ -2995,7 +2995,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var maxRounds=200;
 
   function snapshot(){
-    function snapUnit(u){var bid=u.baseId||'';return{id:u.id,name:u.name,baseId:bid,atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:(_G.keiseisenCounters&&_G.keiseisenCounters[bid])||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0};}
+    function snapUnit(u){var bid=u.baseId||'';return{id:u.id,name:u.name,baseId:bid,atk:u.atk,hp:u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:(_G.keiseisenCounters&&_G.keiseisenCounters[bid])||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0,_hasAttacked:u._hasAttacked||false};}
     return{a:a.map(snapUnit),b:b.map(snapUnit)};
   }
   function getAlive(side){return side.filter(function(m){return m.alive;});}
@@ -4505,7 +4505,7 @@ function finishBattle(result) {
 }
 
 function miniCardHtml(m){
-  var cls='minicard'+(m.isSkin?' skin':'');
+  var cls='minicard'+(m.isSkin?' skin':'')+(hasKw(m,'ambush')&&!m._hasAttacked?' ambush':'')+(hasKw(m,'shield')?' has-shield':'');
   var bgTag=m.img?'<div class="mini-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'"></div>':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'" data-mini-atk="'+m.atk+'" data-mini-hp="'+m.hp+'" data-mini-kw="'+(m.kw||[]).join(',')+'" data-mini-name="'+m.name+'" data-mini-img="'+(m.img||'')+'" data-mini-golden="'+(m.isSkin?'1':'')+'"';
   var kwHtml='';
