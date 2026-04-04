@@ -4549,7 +4549,7 @@ function miniCardHtml(m){
   if(hasKw(m,'taunt')) mIconBar+='🛡️';
   if(hasKw(m,'cleave')) mIconBar+='🌊';
   if(hasKw(m,'windfury')) mIconBar+='⚡';
-  if(hasKw(m,'pierce')) mIconBar+='💥';
+  if(hasKw(m,'pierce')) mIconBar+='🔱';
   if(hasKw(m,'ranged')) mIconBar+='🏹';
   if(hasKw(m,'invincible')) mIconBar+='🏆';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
