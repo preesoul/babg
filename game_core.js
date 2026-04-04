@@ -2180,7 +2180,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       if(otherSide[i].alive&&!otherSide[i].abilityImmune){
         otherSide[i].atk=Math.max(1,otherSide[i].atk-debuff);
         otherSide[i].hp-=debuff;
-        if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;log.push({cls:'kill',text:otherSide[i].name+' 디버프로 쓰러졌다!'});hibikiKills.push(otherSide[i]);}
+        if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;otherSide[i]._killedBy=u;log.push({cls:'kill',text:otherSide[i].name+' 디버프로 쓰러졌다!'});hibikiKills.push(otherSide[i]);}
       }
     }
     for(var i=0;i<hibikiKills.length;i++) triggerDeathrattle(hibikiKills[i],otherSide,mySide,log);
@@ -2271,7 +2271,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       for(var i=0;i<otherSide.length;i++){
         if(otherSide[i].alive&&!otherSide[i].abilityImmune){
           otherSide[i].hp-=6;
-          if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;trainKills.push(otherSide[i]);}
+          if(otherSide[i].hp<=0){otherSide[i].hp=0;otherSide[i].alive=false;otherSide[i]._killedBy=u;trainKills.push(otherSide[i]);}
         }
       }
       for(var i=0;i<trainKills.length;i++) triggerDeathrattle(trainKills[i],otherSide,mySide,log);
@@ -2652,7 +2652,7 @@ function _doDR(unit, mySide, otherSide, log) {
     // 카스미/나구사를 죽인 상대를 쓰러뜨림
     if(unit._killedBy){
       var killer=unit._killedBy;
-      if(killer.alive&&!killer.abilityImmune){
+      if(killer.alive){
         killer.hp=0;killer.alive=false;
         log.push({cls:'kill',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
         triggerDeathrattle(killer,otherSide,mySide,log);
