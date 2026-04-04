@@ -47,13 +47,13 @@ var CHARS = [
   {id:'iori',    name:'이오리', school:'게헨나',  tier:3,atk:3,hp:2,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:3,atk:3,hp:3,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
-  {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:3,hp:4,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
+  {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:3,hp:4,kw:['shield'],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
   // 밀레니엄 2학년
   {id:'noa',     name:'노아',   school:'밀레니엄',tier:4,atk:3,hp:5,kw:['survive'],   skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
   // 트리니티 2학년
   {id:'azusa',   name:'아즈사', school:'트리니티',tier:4,atk:5,hp:5,kw:['ambush'],            skin:'아즈사(수영복)',   img:'Azusa.png',          imgGold:'Azusa_(Swimsuit).png'},
   // 트리니티 3학년
-  {id:'hinata',  name:'히나타', school:'트리니티',tier:5,atk:3,hp:8,kw:['preemptive'],skin:'히나타(수영복)',   img:'Hinata.png',         imgGold:'Hinata_(Swimsuit).png'},
+  {id:'hinata',  name:'히나타', school:'트리니티',tier:4,atk:3,hp:5,kw:['preemptive'],skin:'히나타(수영복)',   img:'Hinata.png',         imgGold:'Hinata_(Swimsuit).png'},
 
   // ===== Tier 5 (밸류15) =====
   // 게헨나 3학년
@@ -72,7 +72,7 @@ var CHARS = [
   {id:'makoto',  name:'마코토', school:'게헨나',  tier:6,atk:7,hp:7,kw:[],            skin:'마코토(수영복)',   img:'Makoto.png',         imgGold:'Makoto_(Swimsuit).png'},
   // 밀레니엄 3학년
   {id:'neru',    name:'네루',   school:'밀레니엄',tier:5,atk:5,hp:5,kw:['shield','survive','ambush'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
-  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:5,hp:5,kw:['preemptive'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
+  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:5,hp:5,kw:['ambush'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
   // 트리니티 3학년
   {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:7,hp:7,kw:[],            skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:6,hp:6,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
@@ -86,7 +86,7 @@ var CHARS = [
   {id:'chiaki',  name:'치아키', school:'게헨나',  tier:3,atk:5,hp:3,kw:['ranged'],        skin:'치아키(수영복)',   img:'Chiaki.png',         imgGold:'Chiaki_(Swimsuit).png'},
   // ===== 밀레니엄 신규 =====
   // 밀레니엄 1학년
-  {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:2,atk:1,hp:1,kw:['preemptive','ambush'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
+  {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:2,atk:1,hp:1,kw:['preemptive'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
   // 밀레니엄 2학년
   {id:'akane',   name:'아카네', school:'밀레니엄',tier:3,atk:2,hp:4,kw:[],               skin:'아카네(버니걸)',   img:'Akane.png',          imgGold:'Akane_(Bunny_Girl).png'},
   {id:'karin',   name:'카린',   school:'밀레니엄',tier:4,atk:6,hp:3,kw:['ranged','pierce'],skin:'카린(버니걸)',   img:'Karin.png',          imgGold:'Karin_(Bunny_Girl).png'},
@@ -99,7 +99,7 @@ var CHARS = [
   // 트리니티 2학년
   {id:'suzumi',  name:'스즈미', school:'트리니티',tier:3,atk:2,hp:4,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   // 트리니티 3학년
-  {id:'hasumi',  name:'하스미', school:'트리니티',tier:4,atk:5,hp:4,kw:['ambush'],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
+  {id:'hasumi',  name:'하스미', school:'트리니티',tier:5,atk:7,hp:5,kw:['ambush'],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
   // ===== 총학생회 (중립) =====
   // 총학생회 1학년
   {id:'haine',   name:'하이네', school:'총학생회',tier:1,atk:3,hp:2,kw:[],            skin:'하이네(인터뷰)',   img:'Haine.png',          imgGold:'Haine_(Interview).png'},
@@ -118,7 +118,7 @@ var CHARS = [
   {id:'yukari',  name:'유카리', school:'백귀야행',tier:2,atk:2,hp:1,kw:['reborn','preemptive'],skin:'유카리(수영복)',img:'Yukari.png',     imgGold:'Yukari_(Swimsuit).png'},
   {id:'tsukuyo', name:'츠쿠요', school:'백귀야행',tier:2,atk:3,hp:2,kw:[],            skin:'츠쿠요(드레스)',   img:'Tsukuyo.png',        imgGold:'Tsukuyo_(Dress).png'},
   // 백귀야행 2학년
-  {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:3,kw:['taunt','survive'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
+  {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:3,kw:['taunt'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:3,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:5,hp:6,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
@@ -224,10 +224,10 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
-var SURV_IDS = {toki:1, neru:1, noa:1, mimori:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, chise:1, wakamo:1, eimi:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1}; // 패시브 (영입 턴/상시)
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
+var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -255,14 +255,14 @@ var ABILITY_DESCS = {
   toramaru: {type:'뒤끝',desc:'원래의 이로하를 소환합니다.',skinEffect:'스킨 토라마루: 수영복 이로하 소환'},
   ui:       {type:'선제',desc:'상대의 모든 능력을 삭제합니다.',skinEffect:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
-  eimi:     {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨만큼의 공/체를 추가합니다.',skinEffect:'수영복 에이미: 스케쥴 레벨×2',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>만큼의 공/체를 추가합니다.'},
+  eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.\n(전투당 1회)',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.\n(전투당 1회)'},
-  satsuki:  {type:'뒤끝',desc:'자신을 죽인 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗음',skinEffectDesc:'뒤끝: 자신을 죽인 상대를 <span style="color:#ffd700;font-weight:700">2턴간</span> 빼앗습니다.'},
+  satsuki:  {type:'뒤끝',desc:'상대 필드의 무작위 1명을 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2명을 빼앗음',skinEffectDesc:'뒤끝: 상대 필드의 무작위 <span style="color:#ffd700;font-weight:700">2명</span>을 1턴간 빼앗습니다.'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×3 공격력/체력, 자폭',skinEffect:'수영복 마코토: 아군 수×6\n비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×6</span> 공격력/체력, 자폭)'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
   noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',skinEffect:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',skinEffectDesc:'버티기: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
-  utaha:    {type:'선제',desc:'<천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.',skinEffect:'치어리더 우타하: 천둥이 두 번 소환',skinEffectDesc:'선제: <천둥이>(8/2, 보호막)를 소환해 먼저 공격시킵니다.\n<span style="color:#ffd700;font-weight:700">두 번 시행합니다.</span>\n천둥이가 적을 처치하면 우타하는 공격하지 않습니다.'},
+  utaha:    {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨만큼의 공/체를 추가합니다.',skinEffect:'치어리더 우타하: 스케쥴 레벨×2',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>만큼의 공/체를 추가합니다.'},
   mashiro:  {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 마시로: 관통 추가',skinEffectDesc:'저격+관통: 저격 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.'},
   hinata:   {type:'선제',desc:'한 번에 2~5회 공격합니다.',skinEffect:'수영복 히나타: 4~10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.'},
   airship:  {type:'뒤끝',desc:'<파마머리 마코토>를 소환합니다.',skinEffect:''},
@@ -281,12 +281,12 @@ var ABILITY_DESCS = {
   izuna:    {type:'첫인사',desc:'아군 전체 공격력 +1 (자신 포함)',skinEffect:'수영복 이즈나: +1/+1',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+1/+1</span> (자신 포함)'},
   tsukuyo:  {type:'첫인사',desc:'아군 전체 +1/+1 (자신 포함)',skinEffect:'드레스 츠쿠요: +2/+2',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>을 부여합니다. (자신 포함)'},
   yukari:   {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 유카리: 보호막 추가',skinEffectDesc:'선제: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
-  mimori:   {type:'버티기',desc:'이번 전투 동안 상대 전체 공격력 -1\n(공격력 0이면 공격하지 않습니다.)',skinEffect:'수영복 미모리: -2',skinEffectDesc:'버티기: 이번 전투 동안 상대 전체 공격력 <span style="color:#ffd700;font-weight:700">-2</span>\n(공격력 0이면 공격하지 않습니다.)'},
+  mimori:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'수영복 미모리: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
   renge:    {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 렌게: 부활 추가',skinEffectDesc:'선제: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
   shizuko:  {type:'패시브',desc:'첫인사가 2회 발동합니다.',skinEffect:'수영복 시즈코: 4회 발동',skinEffectDesc:'패시브: 첫인사가 <span style="color:#ffd700;font-weight:700">4회</span> 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
   kikyou:   {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선제: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
-  chise:    {type:'패시브',desc:'반격할 때마다 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',skinEffect:'수영복 치세: 영구 제거',skinEffectDesc:'패시브: 반격할 때마다 상대의 능력 중\n무작위 1개를 <span style="color:#ffd700;font-weight:700">영구</span> 제거합니다.'},
+  chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 1명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
   michiru:  {type:'개전 / 첫인사',desc:'개전: 아군 백귀야행 학생 무작위 1명에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 기습 2명 부여 / 첫인사 두 번 발동',skinEffectDesc:'개전: 아군 백귀야행 학생 무작위 <span style="color:#ffd700;font-weight:700">2명</span>에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제 / 뒤끝',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선제: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)'},
@@ -310,7 +310,7 @@ var ABILITY_DESCS = {
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 20%',skinEffectDesc:'선제: 공격 시, <span style="color:#ffd700;font-weight:700">20%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
-  suzumi:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'마법소녀 스즈미: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
+  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n20% 내립니다.',skinEffect:'마법소녀 스즈미: 40% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">40%</span> 내립니다.'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 동일'},
   haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',skinEffect:'새해 하루카: 2~5회 / 조건 시 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">2~5회</span> 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 <span style="color:#ffd700;font-weight:700">10회</span> 공격합니다.'},
   // 총학생회
@@ -348,7 +348,7 @@ var TOKENS = {
   sweeper:   {id:'sweeper',  name:'스위퍼',     school:'밀레니엄', tier:0, atk:10,hp:10,kw:['shield','selfdestruct'], img:'token/Sweeper.png'},
   hina_the_last:{id:'hina_the_last',name:'마지막 히나',school:'게헨나',tier:0,atk:10,hp:10,kw:['cleave','poison'],img:'token/Hina_the_last.png'},
   hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:0, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
-  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:5, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
+  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:0, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
 };
 
 function makeToken(tokenId) {
@@ -1377,9 +1377,9 @@ function getEimiSummonBonus(side){
   var bonus=0;
   // side가 배열(전투중)이면 전투용, player 객체면 영입용
   if(Array.isArray(side)){
-    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='eimi')bonus+=side[i].isSkin?2:1;}
+    for(var i=0;i<side.length;i++){if(side[i].alive&&(side[i].baseId==='eimi'||side[i].baseId==='utaha'))bonus+=side[i].isSkin?2:1;}
   } else {
-    for(var i=0;i<side.board.length;i++){if(side.board[i]&&side.board[i].baseId==='eimi')bonus+=side.board[i].isSkin?2:1;}
+    for(var i=0;i<side.board.length;i++){if(side.board[i]&&(side.board[i].baseId==='eimi'||side.board[i].baseId==='utaha'))bonus+=side.board[i].isSkin?2:1;}
   }
   return bonus;
 }
@@ -2448,6 +2448,13 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 상대 능력 삭제+공체 뒤집기+능력 복사!'});
   }
   // 미치�� 개전: 아군 백귀야행 무작위 1명에게 기습 부여
+  else if(id==='eimi'){
+    var milCount=0;
+    for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i].school==='밀레니엄')milCount++;}
+    var buff=u.isSkin?milCount*2:milCount;
+    u.atk+=buff;u.hp+=buff;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 밀레니엄 '+milCount+'명 → +'+buff+'/+'+buff});
+  }
   else if(id==='michiru'){
     var hkykAlive=[];
     for(var i=0;i<mySide.length;i++){
@@ -2782,19 +2789,18 @@ function _doDR(unit, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 당고 '+count+'개 소환! (각 1/1)'});
   }
   else if(id==='satsuki'){
-    // 자신을 죽인 상대를 빼앗기 (1턴, 황금: 2턴)
-    if(unit._killedBy&&unit._killedBy.alive){
-      var killer=unit._killedBy;
+    // 뒤끝: 적 무작위 1명을 빼앗기 (1턴, 황금: 2턴)
+    var stealCandidates=[];
+    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)stealCandidates.push(i);}
+    if(stealCandidates.length>0){
+      var stealIdx=stealCandidates[Math.floor(Math.random()*stealCandidates.length)];
+      var stolen=otherSide[stealIdx];
       var turns=unit.isSkin?2:1;
-      // 적 진영에서 제거
-      var kIdx=-1;for(var i=0;i<otherSide.length;i++)if(otherSide[i]===killer){kIdx=i;break;}
-      if(kIdx!==-1){
-        otherSide.splice(kIdx,1);
-        killer._stolenTurns=turns;
-        killer._stolenFrom=otherSide;
-        mySide.push(killer);
-        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) '+turns+'턴간 빼앗았다!'});
-      }
+      otherSide.splice(stealIdx,1);
+      stolen._stolenTurns=turns;
+      stolen._stolenFrom=otherSide;
+      mySide.push(stolen);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+stolen.name+'을(를) '+turns+'턴간 빼앗았다!'});
     }
   }
   else if(id==='yuzu'){
@@ -2909,6 +2915,26 @@ function _doDR(unit, mySide, otherSide, log) {
       mySide.push(ae);
       log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아비 에슈흐 소환! ('+ae.atk+'/'+ae.hp+')'});
       if(ae.atk>eimiPreCC) log.push({cls:'soc',text:'  → [패시브] 에이미: 밀레니엄 소환 보너스 +'+(ae.atk-eimiPreCC)+'/+'+(ae.atk-eimiPreCC)});
+    }
+  }
+  else if(id==='chise'){
+    // 치세 뒤끝: 아군 백귀야행 무작위 1명의 첫인사 발동 (황금: 전원)
+    var hkykBC=[];
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive&&mySide[i].school==='백귀야행'&&mySide[i]!==unit&&BC_IDS[mySide[i].baseId])
+        hkykBC.push(mySide[i]);
+    }
+    if(hkykBC.length>0){
+      if(unit.isSkin){
+        for(var i=0;i<hkykBC.length;i++){
+          triggerSOC_battlecry_inner(hkykBC[i],mySide,log);
+        }
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 백귀야행 전원 첫인사 발동!'});
+      } else {
+        var pick=hkykBC[Math.floor(Math.random()*hkykBC.length)];
+        triggerSOC_battlecry_inner(pick,mySide,log);
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+pick.name+'의 첫인사 발동!'});
+      }
     }
   }
 }
@@ -3052,12 +3078,12 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
     }
-    // 스즈미 패시브: 자신을 공격한 적 atk 0으로 (1~2회 공격 동안)
-    if(dst.baseId==='suzumi'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&src!==dst){
-      var suzTurns=dst.isSkin?2:1;
-      if(!src._suzumiDebuff||src._suzumiDebuff<=0){
-        src._suzumiOrigAtk=src.atk;src._suzumiDebuff=suzTurns;src.atk=0;
-        log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! ('+suzTurns+'회)'});
+    // 미모리 패시브: 자신을 공격한 적의 atk을 한 바퀴 동안 0으로 (황금: 이번 전투 동안)
+    if(dst.baseId==='mimori'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&src!==dst){
+      var mimTurns=dst.isSkin?99:1;
+      if(!src._mimoriDebuff||src._mimoriDebuff<=0){
+        src._mimoriOrigAtk=src.atk;src._mimoriDebuff=mimTurns;src.atk=0;
+        log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! ('+(mimTurns>=99?'전투 동안':mimTurns+'회')+')'});
       }
     }
     if(hasKw(dst,'shield')){
@@ -3267,42 +3293,6 @@ function runBattle(boardA, boardB, startWithA, opts) {
           if(adj) stripAbilities(adj,log2);
         }
       }
-    }
-    else if(attacker.baseId==='utaha'){
-      // 천둥이 소환 후 별도 스텝으로 공격 (황금: 두 번)
-      var thunderCount=attacker.isSkin?2:1;
-      var teAtkSide=(atkArr===a)?'a':'b';
-      var teDefSide=(atkArr===a)?'b':'a';
-      for(var _tc=0;_tc<thunderCount;_tc++){
-        if(!target.alive) break;
-        var te;
-        te=makeToken('thunder_e');te.atk=8;te.hp=2;te.alive=true;te.poisonImmune=false;te.isToken=true;te.baseId='thunder_e';te._mySide=atkArr;
-        applyEimiBonus(te,atkArr);
-        atkArr.push(te);
-        _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
-        var teLog=[];
-        teLog.push({cls:'soc',text:'[선제] '+attacker.name+': '+te.name+' 소환! ('+te.atk+'/'+te.hp+')'});
-        if(hasKw(te,'selfdestruct')){
-          var sdDmg2=te.atk+te.hp;
-          var teHit=dealHit(te,target,teLog,sdDmg2);
-          checkSurvive(target,defArr,teLog,te);
-          resolveDeath(target,defArr,atkArr,teLog,te);
-          te.alive=false;
-        } else {
-          var thHit=dealHit(te,target,teLog);
-          checkSurvive(target,defArr,teLog,te);
-          var thCounter=dealHit(target,te,teLog);
-          checkSurvive(te,atkArr,teLog,target);
-          resolveDeath(target,defArr,atkArr,teLog,te);
-          resolveDeath(te,atkArr,defArr,teLog,target);
-        }
-        if(!target.alive){
-          teLog.push({cls:'soc',text:'[선제] '+te.name+'이(가) 쓰러뜨렸다! '+attacker.name+'는 공격하지 않습니다.'});
-        }
-        for(var tl=0;tl<teLog.length;tl++) log.push(teLog[tl]);
-        steps.push({atkSide:teAtkSide,atkIdx:atkArr.indexOf(te),defSide:teDefSide,defIdx:defArr.indexOf(target),atkId:te.id,defId:target.id,log:teLog,snap:snapshot()});
-      }
-      if(!target.alive) return true;
     }
     // 계승전 카운터: 유카리, 렌게, 키쿄 (아군만 카운트)
     else if(attacker.baseId==='yukari'||attacker.baseId==='renge'||attacker.baseId==='kikyou'){
@@ -3632,6 +3622,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
         attacker._suzumiDebuff--;
         if(attacker._suzumiDebuff<=0&&attacker._suzumiOrigAtk!==undefined){
           attacker.atk=attacker._suzumiOrigAtk;delete attacker._suzumiOrigAtk;delete attacker._suzumiDebuff;
+        }
+      }
+      // 미모리 debuff 턴 감소
+      if(attacker._mimoriDebuff>0&&attacker._mimoriDebuff<99){
+        attacker._mimoriDebuff--;
+        if(attacker._mimoriDebuff<=0&&attacker._mimoriOrigAtk!==undefined){
+          attacker.atk=attacker._mimoriOrigAtk;delete attacker._mimoriOrigAtk;delete attacker._mimoriDebuff;
         }
       }
       if(stepLog.length>0){
@@ -3965,6 +3962,11 @@ function runBattleCoinPhase(snap,callback){
   var coinOffMap={};
   for(var j=0;j<aliveSnapA.length;j++)if(aliveSnapA[j].coinOff)coinOffMap['a'+j]=true;
 
+  // 스즈미 패시브: 상대 코인 성공률 감소 (-20%, 황금: -40%)
+  var _suzumiPenaltyForEnemy=0,_suzumiPenaltyForAlly=0;
+  for(var j=0;j<aliveSnapA.length;j++){if(aliveSnapA[j].baseId==='suzumi')_suzumiPenaltyForEnemy+=aliveSnapA[j].isSkin?0.4:0.2;}
+  for(var j=0;j<aliveSnapB.length;j++){if(aliveSnapB[j].baseId==='suzumi')_suzumiPenaltyForAlly+=aliveSnapB[j].isSkin?0.4:0.2;}
+
   var coinsInjected=false;
   function injectCoin(ci,isEnemy){
     var card=ci.el,sid=ci.sid;
@@ -4018,8 +4020,8 @@ function runBattleCoinPhase(snap,callback){
     setTimeout(function(){
       var cr={};
       var _btBonus=G.bunnyTossBonus||0;
-      for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<0.5;
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<(0.5+_btBonus));}
+      for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<Math.max(0,0.5-_suzumiPenaltyForEnemy);
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<Math.max(0,0.5+_btBonus-_suzumiPenaltyForAlly));}
       // 버니걸 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인토스 성공
       var _asunaGold=aliveAlly.some(function(u){return (u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
       if(_asunaGold){for(var _aj=0;_aj<aliveAlly.length;_aj++){var _lu=aliveAlly[_aj];if(_lu.baseId!=='asuna'&&_lu.baseId!=='millennium_cc'&&!coinOffMap[_lu.sid]){cr[_lu.sid]=true;break;}}}
