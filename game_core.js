@@ -1943,6 +1943,13 @@ function aiTurns() {
           }
           // 자가대전 시뮬 통계 기반 보정 (10판 이상 데이터 있는 카드만)
           s+=simStatBonus(c.id);
+          // 카스미 HP 연동 구매 점수: HP 높으면 공격 픽 선호, 낮으면 방어적 픽, 2장 방지
+          if(c.id==='kasumi'){
+            if(p.hp>=20) s-=2;
+            else if(p.hp<=15) s+=1;
+            var _hasKasumi=false;for(var _kk=0;_kk<p.board.length;_kk++){if(p.board[_kk].baseId==='kasumi'){_hasKasumi=true;break;}}
+            if(_hasKasumi) s-=3;
+          }
           return{tmpl:c,score:s+Math.random()*2};
         });
         scored.sort(function(a,b){return b.score-a.score;});
@@ -1998,6 +2005,20 @@ function aiTurns() {
 
     // Phase 5: 매각+교체 (개선된 버전)
     aiSellReplace(p,aiStrat,aiPool);
+
+    // Phase 5b: 후반 카스미 정리 (턴 12+, HP 20+, 티어3 초과 카드 구매 가능 시)
+    if(G.turn>=12&&p.hp>=20){
+      var _kIdx=-1;for(var _kj=0;_kj<p.board.length;_kj++){if(p.board[_kj].baseId==='kasumi'&&!p.board[_kj].isSkin){_kIdx=_kj;break;}}
+      if(_kIdx>=0&&p.stone+1>=3){
+        var _upgPool=aiPool.filter(function(c){return c.tier>3&&G.pool[c.id]>0&&c.id!=='kasumi';});
+        var _bestUpg=null,_bestUpgSc=0;
+        for(var _uj=0;_uj<_upgPool.length;_uj++){var _us=_upgPool[_uj].atk+_upgPool[_uj].hp+_upgPool[_uj].tier*1.5;if(DR_IDS[_upgPool[_uj].id])_us+=5;if(SOC_IDS[_upgPool[_uj].id])_us+=4;if(_us>_bestUpgSc){_bestUpgSc=_us;_bestUpg=_upgPool[_uj];}}
+        if(_bestUpg&&_bestUpgSc>aiUnitScore(p.board[_kIdx])+2){
+          returnToPool(p.board[_kIdx].baseId);p.stone+=1;p.board.splice(_kIdx,1);
+          if(p.stone>=3&&takeFromPool(_bestUpg.id)){var _nu=makeMinion(_bestUpg,false);p.board.push(_nu);p.stone-=3;triggerBattlecry(_nu,p);}
+        }
+      }
+    }
 
     // Phase 6: 잔여 골드 소비 (남은 골드로 주문)
     aiSpendRemainder(p);
