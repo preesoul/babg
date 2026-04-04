@@ -1044,7 +1044,17 @@ function buyMinion(idx, insertIdx) {
 // 캐릭터 영입 보이스
 var RECRUIT_VOICES = {
   satsuki: 'sfx/satsuki_recruit.webm',
-  arisu: 'sfx/arisu_recruit.webm'
+  arisu: 'sfx/arisu_recruit.webm',
+  makoto: 'sfx/makoto_recruit.webm',
+  hina: 'sfx/hina_recruit.webm',
+  himari: 'sfx/himari_recruit.webm',
+  wakamo: 'sfx/wakamo_recruit.webm',
+  sakurako: 'sfx/sakurako_recruit.webm',
+  tsurugi: 'sfx/tsurugi_recruit.webm',
+  nagusa: 'sfx/nagusa_recruit.webm',
+  mine: 'sfx/mine_recruit.webm',
+  shizuko: 'sfx/shizuko_recruit.webm',
+  rio: 'sfx/rio_recruit.webm'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
