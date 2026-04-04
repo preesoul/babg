@@ -845,13 +845,17 @@ function buySpell(idx) {
   var result=spell.effect(G);
   if(result===false){p.stone+=item.cost;if(spell.once)delete G.usedOnceSpells[spell.id];}
   else if(BUFF_SPELL_IDS[spell.id]){playSfx('buff',0.3);}
+  else{playSfx(spell.tier>=5?'spell_high':'spell_low',0.3);}
   renderAll();
 }
 
 function applyPendingSpell(idx) {
   if(!G.pendingSpell)return;
   var result=G.pendingSpell.effect(G,idx);
-  if(result!==false&&BUFF_SPELL_IDS[G.pendingSpell.id]) playSfx('buff',0.3);
+  if(result!==false){
+    if(BUFF_SPELL_IDS[G.pendingSpell.id]) playSfx('buff',0.3);
+    else playSfx(G.pendingSpell.tier>=5?'spell_high':'spell_low',0.3);
+  }
   G.pendingSpell=null;
   renderAll();
 }
@@ -1135,6 +1139,8 @@ function playSfx(name,vol){
     coin_toggle:'sfx/tutorial_mission_hero_coin_mouse_over.ogg',
     hero_explode:'sfx/hero_portrait_explode_1.ogg',
     aoe_damage:'sfx/Arrow_Targeted_Explode_01.ogg',
+    spell_low:'sfx/Arrow_Targeted_Explode_01.ogg',
+    spell_high:'sfx/spell_HolyLight_cast_1.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
     drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
     drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'
