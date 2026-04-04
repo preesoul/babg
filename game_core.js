@@ -537,6 +537,7 @@ var G = {};
 var swapFirst = -1;
 
 function newGame() {
+  deleteSave(); // 새 게임 시 저장 데이터 삭제
   var players=[];
   var aiCount=SANDBOX?5:7;
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
@@ -4465,6 +4466,102 @@ function nextTurn() {
     if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);}
   }
   aiTurns();rollShop();renderAll();
+  saveGame(); // 매 턴 자동 저장
+}
+
+// ===== 진행도 저장/복원 =====
+var SAVE_KEY='babg_save';
+function saveGame(){
+  try{
+    var saveData={
+      players:G.players.map(function(p){
+        return{id:p.id,name:p.name,hp:p.hp,tier:p.tier,stone:p.stone,turnStone:p.turnStone,
+          upgradeCost:p.upgradeCost,dead:p.dead,isPlayer:p.isPlayer,frozen:p.frozen,
+          purchasedSchools:p.purchasedSchools||{},totalDamageTaken:p.totalDamageTaken||0,
+          panchanDeaths:p.panchanDeaths||0,
+          personalityType:p.personalityType||'standard',
+          board:p.board.map(function(u){
+            return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
+              atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:(u.kw||[]).slice(),
+              img:u.img,isSkin:u.isSkin,isHidden:u.isHidden||false,
+              coinOff:u.coinOff||false,noAttack:u.noAttack||false,
+              abilityImmune:u.abilityImmune||false,
+              _battlesSurvived:u._battlesSurvived||0,
+              _hovercraftCounter:u._hovercraftCounter||0,
+              _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false};
+          }),
+          bench:p.bench?{id:p.bench.id,baseId:p.bench.baseId,name:p.bench.name,school:p.bench.school,
+            tier:p.bench.tier,atk:p.bench.atk,hp:p.bench.hp,maxHp:p.bench.maxHp||p.bench.hp,
+            kw:(p.bench.kw||[]).slice(),img:p.bench.img,isSkin:p.bench.isSkin}:null
+        };
+      }),
+      turn:G.turn,phase:G.phase,aliveCount:G.aliveCount,placement:G.placement,
+      bonusStone:G.bonusStone||0,shopBuff:G.shopBuff||0,freeRerolls:G.freeRerolls||0,
+      pool:G.pool,hiddenCardsOwned:G.hiddenCardsOwned,hiddenCardsEverOwned:G.hiddenCardsEverOwned,
+      permanentAbilityBan:G.permanentAbilityBan,shopExclusions:G.shopExclusions,
+      keiseisenCounters:G.keiseisenCounters,millenniumTokenSummons:G.millenniumTokenSummons,
+      arisuDeathCount:G.arisuDeathCount,soldHkyk:G.soldHkyk||{},
+      usedOnceSpells:G.usedOnceSpells||{},
+      bunnyTossBonus:G.bunnyTossBonus||0,
+      savedAt:Date.now()
+    };
+    localStorage.setItem(SAVE_KEY,JSON.stringify(saveData));
+  }catch(e){}
+}
+function loadGame(){
+  try{
+    var raw=localStorage.getItem(SAVE_KEY);
+    if(!raw)return null;
+    return JSON.parse(raw);
+  }catch(e){return null;}
+}
+function deleteSave(){
+  localStorage.removeItem(SAVE_KEY);
+}
+function hasSavedGame(){
+  return !!localStorage.getItem(SAVE_KEY);
+}
+function restoreGame(save){
+  var players=save.players.map(function(p){
+    var restored={id:p.id,name:p.name,hp:p.hp,tier:p.tier,stone:p.stone,turnStone:p.turnStone,
+      upgradeCost:p.upgradeCost,dead:p.dead,isPlayer:p.isPlayer,frozen:p.frozen||false,
+      purchasedSchools:p.purchasedSchools||{},totalDamageTaken:p.totalDamageTaken||0,
+      panchanDeaths:p.panchanDeaths||0,
+      personality:AI_PERSONALITIES[p.personalityType||'standard'],
+      personalityType:p.personalityType||'standard',
+      board:p.board.map(function(u){
+        return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
+          atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:u.kw||[],
+          img:u.img,isSkin:u.isSkin||false,isHidden:u.isHidden||false,
+          coinOff:u.coinOff||false,noAttack:u.noAttack||false,
+          abilityImmune:u.abilityImmune||false,
+          _battlesSurvived:u._battlesSurvived||0,
+          _hovercraftCounter:u._hovercraftCounter||0,
+          _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false};
+      }),
+      bench:p.bench?{id:p.bench.id,baseId:p.bench.baseId,name:p.bench.name,school:p.bench.school,
+        tier:p.bench.tier,atk:p.bench.atk,hp:p.bench.hp,maxHp:p.bench.maxHp||p.bench.hp,
+        kw:p.bench.kw||[],img:p.bench.img,isSkin:p.bench.isSkin||false}:null
+    };
+    return restored;
+  });
+  G={players:players,turn:save.turn,phase:save.phase||'recruit',
+    shop:[],aliveCount:save.aliveCount,placement:save.placement||0,
+    frozen:false,bonusStone:save.bonusStone||0,shopBuff:save.shopBuff||0,
+    pendingSpell:null,pool:save.pool,rioSchool:null,freeRerolls:save.freeRerolls||0,
+    purchasedSchools:players[0].purchasedSchools||{},
+    totalDamageTaken:save.totalDamageTaken||0,
+    arisuDeathCount:save.arisuDeathCount||0,
+    millenniumTokenSummons:save.millenniumTokenSummons||0,
+    hiddenCardsOwned:save.hiddenCardsOwned||{},
+    hiddenCardsEverOwned:save.hiddenCardsEverOwned||{},
+    permanentAbilityBan:save.permanentAbilityBan||false,
+    shopExclusions:save.shopExclusions||[],
+    keiseisenCounters:save.keiseisenCounters||{},
+    hovercraftCounter:0,soldHkyk:save.soldHkyk||{},
+    usedOnceSpells:save.usedOnceSpells||{},
+    bunnyTossBonus:save.bunnyTossBonus||0};
+  rollShop();
 }
 
 // ===== 자가대전 온라인 학습 시스템 =====

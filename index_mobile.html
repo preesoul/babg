@@ -646,6 +646,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
     <img src="img/UI/bluearchive2.png" class="title-logo">
     <p class="sub">Battle Grounds</p>
     <button class="btn btn-blue btn-big" id="btn-play"><span class="btn-inner">게임 시작</span></button>
+    <button class="btn btn-big" id="btn-continue-game" style="margin-top:16px;display:none;background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#b45309"><span class="btn-inner">이어하기</span></button>
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px"><span class="btn-inner">학생명부</span></button>
     <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px"><span class="btn-inner">튜토리얼</span></button>
   </div>
@@ -810,10 +811,11 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404p"></script>
+<script src="game_core.js?v=20260404q"></script>
 <script>
 
 function showGameOver() {
+  deleteSave();
   var go=document.getElementById('game-over');go.classList.add('active');
   document.getElementById('go-title').textContent=G.placement===1?'1등!':'게임 오버';
   document.getElementById('go-title').style.color=G.placement===1?'#ffd700':'#ef4444';
@@ -1724,6 +1726,27 @@ document.getElementById('btn-play').addEventListener('click',function(){
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
 });
+// 이어하기 버튼
+document.getElementById('btn-continue-game').addEventListener('click',function(){
+  var save=loadGame();
+  if(!save){alert('저장된 게임이 없습니다.');return;}
+  var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
+  fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),function(){
+    restoreGame(save);
+    renderAll();
+  });
+});
+// 타이틀 진입 시 저장 감지
+(function(){
+  var btn=document.getElementById('btn-continue-game');
+  if(hasSavedGame()){
+    var save=loadGame();
+    if(save){
+      btn.style.display='';
+      btn.querySelector('.btn-inner').textContent='이어하기 ('+save.turn+'턴)';
+    }
+  }
+})();
 // 능력 팝업 닫기
 document.getElementById('ap-close').addEventListener('click',function(){document.getElementById('ability-popup-overlay').classList.remove('active');});
 document.getElementById('ability-popup-overlay').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
