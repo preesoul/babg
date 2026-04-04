@@ -4536,9 +4536,12 @@ function miniCardHtml(m){
     counterHtml='<div class="battle-counter" style="background:rgba(251,191,36,0.3);border:1px solid rgba(251,191,36,0.6);color:#fde68a">⚔ '+m._keiseisenCounter+'</div>';
   }
   var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
-  var mHasSOC=SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin);
-  var mNameDisp=(mHasSOC?'📯 ':'')+m.name+(mHasSOC?' 📯':'');
-  return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+mNameDisp+'</div>'+
+  var mIconBar='';
+  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📯';
+  if(BC_IDS[bid]) mIconBar+='🔔';
+  if(DR_IDS[bid]) mIconBar+='💀';
+  var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
+  return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
     kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }

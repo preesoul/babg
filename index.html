@@ -79,8 +79,10 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .card.skin{border-color:#c8a010;box-shadow:0 0 12px rgba(200,160,16,0.3)}
 .card.token-card{border-color:#6a8090}
 .card.swap-selected{border-color:#00c8ff!important;box-shadow:0 0 14px rgba(0,200,255,0.5)!important}
+.ability-icons{position:absolute;top:2px;left:50%;transform:translateX(-50%);z-index:3;font-size:14px;letter-spacing:4px;text-align:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.7));pointer-events:none}
+.minicard .ability-icons{font-size:11px;letter-spacing:2px;top:1px}
 .card.ambush .card-bg img{filter:grayscale(100%);opacity:0.7}
-.shield-orb{position:absolute;width:70%;height:50%;top:15%;left:15%;border-radius:50%;background:radial-gradient(ellipse,rgba(140,210,255,0.35) 0%,rgba(100,180,255,0.15) 50%,transparent 70%);box-shadow:0 0 20px rgba(100,180,255,0.3);z-index:1;pointer-events:none}
+.shield-orb{position:absolute;width:70%;height:50%;top:15%;left:15%;border-radius:50%;background:radial-gradient(ellipse,rgba(140,210,255,0.15) 0%,rgba(80,160,255,0.5) 60%,rgba(60,140,255,0.5) 100%);border:1.5px solid rgba(100,180,255,0.6);box-shadow:0 0 20px rgba(100,180,255,0.3);z-index:1;pointer-events:none}
 .card .card-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;border-radius:3px}
 .card .card-bg img{width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)}
 .card .card-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(14,24,38,0.98) 0%,rgba(16,28,42,0.75) 40%,transparent 100%)}
@@ -123,7 +125,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .minicard.skin{border-color:#c8a010;box-shadow:0 0 10px rgba(200,160,16,0.3)}
 .minicard.ambush .mini-bg img{filter:grayscale(100%);opacity:0.7}
 .minicard .shield-orb{width:60%;height:45%;top:10%;left:20%}
-.minicard.has-taunt{transform:scale(1.2);z-index:2}
+.minicard.has-taunt{transform:scale(1.05);z-index:2;margin:0 4px}
 .minicard.tier7{border-color:#c030d0;box-shadow:0 0 8px rgba(192,48,208,0.35)}
 .minicard .mini-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
 .minicard .mini-bg img{width:85%;height:auto;object-fit:contain;position:absolute;top:2px;left:50%;transform:translateX(-50%)}
@@ -929,11 +931,16 @@ function cardHtml(m,idx,isBoard){
   if(m.img){html+='<div class="card-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'">';if(hasKw(m,'shield'))html+='<div class="shield-orb"></div>';html+='</div>';}
   html+='<div class="card-inner">';
   var sIcon=SCHOOL_ICONS[m.school];if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
+  // 능력 아이콘 바 (카드 맨 위 중앙)
+  var SKIN_ONLY_SOC_C={iori:1,hanako:1,pina:1,kasumi:1};
+  var iconBar='';
+  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) iconBar+='📯';
+  if(BC_IDS[m.baseId||'']) iconBar+='🔔';
+  if(DR_IDS[m.baseId||'']) iconBar+='💀';
+  if(iconBar) html+='<div class="ability-icons">'+iconBar+'</div>';
   html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
   html+='<div class="card-spacer"></div>';
-  var SKIN_ONLY_SOC_C={iori:1,hanako:1,pina:1,kasumi:1};
-  var hasSOC=SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin);
-  html+='<div class="name-banner">'+(hasSOC?'📯 ':'')+m.name+(hasSOC?' 📯':'')+'</div>';
+  html+='<div class="name-banner">'+m.name+'</div>';
   var kwt=kwText(m);html+='<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
   var aTag=abilityTag(m.baseId,m.isSkin);if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
   else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
