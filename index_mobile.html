@@ -59,7 +59,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .schale-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 .schale-label-icon{width:20px;height:20px;object-fit:contain;transform:skewX(8deg)}
 .schedule-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15);margin:6px 0 4px 4px;position:relative;z-index:1}
-.board{display:flex;gap:10px;min-height:240px;padding:6px 12px;background:#141e28;border-radius:14px;border:1.5px dashed #1c2838;margin-bottom:4px;flex-wrap:nowrap;justify-content:center;align-items:flex-start;box-shadow:inset 0 1px 2px rgba(0,0,0,0.2)}
+.board{display:flex;gap:6px;min-height:240px;padding:6px 6px;background:#141e28;border-radius:14px;border:1.5px dashed #1c2838;margin-bottom:4px;flex-wrap:nowrap;justify-content:center;align-items:flex-start;box-shadow:inset 0 1px 2px rgba(0,0,0,0.2)}
 
 /* 카드 — BA TCG 솔리드 프레임 */
 .card{width:170px;height:250px;background:#1e2d3d;border:3px solid #3a5a6e;border-radius:6px;padding:0;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;flex-shrink:0;overflow:visible;box-shadow:0 3px 12px rgba(0,0,0,0.25)}
@@ -811,7 +811,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404r"></script>
+<script src="game_core.js?v=20260404s"></script>
 <script>
 
 function showGameOver() {
@@ -1066,8 +1066,10 @@ function spellCardHtml(item,idx){
   if(item.isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
     html+='<div class="card-bg"><img src="img/unique/HKYK_Showdown.png" style="width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
   } else {
+    var spellImg=item.img||(item.spell&&item.spell.img)||null;
     var spellId=item.spell?item.spell.id:(item.id||'');
-    html+='<div class="card-bg"><img src="img/spell/'+spellId+'.png" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'"></div>';
+    var imgSrc=spellImg||('img/spell/'+spellId+'.png');
+    html+='<div class="card-bg"><img src="'+imgSrc+'" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'"></div>';
   }
   html+='<div class="card-inner">';
   html+='<div class="tier-stars">'+starStr(item.tier)+'</div>';
