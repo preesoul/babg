@@ -2801,15 +2801,18 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   if(id==='panchan') mySide._panchanDeaths=(mySide._panchanDeaths||0)+1;
   // 토라마루(이로하 변신)는 baseId가 'iroha'지만 토라마루 DR이 있음
   if(unit.irohaRef) id='toramaru';
-  // 아카네 C4 부여 뒤끝
+  // 아카네 C4 부여 뒤끝 (린 반복 포함)
   if(unit._akaneC4DR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
-    var c4Count=unit._akaneC4Golden?2:1;
-    for(var _c4=0;_c4<c4Count;_c4++){
-      if(countAlive(mySide)<BATTLE_MAX){
-        var c4tk=makeToken('c4');c4tk.alive=true;c4tk.poisonImmune=false;c4tk._mySide=mySide;
-        applyEimiBonus(c4tk,mySide);
-        mySide.push(c4tk);
-        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': C4 소환! ('+c4tk.atk+'/'+c4tk.hp+')'});
+    var c4LinRepeat=1+getLinExtra(mySide);
+    for(var _c4lr=0;_c4lr<c4LinRepeat;_c4lr++){
+      var c4Count=unit._akaneC4Golden?2:1;
+      for(var _c4=0;_c4<c4Count;_c4++){
+        if(countAlive(mySide)<BATTLE_MAX){
+          var c4tk=makeToken('c4');c4tk.alive=true;c4tk.poisonImmune=false;c4tk._mySide=mySide;
+          applyEimiBonus(c4tk,mySide);
+          mySide.push(c4tk);
+          log.push({cls:'soc',text:'[뒤끝] '+unit.name+': C4 소환! ('+c4tk.atk+'/'+c4tk.hp+')'+(_c4lr>0?' (린 추가)':'')});
+        }
       }
     }
   }
