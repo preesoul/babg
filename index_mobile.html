@@ -1116,6 +1116,7 @@ function cardHtml(m,idx,isBoard){
   if(DR_IDS[bid])allLabels.push({t:'뒤끝',c:'#fca5a5'});
   if(SOC_IDS[bid])allLabels.push({t:'개전',c:'#93c5fd'});
   if(SURV_IDS[bid])allLabels.push({t:'버티기',c:'#6ee7b7'});
+  if(PRE_IDS[bid])allLabels.push({t:'선제',c:'#c4b5fd'});
   if(PASSIVE_IDS[bid])allLabels.push({t:'패시브',c:'#c084fc'});
   var maxShow=3;var hasEtc=allLabels.length>maxShow;
   var showLabels=hasEtc?allLabels.slice(0,maxShow):allLabels;
