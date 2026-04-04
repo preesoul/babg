@@ -1321,6 +1321,8 @@ function aiDiscover(p) {
 
 // ========== ADD TO BOARD (트리플 체크 포함) ==========
 function addToBoard(p, m) {
+  // 영입 효과음 (모든 경로 공통)
+  if(p.isPlayer){playCardDrop();playRecruitVoice(m.baseId);if(m.tier>=5)shakeScreen(m.tier>=6?'heavy':'light');}
   // 트리플 체크
   var count=0;
   for(var i=0;i<p.board.length;i++){
@@ -1346,6 +1348,7 @@ function addToBoard(p, m) {
     applySkinKwTransform(tmpl,skinUnit);
     p.board.push(skinUnit);
     triggerBattlecry(skinUnit,p);
+    if(p.isPlayer){playSfx('triple');playRecruitVoice(skinUnit.baseId);shakeScreen('heavy');}
     // 플레이어면 발견 (AI는 aiDiscover 별도 호출)
     if(p.isPlayer) showDiscover(p);
     return skinUnit;
