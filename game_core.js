@@ -123,7 +123,7 @@ var CHARS = [
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:8,hp:7,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:4,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
-  {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
+  {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:7,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:9,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
   {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:4,hp:10,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
@@ -285,8 +285,8 @@ var ABILITY_DESCS = {
   shizuko:  {type:'패시브',desc:'첫인사가 2회 발동합니다.',skinEffect:'수영복 시즈코: 4회 발동',skinEffectDesc:'패시브: 첫인사가 <span style="color:#ffd700;font-weight:700">4회</span> 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
   kikyou:   {type:'선제',desc:'<계승전> 카운터를 1 쌓습니다. (최대 5)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선제: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
-  chise:    {type:'패시브',desc:'공격한 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',skinEffect:'수영복 치세: 무작위 2개 제거',skinEffectDesc:'패시브: 공격한 상대의 능력 중\n무작위 <span style="color:#ffd700;font-weight:700">2개</span>를 이번 전투 동안 제거합니다.'},
-  michiru:  {type:'첫인사',desc:'샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 추가로 두 번 발동',skinEffectDesc:'첫인사: 샬레의 다른 백귀야행 학생들이 가진\n모든 첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
+  chise:    {type:'패시브',desc:'반격할 때마다 상대의 능력 중\n무작위 1개를 이번 전투 동안 제거합니다.',skinEffect:'수영복 치세: 영구 제거',skinEffectDesc:'패시브: 반격할 때마다 상대의 능력 중\n무작위 1개를 <span style="color:#ffd700;font-weight:700">영구</span> 제거합니다.'},
+  michiru:  {type:'첫인사',desc:'아군 전체 +1/+1 후,\n다른 백귀야행 학생들의 첫인사를\n모두 추가 발동합니다.',skinEffect:'드레스 미치루: 추가로 두 번 발동',skinEffectDesc:'첫인사: 아군 전체 +1/+1 후,\n다른 백귀야행 학생들의 첫인사를\n모두 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선제 / 뒤끝',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 5)\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선제: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   wakamo:   {type:'선제 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선제: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.\n(황금 호버크래프트: 와카모(수영복) 소환)',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
@@ -3346,28 +3346,44 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   // (hasMalkuthOnSide, makeSweeper는 전역으로 이동됨)
 
-  // 치세 패시브: 공격당하면 상대 능력 무작위 제거
-  function checkChisePassive(attacker,defender,log2){
-    if(defender.baseId!=='chise'||!defender.alive||defender.hp<=0) return;
-    if(defender._abilitiesStripped||_G.permanentAbilityBan) return;
-    var count=defender.isSkin?2:1;
+  // 치세 패시브: 반격할 때 상대 능력 무작위 제거 (골든: 영구 제거)
+  function checkChisePassive(chise,target,atkOrigBoard,log2){
+    if(chise.baseId!=='chise'||!chise.alive) return;
+    if(chise._abilitiesStripped||_G.permanentAbilityBan) return;
+    var isGolden=chise.isSkin;
     var removable=[];
-    for(var i=0;i<(attacker.kw||[]).length;i++){
-      if(attacker.kw[i]!=='preemptive') removable.push(attacker.kw[i]);
+    for(var i=0;i<(target.kw||[]).length;i++){
+      if(target.kw[i]!=='preemptive') removable.push(target.kw[i]);
     }
-    if(DR_IDS[attacker.baseId]&&!attacker._abilitiesStripped) removable.push('_dr');
-    if(BC_IDS[attacker.baseId]&&!attacker._abilitiesStripped) removable.push('_bc');
-    if(SOC_IDS[attacker.baseId]&&!attacker._abilitiesStripped) removable.push('_soc');
+    if(DR_IDS[target.baseId]&&!target._abilitiesStripped) removable.push('_dr');
+    if(BC_IDS[target.baseId]&&!target._abilitiesStripped) removable.push('_bc');
+    if(SOC_IDS[target.baseId]&&!target._abilitiesStripped) removable.push('_soc');
     if(removable.length===0) return;
     removable.sort(function(){return Math.random()-0.5;});
-    for(var c=0;c<Math.min(count,removable.length);c++){
-      var pick=removable[c];
-      if(pick==='_dr'||pick==='_bc'||pick==='_soc'){
-        attacker._abilitiesStripped=true;
-        log2.push({cls:'kill',text:'[치세] '+attacker.name+'의 능력이 제거됨!'});
-      } else {
-        var kwIdx=attacker.kw.indexOf(pick);
-        if(kwIdx!==-1){attacker.kw.splice(kwIdx,1);log2.push({cls:'kill',text:'[치세] '+attacker.name+'의 '+(KW_LABELS[pick]||pick)+' 제거!'});}
+    var pick=removable[0];
+    if(pick==='_dr'||pick==='_bc'||pick==='_soc'){
+      target._abilitiesStripped=true;
+      if(isGolden&&atkOrigBoard){
+        for(var _ob=0;_ob<atkOrigBoard.length;_ob++){
+          if(atkOrigBoard[_ob].baseId===target.baseId){atkOrigBoard[_ob].stripped=true;break;}
+        }
+      }
+      log2.push({cls:'kill',text:'[치세] '+target.name+'의 능력이 제거됨!'+(isGolden?' (영구)':'')});
+    } else {
+      var kwIdx=target.kw.indexOf(pick);
+      if(kwIdx!==-1){
+        target.kw.splice(kwIdx,1);
+        if(isGolden&&atkOrigBoard){
+          for(var _ob=0;_ob<atkOrigBoard.length;_ob++){
+            if(atkOrigBoard[_ob].baseId===target.baseId){
+              var _origIdx=atkOrigBoard[_ob].kw.indexOf(pick);
+              if(_origIdx!==-1) atkOrigBoard[_ob].kw.splice(_origIdx,1);
+              if(atkOrigBoard[_ob]._baseKw){var _baseIdx=atkOrigBoard[_ob]._baseKw.indexOf(pick);if(_baseIdx!==-1)atkOrigBoard[_ob]._baseKw.splice(_baseIdx,1);}
+              break;
+            }
+          }
+        }
+        log2.push({cls:'kill',text:'[치세] '+target.name+'의 '+(KW_LABELS[pick]||pick)+' 제거!'+(isGolden?' (영구)':'')});
       }
     }
   }
@@ -3376,12 +3392,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
     var hitResult=dealHit(attacker,defender,log2,dmgOverride,true);
     // 방어자가 맞고 살아남았으면 버티기 체크
     checkSurvive(defender,defArr,log2,attacker);
-    // 치세 패시브: 공격자 능력 제거
-    if(!hitResult.blocked&&defender.alive) checkChisePassive(attacker,defender,log2);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')){
       var counterResult=dealHit(defender,attacker,log2);
       // 공격자가 반격 맞고 살아남았으면 버티기 체크
       checkSurvive(attacker,atkArr,log2,defender);
+      // 치세 패시브: 반격 후 상대 능력 제거
+      var _atkOrigBoard=(!opts||!opts.simCtx)?(atkArr===a?boardA:boardB):null;
+      if(defender.alive) checkChisePassive(defender,attacker,_atkOrigBoard,log2);
     }
     resolveDeath(defender,defArr,atkArr,log2,attacker);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct'))resolveDeath(attacker,atkArr,defArr,log2,defender);
