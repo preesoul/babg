@@ -4537,9 +4537,15 @@ function miniCardHtml(m){
   }
   var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
   var mIconBar='';
-  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📯';
+  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📢';
   if(BC_IDS[bid]) mIconBar+='🔔';
   if(DR_IDS[bid]) mIconBar+='💀';
+  if(PASSIVE_IDS[bid]) mIconBar+='❓';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='⚡';
+  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='💪';
+  if(hasKw(m,'reborn')) mIconBar+='🌱';
+  if(hasKw(m,'poison')) mIconBar+='🧪';
+  if(hasKw(m,'selfdestruct')) mIconBar+='💣';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+

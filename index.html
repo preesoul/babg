@@ -79,10 +79,10 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .card.skin{border-color:#c8a010;box-shadow:0 0 12px rgba(200,160,16,0.3)}
 .card.token-card{border-color:#6a8090}
 .card.swap-selected{border-color:#00c8ff!important;box-shadow:0 0 14px rgba(0,200,255,0.5)!important}
-.ability-icons{position:absolute;top:2px;left:50%;transform:translateX(-50%);z-index:3;font-size:14px;letter-spacing:4px;text-align:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.7));pointer-events:none}
-.minicard .ability-icons{font-size:11px;letter-spacing:2px;top:1px}
+.ability-icons{position:absolute;top:-1px;left:50%;transform:translateX(-50%);z-index:3;font-size:21px;letter-spacing:3px;text-align:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.7));pointer-events:none}
+.minicard .ability-icons{font-size:16px;letter-spacing:2px;top:-1px}
 .card.ambush .card-bg img{filter:grayscale(100%);opacity:0.7}
-.shield-orb{position:absolute;width:70%;height:50%;top:15%;left:15%;border-radius:50%;background:radial-gradient(ellipse,rgba(140,210,255,0.15) 0%,rgba(80,160,255,0.5) 60%,rgba(60,140,255,0.5) 100%);border:1.5px solid rgba(100,180,255,0.6);box-shadow:0 0 20px rgba(100,180,255,0.3);z-index:1;pointer-events:none}
+.shield-orb{position:absolute;width:84%;height:60%;top:-10%;left:8%;border-radius:50%;background:radial-gradient(ellipse,rgba(140,210,255,0.15) 0%,rgba(80,160,255,0.5) 60%,rgba(60,140,255,0.5) 100%);border:1.5px solid rgba(100,180,255,0.6);box-shadow:0 0 20px rgba(100,180,255,0.3);z-index:1;pointer-events:none}
 .card .card-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;border-radius:3px}
 .card .card-bg img{width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)}
 .card .card-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(14,24,38,0.98) 0%,rgba(16,28,42,0.75) 40%,transparent 100%)}
@@ -124,7 +124,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .minicard{width:140px;height:195px;background:#1e2d3d;border:2.5px solid #3a5a6e;border-radius:5px;padding:0;text-align:center;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
 .minicard.skin{border-color:#c8a010;box-shadow:0 0 10px rgba(200,160,16,0.3)}
 .minicard.ambush .mini-bg img{filter:grayscale(100%);opacity:0.7}
-.minicard .shield-orb{width:60%;height:45%;top:10%;left:20%}
+.minicard .shield-orb{width:72%;height:54%;top:-5%;left:14%}
 .minicard.has-taunt{transform:scale(1.05);z-index:2;margin:0 4px}
 .minicard.tier7{border-color:#c030d0;box-shadow:0 0 8px rgba(192,48,208,0.35)}
 .minicard .mini-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
@@ -934,9 +934,15 @@ function cardHtml(m,idx,isBoard){
   // 능력 아이콘 바 (카드 맨 위 중앙)
   var SKIN_ONLY_SOC_C={iori:1,hanako:1,pina:1,kasumi:1};
   var iconBar='';
-  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) iconBar+='📯';
+  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) iconBar+='📢';
   if(BC_IDS[m.baseId||'']) iconBar+='🔔';
   if(DR_IDS[m.baseId||'']) iconBar+='💀';
+  if(PASSIVE_IDS[m.baseId||'']) iconBar+='❓';
+  if(PRE_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('preemptive')!==-1)) iconBar+='⚡';
+  if(SURV_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('survive')!==-1)) iconBar+='💪';
+  if(hasKw(m,'reborn')) iconBar+='🌱';
+  if(hasKw(m,'poison')) iconBar+='🧪';
+  if(hasKw(m,'selfdestruct')) iconBar+='💣';
   if(iconBar) html+='<div class="ability-icons">'+iconBar+'</div>';
   html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
   html+='<div class="card-spacer"></div>';
