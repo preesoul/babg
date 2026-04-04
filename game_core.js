@@ -1054,7 +1054,16 @@ var RECRUIT_VOICES = {
   nagusa: 'sfx/nagusa_recruit.webm',
   mine: 'sfx/mine_recruit.webm',
   shizuko: 'sfx/shizuko_recruit.webm',
-  rio: 'sfx/rio_recruit.webm'
+  rio: 'sfx/rio_recruit.webm',
+  neru: 'sfx/neru_recruit.webm',
+  michiru: 'sfx/michiru_recruit.webm',
+  utaha: 'sfx/utaha_recruit.webm',
+  asuna: 'sfx/asuna_recruit.webm',
+  ui: 'sfx/ui_recruit.m4a',
+  lin: 'sfx/lin_recruit.webm',
+  hasumi: 'sfx/hasumi_recruit.webm',
+  sena: 'sfx/sena_recruit.webm',
+  aru: 'sfx/aru_recruit.m4a'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
