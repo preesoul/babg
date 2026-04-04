@@ -348,7 +348,7 @@ var TOKENS = {
   sweeper:   {id:'sweeper',  name:'스위퍼',     school:'밀레니엄', tier:0, atk:10,hp:10,kw:['shield','selfdestruct'], img:'token/Sweeper.png'},
   hina_the_last:{id:'hina_the_last',name:'마지막 히나',school:'게헨나',tier:0,atk:10,hp:10,kw:['cleave','poison'],img:'token/Hina_the_last.png'},
   hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:0, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
-  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:0, hp:5, kw:['selfdestruct'], img:'token/C4.png'},
+  c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:5, hp:1, kw:['selfdestruct'], img:'token/C4.png'},
 };
 
 function makeToken(tokenId) {
@@ -4537,16 +4537,21 @@ function miniCardHtml(m){
   }
   var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
   var mIconBar='';
-  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📢';
+  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📣';
   if(BC_IDS[bid]) mIconBar+='🔔';
   if(DR_IDS[bid]) mIconBar+='💀';
-  if(PASSIVE_IDS[bid]) mIconBar+='❓';
-  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='⚡';
+  if(PASSIVE_IDS[bid]) mIconBar+='✨';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='🥊';
   if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='💪';
   if(hasKw(m,'reborn')) mIconBar+='🌱';
-  if(hasKw(m,'poison')) mIconBar+='🧪';
+  if(hasKw(m,'poison')) mIconBar+='🐍';
   if(hasKw(m,'selfdestruct')) mIconBar+='💣';
-  if(hasKw(m,'taunt')) mIconBar+='🛡️';
+  if(hasKw(m,'taunt')) mIconBar+='🎭';
+  if(hasKw(m,'cleave')) mIconBar+='🌊';
+  if(hasKw(m,'windfury')) mIconBar+='⚡';
+  if(hasKw(m,'pierce')) mIconBar+='💥';
+  if(hasKw(m,'ranged')) mIconBar+='🏹';
+  if(hasKw(m,'invincible')) mIconBar+='🏆';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
