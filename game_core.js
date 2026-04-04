@@ -305,7 +305,7 @@ var ABILITY_DESCS = {
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',skinEffect:'수영복 이부키: +10/+10',skinEffectDesc:'개전: 아군 마코토, 치아키, 사츠키, 이로하에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   chiaki:   {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 치아키: 연사 추가',skinEffectDesc:'저격+연사: 저격 공격. 반격을 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">연사</span>로 2회 공격합니다.'},
   koyuki:   {type:'선제',desc:'공격 대상의 공격력과 체력 수치를\n이번 전투 동안 뒤집습니다.',skinEffect:'파자마 코유키: 상대 무작위 능력 삭제 추가',skinEffectDesc:'선제: 공격 대상의 공격력과 체력 수치를 뒤집습니다.\n추가로 상대의 <span style="color:#ffd700;font-weight:700">무작위 능력 하나를 삭제</span>합니다.'},
-  akane:    {type:'개전',desc:'아군 네루, 카린, 아스나, 아카네, 토키에게\n"뒤끝: C4(5/5 자폭) 소환"을 부여합니다.\n(중복되지 않습니다.)',skinEffect:'버니걸 아카네: 동일'},
+  akane:    {type:'개전',desc:'아군 네루, 카린, 아스나, 아카네, 토키에게\n"뒤끝: C4(5/1 자폭) 소환"을 부여합니다.\n(중복되지 않습니다.)',skinEffect:'버니걸 아카네: C4를 2개 소환',skinEffectDesc:'개전: 아군 네루, 카린, 아스나, 아카네, 토키에게\n"뒤끝: C4(5/1 자폭) <span style="color:#ffd700;font-weight:700">2개</span> 소환"을 부여합니다.\n(중복되지 않습니다.)'},
   karin:    {type:'저격+관통',desc:'저격 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.',skinEffect:'버니걸 카린: 연사 추가',skinEffectDesc:'저격+관통+<span style="color:#ffd700;font-weight:700">연사</span>: 저격 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.\n연사로 2회 공격합니다.'},
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선제',desc:'공격 시, 10% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 20%',skinEffectDesc:'선제: 공격 시, <span style="color:#ffd700;font-weight:700">20%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
@@ -4388,6 +4388,32 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
     // 공격 단계: 3페이즈 애니메이션
     var atkIsAlly=(step.atkSide==='a');
     var changes=findChanges(prevSnap,currSnap);
+    // 말쿠트 선제: 스위퍼 소환 연출 (돌진 대신 제자리에서 발사)
+    var isMalkuth=prevSnap[step.atkSide]&&prevSnap[step.atkSide][step.atkIdx]&&prevSnap[step.atkSide][step.atkIdx].baseId==='millennium_malkuth';
+    if(isMalkuth){
+      renderBattleSnap(prevSnap);
+      appendLog(step.log,logEl);
+      var sweepCount=0;for(var _sl=0;_sl<step.log.length;_sl++){if((step.log[_sl].text||'').indexOf('스위퍼 소환')!==-1)sweepCount++;}
+      var _swIdx=0;
+      function fireSweeper(){
+        if(_swIdx>=sweepCount){
+          setTimeout(function(){renderBattleSnap(currSnap);stepIdx++;setTimeout(nextStep,300);},400);
+          return;
+        }
+        playSfx('selfdestruct',0.4);shakeScreen('light');
+        // 상대쪽 플래시
+        var dRow=atkIsAlly?document.getElementById('enemy-row'):document.getElementById('ally-row');
+        if(dRow&&dRow.children.length>0){
+          var tgt=dRow.children[Math.min(_swIdx,dRow.children.length-1)];
+          if(tgt){tgt.style.filter='brightness(2)';setTimeout(function(){tgt.style.filter='';},150);}
+        }
+        _swIdx++;
+        setTimeout(fireSweeper,300);
+      }
+      playSfx('soc_trigger',0.4);
+      setTimeout(fireSweeper,500);
+      return;
+    }
     // Phase 1: 느리게 들어올리기 (350ms)
     renderBattleSnap(prevSnap);
     var atkRow=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
