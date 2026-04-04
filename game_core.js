@@ -2803,7 +2803,10 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   if(unit.irohaRef) id='toramaru';
   // 아카네 C4 부여 뒤끝 (린 반복 포함)
   if(unit._akaneC4DR&&!unit._abilitiesStripped&&!G.permanentAbilityBan){
-    var c4LinRepeat=1+getLinExtra(mySide);
+    var _linDbg=getLinExtra(mySide);
+    log.push({cls:'soc',text:'[디버그] C4 뒤끝: mySide='+mySide.length+'명, 린추가='+_linDbg+', alive린='});
+    for(var _ld=0;_ld<mySide.length;_ld++){if(mySide[_ld].baseId==='lin')log.push({cls:'soc',text:'  린발견: alive='+mySide[_ld].alive});}
+    var c4LinRepeat=1+_linDbg;
     for(var _c4lr=0;_c4lr<c4LinRepeat;_c4lr++){
       var c4Count=unit._akaneC4Golden?2:1;
       for(var _c4=0;_c4<c4Count;_c4++){
