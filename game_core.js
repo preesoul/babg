@@ -1011,6 +1011,7 @@ function buyMinion(idx, insertIdx) {
   if(m.school) G.purchasedSchools[m.school]=true;
   var addedUnit;
   if(willTriple){
+    playSfx('triple');
     var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];
     var mergedKw=[],bonusAtk=0,bonusHp=0;
     var sources=[];for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin)sources.push(p.board[i]);
@@ -1081,6 +1082,40 @@ var _cardPickSfx=null;
 function playCardPick(){
   try{if(!_cardPickSfx)_cardPickSfx=new Audio('sfx/card_pick.mp3');_cardPickSfx.currentTime=0;_cardPickSfx.volume=0.4;_cardPickSfx.play();}catch(e){}
 }
+// ===== SFX 시스템 =====
+var SFX_CACHE={};
+function playSfx(name,vol){
+  vol=vol||0.5;
+  var paths={
+    levelup:'sfx/wow_levelup.ogg',
+    coinflip:'sfx/FX_MulliganCoin03_CoinFlip.ogg',
+    shield_on:'sfx/spell_DivineShield_target_1.ogg',
+    shield_break:'sfx/taunt_shield_break.ogg',
+    taunt_on:'sfx/taunt_shield_up.ogg',
+    reroll:'sfx/FX_MulliganCoin09_DeckShuffle.ogg',
+    sell:'sfx/GadgetzanAuctioneer_card_spawn_coins.ogg',
+    triple:'sfx/Battlecry_1.ogg',
+    battle_start:'sfx/Brawl_Start_Bell.ogg',
+    victory:'sfx/the_coin_card.ogg',
+    defeat:'sfx/defeat_thunder_rumble_loop.ogg',
+    heal:'sfx/Holy_Heal_Cast_01.ogg',
+    freeze:'sfx/FX_FreezeEvent_SpellCast.ogg',
+    unfreeze:'sfx/FX_FreezeEvent_StateEnd.ogg',
+    hit:'sfx/Brawl_punch_minion_out_1.ogg',
+    deathrattle:'sfx/FeignDeath_trigger_1.ogg',
+    enrage:'sfx/enrage.ogg',
+    bomb:'sfx/Bomb_Missile_Dynamite_Sound_01.ogg',
+    secret:'sfx/FX_Secret_Trigger.ogg',
+    frost:'sfx/FrostBoltHit1.ogg',
+    coin_drop:'sfx/FX_MulliganCoin01_HeroCoinDrop.ogg'
+  };
+  var src=paths[name];if(!src)return;
+  try{
+    if(!SFX_CACHE[name])SFX_CACHE[name]=new Audio(src);
+    var a=SFX_CACHE[name];a.currentTime=0;a.volume=vol;a.play();
+  }catch(e){}
+}
+
 function shakeScreen(intensity){
   var el=document.querySelector('.main-content')||document.body;
   var cls=intensity==='heavy'?'shake-heavy':'shake-light';
@@ -1512,6 +1547,7 @@ function showSellConfirm(onConfirm){
 function sellMinion(idx) {
   var p=G.players[0];
   if(!p.board[idx])return;
+  playSfx('sell',0.4);
   var m=p.board[idx];
   // undo용 저장
   var undoData={unit:m,idx:idx,haineBuff:0,exclusion:null};
@@ -1568,6 +1604,7 @@ function moveFromBench() {
   if(p.board.length>=MAX_BOARD&&!willTriple) return;
   p.bench=null;
   if(willTriple){
+    playSfx('triple');
     var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId){tmpl=CHARS[j];break;}
     if(tmpl){
       var mergedKw=[],bonusAtk=0,bonusHp=0;
@@ -1588,6 +1625,7 @@ function moveFromBench() {
 function sellBench() {
   var p=G.players[0];
   if(p.bench===null) return;
+  playSfx('sell',0.4);
   var m=p.bench;
   // 하이네 패시브: 벤치에서 팔아도 아군 전체 버프
   if(m.baseId==='haine'){
@@ -1610,21 +1648,21 @@ function sellBench() {
 function doReroll() {
   var p=G.players[0];
   lastSold=null;
-  if(SANDBOX){rollShop(true);renderAll();return;}
-  if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;rollShop(true);renderAll();return;}
-  if(p.stone<1)return;p.stone-=1;rollShop(true);renderAll();
+  if(SANDBOX){playSfx('reroll',0.3);rollShop(true);renderAll();return;}
+  if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;playSfx('reroll',0.3);rollShop(true);renderAll();return;}
+  if(p.stone<1)return;p.stone-=1;playSfx('reroll',0.3);rollShop(true);renderAll();
 }
 function doUpgrade() {
   var p=G.players[0];if(p.tier>=6)return;
-  if(SANDBOX){p.tier++;p.upgradeCost=p.tier<6?0:99;renderAll();}
+  if(SANDBOX){p.tier++;p.upgradeCost=p.tier<6?0:99;playSfx('levelup');renderAll();}
   else{if(p.stone<p.upgradeCost)return;
-  p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;renderAll();}
+  p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;playSfx('levelup');renderAll();}
   if(TUT.active){
     var s=TUTORIAL_STEPS[TUT.step];
     if(s&&s.action==='waitUpgrade') setTimeout(function(){tutNext();},300);
   }
 }
-function doFreeze() { G.frozen=!G.frozen;renderAll(); }
+function doFreeze() { G.frozen=!G.frozen;playSfx(G.frozen?'freeze':'unfreeze');renderAll(); }
 
 function boardSwap(idx) {
   if(swapFirst===-1){swapFirst=idx;renderAll();}
@@ -3725,6 +3763,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
 }
 
 function startBattle() {
+  playSfx('battle_start');
   lastSold=null;
   _activeCoinOverlay=null;
   var p=G.players[0];

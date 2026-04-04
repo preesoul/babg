@@ -656,6 +656,7 @@ img.tutorial-highlight{border-radius:50%!important}
 
 function showGameOver() {
   deleteSave(); // 게임 종료 시 저장 삭제
+  playSfx(G.placement===1?'victory':'defeat',G.placement===1?0.5:0.3);
   var go=document.getElementById('game-over');go.classList.add('active');
   document.getElementById('go-title').textContent=G.placement===1?'1등!':'게임 오버';
   document.getElementById('go-title').style.color=G.placement===1?'#ffd700':'#ef4444';
