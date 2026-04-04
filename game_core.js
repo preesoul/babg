@@ -1045,7 +1045,7 @@ function buyMinion(idx, insertIdx) {
 var RECRUIT_VOICES = {
   satsuki: 'sfx/satsuki_recruit.webm',
   arisu: 'sfx/arisu_recruit.webm',
-  makoto: 'sfx/makoto_recruit.webm',
+  makoto: 'sfx/makoto_recruit.m4a',
   hina: 'sfx/hina_recruit.webm',
   himari: 'sfx/himari_recruit.webm',
   wakamo: 'sfx/wakamo_recruit.webm',
