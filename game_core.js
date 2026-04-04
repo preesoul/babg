@@ -1107,7 +1107,14 @@ function playSfx(name,vol){
     bomb:'sfx/Bomb_Missile_Dynamite_Sound_01.ogg',
     secret:'sfx/FX_Secret_Trigger.ogg',
     frost:'sfx/FrostBoltHit1.ogg',
-    coin_drop:'sfx/FX_MulliganCoin01_HeroCoinDrop.ogg'
+    coin_drop:'sfx/FX_MulliganCoin01_HeroCoinDrop.ogg',
+    attack_launch:'sfx/FX_Minion_AttackLaunch.ogg',
+    attack_impact:'sfx/FX_Minion_AttackImpact.ogg',
+    attack_impact_large:'sfx/FX_Minion_AttackImpactLarge.ogg',
+    whoosh:'sfx/Lightning_Targeted_Whoosh_01.ogg',
+    arrow_hit:'sfx/Arrow_Targeted_Impact_01.ogg',
+    backstab:'sfx/backstab_impact_chestdru.ogg',
+    fireball_impact:'sfx/FX_FireballEvent04_SpellImpact_01.ogg'
   };
   var src=paths[name];if(!src)return;
   try{
@@ -4303,11 +4310,13 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       atkCard.style.setProperty('--slam-x',slamVars.x);
       atkCard.style.setProperty('--slam-y',slamVars.y);
       atkCard.classList.add('lift');
+      playSfx('attack_launch',0.3);
     }
     setTimeout(function(){
       if(battleState.skip){stepIdx=steps.length;nextStep();return;}
       // Phase 2: 폭발적으로 상대 카드까지 돌진 (200ms)
       if(atkCard){atkCard.classList.remove('lift');atkCard.classList.add('slam');}
+      playSfx('whoosh',0.3);
       setTimeout(function(){
         if(battleState.skip){stepIdx=steps.length;nextStep();return;}
 
@@ -4319,7 +4328,8 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
           var hitDone=0;
           var hitTimer=setInterval(function(){
             hitDone++;
-            // 타격마다 작은 플래시
+            // 타격마다 작은 플래시 + 타격음
+            playSfx('hit',0.25);
             if(defCard){
               var dr2=defCard.getBoundingClientRect();
               var fl=document.createElement('div');
@@ -4343,6 +4353,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
 
         function doPhase3(){
           // Phase 3: 임팩트! 플래시 + 넉백 + 데미지 (500ms)
+          playSfx('attack_impact',0.4);
           renderBattleSnap(currSnap);
           // 공격자 원위치 복귀
           var atkRow2=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
