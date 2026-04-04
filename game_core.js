@@ -406,7 +406,7 @@ var SPELLS = [
     effect:function(G){G.bonusStone=(G.bonusStone||0)+2;}},
   {id:'visit_plan',name:'방문 예정',cost:2,tier:2,desc:'다음 스케쥴 학생 공/체 +2',target:'auto',img:'img/spell/visit_plan.png',
     effect:function(G){var ab=getAyumuBonus();G.shopBuff=(G.shopBuff||0)+2+ab;}},
-  {id:'visit_buff',name:'방과 후 수업',cost:3,tier:2,desc:'선택 학생 +4/+4',target:'select_ally',img:'img/spell/visit_buff.png',
+  {id:'visit_buff',name:'방과 후 수업',cost:3,tier:2,desc:'선택 학생 +4/+4',target:'select_ally',img:'img/spell/Hard_work.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;p.board[idx].hp+=4+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+4+ab;logBuff(p.board[idx],'방문 예정',4+ab,4+ab);return true;}},
   {id:'aggro',name:'어그로꾼',cost:2,tier:3,desc:'선택 학생에게 도발 부여',target:'select_ally',img:'img/spell/aggro.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'taunt');return true;}},
