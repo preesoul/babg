@@ -667,13 +667,41 @@ img.tutorial-highlight{border-radius:50%!important}
 <script src="game_core.js?v=20260404r"></script>
 <script>
 
+var _endMusic=null;
 function showGameOver() {
-  deleteSave(); // 게임 종료 시 저장 삭제
-  playSfx(G.placement===1?'victory':'defeat',G.placement===1?0.5:0.3);
+  deleteSave();
+  if(_endMusic){_endMusic.pause();_endMusic=null;}
+  var isWin=G.placement===1;
+  _endMusic=new Audio(isWin?'sfx/victory_music.webm':'sfx/defeat_music.webm');
+  _endMusic.volume=0.5;_endMusic.play().catch(function(){});
+  if(isWin){shakeScreen('heavy');startCelebration();}
   var go=document.getElementById('game-over');go.classList.add('active');
-  document.getElementById('go-title').textContent=G.placement===1?'1등!':'게임 오버';
-  document.getElementById('go-title').style.color=G.placement===1?'#ffd700':'#ef4444';
+  document.getElementById('go-title').textContent=isWin?'1등!':'게임 오버';
+  document.getElementById('go-title').style.color=isWin?'#ffd700':'#ef4444';
   document.getElementById('go-placement').textContent=G.placement+'등 / 8명 (턴 '+G.turn+')';
+}
+var _celebInterval=null;
+function startCelebration(){
+  if(_celebInterval)clearInterval(_celebInterval);
+  var emojis=['🎉','🎊','🎈','❤️','⭐','🏆','✨','💛'];
+  _celebInterval=setInterval(function(){
+    var el=document.createElement('div');
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText='position:fixed;bottom:-30px;left:'+(5+Math.random()*90)+'%;font-size:'+(24+Math.random()*20)+'px;z-index:9999;pointer-events:none;opacity:0.9;transition:none;';
+    document.body.appendChild(el);
+    var dur=2000+Math.random()*1500;
+    el.animate([
+      {transform:'translateY(0) rotate(0deg)',opacity:0.9},
+      {transform:'translateY(-'+(window.innerHeight+60)+'px) rotate('+(Math.random()*360-180)+'deg)',opacity:0}
+    ],{duration:dur,easing:'ease-out'});
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},dur);
+  },150);
+  // 다시하기 누르면 정리
+  var restartBtn=document.getElementById('btn-restart');
+  restartBtn.addEventListener('click',function(){
+    if(_celebInterval){clearInterval(_celebInterval);_celebInterval=null;}
+    if(_endMusic){_endMusic.pause();_endMusic=null;}
+  },{once:true});
 }
 
 // ========== RENDER ==========
