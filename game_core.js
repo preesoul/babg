@@ -13,7 +13,7 @@ var CHARS = [
   {id:'midori', name:'미도리', school:'밀레니엄',tier:1,atk:3,hp:2,kw:[],            skin:'미도리(메이드)',   img:'Midori.png',         imgGold:'Midori_(Maid).png'},
   // 트리니티 1학년
   {id:'mari',   name:'마리',   school:'트리니티',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'마리(아이돌)',     img:'Mari.png',           imgGold:'Mari_(Idol).png'},
-  {id:'reisa',  name:'레이사', school:'트리니티',tier:1,atk:2,hp:2,kw:['reborn'],    skin:'레이사(마법소녀)', img:'Reisa.png',          imgGold:'Reisa_(Magical).png'},
+  {id:'reisa',  name:'레이사', school:'트리니티',tier:2,atk:2,hp:2,kw:['reborn'],    skin:'레이사(마법소녀)', img:'Reisa.png',          imgGold:'Reisa_(Magical).png'},
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
@@ -44,7 +44,7 @@ var CHARS = [
 
   // ===== Tier 4 (밸류12) =====
   // 게헨나 2학년
-  {id:'iori',    name:'이오리', school:'게헨나',  tier:4,atk:7,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
+  {id:'iori',    name:'이오리', school:'게헨나',  tier:4,atk:7,hp:3,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:4,atk:5,hp:4,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:5,hp:4,kw:[],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
@@ -63,7 +63,7 @@ var CHARS = [
   {id:'himari',  name:'히마리', school:'밀레니엄',tier:6,atk:6,hp:6,kw:[],            skin:'히마리(임전)',     img:'Himari.png',         imgGold:'Himari_(Battle).png'},
   {id:'rio',     name:'리오',   school:'밀레니엄',tier:6,atk:8,hp:8,kw:[],            skin:'리오(임전)',       img:'Rio.png',            imgGold:'Rio_(Battle).png'},
   // 트리니티 3학년
-  {id:'sakurako',name:'사쿠라코',school:'트리니티',tier:5,atk:5,hp:9,kw:[],           skin:'사쿠라코(아이돌)', img:'Sakurako.png',       imgGold:'Sakurako_(Idol).png'},
+  {id:'sakurako',name:'사쿠라코',school:'트리니티',tier:5,atk:7,hp:9,kw:[],           skin:'사쿠라코(아이돌)', img:'Sakurako.png',       imgGold:'Sakurako_(Idol).png'},
   {id:'ui',      name:'우이',   school:'트리니티',tier:5,atk:8,hp:5,kw:['preemptive'],skin:'우이(수영복)',     img:'Ui.png',             imgGold:'Ui_(Swimsuit).png'},
 
   // ===== Tier 6 (밸류18) =====
@@ -79,7 +79,7 @@ var CHARS = [
 
   // ===== 게헨나 신규 =====
   // 게헨나 1학년
-  {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'하루카(새해)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
+  {id:'haruka',  name:'하루카', school:'게헨나',  tier:1,atk:2,hp:2,kw:['preemptive'],   skin:'하루카(새해)',     img:'Haruka.png',         imgGold:'Haruka_(New_Year).png'},
   {id:'ibuki',   name:'이부키', school:'게헨나',  tier:1,atk:2,hp:2,kw:[],               skin:'이부키(수영복)',   img:'Ibuki.png',          imgGold:'Ibuki_(Swimsuit).png'},
   // 게헨나 2학년
   {id:'mutsuki', name:'무츠키', school:'게헨나',  tier:2,atk:3,hp:2,kw:['pierce'],        skin:'무츠키(새해)',     img:'Mutsuki.png',        imgGold:'Mutsuki_(New_Year).png'},
@@ -120,7 +120,7 @@ var CHARS = [
   // 백귀야행 2학년
   {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:4,kw:['taunt','survive'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:4,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
-  {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:6,hp:6,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
+  {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:8,hp:7,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:4,hp:7,kw:['windfury','preemptive'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
   {id:'chise',   name:'치세',   school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
@@ -1333,19 +1333,25 @@ function _doBC(m, p) {
     }
   }
   else if(id==='michiru') {
-    // 보드의 다른 백귀야행 BC를 추가 발동 (황금: 2회, 미치루 제외)
-    if(!G._michiruChaining){
-      G._michiruChaining=true;
-      var repeat=m.isSkin?2:1;
-      for(var r=0;r<repeat;r++){
-        for(var i=0;i<p.board.length;i++){
-          if(p.board[i].baseId!=='michiru'&&p.board[i].school==='백귀야행'&&BC_IDS[p.board[i].baseId]){
-            _doBC(p.board[i],p); // 시즈코/린 증폭 없이 순수 1회
-          }
+    if(G._michiruChaining) return; // 연쇄 중 자신 재발동 방지
+    // 1단계: 아군 전체 +1/+1
+    for(var i=0;i<p.board.length;i++){
+      p.board[i].atk+=1;
+      p.board[i].hp+=1;
+      p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp);p.board[i].maxHp+=1;
+      logBuff(p.board[i],m.name,1,1);
+    }
+    // 2단계: 아군 백귀야행(자신 포함) BC 연쇄 (황금: 2회)
+    G._michiruChaining=true;
+    var repeat=m.isSkin?2:1;
+    for(var r=0;r<repeat;r++){
+      for(var i=0;i<p.board.length;i++){
+        if(p.board[i].school==='백귀야행'&&BC_IDS[p.board[i].baseId]){
+          _doBC(p.board[i],p); // 시즈코/린 증폭 없이 순수 1회
         }
       }
-      G._michiruChaining=false;
     }
+    G._michiruChaining=false;
   }
 
   // 히마리: 첫인사 제거 → 개전(SOC)으로 이동
@@ -2210,7 +2216,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   else if(id==='makoto'){
     // 마코토 → 비행선으로 교체
     var allyCount=0;for(var i=0;i<mySide.length;i++)if(mySide[i].alive)allyCount++;
-    var mult=u.isSkin?6:3;
+    var mult=u.isSkin?4:2;
     var as=makeToken('airship');
     as.atk=allyCount*mult;as.hp=allyCount*mult;as.alive=true;as.poisonImmune=false;
     as.isSkin=u.isSkin;as.school='게헨나';as.baseId='airship';
@@ -2470,7 +2476,10 @@ function triggerSOC_battlecry(u, mySide, log) {
       log.push({cls:'soc',text:'  → '+u.name+': 백귀야행 +'+buff+'/+'+buff+(_lr>0?' (추가발동)':'')});
     }
     else if(id==='michiru'){
-      // 미치루: 다른 백귀야행 BC 연쇄 발동 (미치루 제외)
+      // 1단계: 아군 전체 +1/+1
+      for(var i=0;i<mySide.length;i++){if(mySide[i].alive){mySide[i].atk+=1;mySide[i].hp+=1;}}
+      log.push({cls:'soc',text:'  → '+u.name+': 아군 전체 +1/+1'+(_lr>0?' (추가발동)':'')});
+      // 2단계: 아군 백귀야행(자신 포함) BC 연쇄 (미치루 재귀 방지)
       var mRepeat=u.isSkin?2:1;
       for(var mr=0;mr<mRepeat;mr++){
         for(var i=0;i<mySide.length;i++){
@@ -2689,11 +2698,11 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='kazusa'){
     if(countAlive(mySide)>=BATTLE_MAX) return;
-    var atk=unit.isSkin?2:1,hp2=unit.isSkin?2:1;
+    var atk=unit.isSkin?6:4,hp2=unit.isSkin?4:3;
     var cp={id:'cp_'+Math.random().toString(36).substr(2,4),baseId:'cathpalug',isToken:true,
-      name:'카스팔루스',school:G.rioSchool||'트리니티',tier:6,atk:atk,hp:hp2,kw:['poison'],img:'token/CathPalug.png',isSkin:false,alive:true,poisonImmune:false};
+      name:'카스팔루스',school:G.rioSchool||'트리니티',tier:6,atk:atk,hp:hp2,kw:[],img:'token/CathPalug.png',isSkin:false,alive:true,poisonImmune:false};
     mySide.push(cp);
-    log.push({cls:'soc',text:'[뒤끝] 카스팔루스 소환! ('+atk+'/'+hp2+', 독사굴)'});
+    log.push({cls:'soc',text:'[뒤끝] 카스팔루스 소환! ('+atk+'/'+hp2+')'});
   }
   else if(id==='hifumi'){
     if(countAlive(mySide)>=BATTLE_MAX) return;
@@ -3190,7 +3199,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       return false;
     }
     if(attacker.baseId==='koharu'){
-      var chance=attacker.isSkin?0.2:0.1;
+      var chance=attacker.isSkin?0.1:0.05;
       if(Math.random()<chance){
         stripAbilities(target,log2);
         target.alive=false;target._killedBy=attacker;
