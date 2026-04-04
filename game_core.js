@@ -4505,8 +4505,9 @@ function finishBattle(result) {
 }
 
 function miniCardHtml(m){
-  var cls='minicard'+(m.isSkin?' skin':'')+(hasKw(m,'ambush')&&!m._hasAttacked?' ambush':'')+(hasKw(m,'shield')?' has-shield':'');
-  var bgTag=m.img?'<div class="mini-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'"></div>':'';
+  var cls='minicard'+(m.isSkin?' skin':'')+(hasKw(m,'ambush')&&!m._hasAttacked?' ambush':'')+(hasKw(m,'taunt')?' has-taunt':'');
+  var shieldOrb=hasKw(m,'shield')?'<div class="shield-orb"></div>':'';
+  var bgTag=m.img?'<div class="mini-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'">'+shieldOrb+'</div>':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'" data-mini-atk="'+m.atk+'" data-mini-hp="'+m.hp+'" data-mini-kw="'+(m.kw||[]).join(',')+'" data-mini-name="'+m.name+'" data-mini-img="'+(m.img||'')+'" data-mini-golden="'+(m.isSkin?'1':'')+'"';
   var kwHtml='';
   if(m.stripped){
@@ -4534,7 +4535,10 @@ function miniCardHtml(m){
   if((bid==='nagusa'||bid==='yukari'||bid==='renge'||bid==='kikyou')&&m._keiseisenCounter>0){
     counterHtml='<div class="battle-counter" style="background:rgba(251,191,36,0.3);border:1px solid rgba(251,191,36,0.6);color:#fde68a">⚔ '+m._keiseisenCounter+'</div>';
   }
-  return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
+  var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
+  var mHasSOC=SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin);
+  var mNameDisp=(mHasSOC?'📯 ':'')+m.name+(mHasSOC?' 📯':'');
+  return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+'<div class="mini-inner"><div class="name">'+mNameDisp+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
     kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }
