@@ -1115,9 +1115,82 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-05T23:39:48",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 27,
+              "hp": 22,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "네루(바니걸)",
+              "baseId": "neru",
+              "atk": 42,
+              "hp": 48,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Neru_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 10,
+              "hp": 7,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 37,
+              "hp": 41,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-06",
