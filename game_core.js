@@ -2974,21 +2974,20 @@ function triggerSOC(u, mySide, otherSide, log) {
       if(otherSide[_sti].alive&&otherSide[_sti].hp===maxEnemyHp) topEnemies.push(otherSide[_sti]);
     }
     var spared=topEnemies.length>0?topEnemies[Math.floor(Math.random()*topEnemies.length)]:null;
+    // 발동 시점 유닛 스냅샷 (DR로 추가되는 유닛은 대상에서 제외)
+    var allyTargets=mySide.filter(function(m){return m.alive&&m!==u;});
+    var enemyTargets=otherSide.filter(function(m){return m.alive&&m!==spared;});
     // 2. 아군 자신 제외 전체 처치 (먼저 — DR로 귀환할 학생들이 다시 죽지 않도록)
-    for(var _sti=0;_sti<mySide.length;_sti++){
-      if(mySide[_sti].alive&&mySide[_sti]!==u){
-        mySide[_sti].hp=0;mySide[_sti].alive=false;mySide[_sti]._killedBy=u;
-        log.push({cls:'kill',text:'[개전] '+u.name+': 아군 '+mySide[_sti].name+' 처치!'});
-        triggerDeathrattle(mySide[_sti],mySide,otherSide,log);
-      }
+    for(var _sti=0;_sti<allyTargets.length;_sti++){
+      allyTargets[_sti].hp=0;allyTargets[_sti].alive=false;allyTargets[_sti]._killedBy=u;
+      log.push({cls:'kill',text:'[개전] '+u.name+': 아군 '+allyTargets[_sti].name+' 처치!'});
+      triggerDeathrattle(allyTargets[_sti],mySide,otherSide,log);
     }
     // 3. 적 전체 (최고체력 1인 제외) 처치
-    for(var _sti=0;_sti<otherSide.length;_sti++){
-      if(otherSide[_sti].alive&&otherSide[_sti]!==spared){
-        otherSide[_sti].hp=0;otherSide[_sti].alive=false;otherSide[_sti]._killedBy=u;
-        log.push({cls:'kill',text:'[개전] '+u.name+': '+otherSide[_sti].name+' 처치!'});
-        triggerDeathrattle(otherSide[_sti],otherSide,mySide,log);
-      }
+    for(var _sti=0;_sti<enemyTargets.length;_sti++){
+      enemyTargets[_sti].hp=0;enemyTargets[_sti].alive=false;enemyTargets[_sti]._killedBy=u;
+      log.push({cls:'kill',text:'[개전] '+u.name+': '+enemyTargets[_sti].name+' 처치!'});
+      triggerDeathrattle(enemyTargets[_sti],otherSide,mySide,log);
     }
     if(spared) log.push({cls:'soc',text:'[개전] '+u.name+': '+spared.name+'은(는) 살아남았다! (체력 '+spared.hp+')'});
   }
