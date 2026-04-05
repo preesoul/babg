@@ -299,11 +299,26 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .pop{animation:pop 0.3s ease}
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+/* 기습/보호막/도발 비주얼 */
+.card.ambush .card-bg img{filter:grayscale(100%);opacity:0.7}
+.shield-orb{position:absolute;width:132px;height:132px;top:calc(31% - 66px);left:50%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,230,140,0.2) 0%,rgba(255,200,60,0.5) 60%,rgba(240,180,40,0.6) 100%);border:1.5px solid rgba(255,210,80,0.7);box-shadow:0 0 20px rgba(255,200,60,0.4);z-index:1;pointer-events:none}
+.minicard.ambush .mini-bg img{filter:grayscale(100%);opacity:0.7}
+.minicard .shield-orb{width:99px;height:99px;top:calc(28% - 50px);left:50%;transform:translateX(-50%)}
+.minicard.has-taunt{transform:scale(1.1);z-index:2;margin:0 4px}
+/* 아이콘 바 */
+.ability-icons{position:absolute;top:-12px;left:50%;transform:translateX(-50%);z-index:4;font-size:16px;letter-spacing:2px;text-align:center;pointer-events:none;background:#1a2a3a;border:1px solid #3a5a6e;border-radius:3px;padding:0 4px;white-space:nowrap}
+.minicard .ability-icons{font-size:13px;letter-spacing:1px;top:1px;padding:0 4px}
+/* 화면 흔들림 */
+.shake-light{animation:shake-l 0.4s ease-out}
+.shake-heavy{animation:shake-h 0.5s ease-out}
+@keyframes shake-l{0%{transform:translateX(0)}10%{transform:translateX(-4px)}20%{transform:translateX(4px)}30%{transform:translateX(-3px)}40%{transform:translateX(3px)}50%{transform:translateX(-2px)}60%{transform:translateX(2px)}100%{transform:translateX(0)}}
+@keyframes shake-h{0%{transform:translateX(0)}8%{transform:translateX(-8px)}16%{transform:translateY(3px) translateX(8px)}24%{transform:translateY(-3px) translateX(-6px)}32%{transform:translateX(6px)}40%{transform:translateX(-4px)}50%{transform:translateX(4px)}60%{transform:translateX(-2px)}100%{transform:translateX(0)}}
+
 .screen{display:none;opacity:0}.screen.active{display:block;opacity:1}.screen.fading{display:block;opacity:0;transition:opacity 0.4s ease}
-#title-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
-#title-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
-#title-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
-#title-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
+#title-screen.active,#login-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
+#title-screen.fading,#login-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
+#title-screen .title-logo,#login-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
+#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
 
 /* 능력 팝업 — BA TCG 다크 블루 */
 .ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:300;justify-content:center;align-items:center}
@@ -557,7 +572,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .hover-tooltip .tt-portrait{height:160px!important}
 
 /* 타이틀 화면: 원본 비율 유지, 좌우 잘림 허용 */
-#title-screen.active,#title-screen.fading{overflow:hidden!important;min-height:100vh!important;padding-bottom:40px!important}
+#title-screen.active,#title-screen.fading,#login-screen.active,#login-screen.fading{overflow:hidden!important;min-height:100vh!important;padding-bottom:40px!important}
 .title-logo{height:154px!important;width:auto!important;max-width:none!important}
 .sub{font-size:24px!important;margin-bottom:40px!important}
 
@@ -642,13 +657,56 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 </div>
 <div id="app">
 <div class="schale-frame" id="schale-frame" style="background-image:url('img/UI/wallpaper01.jpg');background-size:cover;background-position:center">
-  <div id="title-screen" class="screen active">
+  <!-- 로그인 화면 -->
+  <div id="login-screen" class="screen active">
     <img src="img/UI/bluearchive2.png" class="title-logo">
     <p class="sub">Battle Grounds</p>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <input id="login-name" type="text" placeholder="닉네임" style="width:120px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+      <input id="login-pw" type="password" placeholder="비번" style="width:80px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+    </div>
+    <div id="login-status" style="font-size:11px;color:#e04040;margin-bottom:8px"></div>
+    <button class="btn btn-blue btn-big" id="btn-login" style="min-width:200px"><span class="btn-inner">로그인</span></button>
+    <div style="font-size:10px;color:#6a8a9e;margin-top:12px">처음이면 닉네임+비번 입력 후 로그인 (자동 가입)</div>
+  </div>
+
+  <!-- 메인 메뉴 -->
+  <div id="title-screen" class="screen">
+    <img src="img/UI/bluearchive2.png" class="title-logo" style="height:200px">
+    <p class="sub" style="font-size:28px">Battle Grounds</p>
+    <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
     <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">게임 시작</span></button>
     <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">이어하기</span></button>
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
-    <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px"><span class="btn-inner">튜토리얼</span></button>
+    <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">튜토리얼</span></button>
+    <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">전적 기록</span></button>
+    <button class="btn btn-purple btn-big" id="btn-quests" style="margin-top:8px;min-width:200px"><span class="btn-inner">퀘스트</span></button>
+    <button class="btn btn-stone" id="btn-logout" style="margin-top:16px;min-width:100px;opacity:0.6"><span class="btn-inner">로그아웃</span></button>
+  </div>
+
+  <!-- 퀘스트 오버레이 -->
+  <div id="quest-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:700px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="color:#ffd700;margin:0">퀘스트</h2>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span id="quest-points" style="color:#fbbf24;font-size:18px;font-weight:700"></span>
+          <button class="btn btn-stone" id="btn-quest-close"><span class="btn-inner">닫기</span></button>
+        </div>
+      </div>
+      <div id="quest-content" style="color:#c0d0e0;font-size:13px">로딩 중...</div>
+    </div>
+  </div>
+
+  <!-- 전적 기록 오버레이 -->
+  <div id="records-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:800px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="color:#ffd700;margin:0">전적 기록</h2>
+        <button class="btn btn-stone" id="btn-records-close"><span class="btn-inner">닫기</span></button>
+      </div>
+      <div id="records-content" style="color:#c0d0e0;font-size:13px">로딩 중...</div>
+    </div>
   </div>
 
   <div id="roster-overlay" class="roster-overlay">
@@ -665,6 +723,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
           <option value="poison">독사굴</option>
           <option value="pierce">관통</option>
           <option value="ranged">저격</option>
+          <option value="ambush">기습</option>
           <option value="selfdestruct">자폭</option>
           <option value="invincible">무적</option>
         </select>
@@ -814,12 +873,44 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 <script src="game_core.js?v=20260404t"></script>
 <script>
 
+var _endMusic=null;
 function showGameOver() {
   deleteSave();
+  // 전적 기록 저장
+  try{submitGameRecord();}catch(e){}
+  // 전투 중 잔여 SFX 정지
+  for(var k in SFX_CACHE){try{SFX_CACHE[k].pause();SFX_CACHE[k].currentTime=0;}catch(e){}}
+  if(_endMusic){_endMusic.pause();_endMusic=null;}
+  var isWin=G.placement===1;
+  _endMusic=new Audio(isWin?'sfx/victory_music.webm':'sfx/defeat_music.webm');
+  _endMusic.volume=0.5;_endMusic.play().catch(function(){});
+  if(isWin){shakeScreen('heavy');startCelebration();}
   var go=document.getElementById('game-over');go.classList.add('active');
-  document.getElementById('go-title').textContent=G.placement===1?'1등!':'게임 오버';
-  document.getElementById('go-title').style.color=G.placement===1?'#ffd700':'#ef4444';
+  document.getElementById('go-title').textContent=isWin?'1등!':'게임 오버';
+  document.getElementById('go-title').style.color=isWin?'#ffd700':'#ef4444';
   document.getElementById('go-placement').textContent=G.placement+'등 / 8명 (턴 '+G.turn+')';
+}
+var _celebInterval=null;
+function startCelebration(){
+  if(_celebInterval)clearInterval(_celebInterval);
+  var emojis=['🎉','🎊','🎈','❤️','⭐','🏆','✨','💛'];
+  _celebInterval=setInterval(function(){
+    var el=document.createElement('div');
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText='position:fixed;bottom:-30px;left:'+(5+Math.random()*90)+'%;font-size:'+(24+Math.random()*20)+'px;z-index:9999;pointer-events:none;opacity:0.9;transition:none;';
+    document.body.appendChild(el);
+    var dur=2000+Math.random()*1500;
+    el.animate([
+      {transform:'translateY(0) rotate(0deg)',opacity:0.9},
+      {transform:'translateY(-'+(window.innerHeight+60)+'px) rotate('+(Math.random()*360-180)+'deg)',opacity:0}
+    ],{duration:dur,easing:'ease-out'});
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},dur);
+  },150);
+  var restartBtn=document.getElementById('btn-restart');
+  restartBtn.addEventListener('click',function(){
+    if(_celebInterval){clearInterval(_celebInterval);_celebInterval=null;}
+    if(_endMusic){_endMusic.pause();_endMusic=null;}
+  },{once:true});
 }
 
 // ========== RENDER ==========
@@ -1090,7 +1181,7 @@ function starStr(tier){var s='<div class="tier-bar">';for(var i=0;i<7;i++){var s
 function cardHtml(m,idx,isBoard){
   if(!m) return '<div style="width:150px;height:220px"></div>';
   var isToken=m.isToken||false;
-  var cls='card tier'+m.tier+(m.isSkin?' skin':'')+(isToken?' token-card':'')+(m.hkykBuffed?' hkyk-buffed':'');
+  var cls='card tier'+m.tier+(m.isSkin?' skin':'')+(isToken?' token-card':'')+(m.hkykBuffed?' hkyk-buffed':'')+(hasKw(m,'ambush')?' ambush':'');
   var dragAttr=isBoard?' data-board-idx="'+idx+'"':'';
   var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
   var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
@@ -1101,7 +1192,26 @@ function cardHtml(m,idx,isBoard){
   if(keiTargets.indexOf(m.baseId)!==-1&&G.keiseisenCounters&&G.keiseisenCounters[m.baseId]>0)html+='<div style="'+counterStyle+';background:rgba(220,38,38,0.9)">'+G.keiseisenCounters[m.baseId]+'</div>';
   if(m._hovercraftCounter&&m._hovercraftCounter>0)html+='<div style="'+counterStyle+';background:rgba(168,85,247,0.9)">'+m._hovercraftCounter+'</div>';
   if(m.baseId==='gehenna_traingun')html+='<div style="'+counterStyle+';background:rgba(220,38,38,0.9)">'+(1+(m._battlesSurvived||0))+'</div>';
-  if(m.img)html+='<div class="card-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
+  if(m.img){html+='<div class="card-bg"><img src="img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'">';if(hasKw(m,'shield'))html+='<div class="shield-orb"></div>';html+='</div>';}
+  // 능력 아이콘 바
+  var SKIN_ONLY_SOC_C={iori:1,hanako:1,pina:1,kasumi:1};
+  var iconBar='';
+  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) iconBar+='📣';
+  if(BC_IDS[m.baseId||'']) iconBar+='🔔';
+  if(DR_IDS[m.baseId||'']) iconBar+='💀';
+  if(PASSIVE_IDS[m.baseId||'']) iconBar+='✨';
+  if(PRE_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('preemptive')!==-1)) iconBar+='👊';
+  if(SURV_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('survive')!==-1)) iconBar+='💪';
+  if(hasKw(m,'reborn')) iconBar+='🌱';
+  if(hasKw(m,'poison')) iconBar+='🐍';
+  if(hasKw(m,'selfdestruct')) iconBar+='🧨';
+  if(hasKw(m,'taunt')) iconBar+='🛡️';
+  if(hasKw(m,'cleave')) iconBar+='🌊';
+  if(hasKw(m,'windfury')) iconBar+='⚡';
+  if(hasKw(m,'pierce')) iconBar+='🔱';
+  if(hasKw(m,'ranged')) iconBar+='🏹';
+  if(hasKw(m,'invincible')) iconBar+='🏆';
+  if(iconBar) html+='<div class="ability-icons">'+iconBar+'</div>';
   html+='<div class="card-inner">';
   var sIcon=SCHOOL_ICONS[m.school];if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
   html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
@@ -2662,6 +2772,144 @@ document.getElementById('roster-overlay').addEventListener('click',function(e){
 });
 document.getElementById('filter-kw').addEventListener('change',renderRoster);
 document.getElementById('filter-abil').addEventListener('change',renderRoster);
+
+// ========== 로그인 / 전적 / 퀘스트 ==========
+// 로그인 상태 복원
+(function(){
+  var saved=localStorage.getItem('babg_login');
+  if(saved){
+    try{
+      var d=JSON.parse(saved);
+      document.getElementById('login-name').value=d.name||'';
+      document.getElementById('login-pw').value=d.pw||'';
+      doLogin(d.name,d.pw,true);
+    }catch(e){}
+  }
+})();
+function doLogin(name,pw,auto){
+  if(!name){document.getElementById('login-status').textContent='닉네임을 입력하세요.';return;}
+  document.getElementById('login-status').textContent='확인 중...';
+  fetchRecords(function(err,data,sha){
+    if(err){
+      window._babgLogin={name:name,pw:pw};
+      localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+      goToMainMenu(name);
+      return;
+    }
+    if(!data.players)data.players={};
+    if(data.players[name]){
+      if(data.players[name].pw!==pw){
+        document.getElementById('login-status').textContent='비밀번호가 틀립니다.';
+        return;
+      }
+    } else {
+      data.players[name]={pw:pw,records:[],points:0};
+      saveRecords(data,sha);
+    }
+    window._babgLogin={name:name,pw:pw};
+    localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+    goToMainMenu(name);
+    try{checkLoginQuest();}catch(e){}
+  });
+}
+function goToMainMenu(name){
+  document.getElementById('welcome-msg').textContent='환영합니다, '+name+' 선생님!';
+  document.getElementById('login-screen').classList.remove('active');
+  document.getElementById('title-screen').classList.add('active');
+}
+document.getElementById('btn-login').addEventListener('click',function(){
+  var name=document.getElementById('login-name').value.trim();
+  var pw=document.getElementById('login-pw').value;
+  doLogin(name,pw,false);
+});
+document.getElementById('login-name').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-login').click();});
+document.getElementById('login-pw').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-login').click();});
+document.getElementById('btn-logout').addEventListener('click',function(){
+  window._babgLogin=null;
+  localStorage.removeItem('babg_login');
+  document.getElementById('title-screen').classList.remove('active');
+  document.getElementById('login-screen').classList.add('active');
+  document.getElementById('login-name').value='';
+  document.getElementById('login-pw').value='';
+  document.getElementById('login-status').textContent='';
+});
+// 전적 기록 버튼
+document.getElementById('btn-records').addEventListener('click',function(){
+  document.getElementById('records-overlay').style.display='block';
+  renderRecords();
+});
+document.getElementById('btn-records-close').addEventListener('click',function(){
+  document.getElementById('records-overlay').style.display='none';
+});
+// 퀘스트 버튼
+document.getElementById('btn-quests').addEventListener('click',function(){
+  if(!window._babgLogin||!window._babgLogin.name){alert('닉네임을 입력해주세요.');return;}
+  document.getElementById('quest-overlay').style.display='block';
+  renderQuestUI();
+});
+document.getElementById('btn-quest-close').addEventListener('click',function(){
+  document.getElementById('quest-overlay').style.display='none';
+});
+function renderQuestUI(){
+  var el=document.getElementById('quest-content');
+  var pts=document.getElementById('quest-points');
+  el.innerHTML='로딩 중...';
+  fetchRecords(function(err,data,sha){
+    if(err||!data){el.innerHTML='데이터를 불러올 수 없습니다.';return;}
+    var name=window._babgLogin.name;
+    if(!data.players||!data.players[name]){el.innerHTML='게임 기록이 없습니다. 먼저 게임을 플레이하세요.';pts.textContent='';return;}
+    var pd=data.players[name];
+    initQuestState(pd);
+    pts.innerHTML='<img src="img/Icon/quest_stone.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px">'+(pd.points||0)+' 엘리그마';
+    var html='';
+    html+='<h3 style="color:#60a5fa;margin:12px 0 8px">일일 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매일 갱신, 1일 1회 교체 가능)</span></h3>';
+    var dq=pd.questState.daily.quests;
+    var canReroll=!pd.questState.daily.rerolled;
+    for(var i=0;i<dq.length;i++){
+      var q=dq[i];var def=null;for(var j=0;j<DAILY_QUESTS.length;j++){if(DAILY_QUESTS[j].id===q.id){def=DAILY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#3b82f6')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'엘리그마)</div></div>';
+      if(!done&&canReroll) html+='<button class="btn btn-stone" onclick="doRerollQuest('+i+',\''+sha+'\')" style="font-size:10px;padding:2px 8px"><span class="btn-inner">🔄</span></button>';
+      html+='</div>';
+    }
+    html+='<h3 style="color:#a78bfa;margin:16px 0 8px">주간 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매주 월요일 갱신)</span></h3>';
+    var wq=pd.questState.weekly.quests;
+    for(var i=0;i<wq.length;i++){
+      var q=wq[i];var def=null;for(var j=0;j<WEEKLY_QUESTS.length;j++){if(WEEKLY_QUESTS[j].id===q.id){def=WEEKLY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#a78bfa')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'엘리그마)</div></div>';
+      html+='</div>';
+    }
+    el.innerHTML=html;
+    window._questSha=sha;window._questData=data;
+  });
+}
+function doRerollQuest(idx,sha){
+  if(!window._babgLogin)return;
+  fetchRecords(function(err,data,latestSha){
+    if(err||!data)return;
+    var pd=data.players[window._babgLogin.name];
+    if(!pd||!pd.questState)return;
+    if(pd.questState.daily.rerolled){alert('오늘은 이미 교체했습니다.');return;}
+    var active=pd.questState.daily.quests.map(function(q){return q.id;});
+    var pool=DAILY_QUESTS.filter(function(q){return active.indexOf(q.id)===-1;});
+    if(pool.length===0)return;
+    var pick=pool[Math.floor(Math.random()*pool.length)];
+    pd.questState.daily.quests[idx]={id:pick.id,progress:0,completed:false};
+    pd.questState.daily.rerolled=true;
+    saveRecords(data,latestSha,function(){renderQuestUI();});
+  });
+}
 </script>
 </body>
 </html>

@@ -477,6 +477,8 @@ var SPELLS = [
     effect:function(G){var p=G.players[0];var basicPool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct'];var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}var usedKw={};for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];var u=p.board[pick];var avail=basicPool.filter(function(k){return !hasKw(u,k)&&!usedKw[k];});if(avail.length===0)continue;var kw=avail[Math.floor(Math.random()*avail.length)];addKw(u,kw);usedKw[kw]=true;}return true;}},
   {id:'bunny_toss',name:'바니 토스',cost:3,tier:6,desc:'다음 전투 코인토스 성공률 +30%',target:'auto',img:'img/spell/bunny_toss.png',
     effect:function(G){G.bunnyTossBonus=(G.bunnyTossBonus||0)+0.30;}},
+  {id:'poison_grail',name:'독이 든 성배',cost:7,tier:6,desc:'아군 학생 1명을 돌려보내고,\n그 공격력과 체력을 무작위 아군 1명에게 부여합니다.',target:'select_ally',img:'img/spell/consume.png',
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;if(p.board.length<=1)return false;var removed=p.board.splice(idx,1)[0];returnToPool(removed.baseId,removed.isSkin?3:1);var targets=[];for(var i=0;i<p.board.length;i++)targets.push(i);if(targets.length===0)return false;var pick=targets[Math.floor(Math.random()*targets.length)];var ab=getAyumuBonus();p.board[pick].atk+=removed.atk+ab;p.board[pick].hp+=removed.hp+ab;p.board[pick].maxHp=(p.board[pick].maxHp||p.board[pick].hp)+removed.hp+ab;logBuff(p.board[pick],'독이 든 성배',removed.atk+ab,removed.hp+ab);return true;}},
 ];
 
 function getAvailableSpells(tier) {
