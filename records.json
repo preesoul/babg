@@ -1263,7 +1263,7 @@
           ]
         }
       ],
-      "points": 12,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-05",
@@ -1316,7 +1316,10 @@
           ]
         },
         "_lastLoginDate": "2026-04-05"
-      }
+      },
+      "unlockedAbydos": [
+        "rumi"
+      ]
     }
   }
 }
