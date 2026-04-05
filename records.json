@@ -2442,9 +2442,82 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-05T23:55:13",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 12,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아스나(버니걸)",
+              "baseId": "asuna",
+              "atk": 19,
+              "hp": 17,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Asuna_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 13,
+              "hp": 13,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 9,
+              "hp": 13,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 5,
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2482,7 +2555,7 @@
             },
             {
               "id": "play10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             }
           ]
