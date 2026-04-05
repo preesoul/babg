@@ -475,7 +475,7 @@
           ]
         }
       ],
-      "points": 23,
+      "points": 123,
       "questState": {
         "daily": {
           "date": "2026-04-05",
@@ -521,12 +521,32 @@
         "_lastLoginDate": "2026-04-05"
       },
       "unlockedAbydos": [
-        "serika",
-        "hoshino",
-        "shiroko",
-        "nonomi",
         "ayane",
-        "saya"
+        "serika",
+        "nonomi",
+        "shiroko",
+        "hoshino",
+        "kokona",
+        "mina",
+        "reijo",
+        "saya",
+        "rumi",
+        "shun",
+        "kisaki",
+        "juri",
+        "kasumi",
+        "sena",
+        "shimiko",
+        "suzumi",
+        "ui",
+        "hibiki",
+        "utaha",
+        "himari",
+        "chise",
+        "shizuko",
+        "wakamo",
+        "kaya",
+        "lin"
       ]
     },
     "쿼츠": {

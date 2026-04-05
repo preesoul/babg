@@ -17,7 +17,7 @@ var CHARS = [
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
-  {id:'juri',    name:'주리',   school:'게헨나',  tier:1,atk:2,hp:2,kw:[],            skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
+  {id:'juri',    name:'주리',   school:'게헨나',  tier:1,atk:2,hp:2,kw:[],            locked:true, skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
@@ -30,12 +30,12 @@ var CHARS = [
   // ===== Tier 3 (밸류9) =====
   // 게헨나 2학년
   {id:'aru',     name:'아루',   school:'게헨나',  tier:5,atk:6,hp:5,kw:['preemptive','ambush'], skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
-  {id:'kasumi',  name:'카스미', school:'게헨나',  tier:4,atk:4,hp:6,kw:['ambush'],            skin:'카스미(수영복)',   img:'Kasumi.png',         imgGold:'Kasumi_(Swimsuit).png'},  // +개전(SOC)
+  {id:'kasumi',  name:'카스미', school:'게헨나',  tier:4,atk:4,hp:6,kw:['ambush'],            locked:true, skin:'카스미(수영복)',   img:'Kasumi.png',         imgGold:'Kasumi_(Swimsuit).png'},  // +개전(SOC)
   // 게헨나 3학년
-  {id:'sena',    name:'세나',   school:'게헨나',  tier:5,atk:7,hp:4,kw:['pierce'],    skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
+  {id:'sena',    name:'세나',   school:'게헨나',  tier:5,atk:7,hp:4,kw:['pierce'],    locked:true, skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
   // 밀레니엄 1학년
   {id:'arisu',   name:'아리스', school:'밀레니엄',tier:4,atk:7,hp:3,kw:['pierce'],    skin:'아리스(메이드)',   img:'Arisu.png',          imgGold:'Arisu_(Maid).png'},
-  {id:'hibiki',  name:'히비키', school:'밀레니엄',tier:3,atk:4,hp:3,kw:[],            skin:'히비키(치어리더)',img:'Hibiki.png',          imgGold:'Hibiki_(Cheerleader).png'},
+  {id:'hibiki',  name:'히비키', school:'밀레니엄',tier:3,atk:4,hp:3,kw:[],            locked:true, skin:'히비키(치어리더)',img:'Hibiki.png',          imgGold:'Hibiki_(Cheerleader).png'},
   {id:'yuzu',    name:'유즈',   school:'밀레니엄',tier:2,atk:2,hp:3,kw:[],            skin:'유즈(메이드)',     img:'Yuzu.png',           imgGold:'Yuzu_(Maid).png'},
   // 트리니티 2학년
   {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:3,hp:2,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
@@ -60,11 +60,11 @@ var CHARS = [
   {id:'ako',     name:'아코',   school:'게헨나',  tier:4,atk:3,hp:5,kw:['taunt'],     skin:'아코(드레스)',     img:'Ako.png',            imgGold:'Ako_(Dress).png'},
   {id:'satsuki', name:'사츠키', school:'게헨나',  tier:5,atk:5,hp:6,kw:[],            skin:'사츠키(수영복)',   img:'Satsuki.png',        imgGold:'Satsuki_(Swinsuit).png'},
   // 밀레니엄 3학년
-  {id:'himari',  name:'히마리', school:'밀레니엄',tier:6,atk:6,hp:7,kw:[],            skin:'히마리(임전)',     img:'Himari.png',         imgGold:'Himari_(Battle).png'},
+  {id:'himari',  name:'히마리', school:'밀레니엄',tier:6,atk:6,hp:7,kw:[],            locked:true, skin:'히마리(임전)',     img:'Himari.png',         imgGold:'Himari_(Battle).png'},
   {id:'rio',     name:'리오',   school:'밀레니엄',tier:6,atk:7,hp:7,kw:[],            skin:'리오(임전)',       img:'Rio.png',            imgGold:'Rio_(Battle).png'},
   // 트리니티 3학년
   {id:'sakurako',name:'사쿠라코',school:'트리니티',tier:6,atk:7,hp:7,kw:[],           skin:'사쿠라코(아이돌)', img:'Sakurako.png',       imgGold:'Sakurako_(Idol).png'},
-  {id:'ui',      name:'우이',   school:'트리니티',tier:5,atk:6,hp:5,kw:['preemptive'],skin:'우이(수영복)',     img:'Ui.png',             imgGold:'Ui_(Swimsuit).png'},
+  {id:'ui',      name:'우이',   school:'트리니티',tier:5,atk:6,hp:5,kw:['preemptive'],locked:true, skin:'우이(수영복)',     img:'Ui.png',             imgGold:'Ui_(Swimsuit).png'},
 
   // ===== Tier 6 (밸류18) =====
   // 게헨나 3학년
@@ -72,7 +72,7 @@ var CHARS = [
   {id:'makoto',  name:'마코토', school:'게헨나',  tier:6,atk:7,hp:7,kw:[],            skin:'마코토(수영복)',   img:'Makoto.png',         imgGold:'Makoto_(Swimsuit).png'},
   // 밀레니엄 3학년
   {id:'neru',    name:'네루',   school:'밀레니엄',tier:5,atk:5,hp:5,kw:['shield','survive','ambush'],skin:'네루(바니걸)',img:'Neru.png',       imgGold:'Neru_(Bunny_Girl).png'},
-  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:5,hp:5,kw:['ambush'],skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
+  {id:'utaha',   name:'우타하', school:'밀레니엄',tier:5,atk:5,hp:5,kw:['ambush'],locked:true, skin:'우타하(치어리더)',img:'Utaha.png',       imgGold:'Utaha_(Cheerleader).png'},
   // 트리니티 3학년
   {id:'tsurugi', name:'츠루기', school:'트리니티',tier:6,atk:7,hp:7,kw:[],            skin:'츠루기(수영복)',   img:'Tsurugi.png',        imgGold:'Tsurugi_(Swimsuit).png'},
   {id:'mine',    name:'미네',   school:'트리니티',tier:6,atk:6,hp:6,kw:['taunt','shield','reborn'],skin:'미네(아이돌)',img:'Mine.png', imgGold:'Mine_(Idol).png'},
@@ -95,9 +95,9 @@ var CHARS = [
   // ===== 트리니티 신규 =====
   // 트리니티 1학년
   {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
-  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:4,hp:3,kw:[],               skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
+  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:4,hp:3,kw:[],               locked:true, skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
   // 트리니티 2학년
-  {id:'suzumi',  name:'스즈미', school:'트리니티',tier:3,atk:2,hp:4,kw:[],               skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
+  {id:'suzumi',  name:'스즈미', school:'트리니티',tier:3,atk:2,hp:4,kw:[],               locked:true, skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   // 트리니티 3학년
   {id:'hasumi',  name:'하스미', school:'트리니티',tier:5,atk:7,hp:5,kw:['ambush'],               skin:'하스미(수영복)',   img:'Hasumi.png',         imgGold:'Hasumi_(Swimsuit).png'},
   // ===== 총학생회 (중립) =====
@@ -108,8 +108,8 @@ var CHARS = [
   {id:'ayumu',   name:'아유무', school:'총학생회',tier:3,atk:5,hp:2,kw:[],            skin:'아유무(승무원)',   img:'Ayumu.png',          imgGold:'Ayumu_(flight).png'},
   {id:'aoi',     name:'아오이', school:'총학생회',tier:4,atk:5,hp:4,kw:[],            skin:'아오이(인터뷰)',   img:'Aoi.png',            imgGold:'Aoi_(Interview).png'},
   // 총학생회 3학년
-  {id:'kaya',    name:'카야',   school:'총학생회',tier:5,atk:5,hp:5,kw:[],            skin:'카야(쿠데타)',     img:'Kaya.png',           imgGold:'Kaya_(Coup).png'},
-  {id:'lin',     name:'린',     school:'총학생회',tier:6,atk:8,hp:8,kw:[],            skin:'린(승무원)',       img:'Lin.png',            imgGold:'Lin_(flight).png'},
+  {id:'kaya',    name:'카야',   school:'총학생회',tier:5,atk:5,hp:5,kw:[],            locked:true, skin:'카야(쿠데타)',     img:'Kaya.png',           imgGold:'Kaya_(Coup).png'},
+  {id:'lin',     name:'린',     school:'총학생회',tier:6,atk:8,hp:8,kw:[],            locked:true, skin:'린(승무원)',       img:'Lin.png',            imgGold:'Lin_(flight).png'},
 
   // ===== 백귀야행 =====
   // 백귀야행 1학년
@@ -120,13 +120,13 @@ var CHARS = [
   // 백귀야행 2학년
   {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:3,kw:['taunt'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:3,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
-  {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:5,hp:6,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
+  {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:5,hp:6,kw:[],            locked:true, skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:4,hp:4,kw:['windfury','preemptive','ambush'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
-  {id:'chise',   name:'치세',   school:'백귀야행',tier:4,atk:4,hp:5,kw:['taunt'],     skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
+  {id:'chise',   name:'치세',   school:'백귀야행',tier:4,atk:4,hp:5,kw:['taunt'],     locked:true, skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
-  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
+  {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],locked:true, skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
 
   // ===== 아비도스 (잠금 해제 필요) =====
@@ -570,7 +570,7 @@ function initPool() {
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
 var ENIGMA_UNLOCK_COST = 10; // 신비해방 1회당 비용
 // 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
-var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki'];
+var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki','juri','kasumi','sena','shimiko','suzumi','ui','hibiki','utaha','himari','chise','shizuko','wakamo','kaya','lin'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
