@@ -704,6 +704,73 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T10:51:35",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "치세",
+              "baseId": "chise",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chise.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 4,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 13,
+              "hp": 3,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 3,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 5,
+              "hp": 7,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
       "points": 0,
@@ -713,7 +780,7 @@
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 7,
               "completed": false
             },
             {
@@ -734,7 +801,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -744,7 +811,7 @@
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
