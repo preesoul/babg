@@ -3232,13 +3232,12 @@ function runBattle(boardA, boardB, startWithA, opts) {
       unit.kw.splice(unit.kw.indexOf('reborn'),1);
       // 레이사 마법소녀: 최대 체력으로 부활
       if(unit.isSkin&&unit.baseId==='reisa'){
-        // 레이사 마법소녀: 전투 시작 시 최대 체력으로 부활
         unit.hp=unit._reisaFullHp||unit.maxHp||1;
       } else {unit.hp=1;}
-      var shIdx=unit.kw.indexOf('shield');if(shIdx!==-1)unit.kw.splice(shIdx,1);
+      // 부활 시 보호막 등 기본 키워드 유지 (reborn만 제거)
       log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:'+unit.hp+')'});
-      // 카즈사 밴드: 부활해도 DR 발동 (한 게임에 카스팔루스 2기 소환)
-      if(unit.baseId==='kazusa') triggerDeathrattle(unit,myArr,oppArr,log2);
+      // 부활 시에도 뒤끝 발동 (모든 DR 보유 유닛)
+      triggerDeathrattle(unit,myArr,oppArr,log2);
     } else {
       unit.alive=false;
       if(killedBy) unit._killedBy=killedBy;
