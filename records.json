@@ -977,7 +977,7 @@
           ]
         }
       ],
-      "points": 30,
+      "points": 20,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1030,7 +1030,10 @@
             }
           ]
         }
-      }
+      },
+      "unlockedAbydos": [
+        "kisaki"
+      ]
     },
     "ㄱㄱ": {
       "pw": "",
