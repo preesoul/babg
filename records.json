@@ -1382,9 +1382,85 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T17:41:55",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 15,
+              "hp": 17,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "selfdestruct"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 5,
+              "hp": 9,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 30,
+              "hp": 26,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아스나(버니걸)",
+              "baseId": "asuna",
+              "atk": 15,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Asuna_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 19,
+              "hp": 17,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "taunt",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 37,
+      "points": 49,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1412,8 +1488,8 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 8,
-              "completed": false
+              "progress": 12,
+              "completed": true
             },
             {
               "id": "hidden1",
