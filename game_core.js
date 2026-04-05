@@ -777,9 +777,18 @@ var HKYK_SHOWDOWN_SPELL = {
       if(targets.indexOf(p.board[i].baseId)!==-1){
         p.board[i].atk+=10;p.board[i].hp+=10;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+10;
         addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');
+        p.board[i]._keiseisenBuffed=true;
       }
     }
     G2.hiddenCardsEverOwned['hkyk_showdown']=true;
+    // 하얀 이펙트 + 소리
+    try{var snd=new Audio('audio/keiseisen.mp3');snd.volume=0.7;snd.play();
+      var fadeStart=Math.max(0,4);setTimeout(function(){var fi=setInterval(function(){snd.volume=Math.max(0,snd.volume-0.07);if(snd.volume<=0){clearInterval(fi);snd.pause();}},50);},fadeStart*1000);
+    }catch(e){}
+    var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.5s ease-in;';
+    document.body.appendChild(fl);
+    requestAnimationFrame(function(){fl.style.opacity='1';});
+    setTimeout(function(){fl.style.transition='opacity 2s ease-out';fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},2000);},1500);
     return true;
   }
 };
@@ -4355,7 +4364,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
 function _playBattleHiddenSfx(p,opp){
   var enemyHas7=false,allyHas7=false;
   if(opp&&opp.board){for(var i=0;i<opp.board.length;i++){if(opp.board[i].tier>=7||opp.board[i].isHidden){enemyHas7=true;break;}}}
-  for(var i=0;i<p.board.length;i++){if(p.board[i].tier>=7||p.board[i].isHidden){allyHas7=true;break;}}
+  for(var i=0;i<p.board.length;i++){if(p.board[i].tier>=7||p.board[i].isHidden||p.board[i]._keiseisenBuffed){allyHas7=true;break;}}
   var src=null;
   if(enemyHas7) src='audio/battle_hidden_enemy.mp3';
   else if(allyHas7) src='audio/battle_hidden_ally.mp3';
