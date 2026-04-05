@@ -696,6 +696,8 @@ function applySkinKwTransform(tmpl, unit){
   if(tmpl.id==='yukari'){if(unit.kw.indexOf('shield')===-1)unit.kw.push('shield');}
   // 나구사 수영복: 부활 추가
   if(tmpl.id==='nagusa'){if(unit.kw.indexOf('reborn')===-1)unit.kw.push('reborn');}
+  // 레이죠 사복: 관통 추가
+  if(tmpl.id==='reijo'){if(unit.kw.indexOf('pierce')===-1)unit.kw.push('pierce');}
 }
 
 function makeMinion(template, skinUnit) {
@@ -785,6 +787,11 @@ function checkHiddenConditionsFor(p) {
   // 시로코 테러: 아비도스 5인 전원 보유 (스폰율 50%는 injectHiddenToShop에서 처리)
   if(notOwned('Shiroko_Terror')&&inPool('Shiroko_Terror')&&boardHas('hoshino')&&boardHas('shiroko')&&boardHas('nonomi')&&boardHas('ayane')&&boardHas('serika'))
     eligible.push('Shiroko_Terror');
+  // 키키: 산해경 5명 + 키사키 필수 (나머지 중복 허용)
+  if(notOwned('shanhai_kiki')&&inPool('shanhai_kiki')&&boardHas('kisaki')){
+    var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
+    if(shCount>=5) eligible.push('shanhai_kiki');
+  }
 
   return eligible;
 }
@@ -841,6 +848,7 @@ function injectHiddenToShop() {
     else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
     else if(hid==='hkyk_kuzunoha') rate=0.60;
     else if(hid==='Shiroko_Terror') rate=0.50;
+    else if(hid==='shanhai_kiki') rate=0.60;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(htmpl&&G.pool[htmpl.id]>0){
@@ -1022,7 +1030,7 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror','shanhai_kiki'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.stone-=3;
@@ -1149,6 +1157,17 @@ function buyHiddenCard(idx) {
     G._shirokoTerrorAbsorbed=absorbedUnits;
     // 노노미 카운터 초기화 (흡수됨)
     G.nonomiStoneSinceJoined=0;
+  }
+
+  // 키키: 키사키 흡수
+  else if(bid==='shanhai_kiki'){
+    var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i].baseId==='kisaki'){
+        m.atk+=p.board[i].atk;m.hp+=p.board[i].hp;m.maxHp=m.hp;
+      } else { newBoard.push(p.board[i]); }
+    }
+    p.board=newBoard;
   }
 
   // 왕녀: 아리스 상점 제외
@@ -1935,6 +1954,40 @@ function _doBC(m, p) {
     G._michiruChaining=false;
   }
 
+  // ===== 산해경 첫인사 =====
+  else if(id==='kokona'){
+    // 코코나: 무작위 산해경 학생 소환 (스케쥴 레벨 이하)
+    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.id!=='kokona'&&c.tier<=p.tier;});
+    var unlockedAby=getUnlockedAbydos();
+    shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
+    if(shChars.length>0&&p.board.length<MAX_BOARD){
+      var pick=shChars[Math.floor(Math.random()*shChars.length)];
+      if(m.isSkin){
+        // 스킨: 발견
+        showDiscoverCustom(shChars.length>=3?[shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)]]:shChars);
+      } else {
+        if(takeFromPool(pick.id)){var nu=makeMinion(pick,false);p.board.push(nu);triggerBattlecry(nu,p);}
+      }
+    }
+  }
+  else if(id==='kisaki'){
+    // 키사키: 아군 산해경 1인(스킨: 전원)을 스킨으로 교체
+    var shTargets=[];
+    for(var i=0;i<p.board.length;i++){if(p.board[i].school==='산해경'&&!p.board[i].isSkin&&p.board[i].baseId!=='kisaki')shTargets.push(i);}
+    if(shTargets.length>0){
+      var count=m.isSkin?shTargets.length:1;
+      var picks=m.isSkin?shTargets:([shTargets[Math.floor(Math.random()*shTargets.length)]]);
+      for(var _ki=0;_ki<picks.length;_ki++){
+        var idx=picks[_ki];var u=p.board[idx];
+        var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===u.baseId){tmpl=CHARS[j];break;}
+        if(!tmpl)continue;
+        var bonusAtk=u.atk-tmpl.atk,bonusHp=u.hp-tmpl.hp;
+        u.name=tmpl.skin;u.atk=tmpl.atk*2+1+bonusAtk;u.hp=tmpl.hp*2+1+bonusHp;u.maxHp=u.hp;
+        u.isSkin=true;u.img=tmpl.imgGold;
+        applySkinKwTransform(tmpl,u);
+      }
+    }
+  }
   // 히마리: 첫인사 제거 → 개전(SOC)으로 이동
 }
 
@@ -2650,6 +2703,7 @@ function aiCheckHidden(p) {
     else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
     else if(hid==='hkyk_kuzunoha') rate=0.60;
     else if(hid==='Shiroko_Terror') rate=0.50;
+    else if(hid==='shanhai_kiki') rate=0.60;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(!htmpl||G.pool[htmpl.id]<=0) continue;
@@ -3092,6 +3146,28 @@ function triggerSOC(u, mySide, otherSide, log) {
       }
     } else {
       log.push({cls:'soc',text:'[개전] '+u.name+': 소비 청휘석 없음 (0)'});
+    }
+  }
+  else if(id==='mina'){
+    // 미나 개전: 아군 전체 -1/-1
+    for(var _mi=0;_mi<mySide.length;_mi++){
+      if(mySide[_mi].alive){mySide[_mi].atk=Math.max(1,mySide[_mi].atk-1);mySide[_mi].hp-=1;
+        if(mySide[_mi].hp<=0){mySide[_mi].hp=1;}}
+    }
+    log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 -1/-1!'});
+  }
+  else if(id==='rumi'){
+    // 루미 개전: 자신의 기본능력을 아군 1인(스킨:2인)에게 복사
+    var rumiKw=u.kw.filter(function(k){return k!=='survive'&&k!=='preemptive';});
+    if(rumiKw.length>0){
+      var rumiCands=[];for(var _ri=0;_ri<mySide.length;_ri++){if(mySide[_ri].alive&&mySide[_ri]!==u)rumiCands.push(mySide[_ri]);}
+      var rumiCount=u.isSkin?2:1;
+      for(var _rc=0;_rc<rumiCount&&rumiCands.length>0;_rc++){
+        var _rIdx=Math.floor(Math.random()*rumiCands.length);
+        var rumiTarget=rumiCands.splice(_rIdx,1)[0];
+        for(var _rk=0;_rk<rumiKw.length;_rk++){if(rumiTarget.kw.indexOf(rumiKw[_rk])===-1)rumiTarget.kw.push(rumiKw[_rk]);}
+        log.push({cls:'soc',text:'[개전] '+u.name+': '+rumiTarget.name+'에게 '+rumiKw.join(',')+' 부여!'});
+      }
     }
   }
   else if(id==='Shiroko_Terror'){
@@ -3597,6 +3673,27 @@ function _doDR(unit, mySide, otherSide, log) {
         triggerSOC_battlecry_inner(pick,mySide,log);
         log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+pick.name+'의 첫인사 발동!'});
       }
+    }
+  }
+  // ===== 산해경 뒤끝 =====
+  else if(id==='mina'){
+    // 미나 뒤끝: 아군 전체 +3/+3 (스킨: +6/+6)
+    var minaBuff=unit.isSkin?6:3;
+    for(var _mi=0;_mi<mySide.length;_mi++){
+      if(mySide[_mi].alive){mySide[_mi].atk+=minaBuff;mySide[_mi].hp+=minaBuff;}
+    }
+    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아군 전체 +'+minaBuff+'/+'+minaBuff+'!'});
+  }
+  else if(id==='shanhai_kiki'){
+    // 키키 뒤끝: 현룡문의 검은 군주 소환
+    if(countAlive(mySide)<BATTLE_MAX){
+      var bl=makeToken('black_lord');
+      bl.alive=true;bl.isToken=true;bl._mySide=mySide;
+      // 패시브 면역
+      bl.abilityImmune=true;bl._effectImmune=true;
+      mySide.push(bl);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 현룡문의 검은 군주 소환! ('+bl.atk+'/'+bl.hp+')'});
+      try{var snd=new Audio('audio/black_lord.mp3');snd.volume=0.7;snd.play();}catch(e){}
     }
   }
   // ===== 아비도스 뒤끝 =====
@@ -4123,7 +4220,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
     var hitResult=dealHit(attacker,defender,log2,dmgOverride,true);
     // 방어자가 맞고 살아남았으면 버티기 체크
     checkSurvive(defender,defArr,log2,attacker);
-    if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')){
+    // 레이죠 패시브: 데미지를 주지 못하면 반격도 받지 않음
+    var _reijoBlock=(attacker.baseId==='reijo'&&!attacker._abilitiesStripped&&hitResult&&hitResult.blocked);
+    if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')&&!_reijoBlock){
       var counterResult=dealHit(defender,attacker,log2);
       // 공격자가 반격 맞고 살아남았으면 버티기 체크
       checkSurvive(attacker,atkArr,log2,defender);
@@ -4162,6 +4261,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
     return{unit:null,pos:startPos};
   }
+
+  // 사야 패시브: 전투 중 효과 면역 (기본: 전체, 스킨: 적만)
+  for(var _sy=0;_sy<a.length;_sy++){if(a[_sy].baseId==='saya'&&a[_sy].alive&&!a[_sy]._abilitiesStripped){a[_sy]._sayaImmune=true;if(!a[_sy].isSkin)a[_sy].abilityImmune=true;}}
+  for(var _sy=0;_sy<b.length;_sy++){if(b[_sy].baseId==='saya'&&b[_sy].alive&&!b[_sy]._abilitiesStripped){b[_sy]._sayaImmune=true;if(!b[_sy].isSkin)b[_sy].abilityImmune=true;}}
 
   // 레이사 마법소녀: 개전 버프 후 풀 hp 기록
   for(var _r=0;_r<a.length;_r++)if(a[_r].isSkin&&a[_r].baseId==='reisa')a[_r]._reisaFullHp=a[_r].hp;
@@ -4311,6 +4414,19 @@ function runBattle(boardA, boardB, startWithA, opts) {
               stepLog.push({cls:'hit',text:attacker.name+'의 관통! 초과 데미지 '+hitResult.overflow+'!'});
               if(tIdx>0&&aliveD[tIdx-1])dealDamage(attacker,atkArr2,aliveD[tIdx-1],defArr2,stepLog,true,hitResult.overflow);
               if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
+            }
+          }
+          // 슌 패시브: 킬 시 오버킬 데미지를 다음 대상에게 (스킨: 추가 공격)
+          if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
+            var shunNext=findTarget(defArr2);
+            if(shunNext){
+              if(attacker.isSkin){
+                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
+                dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true);
+              } else if(hitResult.overflow>0){
+                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+hitResult.overflow+'을(를) '+shunNext.name+'에게!'});
+                dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true,hitResult.overflow);
+              }
             }
           }
         }
