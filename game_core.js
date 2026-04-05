@@ -5252,13 +5252,15 @@ function submitGameRecord(){
   var login=window._babgLogin;
   if(!login||!login.name)return;
   var p=G.players[0];
-  var boardNames=p.board.map(function(u){return u.name;});
+  var boardData=p.board.map(function(u){
+    return{name:u.name,baseId:u.baseId,atk:u.atk,hp:u.hp,tier:u.tier,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',school:u.school||''};
+  });
   var record={
     date:new Date().toISOString().slice(0,19),
     placement:G.placement,
     turn:G.turn,
     tier:p.tier,
-    board:boardNames
+    board:boardData
   };
   var tracker = window._questTracker || {recruits:{'트리니티':0,'게헨나':0,'백귀야행':0,'밀레니엄':0},kills:0,discovers:0,skins:0,hiddenCompleted:false,hiddenSurvived:false};
   var placement = G.placement;
@@ -5272,6 +5274,8 @@ function submitGameRecord(){
       console.log('비밀번호 불일치');return;
     }
     data.players[name].records.push(record);
+    // 최근 10전만 유지
+    if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
     // 퀘스트 진행도 업데이트
     data.players[name] = initQuestState(data.players[name]);
     data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
@@ -5293,17 +5297,38 @@ function renderRecords(){
       var p=data.players[name];
       var recs=p.records||[];
       var wins=recs.filter(function(r){return r.placement===1;}).length;
-      html+='<div style="margin-bottom:16px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
-      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:8px">'+name+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
+      html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
+      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:12px">'+name+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{
-        html+='<table style="width:100%;border-collapse:collapse;font-size:12px"><tr style="color:#8ab4d8;border-bottom:1px solid #2a3a4a"><th style="padding:4px;text-align:left">날짜</th><th>등수</th><th>턴</th><th>Lv</th><th style="text-align:left">보드</th></tr>';
-        for(var i=recs.length-1;i>=Math.max(0,recs.length-20);i--){
+        for(var i=recs.length-1;i>=0;i--){
           var r=recs[i];
           var placeColor=r.placement===1?'#ffd700':r.placement<=3?'#60a5fa':'#c0d0e0';
-          html+='<tr style="border-bottom:1px solid #1a2a3a"><td style="padding:3px;color:#8a9ab0">'+r.date.slice(5,16)+'</td><td style="text-align:center;color:'+placeColor+';font-weight:700">'+r.placement+'등</td><td style="text-align:center">'+r.turn+'</td><td style="text-align:center">'+r.tier+'</td><td style="color:#a0b8c8">'+(r.board||[]).join(', ')+'</td></tr>';
+          html+='<div style="margin-bottom:12px;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;border-left:3px solid '+placeColor+'">';
+          html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+          html+='<span style="color:'+placeColor+';font-weight:900;font-size:18px">'+r.placement+'등</span>';
+          html+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
+          html+='</div>';
+          // 보드 카드 렌더링
+          html+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
+          var board=r.board||[];
+          for(var j=0;j<board.length;j++){
+            var u=board[j];
+            if(typeof u==='string'){
+              // 구버전 기록 (이름만)
+              html+='<div style="background:#1e2d3d;border:2px solid #3a5a6e;border-radius:4px;padding:4px 8px;font-size:11px;color:#c0d0e0">'+u+'</div>';
+            } else {
+              // 신버전 기록 (상세 데이터)
+              var borderColor=u.isSkin?'#c8a010':(['#6a8090','#3a8a4a','#3070cc','#7a50c0','#c88a10','#cc3030','#c030d0'][u.tier-1]||'#3a5a6e');
+              html+='<div style="width:80px;background:#1e2d3d;border:2px solid '+borderColor+';border-radius:4px;overflow:hidden;text-align:center;font-size:10px">';
+              if(u.img) html+='<div style="height:60px;overflow:hidden;position:relative"><img src="img/'+u.img+'" style="width:100%;height:auto;position:absolute;top:-5px;left:0" onerror="this.style.display=\'none\'"></div>';
+              html+='<div style="padding:2px 3px;background:rgba(0,0,0,0.6);color:#e0eaf4;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+u.name+'</div>';
+              html+='<div style="display:flex;justify-content:space-between;padding:2px 4px;background:rgba(0,0,0,0.4)"><span style="color:#5ab0e8;font-weight:900">'+u.atk+'</span><span style="color:#e04040;font-weight:900">'+u.hp+'</span></div>';
+              html+='</div>';
+            }
+          }
+          html+='</div></div>';
         }
-        html+='</table>';
       }
       html+='</div>';
     }
