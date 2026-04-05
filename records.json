@@ -15,6 +15,18 @@
             "츠쿠요(드레스)",
             "카야(쿠데타)"
           ]
+        },
+        {
+          "date": "2026-04-05T02:17:53",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            "아즈사(수영복)",
+            "네루",
+            "카야(쿠데타)",
+            "린(승무원)"
+          ]
         }
       ],
       "points": 2,
@@ -24,7 +36,7 @@
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 2,
+              "progress": 4,
               "completed": false
             },
             {
@@ -45,17 +57,17 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "discover10",
-              "progress": 2,
+              "progress": 9,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
