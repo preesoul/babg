@@ -628,6 +628,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .elim-crack{position:fixed;height:3px;background:linear-gradient(90deg,transparent,rgba(255,100,100,0.9),transparent);pointer-events:none;z-index:9997;transform-origin:center;animation:crack-line 0.7s ease-out forwards}
 .btn-teal{background:#2d7d9a;color:#e0f4ff;border:2px solid #3a9abf}
 .btn-teal:hover{background:#3a9abf;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.enigma-display{text-align:center;font-size:12px;color:#c4b5fd;padding:4px 0 2px;font-weight:700}
+.enigma-actions{display:flex;gap:6px;justify-content:center;padding:2px 0 4px}
 .roster-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,20,0.97);z-index:2000;overflow-y:auto;padding:14px 10px;box-sizing:border-box}
 .roster-overlay.active{display:block}
 .roster-hdr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #1e3a5f}
@@ -802,6 +804,11 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
         <div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div>
         <div class="shop-row" id="ui-shop"></div>
         <div class="stone-display" id="ui-stone"><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
+        <div class="enigma-display" id="ui-enigma">엘리그마 <span id="enigma-count">0</span>P</div>
+        <div class="enigma-actions">
+          <button class="btn btn-teal" onclick="unlockAbydosCard()"><span class="btn-inner">해금</span></button>
+          <button class="btn" onclick="addEnigmaPoints(1)" style="font-size:11px;padding:4px 8px;opacity:0.6"><span class="btn-inner">+1P</span></button>
+        </div>
         <div class="shop-actions">
           <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
           <button class="btn btn-blue" id="btn-freeze"><span class="btn-inner">스케쥴 고정</span></button>
@@ -966,6 +973,7 @@ function renderAll() {
   document.getElementById('ui-tier').textContent='스케쥴 Lv.'+p.tier;
   var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
   document.getElementById('ui-stone').innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';
+  var enigmaCountEl=document.getElementById('enigma-count');if(enigmaCountEl)enigmaCountEl.textContent=getEnigmaPoints();
   document.getElementById('ui-hp').textContent='HP: '+p.hp;
   // HP 바 업데이트
   var hpPct=Math.max(0,Math.min(100,p.hp/40*100));
@@ -2656,7 +2664,7 @@ document.getElementById('btn-continue').addEventListener('click',continueBattle)
 function renderRoster(){
   var kwFilter=document.getElementById('filter-kw').value;
   var abilFilter=document.getElementById('filter-abil').value;
-  var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','총학생회'];
+  var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','아비도스','총학생회'];
   var bySchool={};
   SCHOOL_ORDER.forEach(function(s){bySchool[s]=[];});
   CHARS.forEach(function(c){

@@ -128,6 +128,13 @@ var CHARS = [
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
   {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
+
+  // ===== 아비도스 (잠금 해제 필요) =====
+  {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
+  {id:'serika',  name:'세리카', school:'아비도스', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'세리카(수영복)',   img:'Serika.png',         imgGold:'Serika_(Swimsuit).png'},
+  {id:'nonomi',  name:'노노미', school:'아비도스', tier:4, atk:4, hp:4, kw:[],                 locked:true, skin:'노노미(수영복)',   img:'Nonomi.png',         imgGold:'Nonomi_(Swimsuit).png'},
+  {id:'shiroko', name:'시로코', school:'아비도스', tier:5, atk:7, hp:4, kw:['reborn'],         locked:true, skin:'시로코(수영복)',   img:'Shiroko.png',        imgGold:'Shiroko_(Swimsuit).png'},
+  {id:'hoshino', name:'호시노', school:'아비도스', tier:6, atk:5, hp:7, kw:['taunt','shield'], locked:true, skin:'호시노(수영복)',   img:'Hoshino.png',        imgGold:'Hoshino_(Swimsuit).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -153,6 +160,8 @@ var HIDDEN_CHARS = [
   {id:'millennium_cc',           name:'Cleaning&Clearing',    school:'밀레니엄', tier:7, atk:12, hp:12, kw:['ranged','shield'],                     img:'unique/Cleaning_Clearing.png'},
   {id:'trinity_makeup',          name:'보충수업부',           school:'트리니티', tier:7, atk:10, hp:10, kw:[],                                     img:'unique/Make_Up_Work_Club.png'},
   {id:'trinity_justice',         name:'정의실현부',           school:'트리니티', tier:7, atk:10, hp:10, kw:['shield','windfury'],                   img:'unique/Justice_Task_Force.png'},
+  // 아비도스
+  {id:'Shiroko_Terror',          name:'시로코 테러',          school:'아비도스', tier:7, atk:10, hp:10, kw:['shield'],                                   img:'unique/Shiroko_Terror.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -196,7 +205,7 @@ var KW_DESCS = {
   ambush:'첫 공격 전까지 대상 지정 불가.'
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
-var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png'};
+var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png'};
 var CHAR_GRADES = {
   kayoko:3, junko:1, toki:1, midori:1, mari:1, reisa:1,
   juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
@@ -211,7 +220,8 @@ var CHAR_GRADES = {
   haine:1, momoka:1, ayumu:2, aoi:2, kaya:3, lin:3,
   izuna:1, pina:1, yukari:1, tsukuyo:1,
   mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
-  nagusa:3, wakamo:3, michiru:3
+  nagusa:3, wakamo:3, michiru:3,
+  ayane:1, serika:2, nonomi:2, shiroko:3, hoshino:3
 };
 var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
 if(typeof window!=='undefined') localStorage.removeItem('babg_sandbox');
@@ -224,10 +234,10 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1}; // 개전
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1}; // 뒤끝
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -320,6 +330,13 @@ var ABILITY_DESCS = {
   aoi:      {type:'패시브',desc:'매 턴 (청휘석)+2를 추가로 얻습니다.',skinEffect:'인터뷰 아오이: +4 추가',skinEffectDesc:'패시브: 매 턴 (청휘석아이콘)<span style="color:#ffd700;font-weight:700">+4</span>를 추가로 얻습니다.'},
   kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 2배로 적용하여 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 네 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 <span style="color:#ffd700;font-weight:700">네 배로</span> 적용하여 흡수합니다.\n(가장 마지막에 발동)'},
   lin:      {type:'패시브',desc:'아군의 뒤끝과 첫인사가\n한 번 더 발동합니다.',skinEffect:'승무원 린: 두 번 더 발동',skinEffectDesc:'패시브: 아군의 뒤끝과 첫인사가\n<span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
+  // ===== 아비도스 =====
+  ayane:    {type:'뒤끝',desc:'다음 턴 청휘석 +1',skinEffect:'수영복 아야네: 동일',skinEffectDesc:'뒤끝: 다음 턴 청휘석 +1'},
+  serika:   {type:'패시브',desc:'영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 더합니다.',skinEffect:'수영복 세리카: 동일'},
+  nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 동일'},
+  shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 동일'},
+  hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 동일'},
+  Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
@@ -528,6 +545,40 @@ function initPool() {
   }
   return pool;
 }
+// ========== 엘리그마 (아비도스 해금) 시스템 ==========
+var ENIGMA_UNLOCK_COST = 1; // 해금 1회당 비용
+var ABYDOS_LOCKED_IDS = ['ayane','serika','nonomi','shiroko','hoshino'];
+var ENIGMA_SAVE_KEY = 'babg_enigma';
+var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
+
+function getEnigmaPoints() {
+  try { return parseInt(localStorage.getItem(ENIGMA_SAVE_KEY)||'0')||0; } catch(e){return 0;}
+}
+function setEnigmaPoints(n) {
+  try { localStorage.setItem(ENIGMA_SAVE_KEY, String(Math.max(0,n))); } catch(e){}
+}
+function getUnlockedAbydos() {
+  try { return JSON.parse(localStorage.getItem(ABYDOS_UNLOCK_KEY)||'[]'); } catch(e){return [];}
+}
+function setUnlockedAbydos(arr) {
+  try { localStorage.setItem(ABYDOS_UNLOCK_KEY, JSON.stringify(arr)); } catch(e){}
+}
+function unlockAbydosCard() {
+  var unlocked = getUnlockedAbydos();
+  var locked = ABYDOS_LOCKED_IDS.filter(function(id){ return unlocked.indexOf(id)===-1; });
+  if(locked.length===0) return null;
+  var enigma = getEnigmaPoints();
+  if(enigma < ENIGMA_UNLOCK_COST) return null;
+  setEnigmaPoints(enigma - ENIGMA_UNLOCK_COST);
+  var pick = locked[Math.floor(Math.random()*locked.length)];
+  unlocked.push(pick);
+  setUnlockedAbydos(unlocked);
+  return pick;
+}
+function addEnigmaPoints(n) {
+  setEnigmaPoints(getEnigmaPoints() + n);
+}
+
 function takeFromPool(charId) { if(SANDBOX)return true; if(G.pool[charId]>0){G.pool[charId]--;return true;} return false; }
 function returnToPool(charId,count) {
   if(!count)count=1;
@@ -555,7 +606,8 @@ function newGame() {
     players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
-    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{}};
+    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
+    nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0};
   rollShop();
   aiTurns();
   renderAll();
@@ -672,6 +724,9 @@ function checkHiddenConditionsFor(p) {
   // 정의실현부: 하스미+츠루기+마시로+이치카 보드
   if(notOwned('trinity_justice')&&inPool('trinity_justice')&&p.tier>=6&&boardHas('hasumi')&&boardHas('tsurugi')&&boardHas('mashiro')&&boardHas('ichika'))
     eligible.push('trinity_justice');
+  // 시로코 테러: 아비도스 5인 전원 보유 (스폰율 50%는 injectHiddenToShop에서 처리)
+  if(notOwned('Shiroko_Terror')&&inPool('Shiroko_Terror')&&boardHas('hoshino')&&boardHas('shiroko')&&boardHas('nonomi')&&boardHas('ayane')&&boardHas('serika'))
+    eligible.push('Shiroko_Terror');
 
   return eligible;
 }
@@ -718,6 +773,7 @@ function injectHiddenToShop() {
     if(hid==='hkyk_saikyo') rate=0.05;
     else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
     else if(hid==='hkyk_kuzunoha') rate=0.60;
+    else if(hid==='Shiroko_Terror') rate=0.50;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(htmpl&&G.pool[htmpl.id]>0){
@@ -753,10 +809,12 @@ function makeHiddenMinion(template) {
 
 // ========== SHOP ==========
 function getAvailableChars(tier) {
+  var unlockedAbydos = getUnlockedAbydos();
   var pool=[];
   for(var i=0;i<CHARS.length;i++){
     if(CHARS[i].tier<=tier){
       if(G.shopExclusions&&G.shopExclusions.indexOf(CHARS[i].id)!==-1) continue;
+      if(CHARS[i].locked && unlockedAbydos.indexOf(CHARS[i].id)===-1) continue;
       pool.push(CHARS[i]);
     }
   }
@@ -839,12 +897,12 @@ function buySpell(idx) {
     if(spell.id==='mirror'&&p.board.length>=MAX_BOARD){
       var canTriple=false;var bCounts={};for(var _mi=0;_mi<p.board.length;_mi++){var _bid=p.board[_mi].baseId;if(!p.board[_mi].isSkin){bCounts[_bid]=(bCounts[_bid]||0)+1;if(bCounts[_bid]>=2)canTriple=true;}}
       if(!canTriple)return;}
-    p.stone-=item.cost;G.shop[idx]=null;
+    p.stone-=item.cost;trackNonomiStone(item.cost);G.shop[idx]=null;
     if(spell.once){if(!G.usedOnceSpells)G.usedOnceSpells={};G.usedOnceSpells[spell.id]=true;}
     G.pendingSpell=spell;renderAll();return;
   }
-  if(spell.target==='select_school'){p.stone-=item.cost;G.shop[idx]=null;G.pendingSpell=spell;showSchoolSelect();return;}
-  p.stone-=item.cost;G.shop[idx]=null;
+  if(spell.target==='select_school'){p.stone-=item.cost;trackNonomiStone(item.cost);G.shop[idx]=null;G.pendingSpell=spell;showSchoolSelect();return;}
+  p.stone-=item.cost;trackNonomiStone(item.cost);G.shop[idx]=null;
   if(spell.once){if(!G.usedOnceSpells)G.usedOnceSpells={};G.usedOnceSpells[spell.id]=true;}
   var result=spell.effect(G);
   if(result===false){p.stone+=item.cost;if(spell.once)delete G.usedOnceSpells[spell.id];}
@@ -897,10 +955,11 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.stone-=3;
+  trackNonomiStone(3);
   G.shop[idx]=null;
   takeFromPool(bid);
   G.hiddenCardsOwned[bid]=true;
@@ -997,6 +1056,29 @@ function buyHiddenCard(idx) {
     for(var i=0;i<p.board.length;i++){returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);}
     p.board=[];
   }
+  // 시로코 테러: 아비도스 5인을 흡수하며 등장
+  else if(bid==='Shiroko_Terror'){
+    var stAbsorbIds=['shiroko','hoshino','nonomi','ayane','serika'];
+    var absorbedUnits=[];
+    var newBoard=[];
+    for(var i=0;i<p.board.length;i++){
+      if(stAbsorbIds.indexOf(p.board[i].baseId)!==-1){
+        // 흡수 당시 상태 스냅샷 저장 (풀에는 반환하지 않음)
+        absorbedUnits.push({
+          id:p.board[i].id, baseId:p.board[i].baseId, name:p.board[i].name,
+          school:p.board[i].school, tier:p.board[i].tier,
+          atk:p.board[i].atk, hp:p.board[i].hp, maxHp:p.board[i].hp,
+          kw:(p.board[i].kw||[]).slice(), img:p.board[i].img,
+          isSkin:p.board[i].isSkin||false
+        });
+      } else { newBoard.push(p.board[i]); }
+    }
+    p.board=newBoard;
+    m._shirokoAbsorbed=absorbedUnits;
+    G._shirokoTerrorAbsorbed=absorbedUnits;
+    // 노노미 카운터 초기화 (흡수됨)
+    G.nonomiStoneSinceJoined=0;
+  }
 
   // 왕녀: 아리스 상점 제외
   if(bid==='millennium_nameless'){
@@ -1017,6 +1099,39 @@ function buyHiddenCard(idx) {
 
 // 7성 고유 등장 연출
 var HIDDEN_CARD_ENTRANCE = {
+  Shiroko_Terror: function(m,p){
+    // 번쩍! 효과: 화면 전체 화이트 플래시 + 헤비 진동 후 등장
+    var flashEl=document.createElement('div');
+    flashEl.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.9);pointer-events:none;z-index:9999;transition:opacity 0.35s;';
+    document.body.appendChild(flashEl);
+    playSfx('attack_impact_large',0.8);
+    shakeScreen('heavy');
+    p.board.push(m);
+    if(BC_IDS[m.baseId]) triggerBattlecry(m,p);
+    renderAll();
+    // 카드 착지 흔들림 (trinity_mika 동일 패턴)
+    var boardEl=document.getElementById('ui-board');
+    var cards=boardEl?boardEl.querySelectorAll('.card'):[];
+    var lastCard=cards[cards.length-1];
+    if(lastCard){
+      lastCard.style.transition='transform 0.06s ease-in-out';
+      lastCard.style.transform='scale(1.15)';
+      setTimeout(function(){
+        lastCard.style.transform='translateX(-12px) rotate(-4deg)';
+        setTimeout(function(){lastCard.style.transform='translateX(10px) rotate(3deg)';
+        setTimeout(function(){lastCard.style.transform='translateX(-8px) rotate(-2.5deg)';
+        setTimeout(function(){lastCard.style.transform='translateX(6px) rotate(2deg)';
+        setTimeout(function(){lastCard.style.transform='translateX(-4px) rotate(-1deg)';
+        setTimeout(function(){lastCard.style.transform='translateX(0) rotate(0) scale(1)';},60);},60);},60);},60);},60);
+      },100);
+    }
+    // 플래시 페이드아웃
+    setTimeout(function(){
+      flashEl.style.opacity='0';
+      setTimeout(function(){if(flashEl.parentNode)flashEl.parentNode.removeChild(flashEl);},350);
+    },80);
+    playCardDrop(7);playRecruitVoice('Shiroko_Terror');
+  },
   trinity_mika: function(m,p){
     var footSfx=new Audio('sfx/mika_footstep.webm');
     footSfx.volume=0.5;
@@ -1070,6 +1185,7 @@ function buyMinion(idx, insertIdx) {
   var willTriple=count>=2;
   if(p.board.length>=MAX_BOARD&&!willTriple)return;
   p.stone-=3;
+  trackNonomiStone(3);
   G.shop[idx]=null;
   if(m.school) G.purchasedSchools[m.school]=true;
   // 퀘스트 트래킹: 영입
@@ -1139,7 +1255,10 @@ var RECRUIT_VOICES = {
   aru: 'sfx/aru_recruit.m4a',
   kaya: 'sfx/kaya_recruit.webm',
   izuna: 'sfx/izuna_recruit.webm',
-  tsukuyo: 'sfx/tsukuyo_recruit.webm'
+  tsukuyo: 'sfx/tsukuyo_recruit.webm',
+  hoshino: 'audio/abydos_hoshino.mp3',
+  shiroko: 'audio/abydos_shiroko.mp3',
+  Shiroko_Terror: 'audio/abydos_shiroko_terror.mp3'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
@@ -1686,6 +1805,15 @@ function sellMinion(idx) {
     }
   }
   p.stone+=1;
+  // 노노미 판매 시 청휘석 카운터 초기화
+  if(m.baseId==='nonomi') G.nonomiStoneSinceJoined=0;
+  // 시로코 테러 판매 시 흡수된 학생 귀환
+  if(m.baseId==='Shiroko_Terror'&&G._shirokoTerrorAbsorbed&&G._shirokoTerrorAbsorbed.length>0){
+    for(var _sta=0;_sta<G._shirokoTerrorAbsorbed.length;_sta++){
+      if(p.board.length<MAX_BOARD) p.board.push(G._shirokoTerrorAbsorbed[_sta]);
+    }
+    G._shirokoTerrorAbsorbed=[];
+  }
   // 백귀야행 판매 추적 (쿠즈노하 등장 조건)
   if(HKYK_ALL_IDS.indexOf(m.baseId)!==-1) G.soldHkyk[m.baseId]=true;
   // 히든 카드: 풀 반환하지 않고, 소유 해제 + 상점제외 해제
@@ -1772,19 +1900,30 @@ function doReroll() {
   lastSold=null;
   if(SANDBOX){playSfx('reroll',0.3);rollShop(true);renderAll();return;}
   if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;playSfx('reroll',0.3);rollShop(true);renderAll();return;}
-  if(p.stone<1)return;p.stone-=1;playSfx('reroll',0.3);rollShop(true);renderAll();
+  if(p.stone<1)return;p.stone-=1;trackNonomiStone(1);playSfx('reroll',0.3);rollShop(true);renderAll();
 }
 function doUpgrade() {
   var p=G.players[0];if(p.tier>=6)return;
   if(SANDBOX){p.tier++;p.upgradeCost=p.tier<6?0:99;playSfx('levelup');renderAll();}
   else{if(p.stone<p.upgradeCost)return;
-  p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;playSfx('levelup');renderAll();}
+  var _upCost=p.upgradeCost;p.stone-=_upCost;trackNonomiStone(_upCost);p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;playSfx('levelup');renderAll();}
   if(TUT.active){
     var s=TUTORIAL_STEPS[TUT.step];
     if(s&&s.action==='waitUpgrade') setTimeout(function(){tutNext();},300);
   }
 }
 function doFreeze() { G.frozen=!G.frozen;playSfx(G.frozen?'freeze':'unfreeze');renderAll(); }
+
+// ===== 노노미 청휘석 소비 추적 =====
+function trackNonomiStone(amount) {
+  var p=G.players[0];
+  for(var _ni=0;_ni<p.board.length;_ni++){
+    if(p.board[_ni].baseId==='nonomi'){
+      G.nonomiStoneSinceJoined=(G.nonomiStoneSinceJoined||0)+amount;
+      break;
+    }
+  }
+}
 
 function boardSwap(idx) {
   if(swapFirst===-1){swapFirst=idx;renderAll();}
@@ -2250,6 +2389,7 @@ function aiCheckHidden(p) {
     if(hid==='hkyk_saikyo') rate=0.05;
     else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
     else if(hid==='hkyk_kuzunoha') rate=0.60;
+    else if(hid==='Shiroko_Terror') rate=0.50;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(!htmpl||G.pool[htmpl.id]<=0) continue;
@@ -2678,6 +2818,50 @@ function triggerSOC(u, mySide, otherSide, log) {
       var chosen=hkykAlive.splice(pick,1)[0];
       addKw(chosen,'ambush');
       log.push({cls:'soc',text:'[개전] '+u.name+': '+chosen.name+'에게 기습 부여!'});
+    }
+  }
+  else if(id==='nonomi'){
+    // 노노미 개전: 샬레에 존재한 이후 소비된 청휘석 / 2 (내림)를 맨 왼쪽 학생 공/체에 추가
+    var nonomiStone=Math.floor((_G.nonomiStoneSinceJoined||0)/2);
+    if(nonomiStone>0&&mySide.length>0){
+      var leftmost=null;
+      for(var _nli=0;_nli<mySide.length;_nli++){if(mySide[_nli].alive){leftmost=mySide[_nli];break;}}
+      if(leftmost){
+        leftmost.atk+=nonomiStone;leftmost.hp+=nonomiStone;
+        log.push({cls:'soc',text:'[개전] '+u.name+': '+leftmost.name+'에게 +'+nonomiStone+'/+'+nonomiStone+' (소비 청휘석 '+(_G.nonomiStoneSinceJoined||0)+'의 절반)'});
+      }
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 소비 청휘석 없음 (0)'});
+    }
+  }
+  else if(id==='Shiroko_Terror'){
+    // 시로코 테러 개전: 적 가장 체력 높은 1인 + 자신을 제외한 모든 학생 쓰러뜨림
+    // 1. 적에서 최고 체력 1인 선정
+    var maxEnemyHp=-1;
+    for(var _sti=0;_sti<otherSide.length;_sti++){
+      if(otherSide[_sti].alive&&otherSide[_sti].hp>maxEnemyHp) maxEnemyHp=otherSide[_sti].hp;
+    }
+    var topEnemies=[];
+    for(var _sti=0;_sti<otherSide.length;_sti++){
+      if(otherSide[_sti].alive&&otherSide[_sti].hp===maxEnemyHp) topEnemies.push(otherSide[_sti]);
+    }
+    var spared=topEnemies.length>0?topEnemies[Math.floor(Math.random()*topEnemies.length)]:null;
+    // 2. 적 전체 (최고체력 1인 제외) 처치
+    for(var _sti=0;_sti<otherSide.length;_sti++){
+      if(otherSide[_sti].alive&&otherSide[_sti]!==spared){
+        otherSide[_sti].hp=0;otherSide[_sti].alive=false;otherSide[_sti]._killedBy=u;
+        log.push({cls:'kill',text:'[개전] '+u.name+': '+otherSide[_sti].name+' 처치!'});
+        triggerDeathrattle(otherSide[_sti],otherSide,mySide,log);
+      }
+    }
+    if(spared) log.push({cls:'soc',text:'[개전] '+u.name+': '+spared.name+'은(는) 살아남았다! (체력 '+spared.hp+')'});
+    // 3. 아군 자신 제외 전체 처치
+    for(var _sti=0;_sti<mySide.length;_sti++){
+      if(mySide[_sti].alive&&mySide[_sti]!==u){
+        mySide[_sti].hp=0;mySide[_sti].alive=false;mySide[_sti]._killedBy=u;
+        log.push({cls:'kill',text:'[개전] '+u.name+': 아군 '+mySide[_sti].name+' 처치!'});
+        triggerDeathrattle(mySide[_sti],mySide,otherSide,log);
+      }
     }
   }
 }
@@ -3156,6 +3340,41 @@ function _doDR(unit, mySide, otherSide, log) {
       }
     }
   }
+  // ===== 아비도스 뒤끝 =====
+  else if(id==='ayane'){
+    // 아야네 뒤끝: 다음 턴 청휘석 +1
+    _G._ayaneDeathsThisBattle=(_G._ayaneDeathsThisBattle||0)+1;
+    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다음 턴 청휘석 +1!'});
+  }
+  else if(id==='hoshino'){
+    // 호시노 뒤끝: 자신의 공격력과 체력을 무작위 아군 1인에게 부여
+    var hoshinoCands=[];
+    for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)hoshinoCands.push(mySide[i]);}
+    if(hoshinoCands.length>0){
+      var hoshinoPick=hoshinoCands[Math.floor(Math.random()*hoshinoCands.length)];
+      hoshinoPick.atk+=unit.atk;hoshinoPick.hp+=unit.hp;
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+hoshinoPick.name+'에게 +'+unit.atk+'/+'+unit.hp+' 부여!'});
+    }
+  }
+  else if(id==='Shiroko_Terror'){
+    // 시로코 테러 뒤끝: 흡수한 학생들을 흡수 당시 상태로 귀환
+    var stAbsorbed=unit._shirokoAbsorbed||(_G._shirokoTerrorAbsorbed||[]);
+    if(stAbsorbed.length>0){
+      for(var _si=0;_si<stAbsorbed.length;_si++){
+        if(countAlive(mySide)>=BATTLE_MAX) break;
+        var ab=stAbsorbed[_si];
+        var revUnit={
+          id:ab.id,baseId:ab.baseId,name:ab.name,school:ab.school||'아비도스',
+          tier:ab.tier,atk:ab.atk,hp:ab.hp,maxHp:ab.hp,kw:(ab.kw||[]).slice(),
+          img:ab.img,isSkin:ab.isSkin||false,isToken:false,
+          alive:true,poisonImmune:false,_mySide:mySide,_shirokoTerrorSpawned:true
+        };
+        mySide.push(revUnit);
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+revUnit.name+' 귀환! ('+revUnit.atk+'/'+revUnit.hp+')'});
+      }
+    }
+    unit._shirokoTerrorDRFired=true;
+  }
 }
 
 // 말쿠트 헬퍼 (전역)
@@ -3265,6 +3484,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
       // 아리스 사망 추적
       if(unit.baseId==='arisu') _G.arisuDeathCount=(_G.arisuDeathCount||0)+1;
+      // 시로코 킬 추적 (패시브: 다음 턴 청휘석)
+      if(killedBy&&killedBy.baseId==='shiroko'&&killedBy._mySide===a){
+        _G._shirokoKillsThisBattle=(_G._shirokoKillsThisBattle||0)+1;
+      }
       // 세이아 사망 페널티: 아군 전체 능력 영구 삭제
       if(unit.baseId==='trinity_seia'){
         _G.permanentAbilityBan=true;
@@ -3904,6 +4127,17 @@ function startBattle() {
   lastSold=null;
   _activeCoinOverlay=null;
   var p=G.players[0];
+  // 세리카 패시브: 영입 페이즈 종료 시 남은 청휘석을 공/체에 영구 추가
+  if(!SANDBOX){
+    for(var _sk=0;_sk<p.board.length;_sk++){
+      if(p.board[_sk].baseId==='serika'&&p.stone>0){
+        var _sSt=p.stone;
+        p.board[_sk].atk+=_sSt;p.board[_sk].hp+=_sSt;
+        if(!p.board[_sk].maxHp)p.board[_sk].maxHp=p.board[_sk].hp;else p.board[_sk].maxHp+=_sSt;
+        logBuff(p.board[_sk],'세리카 패시브',_sSt,_sSt);
+      }
+    }
+  }
   var alive=[];for(var i=1;i<G.players.length;i++)if(!G.players[i].dead)alive.push(G.players[i]);
   if(alive.length===0)return;
   var opp=alive[Math.floor(Math.random()*alive.length)];
@@ -4035,6 +4269,30 @@ function startBattle() {
         }
       }
       restoreBoardFromSnapshot(p,boardSnapshot);
+      // 시로코 패시브: 이번 전투 킬 수만큼 다음 턴 청휘석
+      if(G._shirokoKillsThisBattle>0){
+        G.bonusStone=(G.bonusStone||0)+G._shirokoKillsThisBattle;
+        G._shirokoKillsThisBattle=0;
+      }
+      // 아야네 뒤끝: 이번 전투 아야네 사망 수만큼 다음 턴 청휘석
+      if(G._ayaneDeathsThisBattle>0){
+        G.bonusStone=(G.bonusStone||0)+G._ayaneDeathsThisBattle;
+        G._ayaneDeathsThisBattle=0;
+      }
+      // 시로코 테러 DR: 뒤끝 발동 시 흡수된 학생들 보드 귀환
+      for(var _sti=0;_sti<p.board.length;_sti++){
+        if(p.board[_sti].baseId==='Shiroko_Terror'&&p.board[_sti]._shirokoTerrorDRFired){
+          p.board.splice(_sti,1); // ST 제거
+          if(G._shirokoTerrorAbsorbed&&G._shirokoTerrorAbsorbed.length>0){
+            for(var _sj=0;_sj<G._shirokoTerrorAbsorbed.length;_sj++){
+              if(p.board.length<MAX_BOARD) p.board.push(G._shirokoTerrorAbsorbed[_sj]);
+            }
+            G._shirokoTerrorAbsorbed=[];
+            G.nonomiStoneSinceJoined=0;
+          }
+          break;
+        }
+      }
       G.bunnyTossBonus=0; // 바니 토스 전투 후 리셋
       aiAutoBattles();
     }
@@ -4098,11 +4356,14 @@ var _gBattleCounterSave=null;
 function saveGBattleCounters(){
   return{millenniumTokenSummons:G.millenniumTokenSummons||0,arisuDeathCount:G.arisuDeathCount||0,
     permanentAbilityBan:!!G.permanentAbilityBan,
-    keiseisenCounters:JSON.parse(JSON.stringify(G.keiseisenCounters||{}))};
+    keiseisenCounters:JSON.parse(JSON.stringify(G.keiseisenCounters||{})),
+    _shirokoKillsThisBattle:0, _ayaneDeathsThisBattle:0};
 }
 function restoreGBattleCounters(s){
   G.millenniumTokenSummons=s.millenniumTokenSummons;G.arisuDeathCount=s.arisuDeathCount;
   G.permanentAbilityBan=s.permanentAbilityBan;G.keiseisenCounters=s.keiseisenCounters;
+  G._shirokoKillsThisBattle=s._shirokoKillsThisBattle||0;
+  G._ayaneDeathsThisBattle=s._ayaneDeathsThisBattle||0;
 }
 var BCOIN_BASE='img/Icon/';
 var BCOIN_SG='img/UI/sunglasses.png';
@@ -4937,6 +5198,8 @@ function saveGame(){
       arisuDeathCount:G.arisuDeathCount,soldHkyk:G.soldHkyk||{},
       usedOnceSpells:G.usedOnceSpells||{},
       bunnyTossBonus:G.bunnyTossBonus||0,
+      nonomiStoneSinceJoined:G.nonomiStoneSinceJoined||0,
+      _shirokoTerrorAbsorbed:G._shirokoTerrorAbsorbed||[],
       savedAt:Date.now()
     };
     localStorage.setItem(SAVE_KEY,JSON.stringify(saveData));
@@ -4994,7 +5257,9 @@ function restoreGame(save){
     keiseisenCounters:save.keiseisenCounters||{},
     hovercraftCounter:0,soldHkyk:save.soldHkyk||{},
     usedOnceSpells:save.usedOnceSpells||{},
-    bunnyTossBonus:save.bunnyTossBonus||0};
+    bunnyTossBonus:save.bunnyTossBonus||0,
+    nonomiStoneSinceJoined:save.nonomiStoneSinceJoined||0,
+    _shirokoTerrorAbsorbed:save._shirokoTerrorAbsorbed||[]};
   rollShop();
 }
 
