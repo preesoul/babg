@@ -1113,7 +1113,8 @@
               "img": "unique/Gehenna_pandemonium_Society.png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 14,
