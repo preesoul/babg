@@ -2329,7 +2329,60 @@
     "Test1": {
       "pw": "2853",
       "records": [],
-      "points": 0
+      "points": 0,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "millennium10",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "play10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin10",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "_lastLoginDate": "2026-04-06"
+      }
     }
   }
 }
