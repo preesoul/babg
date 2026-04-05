@@ -310,7 +310,7 @@ var ABILITY_DESCS = {
   millennium_seminar:     {type:'패시브 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',skinEffect:'',quote:'리오: 우리는, 빛이 없는 곳에서 만날 거야.'},
   millennium_cc:          {type:'패시브 / 뒤끝',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: 코인 토스가 항상 성공합니다.\n뒤끝: 아비 에슈흐(스케쥴×8)를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
   trinity_makeup:         {type:'패시브',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',skinEffect:'',quote:'히후미: 그러니까, 지금부터 시작하겠습니다! 우리들의 이야기를!',quote2:'히후미: 학원과 청춘의 이야기를!!'},
-  trinity_justice:        {type:'패시브 / 개전',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 처음으로 쓰러뜨린 적의 공/체를 두 배로 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
+  trinity_justice:        {type:'패시브 / 개전',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
   // ===== 신규 캐릭터 =====
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',skinEffect:'수영복 이부키: +10/+10',skinEffectDesc:'개전: 아군 마코토, 치아키, 사츠키, 이로하에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   chiaki:   {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 치아키: 연사 추가',skinEffectDesc:'저격+연사: 저격 공격. 반격을 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">연사</span>로 2회 공격합니다.'},
@@ -3719,13 +3719,11 @@ function runBattle(boardA, boardB, startWithA, opts) {
         killedBy.atk+=unit.atk;killedBy.hp+=absHp;killedBy.maxHp=killedBy.hp;
         log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 흡수! +'+unit.atk+'/+'+absHp});
       }
-      // 정의실현부 패시브: 처음 쓰러뜨린 적 공/체 ×2 흡수
-      if(killedBy&&killedBy.baseId==='trinity_justice'&&!killedBy._justiceAbsorbed){
-        killedBy._justiceAbsorbed=true;
-        var absHp2=unit._hpBeforeKill!==undefined?unit._hpBeforeKill:Math.max(0,unit.hp);
-        var gainAtk=unit.atk*2,gainHp=absHp2*2;
-        killedBy.atk+=gainAtk;killedBy.hp+=gainHp;
-        log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 처치! +'+gainAtk+'/+'+gainHp+' 흡수!'});
+      // 정의실현부 패시브: 쓰러뜨린 적의 공/최대체력 흡수 (매 킬마다)
+      if(killedBy&&killedBy.baseId==='trinity_justice'){
+        var absHp2=unit._peakHp||unit.maxHp||Math.max(1,unit.hp);
+        killedBy.atk+=unit.atk;killedBy.hp+=absHp2;killedBy.maxHp=killedBy.hp;
+        log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 흡수! +'+unit.atk+'/+'+absHp2});
       }
       // 아리스 사망 추적
       if(unit.baseId==='arisu') _G.arisuDeathCount=(_G.arisuDeathCount||0)+1;
