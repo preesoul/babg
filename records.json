@@ -1124,6 +1124,85 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T14:45:45",
+          "placement": 4,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "나구사(수영복)",
+              "baseId": "nagusa",
+              "atk": 11,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Nagusa_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 8,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 4,
+              "hp": 4,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
       "points": 7,
@@ -1133,7 +1212,7 @@
           "quests": [
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -1154,7 +1233,7 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 2,
+              "progress": 4,
               "completed": false
             },
             {
@@ -1173,7 +1252,7 @@
           "quests": [
             {
               "id": "repeat_play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
