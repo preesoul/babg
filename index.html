@@ -771,6 +771,7 @@ function abilityTag(baseId,isSkin) {
 
 function showAbilityPopup(baseId, e, isSkin) {
   e.stopPropagation();
+  playSfx('roster_click',0.3);
   var info = ABILITY_DESCS[baseId];
   if(!info) return;
   // 골든 여부: 인자로 안 오면 이벤트 소스 카드에서 추적
@@ -1490,11 +1491,13 @@ function fadeSwitch(from,to,cb){
 (function(){var n=document.getElementById('pc-notice');if(!n)return;n.style.pointerEvents='auto';n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
 
 document.getElementById('btn-play').addEventListener('click',function(){
+  playSfx('game_start',0.5);
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
 });
 // 이어하기 버튼
 document.getElementById('btn-continue-game').addEventListener('click',function(){
+  playSfx('game_start',0.5);
   var save=loadGame();
   if(!save){alert('저장된 게임이 없습니다.');return;}
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
@@ -2597,8 +2600,9 @@ function doRerollQuest(idx,sha){
 }
 document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
 document.getElementById('tut-skip').addEventListener('click',tutEnd);
-document.getElementById('btn-roster').addEventListener('click',showRoster);
+document.getElementById('btn-roster').addEventListener('click',function(){playSfx('roster_open',0.4);showRoster();});
 document.getElementById('btn-roster-close').addEventListener('click',function(){
+  playSfx('roster_close',0.4);
   hideTooltip();
   document.getElementById('roster-overlay').classList.remove('active');
 });

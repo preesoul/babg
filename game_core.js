@@ -1209,6 +1209,10 @@ function playSfx(name,vol){
     spell_high:'sfx/spell_HolyLight_cast_1.ogg',
     ui_open:'sfx/Card_Transition_In.ogg',
     ui_close:'sfx/Card_Transition_Out.ogg',
+    game_start:'sfx/tutorial_intro_box_opens.ogg',
+    roster_open:'sfx/collection_manager_book_open.ogg',
+    roster_close:'sfx/collection_manager_book_close.ogg',
+    roster_click:'sfx/collection_manager_book_latch_jiggle.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
     drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
     drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'
