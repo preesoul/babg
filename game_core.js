@@ -3430,7 +3430,7 @@ function _doDR(unit, mySide, otherSide, log) {
   // ===== 아비도스 뒤끝 =====
   else if(id==='ayane'){
     // 아야네 뒤끝: 다음 턴 청휘석 +1
-    _G._ayaneDeathsThisBattle=(_G._ayaneDeathsThisBattle||0)+(unit.isSkin?2:1);
+    G._ayaneDeathsThisBattle=(G._ayaneDeathsThisBattle||0)+(unit.isSkin?2:1);
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다음 턴 청휘석 +1!'});
   }
   else if(id==='hoshino'){
@@ -3448,7 +3448,7 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='Shiroko_Terror'){
     // 시로코 테러 뒤끝: 흡수한 학생들을 흡수 당시 상태로 귀환
-    var stAbsorbed=unit._shirokoAbsorbed||(_G._shirokoTerrorAbsorbed||[]);
+    var stAbsorbed=unit._shirokoAbsorbed||(G._shirokoTerrorAbsorbed||[]);
     if(stAbsorbed.length>0){
       for(var _si=0;_si<stAbsorbed.length;_si++){
         if(countAlive(mySide)>=BATTLE_MAX) break;
