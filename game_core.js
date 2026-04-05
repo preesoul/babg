@@ -5456,7 +5456,8 @@ function saveGame(){
               abilityImmune:u.abilityImmune||false,
               _battlesSurvived:u._battlesSurvived||0,
               _hovercraftCounter:u._hovercraftCounter||0,
-              _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false};
+              _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,
+              _keiseisenBuffed:u._keiseisenBuffed||false};
           }),
           bench:p.bench?{id:p.bench.id,baseId:p.bench.baseId,name:p.bench.name,school:p.bench.school,
             tier:p.bench.tier,atk:p.bench.atk,hp:p.bench.hp,maxHp:p.bench.maxHp||p.bench.hp,
