@@ -3186,7 +3186,15 @@ function triggerSOC(u, mySide, otherSide, log) {
     // 루미 개전: 자신의 기본능력을 아군 1인(스킨:2인)에게 복사
     var rumiKw=u.kw.filter(function(k){return k!=='survive'&&k!=='preemptive';});
     if(rumiKw.length>0){
-      var rumiCands=[];for(var _ri=0;_ri<mySide.length;_ri++){if(mySide[_ri].alive&&mySide[_ri]!==u&&!mySide[_ri].abilityImmune)rumiCands.push(mySide[_ri]);}
+      // 새 키워드를 받을 수 있는 대상 우선 선택
+      var rumiCandsAll=[];var rumiCandsNew=[];
+      for(var _ri=0;_ri<mySide.length;_ri++){
+        if(!mySide[_ri].alive||mySide[_ri]===u||mySide[_ri].abilityImmune)continue;
+        rumiCandsAll.push(mySide[_ri]);
+        var _hasNew=false;for(var _rk=0;_rk<rumiKw.length;_rk++){if(mySide[_ri].kw.indexOf(rumiKw[_rk])===-1){_hasNew=true;break;}}
+        if(_hasNew)rumiCandsNew.push(mySide[_ri]);
+      }
+      var rumiCands=rumiCandsNew.length>0?rumiCandsNew:rumiCandsAll;
       var rumiCount=u.isSkin?2:1;
       for(var _rc=0;_rc<rumiCount&&rumiCands.length>0;_rc++){
         var _rIdx=Math.floor(Math.random()*rumiCands.length);
