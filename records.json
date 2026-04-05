@@ -405,6 +405,74 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T10:41:12",
+          "placement": 4,
+          "turn": 15,
+          "tier": 5,
+          "board": [
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 9,
+              "hp": 10,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 19,
+              "hp": 17,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 20,
+              "hp": 17,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
       "points": 33,
@@ -445,7 +513,7 @@
             },
             {
               "id": "play10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             }
           ]
@@ -560,6 +628,190 @@
             {
               "id": "win3",
               "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "_lastLoginDate": "2026-04-05"
+      }
+    },
+    "ㄱㄱ": {
+      "pw": "",
+      "records": [
+        {
+          "date": "2026-04-05T10:47:25",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "준코",
+              "baseId": "junko",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "selfdestruct"
+              ],
+              "isSkin": false,
+              "img": "Junko.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미도리",
+              "baseId": "midori",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Midori.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히후미",
+              "baseId": "hifumi",
+              "atk": 2,
+              "hp": 3,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hifumi.png",
+              "school": "트리니티"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T10:51:35",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "치세",
+              "baseId": "chise",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chise.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 4,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 13,
+              "hp": 3,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 3,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 5,
+              "hp": 7,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
+        }
+      ],
+      "points": 0,
+      "questState": {
+        "daily": {
+          "date": "2026-04-05",
+          "quests": [
+            {
+              "id": "hyakkiyako10",
+              "progress": 7,
+              "completed": false
+            },
+            {
+              "id": "trinity10",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-03-30",
+          "quests": [
+            {
+              "id": "skin10",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "win3",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 1,
               "completed": false
             }
           ]
