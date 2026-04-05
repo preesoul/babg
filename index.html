@@ -318,10 +318,10 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .pop{animation:pop 0.3s ease}
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .screen{display:none;opacity:0}.screen.active{display:block;opacity:1}.screen.fading{display:block;opacity:0;transition:opacity 0.4s ease}
-#title-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
-#title-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
-#title-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
-#title-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
+#title-screen.active,#login-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
+#title-screen.fading,#login-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
+#title-screen .title-logo,#login-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
+#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
 
 /* 능력 팝업 — BA TCG 다크 블루 */
 .ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:300;justify-content:center;align-items:center}
