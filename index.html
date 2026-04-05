@@ -513,7 +513,10 @@ img.tutorial-highlight{border-radius:50%!important}
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
     <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">전적 기록</span></button>
     <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">튜토리얼</span></button>
-    <button class="btn btn-stone" id="btn-logout" style="margin-top:16px;min-width:100px;opacity:0.6"><span class="btn-inner">로그아웃</span></button>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">
+      <button class="btn btn-stone" id="btn-logout" style="min-width:100px;opacity:0.6"><span class="btn-inner">로그아웃</span></button>
+      <button class="btn" id="btn-reset-account" style="min-width:100px;opacity:0.4;font-size:11px;padding:4px 8px;background:#1a1a2e;border:1px solid #ef4444;color:#ef4444"><span class="btn-inner">계정 초기화</span></button>
+    </div>
   </div>
 
   <!-- 퀘스트 오버레이 -->
@@ -2537,6 +2540,41 @@ document.getElementById('btn-logout').addEventListener('click',function(){
   document.getElementById('login-name').value='';
   document.getElementById('login-pw').value='';
   document.getElementById('login-status').textContent='';
+});
+// 계정 초기화
+document.getElementById('btn-reset-account').addEventListener('click',function(){
+  if(!window._babgLogin||!window._babgLogin.name)return;
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center';
+  var box=document.createElement('div');
+  box.style.cssText='background:#1a2a3a;border:2px solid #ef4444;border-radius:12px;padding:24px;text-align:center;max-width:320px';
+  box.innerHTML='<div style="color:#ef4444;font-size:18px;font-weight:700;margin-bottom:12px">계정 초기화</div>'
+    +'<div style="color:#c0d0e0;font-size:13px;margin-bottom:20px">모든 전적, 엘리그마, 해금 카드, 퀘스트가<br>초기화됩니다. 되돌릴 수 없습니다.<br><br>정말로 하시겠습니까?</div>'
+    +'<div style="display:flex;gap:12px;justify-content:center">'
+    +'<button id="reset-yes" style="padding:8px 24px;border:none;border-radius:8px;font-size:14px;font-weight:bold;background:#ef4444;color:#fff;cursor:pointer">예</button>'
+    +'<button id="reset-no" style="padding:8px 24px;border:none;border-radius:8px;font-size:14px;font-weight:bold;background:#475569;color:#fff;cursor:pointer">아니오</button>'
+    +'</div>';
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  document.getElementById('reset-no').addEventListener('click',function(){overlay.remove();});
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
+  document.getElementById('reset-yes').addEventListener('click',function(){
+    var name=window._babgLogin.name;
+    fetchRecords(function(err,data,sha){
+      if(err||!data){alert('서버 연결 실패');overlay.remove();return;}
+      if(data.players&&data.players[name]){
+        var pw=data.players[name].pw;
+        data.players[name]={pw:pw,records:[],points:0,questState:null,unlockedAbydos:[]};
+      }
+      saveRecords(data,sha,function(){
+        setUnlockedAbydos([]);
+        localStorage.removeItem('babg_save');
+        overlay.remove();
+        alert('계정이 초기화되었습니다.');
+        document.getElementById('btn-logout').click();
+      });
+    });
+  });
 });
 // 전적 기록 버튼
 document.getElementById('btn-records').addEventListener('click',function(){
