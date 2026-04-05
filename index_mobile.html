@@ -2940,6 +2940,19 @@ function renderQuestUI(){
     window._enigmaPointsCache=pd.points||0;
     pts.innerHTML='<img src="img/Icon/quest_stone.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px">'+(pd.points||0)+' 엘리그마';
     var html='';
+    if(pd.questState.repeat&&pd.questState.repeat.quests){
+      html+='<h3 style="color:#22c55e;margin:12px 0 8px">반복 퀘스트 <span style="font-size:11px;color:#6a8a9e">(무한 반복)</span></h3>';
+      var rq=pd.questState.repeat.quests;
+      for(var i=0;i<rq.length;i++){
+        var q=rq[i];var def=null;for(var j=0;j<REPEAT_QUESTS.length;j++){if(REPEAT_QUESTS[j].id===q.id){def=REPEAT_QUESTS[j];break;}}
+        if(!def)continue;
+        var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+        html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid #2a3a4a">';
+        html+='<div style="flex:1"><div style="font-weight:600;color:#e0eaf4">'+def.name+'</div>';
+        html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:#22c55e;border-radius:4px"></div></div>';
+        html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'엘리그마)</div></div></div>';
+      }
+    }
     html+='<h3 style="color:#60a5fa;margin:12px 0 8px">일일 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매일 갱신, 1일 1회 교체 가능)</span></h3>';
     var dq=pd.questState.daily.quests;
     var canReroll=!pd.questState.daily.rerolled;

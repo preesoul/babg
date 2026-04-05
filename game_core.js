@@ -5683,15 +5683,18 @@ function restoreGame(save){
 }
 
 // ===== 퀘스트 시스템 =====
+var REPEAT_QUESTS = [
+  {id:'repeat_play3', name:'게임 3판 하기 (반복)', target:3, points:1, repeatable:true}
+];
 var DAILY_QUESTS = [
-  {id:'login', name:'로그인 하기', target:1, points:1},
-  {id:'play3', name:'게임 3판 하기', target:3, points:1},
-  {id:'win1', name:'1등 1판 하기', target:1, points:1},
-  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:1},
-  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:1},
-  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:1},
-  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:1},
-  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:1}
+  {id:'login', name:'로그인 하기', target:1, points:2},
+  {id:'play3', name:'게임 3판 하기', target:3, points:2},
+  {id:'win1', name:'1등 1판 하기', target:1, points:2},
+  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:2},
+  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:2},
+  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:2},
+  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:2},
+  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:2}
 ];
 var WEEKLY_QUESTS = [
   {id:'login3', name:'로그인 3회 하기', target:3, points:5},
@@ -5776,6 +5779,10 @@ function initQuestState(playerData) {
       quests: wpicked.map(function(q) { return {id: q.id, progress: 0, completed: false}; })
     };
   }
+  // 반복 퀘스트 (항상 존재, 완료 시 리셋)
+  if (!qs.repeat) {
+    qs.repeat = {quests: REPEAT_QUESTS.map(function(q) { return {id: q.id, progress: 0, completed: false}; })};
+  }
   return playerData;
 }
 
@@ -5788,6 +5795,7 @@ function updateQuestProgress(playerData, tracker, placement) {
   var allQuests = {};
   for (var i = 0; i < DAILY_QUESTS.length; i++) allQuests[DAILY_QUESTS[i].id] = DAILY_QUESTS[i];
   for (var i = 0; i < WEEKLY_QUESTS.length; i++) allQuests[WEEKLY_QUESTS[i].id] = WEEKLY_QUESTS[i];
+  for (var i = 0; i < REPEAT_QUESTS.length; i++) allQuests[REPEAT_QUESTS[i].id] = REPEAT_QUESTS[i];
 
   function updateList(questList) {
     for (var i = 0; i < questList.length; i++) {
@@ -5797,7 +5805,9 @@ function updateQuestProgress(playerData, tracker, placement) {
       if (!def) continue;
 
       // 진행도 업데이트
-      if (q.id === 'play3' || q.id === 'play10') {
+      if (q.id === 'repeat_play3') {
+        q.progress += 1;
+      } else if (q.id === 'play3' || q.id === 'play10') {
         q.progress += 1;
       } else if (q.id === 'win1' || q.id === 'win3') {
         if (placement === 1) q.progress += 1;
@@ -5832,6 +5842,16 @@ function updateQuestProgress(playerData, tracker, placement) {
 
   updateList(qs.daily.quests);
   updateList(qs.weekly.quests);
+  // 반복 퀘스트: 완료 시 progress 리셋
+  if(qs.repeat&&qs.repeat.quests){
+    updateList(qs.repeat.quests);
+    for(var _rq=0;_rq<qs.repeat.quests.length;_rq++){
+      if(qs.repeat.quests[_rq].completed){
+        qs.repeat.quests[_rq].progress=0;
+        qs.repeat.quests[_rq].completed=false;
+      }
+    }
+  }
   return playerData;
 }
 
