@@ -3839,14 +3839,14 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(killedBy) unit._killedBy=killedBy;
       // 하스미 패시브: 첫 처치 공/체 흡수
       var hasumiMax=killedBy&&killedBy.isSkin?2:1;
-      if(killedBy&&killedBy.baseId==='hasumi'&&(killedBy._hasumiAbsorbed||0)<hasumiMax){
+      if(killedBy&&killedBy.baseId==='hasumi'&&killedBy.hp>0&&!killedBy._poisonKilled&&(killedBy._hasumiAbsorbed||0)<hasumiMax){
         killedBy._hasumiAbsorbed=(killedBy._hasumiAbsorbed||0)+1;
         var absHp=unit._hpBeforeKill!==undefined?unit._hpBeforeKill:Math.max(0,unit.hp);
         killedBy.atk+=unit.atk;killedBy.hp+=absHp;killedBy.maxHp=killedBy.hp;
         log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 흡수! +'+unit.atk+'/+'+absHp});
       }
       // 정의실현부 패시브: 쓰러뜨린 적의 공/최대체력 흡수 (매 킬마다)
-      if(killedBy&&killedBy.baseId==='trinity_justice'){
+      if(killedBy&&killedBy.baseId==='trinity_justice'&&killedBy.hp>0&&!killedBy._poisonKilled){
         var absHp2=unit._peakHp||unit.maxHp||Math.max(1,unit.hp);
         killedBy.atk+=unit.atk;killedBy.hp+=absHp2;killedBy.maxHp=killedBy.hp;
         log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': '+unit.name+' 흡수! +'+unit.atk+'/+'+absHp2});
@@ -3912,7 +3912,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(dst.hp<=0&&dst._hpBeforeKill===undefined) dst._hpBeforeKill=Math.max(0,hpBefore);
       log2.push({cls:'hit',text:src.name+'가 '+dst.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,dst.hp)+')'});
       if(hasKw(src,'poison')&&dmg>=1&&dst.hp>0&&!dst.poisonImmune&&!dst.abilityImmune){
-        dst.hp=0;
+        dst.hp=0;dst._poisonKilled=true;
         log2.push({cls:'kill',text:src.name+'의 독사굴! '+dst.name+' 즉사!'});
       }
       var overflow=dmg-hpBefore;
