@@ -534,14 +534,18 @@ img.tutorial-highlight{border-radius:50%!important}
   </div>
 
   <!-- 신비해방 팝업 -->
-  <div id="unlock-popup-overlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center" onclick="this.style.display='none'">
-    <div style="text-align:center;animation:unlockPop 0.4s ease-out" onclick="event.stopPropagation()">
+  <div id="unlock-popup-overlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;overflow:hidden" onclick="this.style.display='none'">
+    <div id="unlock-popup-inner" style="text-align:center" onclick="event.stopPropagation()">
       <img id="unlock-popup-img" src="" style="width:160px;height:160px;object-fit:cover;border-radius:12px;border:3px solid #ffd700;margin-bottom:16px">
-      <div id="unlock-popup-text" style="color:#ffd700;font-size:22px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5)"></div>
+      <div id="unlock-popup-text" style="color:#ffd700;font-size:20px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5);line-height:1.5"></div>
       <button class="btn btn-stone" style="margin-top:20px" onclick="document.getElementById('unlock-popup-overlay').style.display='none'"><span class="btn-inner">확인</span></button>
     </div>
+    <div id="unlock-particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
   </div>
-  <style>@keyframes unlockPop{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}</style>
+  <style>
+  @keyframes unlockSpin{0%{transform:scale(0.3) rotate(0deg);opacity:0}60%{transform:scale(1.1) rotate(720deg);opacity:1}100%{transform:scale(1) rotate(720deg);opacity:1}}
+  @keyframes particleRise{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-600px) scale(0.5);opacity:0}}
+  </style>
 
   <!-- 전적 기록 오버레이 -->
   <div id="records-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
@@ -2541,9 +2545,22 @@ document.getElementById('btn-quest-close').addEventListener('click',function(){
 });
 function showUnlockPopup(name,img){
   var overlay=document.getElementById('unlock-popup-overlay');
+  var inner=document.getElementById('unlock-popup-inner');
   document.getElementById('unlock-popup-img').src='img/'+img;
-  document.getElementById('unlock-popup-text').textContent=name+'가 해방되었습니다!';
+  var particle='이';
+  if(name){var last=name.charCodeAt(name.length-1);if(last>=0xAC00&&last<=0xD7A3){particle=((last-0xAC00)%28===0)?'가':'이';}}
+  document.getElementById('unlock-popup-text').innerHTML=name+particle+' 신비 해방되었습니다!<br><span style="font-size:14px;color:#c4b5fd">학생명부에서 확인해 보세요!</span>';
+  inner.style.animation='none';inner.offsetHeight;inner.style.animation='unlockSpin 0.7s ease-out forwards';
   overlay.style.display='flex';
+  try{var snd=new Audio('sfx/victory_screen_start.ogg');snd.volume=0.5;snd.play();}catch(e){}
+  var pc=document.getElementById('unlock-particles');pc.innerHTML='';
+  var emojis=['🎉','⭐','🎊','✨','🥳','💫','🎆','🌟'];
+  for(var i=0;i<20;i++){
+    var span=document.createElement('span');
+    span.textContent=emojis[i%emojis.length];
+    span.style.cssText='position:absolute;font-size:'+(20+Math.random()*16)+'px;bottom:-40px;left:'+(Math.random()*100)+'%;animation:particleRise '+(1.2+Math.random()*1.5)+'s ease-out '+(Math.random()*0.5)+'s forwards;';
+    pc.appendChild(span);
+  }
 }
 function renderQuestUI(){
   var el=document.getElementById('quest-content');
