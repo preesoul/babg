@@ -540,6 +540,7 @@ var swapFirst = -1;
 
 function newGame() {
   deleteSave(); // 새 게임 시 저장 데이터 삭제
+  resetQuestTracker();
   var players=[];
   var aiCount=SANDBOX?5:7;
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
@@ -903,6 +904,8 @@ function buyHiddenCard(idx) {
   G.hiddenCardsOwned[bid]=true;
   G.hiddenCardsEverOwned[bid]=true;
   if(m.school) G.purchasedSchools[m.school]=true;
+  // 퀘스트 트래킹: 7성 카드 완성
+  if(window._questTracker) window._questTracker.hiddenCompleted = true;
 
   // 흡수형: 지정 유닛 제거 + 스탯 합산
   if(bid==='gehenna_prefect'){
@@ -1067,9 +1070,15 @@ function buyMinion(idx, insertIdx) {
   p.stone-=3;
   G.shop[idx]=null;
   if(m.school) G.purchasedSchools[m.school]=true;
+  // 퀘스트 트래킹: 영입
+  if(m.school && window._questTracker && window._questTracker.recruits[m.school] !== undefined) {
+    window._questTracker.recruits[m.school]++;
+  }
   var addedUnit;
   if(willTriple){
     playSfx('triple');
+    // 퀘스트 트래킹: 스킨 갈아입히기
+    if(window._questTracker) window._questTracker.skins++;
     var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];
     var mergedKw=[],bonusAtk=0,bonusHp=0;
     var sources=[];for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin)sources.push(p.board[i]);
@@ -1310,6 +1319,8 @@ function showDiscover(p) {
     overlay.classList.remove('active');
     document.getElementById('battle-intro-area').innerHTML='';
     document.getElementById('battle-intro-area').removeEventListener('click', handler);
+    // 퀘스트 트래킹: 발견 횟수
+    if(window._questTracker) window._questTracker.discovers++;
     // 선택한 캐릭터를 풀에서 빼고 보드에 추가 (트리플 체크 포함)
     var tmpl = choices[idx];
     if(takeFromPool(tmpl.id)){
@@ -1373,6 +1384,8 @@ function showDiscoverCustom(choices) {
     document.getElementById('battle-intro-area').innerHTML='';
     document.getElementById('battle-intro-area').removeEventListener('click',handler);
     var chosen=choices[idx];if(!chosen){renderAll();return;}
+    // 퀘스트 트래킹: 발견 횟수
+    if(window._questTracker) window._questTracker.discovers++;
     takeFromPool(chosen.id);
     var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin)count++;}
     if(count>=2){
@@ -1407,12 +1420,18 @@ function aiDiscover(p) {
 function addToBoard(p, m) {
   // 영입 효과음 (모든 경로 공통)
   if(p.isPlayer){playCardDrop(m.tier);playRecruitVoice(m.baseId);if(m.tier>=5)shakeScreen(m.tier>=6?'heavy':'light');}
+  // 퀘스트 트래킹: 영입 (플레이어만)
+  if(p.isPlayer && m.school && window._questTracker && window._questTracker.recruits[m.school] !== undefined) {
+    window._questTracker.recruits[m.school]++;
+  }
   // 트리플 체크
   var count=0;
   for(var i=0;i<p.board.length;i++){
     if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin) count++;
   }
   if(count>=2){
+    // 퀘스트 트래킹: 스킨 갈아입히기 (플레이어만)
+    if(p.isPlayer && window._questTracker) window._questTracker.skins++;
     var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];
     var mergedKw=[],bonusAtk=0,bonusHp=0;
     var sources=[];for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin)sources.push(p.board[i]);
@@ -3927,6 +3946,7 @@ function startBattle() {
     startBattleAnimation(resultA,opp,resultB,_battleChosenCallback);
 
     function _battleChosenCallback(chosen){
+      var _questEnemyBoardLen = opp.board.length; // 퀘스트용 적 보드 크기 캡처
       // 주리 사망 카운터 플레이어에 반영
       p.panchanDeaths=chosen.panchanDeathsA||0;
       opp.panchanDeaths=chosen.panchanDeathsB||0;
@@ -3981,6 +4001,18 @@ function startBattle() {
         for(var _ci=0;_ci<chosen._sideA.length&&_ci<p.board.length;_ci++){
           if(chosen._sideA[_ci].baseId===p.board[_ci].baseId){
             if(chosen._sideA[_ci]._hovercraftCounter) p.board[_ci]._hovercraftCounter=chosen._sideA[_ci]._hovercraftCounter;
+          }
+        }
+      }
+      // 퀘스트 트래킹: 킬 수, 7성 카드 생존
+      if(window._questTracker) {
+        var enemyTotal = _questEnemyBoardLen;
+        var enemySurvivors = (chosen.survivorsB||[]).length;
+        window._questTracker.kills += (enemyTotal - enemySurvivors);
+        // 7성 카드 생존 체크 (승리 시)
+        if(chosen.result==='win' && chosen.survivorsA) {
+          for(var _qi=0;_qi<chosen.survivorsA.length;_qi++) {
+            if(chosen.survivorsA[_qi].isHidden) { window._questTracker.hiddenSurvived = true; break; }
           }
         }
       }
@@ -4940,6 +4972,239 @@ function restoreGame(save){
   rollShop();
 }
 
+// ===== 퀘스트 시스템 =====
+var DAILY_QUESTS = [
+  {id:'login', name:'로그인 하기', target:1, points:1},
+  {id:'play3', name:'게임 3판 하기', target:3, points:1},
+  {id:'win1', name:'1등 1판 하기', target:1, points:1},
+  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:1},
+  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:1},
+  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:1},
+  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:1},
+  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:1}
+];
+var WEEKLY_QUESTS = [
+  {id:'login3', name:'로그인 3회 하기', target:3, points:5},
+  {id:'win3', name:'1등 3판 하기', target:3, points:5},
+  {id:'play10', name:'게임 10판 하기', target:10, points:5},
+  {id:'discover10', name:'발견! 10회 하기', target:10, points:5},
+  {id:'skin10', name:'영입으로 스킨 10회 갈아입히기', target:10, points:5},
+  {id:'hidden1', name:'7성 카드 완성하기', target:1, points:5},
+  {id:'hidden_win', name:'7성 카드가 생존한 채 1등하기', target:1, points:5}
+];
+
+window._questTracker = {
+  recruits: {'트리니티':0, '게헨나':0, '백귀야행':0, '밀레니엄':0},
+  kills: 0,
+  discovers: 0,
+  skins: 0,
+  hiddenCompleted: false,
+  hiddenSurvived: false
+};
+
+function resetQuestTracker() {
+  window._questTracker = {
+    recruits: {'트리니티':0, '게헨나':0, '백귀야행':0, '밀레니엄':0},
+    kills: 0,
+    discovers: 0,
+    skins: 0,
+    hiddenCompleted: false,
+    hiddenSurvived: false
+  };
+}
+
+function getTodayStr() {
+  var d = new Date();
+  var mm = String(d.getMonth()+1).padStart(2,'0');
+  var dd = String(d.getDate()).padStart(2,'0');
+  return d.getFullYear()+'-'+mm+'-'+dd;
+}
+
+function getMondayStr() {
+  var d = new Date();
+  var day = d.getDay(); // 0=Sun
+  var diff = day === 0 ? 6 : day - 1; // days since Monday
+  var monday = new Date(d);
+  monday.setDate(d.getDate() - diff);
+  var mm = String(monday.getMonth()+1).padStart(2,'0');
+  var dd = String(monday.getDate()).padStart(2,'0');
+  return monday.getFullYear()+'-'+mm+'-'+dd;
+}
+
+function pickRandom(arr, count) {
+  var copy = arr.slice();
+  var result = [];
+  for (var i = 0; i < count && copy.length > 0; i++) {
+    var idx = Math.floor(Math.random() * copy.length);
+    result.push(copy.splice(idx, 1)[0]);
+  }
+  return result;
+}
+
+function initQuestState(playerData) {
+  var today = getTodayStr();
+  var monday = getMondayStr();
+  if (!playerData.questState) {
+    playerData.questState = {daily: {date: '', quests: [], rerolled: false}, weekly: {weekStart: '', quests: []}};
+  }
+  if (!playerData.points) playerData.points = 0;
+  var qs = playerData.questState;
+  // 일일 퀘스트 갱신
+  if (qs.daily.date !== today) {
+    var picked = pickRandom(DAILY_QUESTS, 3);
+    qs.daily = {
+      date: today,
+      quests: picked.map(function(q) { return {id: q.id, progress: 0, completed: false}; }),
+      rerolled: false
+    };
+  }
+  // 주간 퀘스트 갱신
+  if (qs.weekly.weekStart !== monday) {
+    var wpicked = pickRandom(WEEKLY_QUESTS, 3);
+    qs.weekly = {
+      weekStart: monday,
+      quests: wpicked.map(function(q) { return {id: q.id, progress: 0, completed: false}; })
+    };
+  }
+  return playerData;
+}
+
+function updateQuestProgress(playerData, tracker, placement) {
+  if (!playerData.questState) return playerData;
+  if (!playerData.points) playerData.points = 0;
+  var qs = playerData.questState;
+
+  // 퀘스트 정의 맵 만들기
+  var allQuests = {};
+  for (var i = 0; i < DAILY_QUESTS.length; i++) allQuests[DAILY_QUESTS[i].id] = DAILY_QUESTS[i];
+  for (var i = 0; i < WEEKLY_QUESTS.length; i++) allQuests[WEEKLY_QUESTS[i].id] = WEEKLY_QUESTS[i];
+
+  function updateList(questList) {
+    for (var i = 0; i < questList.length; i++) {
+      var q = questList[i];
+      if (q.completed) continue;
+      var def = allQuests[q.id];
+      if (!def) continue;
+
+      // 진행도 업데이트
+      if (q.id === 'play3' || q.id === 'play10') {
+        q.progress += 1;
+      } else if (q.id === 'win1' || q.id === 'win3') {
+        if (placement === 1) q.progress += 1;
+      } else if (q.id === 'trinity10') {
+        q.progress += tracker.recruits['트리니티'] || 0;
+      } else if (q.id === 'gehenna10') {
+        q.progress += tracker.recruits['게헨나'] || 0;
+      } else if (q.id === 'hyakkiyako10') {
+        q.progress += tracker.recruits['백귀야행'] || 0;
+      } else if (q.id === 'millennium10') {
+        q.progress += tracker.recruits['밀레니엄'] || 0;
+      } else if (q.id === 'kill10') {
+        q.progress += tracker.kills || 0;
+      } else if (q.id === 'discover10') {
+        q.progress += tracker.discovers || 0;
+      } else if (q.id === 'skin10') {
+        q.progress += tracker.skins || 0;
+      } else if (q.id === 'hidden1') {
+        if (tracker.hiddenCompleted) q.progress += 1;
+      } else if (q.id === 'hidden_win') {
+        if (tracker.hiddenSurvived && placement === 1) q.progress += 1;
+      }
+      // login, login3은 submitGameRecord에서 처리하지 않음 (checkLoginQuest에서 처리)
+
+      // 완료 체크
+      if (q.progress >= def.target && !q.completed) {
+        q.completed = true;
+        playerData.points += def.points;
+      }
+    }
+  }
+
+  updateList(qs.daily.quests);
+  updateList(qs.weekly.quests);
+  return playerData;
+}
+
+function checkLoginQuest() {
+  var login = window._babgLogin;
+  if (!login || !login.name) return;
+  fetchRecords(function(err, data, sha) {
+    if (err || !data) return;
+    if (!data.players) return;
+    var name = login.name;
+    if (!data.players[name]) return;
+    if (data.players[name].pw !== login.pw) return;
+    var pd = data.players[name];
+    pd = initQuestState(pd);
+
+    var today = getTodayStr();
+    // 이미 오늘 로그인 처리했는지 체크
+    if (pd.questState._lastLoginDate === today) return;
+    pd.questState._lastLoginDate = today;
+
+    // 일일 login 퀘스트 진행
+    var allQuests = {};
+    for (var i = 0; i < DAILY_QUESTS.length; i++) allQuests[DAILY_QUESTS[i].id] = DAILY_QUESTS[i];
+    for (var i = 0; i < WEEKLY_QUESTS.length; i++) allQuests[WEEKLY_QUESTS[i].id] = WEEKLY_QUESTS[i];
+
+    function processLogin(questList) {
+      for (var i = 0; i < questList.length; i++) {
+        var q = questList[i];
+        if (q.completed) continue;
+        if (q.id === 'login' || q.id === 'login3') {
+          q.progress += 1;
+          var def = allQuests[q.id];
+          if (def && q.progress >= def.target && !q.completed) {
+            q.completed = true;
+            if (!pd.points) pd.points = 0;
+            pd.points += def.points;
+          }
+        }
+      }
+    }
+    processLogin(pd.questState.daily.quests);
+    processLogin(pd.questState.weekly.quests);
+
+    data.players[name] = pd;
+    saveRecords(data, sha, function(e) {
+      if (e) console.log('로그인 퀘스트 저장 실패:', e);
+      else console.log('로그인 퀘스트 처리 완료');
+    });
+  });
+}
+
+function rerollDailyQuest(questIndex) {
+  var login = window._babgLogin;
+  if (!login || !login.name) return;
+  fetchRecords(function(err, data, sha) {
+    if (err || !data || !data.players) return;
+    var name = login.name;
+    if (!data.players[name] || data.players[name].pw !== login.pw) return;
+    var pd = data.players[name];
+    pd = initQuestState(pd);
+    var qs = pd.questState;
+    if (qs.daily.rerolled) { console.log('오늘 이미 리롤함'); return; }
+    if (questIndex < 0 || questIndex >= qs.daily.quests.length) return;
+    if (qs.daily.quests[questIndex].completed) return;
+
+    // 현재 활성 퀘스트 ID 목록
+    var activeIds = {};
+    for (var i = 0; i < qs.daily.quests.length; i++) activeIds[qs.daily.quests[i].id] = true;
+    // 대체 가능한 퀘스트 필터
+    var candidates = DAILY_QUESTS.filter(function(q) { return !activeIds[q.id]; });
+    if (candidates.length === 0) return;
+    var newQuest = candidates[Math.floor(Math.random() * candidates.length)];
+    qs.daily.quests[questIndex] = {id: newQuest.id, progress: 0, completed: false};
+    qs.daily.rerolled = true;
+
+    data.players[name] = pd;
+    saveRecords(data, sha, function(e) {
+      if (e) console.log('리롤 저장 실패:', e);
+      else console.log('퀘스트 리롤 완료');
+    });
+  });
+}
+
 // ===== 전적 기록 시스템 (GitHub API) =====
 var RECORDS_PAT='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';
 var RECORDS_REPO='preesoul/babg';
@@ -4976,19 +5241,24 @@ function submitGameRecord(){
     tier:p.tier,
     board:boardNames
   };
+  var tracker = window._questTracker || {recruits:{'트리니티':0,'게헨나':0,'백귀야행':0,'밀레니엄':0},kills:0,discovers:0,skins:0,hiddenCompleted:false,hiddenSurvived:false};
+  var placement = G.placement;
   fetchRecords(function(err,data,sha){
     if(err||!data){console.log('기록 저장 실패:',err);return;}
     if(!data.players)data.players={};
     var name=login.name;
     if(!data.players[name]){
-      data.players[name]={pw:login.pw,records:[]};
+      data.players[name]={pw:login.pw,records:[],points:0,questState:null};
     } else if(data.players[name].pw!==login.pw){
       console.log('비밀번호 불일치');return;
     }
     data.players[name].records.push(record);
+    // 퀘스트 진행도 업데이트
+    data.players[name] = initQuestState(data.players[name]);
+    data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
     saveRecords(data,sha,function(e){
       if(e)console.log('기록 저장 실패:',e);
-      else console.log('기록 저장 완료');
+      else console.log('기록 저장 완료 (퀘스트 포함)');
     });
   });
 }

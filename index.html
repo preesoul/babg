@@ -498,6 +498,21 @@ img.tutorial-highlight{border-radius:50%!important}
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
     <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">튜토리얼</span></button>
     <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">전적 기록</span></button>
+    <button class="btn btn-purple btn-big" id="btn-quests" style="margin-top:8px;min-width:200px"><span class="btn-inner">퀘스트</span></button>
+  </div>
+
+  <!-- 퀘스트 오버레이 -->
+  <div id="quest-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:700px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="color:#ffd700;margin:0">퀘스트</h2>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span id="quest-points" style="color:#fbbf24;font-size:18px;font-weight:700"></span>
+          <button class="btn btn-stone" id="btn-quest-close"><span class="btn-inner">닫기</span></button>
+        </div>
+      </div>
+      <div id="quest-content" style="color:#c0d0e0;font-size:13px">로딩 중...</div>
+    </div>
   </div>
 
   <!-- 전적 기록 오버레이 -->
@@ -2427,6 +2442,8 @@ function showRoster(){
       document.getElementById('login-status').textContent='';
     }
   }
+  // 페이지 로드 시 로그인 퀘스트 체크
+  if(window._babgLogin){try{checkLoginQuest();}catch(e){}}
 })();
 // 전적 기록 버튼
 document.getElementById('btn-records').addEventListener('click',function(){
@@ -2436,6 +2453,78 @@ document.getElementById('btn-records').addEventListener('click',function(){
 document.getElementById('btn-records-close').addEventListener('click',function(){
   document.getElementById('records-overlay').style.display='none';
 });
+// 퀘스트 버튼
+document.getElementById('btn-quests').addEventListener('click',function(){
+  if(!window._babgLogin||!window._babgLogin.name){alert('닉네임을 입력해주세요.');return;}
+  document.getElementById('quest-overlay').style.display='block';
+  renderQuestUI();
+});
+document.getElementById('btn-quest-close').addEventListener('click',function(){
+  document.getElementById('quest-overlay').style.display='none';
+});
+function renderQuestUI(){
+  var el=document.getElementById('quest-content');
+  var pts=document.getElementById('quest-points');
+  el.innerHTML='로딩 중...';
+  fetchRecords(function(err,data,sha){
+    if(err||!data){el.innerHTML='데이터를 불러올 수 없습니다.';return;}
+    var name=window._babgLogin.name;
+    if(!data.players||!data.players[name]){el.innerHTML='게임 기록이 없습니다. 먼저 게임을 플레이하세요.';pts.textContent='';return;}
+    var pd=data.players[name];
+    initQuestState(pd);
+    pts.textContent='⭐ '+(pd.points||0)+' 포인트';
+    var html='';
+    // 일일 퀘스트
+    html+='<h3 style="color:#60a5fa;margin:12px 0 8px">일일 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매일 갱신, 1일 1회 교체 가능)</span></h3>';
+    var dq=pd.questState.daily.quests;
+    var canReroll=!pd.questState.daily.rerolled;
+    for(var i=0;i<dq.length;i++){
+      var q=dq[i];var def=null;for(var j=0;j<DAILY_QUESTS.length;j++){if(DAILY_QUESTS[j].id===q.id){def=DAILY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#3b82f6')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'pt)</div></div>';
+      if(!done&&canReroll) html+='<button class="btn btn-stone" onclick="doRerollQuest('+i+',\''+sha+'\')" style="font-size:10px;padding:2px 8px"><span class="btn-inner">🔄</span></button>';
+      html+='</div>';
+    }
+    // 주간 퀘스트
+    html+='<h3 style="color:#a78bfa;margin:16px 0 8px">주간 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매주 월요일 갱신)</span></h3>';
+    var wq=pd.questState.weekly.quests;
+    for(var i=0;i<wq.length;i++){
+      var q=wq[i];var def=null;for(var j=0;j<WEEKLY_QUESTS.length;j++){if(WEEKLY_QUESTS[j].id===q.id){def=WEEKLY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#a78bfa')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'pt)</div></div>';
+      html+='</div>';
+    }
+    el.innerHTML=html;
+    // sha 저장 (reroll용)
+    window._questSha=sha;window._questData=data;
+  });
+}
+function doRerollQuest(idx,sha){
+  if(!window._babgLogin)return;
+  fetchRecords(function(err,data,latestSha){
+    if(err||!data)return;
+    var pd=data.players[window._babgLogin.name];
+    if(!pd||!pd.questState)return;
+    if(pd.questState.daily.rerolled){alert('오늘은 이미 교체했습니다.');return;}
+    var active=pd.questState.daily.quests.map(function(q){return q.id;});
+    var pool=DAILY_QUESTS.filter(function(q){return active.indexOf(q.id)===-1;});
+    if(pool.length===0)return;
+    var pick=pool[Math.floor(Math.random()*pool.length)];
+    pd.questState.daily.quests[idx]={id:pick.id,progress:0,completed:false};
+    pd.questState.daily.rerolled=true;
+    saveRecords(data,latestSha,function(){renderQuestUI();});
+  });
+}
 document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
 document.getElementById('tut-skip').addEventListener('click',tutEnd);
 document.getElementById('btn-roster').addEventListener('click',showRoster);
