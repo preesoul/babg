@@ -2,26 +2,40 @@
   "players": {
     "preesoul": {
       "pw": "aqula88",
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-05T02:01:40",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            "린",
+            "이즈나(수영복)",
+            "이즈나(수영복)",
+            "츠쿠요(드레스)",
+            "카야(쿠데타)"
+          ]
+        }
+      ],
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 22,
+              "completed": true
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -36,12 +50,12 @@
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
