@@ -1137,7 +1137,7 @@
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
+              "id": "win1",
               "progress": 0,
               "completed": false
             },
@@ -1147,7 +1147,7 @@
               "completed": true
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-03-30",
