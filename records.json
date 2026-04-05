@@ -136,6 +136,88 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T03:12:09",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 15,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 24,
+              "hp": 24,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury",
+                "reborn",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 16,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 23,
+              "hp": 21,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 15,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush",
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
       "points": 7,
@@ -145,7 +227,7 @@
           "quests": [
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -166,7 +248,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 3,
+              "progress": 5,
               "completed": false
             },
             {
@@ -176,7 +258,7 @@
             },
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             }
           ]
