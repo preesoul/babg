@@ -1166,7 +1166,7 @@ function _entranceBang(m,p){
     if(footSfx){footSfx.currentTime=0;footSfx.play().catch(function(){});}
     shakeScreen('light');
     step++;
-    setTimeout(doStep,600);
+    setTimeout(doStep,1200);
   }
   doStep();
 }
