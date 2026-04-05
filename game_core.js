@@ -1151,10 +1151,24 @@ function _entranceCardLand(m,p){
   playCardDrop(7);playRecruitVoice(m.baseId);
 }
 function _entranceBang(m,p){
-  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,255,255,0.9);pointer-events:none;z-index:9999;transition:opacity 0.35s;';
-  document.body.appendChild(fl);playSfx('attack_impact_large',0.8);shakeScreen('heavy');
-  _entranceCardLand(m,p);
-  setTimeout(function(){fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},350);},80);
+  // 쿵 2번 → 쾅 착지
+  var step=0;
+  var footSfx;try{footSfx=new Audio('sfx/mika_footstep.webm');footSfx.volume=0.5;}catch(e){}
+  function doStep(){
+    if(step>=2){
+      // 쾅 착지
+      var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,255,255,0.9);pointer-events:none;z-index:9999;transition:opacity 0.35s;';
+      document.body.appendChild(fl);playSfx('attack_impact_large',0.8);shakeScreen('heavy');
+      _entranceCardLand(m,p);
+      setTimeout(function(){fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},350);},80);
+      return;
+    }
+    if(footSfx){footSfx.currentTime=0;footSfx.play().catch(function(){});}
+    shakeScreen('light');
+    step++;
+    setTimeout(doStep,600);
+  }
+  doStep();
 }
 function _entranceGlow(m,p){
   var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
