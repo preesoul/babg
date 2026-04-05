@@ -587,6 +587,81 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T12:49:31",
+          "placement": 8,
+          "turn": 12,
+          "tier": 5,
+          "board": [
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 19,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이치카(수영복)",
+              "baseId": "ichika",
+              "atk": 7,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ichika_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마시로",
+              "baseId": "mashiro",
+              "atk": 4,
+              "hp": 2,
+              "tier": 2,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Mashiro.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 7,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 3,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
       "points": 1,
