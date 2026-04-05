@@ -22,10 +22,10 @@
           "turn": 16,
           "tier": 6,
           "board": [
-            "아즈사(수영복)",
-            "네루",
-            "카야(쿠데타)",
-            "린(승무원)"
+            {"name":"아즈사(수영복)","baseId":"azusa","atk":46,"hp":46,"tier":4,"kw":["ambush"],"isSkin":true,"img":"Azusa_(Swimsuit).png","school":"트리니티"},
+            {"name":"네루","baseId":"neru","atk":19,"hp":20,"tier":5,"kw":["shield","survive","ambush"],"isSkin":false,"img":"Neru.png","school":"밀레니엄"},
+            {"name":"카야(쿠데타)","baseId":"kaya","atk":26,"hp":26,"tier":5,"kw":[],"isSkin":true,"img":"Kaya_(Coup).png","school":"총학생회"},
+            {"name":"린(승무원)","baseId":"lin","atk":16,"hp":19,"tier":6,"kw":[],"isSkin":true,"img":"Lin_(flight).png","school":"총학생회"}
           ]
         }
       ],
