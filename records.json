@@ -405,6 +405,74 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T10:41:12",
+          "placement": 4,
+          "turn": 15,
+          "tier": 5,
+          "board": [
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 9,
+              "hp": 10,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 19,
+              "hp": 17,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 20,
+              "hp": 17,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
       "points": 33,
@@ -445,7 +513,7 @@
             },
             {
               "id": "play10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             }
           ]
