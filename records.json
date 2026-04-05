@@ -375,7 +375,7 @@
           ]
         }
       ],
-      "points": 53,
+      "points": 33,
       "questState": {
         "daily": {
           "date": "2026-04-05",
@@ -423,7 +423,9 @@
       "unlockedAbydos": [
         "serika",
         "hoshino",
-        "shiroko"
+        "shiroko",
+        "nonomi",
+        "ayane"
       ]
     },
     "쿼츠": {
