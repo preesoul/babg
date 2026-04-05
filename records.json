@@ -1294,9 +1294,63 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T17:29:45",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "이부키(수영복)",
+              "baseId": "ibuki",
+              "atk": 13,
+              "hp": 15,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ibuki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 26,
+              "hp": 26,
+              "tier": 6,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 16,
+              "hp": 10,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "주리",
+              "baseId": "juri",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Juri.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 18,
+      "points": 35,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1313,8 +1367,8 @@
             },
             {
               "id": "gehenna10",
-              "progress": 6,
-              "completed": false
+              "progress": 17,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -1324,13 +1378,13 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "hidden_win",
