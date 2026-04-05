@@ -557,7 +557,9 @@ var POOL_COPIES = {1:12,2:10,3:8,4:6,5:5,6:4,7:1};
 
 function initPool() {
   var pool={};
+  var unlocked=getUnlockedAbydos();
   for(var i=0;i<CHARS.length;i++){
+    if(CHARS[i].locked && unlocked.indexOf(CHARS[i].id)===-1) continue;
     var copies=POOL_COPIES[CHARS[i].tier]||10;
     if(CHARS[i].school==='총학생회') copies=Math.round(copies*0.7);
     pool[CHARS[i].id]=copies;
@@ -1557,13 +1559,16 @@ function getDiscoverChoices(p) {
     return res;
   }
   var discoverTier = Math.min(p.tier + 1, 6);
+  var unlocked=getUnlockedAbydos();
   var candidates = [];
   for(var i=0;i<CHARS.length;i++){
+    if(CHARS[i].locked && unlocked.indexOf(CHARS[i].id)===-1) continue;
     if(CHARS[i].tier === discoverTier && G.pool[CHARS[i].id] > 0) candidates.push(CHARS[i]);
   }
   // 풀에 없으면 현재 등급에서
   if(candidates.length === 0){
     for(var i=0;i<CHARS.length;i++){
+      if(CHARS[i].locked && unlocked.indexOf(CHARS[i].id)===-1) continue;
       if(CHARS[i].tier === p.tier && G.pool[CHARS[i].id] > 0) candidates.push(CHARS[i]);
     }
   }
