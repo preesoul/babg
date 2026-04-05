@@ -2816,9 +2816,80 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T23:40:43",
+          "placement": 8,
+          "turn": 9,
+          "tier": 4,
+          "board": [
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 11,
+              "hp": 3,
+              "tier": 4,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "모모이",
+              "baseId": "momoi",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "모모이",
+              "baseId": "momoi",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 9,
+              "hp": 5,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 7,
+              "hp": 3,
+              "tier": 4,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2830,8 +2901,8 @@
             },
             {
               "id": "skin3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "gehenna10",
@@ -2846,7 +2917,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
@@ -2856,7 +2927,7 @@
             },
             {
               "id": "discover10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
