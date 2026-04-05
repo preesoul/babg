@@ -1268,6 +1268,9 @@ var HIDDEN_CARD_ENTRANCE = {
   gehenna_p68: function(m,p){_entranceDark(m,p);},
   millennium_seminar: function(m,p){_entranceDark(m,p);},
 
+  // === 산해경 ===
+  shanhai_kiki: function(m,p){_entranceGlow(m,p);},
+
   trinity_mika: function(m,p){
     var footSfx=new Audio('sfx/mika_footstep.webm');
     footSfx.volume=0.5;
@@ -1409,7 +1412,11 @@ var RECRUIT_VOICES = {
   millennium_seminar: 'audio/millennium_seminar.mp3',
   hkyk_saikyo: 'audio/hovercraft.mp3',
   hkyk_kuzunoha: 'audio/hkyk_kuzunoha.mp3',
-  gehenna_p68: 'audio/gehenna_p68.mp3'
+  gehenna_p68: 'audio/gehenna_p68.mp3',
+  kisaki: 'audio/kisaki.mp3',
+  rumi: 'audio/rumi.mp3',
+  shun: 'audio/shun.mp3',
+  shanhai_kiki: 'audio/shanhai_kiki.mp3'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
