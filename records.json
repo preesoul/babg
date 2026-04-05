@@ -291,9 +291,91 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T04:35:36",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 16,
+              "hp": 20,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 14,
+              "hp": 14,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 8,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 14,
+              "hp": 12,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 16,
+              "hp": 20,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 8,
+      "points": 13,
       "questState": {
         "daily": {
           "date": "2026-04-05",
@@ -321,8 +403,8 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 7,
-              "completed": false
+              "progress": 11,
+              "completed": true
             },
             {
               "id": "discover10",
@@ -331,7 +413,7 @@
             },
             {
               "id": "play10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             }
           ]
