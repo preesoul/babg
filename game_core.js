@@ -4169,7 +4169,7 @@ function startBattle() {
   _activeCoinOverlay=null;
   var p=G.players[0];
   // 세리카 패시브: 영입 페이즈 종료 시 남은 청휘석을 모두 소비하여 공/체에 영구 추가
-  if(!SANDBOX&&p.stone>0){
+  if(p.stone>0){
     var _hasSerika=false;
     for(var _sk=0;_sk<p.board.length;_sk++){
       if(p.board[_sk].baseId==='serika'){_hasSerika=true;break;}
