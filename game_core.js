@@ -574,12 +574,16 @@ var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona',
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
-// 해방된 카드 목록 (localStorage)
+// 해방된 카드 목록 (localStorage, 계정별)
+function _unlockKey(){
+  var name=(window._babgLogin&&window._babgLogin.name)||'';
+  return name?'babg_unlocked_'+name:ABYDOS_UNLOCK_KEY;
+}
 function getUnlockedAbydos() {
-  try { return JSON.parse(localStorage.getItem(ABYDOS_UNLOCK_KEY)||'[]'); } catch(e){return [];}
+  try { return JSON.parse(localStorage.getItem(_unlockKey())||'[]'); } catch(e){return [];}
 }
 function setUnlockedAbydos(arr) {
-  try { localStorage.setItem(ABYDOS_UNLOCK_KEY, JSON.stringify(arr)); } catch(e){}
+  try { localStorage.setItem(_unlockKey(), JSON.stringify(arr)); } catch(e){}
 }
 // 마지막으로 fetch된 엘리그마 포인트 캐시 (renderAll 표시용)
 function getEnigmaPoints() { return window._enigmaPointsCache||0; }
