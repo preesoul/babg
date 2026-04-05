@@ -1283,7 +1283,7 @@
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
+              "id": "login",
               "progress": 0,
               "completed": false
             },
@@ -1293,7 +1293,7 @@
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-04-06",
