@@ -5322,7 +5322,9 @@ function renderRecords(){
             } else {
               // 신버전 기록 (상세 데이터)
               var borderColor=u.isSkin?'#c8a010':(['#6a8090','#3a8a4a','#3070cc','#7a50c0','#c88a10','#cc3030','#c030d0'][u.tier-1]||'#3a5a6e');
-              html+='<div style="width:80px;background:#1e2d3d;border:2px solid '+borderColor+';border-radius:4px;overflow:hidden;text-align:center;font-size:10px">';
+              var uData=JSON.stringify(u).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+              html+='<div onclick="showRecordCardPopup(this)" data-card="'+uData+'" style="width:80px;background:#1e2d3d;border:2px solid '+borderColor+';border-radius:4px;overflow:hidden;text-align:center;font-size:10px;cursor:pointer;position:relative">';
+              html+='<div style="position:absolute;top:1px;left:2px;font-size:8px;color:#ffd700;z-index:1;text-shadow:0 1px 2px rgba(0,0,0,0.8)">★'+u.tier+'</div>';
               if(u.img) html+='<div style="height:60px;overflow:hidden;position:relative"><img src="img/'+u.img+'" style="width:100%;height:auto;position:absolute;top:-5px;left:0" onerror="this.style.display=\'none\'"></div>';
               html+='<div style="padding:2px 3px;background:rgba(0,0,0,0.6);color:#e0eaf4;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+u.name+'</div>';
               html+='<div style="display:flex;justify-content:space-between;padding:2px 4px;background:rgba(0,0,0,0.4)"><span style="color:#5ab0e8;font-weight:900">'+u.atk+'</span><span style="color:#e04040;font-weight:900">'+u.hp+'</span></div>';
@@ -5336,6 +5338,52 @@ function renderRecords(){
     }
     el.innerHTML=html;
   });
+}
+
+function showRecordCardPopup(el){
+  var u=JSON.parse(el.getAttribute('data-card'));
+  var borderColor=u.isSkin?'#c8a010':(['#6a8090','#3a8a4a','#3070cc','#7a50c0','#c88a10','#cc3030','#c030d0'][u.tier-1]||'#3a5a6e');
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;z-index:700;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;cursor:pointer';
+  overlay.addEventListener('click',function(){overlay.remove();});
+  var card=document.createElement('div');
+  card.style.cssText='width:220px;background:#1e2d3d;border:3px solid '+borderColor+';border-radius:8px;overflow:hidden;text-align:center;cursor:default';
+  card.addEventListener('click',function(e){e.stopPropagation();});
+  var html='';
+  if(u.img) html+='<div style="height:180px;overflow:hidden;position:relative"><img src="img/'+u.img+'" style="width:100%;height:auto;position:absolute;top:0;left:0"></div>';
+  html+='<div style="padding:6px 8px;background:rgba(0,0,0,0.6)">';
+  html+='<div style="color:#ffd700;font-size:12px;margin-bottom:2px">★'.repeat(u.tier)+' '+(u.school||'')+'</div>';
+  html+='<div style="color:#e0eaf4;font-size:16px;font-weight:700;margin-bottom:4px">'+u.name+'</div>';
+  // 키워드
+  var kwLabels={taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',ambush:'기습',invincible:'무적'};
+  if(u.kw&&u.kw.length>0){
+    html+='<div style="margin-bottom:4px">';
+    for(var k=0;k<u.kw.length;k++){html+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(180,210,230,0.3);border:1px solid rgba(200,225,240,0.5);color:#f0f8ff;font-size:11px">'+(kwLabels[u.kw[k]]||u.kw[k])+'</span>';}
+    html+='</div>';
+  }
+  // 능력 태그
+  var bid=u.baseId||'';
+  var aTags='';
+  if(BC_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(59,130,246,0.2);color:#93c5fd;border:1px solid rgba(59,130,246,0.4);font-size:11px">첫인사</span>';
+  if(DR_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);font-size:11px">뒤끝</span>';
+  if(SOC_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(251,191,36,0.2);color:#fde68a;border:1px solid rgba(251,191,36,0.4);font-size:11px">개전</span>';
+  if(PASSIVE_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4);font-size:11px">패시브</span>';
+  if(PRE_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);font-size:11px">선제</span>';
+  if(SURV_IDS[bid]) aTags+='<span style="display:inline-block;padding:1px 6px;margin:1px;border-radius:4px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4);font-size:11px">버티기</span>';
+  if(aTags) html+='<div style="margin-bottom:4px">'+aTags+'</div>';
+  // 능력 설명
+  var desc=ABILITY_DESCS[bid];
+  if(desc&&desc.desc) html+='<div style="font-size:11px;color:#8ab4d8;text-align:left;padding:4px 0;border-top:1px solid #2a3a4a;margin-top:4px;white-space:pre-line">'+desc.desc+'</div>';
+  if(desc&&u.isSkin&&desc.skinEffect) html+='<div style="font-size:10px;color:#ffd700;text-align:left;margin-top:2px">'+desc.skinEffect+'</div>';
+  html+='</div>';
+  // 스탯
+  html+='<div style="display:flex;justify-content:space-between;padding:6px 12px;background:rgba(0,0,0,0.5)">';
+  html+='<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#084a6a,#0a6a88);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:900">'+u.atk+'</div>';
+  html+='<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#8a2020,#c03030);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:900">'+u.hp+'</div>';
+  html+='</div>';
+  card.innerHTML=html;
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
 }
 
 // ===== 자가대전 온라인 학습 시스템 =====
