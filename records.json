@@ -22,21 +22,130 @@
           "turn": 16,
           "tier": 6,
           "board": [
-            {"name":"아즈사(수영복)","baseId":"azusa","atk":46,"hp":46,"tier":4,"kw":["ambush"],"isSkin":true,"img":"Azusa_(Swimsuit).png","school":"트리니티"},
-            {"name":"네루","baseId":"neru","atk":19,"hp":20,"tier":5,"kw":["shield","survive","ambush"],"isSkin":false,"img":"Neru.png","school":"밀레니엄"},
-            {"name":"카야(쿠데타)","baseId":"kaya","atk":26,"hp":26,"tier":5,"kw":[],"isSkin":true,"img":"Kaya_(Coup).png","school":"총학생회"},
-            {"name":"린(승무원)","baseId":"lin","atk":16,"hp":19,"tier":6,"kw":[],"isSkin":true,"img":"Lin_(flight).png","school":"총학생회"}
+            {
+              "name": "아즈사(수영복)",
+              "baseId": "azusa",
+              "atk": 46,
+              "hp": 46,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Azusa_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 19,
+              "hp": 20,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 26,
+              "hp": 26,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "린(승무원)",
+              "baseId": "lin",
+              "atk": 16,
+              "hp": 19,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Lin_(flight).png",
+              "school": "총학생회"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T02:58:17",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코(드레스)",
+              "baseId": "ako",
+              "atk": 27,
+              "hp": 31,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ako_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 37,
+              "hp": 17,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 37,
+              "hp": 17,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            }
           ]
         }
       ],
-      "points": 2,
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -57,17 +166,17 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 1,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "discover10",
-              "progress": 9,
-              "completed": false
+              "progress": 13,
+              "completed": true
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
