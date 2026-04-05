@@ -1460,7 +1460,7 @@
           ]
         }
       ],
-      "points": 39,
+      "points": 29,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1515,7 +1515,8 @@
         }
       },
       "unlockedAbydos": [
-        "rumi"
+        "rumi",
+        "himari"
       ]
     },
     "도도새": {
