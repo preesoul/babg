@@ -218,17 +218,90 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T03:38:32",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아스나",
+              "baseId": "asuna",
+              "atk": 7,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Asuna.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 29,
+              "hp": 31,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 11,
+              "hp": 15,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 15,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -248,7 +321,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 5,
+              "progress": 7,
               "completed": false
             },
             {
@@ -258,7 +331,7 @@
             },
             {
               "id": "play10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             }
           ]
