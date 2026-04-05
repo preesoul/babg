@@ -1222,7 +1222,7 @@ var HIDDEN_CARD_ENTRANCE = {
   gehenna_prefect: function(m,p){_entranceBang(m,p);},
   gehenna_pandemonium: function(m,p){_entranceBang(m,p);},
   millennium_death_momoi: function(m,p){_entranceBang(m,p);},
-  hovercraft: function(m,p){_entranceBang(m,p);},
+  hkyk_saikyo: function(m,p){_entranceBang(m,p);},
   trinity_justice: function(m,p){_entranceBang(m,p);},
   millennium_cc: function(m,p){_entranceBang(m,p);},
   // === 금빛 밝아짐 (5초) ===
@@ -1376,7 +1376,7 @@ var RECRUIT_VOICES = {
   millennium_death_momoi: 'audio/millennium_death_momoi.mp3',
   millennium_cc: 'audio/millennium_cc.mp3',
   millennium_seminar: 'audio/millennium_seminar.mp3',
-  hovercraft: 'audio/hovercraft.mp3',
+  hkyk_saikyo: 'audio/hovercraft.mp3',
   hkyk_kuzunoha: 'audio/hkyk_kuzunoha.mp3',
   gehenna_p68: 'audio/gehenna_p68.mp3'
 };
