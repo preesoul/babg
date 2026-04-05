@@ -423,16 +423,74 @@
     },
     "쿼츠": {
       "pw": "0903",
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-05T05:36:33",
+          "placement": 3,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "와카모",
+              "baseId": "wakamo",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Wakamo.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "보충수업부",
+              "baseId": "trinity_makeup",
+              "atk": 43,
+              "hp": 45,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Make_Up_Work_Club.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "린(승무원)",
+              "baseId": "lin",
+              "atk": 25,
+              "hp": 24,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Lin_(flight).png",
+              "school": "총학생회"
+            }
+          ]
+        }
+      ],
+      "points": 1,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "trinity10",
-              "progress": 0,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "gehenna10",
@@ -441,7 +499,7 @@
             },
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
