@@ -587,6 +587,204 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T12:49:31",
+          "placement": 8,
+          "turn": 12,
+          "tier": 5,
+          "board": [
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 19,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이치카(수영복)",
+              "baseId": "ichika",
+              "atk": 7,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ichika_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마시로",
+              "baseId": "mashiro",
+              "atk": 4,
+              "hp": 2,
+              "tier": 2,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Mashiro.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 7,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 3,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T12:53:37",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 3,
+              "hp": 3,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 6,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T13:00:52",
+          "placement": 7,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 13,
+              "hp": 3,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "정의실현부",
+              "baseId": "trinity_justice",
+              "atk": 55,
+              "hp": 45,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Justice_Task_Force.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
       "points": 1,
@@ -601,12 +799,12 @@
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "millennium10",
-              "progress": 2,
+              "progress": 5,
               "completed": false
             }
           ],
