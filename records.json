@@ -1460,7 +1460,7 @@
           ]
         }
       ],
-      "points": 49,
+      "points": 39,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1513,7 +1513,10 @@
             }
           ]
         }
-      }
+      },
+      "unlockedAbydos": [
+        "rumi"
+      ]
     },
     "도도새": {
       "pw": "3778",
