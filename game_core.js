@@ -1957,7 +1957,7 @@ function _doBC(m, p) {
   // ===== 산해경 첫인사 =====
   else if(id==='kokona'){
     // 코코나: 무작위 산해경 학생 소환 (스케쥴 레벨 이하)
-    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.id!=='kokona'&&c.tier<=p.tier;});
+    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier;});
     var unlockedAby=getUnlockedAbydos();
     shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
     if(shChars.length>0&&p.board.length<MAX_BOARD){
@@ -3160,7 +3160,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     // 루미 개전: 자신의 기본능력을 아군 1인(스킨:2인)에게 복사
     var rumiKw=u.kw.filter(function(k){return k!=='survive'&&k!=='preemptive';});
     if(rumiKw.length>0){
-      var rumiCands=[];for(var _ri=0;_ri<mySide.length;_ri++){if(mySide[_ri].alive&&mySide[_ri]!==u)rumiCands.push(mySide[_ri]);}
+      var rumiCands=[];for(var _ri=0;_ri<mySide.length;_ri++){if(mySide[_ri].alive&&mySide[_ri]!==u&&!mySide[_ri].abilityImmune)rumiCands.push(mySide[_ri]);}
       var rumiCount=u.isSkin?2:1;
       for(var _rc=0;_rc<rumiCount&&rumiCands.length>0;_rc++){
         var _rIdx=Math.floor(Math.random()*rumiCands.length);
@@ -4251,6 +4251,22 @@ function runBattle(boardA, boardB, startWithA, opts) {
       steps.push({atkSide:null,atkIdx:-1,defSide:null,defIdx:-1,log:socLog,snap:snapshot()});
     }
   }
+
+  // 키키 패시브: 아군 전체 5/5 이하로 제한 (개전 후 적용)
+  function applyKikiCap(side){
+    var hasKiki=false;
+    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='shanhai_kiki'){hasKiki=true;break;}}
+    if(hasKiki){
+      for(var i=0;i<side.length;i++){
+        if(side[i].alive&&side[i].baseId!=='shanhai_kiki'){
+          if(side[i].atk>5)side[i].atk=5;
+          if(side[i].hp>5)side[i].hp=5;
+          if(side[i].maxHp>5)side[i].maxHp=5;
+        }
+      }
+    }
+  }
+  applyKikiCap(a);applyKikiCap(b);
 
   // 공격 순서: 전체 배열에서 위치 포인터를 유지하고, 죽은 유닛은 건너뜀
   function findNextAttacker(arr, startPos){
