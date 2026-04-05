@@ -4252,21 +4252,20 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
   }
 
-  // 키키 패시브: 아군 전체 5/5 이하로 제한 (개전 후 적용)
-  function applyKikiCap(side){
-    var hasKiki=false;
-    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='shanhai_kiki'){hasKiki=true;break;}}
-    if(hasKiki){
-      for(var i=0;i<side.length;i++){
-        if(side[i].alive&&side[i].baseId!=='shanhai_kiki'){
-          if(side[i].atk>5)side[i].atk=5;
-          if(side[i].hp>5)side[i].hp=5;
-          if(side[i].maxHp>5)side[i].maxHp=5;
-        }
+  // 키키 패시브: 필드 전체 5/5 이하로 제한 (개전 후 적용, 키키 본인 제외)
+  var _kikiOnField=false;
+  for(var _kk=0;_kk<a.length;_kk++){if(a[_kk].alive&&a[_kk].baseId==='shanhai_kiki'){_kikiOnField=true;break;}}
+  if(!_kikiOnField){for(var _kk=0;_kk<b.length;_kk++){if(b[_kk].alive&&b[_kk].baseId==='shanhai_kiki'){_kikiOnField=true;break;}}}
+  if(_kikiOnField){
+    var _both=a.concat(b);
+    for(var _kk=0;_kk<_both.length;_kk++){
+      if(_both[_kk].alive&&_both[_kk].baseId!=='shanhai_kiki'){
+        if(_both[_kk].atk>5)_both[_kk].atk=5;
+        if(_both[_kk].hp>5)_both[_kk].hp=5;
+        if(_both[_kk].maxHp>5)_both[_kk].maxHp=5;
       }
     }
   }
-  applyKikiCap(a);applyKikiCap(b);
 
   // 공격 순서: 전체 배열에서 위치 포인터를 유지하고, 죽은 유닛은 건너뜀
   function findNextAttacker(arr, startPos){
