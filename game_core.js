@@ -4416,6 +4416,11 @@ function startBattle() {
           }
         }
       }
+      // 시로코 테러 DR 체크: 복원 전에 플래그 저장
+      var _stDRFired=false;
+      for(var _sti=0;_sti<p.board.length;_sti++){
+        if(p.board[_sti].baseId==='Shiroko_Terror'&&p.board[_sti]._shirokoTerrorDRFired){_stDRFired=true;break;}
+      }
       restoreBoardFromSnapshot(p,boardSnapshot);
       // 시로코 패시브: 이번 전투 킬 수만큼 다음 턴 청휘석
       if(G._shirokoKillsThisBattle>0){
@@ -4428,17 +4433,19 @@ function startBattle() {
         G._ayaneDeathsThisBattle=0;
       }
       // 시로코 테러 DR: 뒤끝 발동 시 흡수된 학생들 보드 귀환
-      for(var _sti=0;_sti<p.board.length;_sti++){
-        if(p.board[_sti].baseId==='Shiroko_Terror'&&p.board[_sti]._shirokoTerrorDRFired){
-          p.board.splice(_sti,1); // ST 제거
-          if(G._shirokoTerrorAbsorbed&&G._shirokoTerrorAbsorbed.length>0){
-            for(var _sj=0;_sj<G._shirokoTerrorAbsorbed.length;_sj++){
-              if(p.board.length<MAX_BOARD) p.board.push(G._shirokoTerrorAbsorbed[_sj]);
+      if(_stDRFired){
+        for(var _sti=0;_sti<p.board.length;_sti++){
+          if(p.board[_sti].baseId==='Shiroko_Terror'){
+            p.board.splice(_sti,1);
+            if(G._shirokoTerrorAbsorbed&&G._shirokoTerrorAbsorbed.length>0){
+              for(var _sj=0;_sj<G._shirokoTerrorAbsorbed.length;_sj++){
+                if(p.board.length<MAX_BOARD) p.board.push(G._shirokoTerrorAbsorbed[_sj]);
+              }
+              G._shirokoTerrorAbsorbed=[];
+              G.nonomiStoneSinceJoined=0;
             }
-            G._shirokoTerrorAbsorbed=[];
-            G.nonomiStoneSinceJoined=0;
+            break;
           }
-          break;
         }
       }
       G.bunnyTossBonus=0; // 바니 토스 전투 후 리셋
