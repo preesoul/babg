@@ -475,50 +475,59 @@
           ]
         }
       ],
-      "points": 123,
+      "points": 125,
       "questState": {
         "daily": {
-          "date": "2026-04-05",
+          "date": "2026-04-06",
           "quests": [
             {
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
+            },
+            {
               "id": "play3",
-              "progress": 3,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 22,
-              "completed": true
-            },
-            {
-              "id": "win1",
+              "id": "login",
               "progress": 1,
               "completed": true
             }
           ],
-          "rerolled": true
+          "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-03-30",
+          "weekStart": "2026-04-06",
           "quests": [
             {
-              "id": "skin10",
-              "progress": 11,
-              "completed": true
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "win3",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "discover10",
-              "progress": 13,
-              "completed": true
-            },
-            {
-              "id": "play10",
-              "progress": 8,
+              "progress": 0,
               "completed": false
             }
           ]
         },
-        "_lastLoginDate": "2026-04-05"
+        "_lastLoginDate": "2026-04-06",
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play3",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
       },
       "unlockedAbydos": [
         "ayane",
