@@ -1045,46 +1045,263 @@
     },
     "Prenguin": {
       "pw": "aqula88!",
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-05T14:37:05",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "정의실현부",
+              "baseId": "trinity_justice",
+              "atk": 37,
+              "hp": 27,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Justice_Task_Force.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "정의실현부",
+              "baseId": "trinity_justice",
+              "atk": 37,
+              "hp": 27,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Justice_Task_Force.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T14:45:45",
+          "placement": 4,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "나구사(수영복)",
+              "baseId": "nagusa",
+              "atk": 11,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Nagusa_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 8,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 4,
+              "hp": 4,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            }
+          ]
+        },
+        {
+          "date": "2026-04-05T14:55:24",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 12,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 5,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 45,
+              "hp": 35,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 0,
-              "completed": false
+              "id": "win1",
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 52,
+              "completed": true
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-03-30",
           "quests": [
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 7,
               "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -1099,7 +1316,10 @@
           ]
         },
         "_lastLoginDate": "2026-04-05"
-      }
+      },
+      "unlockedAbydos": [
+        "rumi"
+      ]
     }
   }
 }
