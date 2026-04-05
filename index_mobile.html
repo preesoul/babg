@@ -647,7 +647,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .roster-filter:focus{border-color:#3a9abf}
 .roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:155px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
 .roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
-.roster-card:hover{filter:brightness(1.2)}
+.roster-card:hover{filter:brightness(1.2)}.roster-card[data-locked]:hover{filter:none;opacity:1}.roster-card[data-locked]:hover .r-portrait{filter:none}
 .r-portrait{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .r-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.82);color:#e0e8f0;font-size:9px;font-weight:700;text-align:center;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:600px){.roster-card{width:78px}.rt-sep{height:117px}}
@@ -2716,7 +2716,7 @@ function renderRoster(){
         var isLocked=c.locked&&_unlockedAby.indexOf(c.id)===-1;
         if(isLocked){
           html+='<div class="roster-card rt'+c.tier+'" data-locked="1" style="opacity:0.6;cursor:pointer">';
-          html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s" onmouseenter="this.style.filter=\'none\'" onmouseleave="this.style.filter=\'grayscale(1)\'">';
+          html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
           html+='<div class="r-name" style="color:#666">???</div>';
         } else {
           html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
