@@ -2716,7 +2716,7 @@ function renderRoster(){
         var isLocked=c.locked&&_unlockedAby.indexOf(c.id)===-1;
         if(isLocked){
           html+='<div class="roster-card rt'+c.tier+'" data-locked="1" style="opacity:0.6;cursor:pointer">';
-          html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain">';
+          html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s" onmouseenter="this.style.filter=\'none\'" onmouseleave="this.style.filter=\'grayscale(1)\'">';
           html+='<div class="r-name" style="color:#666">???</div>';
         } else {
           html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
