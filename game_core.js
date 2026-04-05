@@ -581,9 +581,9 @@ function doMysteryUnlock() {
     setUnlockedAbydos(unlocked);
     saveRecords(data,sha,function(){
       window._enigmaPointsCache=pd.points;
-      var pickedName=pick,pickedImg='';
-      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;break;}}
-      if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg);
+      var pickedName=pick,pickedImg='',pickedSchool='';
+      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;pickedSchool=CHARS[i].school||'';break;}}
+      if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool);
       else alert('[신비해방] '+pickedName+' 해방!');
       if(typeof renderQuestUI==='function') renderQuestUI();
       if(typeof renderAll==='function') renderAll();

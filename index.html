@@ -2559,13 +2559,14 @@ document.getElementById('btn-quest-close').addEventListener('click',function(){
   playSfx('ui_close',0.4);
   document.getElementById('quest-overlay').style.display='none';
 });
-function showUnlockPopup(name,img){
+function showUnlockPopup(name,img,school){
   var overlay=document.getElementById('unlock-popup-overlay');
   var inner=document.getElementById('unlock-popup-inner');
   document.getElementById('unlock-popup-img').src='img/'+img;
   var particle='이';
   if(name){var last=name.charCodeAt(name.length-1);if(last>=0xAC00&&last<=0xD7A3){particle=((last-0xAC00)%28===0)?'가':'이';}}
-  document.getElementById('unlock-popup-text').innerHTML=name+particle+' 신비 해방되었습니다!<br><span style="font-size:14px;color:#c4b5fd">학생명부에서 확인해 보세요!</span>';
+  var hl='<span style="color:#ffd700;font-weight:700">';
+  document.getElementById('unlock-popup-text').innerHTML=hl+(school||'')+'</span>의 '+hl+name+'</span>'+particle+' 신비 해방되었습니다!<br><span style="font-size:14px;color:#c4b5fd">학생명부에서 확인해 보세요!</span>';
   inner.style.animation='none';inner.offsetHeight;inner.style.animation='unlockSpin 0.7s ease-out forwards';
   overlay.style.display='flex';
   try{var snd=new Audio('sfx/victory_screen_start.ogg');snd.volume=0.5;snd.play();}catch(e){}
