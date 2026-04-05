@@ -462,7 +462,7 @@ img.tutorial-highlight{border-radius:50%!important}
 .roster-filter:focus{border-color:#3a9abf}
 .roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:155px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
 .roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
-.roster-card:hover{filter:brightness(1.2)}.roster-card[data-locked]:hover{filter:none;opacity:1}.roster-card[data-locked]:hover .r-portrait{filter:none}
+.roster-card:hover{filter:brightness(1.2)}.roster-card[data-locked]{transition:opacity 0.3s}.roster-card[data-locked]:hover{filter:none!important;opacity:1!important}.roster-card[data-locked]:hover .r-portrait{filter:none!important}
 .r-portrait{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .r-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.82);color:#e0e8f0;font-size:9px;font-weight:700;text-align:center;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:600px){
@@ -648,7 +648,7 @@ img.tutorial-highlight{border-radius:50%!important}
         <div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div>
         <div class="shop-row" id="ui-shop"></div>
         <div class="stone-display" id="ui-stone"><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
-        <div class="enigma-display" id="ui-enigma">엘리그마 <span id="enigma-count">0</span>P</div>
+        <div class="enigma-display" id="ui-enigma" style="display:none">엘리그마 <span id="enigma-count">0</span>P</div>
         <div class="shop-actions">
           <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
           <button class="btn btn-blue" id="btn-freeze"><span class="btn-inner">스케쥴 고정</span></button>
