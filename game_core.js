@@ -960,7 +960,7 @@ function applyPendingSpell(idx) {
 
 function showSchoolSelect() {
   var overlay=document.getElementById('battle-overlay');
-  var schools=['게헨나','밀레니엄','트리니티','백귀야행','총학생회'];
+  var schools=['게헨나','밀레니엄','트리니티','백귀야행','아비도스','총학생회'];
   var html='<div class="battle-intro"><h3 style="margin-bottom:16px">학교를 선택하세요</h3>';
   for(var i=0;i<schools.length;i++) html+='<button class="btn btn-blue school-pick" data-school="'+schools[i]+'" style="margin:4px 8px;padding:10px 24px;font-size:16px">'+schools[i]+'</button>';
   html+='</div>';
