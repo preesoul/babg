@@ -331,11 +331,11 @@ var ABILITY_DESCS = {
   kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 2배로 적용하여 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 네 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 <span style="color:#ffd700;font-weight:700">네 배로</span> 적용하여 흡수합니다.\n(가장 마지막에 발동)'},
   lin:      {type:'패시브',desc:'아군의 뒤끝과 첫인사가\n한 번 더 발동합니다.',skinEffect:'승무원 린: 두 번 더 발동',skinEffectDesc:'패시브: 아군의 뒤끝과 첫인사가\n<span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   // ===== 아비도스 =====
-  ayane:    {type:'뒤끝',desc:'다음 턴 청휘석 +1',skinEffect:'수영복 아야네: 동일',skinEffectDesc:'뒤끝: 다음 턴 청휘석 +1'},
-  serika:   {type:'패시브',desc:'영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 더합니다.',skinEffect:'수영복 세리카: 동일'},
-  nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 동일'},
-  shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 동일'},
-  hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 동일'},
+  ayane:    {type:'뒤끝',desc:'다음 턴 청휘석 +1',skinEffect:'수영복 아야네: +2돌',skinEffectDesc:'뒤끝: 다음 턴 청휘석 <span style="color:#ffd700;font-weight:700">+2</span>'},
+  serika:   {type:'패시브',desc:'영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 더합니다.',skinEffect:'수영복 세리카: 두 배로 공/체',skinEffectDesc:'패시브: 영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 <span style="color:#ffd700;font-weight:700">두 배로</span> 더합니다.'},
+  nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 나누지 않고 그대로',skinEffectDesc:'개전: 노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을,\n맨 왼쪽 학생의 공/체에 각각 <span style="color:#ffd700;font-weight:700">그대로</span> 더합니다.'},
+  shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 두 배로 돌',skinEffectDesc:'패시브: 전투 중 시로코가 쓰러뜨린 적의 수의 <span style="color:#ffd700;font-weight:700">두 배</span>만큼,\n다음 턴 청휘석을 얻습니다.'},
+  hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
@@ -2849,7 +2849,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   else if(id==='nonomi'){
     // 노노미 개전: 샬레에 존재한 이후 소비된 청휘석 / 2 (내림)를 맨 왼쪽 학생 공/체에 추가
-    var nonomiStone=Math.floor((_G.nonomiStoneSinceJoined||0)/2);
+    var nonomiStone=u.isSkin?(_G.nonomiStoneSinceJoined||0):Math.floor((_G.nonomiStoneSinceJoined||0)/2);
     if(nonomiStone>0&&mySide.length>0){
       var leftmost=null;
       for(var _nli=0;_nli<mySide.length;_nli++){if(mySide[_nli].alive){leftmost=mySide[_nli];break;}}
@@ -3370,15 +3370,17 @@ function _doDR(unit, mySide, otherSide, log) {
   // ===== 아비도스 뒤끝 =====
   else if(id==='ayane'){
     // 아야네 뒤끝: 다음 턴 청휘석 +1
-    _G._ayaneDeathsThisBattle=(_G._ayaneDeathsThisBattle||0)+1;
+    _G._ayaneDeathsThisBattle=(_G._ayaneDeathsThisBattle||0)+(unit.isSkin?2:1);
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다음 턴 청휘석 +1!'});
   }
   else if(id==='hoshino'){
     // 호시노 뒤끝: 자신의 공격력과 체력을 무작위 아군 1인에게 부여
     var hoshinoCands=[];
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)hoshinoCands.push(mySide[i]);}
-    if(hoshinoCands.length>0){
-      var hoshinoPick=hoshinoCands[Math.floor(Math.random()*hoshinoCands.length)];
+    var hoshinoCount=unit.isSkin?2:1;
+    for(var _hi=0;_hi<hoshinoCount&&hoshinoCands.length>0;_hi++){
+      var _hpIdx=Math.floor(Math.random()*hoshinoCands.length);
+      var hoshinoPick=hoshinoCands.splice(_hpIdx,1)[0];
       hoshinoPick.atk+=unit.atk;hoshinoPick.hp+=unit.hp;
       log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+hoshinoPick.name+'에게 +'+unit.atk+'/+'+unit.hp+' 부여!'});
     }
@@ -3513,7 +3515,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(unit.baseId==='arisu') _G.arisuDeathCount=(_G.arisuDeathCount||0)+1;
       // 시로코 킬 추적 (패시브: 다음 턴 청휘석)
       if(killedBy&&killedBy.baseId==='shiroko'&&killedBy._mySide===a){
-        _G._shirokoKillsThisBattle=(_G._shirokoKillsThisBattle||0)+1;
+        _G._shirokoKillsThisBattle=(_G._shirokoKillsThisBattle||0)+(killedBy.isSkin?2:1);
       }
       // 세이아 사망 페널티: 아군 전체 능력 영구 삭제
       if(unit.baseId==='trinity_seia'){
@@ -4158,7 +4160,7 @@ function startBattle() {
   if(!SANDBOX){
     for(var _sk=0;_sk<p.board.length;_sk++){
       if(p.board[_sk].baseId==='serika'&&p.stone>0){
-        var _sSt=p.stone;
+        var _sSt=p.stone*(p.board[_sk].isSkin?2:1);
         p.board[_sk].atk+=_sSt;p.board[_sk].hp+=_sSt;
         if(!p.board[_sk].maxHp)p.board[_sk].maxHp=p.board[_sk].hp;else p.board[_sk].maxHp+=_sSt;
         logBuff(p.board[_sk],'세리카 패시브',_sSt,_sSt);
