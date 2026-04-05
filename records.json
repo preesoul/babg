@@ -1831,7 +1831,8 @@
               "img": "unique/HKYK_Saikyo_ikaku_raion.png",
               "school": "백귀야행"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 11,
