@@ -488,10 +488,27 @@ img.tutorial-highlight{border-radius:50%!important}
   <div id="title-screen" class="screen active">
     <img src="img/UI/bluearchive2.png" class="title-logo">
     <p class="sub">Battle Grounds</p>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <input id="login-name" type="text" placeholder="닉네임" style="width:120px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+      <input id="login-pw" type="password" placeholder="비번" style="width:80px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+    </div>
+    <div id="login-status" style="font-size:11px;color:#6a8a9e;margin-bottom:8px"></div>
     <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">게임 시작</span></button>
     <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">이어하기</span></button>
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
     <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">튜토리얼</span></button>
+    <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">전적 기록</span></button>
+  </div>
+
+  <!-- 전적 기록 오버레이 -->
+  <div id="records-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:800px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="color:#ffd700;margin:0">전적 기록</h2>
+        <button class="btn btn-stone" id="btn-records-close"><span class="btn-inner">닫기</span></button>
+      </div>
+      <div id="records-content" style="color:#c0d0e0;font-size:13px">로딩 중...</div>
+    </div>
   </div>
 
   <div id="roster-overlay" class="roster-overlay">
@@ -670,6 +687,8 @@ img.tutorial-highlight{border-radius:50%!important}
 var _endMusic=null;
 function showGameOver() {
   deleteSave();
+  // 전적 기록 저장
+  try{submitGameRecord();}catch(e){}
   // 전투 중 잔여 SFX 정지
   for(var k in SFX_CACHE){try{SFX_CACHE[k].pause();SFX_CACHE[k].currentTime=0;}catch(e){}}
   if(_endMusic){_endMusic.pause();_endMusic=null;}
@@ -2387,6 +2406,36 @@ function showRoster(){
 }
 
 // 튜토리얼 버튼 & 건너뛰기
+// 로그인 상태 복원
+(function(){
+  var saved=localStorage.getItem('babg_login');
+  if(saved){
+    try{var d=JSON.parse(saved);document.getElementById('login-name').value=d.name||'';document.getElementById('login-pw').value=d.pw||'';window._babgLogin=d;document.getElementById('login-status').textContent='로그인: '+d.name;}catch(e){}
+  }
+  document.getElementById('login-name').addEventListener('input',updateLogin);
+  document.getElementById('login-pw').addEventListener('input',updateLogin);
+  function updateLogin(){
+    var name=document.getElementById('login-name').value.trim();
+    var pw=document.getElementById('login-pw').value;
+    if(name){
+      window._babgLogin={name:name,pw:pw};
+      localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+      document.getElementById('login-status').textContent='로그인: '+name;
+    } else {
+      window._babgLogin=null;
+      localStorage.removeItem('babg_login');
+      document.getElementById('login-status').textContent='';
+    }
+  }
+})();
+// 전적 기록 버튼
+document.getElementById('btn-records').addEventListener('click',function(){
+  document.getElementById('records-overlay').style.display='block';
+  renderRecords();
+});
+document.getElementById('btn-records-close').addEventListener('click',function(){
+  document.getElementById('records-overlay').style.display='none';
+});
 document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
 document.getElementById('tut-skip').addEventListener('click',tutEnd);
 document.getElementById('btn-roster').addEventListener('click',showRoster);

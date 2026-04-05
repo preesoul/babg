@@ -544,7 +544,8 @@ function newGame() {
   var aiCount=SANDBOX?5:7;
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
   var startStone=SANDBOX?20:3;
-  players.push({id:0,name:'선생님',hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
+  var playerName=window._babgLogin?window._babgLogin.name:'선생님';
+  players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
   for(var i=0;i<aiCount;i++){
     var pType=i<4?AI_PERSONALITY_KEYS[i]:AI_PERSONALITY_KEYS[Math.floor(Math.random()*4)];
@@ -4937,6 +4938,88 @@ function restoreGame(save){
     usedOnceSpells:save.usedOnceSpells||{},
     bunnyTossBonus:save.bunnyTossBonus||0};
   rollShop();
+}
+
+// ===== 전적 기록 시스템 (GitHub API) =====
+var RECORDS_PAT='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';
+var RECORDS_REPO='preesoul/babg';
+var RECORDS_FILE='records.json';
+
+function fetchRecords(cb){
+  fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
+    headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json'}
+  }).then(function(r){return r.json();}).then(function(data){
+    var content=JSON.parse(atob(data.content));
+    cb(null,content,data.sha);
+  }).catch(function(e){cb(e,null,null);});
+}
+
+function saveRecords(data,sha,cb){
+  fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
+    method:'PUT',
+    headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+    body:JSON.stringify({message:'record update',content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha:sha})
+  }).then(function(r){return r.json();}).then(function(res){
+    if(cb)cb(null,res);
+  }).catch(function(e){if(cb)cb(e);});
+}
+
+function submitGameRecord(){
+  var login=window._babgLogin;
+  if(!login||!login.name)return;
+  var p=G.players[0];
+  var boardNames=p.board.map(function(u){return u.name;});
+  var record={
+    date:new Date().toISOString().slice(0,19),
+    placement:G.placement,
+    turn:G.turn,
+    tier:p.tier,
+    board:boardNames
+  };
+  fetchRecords(function(err,data,sha){
+    if(err||!data){console.log('기록 저장 실패:',err);return;}
+    if(!data.players)data.players={};
+    var name=login.name;
+    if(!data.players[name]){
+      data.players[name]={pw:login.pw,records:[]};
+    } else if(data.players[name].pw!==login.pw){
+      console.log('비밀번호 불일치');return;
+    }
+    data.players[name].records.push(record);
+    saveRecords(data,sha,function(e){
+      if(e)console.log('기록 저장 실패:',e);
+      else console.log('기록 저장 완료');
+    });
+  });
+}
+
+function renderRecords(){
+  var el=document.getElementById('records-content');
+  el.innerHTML='로딩 중...';
+  fetchRecords(function(err,data){
+    if(err||!data){el.innerHTML='기록을 불러올 수 없습니다.';return;}
+    if(!data.players||Object.keys(data.players).length===0){el.innerHTML='아직 기록이 없습니다.';return;}
+    var html='';
+    for(var name in data.players){
+      var p=data.players[name];
+      var recs=p.records||[];
+      var wins=recs.filter(function(r){return r.placement===1;}).length;
+      html+='<div style="margin-bottom:16px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
+      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:8px">'+name+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
+      if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
+      else{
+        html+='<table style="width:100%;border-collapse:collapse;font-size:12px"><tr style="color:#8ab4d8;border-bottom:1px solid #2a3a4a"><th style="padding:4px;text-align:left">날짜</th><th>등수</th><th>턴</th><th>Lv</th><th style="text-align:left">보드</th></tr>';
+        for(var i=recs.length-1;i>=Math.max(0,recs.length-20);i--){
+          var r=recs[i];
+          var placeColor=r.placement===1?'#ffd700':r.placement<=3?'#60a5fa':'#c0d0e0';
+          html+='<tr style="border-bottom:1px solid #1a2a3a"><td style="padding:3px;color:#8a9ab0">'+r.date.slice(5,16)+'</td><td style="text-align:center;color:'+placeColor+';font-weight:700">'+r.placement+'등</td><td style="text-align:center">'+r.turn+'</td><td style="text-align:center">'+r.tier+'</td><td style="color:#a0b8c8">'+(r.board||[]).join(', ')+'</td></tr>';
+        }
+        html+='</table>';
+      }
+      html+='</div>';
+    }
+    el.innerHTML=html;
+  });
 }
 
 // ===== 자가대전 온라인 학습 시스템 =====
