@@ -1207,6 +1207,8 @@ function playSfx(name,vol){
     mika_landing:'sfx/mika_landing.webm',
     spell_low:'sfx/Arrow_Targeted_Explode_01.ogg',
     spell_high:'sfx/spell_HolyLight_cast_1.ogg',
+    ui_open:'sfx/Card_Transition_In.ogg',
+    ui_close:'sfx/Card_Transition_Out.ogg',
     drop_low:'sfx/FX_MinionSummon_Drop.ogg',
     drop_mid:'sfx/FX_MinionSummonMedium_Drop.ogg',
     drop_high:'sfx/FX_MinionSummonLarge_Drop.ogg'

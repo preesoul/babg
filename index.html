@@ -2513,19 +2513,23 @@ document.getElementById('btn-logout').addEventListener('click',function(){
 });
 // 전적 기록 버튼
 document.getElementById('btn-records').addEventListener('click',function(){
+  playSfx('ui_open',0.4);
   document.getElementById('records-overlay').style.display='block';
   renderRecords();
 });
 document.getElementById('btn-records-close').addEventListener('click',function(){
+  playSfx('ui_close',0.4);
   document.getElementById('records-overlay').style.display='none';
 });
 // 퀘스트 버튼
 document.getElementById('btn-quests').addEventListener('click',function(){
   if(!window._babgLogin||!window._babgLogin.name){alert('닉네임을 입력해주세요.');return;}
+  playSfx('ui_open',0.4);
   document.getElementById('quest-overlay').style.display='block';
   renderQuestUI();
 });
 document.getElementById('btn-quest-close').addEventListener('click',function(){
+  playSfx('ui_close',0.4);
   document.getElementById('quest-overlay').style.display='none';
 });
 function renderQuestUI(){
