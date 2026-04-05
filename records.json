@@ -662,6 +662,81 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T12:53:37",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 3,
+              "hp": 3,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 6,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
       "points": 1,
@@ -676,12 +751,12 @@
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "millennium10",
-              "progress": 2,
+              "progress": 5,
               "completed": false
             }
           ],
