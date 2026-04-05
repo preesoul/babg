@@ -6065,50 +6065,79 @@ function submitGameRecord(){
   });
 }
 
+function _renderRecordCard(r,showPin,pinIdx){
+  var placeColor=r.placement===1?'#ffd700':r.placement<=3?'#60a5fa':'#c0d0e0';
+  var h='<div style="margin-bottom:12px;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;border-left:3px solid '+placeColor+'">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+  if(showPin) h+='<label style="cursor:pointer;display:flex;align-items:center;gap:4px"><input type="checkbox" class="pin-check" data-pin-idx="'+pinIdx+'" '+(r.pinned?'checked':'')+' style="cursor:pointer"><span style="font-size:10px;color:#6a8a9e">공개</span></label>';
+  h+='<span style="color:'+placeColor+';font-weight:900;font-size:18px">'+r.placement+'등</span>';
+  h+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
+  var board=r.board||[];
+  for(var j=0;j<board.length;j++){
+    var u=board[j];
+    if(typeof u==='string'){
+      h+='<div style="background:#1e2d3d;border:2px solid #3a5a6e;border-radius:4px;padding:4px 8px;font-size:11px;color:#c0d0e0">'+u+'</div>';
+    } else {
+      var fakeUnit={id:u.baseId+'_rec',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk,hp:u.hp,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
+      h+='<div class="rec-card" style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
+    }
+  }
+  h+='</div></div>';
+  return h;
+}
+var _recData=null,_recSha=null;
 function renderRecords(){
   var el=document.getElementById('records-content');
   el.innerHTML='로딩 중...';
-  fetchRecords(function(err,data){
+  fetchRecords(function(err,data,sha){
     if(err||!data){el.innerHTML='기록을 불러올 수 없습니다.';return;}
+    _recData=data;_recSha=sha;
     if(!data.players||Object.keys(data.players).length===0){el.innerHTML='아직 기록이 없습니다.';return;}
     var html='';
     var myName=window._babgLogin?window._babgLogin.name:null;
-    for(var name in data.players){
-      if(myName&&name!==myName) continue;
-      var p=data.players[name];
+    // 내 기록
+    if(myName&&data.players[myName]){
+      var p=data.players[myName];
       var recs=p.records||[];
       var wins=recs.filter(function(r){return r.placement===1;}).length;
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
-      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:12px">'+name+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
+      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
-      else{
-        for(var i=recs.length-1;i>=0;i--){
-          var r=recs[i];
-          var placeColor=r.placement===1?'#ffd700':r.placement<=3?'#60a5fa':'#c0d0e0';
-          html+='<div style="margin-bottom:12px;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;border-left:3px solid '+placeColor+'">';
-          html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-          html+='<span style="color:'+placeColor+';font-weight:900;font-size:18px">'+r.placement+'등</span>';
-          html+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
-          html+='</div>';
-          // 보드 카드 렌더링
-          html+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
-          var board=r.board||[];
-          for(var j=0;j<board.length;j++){
-            var u=board[j];
-            if(typeof u==='string'){
-              html+='<div style="background:#1e2d3d;border:2px solid #3a5a6e;border-radius:4px;padding:4px 8px;font-size:11px;color:#c0d0e0">'+u+'</div>';
-            } else {
-              // cardHtml용 가짜 유닛 객체 생성
-              var fakeUnit={id:u.baseId+'_rec',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk,hp:u.hp,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
-              html+='<div class="rec-card" style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
-            }
-          }
-          html+='</div></div>';
-        }
+      else{for(var i=recs.length-1;i>=0;i--) html+=_renderRecordCard(recs[i],true,i);}
+      html+='</div>';
+    }
+    // 다른 선생님들의 공개 기록
+    var otherPinned=[];
+    for(var name in data.players){
+      if(name===myName) continue;
+      var recs2=data.players[name].records||[];
+      for(var i=0;i<recs2.length;i++){
+        if(recs2[i].pinned) otherPinned.push(recs2[i]);
       }
+    }
+    if(otherPinned.length>0){
+      // 셔플 후 최대 10개
+      otherPinned.sort(function(){return Math.random()-0.5;});
+      otherPinned=otherPinned.slice(0,10);
+      html+='<div style="margin-top:24px;border-top:2px solid rgba(255,255,255,0.1);padding-top:16px">';
+      html+='<div style="font-size:15px;font-weight:700;color:#a78bfa;margin-bottom:12px">다른 선생님들의 기록</div>';
+      for(var i=0;i<otherPinned.length;i++) html+=_renderRecordCard(otherPinned[i],false,-1);
       html+='</div>';
     }
     el.innerHTML=html;
+    // 핀 체크박스 이벤트
+    el.querySelectorAll('.pin-check').forEach(function(cb){
+      cb.addEventListener('change',function(){
+        var idx=parseInt(this.getAttribute('data-pin-idx'));
+        if(!myName||!_recData||!_recData.players[myName])return;
+        var recs=_recData.players[myName].records;
+        if(recs[idx]) recs[idx].pinned=this.checked;
+        saveRecords(_recData,_recSha,function(){});
+      });
+    });
   });
 }
 
