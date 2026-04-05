@@ -6072,7 +6072,9 @@ function renderRecords(){
     if(err||!data){el.innerHTML='기록을 불러올 수 없습니다.';return;}
     if(!data.players||Object.keys(data.players).length===0){el.innerHTML='아직 기록이 없습니다.';return;}
     var html='';
+    var myName=window._babgLogin?window._babgLogin.name:null;
     for(var name in data.players){
+      if(myName&&name!==myName) continue;
       var p=data.players[name];
       var recs=p.records||[];
       var wins=recs.filter(function(r){return r.placement===1;}).length;
