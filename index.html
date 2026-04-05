@@ -502,7 +502,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <div id="title-screen" class="screen">
     <img src="img/UI/bluearchive2.png" class="title-logo" style="height:200px">
     <p class="sub" style="font-size:28px">Battle Grounds</p>
-    <div id="welcome-msg" style="font-size:14px;color:#ffd700;margin-bottom:12px"></div>
+    <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
     <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">게임 시작</span></button>
     <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">이어하기</span></button>
     <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
@@ -2475,7 +2475,7 @@ function doLogin(name,pw,auto){
   });
 }
 function goToMainMenu(name){
-  document.getElementById('welcome-msg').textContent='환영합니다, '+name+'!';
+  document.getElementById('welcome-msg').textContent='환영합니다, '+name+' 선생님!';
   document.getElementById('login-screen').classList.remove('active');
   document.getElementById('title-screen').classList.add('active');
 }
