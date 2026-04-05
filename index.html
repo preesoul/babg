@@ -2381,8 +2381,8 @@ function renderRoster(){
       tc.forEach(function(c){
         var isLocked=c.locked&&_unlockedAby.indexOf(c.id)===-1;
         if(isLocked){
-          html+='<div class="roster-card rt'+c.tier+'" style="opacity:0.6;cursor:default">';
-          html+='<img class="r-portrait" src="img/UI/Hidden_card.png" style="filter:grayscale(1);object-fit:contain">';
+          html+='<div class="roster-card rt'+c.tier+'" data-locked="1" style="opacity:0.6;cursor:pointer">';
+          html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain">';
           html+='<div class="r-name" style="color:#666">???</div>';
         } else {
           html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
@@ -2427,6 +2427,22 @@ function renderRoster(){
       el.addEventListener('click',function(e){
         e.stopPropagation();
         var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+      });
+    }
+    if(el.getAttribute('data-locked')){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        hideTooltip();
+        var tip=getTooltipEl();if(!tip)return;
+        tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">이 학생은 신비가 잠겨 있습니다.<br><span style="color:#c4b5fd">퀘스트에서 신비를 해방시켜<br>깨워 보세요!</span></div></div>';
+        tip.style.display='block';tip.classList.add('visible');
+        var rect=el.getBoundingClientRect();
+        var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+        var left=rect.left+rect.width/2-tipW/2;
+        var top=rect.top-tipH-8;
+        if(top<0)top=rect.bottom+8;
+        if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+        tip.style.left=left+'px';tip.style.top=top+'px';
       });
     }
   });
