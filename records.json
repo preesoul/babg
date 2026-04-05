@@ -1751,7 +1751,8 @@
               "img": "Mine.png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 9,
