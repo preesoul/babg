@@ -2974,7 +2974,15 @@ function triggerSOC(u, mySide, otherSide, log) {
       if(otherSide[_sti].alive&&otherSide[_sti].hp===maxEnemyHp) topEnemies.push(otherSide[_sti]);
     }
     var spared=topEnemies.length>0?topEnemies[Math.floor(Math.random()*topEnemies.length)]:null;
-    // 2. 적 전체 (최고체력 1인 제외) 처치
+    // 2. 아군 자신 제외 전체 처치 (먼저 — DR로 귀환할 학생들이 다시 죽지 않도록)
+    for(var _sti=0;_sti<mySide.length;_sti++){
+      if(mySide[_sti].alive&&mySide[_sti]!==u){
+        mySide[_sti].hp=0;mySide[_sti].alive=false;mySide[_sti]._killedBy=u;
+        log.push({cls:'kill',text:'[개전] '+u.name+': 아군 '+mySide[_sti].name+' 처치!'});
+        triggerDeathrattle(mySide[_sti],mySide,otherSide,log);
+      }
+    }
+    // 3. 적 전체 (최고체력 1인 제외) 처치
     for(var _sti=0;_sti<otherSide.length;_sti++){
       if(otherSide[_sti].alive&&otherSide[_sti]!==spared){
         otherSide[_sti].hp=0;otherSide[_sti].alive=false;otherSide[_sti]._killedBy=u;
@@ -2983,14 +2991,6 @@ function triggerSOC(u, mySide, otherSide, log) {
       }
     }
     if(spared) log.push({cls:'soc',text:'[개전] '+u.name+': '+spared.name+'은(는) 살아남았다! (체력 '+spared.hp+')'});
-    // 3. 아군 자신 제외 전체 처치
-    for(var _sti=0;_sti<mySide.length;_sti++){
-      if(mySide[_sti].alive&&mySide[_sti]!==u){
-        mySide[_sti].hp=0;mySide[_sti].alive=false;mySide[_sti]._killedBy=u;
-        log.push({cls:'kill',text:'[개전] '+u.name+': 아군 '+mySide[_sti].name+' 처치!'});
-        triggerDeathrattle(mySide[_sti],mySide,otherSide,log);
-      }
-    }
   }
 }
 
