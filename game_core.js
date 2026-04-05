@@ -1441,7 +1441,8 @@ function showDiscover(p) {
     if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
-    html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
+    html += '<div class="discover-wrap" data-discover="'+i+'" data-base-id="'+c.id+'" style="display:inline-block;text-align:center">';
+    html += '<div class="card tier'+c.tier+' discover-pick" style="cursor:pointer">';
     if(c.img) html += '<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html += '<div class="card-inner">';
     var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
@@ -1452,6 +1453,10 @@ function showDiscover(p) {
     if(aTag) html += '<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html += '<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
     html += '<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div>';
+    html += '</div>';
+    html += '<div class="discover-actions" style="display:none;margin-top:6px;gap:6px;justify-content:center">';
+    html += '<button class="btn btn-blue discover-select" style="font-size:12px;padding:4px 14px"><span class="btn-inner">선택</span></button>';
+    html += '<button class="btn btn-stone discover-detail" style="font-size:12px;padding:4px 14px"><span class="btn-inner">자세히</span></button>';
     html += '</div></div>';
   }
   html += '</div></div>';
@@ -1474,33 +1479,56 @@ function showDiscover(p) {
     },500);
   }
 
-  document.getElementById('battle-intro-area').addEventListener('click', function handler(e){
-    var pick = e.target.closest('.discover-pick');
-    if(!pick) return;
-    if(TUT.active && TUT.discoverBlocked) return; // 차단 중
-    var idx = parseInt(pick.getAttribute('data-discover'));
+  function doDiscoverSelect(idx){
     overlay.classList.remove('active');
     document.getElementById('battle-intro-area').innerHTML='';
-    document.getElementById('battle-intro-area').removeEventListener('click', handler);
-    // 퀘스트 트래킹: 발견 횟수
     if(window._questTracker) window._questTracker.discovers++;
-    // 선택한 캐릭터를 풀에서 빼고 보드에 추가 (트리플 체크 포함)
     var tmpl = choices[idx];
     if(takeFromPool(tmpl.id)){
       var added = addToBoard(p, makeMinion(tmpl, false));
-      // 풀보드라 추가 실패 시 벤치 or 강제 추가
       if(!added){
         var newUnit = makeMinion(tmpl, false);
         if(!p.bench){p.bench=newUnit;}
         else{p.board.push(newUnit);triggerBattlecry(newUnit,p);}
       }
     }
-    overlay.style.zIndex=''; // z-index 복원
+    overlay.style.zIndex='';
     renderAll();
     if(TUT.active){
       var ts=TUTORIAL_STEPS[TUT.step];
       if(ts&&ts.action==='waitDiscover') setTimeout(function(){tutNext();},300);
     }
+  }
+  document.getElementById('battle-intro-area').addEventListener('click', function handler(e){
+    // "선택" 버튼 클릭
+    if(e.target.closest('.discover-select')){
+      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
+      if(TUT.active&&TUT.discoverBlocked)return;
+      var idx=parseInt(wrap.getAttribute('data-discover'));
+      document.getElementById('battle-intro-area').removeEventListener('click',handler);
+      doDiscoverSelect(idx);
+      return;
+    }
+    // "자세히" 버튼 클릭
+    if(e.target.closest('.discover-detail')){
+      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
+      var bid=wrap.getAttribute('data-base-id');
+      var rect=wrap.querySelector('.discover-pick').getBoundingClientRect();
+      showTooltip(bid,rect,null);
+      return;
+    }
+    // 카드 클릭 → 버튼 표시
+    var pick=e.target.closest('.discover-pick');
+    if(!pick)return;
+    if(TUT.active&&TUT.discoverBlocked)return;
+    var wrap=pick.closest('.discover-wrap');if(!wrap)return;
+    // 모든 actions 숨기고 현재 것만 표시
+    var allActions=document.querySelectorAll('.discover-actions');
+    for(var _da=0;_da<allActions.length;_da++) allActions[_da].style.display='none';
+    var allWraps=document.querySelectorAll('.discover-wrap');
+    for(var _dw=0;_dw<allWraps.length;_dw++) allWraps[_dw].querySelector('.discover-pick').style.outline='';
+    wrap.querySelector('.discover-actions').style.display='flex';
+    wrap.querySelector('.discover-pick').style.outline='2px solid #ffd700';
   });
 }
 
@@ -1522,7 +1550,8 @@ function showDiscoverCustom(choices) {
     if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id])aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
-    html+='<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer">';
+    html+='<div class="discover-wrap" data-discover="'+i+'" data-base-id="'+c.id+'" style="display:inline-block;text-align:center">';
+    html+='<div class="card tier'+c.tier+' discover-pick" style="cursor:pointer">';
     if(c.img)html+='<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html+='<div class="card-inner">';
     var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
@@ -1530,7 +1559,11 @@ function showDiscoverCustom(choices) {
     html+='<div class="name-banner">'+c.name+'</div><div class="keywords">'+(kwt||'&nbsp;')+'</div>';
     if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
-    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div></div>';
+    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div>';
+    html+='<div class="discover-actions" style="display:none;margin-top:6px;gap:6px;justify-content:center">';
+    html+='<button class="btn btn-blue discover-select" style="font-size:12px;padding:4px 14px"><span class="btn-inner">선택</span></button>';
+    html+='<button class="btn btn-stone discover-detail" style="font-size:12px;padding:4px 14px"><span class="btn-inner">자세히</span></button>';
+    html+='</div></div>';
   }
   html+='</div></div>';
   document.getElementById('battle-intro-area').innerHTML=html;
@@ -1540,14 +1573,10 @@ function showDiscoverCustom(choices) {
   document.getElementById('btn-continue').style.display='none';
   document.getElementById('btn-skip').style.display='none';
   overlay.classList.add('active');
-  document.getElementById('battle-intro-area').addEventListener('click',function handler(e){
-    var pick=e.target.closest('.discover-pick');if(!pick)return;
-    var idx=parseInt(pick.getAttribute('data-discover'));
+  function doCustomSelect(idx){
     overlay.classList.remove('active');
     document.getElementById('battle-intro-area').innerHTML='';
-    document.getElementById('battle-intro-area').removeEventListener('click',handler);
     var chosen=choices[idx];if(!chosen){renderAll();return;}
-    // 퀘스트 트래킹: 발견 횟수
     if(window._questTracker) window._questTracker.discovers++;
     takeFromPool(chosen.id);
     var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin)count++;}
@@ -1557,6 +1586,28 @@ function showDiscoverCustom(choices) {
     }
     if(p.board.length<MAX_BOARD){var m=makeMinion(chosen,false);p.board.push(m);triggerBattlecry(m,p);}
     renderAll();
+  }
+  document.getElementById('battle-intro-area').addEventListener('click',function handler(e){
+    if(e.target.closest('.discover-select')){
+      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
+      var idx=parseInt(wrap.getAttribute('data-discover'));
+      document.getElementById('battle-intro-area').removeEventListener('click',handler);
+      doCustomSelect(idx);return;
+    }
+    if(e.target.closest('.discover-detail')){
+      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
+      var bid=wrap.getAttribute('data-base-id');
+      var rect=wrap.querySelector('.discover-pick').getBoundingClientRect();
+      showTooltip(bid,rect,null);return;
+    }
+    var pick=e.target.closest('.discover-pick');if(!pick)return;
+    var wrap=pick.closest('.discover-wrap');if(!wrap)return;
+    var allActions=document.querySelectorAll('.discover-actions');
+    for(var _da=0;_da<allActions.length;_da++) allActions[_da].style.display='none';
+    var allWraps=document.querySelectorAll('.discover-wrap');
+    for(var _dw=0;_dw<allWraps.length;_dw++) allWraps[_dw].querySelector('.discover-pick').style.outline='';
+    wrap.querySelector('.discover-actions').style.display='flex';
+    wrap.querySelector('.discover-pick').style.outline='2px solid #ffd700';
   });
 }
 
