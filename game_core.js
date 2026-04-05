@@ -1966,7 +1966,7 @@ function _doBC(m, p) {
         // 스킨: 발견
         showDiscoverCustom(shChars.length>=3?[shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)]]:shChars);
       } else {
-        if(takeFromPool(pick.id)){var nu=makeMinion(pick,false);p.board.push(nu);triggerBattlecry(nu,p);}
+        if(takeFromPool(pick.id)){var nu=makeMinion(pick,false);p.board.push(nu);if(nu.baseId!=='kokona')triggerBattlecry(nu,p);}
       }
     }
   }
