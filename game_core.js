@@ -5818,6 +5818,13 @@ function initQuestState(playerData) {
   }
   if (!playerData.points) playerData.points = 0;
   var qs = playerData.questState;
+  // 유효성 검증: 현재 정의에 없는 퀘스트가 있으면 강제 갱신
+  var dailyIds={};for(var _qi=0;_qi<DAILY_QUESTS.length;_qi++)dailyIds[DAILY_QUESTS[_qi].id]=true;
+  var weeklyIds={};for(var _qi=0;_qi<WEEKLY_QUESTS.length;_qi++)weeklyIds[WEEKLY_QUESTS[_qi].id]=true;
+  var dailyValid=true;if(qs.daily.quests){for(var _qi=0;_qi<qs.daily.quests.length;_qi++){if(!dailyIds[qs.daily.quests[_qi].id]){dailyValid=false;break;}}}
+  var weeklyValid=true;if(qs.weekly.quests){for(var _qi=0;_qi<qs.weekly.quests.length;_qi++){if(!weeklyIds[qs.weekly.quests[_qi].id]){weeklyValid=false;break;}}}
+  if(!dailyValid) qs.daily.date='';
+  if(!weeklyValid) qs.weekly.weekStart='';
   // 일일 퀘스트 갱신
   if (qs.daily.date !== today) {
     var picked = pickRandom(DAILY_QUESTS, 3);
@@ -5835,8 +5842,13 @@ function initQuestState(playerData) {
       quests: wpicked.map(function(q) { return {id: q.id, progress: 0, completed: false}; })
     };
   }
-  // 반복 퀘스트 (항상 존재, 완료 시 리셋)
-  if (!qs.repeat) {
+  // 반복 퀘스트 (항상 존재, 완료 시 리셋, ID 변경 시 재생성)
+  var repeatValid=true;
+  if(qs.repeat&&qs.repeat.quests){
+    var repeatIds={};for(var _qi=0;_qi<REPEAT_QUESTS.length;_qi++)repeatIds[REPEAT_QUESTS[_qi].id]=true;
+    for(var _qi=0;_qi<qs.repeat.quests.length;_qi++){if(!repeatIds[qs.repeat.quests[_qi].id]){repeatValid=false;break;}}
+  }
+  if (!qs.repeat||!repeatValid) {
     qs.repeat = {quests: REPEAT_QUESTS.map(function(q) { return {id: q.id, progress: 0, completed: false}; })};
   }
   return playerData;
