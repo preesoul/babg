@@ -1137,6 +1137,42 @@ function buyHiddenCard(idx) {
   renderAll();
 }
 
+// 7성 등장 연출 헬퍼
+function _entranceCardLand(m,p){
+  p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);renderAll();
+  var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];var lc=cards[cards.length-1];
+  if(lc){lc.style.transition='transform 0.06s ease-in-out';lc.style.transform='scale(1.15)';
+    setTimeout(function(){lc.style.transform='translateX(-12px) rotate(-4deg)';
+    setTimeout(function(){lc.style.transform='translateX(10px) rotate(3deg)';
+    setTimeout(function(){lc.style.transform='translateX(-8px) rotate(-2.5deg)';
+    setTimeout(function(){lc.style.transform='translateX(6px) rotate(2deg)';
+    setTimeout(function(){lc.style.transform='translateX(-4px) rotate(-1deg)';
+    setTimeout(function(){lc.style.transform='translateX(0) rotate(0) scale(1)';},60);},60);},60);},60);},60);},100);}
+  playCardDrop(7);playRecruitVoice(m.baseId);
+}
+function _entranceBang(m,p){
+  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,255,255,0.9);pointer-events:none;z-index:9999;transition:opacity 0.35s;';
+  document.body.appendChild(fl);playSfx('attack_impact_large',0.8);shakeScreen('heavy');
+  _entranceCardLand(m,p);
+  setTimeout(function(){fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},350);},80);
+}
+function _entranceGlow(m,p){
+  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0);pointer-events:none;z-index:9999;transition:opacity 1.5s ease-in;';
+  document.body.appendChild(fl);
+  setTimeout(function(){fl.style.opacity='1';fl.style.background='rgba(255,248,220,0.85)';},50);
+  setTimeout(function(){_entranceCardLand(m,p);fl.style.transition='opacity 2s ease-out';fl.style.opacity='0';
+    setTimeout(function(){if(fl.parentNode)fl.remove();},2000);
+  },2500);
+}
+function _entranceDark(m,p){
+  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;z-index:9999;transition:opacity 0.3s;';
+  document.body.appendChild(fl);
+  setTimeout(function(){fl.style.opacity='1';fl.style.background='rgba(0,0,0,1)';},50);
+  setTimeout(function(){_entranceCardLand(m,p);fl.style.transition='opacity 2s ease-out';fl.style.opacity='0';
+    setTimeout(function(){if(fl.parentNode)fl.remove();},2000);
+  },1500);
+}
+
 // 7성 고유 등장 연출
 var HIDDEN_CARD_ENTRANCE = {
   Shiroko_Terror: function(m,p){
@@ -1172,6 +1208,25 @@ var HIDDEN_CARD_ENTRANCE = {
     },80);
     playCardDrop(7);playRecruitVoice('Shiroko_Terror');
   },
+  // === 쾅! 등장 (시로코테러 동일) ===
+  gehenna_prefect: function(m,p){_entranceBang(m,p);},
+  gehenna_pandemonium: function(m,p){_entranceBang(m,p);},
+  millennium_death_momoi: function(m,p){_entranceBang(m,p);},
+  hovercraft: function(m,p){_entranceBang(m,p);},
+  trinity_justice: function(m,p){_entranceBang(m,p);},
+  millennium_cc: function(m,p){_entranceBang(m,p);},
+  // === 금빛 밝아짐 (5초) ===
+  trinity_seia: function(m,p){_entranceGlow(m,p);},
+  trinity_nagisa: function(m,p){_entranceGlow(m,p);},
+  hkyk_kuzunoha: function(m,p){_entranceGlow(m,p);},
+  trinity_makeup: function(m,p){_entranceGlow(m,p);},
+  // === 암전→서서히 밝아짐 ===
+  millennium_nameless: function(m,p){_entranceDark(m,p);},
+  millennium_malkuth: function(m,p){_entranceDark(m,p);},
+  gehenna_traingun: function(m,p){_entranceDark(m,p);},
+  gehenna_p68: function(m,p){_entranceDark(m,p);},
+  millennium_seminar: function(m,p){_entranceDark(m,p);},
+
   trinity_mika: function(m,p){
     var footSfx=new Audio('sfx/mika_footstep.webm');
     footSfx.volume=0.5;
@@ -1298,11 +1353,40 @@ var RECRUIT_VOICES = {
   tsukuyo: 'sfx/tsukuyo_recruit.webm',
   hoshino: 'audio/abydos_hoshino.mp3',
   shiroko: 'audio/abydos_shiroko.mp3',
-  Shiroko_Terror: 'audio/abydos_shiroko_terror.mp3'
+  Shiroko_Terror: 'audio/abydos_shiroko_terror.mp3',
+  gehenna_prefect: 'audio/gehenna_prefect.mp3',
+  gehenna_pandemonium: 'audio/gehenna_pandemonium.mp3',
+  gehenna_traingun: 'audio/gehenna_traingun.mp3',
+  trinity_seia: 'audio/trinity_seia.mp3',
+  trinity_nagisa: 'audio/trinity_nagisa.mp3',
+  trinity_makeup: 'audio/trinity_makeup.mp3',
+  trinity_justice: 'audio/trinity_justice.mp3',
+  millennium_nameless: 'audio/millennium_nameless.mp3',
+  millennium_malkuth: 'audio/millennium_malkuth.mp3',
+  millennium_death_momoi: 'audio/millennium_death_momoi.mp3',
+  millennium_cc: 'audio/millennium_cc.mp3',
+  millennium_seminar: 'audio/millennium_seminar.mp3',
+  hovercraft: 'audio/hovercraft.mp3',
+  hkyk_kuzunoha: 'audio/hkyk_kuzunoha.mp3',
+  gehenna_p68: 'audio/gehenna_p68.mp3'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
-  if(src){try{var a=new Audio(src);a.volume=0.7;a.play();}catch(e){}}
+  if(!src)return;
+  try{
+    var a=new Audio(src);a.volume=0.7;a.play();
+    // 1초 fadeOut으로 자연스럽게 끝내기
+    var dur=a.duration;
+    a.addEventListener('loadedmetadata',function(){
+      var fadeStart=Math.max(0,a.duration-1);
+      setTimeout(function(){
+        var fadeInt=setInterval(function(){
+          a.volume=Math.max(0,a.volume-0.07);
+          if(a.volume<=0){clearInterval(fadeInt);a.pause();}
+        },50);
+      },fadeStart*1000);
+    });
+  }catch(e){}
 }
 function playCardDrop(tier){
   tier=tier||1;
@@ -4260,6 +4344,23 @@ function runBattle(boardA, boardB, startWithA, opts) {
   return{result:result,log:log,steps:steps,survivorsA:survivorsA,survivorsB:survivorsB,damage:damage,surviveEffects:surviveEffects,_sideA:a,_makeupInstakill:makeupInstakill,panchanDeathsA:a._panchanDeaths||0,panchanDeathsB:b._panchanDeaths||0};
 }
 
+function _playBattleHiddenSfx(p,opp){
+  var enemyHas7=false,allyHas7=false;
+  if(opp&&opp.board){for(var i=0;i<opp.board.length;i++){if(opp.board[i].tier>=7||opp.board[i].isHidden){enemyHas7=true;break;}}}
+  for(var i=0;i<p.board.length;i++){if(p.board[i].tier>=7||p.board[i].isHidden){allyHas7=true;break;}}
+  var src=null;
+  if(enemyHas7) src='audio/battle_hidden_enemy.mp3';
+  else if(allyHas7) src='audio/battle_hidden_ally.mp3';
+  if(src){
+    try{
+      var a=new Audio(src);a.volume=0.6;a.play();
+      // 3초부터 fadeout, 5초에 볼륨 0
+      setTimeout(function(){
+        var fadeInt=setInterval(function(){a.volume=Math.max(0,a.volume-0.03);if(a.volume<=0){clearInterval(fadeInt);a.pause();}},100);
+      },3000);
+    }catch(e){}
+  }
+}
 function startBattle() {
   playSfx('battle_start');
   lastSold=null;
@@ -4288,6 +4389,7 @@ function startBattle() {
   var alive=[];for(var i=1;i<G.players.length;i++)if(!G.players[i].dead)alive.push(G.players[i]);
   if(alive.length===0)return;
   var opp=alive[Math.floor(Math.random()*alive.length)];
+  _playBattleHiddenSfx(p,opp);
 
   var boardSnapshot=p.board.map(function(u){
     return{id:u.id,atk:u.atk,hp:u.hp,maxHp:u.maxHp,kw:(u.kw||[]).slice(),name:u.name};
