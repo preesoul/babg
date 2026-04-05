@@ -1458,9 +1458,85 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T17:48:07",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 20,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 107,
+              "hp": 103,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 31,
+              "hp": 11,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히후미",
+              "baseId": "hifumi",
+              "atk": 5,
+              "hp": 4,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hifumi.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-06",
