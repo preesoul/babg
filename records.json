@@ -2598,8 +2598,132 @@
     },
     "파란파랑별": {
       "pw": "2853",
-      "records": [],
-      "points": 0
+      "records": [
+        {
+          "date": "2026-04-05T23:33:52",
+          "placement": 8,
+          "turn": 8,
+          "tier": 3,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 1,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히후미",
+              "baseId": "hifumi",
+              "atk": 2,
+              "hp": 3,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hifumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 7,
+              "hp": 5,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카요코",
+              "baseId": "kayoko",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kayoko.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 2,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin3",
+              "progress": 2,
+              "completed": false
+            },
+            {
+              "id": "gehenna10",
+              "progress": 8,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "skin10",
+              "progress": 2,
+              "completed": false
+            },
+            {
+              "id": "win3",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 2,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
+      }
     },
     "sen": {
       "pw": "88",
