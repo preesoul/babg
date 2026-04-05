@@ -1056,7 +1056,59 @@
       "pw": "aqula88!",
       "records": [],
       "points": 0,
-      "questState": null,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin3",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "skin10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hidden_win",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play10",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "_lastLoginDate": "2026-04-06"
+      },
       "unlockedAbydos": []
     },
     "남민철": {
