@@ -1762,9 +1762,79 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-05T22:56:57",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시즈코(수영복)",
+              "baseId": "shizuko",
+              "atk": 75,
+              "hp": 71,
+              "tier": 5,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shizuko_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 73,
+              "hp": 63,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 74,
+              "hp": 65,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 69,
+              "hp": 61,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 50,
+              "hp": 50,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1792,7 +1862,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 6,
+              "progress": 9,
               "completed": false
             },
             {
@@ -1802,7 +1872,7 @@
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
