@@ -1203,22 +1203,80 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T14:55:24",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 12,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 5,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 45,
+              "hp": 35,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 12,
       "questState": {
         "daily": {
           "date": "2026-04-05",
           "quests": [
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -1233,7 +1291,7 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 4,
+              "progress": 7,
               "completed": false
             },
             {
@@ -1243,7 +1301,7 @@
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -1252,7 +1310,7 @@
           "quests": [
             {
               "id": "repeat_play3",
-              "progress": 2,
+              "progress": 0,
               "completed": false
             }
           ]
