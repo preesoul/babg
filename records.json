@@ -405,7 +405,8 @@
               "img": "Satsuki.png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T10:41:12",
