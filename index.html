@@ -2522,7 +2522,7 @@ function renderQuestUI(){
     if(!data.players||!data.players[name]){el.innerHTML='게임 기록이 없습니다. 먼저 게임을 플레이하세요.';pts.textContent='';return;}
     var pd=data.players[name];
     initQuestState(pd);
-    pts.textContent='⭐ '+(pd.points||0)+' 포인트';
+    pts.innerHTML='<img src="img/Icon/quest_stone.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px">'+(pd.points||0)+' 엘리그마';
     var html='';
     // 일일 퀘스트
     html+='<h3 style="color:#60a5fa;margin:12px 0 8px">일일 퀘스트 <span style="font-size:11px;color:#6a8a9e">(매일 갱신, 1일 1회 교체 가능)</span></h3>';
@@ -2536,7 +2536,7 @@ function renderQuestUI(){
       html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
       html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
       html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#3b82f6')+';border-radius:4px"></div></div>';
-      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'pt)</div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'엘리그마)</div></div>';
       if(!done&&canReroll) html+='<button class="btn btn-stone" onclick="doRerollQuest('+i+',\''+sha+'\')" style="font-size:10px;padding:2px 8px"><span class="btn-inner">🔄</span></button>';
       html+='</div>';
     }
@@ -2551,7 +2551,7 @@ function renderQuestUI(){
       html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
       html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
       html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#a78bfa')+';border-radius:4px"></div></div>';
-      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'pt)</div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+'엘리그마)</div></div>';
       html+='</div>';
     }
     el.innerHTML=html;
