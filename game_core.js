@@ -5233,7 +5233,7 @@ function fetchRecords(cb){
   fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
     headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json'}
   }).then(function(r){return r.json();}).then(function(data){
-    var content=JSON.parse(atob(data.content));
+    var content=JSON.parse(decodeURIComponent(escape(atob(data.content))));
     cb(null,content,data.sha);
   }).catch(function(e){cb(e,null,null);});
 }
