@@ -375,7 +375,7 @@
           ]
         }
       ],
-      "points": 23,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-05",
@@ -419,7 +419,12 @@
           ]
         },
         "_lastLoginDate": "2026-04-05"
-      }
+      },
+      "unlockedAbydos": [
+        "serika",
+        "hoshino",
+        "shiroko"
+      ]
     },
     "쿼츠": {
       "pw": "0903",
