@@ -1545,8 +1545,12 @@ function showDiscover(p) {
     popup.style.left=(rect.left+rect.width/2)+'px';
     popup.style.top=(rect.bottom+4)+'px';
     popup.style.transform='translateX(-50%)';
-    popup.innerHTML='<button id="dfp-select" class="btn btn-blue" style="font-size:12px;padding:4px 12px"><span class="btn-inner">선택</span></button><button id="dfp-detail" class="btn btn-stone" style="font-size:12px;padding:4px 12px"><span class="btn-inner">자세히</span></button>';
+    var btnSelect=document.createElement('button');btnSelect.className='btn btn-blue';btnSelect.style.cssText='font-size:12px;padding:4px 12px';btnSelect.innerHTML='<span class="btn-inner">선택</span>';
+    var btnDetail=document.createElement('button');btnDetail.className='btn btn-stone';btnDetail.style.cssText='font-size:12px;padding:4px 12px';btnDetail.innerHTML='<span class="btn-inner">자세히</span>';
+    popup.appendChild(btnSelect);popup.appendChild(btnDetail);
     document.body.appendChild(popup);
+    btnSelect.addEventListener('click',function(ev){ev.stopPropagation();var fp=document.getElementById('discover-float-popup');if(fp)fp.remove();doDiscoverSelect(parseInt(idx));});
+    btnDetail.addEventListener('click',function(ev){ev.stopPropagation();var pk=document.querySelector('.discover-pick[data-discover="'+idx+'"]');if(pk){var r=pk.getBoundingClientRect();showTooltip(bid,r,null);}});
   });
 }
 
@@ -1639,8 +1643,12 @@ function showDiscoverCustom(choices) {
     popup.style.left=(rect.left+rect.width/2)+'px';
     popup.style.top=(rect.bottom+4)+'px';
     popup.style.transform='translateX(-50%)';
-    popup.innerHTML='<button id="dfp-select" class="btn btn-blue" style="font-size:12px;padding:4px 12px"><span class="btn-inner">선택</span></button><button id="dfp-detail" class="btn btn-stone" style="font-size:12px;padding:4px 12px"><span class="btn-inner">자세히</span></button>';
+    var btnSelect=document.createElement('button');btnSelect.className='btn btn-blue';btnSelect.style.cssText='font-size:12px;padding:4px 12px';btnSelect.innerHTML='<span class="btn-inner">선택</span>';
+    var btnDetail=document.createElement('button');btnDetail.className='btn btn-stone';btnDetail.style.cssText='font-size:12px;padding:4px 12px';btnDetail.innerHTML='<span class="btn-inner">자세히</span>';
+    popup.appendChild(btnSelect);popup.appendChild(btnDetail);
     document.body.appendChild(popup);
+    btnSelect.addEventListener('click',function(ev){ev.stopPropagation();var fp=document.getElementById('discover-float-popup');if(fp)fp.remove();doCustomSelect(parseInt(idx));});
+    btnDetail.addEventListener('click',function(ev){ev.stopPropagation();var pk=document.querySelector('.discover-pick[data-discover="'+idx+'"]');if(pk){var r=pk.getBoundingClientRect();showTooltip(bid,r,null);}});
   });
 }
 
