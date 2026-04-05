@@ -546,37 +546,64 @@ function initPool() {
   return pool;
 }
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
-var ENIGMA_UNLOCK_COST = 1; // 해금 1회당 비용
-var ABYDOS_LOCKED_IDS = ['ayane','serika','nonomi','shiroko','hoshino'];
-var ENIGMA_SAVE_KEY = 'babg_enigma';
+var ENIGMA_UNLOCK_COST = 10; // 신비해방 1회당 비용
+// 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
+var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino'];
+var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
-function getEnigmaPoints() {
-  try { return parseInt(localStorage.getItem(ENIGMA_SAVE_KEY)||'0')||0; } catch(e){return 0;}
-}
-function setEnigmaPoints(n) {
-  try { localStorage.setItem(ENIGMA_SAVE_KEY, String(Math.max(0,n))); } catch(e){}
-}
+// 해방된 카드 목록 (localStorage)
 function getUnlockedAbydos() {
   try { return JSON.parse(localStorage.getItem(ABYDOS_UNLOCK_KEY)||'[]'); } catch(e){return [];}
 }
 function setUnlockedAbydos(arr) {
   try { localStorage.setItem(ABYDOS_UNLOCK_KEY, JSON.stringify(arr)); } catch(e){}
 }
-function unlockAbydosCard() {
+// 마지막으로 fetch된 엘리그마 포인트 캐시 (renderAll 표시용)
+function getEnigmaPoints() { return window._enigmaPointsCache||0; }
+
+// 신비해방 — 퀘스트 창에서 호출. pd.points에서 차감 후 서버 저장.
+function doMysteryUnlock() {
+  if(!window._babgLogin||!window._babgLogin.name){alert('로그인이 필요합니다.');return;}
   var unlocked = getUnlockedAbydos();
-  var locked = ABYDOS_LOCKED_IDS.filter(function(id){ return unlocked.indexOf(id)===-1; });
-  if(locked.length===0) return null;
-  var enigma = getEnigmaPoints();
-  if(enigma < ENIGMA_UNLOCK_COST) return null;
-  setEnigmaPoints(enigma - ENIGMA_UNLOCK_COST);
-  var pick = locked[Math.floor(Math.random()*locked.length)];
-  unlocked.push(pick);
-  setUnlockedAbydos(unlocked);
-  return pick;
+  var locked = MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
+  if(locked.length===0){alert('더 이상 해방할 신비해방 카드가 없습니다.');return;}
+  fetchRecords(function(err,data,sha){
+    if(err||!data){alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
+    var pd=data.players[window._babgLogin.name];
+    if(!pd){alert('플레이어 데이터를 찾을 수 없습니다.');return;}
+    if(!pd.points||pd.points<ENIGMA_UNLOCK_COST){
+      alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
+    }
+    pd.points-=ENIGMA_UNLOCK_COST;
+    var pick=locked[Math.floor(Math.random()*locked.length)];
+    unlocked.push(pick);
+    setUnlockedAbydos(unlocked);
+    saveRecords(data,sha,function(){
+      window._enigmaPointsCache=pd.points;
+      var pickedName=pick;
+      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;break;}}
+      alert('[신비해방] '+pickedName+' 해방!\n남은 엘리그마: '+pd.points+'P');
+      if(typeof renderQuestUI==='function') renderQuestUI();
+      if(typeof renderAll==='function') renderAll();
+    });
+  });
 }
-function addEnigmaPoints(n) {
-  setEnigmaPoints(getEnigmaPoints() + n);
+
+// 개발용: 엘리그마 +10P (서버에 반영)
+function devAddEnigma() {
+  if(!window._babgLogin||!window._babgLogin.name){alert('로그인 필요');return;}
+  fetchRecords(function(err,data,sha){
+    if(err||!data)return;
+    var pd=data.players[window._babgLogin.name];
+    if(!pd)return;
+    pd.points=(pd.points||0)+10;
+    saveRecords(data,sha,function(){
+      window._enigmaPointsCache=pd.points;
+      if(typeof renderQuestUI==='function') renderQuestUI();
+      if(typeof renderAll==='function') renderAll();
+    });
+  });
 }
 
 function takeFromPool(charId) { if(SANDBOX)return true; if(G.pool[charId]>0){G.pool[charId]--;return true;} return false; }
