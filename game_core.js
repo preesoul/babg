@@ -5740,26 +5740,26 @@ function restoreGame(save){
 
 // ===== 퀘스트 시스템 =====
 var REPEAT_QUESTS = [
-  {id:'repeat_play2', name:'게임 2판 하기 (반복)', target:2, points:1, repeatable:true}
+  {id:'repeat_play1', name:'게임 1판 하기 (반복)', target:1, points:2, repeatable:true}
 ];
 var DAILY_QUESTS = [
-  {id:'play3', name:'게임 3판 하기', target:3, points:3},
-  {id:'win1', name:'1등 1판 하기', target:1, points:3},
-  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:3},
-  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:3},
-  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:3},
-  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:3},
-  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:3},
-  {id:'skin3', name:'영입으로 스킨 3회 갈아입히기', target:3, points:3},
-  {id:'discover3', name:'발견! 3회 하기', target:3, points:3}
+  {id:'play3', name:'게임 3판 하기', target:3, points:5},
+  {id:'win1', name:'1등 1판 하기', target:1, points:5},
+  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:5},
+  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:5},
+  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:5},
+  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:5},
+  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:5},
+  {id:'skin3', name:'영입으로 스킨 3회 갈아입히기', target:3, points:5},
+  {id:'discover3', name:'발견! 3회 하기', target:3, points:5}
 ];
 var WEEKLY_QUESTS = [
-  {id:'win3', name:'1등 3판 하기', target:3, points:5},
-  {id:'play10', name:'게임 10판 하기', target:10, points:5},
-  {id:'discover10', name:'발견! 10회 하기', target:10, points:5},
-  {id:'skin10', name:'영입으로 스킨 10회 갈아입히기', target:10, points:5},
-  {id:'hidden1', name:'7성 카드 완성하기', target:1, points:5},
-  {id:'hidden_win', name:'7성 카드가 생존한 채 1등하기', target:1, points:5}
+  {id:'win3', name:'1등 3판 하기', target:3, points:10},
+  {id:'play10', name:'게임 10판 하기', target:10, points:10},
+  {id:'discover10', name:'발견! 10회 하기', target:10, points:10},
+  {id:'skin10', name:'영입으로 스킨 10회 갈아입히기', target:10, points:10},
+  {id:'hidden1', name:'7성 카드 완성하기', target:1, points:10},
+  {id:'hidden_win', name:'7성 카드가 생존한 채 1등하기', target:1, points:10}
 ];
 
 window._questTracker = {
@@ -5873,7 +5873,7 @@ function updateQuestProgress(playerData, tracker, placement) {
       if (!def) continue;
 
       // 진행도 업데이트
-      if (q.id === 'repeat_play2') {
+      if (q.id === 'repeat_play1') {
         q.progress += 1;
       } else if (q.id === 'play3' || q.id === 'play10') {
         q.progress += 1;
