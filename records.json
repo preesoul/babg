@@ -3167,9 +3167,54 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T23:56:23",
+          "placement": 8,
+          "turn": 8,
+          "tier": 3,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 16,
+              "hp": 16,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "모모카",
+              "baseId": "momoka",
+              "atk": 6,
+              "hp": 5,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Momoka.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 5,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 16,
+      "points": 18,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -3197,7 +3242,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -3207,7 +3252,7 @@
             },
             {
               "id": "discover10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             }
           ]
