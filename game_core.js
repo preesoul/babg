@@ -5732,20 +5732,20 @@ function restoreGame(save){
 
 // ===== 퀘스트 시스템 =====
 var REPEAT_QUESTS = [
-  {id:'repeat_play3', name:'게임 3판 하기 (반복)', target:3, points:1, repeatable:true}
+  {id:'repeat_play2', name:'게임 2판 하기 (반복)', target:2, points:1, repeatable:true}
 ];
 var DAILY_QUESTS = [
-  {id:'login', name:'로그인 하기', target:1, points:2},
-  {id:'play3', name:'게임 3판 하기', target:3, points:2},
-  {id:'win1', name:'1등 1판 하기', target:1, points:2},
-  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:2},
-  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:2},
-  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:2},
-  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:2},
-  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:2}
+  {id:'play3', name:'게임 3판 하기', target:3, points:3},
+  {id:'win1', name:'1등 1판 하기', target:1, points:3},
+  {id:'trinity10', name:'트리니티 학생 10번 영입하기', target:10, points:3},
+  {id:'gehenna10', name:'게헨나 학생 10번 영입하기', target:10, points:3},
+  {id:'hyakkiyako10', name:'백귀야행 학생 10번 영입하기', target:10, points:3},
+  {id:'millennium10', name:'밀레니엄 학생 10번 영입하기', target:10, points:3},
+  {id:'kill10', name:'학생 10명 쓰러뜨리기', target:10, points:3},
+  {id:'skin3', name:'영입으로 스킨 3회 갈아입히기', target:3, points:3},
+  {id:'discover3', name:'발견! 3회 하기', target:3, points:3}
 ];
 var WEEKLY_QUESTS = [
-  {id:'login3', name:'로그인 3회 하기', target:3, points:5},
   {id:'win3', name:'1등 3판 하기', target:3, points:5},
   {id:'play10', name:'게임 10판 하기', target:10, points:5},
   {id:'discover10', name:'발견! 10회 하기', target:10, points:5},
@@ -5853,7 +5853,7 @@ function updateQuestProgress(playerData, tracker, placement) {
       if (!def) continue;
 
       // 진행도 업데이트
-      if (q.id === 'repeat_play3') {
+      if (q.id === 'repeat_play2') {
         q.progress += 1;
       } else if (q.id === 'play3' || q.id === 'play10') {
         q.progress += 1;
@@ -5869,9 +5869,9 @@ function updateQuestProgress(playerData, tracker, placement) {
         q.progress += tracker.recruits['밀레니엄'] || 0;
       } else if (q.id === 'kill10') {
         q.progress += tracker.kills || 0;
-      } else if (q.id === 'discover10') {
+      } else if (q.id === 'discover10' || q.id === 'discover3') {
         q.progress += tracker.discovers || 0;
-      } else if (q.id === 'skin10') {
+      } else if (q.id === 'skin10' || q.id === 'skin3') {
         q.progress += tracker.skins || 0;
       } else if (q.id === 'hidden1') {
         if (tracker.hiddenCompleted) q.progress += 1;
