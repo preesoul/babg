@@ -3385,13 +3385,14 @@ function _doDR(unit, mySide, otherSide, log) {
   else if(id==='hoshino'){
     // 호시노 뒤끝: 자신의 공격력과 체력을 무작위 아군 1인에게 부여
     var hoshinoCands=[];
+    var _hoshinoHp=unit.maxHp||Math.max(1,unit.hp);
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)hoshinoCands.push(mySide[i]);}
     var hoshinoCount=unit.isSkin?2:1;
     for(var _hi=0;_hi<hoshinoCount&&hoshinoCands.length>0;_hi++){
       var _hpIdx=Math.floor(Math.random()*hoshinoCands.length);
       var hoshinoPick=hoshinoCands.splice(_hpIdx,1)[0];
-      hoshinoPick.atk+=unit.atk;hoshinoPick.hp+=unit.hp;
-      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+hoshinoPick.name+'에게 +'+unit.atk+'/+'+unit.hp+' 부여!'});
+      hoshinoPick.atk+=unit.atk;hoshinoPick.hp+=_hoshinoHp;
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+hoshinoPick.name+'에게 +'+unit.atk+'/+'+_hoshinoHp+' 부여!'});
     }
   }
   else if(id==='Shiroko_Terror'){
@@ -3524,7 +3525,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(unit.baseId==='arisu') _G.arisuDeathCount=(_G.arisuDeathCount||0)+1;
       // 시로코 킬 추적 (패시브: 다음 턴 청휘석)
       if(killedBy&&killedBy.baseId==='shiroko'&&killedBy._mySide===a){
-        _G._shirokoKillsThisBattle=(_G._shirokoKillsThisBattle||0)+(killedBy.isSkin?2:1);
+        var _shirokoGain=killedBy.isSkin?2:1;
+        _G._shirokoKillsThisBattle=(_G._shirokoKillsThisBattle||0)+_shirokoGain;
+        log2.push({cls:'soc',text:'[패시브] '+killedBy.name+': 청휘석을 '+_shirokoGain+' 얻었다!'});
       }
       // 세이아 사망 페널티: 아군 전체 능력 영구 삭제
       if(unit.baseId==='trinity_seia'){
