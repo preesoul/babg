@@ -324,7 +324,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 #title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
 
 /* 능력 팝업 — BA TCG 다크 블루 */
-.ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:300;justify-content:center;align-items:center}
+.ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:800;justify-content:center;align-items:center}
 .ability-popup-overlay.active{display:flex}
 .ability-popup{background:#1a2a3a;border-radius:6px;padding:20px 24px;max-width:360px;width:90%;border:2.5px solid #3a5a6e;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:fadeInUp 0.2s ease;color:#c0d8e8}
 .ability-popup .ap-type{display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:8px}
@@ -782,24 +782,38 @@ function showAbilityPopup(baseId, e, isSkin) {
   if(_ch) charName=_ch.name;
   if(TOKENS[baseId]) charName=TOKENS[baseId].name;
 
-  var typeEl=document.getElementById('ap-type');
-  typeEl.textContent=info.type;
-  typeEl.className='ap-type';
-  if(info.type==='첫인사') typeEl.classList.add('bc');
-  else if(info.type==='뒤끝') typeEl.classList.add('dr');
-  else if(info.type==='개전') typeEl.classList.add('soc');
-  else if(info.type==='버티기'){typeEl.style.background='rgba(16,185,129,0.2)';typeEl.style.color='#6ee7b7';typeEl.style.border='1px solid rgba(16,185,129,0.3)';}
-  else if(info.type==='패시브'){typeEl.style.background='rgba(168,85,247,0.2)';typeEl.style.color='#c084fc';typeEl.style.border='1px solid rgba(168,85,247,0.3)';}
-
-  document.getElementById('ap-name').textContent=charName;
-  var descEl=document.getElementById('ap-desc');
-  descEl.textContent=info.desc;
-
-  var skinEl=document.getElementById('ap-skin');
   var _apCh=findAnyChar(baseId);
-  if(_apCh&&_apCh.skin&&_apCh.tier<7){skinEl.innerHTML='3장 모으면 <span style="color:#ffd700">'+_apCh.skin+'</span>이(가) 됩니다!';skinEl.style.display='block';}
-  else{skinEl.style.display='none';}
+  var popupEl=document.getElementById('ability-popup');
+  var html='';
+  // 카드 이미지
+  var imgSrc=_apCh?(isSkin&&_apCh.imgGold?_apCh.imgGold:_apCh.img):'';
+  if(imgSrc) html+='<div style="height:200px;overflow:hidden;border-radius:6px 6px 0 0;margin:-16px -16px 12px -16px;position:relative"><img src="img/'+imgSrc+'" style="width:100%;height:auto;position:absolute;top:0;left:0" onerror="this.parentElement.style.display=\'none\'"></div>';
+  // 이름 + 학교
+  html+='<div style="font-size:20px;font-weight:700;color:#e0eaf4;margin-bottom:2px">'+charName+'</div>';
+  if(_apCh) html+='<div style="font-size:12px;color:#6a8a9e;margin-bottom:8px">'+(_apCh.school||'')+' · '+(['1학년','1학년','2학년','2학년','3학년','3학년','7성'][(_apCh.tier||1)-1]||'')+'</div>';
+  // 티어 + 기본 스탯
+  if(_apCh) html+='<div style="display:flex;gap:8px;margin-bottom:10px"><span style="background:#c8a010;color:#000;padding:2px 8px;border-radius:10px;font-weight:900;font-size:12px">★'+_apCh.tier+'</span><span style="color:#5ab0e8;font-weight:700;font-size:13px">⚔ '+_apCh.atk+'</span><span style="color:#e04040;font-weight:700;font-size:13px">❤ '+_apCh.hp+'</span></div>';
+  // 키워드
+  if(_apCh&&_apCh.kw&&_apCh.kw.length>0){
+    var kwLabels2={taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',ambush:'기습',invincible:'무적'};
+    html+='<div style="margin-bottom:8px">';
+    for(var _k=0;_k<_apCh.kw.length;_k++){
+      var kn=_apCh.kw[_k];if(kn==='survive'||kn==='preemptive')continue;
+      html+='<span style="display:inline-block;padding:2px 8px;margin:1px;border-radius:4px;background:rgba(180,210,230,0.3);border:1px solid rgba(200,225,240,0.5);color:#f0f8ff;font-size:12px">'+(kwLabels2[kn]||kn)+'</span>';
+    }
+    html+='</div>';
+  }
+  // 능력 타입
+  var typeColor={'첫인사':'#93c5fd','뒤끝':'#fca5a5','개전':'#fde68a','버티기':'#6ee7b7','패시브':'#c084fc','선제':'#fbbf24'};
+  html+='<div style="margin-bottom:6px"><span style="display:inline-block;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700;color:'+(typeColor[info.type]||'#c0d0e0')+';background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)">'+info.type+'</span></div>';
+  // 능력 설명
+  html+='<div style="font-size:13px;color:#c0d0e0;line-height:1.6;white-space:pre-line;margin-bottom:8px">'+info.desc+'</div>';
+  // 스킨 효과
+  if(info.skinEffect) html+='<div style="font-size:12px;color:#ffd700;padding:6px 10px;background:rgba(200,160,16,0.1);border:1px solid rgba(200,160,16,0.3);border-radius:6px;margin-bottom:8px">'+info.skinEffect+'</div>';
+  // 트리플 안내
+  if(_apCh&&_apCh.skin&&_apCh.tier<7) html+='<div style="font-size:12px;color:#fbbf24;margin-top:4px">3장 모으면 '+_apCh.skin+'이(가) 됩니다!</div>';
 
+  popupEl.innerHTML=html+'<button class="ap-close" id="ap-close" onclick="document.getElementById(\'ability-popup-overlay\').classList.remove(\'active\')">닫기</button>';
   document.getElementById('ability-popup-overlay').classList.add('active');
 }
 
