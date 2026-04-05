@@ -247,7 +247,7 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1}; // 개전
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
@@ -256,7 +256,7 @@ var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, mille
 var ABILITY_DESCS = {
   juri:     {type:'뒤끝',desc:'다른 아군이 남아 있다면\n<팬짱>을 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.',skinEffect:'웨이트리스 주리: 팬짱 2마리 소환',skinEffectDesc:'뒤끝: 다른 아군이 남아 있다면\n<팬짱>을 <span style="color:#ffd700;font-weight:700">2마리</span> 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.'},
   chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 아군 두 명에게 부여',skinEffectDesc:'뒤끝: 아군 무작위 <span style="color:#ffd700;font-weight:700">2인에게</span> 보호막을 부여합니다.'},
-  kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 동일'},
+  kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 도발 뒤집기',skinEffectDesc:'개전: 상대의 <span style="color:#ffd700;font-weight:700">도발을 해제하고, 도발 없던 학생에게 도발을 부여</span>합니다.\n배치를 역순으로 뒤집습니다.'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +1/+1',skinEffect:'메이드 미도리: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +1/+1',skinEffect:'메이드 모모이: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+2',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+2</span>'},
@@ -333,7 +333,7 @@ var ABILITY_DESCS = {
   koharu:   {type:'선제',desc:'공격 시, 5% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 10%',skinEffectDesc:'선제: 공격 시, <span style="color:#ffd700;font-weight:700">10%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
   suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n30% 내립니다.',skinEffect:'마법소녀 스즈미: 60% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">60%</span> 내립니다.'},
-  mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 동일'},
+  mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
   haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',skinEffect:'새해 하루카: 2~5회 / 조건 시 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">2~5회</span> 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 <span style="color:#ffd700;font-weight:700">10회</span> 공격합니다.'},
   // 총학생회
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',skinEffect:'인터뷰 하이네: +4/+4',skinEffectDesc:'패시브: 팔면 아군 전체에 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다.'},
@@ -2782,6 +2782,16 @@ function aiCheckHidden(p) {
 function triggerSOC(u, mySide, otherSide, log) {
   var id=u.baseId;
   if(id==='kayoko'){
+    // 스킨: 도발 뒤집기
+    if(u.isSkin){
+      for(var i=0;i<otherSide.length;i++){
+        if(!otherSide[i].alive)continue;
+        var ti=otherSide[i].kw.indexOf('taunt');
+        if(ti!==-1){otherSide[i].kw.splice(ti,1);}
+        else{otherSide[i].kw.push('taunt');}
+      }
+      log.push({cls:'soc',text:'[개전] '+u.name+': 적 도발 뒤집기!'});
+    }
     // 적 1~5번째 배치 역순
     var aliveIdx=[];for(var i=0;i<otherSide.length;i++)if(otherSide[i].alive)aliveIdx.push(i);
     var toRev=aliveIdx.slice(0,5);
@@ -2791,6 +2801,11 @@ function triggerSOC(u, mySide, otherSide, log) {
       for(var i=0;i<toRev.length;i++)otherSide[toRev[i]]=units[i];
       log.push({cls:'soc',text:'[개전] '+u.name+': 적 1~'+toRev.length+'번 배치 역순!'});
     }
+  }
+  else if(id==='mutsuki'&&u.isSkin){
+    // 새해 무츠키: 개전 공격력 +5
+    u.atk+=5;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 공격력 +5! ('+u.atk+')'});
   }
   else if(id==='midori'){
     // 모모이 수만큼 버프 (메이드면 수×+2/+2, 둘 다 메이드면 수×+4/+4)
