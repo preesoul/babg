@@ -6085,9 +6085,8 @@ function _renderRecordCard(r,showPin,pinIdx){
       var _charDef=findAnyChar(u.baseId);
       var _isLocked=_charDef&&_charDef.locked&&_unlocked.indexOf(u.baseId)===-1;
       if(_isLocked){
-        h+='<div style="width:90px;height:120px;background:#1a2a3a;border:2px solid #3a5a6e;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:scale(0.75);transform-origin:top left;margin-right:-22px;margin-bottom:-30px">';
-        h+='<img src="img/Hidden_card.png" style="width:50px;height:50px;object-fit:contain;filter:grayscale(1);opacity:0.5">';
-        h+='<div style="color:#666;font-size:9px;margin-top:4px">???</div></div>';
+        var fakeHidden={id:'hidden_rec',baseId:'hidden',name:'???',school:'',tier:u.tier||1,atk:0,hp:0,kw:[],isSkin:false,img:'Hidden_card.png',coinOff:false};
+        h+='<div class="rec-card" style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none;opacity:0.5;filter:grayscale(1)">'+cardHtml(fakeHidden,j,true)+'</div>';
       } else {
         var fakeUnit={id:u.baseId+'_rec',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk,hp:u.hp,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
         h+='<div class="rec-card" style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
