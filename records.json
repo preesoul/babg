@@ -72,7 +72,8 @@
               "img": "Lin_(flight).png",
               "school": "총학생회"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T02:58:17",
