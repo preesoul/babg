@@ -1157,46 +1157,48 @@ function _entranceBang(m,p){
   setTimeout(function(){fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},350);},80);
 }
 function _entranceGlow(m,p){
-  // 화면 금빛 밝아짐
-  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0);pointer-events:none;z-index:9999;transition:opacity 1.2s ease-in;';
+  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
   document.body.appendChild(fl);
-  requestAnimationFrame(function(){fl.style.opacity='1';fl.style.background='rgba(255,248,220,0.85)';});
+  requestAnimationFrame(function(){fl.style.opacity='1';});
+  // 카드를 바로 추가하고 렌더 (먹통 방지)
+  p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);
+  playRecruitVoice(m.baseId);
+  renderAll();
+  // 카드를 하얗게 → 점점 원래 색 복원
+  var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];
+  var lastCard=cards[cards.length-1];
+  if(lastCard){
+    lastCard.style.filter='brightness(3) saturate(0)';
+    lastCard.style.transition='filter 3s ease-out 1.5s';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){lastCard.style.filter='brightness(1) saturate(1)';});});
+  }
+  // 화면: 1.5초 유지 후 2.5초간 복원
   setTimeout(function(){
-    // 카드 추가 (쿵 소리 없이)
-    p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);
-    playRecruitVoice(m.baseId);
-    renderAll();
-    // 카드를 하얗게 시작 → 점점 원래 색 복원
-    var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];
-    var lastCard=cards[cards.length-1];
-    if(lastCard){
-      lastCard.style.filter='brightness(3) saturate(0)';
-      lastCard.style.transition='filter 2.5s ease-out';
-      requestAnimationFrame(function(){lastCard.style.filter='brightness(1) saturate(1)';});
-    }
-    // 화면 밝기 복원
     fl.style.transition='opacity 2.5s ease-out';fl.style.opacity='0';
     setTimeout(function(){if(fl.parentNode)fl.remove();},2500);
   },1500);
 }
 function _entranceDark(m,p){
-  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;z-index:9999;transition:opacity 0.3s;';
+  var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,1);pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.3s;';
   document.body.appendChild(fl);
-  requestAnimationFrame(function(){fl.style.opacity='1';fl.style.background='rgba(0,0,0,1)';});
+  requestAnimationFrame(function(){fl.style.opacity='1';});
+  // 카드를 바로 추가하고 렌더 (먹통 방지)
+  p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);
+  playRecruitVoice(m.baseId);
+  renderAll();
+  // 카드를 검정으로 → 점점 밝아짐
+  var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];
+  var lastCard=cards[cards.length-1];
+  if(lastCard){
+    lastCard.style.filter='brightness(0)';
+    lastCard.style.transition='filter 3.5s ease-out 1s';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){lastCard.style.filter='brightness(1)';});});
+  }
+  // 화면: 1초 유지 후 3.5초간 밝아짐
   setTimeout(function(){
-    p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);
-    playRecruitVoice(m.baseId);
-    renderAll();
-    var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];
-    var lastCard=cards[cards.length-1];
-    if(lastCard){
-      lastCard.style.filter='brightness(0)';
-      lastCard.style.transition='filter 3s ease-out';
-      requestAnimationFrame(function(){lastCard.style.filter='brightness(1)';});
-    }
-    fl.style.transition='opacity 3s ease-out';fl.style.opacity='0';
-    setTimeout(function(){if(fl.parentNode)fl.remove();},3000);
-  },1200);
+    fl.style.transition='opacity 3.5s ease-out';fl.style.opacity='0';
+    setTimeout(function(){if(fl.parentNode)fl.remove();},3500);
+  },1000);
 }
 
 // 7성 고유 등장 연출
