@@ -1138,7 +1138,7 @@
           "pinned": true
         }
       ],
-      "points": 27,
+      "points": 17,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -1192,7 +1192,9 @@
         },
         "_lastLoginDate": "2026-04-06"
       },
-      "unlockedAbydos": []
+      "unlockedAbydos": [
+        "hoshino"
+      ]
     },
     "남민철": {
       "pw": "5056",
