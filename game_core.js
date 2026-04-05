@@ -5311,7 +5311,7 @@ function renderRecords(){
           html+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
           html+='</div>';
           // 보드 카드 렌더링
-          html+='<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">';
+          html+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
           var board=r.board||[];
           for(var j=0;j<board.length;j++){
             var u=board[j];
@@ -5320,7 +5320,7 @@ function renderRecords(){
             } else {
               // cardHtml용 가짜 유닛 객체 생성
               var fakeUnit={id:u.baseId+'_rec',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk,hp:u.hp,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
-              html+='<div style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
+              html+='<div class="rec-card" style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
             }
           }
           html+='</div></div>';
