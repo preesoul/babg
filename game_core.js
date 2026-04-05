@@ -1182,10 +1182,21 @@ function _entranceGlow(m,p){
 function _entranceDark(m,p){
   var fl=document.createElement('div');fl.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;z-index:9999;transition:opacity 0.3s;';
   document.body.appendChild(fl);
-  setTimeout(function(){fl.style.opacity='1';fl.style.background='rgba(0,0,0,1)';},50);
-  setTimeout(function(){_entranceCardLand(m,p);fl.style.transition='opacity 2s ease-out';fl.style.opacity='0';
-    setTimeout(function(){if(fl.parentNode)fl.remove();},2000);
-  },1500);
+  requestAnimationFrame(function(){fl.style.opacity='1';fl.style.background='rgba(0,0,0,1)';});
+  setTimeout(function(){
+    p.board.push(m);if(BC_IDS[m.baseId])triggerBattlecry(m,p);
+    playRecruitVoice(m.baseId);
+    renderAll();
+    var boardEl=document.getElementById('ui-board');var cards=boardEl?boardEl.querySelectorAll('.card'):[];
+    var lastCard=cards[cards.length-1];
+    if(lastCard){
+      lastCard.style.filter='brightness(0)';
+      lastCard.style.transition='filter 3s ease-out';
+      requestAnimationFrame(function(){lastCard.style.filter='brightness(1)';});
+    }
+    fl.style.transition='opacity 3s ease-out';fl.style.opacity='0';
+    setTimeout(function(){if(fl.parentNode)fl.remove();},3000);
+  },1200);
 }
 
 // 7성 고유 등장 연출
