@@ -136,7 +136,8 @@
               "img": "Lin.png",
               "school": "총학생회"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T03:12:09",
@@ -218,7 +219,8 @@
               "img": "Neru.png",
               "school": "밀레니엄"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T03:38:32",
@@ -291,7 +293,8 @@
               "img": "Lin.png",
               "school": "총학생회"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T04:35:36",
@@ -373,7 +376,8 @@
               "img": "Wakamo_(Swimsuit).png",
               "school": "백귀야행"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T08:54:32",
@@ -405,7 +409,8 @@
               "img": "Satsuki.png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T10:41:12",
@@ -473,7 +478,8 @@
               "img": "Kaya.png",
               "school": "총학생회"
             }
-          ]
+          ],
+          "pinned": false
         }
       ],
       "points": 125,
