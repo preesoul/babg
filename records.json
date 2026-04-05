@@ -373,6 +373,38 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-05T08:54:32",
+          "placement": 1,
+          "turn": 11,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 101,
+              "hp": 98,
+              "tier": 7,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
       "points": 33,
@@ -413,7 +445,7 @@
             },
             {
               "id": "play10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             }
           ]
