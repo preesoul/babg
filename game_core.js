@@ -7,7 +7,7 @@ var CHARS = [
   // 게헨나 3학년
   {id:'kayoko', name:'카요코', school:'게헨나',  tier:4,atk:5,hp:5,kw:[],            skin:'카요코(드레스)',   img:'Kayoko.png',         imgGold:'Kayoko_(Dress).png'},
   // 게헨나 1학년
-  {id:'junko',  name:'준코',   school:'게헨나',  tier:1,atk:2,hp:2,kw:['selfdestruct'],            skin:'준코(새해)',       img:'Junko.png',          imgGold:'Junko_(New_Year).png'},
+  {id:'junko',  name:'준코',   school:'게헨나',  tier:1,atk:1,hp:2,kw:['selfdestruct'],            skin:'준코(새해)',       img:'Junko.png',          imgGold:'Junko_(New_Year).png'},
   // 밀레니엄 1학년
   {id:'toki',   name:'토키',   school:'밀레니엄',tier:2,atk:1,hp:4,kw:['survive'],   skin:'토키(바니걸)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
   {id:'midori', name:'미도리', school:'밀레니엄',tier:1,atk:2,hp:2,kw:[],            skin:'미도리(메이드)',   img:'Midori.png',         imgGold:'Midori_(Maid).png'},
