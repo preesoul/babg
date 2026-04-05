@@ -3151,7 +3151,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   else if(id==='mina'){
     // 미나 개전: 아군 전체 -1/-1
     for(var _mi=0;_mi<mySide.length;_mi++){
-      if(mySide[_mi].alive){mySide[_mi].atk=Math.max(1,mySide[_mi].atk-1);mySide[_mi].hp-=1;
+      if(mySide[_mi].alive&&!mySide[_mi].abilityImmune){mySide[_mi].atk=Math.max(1,mySide[_mi].atk-1);mySide[_mi].hp-=1;
         if(mySide[_mi].hp<=0){mySide[_mi].hp=1;}}
     }
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 -1/-1!'});
@@ -3680,7 +3680,7 @@ function _doDR(unit, mySide, otherSide, log) {
     // 미나 뒤끝: 아군 전체 +3/+3 (스킨: +6/+6)
     var minaBuff=unit.isSkin?6:3;
     for(var _mi=0;_mi<mySide.length;_mi++){
-      if(mySide[_mi].alive){mySide[_mi].atk+=minaBuff;mySide[_mi].hp+=minaBuff;}
+      if(mySide[_mi].alive&&!mySide[_mi].abilityImmune){mySide[_mi].atk+=minaBuff;mySide[_mi].hp+=minaBuff;}
     }
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아군 전체 +'+minaBuff+'/+'+minaBuff+'!'});
   }
@@ -4239,6 +4239,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
   // 버티기 효과 추적 (실제 보드 반영용)
   var surviveEffects=[];
 
+  // 사야 패시브: 전투 중 효과 면역 (기본: 전체, 스킨: 적만) — 개전 전에 설정
+  for(var _sy=0;_sy<a.length;_sy++){if(a[_sy].baseId==='saya'&&a[_sy].alive&&!a[_sy]._abilitiesStripped){a[_sy]._sayaImmune=true;if(!a[_sy].isSkin)a[_sy].abilityImmune=true;}}
+  for(var _sy=0;_sy<b.length;_sy++){if(b[_sy].baseId==='saya'&&b[_sy].alive&&!b[_sy]._abilitiesStripped){b[_sy]._sayaImmune=true;if(!b[_sy].isSkin)b[_sy].abilityImmune=true;}}
+
   // 초기 스냅샷 (개전 전 상태)
   steps.push({atkSide:null,atkIdx:-1,defSide:null,defIdx:-1,log:[],snap:snapshot()});
 
@@ -4276,10 +4280,6 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
     return{unit:null,pos:startPos};
   }
-
-  // 사야 패시브: 전투 중 효과 면역 (기본: 전체, 스킨: 적만)
-  for(var _sy=0;_sy<a.length;_sy++){if(a[_sy].baseId==='saya'&&a[_sy].alive&&!a[_sy]._abilitiesStripped){a[_sy]._sayaImmune=true;if(!a[_sy].isSkin)a[_sy].abilityImmune=true;}}
-  for(var _sy=0;_sy<b.length;_sy++){if(b[_sy].baseId==='saya'&&b[_sy].alive&&!b[_sy]._abilitiesStripped){b[_sy]._sayaImmune=true;if(!b[_sy].isSkin)b[_sy].abilityImmune=true;}}
 
   // 레이사 마법소녀: 개전 버프 후 풀 hp 기록
   for(var _r=0;_r<a.length;_r++)if(a[_r].isSkin&&a[_r].baseId==='reisa')a[_r]._reisaFullHp=a[_r].hp;
