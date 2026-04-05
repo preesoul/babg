@@ -1217,40 +1217,8 @@ function _entranceDark(m,p){
 
 // 7성 고유 등장 연출
 var HIDDEN_CARD_ENTRANCE = {
-  Shiroko_Terror: function(m,p){
-    // 번쩍! 효과: 화면 전체 화이트 플래시 + 헤비 진동 후 등장
-    var flashEl=document.createElement('div');
-    flashEl.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.9);pointer-events:none;z-index:9999;transition:opacity 0.35s;';
-    document.body.appendChild(flashEl);
-    playSfx('attack_impact_large',0.8);
-    shakeScreen('heavy');
-    p.board.push(m);
-    if(BC_IDS[m.baseId]) triggerBattlecry(m,p);
-    renderAll();
-    // 카드 착지 흔들림 (trinity_mika 동일 패턴)
-    var boardEl=document.getElementById('ui-board');
-    var cards=boardEl?boardEl.querySelectorAll('.card'):[];
-    var lastCard=cards[cards.length-1];
-    if(lastCard){
-      lastCard.style.transition='transform 0.06s ease-in-out';
-      lastCard.style.transform='scale(1.15)';
-      setTimeout(function(){
-        lastCard.style.transform='translateX(-12px) rotate(-4deg)';
-        setTimeout(function(){lastCard.style.transform='translateX(10px) rotate(3deg)';
-        setTimeout(function(){lastCard.style.transform='translateX(-8px) rotate(-2.5deg)';
-        setTimeout(function(){lastCard.style.transform='translateX(6px) rotate(2deg)';
-        setTimeout(function(){lastCard.style.transform='translateX(-4px) rotate(-1deg)';
-        setTimeout(function(){lastCard.style.transform='translateX(0) rotate(0) scale(1)';},60);},60);},60);},60);},60);
-      },100);
-    }
-    // 플래시 페이드아웃
-    setTimeout(function(){
-      flashEl.style.opacity='0';
-      setTimeout(function(){if(flashEl.parentNode)flashEl.parentNode.removeChild(flashEl);},350);
-    },80);
-    playCardDrop(7);playRecruitVoice('Shiroko_Terror');
-  },
-  // === 쾅! 등장 (시로코테러 동일) ===
+  Shiroko_Terror: function(m,p){_entranceBang(m,p);},
+  // === 쾅! 등장 ===
   gehenna_prefect: function(m,p){_entranceBang(m,p);},
   gehenna_pandemonium: function(m,p){_entranceBang(m,p);},
   millennium_death_momoi: function(m,p){_entranceBang(m,p);},
