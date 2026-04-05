@@ -3998,6 +3998,15 @@ function startBattle() {
             }
           }
         }
+        // 적(opp) 보드에서도 영구 소멸 카드 제거
+        if(finalSnap&&finalSnap.b){
+          for(var _di=0;_di<finalSnap.b.length;_di++){
+            if(!finalSnap.b[_di].alive&&PERMA_DESTROY_IDS.indexOf(finalSnap.b[_di].baseId)!==-1){
+              opp.board=opp.board.filter(function(u){return u.baseId!==finalSnap.b[_di].baseId;});
+              returnToPool(finalSnap.b[_di].baseId,finalSnap.b[_di].isSkin?3:1);
+            }
+          }
+        }
       }
       if(chosen._sideA){
         for(var _ci=0;_ci<chosen._sideA.length&&_ci<p.board.length;_ci++){
@@ -4065,6 +4074,14 @@ function aiAutoBattles() {
     for(var j=0;j<b2.board.length;j++){if(b2.board[j].baseId==='juri'){b2.panchanDeaths=(b2.panchanDeaths||0)+(b2.board[j].isSkin?2:1);break;}}
     if(Math.random()<strA/total){var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0){b2.dead=true;G.aliveCount--;for(var k=0;k<b2.board.length;k++)returnToPool(b2.board[k].baseId,b2.board[k].isSkin?3:1);b2.board=[];}}
     else{var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0){a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}}
+    // AI 전투 후 영구 소멸 카드 제거 + 열차포 생존 카운트 (50% 확률로 파괴)
+    [a2,b2].forEach(function(ai){
+      if(ai.dead)return;
+      ai.board=ai.board.filter(function(u){
+        if(u.baseId==='gehenna_traingun'&&Math.random()<0.5){returnToPool(u.baseId,u.isSkin?3:1);return false;}
+        return true;
+      });
+    });
   }
 }
 
