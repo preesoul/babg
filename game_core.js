@@ -331,11 +331,11 @@ var ABILITY_DESCS = {
   kaya:     {type:'개전',desc:'아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 2배로 적용하여 흡수합니다. (가장 마지막에 발동)',skinEffect:'쿠데타 카야: 네 배로 흡수',skinEffectDesc:'개전: 아군 맨 왼쪽 학생을 쓰러뜨리고\n먹은 상대의 공격력과 체력을 각각 <span style="color:#ffd700;font-weight:700">네 배로</span> 적용하여 흡수합니다.\n(가장 마지막에 발동)'},
   lin:      {type:'패시브',desc:'아군의 뒤끝과 첫인사가\n한 번 더 발동합니다.',skinEffect:'승무원 린: 두 번 더 발동',skinEffectDesc:'패시브: 아군의 뒤끝과 첫인사가\n<span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
   // ===== 아비도스 =====
-  ayane:    {type:'뒤끝',desc:'다음 턴 청휘석 +1',skinEffect:'수영복 아야네: +2돌',skinEffectDesc:'뒤끝: 다음 턴 청휘석 <span style="color:#ffd700;font-weight:700">+2</span>'},
-  serika:   {type:'패시브',desc:'영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 더합니다.',skinEffect:'수영복 세리카: 두 배로 공/체',skinEffectDesc:'패시브: 영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 <span style="color:#ffd700;font-weight:700">두 배로</span> 더합니다.'},
-  nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 나누지 않고 그대로',skinEffectDesc:'개전: 노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을,\n맨 왼쪽 학생의 공/체에 각각 <span style="color:#ffd700;font-weight:700">그대로</span> 더합니다.'},
-  shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 두 배로 돌',skinEffectDesc:'패시브: 전투 중 시로코가 쓰러뜨린 적의 수의 <span style="color:#ffd700;font-weight:700">두 배</span>만큼,\n다음 턴 청휘석을 얻습니다.'},
-  hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
+  ayane:    {type:'뒤끝',desc:'다음 턴 청휘석 +1',skinEffect:'수영복 아야네: 청휘석 +2',skinEffectDesc:'뒤끝: 다음 턴 청휘석 <span style="color:#ffd700;font-weight:700">+2</span>'},
+  serika:   {type:'패시브',desc:'영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 더합니다.',skinEffect:'수영복 세리카: 두 배로 더합니다.',skinEffectDesc:'패시브: 영입 페이즈가 끝나는 순간, 남은 청휘석을 공격력과 체력에 영구히 <span style="color:#ffd700;font-weight:700">두 배로</span> 더합니다.'},
+  nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 나누지 않고 그대로 더합니다.',skinEffectDesc:'개전: 노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을,\n맨 왼쪽 학생의 공/체에 각각 <span style="color:#ffd700;font-weight:700">그대로</span> 더합니다.'},
+  shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 두 배로 얻습니다.',skinEffectDesc:'패시브: 전투 중 시로코가 쓰러뜨린 적의 수의 <span style="color:#ffd700;font-weight:700">두 배</span>만큼,\n다음 턴 청휘석을 얻습니다.'},
+  hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게 부여합니다.',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
