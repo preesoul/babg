@@ -218,7 +218,8 @@
               "img": "Neru.png",
               "school": "밀레니엄"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-05T03:38:32",
