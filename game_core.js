@@ -1441,8 +1441,7 @@ function showDiscover(p) {
     if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
-    html += '<div class="discover-wrap" data-discover="'+i+'" data-base-id="'+c.id+'" style="display:inline-block;text-align:center">';
-    html += '<div class="card tier'+c.tier+' discover-pick" style="cursor:pointer">';
+    html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
     if(c.img) html += '<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html += '<div class="card-inner">';
     var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
@@ -1453,10 +1452,6 @@ function showDiscover(p) {
     if(aTag) html += '<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html += '<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
     html += '<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div>';
-    html += '</div>';
-    html += '<div class="discover-actions" style="display:none;margin-top:6px;gap:6px;justify-content:center">';
-    html += '<button class="btn btn-blue discover-select" style="font-size:12px;padding:4px 14px"><span class="btn-inner">선택</span></button>';
-    html += '<button class="btn btn-stone discover-detail" style="font-size:12px;padding:4px 14px"><span class="btn-inner">자세히</span></button>';
     html += '</div></div>';
   }
   html += '</div></div>';
@@ -1480,6 +1475,7 @@ function showDiscover(p) {
   }
 
   function doDiscoverSelect(idx){
+    var fp=document.getElementById('discover-float-popup');if(fp)fp.remove();
     overlay.classList.remove('active');
     document.getElementById('battle-intro-area').innerHTML='';
     if(window._questTracker) window._questTracker.discovers++;
@@ -1500,35 +1496,53 @@ function showDiscover(p) {
     }
   }
   document.getElementById('battle-intro-area').addEventListener('click', function handler(e){
-    // "선택" 버튼 클릭
-    if(e.target.closest('.discover-select')){
-      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
+    // floating 팝업 버튼 클릭
+    if(e.target.closest('#dfp-select')){
+      var fp=document.getElementById('discover-float-popup');
+      if(!fp)return;
       if(TUT.active&&TUT.discoverBlocked)return;
-      var idx=parseInt(wrap.getAttribute('data-discover'));
+      var idx=parseInt(fp.getAttribute('data-idx'));
       document.getElementById('battle-intro-area').removeEventListener('click',handler);
       doDiscoverSelect(idx);
       return;
     }
-    // "자세히" 버튼 클릭
-    if(e.target.closest('.discover-detail')){
-      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
-      var bid=wrap.getAttribute('data-base-id');
-      var rect=wrap.querySelector('.discover-pick').getBoundingClientRect();
-      showTooltip(bid,rect,null);
+    if(e.target.closest('#dfp-detail')){
+      var fp=document.getElementById('discover-float-popup');
+      if(!fp)return;
+      var bid=fp.getAttribute('data-bid');
+      var pick=document.querySelector('.discover-pick[data-discover="'+fp.getAttribute('data-idx')+'"]');
+      if(pick){var rect=pick.getBoundingClientRect();showTooltip(bid,rect,null);}
       return;
     }
-    // 카드 클릭 → 버튼 표시
+    // 카드 클릭 → floating 팝업 표시
     var pick=e.target.closest('.discover-pick');
-    if(!pick)return;
+    if(!pick){
+      // 빈 영역 클릭 시 tooltip + popup 정리
+      if(typeof hideTooltip==='function') hideTooltip();
+      var old=document.getElementById('discover-float-popup');if(old)old.remove();
+      var allPicks=document.querySelectorAll('.discover-pick');
+      for(var _dp=0;_dp<allPicks.length;_dp++) allPicks[_dp].style.outline='';
+      return;
+    }
     if(TUT.active&&TUT.discoverBlocked)return;
-    var wrap=pick.closest('.discover-wrap');if(!wrap)return;
-    // 모든 actions 숨기고 현재 것만 표시
-    var allActions=document.querySelectorAll('.discover-actions');
-    for(var _da=0;_da<allActions.length;_da++) allActions[_da].style.display='none';
-    var allWraps=document.querySelectorAll('.discover-wrap');
-    for(var _dw=0;_dw<allWraps.length;_dw++) allWraps[_dw].querySelector('.discover-pick').style.outline='';
-    wrap.querySelector('.discover-actions').style.display='flex';
-    wrap.querySelector('.discover-pick').style.outline='2px solid #ffd700';
+    if(typeof hideTooltip==='function') hideTooltip();
+    var idx=pick.getAttribute('data-discover');
+    var bid=pick.getAttribute('data-base-id');
+    var old=document.getElementById('discover-float-popup');if(old)old.remove();
+    var allPicks=document.querySelectorAll('.discover-pick');
+    for(var _dp=0;_dp<allPicks.length;_dp++) allPicks[_dp].style.outline='';
+    pick.style.outline='2px solid #ffd700';
+    var rect=pick.getBoundingClientRect();
+    var popup=document.createElement('div');
+    popup.id='discover-float-popup';
+    popup.setAttribute('data-idx',idx);
+    popup.setAttribute('data-bid',bid);
+    popup.style.cssText='position:fixed;z-index:999;display:flex;gap:6px;background:rgba(20,30,40,0.95);border:1px solid #ffd700;border-radius:8px;padding:6px 10px;';
+    popup.style.left=(rect.left+rect.width/2)+'px';
+    popup.style.top=(rect.bottom+4)+'px';
+    popup.style.transform='translateX(-50%)';
+    popup.innerHTML='<button id="dfp-select" class="btn btn-blue" style="font-size:12px;padding:4px 12px"><span class="btn-inner">선택</span></button><button id="dfp-detail" class="btn btn-stone" style="font-size:12px;padding:4px 12px"><span class="btn-inner">자세히</span></button>';
+    document.body.appendChild(popup);
   });
 }
 
@@ -1550,8 +1564,7 @@ function showDiscoverCustom(choices) {
     if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id])aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선제</span>';
-    html+='<div class="discover-wrap" data-discover="'+i+'" data-base-id="'+c.id+'" style="display:inline-block;text-align:center">';
-    html+='<div class="card tier'+c.tier+' discover-pick" style="cursor:pointer">';
+    html+='<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
     if(c.img)html+='<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html+='<div class="card-inner">';
     var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
@@ -1559,11 +1572,7 @@ function showDiscoverCustom(choices) {
     html+='<div class="name-banner">'+c.name+'</div><div class="keywords">'+(kwt||'&nbsp;')+'</div>';
     if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
-    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div>';
-    html+='<div class="discover-actions" style="display:none;margin-top:6px;gap:6px;justify-content:center">';
-    html+='<button class="btn btn-blue discover-select" style="font-size:12px;padding:4px 14px"><span class="btn-inner">선택</span></button>';
-    html+='<button class="btn btn-stone discover-detail" style="font-size:12px;padding:4px 14px"><span class="btn-inner">자세히</span></button>';
-    html+='</div></div>';
+    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div></div>';
   }
   html+='</div></div>';
   document.getElementById('battle-intro-area').innerHTML=html;
@@ -1574,6 +1583,7 @@ function showDiscoverCustom(choices) {
   document.getElementById('btn-skip').style.display='none';
   overlay.classList.add('active');
   function doCustomSelect(idx){
+    var fp=document.getElementById('discover-float-popup');if(fp)fp.remove();
     overlay.classList.remove('active');
     document.getElementById('battle-intro-area').innerHTML='';
     var chosen=choices[idx];if(!chosen){renderAll();return;}
@@ -1588,26 +1598,45 @@ function showDiscoverCustom(choices) {
     renderAll();
   }
   document.getElementById('battle-intro-area').addEventListener('click',function handler(e){
-    if(e.target.closest('.discover-select')){
-      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
-      var idx=parseInt(wrap.getAttribute('data-discover'));
+    if(e.target.closest('#dfp-select')){
+      var fp=document.getElementById('discover-float-popup');if(!fp)return;
+      var idx=parseInt(fp.getAttribute('data-idx'));
       document.getElementById('battle-intro-area').removeEventListener('click',handler);
       doCustomSelect(idx);return;
     }
-    if(e.target.closest('.discover-detail')){
-      var wrap=e.target.closest('.discover-wrap');if(!wrap)return;
-      var bid=wrap.getAttribute('data-base-id');
-      var rect=wrap.querySelector('.discover-pick').getBoundingClientRect();
-      showTooltip(bid,rect,null);return;
+    if(e.target.closest('#dfp-detail')){
+      var fp=document.getElementById('discover-float-popup');if(!fp)return;
+      var bid=fp.getAttribute('data-bid');
+      var pick=document.querySelector('.discover-pick[data-discover="'+fp.getAttribute('data-idx')+'"]');
+      if(pick){var rect=pick.getBoundingClientRect();showTooltip(bid,rect,null);}
+      return;
     }
-    var pick=e.target.closest('.discover-pick');if(!pick)return;
-    var wrap=pick.closest('.discover-wrap');if(!wrap)return;
-    var allActions=document.querySelectorAll('.discover-actions');
-    for(var _da=0;_da<allActions.length;_da++) allActions[_da].style.display='none';
-    var allWraps=document.querySelectorAll('.discover-wrap');
-    for(var _dw=0;_dw<allWraps.length;_dw++) allWraps[_dw].querySelector('.discover-pick').style.outline='';
-    wrap.querySelector('.discover-actions').style.display='flex';
-    wrap.querySelector('.discover-pick').style.outline='2px solid #ffd700';
+    var pick=e.target.closest('.discover-pick');
+    if(!pick){
+      if(typeof hideTooltip==='function') hideTooltip();
+      var old=document.getElementById('discover-float-popup');if(old)old.remove();
+      var allPicks=document.querySelectorAll('.discover-pick');
+      for(var _dp=0;_dp<allPicks.length;_dp++) allPicks[_dp].style.outline='';
+      return;
+    }
+    if(typeof hideTooltip==='function') hideTooltip();
+    var idx=pick.getAttribute('data-discover');
+    var bid=pick.getAttribute('data-base-id');
+    var old=document.getElementById('discover-float-popup');if(old)old.remove();
+    var allPicks=document.querySelectorAll('.discover-pick');
+    for(var _dp=0;_dp<allPicks.length;_dp++) allPicks[_dp].style.outline='';
+    pick.style.outline='2px solid #ffd700';
+    var rect=pick.getBoundingClientRect();
+    var popup=document.createElement('div');
+    popup.id='discover-float-popup';
+    popup.setAttribute('data-idx',idx);
+    popup.setAttribute('data-bid',bid);
+    popup.style.cssText='position:fixed;z-index:999;display:flex;gap:6px;background:rgba(20,30,40,0.95);border:1px solid #ffd700;border-radius:8px;padding:6px 10px;';
+    popup.style.left=(rect.left+rect.width/2)+'px';
+    popup.style.top=(rect.bottom+4)+'px';
+    popup.style.transform='translateX(-50%)';
+    popup.innerHTML='<button id="dfp-select" class="btn btn-blue" style="font-size:12px;padding:4px 12px"><span class="btn-inner">선택</span></button><button id="dfp-detail" class="btn btn-stone" style="font-size:12px;padding:4px 12px"><span class="btn-inner">자세히</span></button>';
+    document.body.appendChild(popup);
   });
 }
 
