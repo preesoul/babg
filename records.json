@@ -1173,6 +1173,11 @@
       "pw": "1111",
       "records": [],
       "points": 0
+    },
+    "admin": {
+      "pw": "",
+      "records": [],
+      "points": 0
     }
   }
 }
