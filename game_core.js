@@ -576,8 +576,16 @@ function doMysteryUnlock() {
       alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
     }
     pd.points-=ENIGMA_UNLOCK_COST;
-    var pick=locked[Math.floor(Math.random()*locked.length)];
+    // 서버 데이터 기준으로 잠금 목록 병합 (다른 기기에서 해금한 것 반영)
+    var serverUnlocked=pd.unlockedAbydos||[];
+    for(var _ui=0;_ui<serverUnlocked.length;_ui++){
+      if(unlocked.indexOf(serverUnlocked[_ui])===-1) unlocked.push(serverUnlocked[_ui]);
+    }
+    var locked2=MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
+    if(locked2.length===0){alert('더 이상 해방할 신비해방 카드가 없습니다.');pd.points+=ENIGMA_UNLOCK_COST;return;}
+    var pick=locked2[Math.floor(Math.random()*locked2.length)];
     unlocked.push(pick);
+    pd.unlockedAbydos=unlocked.slice();
     setUnlockedAbydos(unlocked);
     saveRecords(data,sha,function(){
       window._enigmaPointsCache=pd.points;

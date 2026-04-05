@@ -2589,6 +2589,15 @@ function renderQuestUI(){
     if(!data.players||!data.players[name]){el.innerHTML='게임 기록이 없습니다. 먼저 게임을 플레이하세요.';pts.textContent='';return;}
     var pd=data.players[name];
     initQuestState(pd);
+    // 서버 해금 목록을 localStorage에 동기화
+    if(pd.unlockedAbydos&&pd.unlockedAbydos.length>0){
+      var local=getUnlockedAbydos();
+      var merged=local.slice();
+      for(var _si=0;_si<pd.unlockedAbydos.length;_si++){
+        if(merged.indexOf(pd.unlockedAbydos[_si])===-1) merged.push(pd.unlockedAbydos[_si]);
+      }
+      if(merged.length>local.length) setUnlockedAbydos(merged);
+    }
     window._enigmaPointsCache=pd.points||0;
     pts.innerHTML='<img src="img/Icon/quest_stone.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px">'+(pd.points||0)+' 엘리그마';
     var html='';
