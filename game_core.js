@@ -135,6 +135,15 @@ var CHARS = [
   {id:'nonomi',  name:'노노미', school:'아비도스', tier:4, atk:4, hp:4, kw:[],                 locked:true, skin:'노노미(수영복)',   img:'Nonomi.png',         imgGold:'Nonomi_(Swimsuit).png'},
   {id:'shiroko', name:'시로코', school:'아비도스', tier:5, atk:7, hp:4, kw:['reborn'],         locked:true, skin:'시로코(수영복)',   img:'Shiroko.png',        imgGold:'Shiroko_(Swimsuit).png'},
   {id:'hoshino', name:'호시노', school:'아비도스', tier:6, atk:5, hp:7, kw:['taunt','shield'], locked:true, skin:'호시노(수영복)',   img:'Hoshino.png',        imgGold:'Hoshino_(Swimsuit).png'},
+
+  // ===== 산해경 (잠금 해제 필요) =====
+  {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:2, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
+  {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
+  {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
+  {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
+  {id:'rumi',    name:'루미',   school:'산해경', tier:5, atk:5, hp:6, kw:[],                 locked:true, skin:'루미(어린이)',       img:'Rumi.png',           imgGold:'Rumi_(Kid).png'},
+  {id:'shun',    name:'슌',     school:'산해경', tier:6, atk:8, hp:5, kw:['ranged'],         locked:true, skin:'슌(어린이)',         img:'Shun.png',           imgGold:'Shun_(Kid).png'},
+  {id:'kisaki',  name:'키사키', school:'산해경', tier:6, atk:5, hp:7, kw:[],                 locked:true, skin:'키사키(사복)',       img:'Kisaki.png',         imgGold:'Kisaki_(Casual).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -162,6 +171,8 @@ var HIDDEN_CHARS = [
   {id:'trinity_justice',         name:'정의실현부',           school:'트리니티', tier:7, atk:10, hp:10, kw:['shield','windfury'],                   img:'unique/Justice_Task_Force.png'},
   // 아비도스
   {id:'Shiroko_Terror',          name:'시로코 테러',          school:'아비도스', tier:7, atk:10, hp:10, kw:['shield'],                                   img:'unique/Shiroko_Terror.png'},
+  // 산해경
+  {id:'shanhai_kiki',            name:'키키',                 school:'산해경',   tier:7, atk:1,  hp:1,  kw:['ambush'],                                   img:'unique/Kiki.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -205,7 +216,7 @@ var KW_DESCS = {
   ambush:'첫 공격 전까지 대상 지정 불가.'
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
-var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png'};
+var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png','산해경':'img/Icon/Shanhaijing.png'};
 var CHAR_GRADES = {
   kayoko:3, junko:1, toki:1, midori:1, mari:1, reisa:1,
   juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
@@ -221,7 +232,8 @@ var CHAR_GRADES = {
   izuna:1, pina:1, yukari:1, tsukuyo:1,
   mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
   nagusa:3, wakamo:3, michiru:3,
-  ayane:1, serika:2, nonomi:2, shiroko:3, hoshino:3
+  ayane:1, serika:2, nonomi:2, shiroko:3, hoshino:3,
+  kokona:1, mina:1, reijo:2, saya:2, rumi:3, shun:3, kisaki:3
 };
 var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
 if(typeof window!=='undefined') localStorage.removeItem('babg_sandbox');
@@ -233,11 +245,11 @@ var START_HP = 40;
 var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
-var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1}; // 개전
+var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -337,6 +349,15 @@ var ABILITY_DESCS = {
   shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 두 배로 얻습니다.',skinEffectDesc:'패시브: 전투 중 시로코가 쓰러뜨린 적의 수의 <span style="color:#ffd700;font-weight:700">두 배</span>만큼,\n다음 턴 청휘석을 얻습니다.'},
   hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게 부여합니다.',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
+  // ===== 산해경 =====
+  kokona:   {type:'첫인사',desc:'무작위 산해경 학생을 샬레에 불러옵니다.\n(스케쥴 레벨 이하)',skinEffect:'아르바이트 코코나: 발견',skinEffectDesc:'첫인사: 무작위 산해경 학생을 <span style="color:#ffd700;font-weight:700">발견</span>합니다.\n(스케쥴 레벨 이하)'},
+  mina:     {type:'개전 / 뒤끝',desc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 +3/+3을 부여합니다.',skinEffect:'리코더 미나: 뒤끝 +6/+6',skinEffectDesc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
+  reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
+  saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
+  rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
+  shun:     {type:'패시브',desc:'공격에 적이 쓰러지면,\n무작위 다음 대상에게 남은 데미지를 줍니다.',skinEffect:'어린이 슌: 추가 공격',skinEffectDesc:'패시브: 공격에 적이 쓰러지면,\n무작위 다음 대상을 <span style="color:#ffd700;font-weight:700">추가로 공격</span>합니다.'},
+  kisaki:   {type:'첫인사',desc:'아군 산해경 학생 1인을\n스킨 학생으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 산해경 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
+  shanhai_kiki: {type:'패시브',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
@@ -366,6 +387,7 @@ var TOKENS = {
   hina_the_last:{id:'hina_the_last',name:'마지막 히나',school:'게헨나',tier:0,atk:10,hp:10,kw:['cleave','poison'],img:'token/Hina_the_last.png'},
   hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:0, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
   c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:5, hp:1, kw:['selfdestruct'], img:'token/C4.png'},
+  black_lord:{id:'black_lord',name:'현룡문의 검은 군주',school:'산해경',tier:0,atk:30,hp:30,kw:['shield','preemptive'],img:'token/Black_lord.png'},
 };
 
 function makeToken(tokenId) {
@@ -548,7 +570,7 @@ function initPool() {
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
 var ENIGMA_UNLOCK_COST = 10; // 신비해방 1회당 비용
 // 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
-var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino'];
+var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
@@ -969,7 +991,7 @@ function applyPendingSpell(idx) {
 
 function showSchoolSelect() {
   var overlay=document.getElementById('battle-overlay');
-  var schools=['게헨나','밀레니엄','트리니티','백귀야행','아비도스','총학생회'];
+  var schools=['게헨나','밀레니엄','트리니티','백귀야행','아비도스','산해경','총학생회'];
   var html='<div class="battle-intro"><h3 style="margin-bottom:16px">학교를 선택하세요</h3>';
   for(var i=0;i<schools.length;i++) html+='<button class="btn btn-blue school-pick" data-school="'+schools[i]+'" style="margin:4px 8px;padding:10px 24px;font-size:16px">'+schools[i]+'</button>';
   html+='</div>';
