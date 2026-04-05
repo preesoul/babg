@@ -1217,7 +1217,7 @@ function _entranceDark(m,p){
 
 // 7성 고유 등장 연출
 var HIDDEN_CARD_ENTRANCE = {
-  Shiroko_Terror: function(m,p){_entranceBang(m,p);},
+  Shiroko_Terror: function(m,p){_entranceDark(m,p);},
   // === 쾅! 등장 ===
   gehenna_prefect: function(m,p){_entranceBang(m,p);},
   gehenna_pandemonium: function(m,p){_entranceBang(m,p);},
