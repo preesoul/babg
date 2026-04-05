@@ -1879,8 +1879,135 @@
     },
     "dsefddg": {
       "pw": "22123",
-      "records": [],
-      "points": 0
+      "records": [
+        {
+          "date": "2026-04-05T20:12:48",
+          "placement": 8,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 16,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "pierce",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 7,
+              "hp": 3,
+              "tier": 4,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 2,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            }
+          ]
+        }
+      ],
+      "points": 12,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "kill10",
+              "progress": 23,
+              "completed": true
+            },
+            {
+              "id": "discover3",
+              "progress": 3,
+              "completed": true
+            },
+            {
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "skin10",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 3,
+              "completed": false
+            },
+            {
+              "id": "play10",
+              "progress": 1,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
+      }
     }
   }
 }
