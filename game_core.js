@@ -4431,16 +4431,24 @@ function runBattle(boardA, boardB, startWithA, opts) {
               if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
             }
           }
-          // 슌 패시브: 킬 시 오버킬 데미지를 다음 대상에게 (스킨: 추가 공격)
+          // 슌 패시브: 킬 시 연쇄 (기본: 오버킬 데미지 전달, 스킨: 추가 공격 연쇄)
           if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
-            var shunNext=findTarget(defArr2);
-            if(shunNext){
+            var _shunOverflow=hitResult.overflow;
+            var _shunChain=0;
+            while(_shunChain<20&&attacker.alive){
+              var shunNext=findTarget(defArr2);
+              if(!shunNext)break;
               if(attacker.isSkin){
                 stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
-                dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true);
-              } else if(hitResult.overflow>0){
-                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+hitResult.overflow+'을(를) '+shunNext.name+'에게!'});
-                dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true,hitResult.overflow);
+                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true);
+                if(!shunNext.alive){_shunChain++;continue;}
+                break;
+              } else {
+                if(_shunOverflow<=0)break;
+                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+_shunOverflow+'을(를) '+shunNext.name+'에게!'});
+                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true,_shunOverflow);
+                if(!shunNext.alive&&shunHit&&shunHit.overflow>0){_shunOverflow=shunHit.overflow;_shunChain++;continue;}
+                break;
               }
             }
           }
