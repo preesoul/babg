@@ -473,7 +473,8 @@
               "img": "Kaya.png",
               "school": "총학생회"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 125,
