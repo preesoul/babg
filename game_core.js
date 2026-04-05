@@ -123,7 +123,7 @@ var CHARS = [
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:5,hp:6,kw:[],            skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
   {id:'kikyou',  name:'키쿄',   school:'백귀야행',tier:4,atk:4,hp:4,kw:['windfury','preemptive','ambush'],skin:'키쿄(수영복)',img:'Kikyou.png',   imgGold:'Kikyou_(Swimsuit).png'},
-  {id:'chise',   name:'치세',   school:'백귀야행',tier:4,atk:4,hp:5,kw:[],            skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
+  {id:'chise',   name:'치세',   school:'백귀야행',tier:4,atk:4,hp:5,kw:['taunt'],     skin:'치세(수영복)',     img:'Chise.png',          imgGold:'Chise_(Swimsuit).png'},
   // 백귀야행 3학년
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
   {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
