@@ -3385,7 +3385,7 @@ function _doDR(unit, mySide, otherSide, log) {
   else if(id==='hoshino'){
     // 호시노 뒤끝: 자신의 공격력과 체력을 무작위 아군 1인에게 부여
     var hoshinoCands=[];
-    var _hoshinoHp=unit.maxHp||Math.max(1,unit.hp);
+    var _hoshinoHp=unit._peakHp||unit.maxHp||Math.max(1,unit.hp);
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i]!==unit)hoshinoCands.push(mySide[i]);}
     var hoshinoCount=unit.isSkin?2:1;
     for(var _hi=0;_hi<hoshinoCount&&hoshinoCands.length>0;_hi++){
@@ -3467,6 +3467,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   var log=[];
   var steps=[];
+  // 전투 중 최대 체력 추적 (호시노 뒤끝 등에 사용)
+  for(var _pi=0;_pi<a.length;_pi++){a[_pi]._peakHp=a[_pi].hp;}
+  for(var _pi=0;_pi<b.length;_pi++){b[_pi]._peakHp=b[_pi].hp;}
   var turnA=(startWithA!==undefined?startWithA:true);
   var idxA=0,idxB=0;
   var maxRounds=200;
@@ -4123,6 +4126,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
       if(stepLog.length>0){
         for(var sl=0;sl<stepLog.length;sl++)log.push(stepLog[sl]);
+        // _peakHp 갱신
+        for(var _pp=0;_pp<a.length;_pp++){if(a[_pp].hp>(a[_pp]._peakHp||0))a[_pp]._peakHp=a[_pp].hp;}
+        for(var _pp=0;_pp<b.length;_pp++){if(b[_pp].hp>(b[_pp]._peakHp||0))b[_pp]._peakHp=b[_pp].hp;}
         var stepObj={atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:defI,atkId:attacker.id,defId:target.id,log:stepLog,snap:snapshot()};
         if(stepMultiHits>0) stepObj.multiHits=stepMultiHits;
         steps.push(stepObj);
