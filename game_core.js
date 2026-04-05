@@ -1110,6 +1110,10 @@ function buyHiddenCard(idx) {
       } else { newBoard.push(p.board[i]); }
     }
     p.board=newBoard;
+    // 흡수한 학생들의 스탯을 시로코 테러에 합산
+    var stBonusAtk=0,stBonusHp=0;
+    for(var _sab=0;_sab<absorbedUnits.length;_sab++){stBonusAtk+=absorbedUnits[_sab].atk;stBonusHp+=absorbedUnits[_sab].hp;}
+    m.atk+=stBonusAtk;m.hp+=stBonusHp;m.maxHp=m.hp;
     m._shirokoAbsorbed=absorbedUnits;
     G._shirokoTerrorAbsorbed=absorbedUnits;
     // 노노미 카운터 초기화 (흡수됨)
