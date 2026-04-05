@@ -5311,22 +5311,16 @@ function renderRecords(){
           html+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
           html+='</div>';
           // 보드 카드 렌더링
-          html+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
+          html+='<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">';
           var board=r.board||[];
           for(var j=0;j<board.length;j++){
             var u=board[j];
             if(typeof u==='string'){
-              // 구버전 기록 (이름만)
               html+='<div style="background:#1e2d3d;border:2px solid #3a5a6e;border-radius:4px;padding:4px 8px;font-size:11px;color:#c0d0e0">'+u+'</div>';
             } else {
-              // 신버전 기록 (상세 데이터)
-              var borderColor=u.isSkin?'#c8a010':(['#6a8090','#3a8a4a','#3070cc','#7a50c0','#c88a10','#cc3030','#c030d0'][u.tier-1]||'#3a5a6e');
-              html+='<div onclick="showAbilityPopup(\''+u.baseId+'\',event,'+(u.isSkin?'true':'false')+')" style="width:80px;background:#1e2d3d;border:2px solid '+borderColor+';border-radius:4px;overflow:hidden;text-align:center;font-size:10px;cursor:pointer;position:relative">';
-              html+='<div style="position:absolute;top:1px;left:2px;font-size:8px;color:#ffd700;z-index:1;text-shadow:0 1px 2px rgba(0,0,0,0.8)">★'+u.tier+'</div>';
-              if(u.img) html+='<div style="height:60px;overflow:hidden;position:relative"><img src="img/'+u.img+'" style="width:100%;height:auto;position:absolute;top:-5px;left:0" onerror="this.style.display=\'none\'"></div>';
-              html+='<div style="padding:2px 3px;background:rgba(0,0,0,0.6);color:#e0eaf4;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+u.name+'</div>';
-              html+='<div style="display:flex;justify-content:space-between;padding:2px 4px;background:rgba(0,0,0,0.4)"><span style="color:#5ab0e8;font-weight:900">'+u.atk+'</span><span style="color:#e04040;font-weight:900">'+u.hp+'</span></div>';
-              html+='</div>';
+              // cardHtml용 가짜 유닛 객체 생성
+              var fakeUnit={id:u.baseId+'_rec',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk,hp:u.hp,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
+              html+='<div style="transform:scale(0.75);transform-origin:top left;margin-right:-42px;margin-bottom:-55px;pointer-events:none">'+cardHtml(fakeUnit,j,true)+'</div>';
             }
           }
           html+='</div></div>';
