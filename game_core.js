@@ -4167,12 +4167,17 @@ function startBattle() {
   var p=G.players[0];
   // 세리카 패시브: 영입 페이즈 종료 시 남은 청휘석을 공/체에 영구 추가
   if(!SANDBOX){
+    console.log('[세리카 패시브] stone='+p.stone+', board='+p.board.map(function(u){return u.baseId+(u.isSkin?'(스킨)':'');}).join(','));
     for(var _sk=0;_sk<p.board.length;_sk++){
-      if(p.board[_sk].baseId==='serika'&&p.stone>0){
-        var _sSt=p.stone*(p.board[_sk].isSkin?2:1);
-        p.board[_sk].atk+=_sSt;p.board[_sk].hp+=_sSt;
-        if(!p.board[_sk].maxHp)p.board[_sk].maxHp=p.board[_sk].hp;else p.board[_sk].maxHp+=_sSt;
-        logBuff(p.board[_sk],'세리카 패시브',_sSt,_sSt);
+      if(p.board[_sk].baseId==='serika'){
+        console.log('[세리카 발견] '+p.board[_sk].name+' isSkin='+p.board[_sk].isSkin+' stone='+p.stone);
+        if(p.stone>0){
+          var _sSt=p.stone*(p.board[_sk].isSkin?2:1);
+          p.board[_sk].atk+=_sSt;p.board[_sk].hp+=_sSt;
+          if(!p.board[_sk].maxHp)p.board[_sk].maxHp=p.board[_sk].hp;else p.board[_sk].maxHp+=_sSt;
+          logBuff(p.board[_sk],'세리카 패시브',_sSt,_sSt);
+          console.log('[세리카 패시브 적용] '+p.board[_sk].name+' +'+_sSt+'/+'+_sSt+' → '+p.board[_sk].atk+'/'+p.board[_sk].hp);
+        }
       }
     }
   }
