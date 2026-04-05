@@ -533,6 +533,16 @@ img.tutorial-highlight{border-radius:50%!important}
     </div>
   </div>
 
+  <!-- 신비해방 팝업 -->
+  <div id="unlock-popup-overlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center" onclick="this.style.display='none'">
+    <div style="text-align:center;animation:unlockPop 0.4s ease-out" onclick="event.stopPropagation()">
+      <img id="unlock-popup-img" src="" style="width:160px;height:160px;object-fit:cover;border-radius:12px;border:3px solid #ffd700;margin-bottom:16px">
+      <div id="unlock-popup-text" style="color:#ffd700;font-size:22px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5)"></div>
+      <button class="btn btn-stone" style="margin-top:20px" onclick="document.getElementById('unlock-popup-overlay').style.display='none'"><span class="btn-inner">확인</span></button>
+    </div>
+  </div>
+  <style>@keyframes unlockPop{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}</style>
+
   <!-- 전적 기록 오버레이 -->
   <div id="records-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
     <div style="max-width:800px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
@@ -2363,10 +2373,18 @@ function renderRoster(){
       if(!tc||!tc.length)continue;
       html+='<div class="roster-tier-chunk">';
       html+='<div class="rt-sep">'+t+'T</div>';
+      var _unlockedAby=getUnlockedAbydos();
       tc.forEach(function(c){
-        html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
-        if(c.img)html+='<img class="r-portrait" src="img/'+c.img+'" onerror="this.style.display=\'none\'">';
-        html+='<div class="r-name">'+c.name+'</div>';
+        var isLocked=c.locked&&_unlockedAby.indexOf(c.id)===-1;
+        if(isLocked){
+          html+='<div class="roster-card rt'+c.tier+'" style="opacity:0.6;cursor:default">';
+          html+='<img class="r-portrait" src="img/UI/Hidden_card.png" style="filter:grayscale(1);object-fit:contain">';
+          html+='<div class="r-name" style="color:#666">???</div>';
+        } else {
+          html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
+          if(c.img)html+='<img class="r-portrait" src="img/'+c.img+'" onerror="this.style.display=\'none\'">';
+          html+='<div class="r-name">'+c.name+'</div>';
+        }
         html+='</div>';
       });
       html+='</div>';
@@ -2521,6 +2539,12 @@ document.getElementById('btn-quest-close').addEventListener('click',function(){
   playSfx('ui_close',0.4);
   document.getElementById('quest-overlay').style.display='none';
 });
+function showUnlockPopup(name,img){
+  var overlay=document.getElementById('unlock-popup-overlay');
+  document.getElementById('unlock-popup-img').src='img/'+img;
+  document.getElementById('unlock-popup-text').textContent=name+'가 해방되었습니다!';
+  overlay.style.display='flex';
+}
 function renderQuestUI(){
   var el=document.getElementById('quest-content');
   var pts=document.getElementById('quest-points');

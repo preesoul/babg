@@ -581,9 +581,10 @@ function doMysteryUnlock() {
     setUnlockedAbydos(unlocked);
     saveRecords(data,sha,function(){
       window._enigmaPointsCache=pd.points;
-      var pickedName=pick;
-      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;break;}}
-      alert('[신비해방] '+pickedName+' 해방!\n남은 엘리그마: '+pd.points+'P');
+      var pickedName=pick,pickedImg='';
+      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;break;}}
+      if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg);
+      else alert('[신비해방] '+pickedName+' 해방!');
       if(typeof renderQuestUI==='function') renderQuestUI();
       if(typeof renderAll==='function') renderAll();
     });
