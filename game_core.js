@@ -696,7 +696,7 @@ function newGame() {
     players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
-    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
+    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
     nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0};
   rollShop();
   aiTurns();
@@ -815,8 +815,8 @@ function checkHiddenConditionsFor(p) {
   // 최강일각라이온: 백귀야행 온리 보드
   if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
     eligible.push('hkyk_saikyo');
-  // 왕녀: 아리스 사망 10회+
-  if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&p.tier>=6&&G.arisuDeathCount>=10)
+  // 왕녀: 밀레니엄 온리 구매 + Lv.6 + 아리스를 산 적 없음
+  if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&onlySchool('밀레니엄')&&p.tier>=6&&!G.arisuPurchased)
     eligible.push('millennium_nameless');
   // 말쿠트: 밀레니엄 토큰 소환 10회+
   if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
@@ -1383,6 +1383,8 @@ function buyMinion(idx, insertIdx) {
   trackNonomiStone(3);
   G.shop[idx]=null;
   if(m.school) G.purchasedSchools[m.school]=true;
+  // 아리스 구매 기록 (왕녀 해금 조건: 아리스를 산 적 없어야 함)
+  if(m.baseId==='arisu') G.arisuPurchased=true;
   // 백귀야행 구매 기록 (쿠즈노하 해금 조건)
   if(HKYK_ALL_IDS.indexOf(m.baseId)!==-1) G.soldHkyk[m.baseId]=true;
   // 퀘스트 트래킹: 영입
@@ -1681,6 +1683,7 @@ function showDiscover(p) {
     var tmpl = choices[idx];
     // 백귀야행 발견도 구매 기록으로 인정 (쿠즈노하 조건)
     if(HKYK_ALL_IDS.indexOf(tmpl.id)!==-1) G.soldHkyk[tmpl.id]=true;
+    if(tmpl.id==='arisu') G.arisuPurchased=true;
     if(takeFromPool(tmpl.id)){
       var added = addToBoard(p, makeMinion(tmpl, false));
       if(!added){
@@ -1796,6 +1799,7 @@ function showDiscoverCustom(choices) {
     if(window._questTracker) window._questTracker.discovers++;
     // 백귀야행 발견도 구매 기록으로 인정 (쿠즈노하 조건)
     if(HKYK_ALL_IDS.indexOf(chosen.id)!==-1) G.soldHkyk[chosen.id]=true;
+    if(chosen.id==='arisu') G.arisuPurchased=true;
     takeFromPool(chosen.id);
     var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin)count++;}
     if(count>=2){
@@ -5827,7 +5831,7 @@ function saveGame(){
       pool:G.pool,hiddenCardsOwned:G.hiddenCardsOwned,hiddenCardsEverOwned:G.hiddenCardsEverOwned,
       permanentAbilityBan:G.permanentAbilityBan,shopExclusions:G.shopExclusions,
       keiseisenCounters:G.keiseisenCounters,millenniumTokenSummons:G.millenniumTokenSummons,
-      arisuDeathCount:G.arisuDeathCount,soldHkyk:G.soldHkyk||{},
+      arisuDeathCount:G.arisuDeathCount,arisuPurchased:G.arisuPurchased||false,soldHkyk:G.soldHkyk||{},
       usedOnceSpells:G.usedOnceSpells||{},
       bunnyTossBonus:G.bunnyTossBonus||0,
       nonomiStoneSinceJoined:G.nonomiStoneSinceJoined||0,
@@ -5881,6 +5885,7 @@ function restoreGame(save){
     purchasedSchools:players[0].purchasedSchools||{},
     totalDamageTaken:save.totalDamageTaken||0,
     arisuDeathCount:save.arisuDeathCount||0,
+    arisuPurchased:save.arisuPurchased||false,
     millenniumTokenSummons:save.millenniumTokenSummons||0,
     hiddenCardsOwned:save.hiddenCardsOwned||{},
     hiddenCardsEverOwned:save.hiddenCardsEverOwned||{},
