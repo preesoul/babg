@@ -5106,23 +5106,22 @@ function bSettleCoin(sid,isHeads){
   img.src=BCOIN_BASE+(isHeads?'coin_front.png':'coin_back.png');
 }
 function bCalcTurnOrder(cr,nA,nB,eFirst){
-  // 가장 왼쪽 앞면 위치 (정규화: 시각적 위치 기준)
-  var firstHeadA=-1,firstHeadB=-1;
-  for(var i=0;i<nA;i++){if(cr['a'+i]){firstHeadA=i;break;}}
-  for(var i=0;i<nB;i++){if(cr['b'+i]){firstHeadB=i;break;}}
+  // 앞면 개수 및 첫 앞면 위치 계산
+  var headsA=0,headsB=0,firstHeadA=-1,firstHeadB=-1;
+  for(var i=0;i<nA;i++){if(cr['a'+i]){headsA++;if(firstHeadA===-1)firstHeadA=i;}}
+  for(var i=0;i<nB;i++){if(cr['b'+i]){headsB++;if(firstHeadB===-1)firstHeadB=i;}}
 
-  // 정규화 위치 비교: (index+0.5)/total → 크로스곱으로 정수 비교
-  // posA = (firstHeadA+0.5)*nB, posB = (firstHeadB+0.5)*nA
   var tied=false;
-  if(firstHeadA===-1&&firstHeadB===-1){
-    tied=true; // 둘 다 앞면 없음
-  } else if(firstHeadA===-1){
-    eFirst=true; // B만 앞면 → 적 선공
-  } else if(firstHeadB===-1){
-    eFirst=false; // A만 앞면 → 아군 선공
+  if(headsA>headsB){
+    eFirst=false; // 아군 앞면 더 많음 → 아군 선공
+  } else if(headsA<headsB){
+    eFirst=true; // 적 앞면 더 많음 → 적 선공
+  } else if(headsA===0){
+    tied=true; // 둘 다 앞면 없음 → 재토스
   } else {
-    var posA=(firstHeadA*2+1)*nB; // (firstHeadA+0.5)*nB*2
-    var posB=(firstHeadB*2+1)*nA; // (firstHeadB+0.5)*nA*2
+    // headsA===headsB && headsA>0 → 첫 앞면 위치 비교 (정규화: 크로스곱)
+    var posA=(firstHeadA*2+1)*nB;
+    var posB=(firstHeadB*2+1)*nA;
     if(posA===posB) tied=true;
     else if(posA<posB) eFirst=false; // 아군이 더 왼쪽 → 아군 선공
     else eFirst=true; // 적이 더 왼쪽 → 적 선공
