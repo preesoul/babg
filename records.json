@@ -2625,9 +2625,83 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T01:55:32",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "에이미(수영복)",
+              "baseId": "eimi",
+              "atk": 23,
+              "hp": 25,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Eimi_(Swimsuit).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 19,
+              "hp": 23,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 19,
+              "hp": 23,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 27,
+              "hp": 27,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2665,7 +2739,7 @@
             },
             {
               "id": "play10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             }
           ]
