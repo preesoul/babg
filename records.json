@@ -2116,81 +2116,6 @@
       "pw": "aqula88!",
       "records": [
         {
-          "date": "2026-04-05T16:48:46",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "사츠키",
-              "baseId": "satsuki",
-              "atk": 5,
-              "hp": 6,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Satsuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "Cleaning&Clearing",
-              "baseId": "millennium_cc",
-              "atk": 35,
-              "hp": 35,
-              "tier": 7,
-              "kw": [
-                "ranged",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "unique/Cleaning_Clearing.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "Cleaning&Clearing",
-              "baseId": "millennium_cc",
-              "atk": 35,
-              "hp": 35,
-              "tier": 7,
-              "kw": [
-                "ranged",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "unique/Cleaning_Clearing.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 9,
-              "hp": 15,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 11,
-              "hp": 11,
-              "tier": 5,
-              "kw": [
-                "ambush",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": false
-        },
-        {
           "date": "2026-04-05T22:43:52",
           "placement": 1,
           "turn": 16,
@@ -2843,9 +2768,87 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T05:38:17",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 39,
+              "hp": 43,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            },
+            {
+              "name": "슌(어린이)",
+              "baseId": "shun",
+              "atk": 25,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "ranged",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shun_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 38,
+              "hp": 30,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 23,
+              "hp": 21,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 32,
+              "hp": 32,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 35,
+      "points": 37,
       "questState": {
         "daily": {
           "date": "2026-04-06",
