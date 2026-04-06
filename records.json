@@ -2848,7 +2848,7 @@
           ]
         }
       ],
-      "points": 37,
+      "points": 27,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2915,7 +2915,8 @@
         "kokona",
         "lin",
         "reijo",
-        "nonomi"
+        "nonomi",
+        "ui"
       ]
     },
     "남민철": {
