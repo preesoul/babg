@@ -2550,9 +2550,84 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-06T01:36:04",
+          "placement": 2,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 43,
+              "hp": 43,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 30,
+              "hp": 22,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 21,
+              "hp": 23,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 21,
+              "hp": 23,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2590,7 +2665,7 @@
             },
             {
               "id": "play10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             }
           ]
