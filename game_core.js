@@ -796,12 +796,11 @@ function checkHiddenConditionsFor(p) {
   // 최강일각라이온: 백귀야행 온리 보드 + 스케쥴6 (5% 확률은 injectHiddenToShop에서 처리)
   if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
     eligible.push('hkyk_saikyo');
-  // 쿠즈노하: 백귀야행 온리 구매 + 스케쥴6
-  // 쿠즈노하: 모든 백귀야행 학생을 1회 이상 판매 + T6 + 60%
-  if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')&&p.tier>=6){
-    var allHkykSold=true;
-    for(var _hi=0;_hi<HKYK_ALL_IDS.length;_hi++){if(!G.soldHkyk[HKYK_ALL_IDS[_hi]]){allHkykSold=false;break;}}
-    if(allHkykSold) eligible.push('hkyk_kuzunoha');
+  // 쿠즈노하: 모든 백귀야행 학생을 1회 이상 구매한 적이 있으면 등장
+  if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')){
+    var allHkykBought=true;
+    for(var _hi=0;_hi<HKYK_ALL_IDS.length;_hi++){if(!G.soldHkyk[HKYK_ALL_IDS[_hi]]){allHkykBought=false;break;}}
+    if(allHkykBought) eligible.push('hkyk_kuzunoha');
   }
   // 흥신소 68: 카요코+무츠키+하루카+아루 보드
   if(notOwned('gehenna_p68')&&inPool('gehenna_p68')&&p.tier>=6&&boardHas('kayoko')&&boardHas('mutsuki')&&boardHas('haruka')&&boardHas('aru'))
@@ -1380,6 +1379,8 @@ function buyMinion(idx, insertIdx) {
   trackNonomiStone(3);
   G.shop[idx]=null;
   if(m.school) G.purchasedSchools[m.school]=true;
+  // 백귀야행 구매 기록 (쿠즈노하 해금 조건)
+  if(HKYK_ALL_IDS.indexOf(m.baseId)!==-1) G.soldHkyk[m.baseId]=true;
   // 퀘스트 트래킹: 영입
   if(m.school && window._questTracker && window._questTracker.recruits[m.school] !== undefined) {
     window._questTracker.recruits[m.school]++;
@@ -2172,8 +2173,7 @@ function sellMinion(idx) {
     }
     G._shirokoTerrorAbsorbed=[];
   }
-  // 백귀야행 판매 추적 (쿠즈노하 등장 조건)
-  if(HKYK_ALL_IDS.indexOf(m.baseId)!==-1) G.soldHkyk[m.baseId]=true;
+  // 백귀야행 판매 시에도 구매 기록 유지 (쿠즈노하 조건은 구매 기록 기준)
   // 히든 카드: 풀 반환하지 않고, 소유 해제 + 상점제외 해제
   if(m.isHidden){
     delete G.hiddenCardsOwned[m.baseId];
