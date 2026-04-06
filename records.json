@@ -4463,7 +4463,7 @@
           ]
         }
       ],
-      "points": 15,
+      "points": 5,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -4520,7 +4520,8 @@
       "unlockedAbydos": [
         "kokona",
         "shun",
-        "lin"
+        "lin",
+        "ui"
       ]
     },
     "마오비": {
