@@ -3207,25 +3207,105 @@
     },
     "남민철": {
       "pw": "5056",
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-06T23:25:39",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아즈사(수영복)",
+              "baseId": "azusa",
+              "atk": 11,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "ambush",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Azusa_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 30,
+              "hp": 30,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 27,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 7,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
+        }
+      ],
+      "points": 17,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -3236,17 +3316,17 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
