@@ -5242,6 +5242,10 @@
         },
         "_lastLoginDate": "2026-04-06"
       }
+    },
+    "debug_tester": {
+      "records": [],
+      "points": 0
     }
   }
 }
