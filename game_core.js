@@ -274,7 +274,7 @@ function setMasterVolume(v){
 var UPGRADE_COSTS = [0,5,7,8,9,11];
 var SHOP_SIZE = [0,3,4,4,5,5,6];
 var MAX_BOARD = 5;
-var BATTLE_MAX = 7;
+var BATTLE_MAX = 10;
 var START_HP = 40;
 var MAX_STONE = SANDBOX ? 20 : 10;
 
@@ -1425,7 +1425,7 @@ var HIDDEN_CARD_ENTRANCE = {
   millennium_death_momoi: function(m,p){_entranceBang(m,p);},
   hkyk_saikyo: function(m,p){_entranceBang(m,p);},
   trinity_justice: function(m,p){_entranceBang(m,p);},
-  millennium_cc: function(m,p){_entranceGlow(m,p);},
+  millennium_cc: function(m,p){_entranceBang(m,p);},
   // === 금빛 밝아짐 (5초) ===
   trinity_seia: function(m,p){_entranceGlow(m,p);},
   trinity_nagisa: function(m,p){_entranceGlow(m,p);},
@@ -1596,9 +1596,14 @@ var RECRUIT_VOICES = {
   shun: 'audio/shun.mp3',
   shanhai_kiki: 'audio/shanhai_kiki.mp3'
 };
+var _lastRecruitVoice={baseId:null,time:0};
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
   if(!src)return;
+  // 1.5초 내 동일 baseId 중복 재생 차단 (연출 경로 중복으로 인한 보이스 다중 재생 방지)
+  var now=Date.now();
+  if(_lastRecruitVoice.baseId===baseId&&(now-_lastRecruitVoice.time)<1500)return;
+  _lastRecruitVoice={baseId:baseId,time:now};
   try{
     var a=new Audio(src);a.volume=0.7;a.play();
     // 1초 fadeOut으로 자연스럽게 끝내기
