@@ -355,9 +355,9 @@ var ABILITY_DESCS = {
   // 신규 7성
   gehenna_p68:            {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 카요코·무츠키·하루카·아루가 모두 있을 때 등장.',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n지켜줌을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.\n뒤끝: 흡수한 아루·카요코·무츠키·하루카를 다시 불러냅니다. 능력치는 흡수될 때의 스탯을 가집니다.',skinEffect:'',quote:'아루: 우릴 고용하는 비용은 꽤 비싸다고? 선생님.'},
   millennium_seminar:     {type:'패시브 / 개전',hiddenCond:'샬레에 유우카·노아·코유키·리오가 모두 있을 때 등장.',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',skinEffect:'',quote:'리오: 우리는, 빛이 없는 곳에서 만날 거야.'},
-  millennium_cc:          {type:'패시브 / 뒤끝',hiddenCond:'샬레에 네루·아스나·아카네·카린·토키가 모두 있을 때 등장.',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: <span style="color:#ffd700;font-weight:700">아군 전체의 코인토스가 항상 성공</span>합니다.\n뒤끝: <TNT> 4개와 <아비 에슈흐 프로토> 1개를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
+  millennium_cc:          {type:'패시브 / 뒤끝',hiddenCond:'샬레에 네루·아스나·아카네·카린·토키가 모두 있을 때 등장.',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: <span style="color:#ffd700;font-weight:700">아군 전체의 코인토스가 항상 성공</span>합니다.\n뒤끝: <TNT>(1/20, 자폭) 4개와 <아비 에슈흐 프로토>(10/10) 1개를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
   trinity_makeup:         {type:'패시브',hiddenCond:'샬레에 히후미·코하루·하나코·아즈사가 모두 있을 때 등장.',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',skinEffect:'',quote:'히후미: 그러니까, 지금부터 시작하겠습니다! 우리들의 이야기를!',quote2:'히후미: 학원과 청춘의 이야기를!!'},
-  trinity_justice:        {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 하스미·츠루기·마시로·이치카가 모두 있을 때 등장.',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.\n뒤끝: <span style="color:#ffd700;font-weight:700">보호막, 연사</span>를 얻은 <츠루기>를 불러냅니다.\n츠루기의 공/체는 이번 전투에서 정의실현부가 가졌던 가장 높은 값을 가집니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
+  trinity_justice:        {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 하스미·츠루기·마시로·이치카가 모두 있을 때 등장.',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.\n뒤끝: <span style="color:#ffd700;font-weight:700">보호막, 연사</span>를 가진 진지한 츠루기를 불러냅니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
   // ===== 신규 캐릭터 =====
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',skinEffect:'수영복 이부키: +10/+10',skinEffectDesc:'개전: 아군 마코토, 치아키, 사츠키, 이로하에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   chiaki:   {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 치아키: 연사 추가',skinEffectDesc:'저격+연사: 저격 공격. 반격을 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">연사</span>로 2회 공격합니다.'},
@@ -383,7 +383,7 @@ var ABILITY_DESCS = {
   nonomi:   {type:'개전',desc:'노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을 반으로 나누어,\n맨 왼쪽 학생의 공/체에 각각 더합니다. (소수점 버림)',skinEffect:'수영복 노노미: 나누지 않고 그대로 더합니다.',skinEffectDesc:'개전: 노노미가 샬레에 존재한 후부터 사용된 모든 청휘석 양을,\n맨 왼쪽 학생의 공/체에 각각 <span style="color:#ffd700;font-weight:700">그대로</span> 더합니다.'},
   shiroko:  {type:'패시브',desc:'전투 중 시로코가 쓰러뜨린 적의 수만큼,\n다음 턴 청휘석을 얻습니다.',skinEffect:'수영복 시로코: 두 배로 얻습니다.',skinEffectDesc:'패시브: 전투 중 시로코가 쓰러뜨린 적의 수의 <span style="color:#ffd700;font-weight:700">두 배</span>만큼,\n다음 턴 청휘석을 얻습니다.'},
   hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게 부여합니다.',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
-  Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 시로코·호시노·노노미·아야네·세리카가 모두 있을 때 등장.',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
+  Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 시로코·호시노·노노미·아야네·세리카가 모두 있을 때 등장.',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 가장 체력이 높은 적과 자신만 남고 모두 파괴합니다.\n뒤끝: 흡수한 모두를 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 산해경 =====
   kokona:   {type:'첫인사',desc:'스케쥴 레벨 이하의 자기 자신을 제외한\n무작위 산해경 학생을 <span style="color:#ffd700;font-weight:700">벤치</span>로 불러옵니다.\n벤치가 차 있으면 발동하지 않습니다.',skinEffect:'',skinEffectDesc:''},
   mina:     {type:'개전 / 뒤끝',desc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 +3/+3을 부여합니다.',skinEffect:'리코더 미나: 뒤끝 +6/+6',skinEffectDesc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
@@ -5357,30 +5357,38 @@ function bCalcTurnOrder(cr,nA,nB,eFirst){
 
 function buildCoinSeqForBattle(boardA,boardB,coinA,coinB,eFirst){
   // coinA[i]/coinB[i] = true(heads)/false(tails)/undefined(dead unit)
-  var headsSeq=[],tailsSeq=[];
-  var n=Math.max(boardA.length,boardB.length);
-  for(var i=0;i<n;i++){
-    var aAlive=i<boardA.length&&boardA[i].alive;
-    var bAlive=i<boardB.length&&boardB[i].alive;
-    if(eFirst){
-      if(bAlive&&coinB[i]===true)headsSeq.push({side:'b',pos:i});
-      if(aAlive&&coinA[i]===true)headsSeq.push({side:'a',pos:i});
-    }else{
-      if(aAlive&&coinA[i]===true)headsSeq.push({side:'a',pos:i});
-      if(bAlive&&coinB[i]===true)headsSeq.push({side:'b',pos:i});
-    }
+  // bCalcTurnOrder와 동일한 규칙: 번갈아 머지 (한 쪽 소진 시 나머지 연속),
+  // 뒷면 그룹은 앞면 그룹 마지막 턴자의 반대 사이드부터 시작.
+  var aHeads=[],bHeads=[],aTails=[],bTails=[];
+  for(var i=0;i<boardA.length;i++){
+    if(!boardA[i].alive)continue;
+    if(coinA[i]===true)aHeads.push({side:'a',pos:i});
+    else if(coinA[i]===false)aTails.push({side:'a',pos:i});
   }
-  for(var i=0;i<n;i++){
-    var aAlive=i<boardA.length&&boardA[i].alive;
-    var bAlive=i<boardB.length&&boardB[i].alive;
-    if(eFirst){
-      if(bAlive&&coinB[i]===false)tailsSeq.push({side:'b',pos:i});
-      if(aAlive&&coinA[i]===false)tailsSeq.push({side:'a',pos:i});
-    }else{
-      if(aAlive&&coinA[i]===false)tailsSeq.push({side:'a',pos:i});
-      if(bAlive&&coinB[i]===false)tailsSeq.push({side:'b',pos:i});
-    }
+  for(var i=0;i<boardB.length;i++){
+    if(!boardB[i].alive)continue;
+    if(coinB[i]===true)bHeads.push({side:'b',pos:i});
+    else if(coinB[i]===false)bTails.push({side:'b',pos:i});
   }
+  function _mergeAlt(listA,listB,bFirst){
+    var res=[],ia=0,ib=0,bTurn=bFirst;
+    while(ia<listA.length||ib<listB.length){
+      if(bTurn){
+        if(ib<listB.length)res.push(listB[ib++]);
+        else res.push(listA[ia++]);
+      }else{
+        if(ia<listA.length)res.push(listA[ia++]);
+        else res.push(listB[ib++]);
+      }
+      bTurn=!bTurn;
+    }
+    return res;
+  }
+  var headsSeq=_mergeAlt(aHeads,bHeads,eFirst);
+  var tailsBFirst;
+  if(headsSeq.length===0)tailsBFirst=eFirst;
+  else tailsBFirst=(headsSeq[headsSeq.length-1].side!=='b');
+  var tailsSeq=_mergeAlt(aTails,bTails,tailsBFirst);
   return headsSeq.concat(tailsSeq);
 }
 
