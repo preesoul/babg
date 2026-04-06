@@ -280,7 +280,7 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1}; // 패시브 (영입 턴/상시)
@@ -352,7 +352,7 @@ var ABILITY_DESCS = {
   hkyk_kuzunoha: {type:'개전 / 선빵',hiddenCond:'이번 게임에서 백귀야행 학생 13명 전원을 한 번이라도 영입/발견한 적이 있을 때 등장.',desc:'영입 시 샬레의 모든 학생을 삭제합니다.\n개전: 쿠즈노하와 상대 1번 학생을 제외한\n모든 학생을 효과 삭제 후 처치합니다.\n이 효과는 가장 먼저 발동합니다.\n선빵: 공격 대상의 모든 효과를 삭제합니다.',skinEffect:'',quote:'쿠즈노하: 늦으나 빠르나… 지금의 자신이 아니게 될 것임은 분명할 게야.'},
   hkyk_showdown: {type:'액션카드',desc:'유카리, 렌게, 키쿄, 나구사에게\n+10/+10과 보호막, 연사, 부활을 부여합니다.\n(수영복 포함)',skinEffect:''},
   // 신규 7성
-  gehenna_p68:            {type:'패시브 / 개전',hiddenCond:'샬레에 카요코·무츠키·하루카·아루가 모두 있을 때 등장.',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n지켜줌을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.',skinEffect:'',quote:'아루: 우릴 고용하는 비용은 꽤 비싸다고? 선생님.'},
+  gehenna_p68:            {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 카요코·무츠키·하루카·아루가 모두 있을 때 등장.',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n지켜줌을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.\n뒤끝: 흡수한 아루·카요코·무츠키·하루카를 다시 불러냅니다. 능력치는 흡수될 때의 스탯을 가집니다.',skinEffect:'',quote:'아루: 우릴 고용하는 비용은 꽤 비싸다고? 선생님.'},
   millennium_seminar:     {type:'패시브 / 개전',hiddenCond:'샬레에 유우카·노아·코유키·리오가 모두 있을 때 등장.',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',skinEffect:'',quote:'리오: 우리는, 빛이 없는 곳에서 만날 거야.'},
   millennium_cc:          {type:'패시브 / 뒤끝',hiddenCond:'샬레에 네루·아스나·아카네·카린·토키가 모두 있을 때 등장.',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: <span style="color:#ffd700;font-weight:700">아군 전체의 코인토스가 항상 성공</span>합니다.\n뒤끝: <TNT> 4개와 <아비 에슈흐 프로토> 1개를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
   trinity_makeup:         {type:'패시브',hiddenCond:'샬레에 히후미·코하루·하나코·아즈사가 모두 있을 때 등장.',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',skinEffect:'',quote:'히후미: 그러니까, 지금부터 시작하겠습니다! 우리들의 이야기를!',quote2:'히후미: 학원과 청춘의 이야기를!!'},
@@ -1226,10 +1226,17 @@ function buyHiddenCard(idx) {
   else if(bid==='gehenna_p68'){
     var absorb=['kayoko','mutsuki','haruka','aru'];
     var bonusAtk=0,bonusHp=0;var newBoard=[];
+    var p68Absorbed=[];
     for(var i=0;i<p.board.length;i++){
-      if(absorb.indexOf(p.board[i].baseId)!==-1){bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);}else{newBoard.push(p.board[i]);}
+      if(absorb.indexOf(p.board[i].baseId)!==-1){
+        bonusAtk+=p.board[i].atk;bonusHp+=p.board[i].hp;
+        // 뒤끝용 스냅샷 저장 (흡수 시점 상태)
+        p68Absorbed.push({id:p.board[i].id,baseId:p.board[i].baseId,name:p.board[i].name,school:p.board[i].school,tier:p.board[i].tier,atk:p.board[i].atk,hp:p.board[i].hp,maxHp:p.board[i].hp,kw:(p.board[i].kw||[]).slice(),img:p.board[i].img,isSkin:p.board[i].isSkin||false});
+        returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);
+      }else{newBoard.push(p.board[i]);}
     }
     p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
+    m._p68Absorbed=p68Absorbed;
   }
   else if(bid==='millennium_seminar'){
     var absorb=['yuuka','noa','koyuki','rio'];
@@ -2921,9 +2928,15 @@ function aiCheckHidden(p) {
         p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
       } else if(hid==='gehenna_p68'){
         var absorb=['kayoko','mutsuki','haruka','aru'];
-        var bAtk=0,bHp=0,nb=[];
-        for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].isSkin?3:1);}else nb.push(p.board[j]);}
-        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+        var bAtk=0,bHp=0,nb=[];var p68A=[];
+        for(var j=0;j<p.board.length;j++){
+          if(absorb.indexOf(p.board[j].baseId)!==-1){
+            bAtk+=p.board[j].atk;bHp+=p.board[j].hp;
+            p68A.push({id:p.board[j].id,baseId:p.board[j].baseId,name:p.board[j].name,school:p.board[j].school,tier:p.board[j].tier,atk:p.board[j].atk,hp:p.board[j].hp,maxHp:p.board[j].hp,kw:(p.board[j].kw||[]).slice(),img:p.board[j].img,isSkin:p.board[j].isSkin||false});
+            returnToPool(p.board[j].baseId,p.board[j].isSkin?3:1);
+          }else nb.push(p.board[j]);
+        }
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;unit._p68Absorbed=p68A;
       } else if(hid==='millennium_seminar'){
         var absorb=['yuuka','noa','koyuki','rio'];
         var bAtk=0,bHp=0,nb=[];
@@ -3984,6 +3997,22 @@ function _doDR(unit, mySide, otherSide, log) {
       }
     }
     unit._shirokoTerrorDRFired=true;
+  }
+  else if(id==='gehenna_p68'){
+    // 흥신소 68 뒤끝: 흡수한 아루·카요코·무츠키·하루카를 흡수 당시 상태로 귀환
+    var p68Abs=unit._p68Absorbed||[];
+    for(var _pi=0;_pi<p68Abs.length;_pi++){
+      if(countAlive(mySide)>=BATTLE_MAX)break;
+      var pab=p68Abs[_pi];
+      var pRev={
+        id:pab.id,baseId:pab.baseId,name:pab.name,school:pab.school||'게헨나',
+        tier:pab.tier,atk:pab.atk,hp:pab.hp,maxHp:pab.hp,kw:(pab.kw||[]).slice(),
+        img:pab.img,isSkin:pab.isSkin||false,isToken:false,
+        alive:true,poisonImmune:false,_mySide:mySide,_p68Spawned:true
+      };
+      mySide.push(pRev);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+pRev.name+' 귀환! ('+pRev.atk+'/'+pRev.hp+')'});
+    }
   }
 }
 
