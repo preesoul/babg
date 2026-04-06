@@ -2299,7 +2299,7 @@
           ]
         }
       ],
-      "points": 7,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -2367,7 +2367,8 @@
         "reijo",
         "mina",
         "saya",
-        "shiroko"
+        "shiroko",
+        "lin"
       ],
       "recruitedTier7": [
         "millennium_nameless",
