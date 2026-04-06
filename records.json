@@ -1601,82 +1601,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:41:55",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 15,
-              "hp": 17,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "selfdestruct"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 5,
-              "hp": 9,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 30,
-              "hp": 26,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아스나(버니걸)",
-              "baseId": "asuna",
-              "atk": 15,
-              "hp": 13,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Asuna_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 19,
-              "hp": 17,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "taunt",
-                "ranged"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:48:07",
           "placement": 1,
           "turn": 18,
@@ -2225,9 +2149,81 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:57:35",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 11,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 48,
+              "hp": 42,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 12,
+              "hp": 6,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-07",
