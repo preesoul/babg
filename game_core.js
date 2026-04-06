@@ -5106,26 +5106,18 @@ function bSettleCoin(sid,isHeads){
   img.src=BCOIN_BASE+(isHeads?'coin_front.png':'coin_back.png');
 }
 function bCalcTurnOrder(cr,nA,nB,eFirst){
-  // 가장 왼쪽 앞면 위치 (정규화: 시각적 위치 기준)
-  var firstHeadA=-1,firstHeadB=-1;
-  for(var i=0;i<nA;i++){if(cr['a'+i]){firstHeadA=i;break;}}
-  for(var i=0;i<nB;i++){if(cr['b'+i]){firstHeadB=i;break;}}
+  // 앞면 개수 비교: 더 많은 쪽이 선공, 같으면 동률
+  var headsA=0,headsB=0;
+  for(var i=0;i<nA;i++){if(cr['a'+i])headsA++;}
+  for(var i=0;i<nB;i++){if(cr['b'+i])headsB++;}
 
-  // 정규화 위치 비교: (index+0.5)/total → 크로스곱으로 정수 비교
-  // posA = (firstHeadA+0.5)*nB, posB = (firstHeadB+0.5)*nA
   var tied=false;
-  if(firstHeadA===-1&&firstHeadB===-1){
-    tied=true; // 둘 다 앞면 없음
-  } else if(firstHeadA===-1){
-    eFirst=true; // B만 앞면 → 적 선공
-  } else if(firstHeadB===-1){
-    eFirst=false; // A만 앞면 → 아군 선공
+  if(headsA===headsB){
+    tied=true; // 같은 수의 앞면 → 동률
+  } else if(headsA>headsB){
+    eFirst=false; // 아군 앞면 더 많음 → 아군 선공
   } else {
-    var posA=(firstHeadA*2+1)*nB; // (firstHeadA+0.5)*nB*2
-    var posB=(firstHeadB*2+1)*nA; // (firstHeadB+0.5)*nA*2
-    if(posA===posB) tied=true;
-    else if(posA<posB) eFirst=false; // 아군이 더 왼쪽 → 아군 선공
-    else eFirst=true; // 적이 더 왼쪽 → 적 선공
+    eFirst=true; // 적 앞면 더 많음 → 적 선공
   }
   if(eFirst===undefined)eFirst=Math.random()<0.5;
 
