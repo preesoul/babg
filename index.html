@@ -86,13 +86,13 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .card.swap-selected{border-color:#00c8ff!important;box-shadow:0 0 14px rgba(0,200,255,0.5)!important}
 .rec-card .sell-x{display:none!important}
 .rec-card .coin-toggle{display:none!important}
-.ability-icons{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:4;font-size:16px;letter-spacing:0;text-align:center;pointer-events:none;background:transparent;border:none;padding:0;white-space:nowrap;display:flex;gap:2px}
-.ability-icons .abi{background:rgba(0,0,0,0.5);border-radius:4px;padding:2px 3px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9));display:inline-flex;align-items:center;line-height:0}
+.ability-icons{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:4;font-size:16px;letter-spacing:0;text-align:center;pointer-events:none;background:transparent;border:none;padding:0;white-space:nowrap;display:flex;gap:0}
+.ability-icons .abi{background:rgba(0,0,0,0.5);border-radius:4px;padding:2px 3px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9));display:inline-flex;align-items:center;line-height:0;margin-left:-5px;position:relative}
+.ability-icons .abi:first-child{margin-left:0}
+.ability-icons .abi:nth-child(1){z-index:8}.ability-icons .abi:nth-child(2){z-index:7}.ability-icons .abi:nth-child(3){z-index:6}.ability-icons .abi:nth-child(4){z-index:5}.ability-icons .abi:nth-child(5){z-index:4}.ability-icons .abi:nth-child(6){z-index:3}
 .ability-icons .abi svg{width:22px;height:22px}
-.minicard .ability-icons{font-size:13px;top:-10px;padding:0;gap:0}
-.minicard .ability-icons .abi{margin-left:-5px;padding:1px 1px;position:relative}
-.minicard .ability-icons .abi:first-child{margin-left:0}
-.minicard .ability-icons .abi:nth-child(1){z-index:8}.minicard .ability-icons .abi:nth-child(2){z-index:7}.minicard .ability-icons .abi:nth-child(3){z-index:6}.minicard .ability-icons .abi:nth-child(4){z-index:5}.minicard .ability-icons .abi:nth-child(5){z-index:4}.minicard .ability-icons .abi:nth-child(6){z-index:3}
+.minicard .ability-icons{font-size:13px;top:-10px;padding:0}
+.minicard .ability-icons .abi{padding:1px 1px}
 .shake-light{animation:shake-l 0.4s ease-out}
 .shake-heavy{animation:shake-h 0.5s ease-out}
 @keyframes shake-l{0%{transform:translateX(0)}10%{transform:translateX(-4px)}20%{transform:translateX(4px)}30%{transform:translateX(-3px)}40%{transform:translateX(3px)}50%{transform:translateX(-2px)}60%{transform:translateX(2px)}100%{transform:translateX(0)}}
