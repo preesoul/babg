@@ -2757,33 +2757,36 @@ function renderRoster(){
     var _t7All=(typeof HIDDEN_CHARS!=="undefined"?HIDDEN_CHARS:[]).slice();
     if(_t7All.length>0){
       var _t7Recruited=(typeof getRecruitedTier7==='function')?getRecruitedTier7():[];
-      html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(255,215,0,0.35);padding-top:12px">';
-      html+='<span class="roster-school-name" style="color:#ffd700">⭐ 7성 유니크</span></div>';
+      html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(192,48,208,0.45);padding-top:12px">';
+      html+='<span class="roster-school-name" style="color:#e070ff">⭐ 7성 유니크</span></div>';
       var _t7BySchool={};
       _t7All.forEach(function(c){if(!_t7BySchool[c.school])_t7BySchool[c.school]=[];_t7BySchool[c.school].push(c);});
+      html+='<div class="roster-cards-flow">';
       SCHOOL_ORDER.forEach(function(school){
         var _list=_t7BySchool[school];
         if(!_list||!_list.length)return;
         var _icon=SCHOOL_ICONS[school]||'';
-        html+='<div style="display:flex;align-items:center;gap:8px;margin:10px 0 4px;padding-left:4px">';
-        if(_icon)html+='<img src="'+_icon+'" style="width:18px;height:18px;filter:invert(1);opacity:0.7">';
-        html+='<span style="font-size:12px;color:#7a9ab8;font-weight:600">'+school+'</span></div>';
-        html+='<div class="roster-cards-flow">';
+        html+='<div class="roster-tier-chunk">';
+        html+='<div class="rt-sep" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:28px">';
+        if(_icon)html+='<img src="'+_icon+'" style="width:18px;height:18px;filter:invert(1);opacity:0.85">';
+        html+='<span style="font-size:9px;color:#9ab8d8;font-weight:600;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:-1px">'+school+'</span>';
+        html+='</div>';
         _list.forEach(function(c){
           var _isLocked=_t7Recruited.indexOf(c.id)===-1;
           if(_isLocked){
-            html+='<div class="roster-card rt6" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#ffd700">';
+            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#c030d0;box-shadow:0 0 10px rgba(192,48,208,0.35)">';
             html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
             html+='<div class="r-name" style="color:#666">???</div>';
           } else {
-            html+='<div class="roster-card rt6" data-rid="'+c.id+'" style="border-color:#ffd700">';
+            html+='<div class="roster-card" data-rid="'+c.id+'" style="border-color:#c030d0;box-shadow:0 0 10px rgba(192,48,208,0.35)">';
             if(c.img)html+='<img class="r-portrait" src="img/'+c.img+'" onerror="this.style.display=\'none\'">';
-            html+='<div class="r-name" style="color:#ffd700">'+c.name+'</div>';
+            html+='<div class="r-name" style="color:#e070ff">'+c.name+'</div>';
           }
           html+='</div>';
         });
         html+='</div>';
       });
+      html+='</div>';
     }
   }
   // 액션카드 섹션 (필터 미적용 시에만 표시)
