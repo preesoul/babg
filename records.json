@@ -689,7 +689,8 @@
               "img": "Yuzu.png",
               "school": "밀레니엄"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 146,
