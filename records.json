@@ -3724,7 +3724,8 @@
               "img": "Chinatsu.png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-06T01:53:09",
