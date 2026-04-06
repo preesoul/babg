@@ -592,8 +592,12 @@ function getEnigmaPoints() { return window._enigmaPointsCache||0; }
 
 // 신비해방 — 퀘스트 창에서 호출. pd.points에서 차감 후 서버 저장.
 var _mysteryUnlocking=false;
+var _mysteryUnlockCooldown=0;
 function doMysteryUnlock() {
   if(_mysteryUnlocking)return;
+  // 쿨다운: 마지막 해방 후 2초 이내 재호출 차단 (터치 이벤트 중복 방지)
+  var now=Date.now();
+  if(now-_mysteryUnlockCooldown<2000)return;
   if(!window._babgLogin||!window._babgLogin.name){alert('로그인이 필요합니다.');return;}
   _mysteryUnlocking=true;
   var _retries=0;
@@ -622,12 +626,13 @@ function doMysteryUnlock() {
       saveRecords(data,sha,function(saveErr){
         if(saveErr){
           _retries++;
-          if(_retries<=2){setTimeout(_tryUnlock,500);return;}
+          if(_retries<=2){setTimeout(_tryUnlock,800);return;}
           _mysteryUnlocking=false;
           alert('저장 실패. 잠시 후 다시 시도해주세요.');
           return;
         }
         _mysteryUnlocking=false;
+        _mysteryUnlockCooldown=Date.now();
         setUnlockedAbydos(unlocked);
         window._enigmaPointsCache=pd.points;
         var pickedName=pick,pickedImg='',pickedSchool='';
@@ -635,7 +640,8 @@ function doMysteryUnlock() {
         if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool);
         else alert('[신비해방] '+pickedName+' 해방!');
         if(typeof renderQuestUI==='function') renderQuestUI();
-        if(typeof renderAll==='function') renderAll();
+        // 게임이 진행중일 때만 renderAll 호출 (타이틀/퀘스트 화면에서 오류 방지)
+        if(typeof G!=='undefined'&&G&&G.players&&G.phase==='recruit'&&typeof renderAll==='function') renderAll();
       });
     });
   }
@@ -673,6 +679,11 @@ var swapFirst = -1;
 function newGame() {
   deleteSave(); // 새 게임 시 저장 데이터 삭제
   resetQuestTracker();
+  // 이전 게임의 오버레이 정리 (발견/전투 팝업 잔존 방지)
+  var _bo=document.getElementById('battle-overlay');if(_bo){_bo.classList.remove('active');_bo.style.zIndex='';}
+  var _bia=document.getElementById('battle-intro-area');if(_bia)_bia.innerHTML='';
+  var _ba=document.getElementById('battle-arena');if(_ba)_ba.style.display='';
+  var _bl=document.getElementById('battle-log');if(_bl)_bl.style.display='';
   var players=[];
   var aiCount=SANDBOX?5:7;
   var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
