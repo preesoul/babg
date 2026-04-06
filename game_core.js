@@ -197,7 +197,7 @@ function logBuff(unit, source, atkDelta, hpDelta) {
 // 키워드 헬퍼
 function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
-function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
+function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; var _KE={taunt:'👊',shield:'💎',reborn:'✨',invincible:'🛡',windfury:'⚡',cleave:'💥',poison:'☠️',pierce:'🔱',ranged:'🎯',ambush:'🌙',selfdestruct:'💣',preemptive:'⚔️',survive:'🏔️'}; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(_KE[k]?_KE[k]+' ':'')+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
 var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',invincible:'무적',ambush:'기습'};
 var KW_DESCS = {
@@ -3775,9 +3775,17 @@ function hasMalkuthOnSide(side){
   for(var i=0;i<side.length;i++)if(side[i].alive&&side[i].baseId==='millennium_malkuth')return true;
   return false;
 }
-function makeSweeper(){
+function makeSweeper(side){
   var sw=makeToken('sweeper');
+  sw.school='밀레니엄'; // rioSchool 오버라이드 방지: 항상 밀레니엄
   sw.alive=true;sw.poisonImmune=false;sw.isToken=true;sw.baseId='sweeper';
+  // 우타하 패시브: 밀레니엄 토큰 소환 시 스케쥴 레벨 보너스
+  if(side) applyEimiBonus(sw,side);
+  // 전투 중 학교 버프 적용
+  if(G.battleSchoolBuff&&G.battleSchoolBuff['밀레니엄']){
+    var sbuff=G.battleSchoolBuff['밀레니엄'];
+    sw.atk+=sbuff;sw.hp+=sbuff;
+  }
   return sw;
 }
 
@@ -4171,7 +4179,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       milCount=Math.max(1,milCount); // 최소 1체
       for(var sw=0;sw<milCount;sw++){
         if(!target.alive) break;
-        var swp=makeSweeper();swp._mySide=atkArr;swp.alive=true;
+        var swp=makeSweeper(atkArr);swp._mySide=atkArr;swp.alive=true;
         atkArr.push(swp);
         _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
         log2.push({cls:'soc',text:'[선제] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+', 보호막)'});
@@ -4265,9 +4273,20 @@ function runBattle(boardA, boardB, startWithA, opts) {
     // 레이죠 패시브: 데미지를 주지 못하면 반격도 받지 않음
     var _reijoBlock=(attacker.baseId==='reijo'&&!attacker._abilitiesStripped&&hitResult&&hitResult.blocked);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')&&!_reijoBlock){
-      var counterResult=dealHit(defender,attacker,log2);
-      // 공격자가 반격 맞고 살아남았으면 버티기 체크
-      checkSurvive(attacker,atkArr,log2,defender);
+      // 하루카 반격: 5회(스킨 10회) 다회 반격
+      if(defender.baseId==='haruka'&&defender.alive&&!defender._abilitiesStripped){
+        var counterHits=defender.isSkin?10:5;
+        log2.push({cls:'hit',text:defender.name+'의 반격! '+counterHits+'회!'});
+        for(var _ch=0;_ch<counterHits;_ch++){
+          if(!attacker.alive||attacker.hp<=0)break;
+          dealHit(defender,attacker,log2);
+          checkSurvive(attacker,atkArr,log2,defender);
+        }
+      } else {
+        var counterResult=dealHit(defender,attacker,log2);
+        // 공격자가 반격 맞고 살아남았으면 버티기 체크
+        checkSurvive(attacker,atkArr,log2,defender);
+      }
       // 치세 패시브: 반격 후 상대 능력 제거
       var _atkOrigBoard=(!opts||!opts.simCtx)?(atkArr===a?boardA:boardB):null;
       if(defender.alive) checkChisePassive(defender,attacker,_atkOrigBoard,log2);
@@ -5220,24 +5239,53 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       renderBattleSnap(prevSnap);
       appendLog(step.log,logEl);
       var sweepCount=0;for(var _sl=0;_sl<step.log.length;_sl++){if((step.log[_sl].text||'').indexOf('스위퍼 소환')!==-1)sweepCount++;}
+      var atkRowM=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
+      var defRowM=atkIsAlly?document.getElementById('enemy-row'):document.getElementById('ally-row');
+      var malkuthCard=atkRowM.children[step.atkIdx];
       var _swIdx=0;
       function fireSweeper(){
         if(_swIdx>=sweepCount){
           setTimeout(function(){renderBattleSnap(currSnap);stepIdx++;setTimeout(nextStep,300);},400);
           return;
         }
-        playSfx('selfdestruct',0.4);shakeScreen('light');
-        // 상대쪽 플래시
-        var dRow=atkIsAlly?document.getElementById('enemy-row'):document.getElementById('ally-row');
-        if(dRow&&dRow.children.length>0){
-          var tgt=dRow.children[Math.min(_swIdx,dRow.children.length-1)];
-          if(tgt){tgt.style.filter='brightness(2)';setTimeout(function(){tgt.style.filter='';},150);}
-        }
-        _swIdx++;
-        setTimeout(fireSweeper,300);
+        // 스위퍼 카드 생성 (말쿠트 옆에서 등장)
+        var proj=document.createElement('div');
+        proj.className='sweeper-proj';
+        var sweeperData={baseId:'sweeper',name:'스위퍼',atk:10,hp:10,kw:['shield','selfdestruct'],img:'token/Sweeper.png',isSkin:false,school:'밀레니엄',isToken:true};
+        proj.innerHTML=miniCardHtml(sweeperData);
+        // 시작 위치: 말쿠트 카드 위치
+        var startRect=malkuthCard?malkuthCard.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:70,height:100};
+        var sx=startRect.left+startRect.width/2-35;
+        var sy=startRect.top+startRect.height/2-50;
+        proj.style.left=sx+'px';
+        proj.style.top=sy+'px';
+        proj.style.animation='sweeperSpawn 0.25s ease-out forwards';
+        document.body.appendChild(proj);
+        playSfx('soc_trigger',0.3);
+        // 0.3초 후 적 방향으로 이동
+        setTimeout(function(){
+          var tgtCard=defRowM.children[Math.min(_swIdx,defRowM.children.length-1)];
+          var endRect=tgtCard?tgtCard.getBoundingClientRect():{left:window.innerWidth/2,top:atkIsAlly?100:window.innerHeight-200,width:70,height:100};
+          var ex=endRect.left+endRect.width/2-35;
+          var ey=endRect.top+endRect.height/2-50;
+          proj.style.animation='none';
+          proj.style.transition='left 0.3s ease-in, top 0.3s ease-in';
+          proj.style.left=ex+'px';
+          proj.style.top=ey+'px';
+          // 0.35초 후 폭발
+          setTimeout(function(){
+            proj.style.transition='none';
+            proj.style.animation='sweeperExplode 0.3s ease-out forwards';
+            playSfx('selfdestruct',0.4);shakeScreen('light');
+            if(tgtCard){tgtCard.style.filter='brightness(2)';setTimeout(function(){tgtCard.style.filter='';},200);}
+            setTimeout(function(){if(proj.parentNode)proj.parentNode.removeChild(proj);},350);
+            _swIdx++;
+            setTimeout(fireSweeper,200);
+          },350);
+        },300);
       }
       playSfx('soc_trigger',0.4);
-      setTimeout(fireSweeper,500);
+      setTimeout(fireSweeper,400);
       return;
     }
     // Phase 1: 느리게 들어올리기 (350ms)
