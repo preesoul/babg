@@ -2699,9 +2699,80 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T04:10:50",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 23,
+              "hp": 23,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 19,
+              "hp": 21,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 32,
+              "hp": 31,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2739,7 +2810,7 @@
             },
             {
               "id": "play10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             }
           ]
