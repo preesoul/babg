@@ -4022,9 +4022,80 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T04:30:26",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 43,
+              "hp": 33,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 27,
+              "hp": 27,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 25,
+              "hp": 23,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 36,
+              "hp": 36,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 24,
+              "hp": 24,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 6,
+      "points": 18,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -4052,12 +4123,12 @@
           "quests": [
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
