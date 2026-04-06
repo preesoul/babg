@@ -1452,75 +1452,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:02:17",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "츠쿠요",
-              "baseId": "tsukuyo",
-              "atk": 6,
-              "hp": 4,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsukuyo.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 11,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "카스미",
-              "baseId": "kasumi",
-              "atk": 6,
-              "hp": 7,
-              "tier": 4,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Kasumi.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 10,
-              "hp": 7,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "나구사",
-              "baseId": "nagusa",
-              "atk": 5,
-              "hp": 7,
-              "tier": 6,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Nagusa.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:08:47",
           "placement": 8,
           "turn": 10,
@@ -2071,9 +2002,80 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T13:41:44",
+          "placement": 5,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 60,
+              "hp": 61,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 11,
+              "hp": 10,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 3,
+              "hp": 2,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 5,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 5,
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-06",
