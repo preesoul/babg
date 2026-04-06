@@ -5686,11 +5686,13 @@ function miniCardHtml(m){
   if(hasKw(m,'poison')) mIconBar+='🐍';
   if(hasKw(m,'selfdestruct')) mIconBar+='🧨';
   if(hasKw(m,'taunt')) mIconBar+='🛡️';
+  if(hasKw(m,'shield')) mIconBar+='💎';
   if(hasKw(m,'cleave')) mIconBar+='🌊';
   if(hasKw(m,'windfury')) mIconBar+='⚡';
   if(hasKw(m,'pierce')) mIconBar+='🔱';
   if(hasKw(m,'ranged')) mIconBar+='🏹';
   if(hasKw(m,'invincible')) mIconBar+='🏆';
+  if(hasKw(m,'ambush')) mIconBar+='🥷';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
