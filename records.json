@@ -3288,7 +3288,7 @@
           ]
         }
       ],
-      "points": 12,
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -3346,7 +3346,8 @@
         "trinity_mika"
       ],
       "unlockedAbydos": [
-        "wakamo"
+        "wakamo",
+        "hoshino"
       ]
     },
     "킹갓프리소울": {
