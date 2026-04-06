@@ -569,80 +569,6 @@
       "pw": "0903",
       "records": [
         {
-          "date": "2026-04-05T23:10:32",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "카린",
-              "baseId": "karin",
-              "atk": 20,
-              "hp": 17,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Karin.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "데스 모모이",
-              "baseId": "millennium_death_momoi",
-              "atk": 40,
-              "hp": 42,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아스나",
-              "baseId": "asuna",
-              "atk": 17,
-              "hp": 16,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Asuna.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "네루(바니걸)",
-              "baseId": "neru",
-              "atk": 46,
-              "hp": 48,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Neru_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 2,
-              "hp": 4,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T23:18:07",
           "placement": 8,
           "turn": 11,
@@ -1310,9 +1236,86 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:38:58",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 93,
+              "hp": 83,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 93,
+              "hp": 83,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 49,
+              "hp": 55,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 35,
+              "hp": 29,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 8,
+      "points": 10,
       "questState": {
         "daily": {
           "date": "2026-04-06",
