@@ -1606,6 +1606,8 @@ function getDiscoverChoices(p) {
 }
 
 function showDiscover(p) {
+  console.trace('[DEBUG] showDiscover called, p.isPlayer='+p.isPlayer+', turn='+G.turn);
+  if(!p.isPlayer){aiDiscover(p);return;} // AI가 호출한 경우 aiDiscover로 전환
   var choices = getDiscoverChoices(p);
   if(choices.length === 0) { renderAll(); return; }
 
@@ -1744,6 +1746,7 @@ function showDiscover(p) {
 
 // 커스텀 발견: 특정 후보 목록으로 발견 UI 표시
 function showDiscoverCustom(choices) {
+  console.trace('[DEBUG] showDiscoverCustom called, turn='+G.turn+', choices='+((choices||[]).map(function(c){return c.id||c.name;}).join(',')));
   if(!choices||choices.length===0){renderAll();return;}
   var p=G.players[0];
   var overlay=document.getElementById('battle-overlay');
@@ -2000,8 +2003,13 @@ function _doBC(m, p) {
     if(shChars.length>0&&p.board.length<MAX_BOARD){
       var pick=shChars[Math.floor(Math.random()*shChars.length)];
       if(m.isSkin){
-        // 스킨: 발견
-        showDiscoverCustom(shChars.length>=3?[shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)]]:shChars);
+        // 스킨: 발견 (플레이어만 UI 표시, AI는 자동 선택)
+        if(p.isPlayer){
+          showDiscoverCustom(shChars.length>=3?[shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)]]:shChars);
+        } else {
+          // AI: 랜덤 산해경 자동 소환
+          if(takeFromPool(pick.id)){var nu2=makeMinion(pick,false);p.board.push(nu2);if(nu2.baseId!=='kokona')triggerBattlecry(nu2,p);}
+        }
       } else {
         if(takeFromPool(pick.id)){var nu=makeMinion(pick,false);p.board.push(nu);if(nu.baseId!=='kokona')triggerBattlecry(nu,p);}
       }
