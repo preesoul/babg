@@ -2068,7 +2068,8 @@ function _doBC(m, p) {
   // ===== 산해경 첫인사 =====
   else if(id==='kokona'){
     // 코코나: 무작위 산해경 학생 소환 (스케쥴 레벨 이하)
-    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier;});
+    // 자기 자신(kokona)은 후보에서 제외 — 자기-소환 루프 방지
+    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier&&c.id!=='kokona';});
     var unlockedAby=getUnlockedAbydos();
     shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
     if(shChars.length>0&&p.board.length<MAX_BOARD){
