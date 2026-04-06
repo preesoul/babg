@@ -4820,9 +4820,80 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:48:40",
+          "placement": 8,
+          "turn": 12,
+          "tier": 5,
+          "board": [
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 24,
+              "hp": 20,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 18,
+              "hp": 16,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 17,
+              "hp": 18,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 16,
+              "hp": 16,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요",
+              "baseId": "tsukuyo",
+              "atk": 15,
+              "hp": 14,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsukuyo.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -4834,13 +4905,13 @@
             },
             {
               "id": "gehenna10",
-              "progress": 1,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 3,
-              "completed": false
+              "progress": 16,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4855,7 +4926,7 @@
             },
             {
               "id": "play10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             },
             {
