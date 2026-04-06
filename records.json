@@ -3893,9 +3893,72 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T10:04:37",
+          "placement": 6,
+          "turn": 11,
+          "tier": 3,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 19,
+              "hp": 17,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 3,
+              "hp": 6,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 27,
+              "hp": 25,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 48,
+      "points": 50,
       "questState": {
         "daily": {
           "date": "2026-04-06",
