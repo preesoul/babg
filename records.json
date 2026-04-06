@@ -2116,79 +2116,6 @@
       "pw": "aqula88!",
       "records": [
         {
-          "date": "2026-04-05T22:43:52",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "치아키",
-              "baseId": "chiaki",
-              "atk": 15,
-              "hp": 13,
-              "tier": 3,
-              "kw": [
-                "ranged",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Chiaki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "사츠키(수영복)",
-              "baseId": "satsuki",
-              "atk": 25,
-              "hp": 27,
-              "tier": 5,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "토라마루(황금)",
-              "baseId": "iroha",
-              "atk": 10,
-              "hp": 2,
-              "tier": 0,
-              "kw": [],
-              "isSkin": true,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이부키(수영복)",
-              "baseId": "ibuki",
-              "atk": 20,
-              "hp": 22,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Ibuki_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-05T22:56:57",
           "placement": 1,
           "turn": 16,
@@ -2847,9 +2774,87 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-06T07:20:54",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 18,
+              "hp": 28,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 9,
+              "hp": 16,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 6,
+              "hp": 4,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "네루(바니걸)",
+              "baseId": "neru",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Neru_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "호시노",
+              "baseId": "hoshino",
+              "atk": 13,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Hoshino.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-06",
