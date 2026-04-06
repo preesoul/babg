@@ -2225,7 +2225,7 @@
           ]
         }
       ],
-      "points": 16,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -2290,7 +2290,8 @@
         "chise",
         "shun",
         "nonomi",
-        "reijo"
+        "reijo",
+        "mina"
       ],
       "recruitedTier7": [
         "millennium_nameless",
