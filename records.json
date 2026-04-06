@@ -3725,7 +3725,7 @@
           ]
         }
       ],
-      "points": 14,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -3778,7 +3778,10 @@
           ]
         },
         "_lastLoginDate": "2026-04-06"
-      }
+      },
+      "unlockedAbydos": [
+        "kokona"
+      ]
     },
     "마오비": {
       "pw": "2089",
