@@ -249,7 +249,7 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
+var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1}; // 패시브 (영입 턴/상시)
@@ -325,7 +325,7 @@ var ABILITY_DESCS = {
   millennium_seminar:     {type:'패시브 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',skinEffect:'',quote:'리오: 우리는, 빛이 없는 곳에서 만날 거야.'},
   millennium_cc:          {type:'패시브 / 뒤끝',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: 코인 토스가 항상 성공합니다.\n뒤끝: 아비 에슈흐(스케쥴×8)를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
   trinity_makeup:         {type:'패시브',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',skinEffect:'',quote:'히후미: 그러니까, 지금부터 시작하겠습니다! 우리들의 이야기를!',quote2:'히후미: 학원과 청춘의 이야기를!!'},
-  trinity_justice:        {type:'패시브 / 개전',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
+  trinity_justice:        {type:'패시브 / 개전 / 뒤끝',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.\n뒤끝: <span style="color:#ffd700;font-weight:700">보호막, 연사</span>를 얻은 <츠루기>를 불러냅니다.\n츠루기의 공/체는 이번 전투에서 정의실현부가 가졌던 가장 높은 값을 가집니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
   // ===== 신규 캐릭터 =====
   ibuki:    {type:'개전',desc:'아군 마코토, 치아키, 사츠키, 이로하에게\n+5/+5를 부여합니다.',skinEffect:'수영복 이부키: +10/+10',skinEffectDesc:'개전: 아군 마코토, 치아키, 사츠키, 이로하에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   chiaki:   {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 치아키: 연사 추가',skinEffectDesc:'저격+연사: 저격 공격. 반격을 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">연사</span>로 2회 공격합니다.'},
@@ -3777,6 +3777,36 @@ function _doDR(unit, mySide, otherSide, log) {
     // 세이아: 게임에서 완전히 사라짐 (killUnit에서 처리됨)
     log.push({cls:'kill',text:'[뒤끝] '+unit.name+': 이번 게임에서 완전히 사라집니다!'});
   }
+  else if(id==='trinity_justice'){
+    // 정의실현부 뒤끝: 보호막+연사를 가진 츠루기를 이번 전투 최대 공/체로 소환
+    if(countAlive(mySide)<BATTLE_MAX){
+      var _tjAtk=Math.max(unit._peakAtk||0, unit.atk);
+      var _tjHp=Math.max(unit._peakHp||0, unit.maxHp||unit.hp);
+      var _tsurugiTmpl=null;
+      for(var _ti=0;_ti<CHARS.length;_ti++)if(CHARS[_ti].id==='tsurugi'){_tsurugiTmpl=CHARS[_ti];break;}
+      var _tsu={
+        id:'tsurugi_'+Math.random().toString(36).substr(2,5),
+        baseId:'tsurugi',
+        name:_tsurugiTmpl?_tsurugiTmpl.name:'츠루기',
+        school:'트리니티',
+        tier:_tsurugiTmpl?_tsurugiTmpl.tier:6,
+        atk:_tjAtk,
+        hp:_tjHp,
+        maxHp:_tjHp,
+        kw:['shield','windfury'],
+        img:_tsurugiTmpl?_tsurugiTmpl.img:'Tsurugi.png',
+        isSkin:false,
+        isToken:false,
+        alive:true,
+        poisonImmune:false,
+        _mySide:mySide,
+        _peakHp:_tjHp,
+        _peakAtk:_tjAtk
+      };
+      mySide.push(_tsu);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 츠루기 소환! ('+_tjAtk+'/'+_tjHp+', 보호막+연사)'});
+    }
+  }
   // ===== 백귀야행 뒤끝 =====
   else if(id==='hovercraft'){
     // 호버크래프트 DR: 아군 와카모가 모두 쓰러진 상태라면 와카모 소환
@@ -3949,9 +3979,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   var log=[];
   var steps=[];
-  // 전투 중 최대 체력 추적 (호시노 뒤끝 등에 사용)
-  for(var _pi=0;_pi<a.length;_pi++){a[_pi]._peakHp=a[_pi].hp;}
-  for(var _pi=0;_pi<b.length;_pi++){b[_pi]._peakHp=b[_pi].hp;}
+  // 전투 중 최대 체력/공격력 추적 (호시노 뒤끝, 정의실현부 뒤끝 등에 사용)
+  for(var _pi=0;_pi<a.length;_pi++){a[_pi]._peakHp=a[_pi].hp;a[_pi]._peakAtk=a[_pi].atk;}
+  for(var _pi=0;_pi<b.length;_pi++){b[_pi]._peakHp=b[_pi].hp;b[_pi]._peakAtk=b[_pi].atk;}
   var turnA=(startWithA!==undefined?startWithA:true);
   var idxA=0,idxB=0;
   var maxRounds=200;
@@ -4731,9 +4761,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
       if(stepLog.length>0){
         for(var sl=0;sl<stepLog.length;sl++)log.push(stepLog[sl]);
-        // _peakHp 갱신
-        for(var _pp=0;_pp<a.length;_pp++){if(a[_pp].hp>(a[_pp]._peakHp||0))a[_pp]._peakHp=a[_pp].hp;}
-        for(var _pp=0;_pp<b.length;_pp++){if(b[_pp].hp>(b[_pp]._peakHp||0))b[_pp]._peakHp=b[_pp].hp;}
+        // _peakHp / _peakAtk 갱신
+        for(var _pp=0;_pp<a.length;_pp++){if(a[_pp].hp>(a[_pp]._peakHp||0))a[_pp]._peakHp=a[_pp].hp;if(a[_pp].atk>(a[_pp]._peakAtk||0))a[_pp]._peakAtk=a[_pp].atk;}
+        for(var _pp=0;_pp<b.length;_pp++){if(b[_pp].hp>(b[_pp]._peakHp||0))b[_pp]._peakHp=b[_pp].hp;if(b[_pp].atk>(b[_pp]._peakAtk||0))b[_pp]._peakAtk=b[_pp].atk;}
         var stepObj={atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:defI,atkId:attacker.id,defId:target.id,log:stepLog,snap:snapshot()};
         if(stepMultiHits>0) stepObj.multiHits=stepMultiHits;
         if(attacker.baseId==='haruka'&&stepMultiHits>0) stepObj.pajdikUid=attacker.id;
