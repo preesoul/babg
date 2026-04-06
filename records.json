@@ -3650,17 +3650,90 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T01:53:09",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 18,
+              "hp": 13,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 15,
+              "hp": 9,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 17,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 37,
+              "hp": 27,
+              "tier": 1,
+              "kw": [
+                "reborn",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "카스미",
+              "baseId": "kasumi",
+              "atk": 12,
+              "hp": 14,
+              "tier": 4,
+              "kw": [
+                "ambush",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Kasumi.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 14,
       "questState": {
         "daily": {
           "date": "2026-04-06",
           "quests": [
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 5,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -3669,7 +3742,7 @@
             },
             {
               "id": "millennium10",
-              "progress": 2,
+              "progress": 6,
               "completed": false
             }
           ],
@@ -3685,12 +3758,12 @@
             },
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
