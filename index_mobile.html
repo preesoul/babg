@@ -477,12 +477,12 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .schale-label-icon{width:14px!important;height:14px!important}
 .hp-bar-wrap{max-width:none!important;flex:1!important}
 .hp-bar-label{font-size:11px!important}
-.kw-guide{position:fixed!important;top:4px!important;left:4px!important;z-index:50!important}
+.kw-guide{position:fixed!important;top:4px!important;right:4px!important;left:auto!important;z-index:50!important}
 .kw-guide-btn{font-size:10px!important;padding:4px 8px!important}
-.kw-guide-panel{position:fixed!important;top:30px!important;left:4px!important;max-height:70vh!important;overflow-y:auto!important;width:280px!important}
+.kw-guide-panel{position:fixed!important;top:30px!important;right:4px!important;left:auto!important;max-height:70vh!important;overflow-y:auto!important;width:280px!important}
 
 /* 보드 카드: 5장이 모바일에 맞게 */
-.board{min-height:100px!important;padding:3px 2px!important;gap:2px!important;border-radius:8px!important;margin-bottom:2px!important}
+.board{min-height:100px!important;padding:3px 2px!important;gap:2px!important;border-radius:8px!important;margin-bottom:0!important}
 .card{width:64px!important;height:92px!important;border-width:2px!important;border-radius:4px!important;flex-shrink:1!important}
 .board .card{min-width:50px!important}
 .board.compact .card{width:64px!important;height:92px!important}
@@ -521,8 +521,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 .empty-hint{font-size:11px!important}
 
 /* 상점 */
-.shop{border-radius:8px!important}
-.shop-inner{padding:6px!important}
+.shop{border-radius:8px!important;overflow:visible!important}
+.shop-inner{padding:6px!important;overflow:visible!important;padding-top:16px!important}
 .shop-row{gap:3px!important;flex-wrap:wrap!important;max-width:100%!important}
 .shop-row .card{min-width:50px!important}
 .schedule-label{font-size:10px!important;padding:3px 8px!important;margin:2px 0 2px 2px!important}
@@ -999,7 +999,11 @@ function renderAll() {
   var turnNumEl=document.getElementById('ui-turn-num');if(turnNumEl)turnNumEl.textContent=G.turn;
   document.getElementById('ui-tier').textContent='스케쥴 Lv.'+p.tier;
   var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
-  document.getElementById('ui-stone').innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';
+  // schedule-label 보존하면서 stone 업데이트
+  var _stoneEl=document.getElementById('ui-stone');
+  var _stoneNum=_stoneEl.querySelector('.stone-num');
+  if(_stoneNum){_stoneNum.textContent=p.stone;}
+  else{_stoneEl.innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';}
   var enigmaCountEl=document.getElementById('enigma-count');if(enigmaCountEl)enigmaCountEl.textContent=getEnigmaPoints();
   document.getElementById('ui-hp').textContent='HP: '+p.hp;
   // HP 바 업데이트
