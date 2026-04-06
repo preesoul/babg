@@ -1602,82 +1602,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:48:07",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 3,
-              "hp": 5,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 20,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "reborn",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "세리카(수영복)",
-              "baseId": "serika",
-              "atk": 107,
-              "hp": 103,
-              "tier": 3,
-              "kw": [
-                "windfury",
-                "poison",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "히나(드레스)",
-              "baseId": "hina",
-              "atk": 31,
-              "hp": 11,
-              "tier": 6,
-              "kw": [
-                "cleave",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hina_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히후미",
-              "baseId": "hifumi",
-              "atk": 5,
-              "hp": 4,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hifumi.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T13:28:37",
           "placement": 2,
           "turn": 17,
@@ -2222,17 +2146,94 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T16:32:00",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 16,
+              "hp": 14,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "세리카",
+              "baseId": "serika",
+              "atk": 30,
+              "hp": 28,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Serika.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "아리스(메이드)",
+              "baseId": "arisu",
+              "atk": 23,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "cleave",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Arisu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 23,
+              "hp": 23,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 23,
+              "hp": 23,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 21,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 7,
-              "completed": false
+              "progress": 15,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -2262,8 +2263,8 @@
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ]
         },
