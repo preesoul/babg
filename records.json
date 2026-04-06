@@ -3372,8 +3372,138 @@
     },
     "sen": {
       "pw": "88",
-      "records": [],
-      "points": 0
+      "records": [
+        {
+          "date": "2026-04-06T00:24:39",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "피나",
+              "baseId": "pina",
+              "atk": 30,
+              "hp": 16,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Pina.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 43,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 43,
+              "hp": 34,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카린(버니걸)",
+              "baseId": "karin",
+              "atk": 37,
+              "hp": 25,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Karin_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 1,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 7,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "discover3",
+              "progress": 2,
+              "completed": false
+            },
+            {
+              "id": "kill10",
+              "progress": 62,
+              "completed": true
+            },
+            {
+              "id": "millennium10",
+              "progress": 2,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play10",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "win3",
+              "progress": 1,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
+      }
     }
   }
 }
