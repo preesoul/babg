@@ -807,8 +807,8 @@ function checkHiddenConditionsFor(p) {
     var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
     if(shCount>=5) eligible.push('shanhai_kiki');
   }
-  // 케이(USB): 밀레니엄 온리 구매 + Lv.6 + 아리스 보드
-  if(notOwned('Kei_usb')&&inPool('Kei_usb')&&onlySchool('밀레니엄')&&p.tier>=6&&boardHas('arisu'))
+  // 케이(USB): 밀레니엄 온리 + Lv.6 + 아리스 보드 + 왕녀를 산 적 없음 (분기 배타)
+  if(notOwned('Kei_usb')&&inPool('Kei_usb')&&!G.hiddenCardsEverOwned['millennium_nameless']&&onlySchool('밀레니엄')&&p.tier>=6&&boardHas('arisu'))
     eligible.push('Kei_usb');
   // === 특수 조건 (Lv.6 유지 — 보드 조건이 없거나 약한 경우) ===
   // 열차포: 게헨나 온리 구매
@@ -824,7 +824,8 @@ function checkHiddenConditionsFor(p) {
   if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
     eligible.push('hkyk_saikyo');
   // 왕녀: 밀레니엄 온리 구매 + Lv.6 + 아리스를 산 적 없음
-  if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&onlySchool('밀레니엄')&&p.tier>=6&&!G.arisuPurchased)
+  // 왕녀: 밀레니엄 온리 + Lv.6 + 아리스 미구매 + 케이를 산 적 없음 (분기 배타)
+  if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&!G.hiddenCardsEverOwned['Kei_usb']&&!G.hiddenCardsEverOwned['Arisu_Kei']&&onlySchool('밀레니엄')&&p.tier>=6&&!G.arisuPurchased)
     eligible.push('millennium_nameless');
   // 말쿠트: 밀레니엄 토큰 소환 10회+
   if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
