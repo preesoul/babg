@@ -2561,8 +2561,7 @@ document.getElementById('btn-reset-account').addEventListener('click',function()
     fetchRecords(function(err,data,sha){
       if(err||!data){alert('서버 연결 실패');overlay.remove();return;}
       if(data.players&&data.players[name]){
-        var pw=data.players[name].pw;
-        data.players[name]={pw:pw,records:[],points:0,questState:null,unlockedAbydos:[]};
+        data.players[name]={records:[],points:0,questState:null,unlockedAbydos:[]};
       }
       saveRecords(data,sha,function(){
         setUnlockedAbydos([]);

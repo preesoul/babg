@@ -6136,9 +6136,7 @@ function submitGameRecord(){
     if(!data.players)data.players={};
     var name=login.name;
     if(!data.players[name]){
-      data.players[name]={pw:login.pw,records:[],points:0,questState:null};
-    } else if(data.players[name].pw!==login.pw){
-      console.log('비밀번호 불일치');return;
+      data.players[name]={records:[],points:0,questState:null};
     }
     data.players[name].records.push(record);
     // 최근 10전만 유지
