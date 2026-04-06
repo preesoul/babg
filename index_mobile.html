@@ -353,6 +353,13 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .kw-guide{position:relative;display:inline-block;z-index:600}
 .kw-guide-btn{background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;cursor:pointer;padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15);transform:skewX(-8deg)}
 .kw-guide-btn:hover{background:#f0f4f8;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.vol-guide{position:relative;display:inline-block;z-index:600;margin-right:6px}
+.vol-guide-btn{background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;cursor:pointer;padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15);transform:skewX(-8deg)}
+.vol-guide-btn:hover{background:#f0f4f8;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.vol-guide-panel{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:#1a2a3a;border:2.5px solid #3a5a6e;border-radius:8px;padding:14px 16px;box-shadow:0 8px 40px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 0.2s ease;z-index:500}
+.vol-guide-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.vol-guide-panel .vol-label{font-size:13px;color:#60c0e8;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.vol-guide-panel input[type=range]{width:100%;accent-color:#60c0e8}
 .kw-guide-panel{position:absolute;top:calc(100% + 8px);right:0;width:360px;background:#1a2a3a;border:2.5px solid #3a5a6e;border-radius:8px;padding:18px 20px;box-shadow:0 8px 40px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 0.2s ease;max-height:none;overflow-y:visible;z-index:500}
 .kw-guide-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
 .kw-guide-panel h3{font-size:15px;color:#60c0e8;margin-bottom:12px;letter-spacing:1px}
@@ -802,6 +809,11 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
           <div class="hp-bar-track"><div class="hp-bar-fill" id="hp-bar-fill" style="width:100%"></div></div>
         </div>
         <div class="kw-guide" id="kw-guide">
+          <button class="vol-guide-btn" id="vol-guide-btn" style="margin-right:4px"><span class="btn-inner">소리</span></button>
+          <div class="vol-guide-panel" id="vol-guide-panel">
+            <div class="vol-label"><span>마스터 볼륨</span><span id="vol-value">100%</span></div>
+            <input type="range" id="vol-slider" min="0" max="100" value="100" step="1">
+          </div>
           <button class="kw-guide-btn" id="kw-guide-btn"><span class="btn-inner">능력 리스트</span></button>
           <div class="kw-guide-panel" id="kw-guide-panel">
             <div class="guide-section">
@@ -1921,7 +1933,28 @@ document.addEventListener('click',function(e){
   if(panel.classList.contains('open')&&!document.getElementById('kw-guide').contains(e.target)){
     panel.classList.remove('open');
   }
+  var vpanel=document.getElementById('vol-guide-panel');
+  if(vpanel&&vpanel.classList.contains('open')){
+    var kwg=document.getElementById('kw-guide');
+    if(kwg&&!kwg.contains(e.target))vpanel.classList.remove('open');
+  }
 });
+// 소리 볼륨 토글 + 슬라이더
+(function(){
+  var vbtn=document.getElementById('vol-guide-btn');
+  var vpanel=document.getElementById('vol-guide-panel');
+  var slider=document.getElementById('vol-slider');
+  var vval=document.getElementById('vol-value');
+  if(!vbtn||!slider)return;
+  var init=Math.round(((window._masterVolume!==undefined?window._masterVolume:1))*100);
+  slider.value=init;vval.textContent=init+'%';
+  vbtn.addEventListener('click',function(e){e.stopPropagation();vpanel.classList.toggle('open');});
+  slider.addEventListener('input',function(){
+    var v=parseInt(slider.value,10)/100;
+    if(typeof setMasterVolume==='function')setMasterVolume(v);
+    vval.textContent=slider.value+'%';
+  });
+})();
 
 // undo 제거됨
 // btn-reroll, btn-fight, btn-continue는 래핑 후 바인딩 (아래 튜토리얼 섹션에서)

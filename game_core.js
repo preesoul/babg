@@ -240,6 +240,37 @@ var CHAR_GRADES = {
 };
 var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
 if(typeof window!=='undefined') localStorage.removeItem('babg_sandbox');
+
+// ===== 마스터 볼륨 =====
+// HTMLMediaElement.volume setter를 가로채서 window._masterVolume 배수로 스케일.
+// 원본 값은 _babgRawVol에 저장해서 fade 등 읽기/쓰기 반복 시 배율이 중첩되지 않도록 함.
+(function(){
+  if(typeof window==='undefined')return;
+  var saved=parseFloat(localStorage.getItem('babg_master_volume'));
+  window._masterVolume=(isNaN(saved)?1:Math.max(0,Math.min(1,saved)));
+  try{
+    var proto=HTMLMediaElement.prototype;
+    var desc=Object.getOwnPropertyDescriptor(proto,'volume');
+    if(desc&&desc.set&&desc.get){
+      var origSet=desc.set,origGet=desc.get;
+      Object.defineProperty(proto,'volume',{
+        get:function(){return this._babgRawVol!==undefined?this._babgRawVol:origGet.call(this);},
+        set:function(v){this._babgRawVol=v;origSet.call(this,Math.max(0,Math.min(1,v*(window._masterVolume||1))));},
+        configurable:true
+      });
+    }
+  }catch(e){}
+})();
+function setMasterVolume(v){
+  window._masterVolume=Math.max(0,Math.min(1,v));
+  try{localStorage.setItem('babg_master_volume',String(window._masterVolume));}catch(e){}
+  // 현재 재생 중인 모든 audio/video 볼륨 재적용
+  try{
+    var els=document.querySelectorAll('audio,video');
+    for(var i=0;i<els.length;i++){if(els[i]._babgRawVol!==undefined)els[i].volume=els[i]._babgRawVol;}
+    if(typeof SFX_CACHE==='object')for(var k in SFX_CACHE){var a=SFX_CACHE[k];if(a&&a._babgRawVol!==undefined)a.volume=a._babgRawVol;}
+  }catch(e){}
+}
 var UPGRADE_COSTS = [0,5,7,8,9,11];
 var SHOP_SIZE = [0,3,4,4,5,5,6];
 var MAX_BOARD = 5;
