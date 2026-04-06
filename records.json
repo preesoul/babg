@@ -4,19 +4,6 @@
       "pw": "aqula88",
       "records": [
         {
-          "date": "2026-04-05T02:01:40",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            "린",
-            "이즈나(수영복)",
-            "이즈나(수영복)",
-            "츠쿠요(드레스)",
-            "카야(쿠데타)"
-          ]
-        },
-        {
           "date": "2026-04-05T02:17:53",
           "placement": 1,
           "turn": 16,
@@ -626,17 +613,94 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:52:14",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 99,
+              "hp": 91,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 99,
+              "hp": 91,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 44,
+              "hp": 44,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 15,
+              "hp": 16,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "유즈",
+              "baseId": "yuzu",
+              "atk": 22,
+              "hp": 23,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuzu.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 139,
+      "points": 146,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 51,
+              "completed": true
             },
             {
               "id": "skin3",
@@ -661,7 +725,7 @@
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
