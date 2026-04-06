@@ -595,6 +595,44 @@ function setUnlockedAbydos(arr) {
 // 마지막으로 fetch된 엘리그마 포인트 캐시 (renderAll 표시용)
 function getEnigmaPoints() { return window._enigmaPointsCache||0; }
 
+// 7성 유니크 영입 이력 (계정별, localStorage + 서버 pd.recruitedTier7 동기화)
+function _recruitedT7Key(){
+  var name=(window._babgLogin&&window._babgLogin.name)||'';
+  return name?'babg_recruited_t7_'+name:'babg_recruited_t7';
+}
+function getRecruitedTier7(){
+  try { return JSON.parse(localStorage.getItem(_recruitedT7Key())||'[]'); } catch(e){return [];}
+}
+function setRecruitedTier7(arr){
+  try { localStorage.setItem(_recruitedT7Key(), JSON.stringify(arr)); } catch(e){}
+}
+function recordRecruitTier7(baseId){
+  if(!baseId)return;
+  var list=getRecruitedTier7();
+  if(list.indexOf(baseId)===-1){
+    list.push(baseId);
+    setRecruitedTier7(list);
+    // 서버 동기화 (비동기, 실패해도 로컬은 유지)
+    if(window._babgLogin&&window._babgLogin.name&&typeof fetchRecords==='function'){
+      fetchRecords(function(err,data,sha){
+        if(err||!data||!data.players)return;
+        var pd=data.players[window._babgLogin.name];
+        if(!pd)return;
+        var srv=pd.recruitedTier7||[];
+        var changed=false;
+        for(var i=0;i<list.length;i++){if(srv.indexOf(list[i])===-1){srv.push(list[i]);changed=true;}}
+        // 서버에서 로컬로 역병합
+        for(var i=0;i<srv.length;i++){if(list.indexOf(srv[i])===-1){list.push(srv[i]);}}
+        setRecruitedTier7(list);
+        if(changed){
+          pd.recruitedTier7=srv;
+          if(typeof saveRecords==='function') saveRecords(data,sha,function(){});
+        }
+      });
+    }
+  }
+}
+
 // 신비해방 — 퀘스트 창에서 호출. pd.points에서 차감 후 서버 저장.
 var _mysteryUnlocking=false;
 var _mysteryUnlockCooldown=0;
@@ -1086,6 +1124,8 @@ function buyHiddenCard(idx) {
   G.hiddenCardsOwned[bid]=true;
   G.hiddenCardsEverOwned[bid]=true;
   if(m.school) G.purchasedSchools[m.school]=true;
+  // 7성 영입 이력 기록 (계정별)
+  recordRecruitTier7(bid);
   // 퀘스트 트래킹: 7성 카드 완성
   if(window._questTracker) window._questTracker.hiddenCompleted = true;
 
