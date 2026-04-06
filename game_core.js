@@ -4005,6 +4005,7 @@ function _doDR(unit, mySide, otherSide, log) {
   else if(id==='gehenna_p68'){
     // 흥신소 68 뒤끝: 흡수한 아루·카요코·무츠키·하루카를 흡수 당시 상태로 귀환
     var p68Abs=unit._p68Absorbed||[];
+    console.log('[DEBUG p68 DR]',{absorbed:p68Abs.length,hasField:!!unit._p68Absorbed,aliveCount:countAlive(mySide),battleMax:BATTLE_MAX});
     for(var _pi=0;_pi<p68Abs.length;_pi++){
       if(countAlive(mySide)>=BATTLE_MAX)break;
       var pab=p68Abs[_pi];
