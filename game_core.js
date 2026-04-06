@@ -570,7 +570,7 @@ function initPool() {
   return pool;
 }
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
-var ENIGMA_UNLOCK_COST = 10; // 신비해방 1회당 비용
+var ENIGMA_UNLOCK_COST = 5; // 신비해방 1회당 비용
 // 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
 var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki','sena','ui','himari','chise','wakamo','kaya','lin'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
