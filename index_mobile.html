@@ -305,7 +305,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .pop{animation:pop 0.3s ease}
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-/* 기습/보호막/도발 비주얼 */
+/* 기습/보호막/지켜줌 비주얼 */
 .card.ambush .card-bg img{filter:grayscale(100%);opacity:0.7}
 .shield-orb{position:absolute;width:132px;height:132px;top:calc(31% - 66px);left:50%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,230,140,0.2) 0%,rgba(255,200,60,0.5) 60%,rgba(240,180,40,0.6) 100%);border:1.5px solid rgba(255,210,80,0.7);box-shadow:0 0 20px rgba(255,200,60,0.4);z-index:1;pointer-events:none}
 .minicard.ambush .mini-bg img{filter:grayscale(100%);opacity:0.7}
@@ -747,7 +747,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
       <div class="roster-filters">
         <select id="filter-kw" class="roster-filter">
           <option value="">기본능력</option>
-          <option value="taunt">도발</option>
+          <option value="taunt">지켜줌</option>
           <option value="shield">보호막</option>
           <option value="cleave">광역</option>
           <option value="reborn">부활</option>
@@ -766,7 +766,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
           <option value="soc">개전</option>
           <option value="surv">버티기</option>
           <option value="passive">패시브</option>
-          <option value="pre">선제</option>
+          <option value="pre">선빵</option>
         </select>
       </div>
       <button class="roster-close" id="btn-roster-close">닫기</button>
@@ -801,7 +801,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
           <div class="kw-guide-panel" id="kw-guide-panel">
             <div class="guide-section">
               <div class="guide-section-title">기본 능력</div>
-              <div class="kw-guide-row"><span class="kw-name">🛡️ 도발</span><span class="kw-desc">이 학생부터 공격합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🛡️ 지켜줌</span><span class="kw-desc">이 학생부터 공격합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">💎 보호막</span><span class="kw-desc">피해를 1회 막아줍니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">🌱 부활</span><span class="kw-desc">처음 쓰러진 후, 체력 1로 부활합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">🏆 무적</span><span class="kw-desc">피해를 입지 않습니다.</span></div>
@@ -818,7 +818,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
               <div class="kw-guide-row"><span class="kw-name" style="color:#fbbf24">🔔 첫인사</span><span class="kw-desc">샬레에 놓을 때 발동합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name" style="color:#fca5a5">💀 뒤끝</span><span class="kw-desc">쓰러질 때 발동합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name" style="color:#6ee7b7">💪 버티기</span><span class="kw-desc">피격 후 살아남으면 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#c4b5fd">👊 선제</span><span class="kw-desc">공격 시 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#c4b5fd">👊 선빵</span><span class="kw-desc">공격 시 발동합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name" style="color:#c084fc">✨ 패시브</span><span class="kw-desc">조건 충족 시 자동으로 발동합니다.</span></div>
             </div>
           </div>
@@ -954,7 +954,7 @@ function abilityTag(baseId) {
   if(SOC_IDS[baseId])  tags+='<span class="ability-tag soc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">개전</span>';
   if(SURV_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">버티기</span>';
   if(PASSIVE_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">패시브</span>';
-  if(PRE_IDS[baseId])     tags+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">선제</span>';
+  if(PRE_IDS[baseId])     tags+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">선빵</span>';
   return tags;
 }
 
@@ -1260,7 +1260,7 @@ function cardHtml(m,idx,isBoard){
   if(DR_IDS[bid])allLabels.push({t:'뒤끝',c:'#fca5a5'});
   if(SOC_IDS[bid])allLabels.push({t:'개전',c:'#93c5fd'});
   if(SURV_IDS[bid])allLabels.push({t:'버티기',c:'#6ee7b7'});
-  if(PRE_IDS[bid])allLabels.push({t:'선제',c:'#c4b5fd'});
+  if(PRE_IDS[bid])allLabels.push({t:'선빵',c:'#c4b5fd'});
   if(PASSIVE_IDS[bid])allLabels.push({t:'패시브',c:'#c084fc'});
   var maxShow=3;var hasEtc=allLabels.length>maxShow;
   var showLabels=hasEtc?allLabels.slice(0,maxShow):allLabels;
@@ -1743,7 +1743,7 @@ function showTooltip(baseId,rect,cardEl){
     '첫인사':'샬레에 놓을 때 발동합니다.',
     '뒤끝':'쓰러질 때 발동합니다.',
     '버티기':'피격 후 살아남으면 발동합니다.',
-    '선제':'공격 시 발동합니다.',
+    '선빵':'공격 시 발동합니다.',
     '패시브':'조건 충족 시 자동으로 발동합니다.',
     '관통(회복)':'초과한 데미지가 양 옆으로 전달됩니다.',
     '저격':'반격을 받지 않습니다.',
@@ -1753,11 +1753,11 @@ function showTooltip(baseId,rect,cardEl){
   };
   var TIMING_COLORS = {
     '개전':'color:#93c5fd','첫인사':'color:#fbbf24','뒤끝':'color:#fca5a5',
-    '버티기':'color:#6ee7b7','선제':'color:#c4b5fd','패시브':'color:#c084fc'
+    '버티기':'color:#6ee7b7','선빵':'color:#c4b5fd','패시브':'color:#c084fc'
   };
   var hasKwSection=displayKw.length>0;
   var info=ABILITY_DESCS[baseId];
-  var _TT_EMOJI={'도발':'🛡️','보호막':'💎','부활':'🌱','무적':'🏆','연사':'⚡','광역':'🌊','독사굴':'🐍','관통':'🔱','저격':'🏹','기습':'🥷','자폭':'🧨','선제':'👊','버티기':'💪','개전':'📣','첫인사':'🔔','뒤끝':'💀','패시브':'✨'};
+  var _TT_EMOJI={'지켜줌':'🛡️','보호막':'💎','부활':'🌱','무적':'🏆','연사':'⚡','광역':'🌊','독사굴':'🐍','관통':'🔱','저격':'🏹','기습':'😶‍🌫️','자폭':'🧨','선빵':'👊','버티기':'💪','개전':'📣','첫인사':'🔔','뒤끝':'💀','패시브':'✨'};
   // 능력 타이밍 표시 여부 (복합 타이밍은 / 로 분리)
   var timingTypes=info?info.type.split(' / '):[];
   if(hasKwSection||timingTypes.length>0){
