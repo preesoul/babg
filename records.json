@@ -3220,9 +3220,71 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:09:43",
+          "placement": 8,
+          "turn": 10,
+          "tier": 4,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 23,
+              "hp": 25,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 6,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 9,
+              "hp": 7,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 6,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 18,
+      "points": 20,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -3250,7 +3312,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 4,
+              "progress": 6,
               "completed": false
             },
             {
@@ -3260,7 +3322,7 @@
             },
             {
               "id": "discover10",
-              "progress": 4,
+              "progress": 6,
               "completed": false
             }
           ]
