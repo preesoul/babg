@@ -1536,60 +1536,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:29:45",
-          "placement": 2,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "이부키(수영복)",
-              "baseId": "ibuki",
-              "atk": 13,
-              "hp": 15,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Ibuki_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마코토",
-              "baseId": "makoto",
-              "atk": 26,
-              "hp": 26,
-              "tier": 6,
-              "kw": [
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Makoto.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "토라마루",
-              "baseId": "iroha",
-              "atk": 16,
-              "hp": 10,
-              "tier": 0,
-              "kw": [],
-              "isSkin": false,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "주리",
-              "baseId": "juri",
-              "atk": 2,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Juri.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:34:25",
           "placement": 8,
           "turn": 10,
@@ -2134,9 +2080,67 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:25:57",
+          "placement": 3,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "세리카",
+              "baseId": "serika",
+              "atk": 32,
+              "hp": 32,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Serika.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 90,
+              "hp": 81,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "taunt",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 17,
+              "hp": 17,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "아오이",
+              "baseId": "aoi",
+              "atk": 17,
+              "hp": 16,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Aoi.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 18,
+      "points": 20,
       "questState": {
         "daily": {
           "date": "2026-04-07",
