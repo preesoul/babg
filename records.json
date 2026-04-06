@@ -1452,82 +1452,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:08:47",
-          "placement": 8,
-          "turn": 10,
-          "tier": 5,
-          "board": [
-            {
-              "name": "준코",
-              "baseId": "junko",
-              "atk": 18,
-              "hp": 17,
-              "tier": 1,
-              "kw": [
-                "selfdestruct",
-                "reborn",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Junko.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "준코",
-              "baseId": "junko",
-              "atk": 1,
-              "hp": 2,
-              "tier": 1,
-              "kw": [
-                "selfdestruct"
-              ],
-              "isSkin": false,
-              "img": "Junko.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마리",
-              "baseId": "mari",
-              "atk": 1,
-              "hp": 2,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mari.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "토키",
-              "baseId": "toki",
-              "atk": 2,
-              "hp": 7,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Toki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "하스미",
-              "baseId": "hasumi",
-              "atk": 7,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Hasumi.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:16:48",
           "placement": 7,
           "turn": 13,
@@ -2073,9 +1997,52 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T13:45:33",
+          "placement": 8,
+          "turn": 10,
+          "tier": 5,
+          "board": [
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 36,
+              "hp": 35,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-06",
