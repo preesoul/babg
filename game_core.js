@@ -1238,6 +1238,7 @@ function buyHiddenCard(idx) {
     }
     p.board=newBoard;m.atk+=bonusAtk;m.hp+=bonusHp;m.maxHp=m.hp;
     m._p68Absorbed=p68Absorbed;
+    G._p68Absorbed=p68Absorbed; // 전역 폴백 (시로코 테러와 동일 패턴)
   }
   else if(bid==='millennium_seminar'){
     var absorb=['yuuka','noa','koyuki','rio'];
@@ -2939,7 +2940,7 @@ function aiCheckHidden(p) {
             returnToPool(p.board[j].baseId,p.board[j].isSkin?3:1);
           }else nb.push(p.board[j]);
         }
-        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;unit._p68Absorbed=p68A;
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;unit._p68Absorbed=p68A;G._p68Absorbed=p68A;
       } else if(hid==='millennium_seminar'){
         var absorb=['yuuka','noa','koyuki','rio'];
         var bAtk=0,bHp=0,nb=[];
@@ -4004,8 +4005,8 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='gehenna_p68'){
     // 흥신소 68 뒤끝: 흡수한 아루·카요코·무츠키·하루카를 흡수 당시 상태로 귀환
-    var p68Abs=unit._p68Absorbed||[];
-    console.log('[DEBUG p68 DR]',{absorbed:p68Abs.length,hasField:!!unit._p68Absorbed,aliveCount:countAlive(mySide),battleMax:BATTLE_MAX});
+    // 시로코 테러와 동일하게 전역 폴백(G._p68Absorbed) 사용 — copyUnit 누락/save-load 경유 상황 대응
+    var p68Abs=unit._p68Absorbed||(G._p68Absorbed||[]);
     for(var _pi=0;_pi<p68Abs.length;_pi++){
       if(countAlive(mySide)>=BATTLE_MAX)break;
       var pab=p68Abs[_pi];
