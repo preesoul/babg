@@ -591,17 +591,20 @@ function setUnlockedAbydos(arr) {
 function getEnigmaPoints() { return window._enigmaPointsCache||0; }
 
 // 신비해방 — 퀘스트 창에서 호출. pd.points에서 차감 후 서버 저장.
+var _mysteryUnlocking=false;
 function doMysteryUnlock() {
+  if(_mysteryUnlocking)return;
   if(!window._babgLogin||!window._babgLogin.name){alert('로그인이 필요합니다.');return;}
   var unlocked = getUnlockedAbydos();
   var locked = MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
   if(locked.length===0){alert('더 이상 해방할 신비해방 카드가 없습니다.');return;}
+  _mysteryUnlocking=true;
   fetchRecords(function(err,data,sha){
-    if(err||!data){alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
+    if(err||!data){_mysteryUnlocking=false;alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
     var pd=data.players[window._babgLogin.name];
-    if(!pd){alert('플레이어 데이터를 찾을 수 없습니다.');return;}
+    if(!pd){_mysteryUnlocking=false;alert('플레이어 데이터를 찾을 수 없습니다.');return;}
     if(!pd.points||pd.points<ENIGMA_UNLOCK_COST){
-      alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
+      _mysteryUnlocking=false;alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
     }
     pd.points-=ENIGMA_UNLOCK_COST;
     // 서버 데이터 기준으로 잠금 목록 병합 (다른 기기에서 해금한 것 반영)
@@ -610,12 +613,20 @@ function doMysteryUnlock() {
       if(unlocked.indexOf(serverUnlocked[_ui])===-1) unlocked.push(serverUnlocked[_ui]);
     }
     var locked2=MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
-    if(locked2.length===0){alert('더 이상 해방할 신비해방 카드가 없습니다.');pd.points+=ENIGMA_UNLOCK_COST;return;}
+    if(locked2.length===0){_mysteryUnlocking=false;alert('더 이상 해방할 신비해방 카드가 없습니다.');pd.points+=ENIGMA_UNLOCK_COST;return;}
     var pick=locked2[Math.floor(Math.random()*locked2.length)];
     unlocked.push(pick);
     pd.unlockedAbydos=unlocked.slice();
-    setUnlockedAbydos(unlocked);
-    saveRecords(data,sha,function(){
+    saveRecords(data,sha,function(saveErr){
+      _mysteryUnlocking=false;
+      if(saveErr){
+        // 서버 저장 실패 시 로컬 해금도 롤백
+        unlocked.pop();
+        setUnlockedAbydos(unlocked);
+        alert('저장 실패. 잠시 후 다시 시도해주세요.');
+        return;
+      }
+      setUnlockedAbydos(unlocked);
       window._enigmaPointsCache=pd.points;
       var pickedName=pick,pickedImg='',pickedSchool='';
       for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;pickedSchool=CHARS[i].school||'';break;}}
@@ -6019,7 +6030,6 @@ function checkLoginQuest() {
     if (!data.players) return;
     var name = login.name;
     if (!data.players[name]) return;
-    if (data.players[name].pw !== login.pw) return;
     var pd = data.players[name];
     pd = initQuestState(pd);
 
@@ -6065,7 +6075,7 @@ function rerollDailyQuest(questIndex) {
   fetchRecords(function(err, data, sha) {
     if (err || !data || !data.players) return;
     var name = login.name;
-    if (!data.players[name] || data.players[name].pw !== login.pw) return;
+    if (!data.players[name]) return;
     var pd = data.players[name];
     pd = initQuestState(pd);
     var qs = pd.questState;
@@ -6099,7 +6109,10 @@ var RECORDS_FILE='records.json';
 function fetchRecords(cb){
   fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
     headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json'}
-  }).then(function(r){return r.json();}).then(function(data){
+  }).then(function(r){
+    if(!r.ok) throw new Error('GitHub API '+r.status);
+    return r.json();
+  }).then(function(data){
     var content=JSON.parse(decodeURIComponent(escape(atob(data.content))));
     cb(null,content,data.sha);
   }).catch(function(e){cb(e,null,null);});
@@ -6110,7 +6123,10 @@ function saveRecords(data,sha,cb){
     method:'PUT',
     headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
     body:JSON.stringify({message:'record update',content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha:sha})
-  }).then(function(r){return r.json();}).then(function(res){
+  }).then(function(r){
+    if(!r.ok) throw new Error('GitHub API '+r.status);
+    return r.json();
+  }).then(function(res){
     if(cb)cb(null,res);
   }).catch(function(e){if(cb)cb(e);});
 }
@@ -6131,24 +6147,28 @@ function submitGameRecord(){
   };
   var tracker = window._questTracker || {recruits:{'트리니티':0,'게헨나':0,'백귀야행':0,'밀레니엄':0},kills:0,discovers:0,skins:0,hiddenCompleted:false,hiddenSurvived:false};
   var placement = G.placement;
-  fetchRecords(function(err,data,sha){
-    if(err||!data){console.log('기록 저장 실패:',err);return;}
-    if(!data.players)data.players={};
-    var name=login.name;
-    if(!data.players[name]){
-      data.players[name]={records:[],points:0,questState:null};
-    }
-    data.players[name].records.push(record);
-    // 최근 10전만 유지
-    if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
-    // 퀘스트 진행도 업데이트
-    data.players[name] = initQuestState(data.players[name]);
-    data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
-    saveRecords(data,sha,function(e){
-      if(e)console.log('기록 저장 실패:',e);
-      else console.log('기록 저장 완료 (퀘스트 포함)');
+  var _retried=false;
+  function _doSubmit(){
+    fetchRecords(function(err,data,sha){
+      if(err||!data){console.log('기록 저장 실패:',err);if(!_retried){_retried=true;setTimeout(_doSubmit,2000);}return;}
+      if(!data.players)data.players={};
+      var name=login.name;
+      if(!data.players[name]){
+        data.players[name]={records:[],points:0,questState:null};
+      }
+      data.players[name].records.push(record);
+      // 최근 10전만 유지
+      if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
+      // 퀘스트 진행도 업데이트
+      data.players[name] = initQuestState(data.players[name]);
+      data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
+      saveRecords(data,sha,function(e){
+        if(e){console.log('기록 저장 실패:',e);if(!_retried){_retried=true;setTimeout(_doSubmit,2000);}}
+        else console.log('기록 저장 완료 (퀘스트 포함)');
+      });
     });
-  });
+  }
+  _doSubmit();
 }
 
 function _renderRecordCard(r,showPin,pinIdx){

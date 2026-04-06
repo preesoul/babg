@@ -2909,7 +2909,8 @@ document.getElementById('btn-reset-account').addEventListener('click',function()
       if(data.players&&data.players[name]){
         data.players[name]={records:[],points:0,questState:null,unlockedAbydos:[]};
       }
-      saveRecords(data,sha,function(){
+      saveRecords(data,sha,function(e){
+        if(e){alert('서버 저장 실패. 초기화가 반영되지 않았습니다.');overlay.remove();return;}
         setUnlockedAbydos([]);
         localStorage.removeItem('babg_save');
         overlay.remove();
