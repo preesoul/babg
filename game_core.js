@@ -1353,8 +1353,10 @@ function _entranceCardLand(m,p){
 }
 function _entranceBang(m,p){
   // 쿵 2번 → 쾅 착지
+  // 주의: 예전에는 sfx/mika_footstep.webm을 footstep으로 썼는데,
+  // 해당 파일에 미카 보이스가 섞여 있어 다른 7성 등장 시 "미카 보이스"가
+  // 먼저 들리는 혼선이 있어 generic impact SFX로 교체.
   var step=0;
-  var footSfx;try{footSfx=new Audio('sfx/mika_footstep.webm');footSfx.volume=0.5;}catch(e){}
   function doStep(){
     if(step>=2){
       // 쾅 착지
@@ -1364,7 +1366,7 @@ function _entranceBang(m,p){
       setTimeout(function(){fl.style.opacity='0';setTimeout(function(){if(fl.parentNode)fl.remove();},350);},80);
       return;
     }
-    if(footSfx){footSfx.currentTime=0;footSfx.play().catch(function(){});}
+    playSfx('attack_impact_mid',0.5);
     shakeScreen('light');
     step++;
     setTimeout(doStep,1200);
@@ -1596,14 +1598,9 @@ var RECRUIT_VOICES = {
   shun: 'audio/shun.mp3',
   shanhai_kiki: 'audio/shanhai_kiki.mp3'
 };
-var _lastRecruitVoice={baseId:null,time:0};
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
   if(!src)return;
-  // 1.5초 내 동일 baseId 중복 재생 차단 (연출 경로 중복으로 인한 보이스 다중 재생 방지)
-  var now=Date.now();
-  if(_lastRecruitVoice.baseId===baseId&&(now-_lastRecruitVoice.time)<1500)return;
-  _lastRecruitVoice={baseId:baseId,time:now};
   try{
     var a=new Audio(src);a.volume=0.7;a.play();
     // 1초 fadeOut으로 자연스럽게 끝내기
