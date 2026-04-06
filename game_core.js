@@ -197,7 +197,7 @@ function logBuff(unit, source, atkDelta, hpDelta) {
 // 키워드 헬퍼
 function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
 function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
-function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; var _KE={taunt:'👊',shield:'💎',reborn:'✨',invincible:'🛡',windfury:'⚡',cleave:'💥',poison:'☠️',pierce:'🔱',ranged:'🎯',ambush:'🌙',selfdestruct:'💣',preemptive:'⚔️',survive:'🏔️'}; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(_KE[k]?_KE[k]+' ':'')+(KW_LABELS[k]||k)+'</span>';}).join(''); }
+function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; var _KE={taunt:'👊',shield:'🟨',reborn:'✨',invincible:'🟦',windfury:'⚡',cleave:'💥',poison:'☠️',pierce:'🔱',ranged:'🎯',ambush:'🏆',selfdestruct:'💣',preemptive:'⚔️',survive:'🏔️'}; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(_KE[k]?_KE[k]+' ':'')+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
 var KW_LABELS = {taunt:'도발',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선제',ranged:'저격',selfdestruct:'자폭',invincible:'무적',ambush:'기습'};
 var KW_DESCS = {

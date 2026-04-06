@@ -628,15 +628,15 @@ img.tutorial-highlight{border-radius:50%!important}
             <div class="guide-section">
               <div class="guide-section-title">기본 능력</div>
               <div class="kw-guide-row"><span class="kw-name">👊 도발</span><span class="kw-desc">이 학생부터 공격합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">💎 보호막</span><span class="kw-desc">피해를 1회 막아줍니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🟨 보호막</span><span class="kw-desc">피해를 1회 막아줍니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">✨ 부활</span><span class="kw-desc">처음 쓰러진 후, 체력 1로 부활합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">🛡 무적</span><span class="kw-desc">피해를 입지 않습니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🟦 무적</span><span class="kw-desc">피해를 입지 않습니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">⚡ 연사</span><span class="kw-desc">한 턴에 두 번 공격합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">💥 광역</span><span class="kw-desc">양 옆의 적도 공격합니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">☠️ 독사굴</span><span class="kw-desc">피해를 주면 대상을 즉시 쓰러뜨립니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">🔱 관통</span><span class="kw-desc">초과한 데미지가 양 옆으로 전달됩니다.</span></div>
               <div class="kw-guide-row"><span class="kw-name">🎯 저격</span><span class="kw-desc">반격을 받지 않습니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">🌙 기습</span><span class="kw-desc">첫 공격 전까지 대상 지정 불가.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🏆 기습</span><span class="kw-desc">첫 공격 전까지 대상 지정 불가.</span></div>
               <div class="kw-guide-row"><span class="kw-name">💣 자폭</span><span class="kw-desc">공격력과 체력을 더하여 공격 후 쓰러집니다.</span></div>
             </div>
             <div class="guide-section">
@@ -1383,7 +1383,7 @@ function showTooltip(baseId,rect,cardEl){
   };
   var hasKwSection=displayKw.length>0;
   var info=ABILITY_DESCS[baseId];
-  var _TT_EMOJI={'도발':'👊','보호막':'💎','부활':'✨','무적':'🛡','연사':'⚡','광역':'💥','독사굴':'☠️','관통':'🔱','저격':'🎯','기습':'🌙','자폭':'💣','선제':'⚔️','버티기':'🏔️','개전':'⚔️','첫인사':'👋','뒤끝':'🔥','패시브':'⭐'};
+  var _TT_EMOJI={'도발':'👊','보호막':'🟨','부활':'✨','무적':'🟦','연사':'⚡','광역':'💥','독사굴':'☠️','관통':'🔱','저격':'🎯','기습':'🏆','자폭':'💣','선제':'⚔️','버티기':'🏔️','개전':'⚔️','첫인사':'👋','뒤끝':'🔥','패시브':'⭐'};
   // 능력 타이밍 표시 여부 (복합 타이밍은 / 로 분리)
   var timingTypes=info?info.type.split(' / '):[];
   if(hasKwSection||timingTypes.length>0){
