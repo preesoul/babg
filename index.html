@@ -2433,7 +2433,7 @@ function renderRoster(){
         html+='<div class="roster-tier-chunk">';
         html+='<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:30px;height:232px;border-right:2px solid #6a3080;padding-right:4px">';
         if(_icon)html+='<img src="'+_icon+'" style="width:18px;height:18px;filter:invert(1);opacity:0.9">';
-        html+='<span style="font-size:10px;color:#cda0e8;font-weight:700;line-height:1.1;text-align:center;word-break:keep-all;white-space:normal;max-width:28px">'+school+'</span>';
+        html+='<span style="font-size:11px;color:#cda0e8;font-weight:700;line-height:1.15;text-align:center;writing-mode:horizontal-tb">'+school.split("").join("<br>")+'</span>';
         html+='</div>';
         _list.forEach(function(c){
           var _isLocked=_t7Recruited.indexOf(c.id)===-1;
