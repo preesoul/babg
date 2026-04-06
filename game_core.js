@@ -4005,9 +4005,16 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(dst._mySide[_ka].alive&&dst._mySide[_ka].baseId==='arisu'){
           var _arisuProxy=dst._mySide[_ka];
           log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+_arisuProxy.name+'이(가) 대신 피해를 받습니다!'});
+          var _arisuHpBefore=_arisuProxy.hp;
           _arisuProxy.hp-=dmg;
           log2.push({cls:'hit',text:src.name+'가 '+_arisuProxy.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,_arisuProxy.hp)+')'});
-          var overflow2=dmg-(_arisuProxy.hp+dmg);
+          // 아리스 사망 처리
+          if(_arisuProxy.hp<=0){
+            var _arisuArr=dst._mySide;
+            var _oppArr=(dst._mySide===a)?b:a;
+            resolveDeath(_arisuProxy,_arisuArr,_oppArr,log2,src);
+          }
+          var overflow2=dmg-_arisuHpBefore;
           return {blocked:false,overflow:overflow2>0?overflow2:0,_keiRedirect:true};
         }
       }
