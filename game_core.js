@@ -3999,11 +3999,18 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
     }
-    // 케이(USB) 패시브: 전투 데미지를 아리스에게 전가
-    if(dst.baseId==='Kei_usb'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&dst._mySide){
+    // 케이(USB) 패시브: 케이 보호막이 없을 때, 전투 데미지를 아리스에게 전가
+    if(dst.baseId==='Kei_usb'&&!hasKw(dst,'shield')&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&dst._mySide){
       for(var _ka=0;_ka<dst._mySide.length;_ka++){
         if(dst._mySide[_ka].alive&&dst._mySide[_ka].baseId==='arisu'){
           var _arisuProxy=dst._mySide[_ka];
+          // 아리스 보호막 체크
+          if(hasKw(_arisuProxy,'shield')){
+            _arisuProxy.kw.splice(_arisuProxy.kw.indexOf('shield'),1);
+            log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+_arisuProxy.name+'이(가) 대신 받습니다!'});
+            log2.push({cls:'shield',text:_arisuProxy.name+'의 보호막이 깨졌다!'});
+            return {blocked:true,overflow:0,_keiRedirect:true};
+          }
           log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+_arisuProxy.name+'이(가) 대신 피해를 받습니다!'});
           var _arisuHpBefore=_arisuProxy.hp;
           _arisuProxy.hp-=dmg;
