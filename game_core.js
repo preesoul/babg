@@ -4967,6 +4967,15 @@ function startBattle() {
               kw:akTmpl.kw.slice(),img:akTmpl.img,isSkin:false,alive:true};
             p.board.push(akUnit);
             G.hiddenCardsOwned['Arisu_Kei']=true;G.hiddenCardsEverOwned['Arisu_Kei']=true;
+            // 하얀 연출 (glow)
+            renderAll();
+            var _akFl=document.createElement('div');_akFl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
+            document.body.appendChild(_akFl);
+            requestAnimationFrame(function(){_akFl.style.opacity='1';});
+            var _akBoardEl=document.getElementById('ui-board');var _akCards=_akBoardEl?_akBoardEl.querySelectorAll('.card'):[];
+            var _akLast=_akCards[_akCards.length-1];
+            if(_akLast){_akLast.style.filter='brightness(3) saturate(0)';_akLast.style.transition='filter 3s ease-out 1.5s';requestAnimationFrame(function(){requestAnimationFrame(function(){_akLast.style.filter='brightness(1) saturate(1)';});});}
+            setTimeout(function(){_akFl.style.transition='opacity 2.5s ease-out';_akFl.style.opacity='0';setTimeout(function(){if(_akFl.parentNode)_akFl.remove();},2500);},1500);
           }
         }
       }
