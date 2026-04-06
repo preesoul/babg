@@ -1592,8 +1592,9 @@ var RECRUIT_VOICES = {
   gehenna_p68: 'audio/gehenna_p68.mp3',
   kisaki: 'audio/kisaki.mp3',
   rumi: 'audio/rumi.mp3',
-  shun: 'audio/shun.mp3',
-  shanhai_kiki: 'audio/shanhai_kiki.mp3'
+  shun: 'audio/shun.mp3'
+  // shanhai_kiki: 제거됨 — shanhai_kiki.mp3 파일이 실제로는 검은 군주 보이스라 키키 영입 시 오발 재생됨.
+  //                      검은 군주 보이스는 뒤끝 발동 시 (game_core.js:3960)에서만 audio/black_lord.mp3 로 재생.
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
