@@ -569,81 +569,6 @@
       "pw": "0903",
       "records": [
         {
-          "date": "2026-04-05T12:53:37",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 4,
-              "hp": 4,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 4,
-              "hp": 4,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "코유키",
-              "baseId": "koyuki",
-              "atk": 3,
-              "hp": 3,
-              "tier": 2,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Koyuki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 6,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T13:00:52",
           "placement": 7,
           "turn": 12,
@@ -1284,9 +1209,88 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:08:19",
+          "placement": 5,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 49,
+              "hp": 45,
+              "tier": 2,
+              "kw": [
+                "poison",
+                "windfury",
+                "selfdestruct",
+                "cleave",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 28,
+              "hp": 24,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "cleave"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "준코",
+              "baseId": "junko",
+              "atk": 28,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "selfdestruct",
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Junko.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 35,
+              "hp": 33,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "와카모",
+              "baseId": "wakamo",
+              "atk": 13,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Wakamo.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-06",
