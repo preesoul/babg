@@ -766,64 +766,67 @@ function checkHiddenConditionsFor(p) {
   function notOwned(id){return !G.hiddenCardsEverOwned[id];}
   function inPool(id){return G.pool[id]>0;}
 
-  // 게헨나 선도부: 히나+이오리+아코+치나츠 보드
-  if(notOwned('gehenna_prefect')&&inPool('gehenna_prefect')&&p.tier>=6&&boardHas('hina')&&boardHas('iori')&&boardHas('ako')&&boardHas('chinatsu'))
+  // === 보드 멤버 조건 (멤버 티어가 자연 진입장벽 → Lv 제한 없음) ===
+  // 게헨나 선도부: 히나(5)+이오리(5)+아코(4)+치나츠(2)
+  if(notOwned('gehenna_prefect')&&inPool('gehenna_prefect')&&boardHas('hina')&&boardHas('iori')&&boardHas('ako')&&boardHas('chinatsu'))
     eligible.push('gehenna_prefect');
-  // 만마전: 마코토+사츠키+이로하+이부키+치아키 보드
-  if(notOwned('gehenna_pandemonium')&&inPool('gehenna_pandemonium')&&p.tier>=6&&boardHas('makoto')&&boardHas('satsuki')&&boardHas('iroha')&&boardHas('ibuki')&&boardHas('chiaki'))
+  // 만마전: 마코토(3)+사츠키(3)+이로하(3)+이부키(4)+치아키(2)
+  if(notOwned('gehenna_pandemonium')&&inPool('gehenna_pandemonium')&&boardHas('makoto')&&boardHas('satsuki')&&boardHas('iroha')&&boardHas('ibuki')&&boardHas('chiaki'))
     eligible.push('gehenna_pandemonium');
-  // 열차포: 게헨나 온리 + 스케쥴6
+  // 흥신소 68: 카요코(1)+무츠키(1)+하루카(1)+아루(5)
+  if(notOwned('gehenna_p68')&&inPool('gehenna_p68')&&boardHas('kayoko')&&boardHas('mutsuki')&&boardHas('haruka')&&boardHas('aru'))
+    eligible.push('gehenna_p68');
+  // 나기사: 마리(1)+사쿠라코(2)+미네(6)
+  if(notOwned('trinity_nagisa')&&inPool('trinity_nagisa')&&boardHas('mari')&&boardHas('sakurako')&&boardHas('mine'))
+    eligible.push('trinity_nagisa');
+  // 보충수업부: 히후미(3)+코하루(1)+하나코(4)+아즈사(4)
+  if(notOwned('trinity_makeup')&&inPool('trinity_makeup')&&boardHas('hifumi')&&boardHas('koharu')&&boardHas('hanako')&&boardHas('azusa'))
+    eligible.push('trinity_makeup');
+  // 정의실현부: 하스미(5)+츠루기(3)+마시로(4)+이치카(3)
+  if(notOwned('trinity_justice')&&inPool('trinity_justice')&&boardHas('hasumi')&&boardHas('tsurugi')&&boardHas('mashiro')&&boardHas('ichika'))
+    eligible.push('trinity_justice');
+  // 데스 모모이: 모모이(1)+미도리(1)+유즈(3)+아리스(4)
+  if(notOwned('millennium_death_momoi')&&inPool('millennium_death_momoi')&&boardHas('momoi')&&boardHas('midori')&&boardHas('yuzu')&&boardHas('arisu'))
+    eligible.push('millennium_death_momoi');
+  // 밀레니엄 세미나: 유우카(2)+노아(3)+코유키(2)+리오(5)
+  if(notOwned('millennium_seminar')&&inPool('millennium_seminar')&&boardHas('yuuka')&&boardHas('noa')&&boardHas('koyuki')&&boardHas('rio'))
+    eligible.push('millennium_seminar');
+  // C&C: 네루(5)+아스나(4)+아카네(3)+카린(4)+토키(5)
+  if(notOwned('millennium_cc')&&inPool('millennium_cc')&&boardHas('neru')&&boardHas('asuna')&&boardHas('akane')&&boardHas('karin')&&boardHas('toki'))
+    eligible.push('millennium_cc');
+  // 시로코 테러: 호시노(5)+시로코(5)+노노미+아야네+세리카
+  if(notOwned('Shiroko_Terror')&&inPool('Shiroko_Terror')&&boardHas('hoshino')&&boardHas('shiroko')&&boardHas('nonomi')&&boardHas('ayane')&&boardHas('serika'))
+    eligible.push('Shiroko_Terror');
+  // 키키: 키사키(6) + 산해경 5명 이상
+  if(notOwned('shanhai_kiki')&&inPool('shanhai_kiki')&&boardHas('kisaki')){
+    var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
+    if(shCount>=5) eligible.push('shanhai_kiki');
+  }
+  // === 특수 조건 (Lv.6 유지 — 보드 조건이 없거나 약한 경우) ===
+  // 열차포: 게헨나 온리 구매
   if(notOwned('gehenna_traingun')&&inPool('gehenna_traingun')&&onlySchool('게헨나')&&p.tier>=6)
     eligible.push('gehenna_traingun');
-  // 미카: 트리니티 온리 + 스케쥴6
+  // 미카: 트리니티 온리 구매
   if(notOwned('trinity_mika')&&inPool('trinity_mika')&&onlySchool('트리니티')&&p.tier>=6)
     eligible.push('trinity_mika');
-  // 나기사: 마리+사쿠라코+미네 보드
-  if(notOwned('trinity_nagisa')&&inPool('trinity_nagisa')&&p.tier>=6&&boardHas('mari')&&boardHas('sakurako')&&boardHas('mine'))
-    eligible.push('trinity_nagisa');
-  // 세이아: 피해0 + 스케쥴6 + 트리니티 온리 보드
+  // 세이아: 피해0 + 트리니티 온리 보드
   if(notOwned('trinity_seia')&&inPool('trinity_seia')&&pDmg===0&&p.tier>=6&&boardOnlySchool('트리니티'))
     eligible.push('trinity_seia');
+  // 최강일각라이온: 백귀야행 온리 보드
+  if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
+    eligible.push('hkyk_saikyo');
   // 왕녀: 아리스 사망 10회+
   if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&p.tier>=6&&G.arisuDeathCount>=10)
     eligible.push('millennium_nameless');
-  // 말쿠트: 밀레니엄 토큰 소환 20회+
+  // 말쿠트: 밀레니엄 토큰 소환 10회+
   if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
     eligible.push('millennium_malkuth');
-  // 데스 모모이: 모모이+미도리+유즈+아리스 보드
-  if(notOwned('millennium_death_momoi')&&inPool('millennium_death_momoi')&&p.tier>=6&&boardHas('momoi')&&boardHas('midori')&&boardHas('yuzu')&&boardHas('arisu'))
-    eligible.push('millennium_death_momoi');
-  // 최강일각라이온: 백귀야행 온리 보드 + 스케쥴6 (5% 확률은 injectHiddenToShop에서 처리)
-  if(notOwned('hkyk_saikyo')&&inPool('hkyk_saikyo')&&boardOnlySchool('백귀야행')&&p.tier>=6)
-    eligible.push('hkyk_saikyo');
-  // 쿠즈노하: 모든 백귀야행 학생을 1회 이상 구매한 적이 있으면 등장
+  // === 누적 조건 (Lv 무관) ===
+  // 쿠즈노하: 백귀야행 13명 전원 구매/발견 기록
   if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')){
     var allHkykBought=true;
     for(var _hi=0;_hi<HKYK_ALL_IDS.length;_hi++){if(!G.soldHkyk[HKYK_ALL_IDS[_hi]]){allHkykBought=false;break;}}
     if(allHkykBought) eligible.push('hkyk_kuzunoha');
-  }
-  // 흥신소 68: 카요코+무츠키+하루카+아루 보드
-  if(notOwned('gehenna_p68')&&inPool('gehenna_p68')&&p.tier>=6&&boardHas('kayoko')&&boardHas('mutsuki')&&boardHas('haruka')&&boardHas('aru'))
-    eligible.push('gehenna_p68');
-  // 밀레니엄 세미나: 유우카+노아+코유키+리오 보드
-  if(notOwned('millennium_seminar')&&inPool('millennium_seminar')&&p.tier>=6&&boardHas('yuuka')&&boardHas('noa')&&boardHas('koyuki')&&boardHas('rio'))
-    eligible.push('millennium_seminar');
-  // C&C: 네루+아스나+아카네+카린+토키 보드
-  if(notOwned('millennium_cc')&&inPool('millennium_cc')&&p.tier>=6&&boardHas('neru')&&boardHas('asuna')&&boardHas('akane')&&boardHas('karin')&&boardHas('toki'))
-    eligible.push('millennium_cc');
-  // 보충수업부: 히후미+코하루+하나코+아즈사 보드
-  if(notOwned('trinity_makeup')&&inPool('trinity_makeup')&&p.tier>=6&&boardHas('hifumi')&&boardHas('koharu')&&boardHas('hanako')&&boardHas('azusa'))
-    eligible.push('trinity_makeup');
-  // 정의실현부: 하스미+츠루기+마시로+이치카 보드
-  if(notOwned('trinity_justice')&&inPool('trinity_justice')&&p.tier>=6&&boardHas('hasumi')&&boardHas('tsurugi')&&boardHas('mashiro')&&boardHas('ichika'))
-    eligible.push('trinity_justice');
-  // 시로코 테러: 아비도스 5인 전원 보유 (스폰율 50%는 injectHiddenToShop에서 처리)
-  if(notOwned('Shiroko_Terror')&&inPool('Shiroko_Terror')&&boardHas('hoshino')&&boardHas('shiroko')&&boardHas('nonomi')&&boardHas('ayane')&&boardHas('serika'))
-    eligible.push('Shiroko_Terror');
-  // 키키: 산해경 5명 + 키사키 필수 (나머지 중복 허용)
-  if(notOwned('shanhai_kiki')&&inPool('shanhai_kiki')&&boardHas('kisaki')){
-    var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
-    if(shCount>=5) eligible.push('shanhai_kiki');
   }
 
   return eligible;
