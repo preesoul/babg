@@ -323,7 +323,7 @@ var ABILITY_DESCS = {
   // 신규 7성
   gehenna_p68:            {type:'패시브 / 개전',desc:'샬레의 카요코, 무츠키, 하루카, 아루를 흡수하며 등장합니다.\n개전: 상대 배치 순서를 완전히 역순으로 변경합니다.\n지켜줌을 무시하고, 가장 체력이 낮은 적을 공격 대상으로 정합니다.',skinEffect:'',quote:'아루: 우릴 고용하는 비용은 꽤 비싸다고? 선생님.'},
   millennium_seminar:     {type:'패시브 / 개전',desc:'샬레의 유우카, 노아, 코유키, 리오를 흡수하며 등장합니다.\n개전: 상대 전체 능력 삭제 후 공/체를 뒤집습니다.\n삭제된 기본능력 중 최대 3개, 특수능력 중 최대 3개를 자신에게 복사합니다.',skinEffect:'',quote:'리오: 우리는, 빛이 없는 곳에서 만날 거야.'},
-  millennium_cc:          {type:'패시브 / 뒤끝',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: 코인 토스가 항상 성공합니다.\n뒤끝: 아비 에슈흐(스케쥴×8)를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
+  millennium_cc:          {type:'패시브 / 뒤끝',desc:'샬레의 네루, 아스나, 아카네, 카린, 토키를 흡수하며 등장합니다.\n패시브: <span style="color:#ffd700;font-weight:700">아군 전체의 코인토스가 항상 성공</span>합니다.\n뒤끝: <TNT> 4개와 <아비 에슈흐 프로토> 1개를 소환합니다.',skinEffect:'',quote:'네루: 야, 다들 모여. 일 할 시간이다.'},
   trinity_makeup:         {type:'패시브',desc:'샬레의 히후미, 코하루, 하나코, 아즈사를 흡수하며 등장합니다.\n전투 승리 시 보충수업부가 생존해 있으면 상대 HP를 0으로 만듭니다.',skinEffect:'',quote:'히후미: 그러니까, 지금부터 시작하겠습니다! 우리들의 이야기를!',quote2:'히후미: 학원과 청춘의 이야기를!!'},
   trinity_justice:        {type:'패시브 / 개전 / 뒤끝',desc:'샬레의 하스미, 츠루기, 마시로, 이치카를 흡수하며 등장합니다.\n패시브: 전투 중 쓰러뜨린 학생의 공격력과 최대 체력을 흡수합니다.\n개전: 자신의 공격력과 체력을 3배로 합니다.\n뒤끝: <span style="color:#ffd700;font-weight:700">보호막, 연사</span>를 얻은 <츠루기>를 불러냅니다.\n츠루기의 공/체는 이번 전투에서 정의실현부가 가졌던 가장 높은 값을 가집니다.',skinEffect:'',quote:'츠루기: 자아, 사냥의 시간이다-!'},
   // ===== 신규 캐릭터 =====
@@ -392,6 +392,8 @@ var TOKENS = {
   hina_the_last:{id:'hina_the_last',name:'마지막 히나',school:'게헨나',tier:0,atk:10,hp:10,kw:['cleave','poison'],img:'token/Hina_the_last.png'},
   hovercraft:{id:'hovercraft',name:'호버크래프트',school:'백귀야행',tier:0, atk:10,hp:10,kw:[],          img:'token/HoverCraft.png'},
   c4:        {id:'c4',        name:'C4',          school:'밀레니엄', tier:0, atk:5, hp:1, kw:['selfdestruct'], img:'token/C4.png'},
+  tnt:       {id:'tnt',       name:'TNT',         school:'밀레니엄', tier:0, atk:1, hp:20, kw:['selfdestruct'], img:'token/C4.png'},
+  abi_eshuh_proto:{id:'abi_eshuh_proto',name:'아비 에슈흐 프로토',school:'밀레니엄',tier:0, atk:10, hp:10, kw:[], img:'token/Abi_Eshuh.png'},
   black_lord:{id:'black_lord',name:'현룡문의 검은 군주',school:'산해경',tier:0,atk:30,hp:30,kw:['shield','preemptive'],img:'token/Black_lord.png'},
 };
 
@@ -3827,16 +3829,19 @@ function _doDR(unit, mySide, otherSide, log) {
     }
   }
   else if(id==='millennium_cc'){
-    // C&C 뒤끝: 아비 에슈흐 소환
+    // C&C 뒤끝: TNT 4개 + 아비 에슈흐 프로토 1개 소환
+    for(var _cci=0;_cci<4;_cci++){
+      if(countAlive(mySide)>=BATTLE_MAX)break;
+      var _tnt=makeToken('tnt');_tnt.alive=true;_tnt.poisonImmune=false;_tnt._mySide=mySide;
+      applyEimiBonus(_tnt,mySide);
+      mySide.push(_tnt);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': TNT 소환! ('+_tnt.atk+'/'+_tnt.hp+')'});
+    }
     if(countAlive(mySide)<BATTLE_MAX){
-      var tierLvl=G.players[0].tier||1;
-      var ae=makeToken('abi_eshuh');ae.atk=tierLvl*2;ae.hp=tierLvl*2;
-      ae.alive=true;ae.poisonImmune=false;ae._mySide=mySide;
-      var eimiPreCC=ae.atk;
-      applyEimiBonus(ae,mySide);
-      mySide.push(ae);
-      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아비 에슈흐 소환! ('+ae.atk+'/'+ae.hp+')'});
-      if(ae.atk>eimiPreCC) log.push({cls:'soc',text:'  → [패시브] 에이미: 밀레니엄 소환 보너스 +'+(ae.atk-eimiPreCC)+'/+'+(ae.atk-eimiPreCC)});
+      var _aep=makeToken('abi_eshuh_proto');_aep.alive=true;_aep.poisonImmune=false;_aep._mySide=mySide;
+      applyEimiBonus(_aep,mySide);
+      mySide.push(_aep);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아비 에슈흐 프로토 소환! ('+_aep.atk+'/'+_aep.hp+')'});
     }
   }
   else if(id==='chise'){
@@ -5358,7 +5363,9 @@ function runBattleCoinPhase(snap,callback){
       var cr={};
       var _btBonus=G.bunnyTossBonus||0;
       for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<Math.max(0,0.5-_suzumiPenaltyForEnemy);
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna'||_u.baseId==='millennium_cc');cr[_u.sid]=coinOffMap[_u.sid]?false:(_isAsuna?true:Math.random()<Math.max(0,0.5+_btBonus-_suzumiPenaltyForAlly));}
+      // C&C 패시브: 아군 전체 코인토스 항상 성공
+      var _hasCC=aliveAlly.some(function(u){return u.baseId==='millennium_cc';});
+      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna');var _forceSuccess=_isAsuna||_hasCC;cr[_u.sid]=coinOffMap[_u.sid]?false:(_forceSuccess?true:Math.random()<Math.max(0,0.5+_btBonus-_suzumiPenaltyForAlly));}
       // 버니걸 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인토스 성공
       var _asunaGold=aliveAlly.some(function(u){return (u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
       if(_asunaGold){for(var _aj=0;_aj<aliveAlly.length;_aj++){var _lu=aliveAlly[_aj];if(_lu.baseId!=='asuna'&&_lu.baseId!=='millennium_cc'&&!coinOffMap[_lu.sid]){cr[_lu.sid]=true;break;}}}
