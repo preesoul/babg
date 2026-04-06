@@ -4207,15 +4207,39 @@ function runBattle(boardA, boardB, startWithA, opts) {
     // 와카모: 선빵 킬 후에 처리
     else if(attacker.baseId==='wakamo'){}
     else if(attacker.baseId==='millennium_malkuth'){
-      // 말쿠트 선빵: 스위퍼 2체 소환 (자폭 공격은 스위퍼 자기 차례에 자동 실행)
-      var milCount=2;
-      for(var sw=0;sw<milCount;sw++){
+      // 말쿠트 선빵: 스위퍼 2체 소환 → 말쿠트 턴 내에서 즉시 자폭 공격
+      // (stepLog에 추가하지 않고 steps에 직접 push — 개별 애니메이션)
+      var _mSide=(atkArr===a)?'a':'b';
+      var _mDefSide=(_mSide==='a')?'b':'a';
+      var _mAtkI=atkArr.indexOf(attacker);
+      var _mDefI=defArr.indexOf(target);
+      var sweepers=[];
+      var summonLog=[];
+      for(var sw=0;sw<2;sw++){
         var swp=makeSweeper(atkArr);swp._mySide=atkArr;swp.alive=true;
         atkArr.push(swp);
         _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
-        log2.push({cls:'soc',text:'[선빵] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+', 보호막, 자폭)'});
+        summonLog.push({cls:'soc',text:'[선빵] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+')'});
+        sweepers.push(swp);
       }
-      return true; // 말쿠트 자체는 공격하지 않음
+      // 소환 스텝 (말쿠트 카드로 표시)
+      for(var _sl=0;_sl<summonLog.length;_sl++)log.push(summonLog[_sl]);
+      steps.push({atkSide:_mSide,atkIdx:_mAtkI,atkId:attacker.id,defSide:_mDefSide,defIdx:_mDefI,defId:target.id,log:summonLog,snap:snapshot()});
+      // 각 스위퍼 자폭 공격 (말쿠트 턴 내 즉시 실행)
+      for(var sw2=0;sw2<sweepers.length;sw2++){
+        if(!target.alive)break; // 적 사망 → 나머지 스위퍼 생존 (다음 자기 차례에 공격)
+        var _sw=sweepers[sw2];
+        var swLog=[];
+        var swDmg=_sw.atk+_sw.hp;
+        swLog.push({cls:'hit',text:_sw.name+'의 자폭! ('+_sw.atk+'+'+_sw.hp+'='+swDmg+' 데미지)'});
+        dealHit(_sw,target,swLog,swDmg);
+        checkSurvive(target,defArr,swLog,_sw);
+        resolveDeath(target,defArr,atkArr,swLog,_sw);
+        _sw.alive=false; // 자폭 사망
+        for(var _swl=0;_swl<swLog.length;_swl++)log.push(swLog[_swl]);
+        steps.push({atkSide:_mSide,atkIdx:atkArr.indexOf(_sw),atkId:_sw.id,defSide:_mDefSide,defIdx:defArr.indexOf(target),defId:target.id,log:swLog,snap:snapshot()});
+      }
+      return true; // stepLog 비워서 메인 스텝 push 방지
     }
     else if(attacker.baseId==='millennium_death_momoi'){
       // 데스 모모이 선빵: 적 부여 수치 초기화
