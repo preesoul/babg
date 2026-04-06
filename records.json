@@ -4092,7 +4092,8 @@
               "img": "unique/Trinity_nagisa.png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 8,
