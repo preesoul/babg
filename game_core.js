@@ -249,7 +249,7 @@ var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisa
 var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1}; // 선제 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -334,7 +334,7 @@ var ABILITY_DESCS = {
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
   suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n30% 내립니다.',skinEffect:'마법소녀 스즈미: 60% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">60%</span> 내립니다.'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
-  haruka:   {type:'선제',desc:'한 번에 5회 공격을 합니다.',skinEffect:'새해 하루카: 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">10회</span> 공격을 합니다.'},
+  haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
   // 총학생회
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',skinEffect:'인터뷰 하이네: +4/+4',skinEffectDesc:'패시브: 팔면 아군 전체에 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다.'},
   momoka:   {type:'패시브',desc:'매 턴 추가 리롤이 1회 무료입니다.',skinEffect:'승무원 모모카: 2회 무료',skinEffectDesc:'패시브: 매 턴 추가 리롤이 <span style="color:#ffd700;font-weight:700">2회</span> 무료입니다.'},
@@ -3934,6 +3934,16 @@ function runBattle(boardA, boardB, startWithA, opts) {
       // 흡수 효과용: 치명타 직전 HP 보존 (음수 hp로 흡수 시 공격자 사망 버그 방지)
       if(dst.hp<=0&&dst._hpBeforeKill===undefined) dst._hpBeforeKill=Math.max(0,hpBefore);
       log2.push({cls:'hit',text:src.name+'가 '+dst.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,dst.hp)+')'});
+      // 하루카 패시브: 아루/무츠키/카요코가 피해받으면 반격 대기
+      if(['aru','mutsuki','kayoko'].indexOf(dst.baseId)!==-1&&dst._mySide&&src._mySide&&!_G.permanentAbilityBan){
+        for(var _hk=0;_hk<dst._mySide.length;_hk++){
+          var _hku=dst._mySide[_hk];
+          if(_hku.baseId==='haruka'&&_hku.alive&&!_hku._abilitiesStripped){
+            _G._harukaCounterPending={haruka:_hku,target:src,harukaArr:dst._mySide,targetArr:src._mySide};
+            break;
+          }
+        }
+      }
       if(hasKw(src,'poison')&&dmg>=1&&dst.hp>0&&!dst.poisonImmune&&!dst.abilityImmune){
         dst.hp=0;dst._poisonKilled=true;
         log2.push({cls:'kill',text:src.name+'의 독사굴! '+dst.name+' 즉사!'});
@@ -4517,6 +4527,27 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(stepMultiHits>0) stepObj.multiHits=stepMultiHits;
         if(attacker.baseId==='haruka'&&stepMultiHits>0) stepObj.pajdikUid=attacker.id;
         steps.push(stepObj);
+        // 하루카 패시브 반격 step
+        if(_G._harukaCounterPending){
+          var _hcp=_G._harukaCounterPending;
+          delete _G._harukaCounterPending;
+          if(_hcp.haruka.alive&&_hcp.target.alive){
+            var hcLog=[];
+            var hcHits=_hcp.haruka.isSkin?10:5;
+            hcLog.push({cls:'hit',text:'[패시브] '+_hcp.haruka.name+': 반격! '+hcHits+'회 공격!'});
+            for(var _hci=0;_hci<hcHits;_hci++){
+              if(!_hcp.target.alive)break;
+              dealHit(_hcp.haruka,_hcp.target,hcLog);
+              checkSurvive(_hcp.target,_hcp.targetArr,hcLog,_hcp.haruka);
+            }
+            resolveDeath(_hcp.target,_hcp.targetArr,_hcp.harukaArr,hcLog,_hcp.haruka);
+            for(var _hcl=0;_hcl<hcLog.length;_hcl++)log.push(hcLog[_hcl]);
+            var hcSide=(_hcp.harukaArr===a)?'a':'b';
+            var hcIdx=_hcp.harukaArr.indexOf(_hcp.haruka);
+            var hcStep={atkSide:hcSide,atkIdx:hcIdx,defSide:hcSide==='a'?'b':'a',defIdx:_hcp.targetArr.indexOf(_hcp.target),atkId:_hcp.haruka.id,defId:_hcp.target.id,log:hcLog,snap:snapshot(),pajdikUid:_hcp.haruka.id};
+            steps.push(hcStep);
+          }
+        }
       }
       if(!attacker.alive)break;if(getAlive(defArr2).length===0)break;
     }
