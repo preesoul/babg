@@ -1339,7 +1339,10 @@ var HIDDEN_CARD_ENTRANCE = {
 
   // === 산해경 ===
   shanhai_kiki: function(m,p){_entranceGlow(m,p);},
-  Kei_usb: function(m,p){_entranceDark(m,p);},
+  Kei_usb: function(m,p){
+    // 일반 1~2성 소환처럼 조용하게
+    p.board.push(m);playCardDrop(1);renderAll();
+  },
 
   trinity_mika: function(m,p){
     var footSfx=new Audio('sfx/mika_footstep.webm');
