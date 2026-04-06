@@ -1534,77 +1534,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:21:53",
-          "placement": 8,
-          "turn": 10,
-          "tier": 4,
-          "board": [
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 2,
-              "hp": 6,
-              "tier": 4,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 7,
-              "hp": 13,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토라마루",
-              "baseId": "iroha",
-              "atk": 5,
-              "hp": 1,
-              "tier": 0,
-              "kw": [],
-              "isSkin": false,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 2,
-              "hp": 4,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 2,
-              "hp": 6,
-              "tier": 4,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:29:45",
           "placement": 2,
           "turn": 17,
@@ -2128,9 +2057,84 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:18:50",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 83,
+              "hp": 79,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 4,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 6,
+              "hp": 9,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 11,
+      "points": 18,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -2147,8 +2151,8 @@
             },
             {
               "id": "discover3",
-              "progress": 1,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ],
           "rerolled": false
