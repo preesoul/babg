@@ -3757,9 +3757,67 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T09:45:03",
+          "placement": 8,
+          "turn": 9,
+          "tier": 3,
+          "board": [
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 9,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 7,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 40,
+              "hp": 25,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요",
+              "baseId": "tsukuyo",
+              "atk": 4,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsukuyo.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 44,
+      "points": 46,
       "questState": {
         "daily": {
           "date": "2026-04-06",
