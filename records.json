@@ -569,54 +569,6 @@
       "pw": "0903",
       "records": [
         {
-          "date": "2026-04-05T13:00:52",
-          "placement": 7,
-          "turn": 12,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아코",
-              "baseId": "ako",
-              "atk": 3,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ako.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히나",
-              "baseId": "hina",
-              "atk": 13,
-              "hp": 3,
-              "tier": 6,
-              "kw": [
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Hina.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "정의실현부",
-              "baseId": "trinity_justice",
-              "atk": 55,
-              "hp": 45,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Justice_Task_Force.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T22:59:33",
           "placement": 1,
           "turn": 15,
@@ -1288,9 +1240,88 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:18:07",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 22,
+              "hp": 21,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 17,
+              "hp": 19,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 50,
+              "hp": 54,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 81,
+              "hp": 79,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 65,
+              "hp": 55,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-06",
