@@ -741,7 +741,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260404r"></script>
+<script src="game_core.js?v=20260404s"></script>
 <script>
 
 var _endMusic=null;
@@ -2417,7 +2417,7 @@ function renderRoster(){
   });
   // 7성 유니크 섹션 (필터 미적용 시에만 표시, 학교 섹션 뒤 / 액션카드 앞)
   if(!kwFilter&&!abilFilter){
-    var _t7All=CHARS.filter(function(c){return c.tier===7;});
+    var _t7All=(typeof HIDDEN_CHARS!=="undefined"?HIDDEN_CHARS:[]).slice();
     if(_t7All.length>0){
       var _t7Recruited=(typeof getRecruitedTier7==='function')?getRecruitedTier7():[];
       html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(255,215,0,0.35);padding-top:12px">';
