@@ -64,7 +64,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .arona-img{width:80%;max-width:140px;border-radius:12px;opacity:1;pointer-events:none}
 .schale-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 .schale-label-icon{width:20px;height:20px;object-fit:contain;transform:skewX(8deg)}
-.schedule-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15);margin:6px 0 4px 4px;position:relative;z-index:1}
+.schedule-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15);margin:0;position:relative;z-index:1}
 .board{display:flex;gap:10px;min-height:240px;padding:6px 12px;background:#141e28;border-radius:14px;border:1.5px dashed #1c2838;margin-bottom:4px;flex-wrap:nowrap;justify-content:center;align-items:flex-start;box-shadow:inset 0 1px 2px rgba(0,0,0,0.2)}
 
 /* 카드 — BA TCG 솔리드 프레임 */
@@ -659,13 +659,11 @@ img.tutorial-highlight{border-radius:50%!important}
       <div class="board" id="ui-board"><div class="empty-hint">캐릭터를 스케쥴에서 구매하세요</div></div>
       <div class="shop">
         <div class="shop-inner">
-        <div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div>
         <div class="shop-row" id="ui-shop"></div>
-        <div class="stone-display" id="ui-stone"><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
+        <div class="stone-display" id="ui-stone"><div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div><button class="btn btn-blue" id="btn-freeze" style="margin:0"><span class="btn-inner">스케쥴 고정</span></button><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
         <div class="enigma-display" id="ui-enigma" style="display:none">엘리그마 <span id="enigma-count">0</span>P</div>
         <div class="shop-actions">
           <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
-          <button class="btn btn-blue" id="btn-freeze"><span class="btn-inner">스케쥴 고정</span></button>
           <button class="btn btn-purple" id="btn-upgrade"><span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">5</span></button>
           <button class="btn btn-green btn-big" id="btn-fight"><span class="btn-inner">전투 시작</span></button>
         </div>
@@ -862,7 +860,11 @@ function renderAll() {
   var turnNumEl=document.getElementById('ui-turn-num');if(turnNumEl)turnNumEl.textContent=G.turn;
   document.getElementById('ui-tier').textContent='스케쥴 Lv.'+p.tier;
   var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
-  document.getElementById('ui-stone').innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';
+  // schedule-label/btn-freeze 보존하면서 stone 업데이트
+  var _pcStoneEl=document.getElementById('ui-stone');
+  var _pcStoneNum=_pcStoneEl.querySelector('.stone-num');
+  if(_pcStoneNum){_pcStoneNum.textContent=p.stone;}
+  else{_pcStoneEl.innerHTML='<img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';}
   var enigmaCountEl=document.getElementById('enigma-count');if(enigmaCountEl)enigmaCountEl.textContent=getEnigmaPoints();
   document.getElementById('ui-hp').textContent='HP: '+p.hp;
   // HP 바 업데이트
@@ -1025,8 +1027,8 @@ function renderAll() {
   // undo 제거됨
 
   var freezeBtn=document.getElementById('btn-freeze');
-  if(G.frozen){freezeBtn.textContent='스케쥴 고정 해제';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
-  else{freezeBtn.textContent='스케쥴 고정';freezeBtn.style.background='';shopEl.style.border='';}
+  if(G.frozen){freezeBtn.innerHTML='<span class="btn-inner">고정 해제</span>';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
+  else{freezeBtn.innerHTML='<span class="btn-inner">스케쥴 고정</span>';freezeBtn.style.background='';shopEl.style.border='';}
   var rerollBtn=document.getElementById('btn-reroll');
   if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">리롤 (무료 '+G.freeRerolls+'회)</span>';rerollBtn.disabled=false;}
   else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}

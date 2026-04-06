@@ -834,11 +834,10 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
       <div class="shop">
         <div class="shop-inner">
         <div class="shop-row" id="ui-shop"></div>
-        <div class="stone-display" id="ui-stone"><div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
+        <div class="stone-display" id="ui-stone"><div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">스케쥴 <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div><button class="btn btn-blue" id="btn-freeze" style="margin:0"><span class="btn-inner">스케쥴 고정</span></button><img src="img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
         <div class="enigma-display" id="ui-enigma" style="display:none">엘리그마 <span id="enigma-count">0</span>P</div>
         <div class="shop-actions">
           <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span></button>
-          <button class="btn btn-blue" id="btn-freeze"><span class="btn-inner">스케쥴 고정</span></button>
           <button class="btn btn-purple" id="btn-upgrade"><span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">5</span></button>
           <button class="btn btn-green btn-big" id="btn-fight"><span class="btn-inner">전투 시작</span></button>
         </div>
@@ -1184,8 +1183,8 @@ function renderAll() {
   // undo 제거됨
 
   var freezeBtn=document.getElementById('btn-freeze');
-  if(G.frozen){freezeBtn.textContent='스케쥴 고정 해제';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
-  else{freezeBtn.textContent='스케쥴 고정';freezeBtn.style.background='';shopEl.style.border='';}
+  if(G.frozen){freezeBtn.innerHTML='<span class="btn-inner">고정 해제</span>';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
+  else{freezeBtn.innerHTML='<span class="btn-inner">스케쥴 고정</span>';freezeBtn.style.background='';shopEl.style.border='';}
   var rerollBtn=document.getElementById('btn-reroll');
   if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">리롤 (무료 '+G.freeRerolls+'회)</span>';rerollBtn.disabled=false;}
   else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}
