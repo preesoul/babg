@@ -4796,7 +4796,7 @@
           ]
         }
       ],
-      "points": 6,
+      "points": 1,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -4856,7 +4856,8 @@
         "lin",
         "ui",
         "nonomi",
-        "hoshino"
+        "hoshino",
+        "ayane"
       ],
       "recruitedTier7": [
         "millennium_death_momoi"
