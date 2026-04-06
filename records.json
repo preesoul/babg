@@ -2140,7 +2140,7 @@
           ]
         }
       ],
-      "points": 20,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -2200,7 +2200,8 @@
         "serika",
         "sena",
         "kaya",
-        "kokona"
+        "kokona",
+        "ayane"
       ],
       "recruitedTier7": [
         "millennium_nameless",
