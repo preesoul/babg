@@ -1452,73 +1452,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T10:51:35",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "치세",
-              "baseId": "chise",
-              "atk": 5,
-              "hp": 5,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Chise.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 4,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "히나",
-              "baseId": "hina",
-              "atk": 13,
-              "hp": 3,
-              "tier": 6,
-              "kw": [
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Hina.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 3,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미모리(수영복)",
-              "baseId": "mimori",
-              "atk": 5,
-              "hp": 7,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mimori_(Swimsuit).png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:02:17",
           "placement": 8,
           "turn": 9,
@@ -2117,9 +2050,30 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T13:36:31",
+          "placement": 8,
+          "turn": 10,
+          "tier": 5,
+          "board": [
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 52,
+              "hp": 45,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 5,
       "questState": {
         "daily": {
           "date": "2026-04-06",
