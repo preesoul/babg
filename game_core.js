@@ -3502,13 +3502,13 @@ function _doDR(unit, mySide, otherSide, log) {
     }
   }
   else if(id==='kasumi'||id==='nagusa'){
-    // 카스미/나구사를 죽인 상대를 쓰러뜨림
+    // 카스미/나구사를 죽인 상대를 쓰러뜨림 (부활 존중)
     if(unit._killedBy){
       var killer=unit._killedBy;
       if(killer.alive&&!killer.abilityImmune){
-        killer.hp=0;killer.alive=false;
         log.push({cls:'kill',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
-        triggerDeathrattle(killer,otherSide,mySide,log);
+        killer.hp=0;
+        killUnit(killer,otherSide,mySide,log,unit); // killUnit이 부활/뒤끝 처리
       } else if(killer.alive&&killer.abilityImmune){
         log.push({cls:'shield',text:killer.name+': 미카의 면역! (효과 사망 무효)'});
       }
