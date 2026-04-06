@@ -1675,6 +1675,8 @@ function showDiscover(p) {
     document.getElementById('battle-intro-area').innerHTML='';
     if(window._questTracker) window._questTracker.discovers++;
     var tmpl = choices[idx];
+    // 백귀야행 발견도 구매 기록으로 인정 (쿠즈노하 조건)
+    if(HKYK_ALL_IDS.indexOf(tmpl.id)!==-1) G.soldHkyk[tmpl.id]=true;
     if(takeFromPool(tmpl.id)){
       var added = addToBoard(p, makeMinion(tmpl, false));
       if(!added){
@@ -1788,6 +1790,8 @@ function showDiscoverCustom(choices) {
     document.getElementById('battle-intro-area').innerHTML='';
     var chosen=choices[idx];if(!chosen){renderAll();return;}
     if(window._questTracker) window._questTracker.discovers++;
+    // 백귀야행 발견도 구매 기록으로 인정 (쿠즈노하 조건)
+    if(HKYK_ALL_IDS.indexOf(chosen.id)!==-1) G.soldHkyk[chosen.id]=true;
     takeFromPool(chosen.id);
     var count=0;for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===chosen.id&&!p.board[j].isSkin)count++;}
     if(count>=2){
