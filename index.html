@@ -500,12 +500,11 @@ img.tutorial-highlight{border-radius:50%!important}
     <img src="img/UI/bluearchive2.png" class="title-logo">
     <p class="sub">Battle Grounds</p>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-      <input id="login-name" type="text" placeholder="닉네임" style="width:120px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
-      <input id="login-pw" type="password" placeholder="비번" style="width:80px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+      <input id="login-name" type="text" placeholder="선생님 이름을 입력하세요" style="width:200px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
     </div>
     <div id="login-status" style="font-size:11px;color:#e04040;margin-bottom:8px"></div>
-    <button class="btn btn-blue btn-big" id="btn-login" style="min-width:200px"><span class="btn-inner">로그인</span></button>
-    <div style="font-size:10px;color:#6a8a9e;margin-top:12px">처음이면 닉네임+비번 입력 후 로그인 (자동 가입)</div>
+    <button class="btn btn-blue btn-big" id="btn-login" style="min-width:200px"><span class="btn-inner">입장</span></button>
+    <div style="font-size:10px;color:#6a8a9e;margin-top:12px">이름을 입력하고 입장하세요</div>
   </div>
 
   <!-- 메인 메뉴 -->
@@ -2493,36 +2492,29 @@ function showRoster(){
     try{
       var d=JSON.parse(saved);
       document.getElementById('login-name').value=d.name||'';
-      document.getElementById('login-pw').value=d.pw||'';
       // 자동 로그인
-      doLogin(d.name,d.pw,true);
+      doLogin(d.name,true);
     }catch(e){}
   }
 })();
-function doLogin(name,pw,auto){
-  if(!name){document.getElementById('login-status').textContent='닉네임을 입력하세요.';return;}
+function doLogin(name,auto){
+  if(!name){document.getElementById('login-status').textContent='선생님 이름을 입력하세요.';return;}
   document.getElementById('login-status').textContent='확인 중...';
   fetchRecords(function(err,data,sha){
     if(err){
       // 네트워크 오류 시 오프라인 모드
-      window._babgLogin={name:name,pw:pw};
+      window._babgLogin={name:name};
       localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
       goToMainMenu(name);
       return;
     }
     if(!data.players)data.players={};
-    if(data.players[name]){
-      // 기존 유저: 비번 확인
-      if(data.players[name].pw!==pw){
-        document.getElementById('login-status').textContent='비밀번호가 틀립니다.';
-        return;
-      }
-    } else {
+    if(!data.players[name]){
       // 신규 유저: 자동 가입
-      data.players[name]={pw:pw,records:[],points:0};
+      data.players[name]={records:[],points:0};
       saveRecords(data,sha);
     }
-    window._babgLogin={name:name,pw:pw};
+    window._babgLogin={name:name};
     localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
     goToMainMenu(name);
     try{checkLoginQuest();}catch(e){}
@@ -2535,18 +2527,15 @@ function goToMainMenu(name){
 }
 document.getElementById('btn-login').addEventListener('click',function(){
   var name=document.getElementById('login-name').value.trim();
-  var pw=document.getElementById('login-pw').value;
-  doLogin(name,pw,false);
+  doLogin(name,false);
 });
 document.getElementById('login-name').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-login').click();});
-document.getElementById('login-pw').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-login').click();});
 document.getElementById('btn-logout').addEventListener('click',function(){
   window._babgLogin=null;
   localStorage.removeItem('babg_login');
   document.getElementById('title-screen').classList.remove('active');
   document.getElementById('login-screen').classList.add('active');
   document.getElementById('login-name').value='';
-  document.getElementById('login-pw').value='';
   document.getElementById('login-status').textContent='';
 });
 // 계정 초기화
