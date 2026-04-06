@@ -1625,27 +1625,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-06T13:36:31",
-          "placement": 8,
-          "turn": 10,
-          "tier": 5,
-          "board": [
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 52,
-              "hp": 45,
-              "tier": 7,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T13:41:44",
           "placement": 5,
           "turn": 13,
@@ -2245,9 +2224,77 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T16:41:34",
+          "placement": 8,
+          "turn": 10,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 9,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 6,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 13,
+              "hp": 11,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 7,
+              "hp": 2,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "피나",
+              "baseId": "pina",
+              "atk": 6,
+              "hp": 3,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Pina.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 5,
       "questState": {
         "daily": {
           "date": "2026-04-07",
