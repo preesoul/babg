@@ -3592,7 +3592,7 @@ function triggerDeathrattle(unit, mySide, otherSide, log) {
   // 나구사 패시브: 자신을 쓰러뜨린 상대를 쓰러뜨림
   if(id==='trinity_nagisa'&&unit._killedBy){
     var killer=unit._killedBy;
-    if(killer.alive&&!killer.abilityImmune){
+    if(killer.alive&&!killer.abilityImmune&&!killer._sayaImmune&&!killer._effectImmune){
       killer.hp=0;killer.alive=false;
       log.push({cls:'kill',text:'[패시브] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
       triggerDeathrattle(killer,otherSide,mySide,log);
@@ -3660,7 +3660,8 @@ function _doDR(unit, mySide, otherSide, log) {
     // killUnit은 runBattle 스코프 안이라 여기서 접근 불가 → 인라인 처리
     if(unit._killedBy){
       var killer=unit._killedBy;
-      if(killer.alive&&!killer.abilityImmune){
+      var _immune=killer.abilityImmune||killer._sayaImmune||killer._effectImmune;
+      if(killer.alive&&!_immune){
         log.push({cls:'kill',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
         killer.hp=0;
         if(hasKw(killer,'reborn')){
@@ -3673,7 +3674,7 @@ function _doDR(unit, mySide, otherSide, log) {
           killer._killedBy=unit;
           triggerDeathrattle(killer,otherSide,mySide,log);
         }
-      } else if(killer.alive&&killer.abilityImmune){
+      } else if(killer.alive&&_immune){
         log.push({cls:'shield',text:killer.name+': 면역! (효과 사망 무효)'});
       }
     }
@@ -4637,7 +4638,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   if(_kikiOnField){
     var _both=a.concat(b);
     for(var _kk=0;_kk<_both.length;_kk++){
-      if(_both[_kk].alive&&_both[_kk].baseId!=='shanhai_kiki'){
+      // 효과 면역 유닛(사야/미카/검은 군주 등)은 키키 공체 제한을 받지 않음
+      if(_both[_kk].alive&&_both[_kk].baseId!=='shanhai_kiki'&&!_both[_kk].abilityImmune&&!_both[_kk]._sayaImmune&&!_both[_kk]._effectImmune){
         if(_both[_kk].atk>5)_both[_kk].atk=5;
         if(_both[_kk].hp>5)_both[_kk].hp=5;
         if(_both[_kk].maxHp>5)_both[_kk].maxHp=5;
