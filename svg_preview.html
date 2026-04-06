@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>SVG Icon Preview v4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1a2e;color:#fff;font-family:'Segoe UI',sans-serif;padding:20px}
+h1{text-align:center;font-size:20px;margin-bottom:6px}
+.sub{text-align:center;color:#666;font-size:12px;margin-bottom:20px}
+.section{color:#f0c060;font-size:12px;font-weight:700;margin:24px 0 10px;padding-bottom:4px;border-bottom:1px solid #333;letter-spacing:1px}
+.row{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:6px;margin-bottom:4px}
+.row:hover{background:rgba(255,255,255,0.04)}
+.icon-set{display:flex;gap:6px;align-items:center;min-width:120px}
+.icon-set .sz{background:rgba(0,0,0,0.4);border-radius:4px;padding:2px;display:inline-flex}
+.nm{font-size:14px;font-weight:700;min-width:70px}
+.nm.cyan{color:#50E3C2} .nm.blue{color:#4A90E2} .nm.green{color:#7ED321} .nm.gold{color:#FFD700}
+.nm.orange{color:#FFAB00} .nm.red{color:#FF4444} .nm.purple{color:#B060FF} .nm.pink{color:#E85D75}
+.nm.crimson{color:#D0021B} .nm.gray{color:#B0B0B0} .nm.darkgray{color:#888}
+.nm.hotpink{color:#FF4081} .nm.amber{color:#F5A623} .nm.white{color:#E8E8E8}
+.desc{font-size:11px;color:#888;flex:1}
+.vs{display:flex;align-items:center;gap:4px;min-width:40px}
+.vs .old{font-size:18px}
+.badge{font-size:9px;padding:1px 5px;border-radius:3px;margin-left:4px;font-weight:400}
+.badge.ok{background:#2a4a2a;color:#7ED321}
+.badge.changed{background:#4a3a1a;color:#FFD700}
+h2{font-size:15px;color:#ccc;margin:28px 0 10px;text-align:center}
+.mock{background:#222238;border-radius:8px;padding:10px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;max-width:600px;margin-left:auto;margin-right:auto}
+.mock .label{color:#f0c060;font-size:12px;min-width:90px}
+.mock .icons{display:flex;gap:2px}
+.mock .abi{background:rgba(0,0,0,0.5);border-radius:3px;padding:1px 2px;display:inline-flex}
+.mock .info{color:#777;font-size:11px;margin-left:6px}
+</style>
+</head>
+<body>
+<h1>Ability SVG Icons v4</h1>
+<div class="sub">dark background — 36 / 20 / 16px</div>
+
+<div class="section">기본 능력</div>
+
+<!-- 지켜줌 taunt — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">🛡️</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='1'/><path d='M12 8.5L9.5 12h1.8v3.5h1.4V12h1.8L12 8.5z' fill='#fff' opacity='0.85'/><defs><linearGradient id='tg' x1='12' y1='3' x2='12' y2='21'><stop offset='0' stop-color='#5BA0F0'/><stop offset='1' stop-color='#2D5FA0'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='1.5'/><path d='M12 8.5L9.5 12h1.8v3.5h1.4V12h1.8L12 8.5z' fill='#fff' opacity='0.85'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='2'/></svg></div>
+  </div>
+  <span class="nm blue">지켜줌</span><span class="badge ok">OK</span>
+  <span class="desc">이 학생부터 공격합니다.</span>
+</div>
+
+<!-- ★ 보호막 shield — 노란 원 (게임 내 이펙트) -->
+<div class="row">
+  <div class="vs"><span class="old">💎</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='none' stroke='url(#shg)' stroke-width='2.5'/><circle cx='12' cy='12' r='6' fill='none' stroke='#FFD700' stroke-width='1' opacity='0.4'/><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.12'/><path d='M8 8l2 2M14 8l2 2' stroke='#FFE066' stroke-width='1.2' stroke-linecap='round' opacity='0.7'/><circle cx='9' cy='7' r='1' fill='#FFE880' opacity='0.6'/><defs><linearGradient id='shg' x1='3' y1='3' x2='21' y2='21'><stop offset='0' stop-color='#FFE880'/><stop offset='1' stop-color='#E8A800'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.12' stroke='#FFD700' stroke-width='2.8'/><circle cx='12' cy='12' r='5.5' fill='none' stroke='#FFD700' stroke-width='0.8' opacity='0.35'/><circle cx='9' cy='7.5' r='1' fill='#FFE880' opacity='0.5'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg></div>
+  </div>
+  <span class="nm gold">보호막</span><span class="badge changed">CHANGED</span>
+  <span class="desc">피해를 1회 막아줍니다.</span>
+</div>
+
+<!-- ★ 부활 reborn — 큰 이파리, 두꺼운, #7ED321 -->
+<div class="row">
+  <div class="vs"><span class="old">🌱</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M12 22V11' stroke='#4A8C10' stroke-width='3' stroke-linecap='round'/><path d='M12 11c0-6 5.5-8.5 10-9.5-1.5 5-5 8-10 9.5z' fill='#7ED321' stroke='#4A8C10' stroke-width='1.2' stroke-linejoin='round'/><path d='M12 13c0-5-5-7.5-9-8.5 1.5 4.5 5 7 9 8.5z' fill='#9BE94A' stroke='#4A8C10' stroke-width='1.2' stroke-linejoin='round'/><path d='M14 10c1-1.5 3-3 5-3.5' stroke='#9BE94A' stroke-width='0.8' opacity='0.6'/><path d='M10 11.5c-1-1.5-3-2.8-4.5-3' stroke='#B8F060' stroke-width='0.8' opacity='0.6'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 22V11' stroke='#4A8C10' stroke-width='3.5' stroke-linecap='round'/><path d='M12 11c0-6 5.5-8.5 10-9.5-1.5 5-5 8-10 9.5z' fill='#7ED321' stroke='#4A8C10' stroke-width='1.5' stroke-linejoin='round'/><path d='M12 13c0-5-5-7.5-9-8.5 1.5 4.5 5 7 9 8.5z' fill='#9BE94A' stroke='#4A8C10' stroke-width='1.5' stroke-linejoin='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg></div>
+  </div>
+  <span class="nm green">부활</span><span class="badge changed">CHANGED</span>
+  <span class="desc">처음 쓰러진 후, 체력 1로 부활합니다.</span>
+</div>
+
+<!-- 무적 invincible — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">🏆</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M5 18h14v2H5z' fill='#E8A800' stroke='#B8860B' stroke-width='0.8'/><path d='M5 18L3 8l4.5 3.5L12 5l4.5 6.5L21 8l-2 10z' fill='url(#cg)' stroke='#B8860B' stroke-width='1' stroke-linejoin='round'/><circle cx='8' cy='15' r='1.2' fill='#FF6B35'/><circle cx='12' cy='14.5' r='1.4' fill='#FF6B35'/><circle cx='16' cy='15' r='1.2' fill='#FF6B35'/><defs><linearGradient id='cg' x1='12' y1='5' x2='12' y2='18'><stop offset='0' stop-color='#FFE066'/><stop offset='1' stop-color='#E8A800'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M5 18h14v2H5z' fill='#E8A800'/><path d='M5 18L3 8l4.5 3.5L12 5l4.5 6.5L21 8l-2 10z' fill='#FFD700' stroke='#B8860B' stroke-width='1.2' stroke-linejoin='round'/><circle cx='8.5' cy='15' r='1.2' fill='#FF6B35'/><circle cx='12' cy='14.5' r='1.3' fill='#FF6B35'/><circle cx='15.5' cy='15' r='1.2' fill='#FF6B35'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M5 18h14v2.5H5z' fill='#E8A800'/><path d='M5 18L3 7l4.5 4L12 4l4.5 7L21 7l-2 11z' fill='#FFD700' stroke='#B8860B' stroke-width='1.5' stroke-linejoin='round'/></svg></div>
+  </div>
+  <span class="nm gold">무적</span><span class="badge ok">OK</span>
+  <span class="desc">피해를 입지 않습니다.</span>
+</div>
+
+<!-- ★ 연사 windfury — >>> 셰브론 (기존 연격→연사로 이동) -->
+<div class="row">
+  <div class="vs"><span class="old">⚡</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M4 6l8 6-8 6' stroke='#FF8C00' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M10 6l8 6-8 6' stroke='#FF6600' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M16 6l6 6-6 6' stroke='#FF4400' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M4 6l8 6-8 6' stroke='#FF8C00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M10 6l8 6-8 6' stroke='#FF6600' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M16 6l6 6-6 6' stroke='#FF4400' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+  </div>
+  <span class="nm orange">연사</span><span class="badge changed">CHANGED</span>
+  <span class="desc">한 턴에 두 번 공격합니다.</span>
+</div>
+
+<!-- ★ 광역 cleave — WiFi 형태 위로 퍼지는 동심원 아크 -->
+<div class="row">
+  <div class="vs"><span class="old">🌊</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='1.8' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='2.2' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='2.2' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='2.2' stroke-linecap='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='2.8' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='2.8' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='2.8' stroke-linecap='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='2.2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='3.2' stroke-linecap='round' fill='none'/></svg></div>
+  </div>
+  <span class="nm blue">광역</span><span class="badge changed">CHANGED</span>
+  <span class="desc">양 옆의 적도 공격합니다.</span>
+</div>
+
+<!-- ★ 독사굴 poison — 더 밝고 쨍하게, #B060FF 계열 -->
+<div class="row">
+  <div class="vs"><span class="old">🐍</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='11' r='8' fill='url(#pg2)'/><circle cx='9' cy='10' r='1.8' fill='#1A0030'/><circle cx='15' cy='10' r='1.8' fill='#1A0030'/><circle cx='9' cy='9.3' r='0.7' fill='#FF60FF'/><circle cx='15' cy='9.3' r='0.7' fill='#FF60FF'/><path d='M9 14.5c1 1 2 1.2 3 1.2s2-.2 3-1.2' stroke='#1A0030' stroke-width='1.2' stroke-linecap='round' fill='none'/><circle cx='7.5' cy='20' r='2' fill='#80FF40' opacity='0.85'/><circle cx='12' cy='21.5' r='1.4' fill='#80FF40' opacity='0.65'/><circle cx='16' cy='20.5' r='1' fill='#80FF40' opacity='0.5'/><defs><radialGradient id='pg2' cx='0.5' cy='0.35'><stop offset='0' stop-color='#D080FF'/><stop offset='1' stop-color='#8030D0'/></radialGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='11' r='8' fill='#A050E0'/><circle cx='9' cy='10' r='1.8' fill='#1A0030'/><circle cx='15' cy='10' r='1.8' fill='#1A0030'/><circle cx='9' cy='9.3' r='0.6' fill='#FF60FF'/><circle cx='15' cy='9.3' r='0.6' fill='#FF60FF'/><path d='M9 14.5c1 1 2 1.2 3 1.2s2-.2 3-1.2' stroke='#1A0030' stroke-width='1.5' stroke-linecap='round' fill='none'/><circle cx='8' cy='20.5' r='1.5' fill='#80FF40' opacity='0.7'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#A050E0'/><circle cx='9' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='15' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='9' cy='10' r='0.7' fill='#FF60FF'/><circle cx='15' cy='10' r='0.7' fill='#FF60FF'/><path d='M9 15.5c1.5 1.2 4.5 1.2 6 0' stroke='#1A0030' stroke-width='2' stroke-linecap='round' fill='none'/></svg></div>
+  </div>
+  <span class="nm purple">독사굴</span><span class="badge changed">CHANGED</span>
+  <span class="desc">피해를 주면 대상을 즉시 쓰러뜨립니다.</span>
+</div>
+
+<!-- 관통 pierce — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">🔱</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='2.5' stroke-linecap='round'/><path d='M12 2v4M7 6l5-4 5 4' stroke='#FFD700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M5 9l2-3M19 9l-2-3' stroke='#FFD700' stroke-width='2' stroke-linecap='round'/><line x1='5' y1='9' x2='5' y2='6' stroke='#D4A020' stroke-width='1.5' stroke-linecap='round'/><line x1='19' y1='9' x2='19' y2='6' stroke='#D4A020' stroke-width='1.5' stroke-linecap='round'/><path d='M9.5 13h5' stroke='#B8860B' stroke-width='1.5' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3' stroke-linecap='round'/><path d='M12 2v4M7 6l5-4 5 4M5 9l2-3M19 9l-2-3' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3.5' stroke-linecap='round'/><path d='M12 2v4M6 7l6-5 6 5M4 10l2-3M20 10l-2-3' stroke='#FFD700' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+  </div>
+  <span class="nm gold">관통</span><span class="badge ok">OK</span>
+  <span class="desc">초과한 데미지가 양 옆으로 전달됩니다.</span>
+</div>
+
+<!-- 저격 ranged — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">🏹</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='8.5' stroke='#D04040' stroke-width='1.5' fill='none'/><circle cx='12' cy='12' r='4' stroke='#D04040' stroke-width='1.2' fill='none'/><circle cx='12' cy='12' r='1.5' fill='#FF4444'/><path d='M12 2v6M12 16v6M2 12h6M16 12h6' stroke='#D04040' stroke-width='1.5' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='8.5' stroke='#D04040' stroke-width='2' fill='none'/><circle cx='12' cy='12' r='2' fill='#FF4444'/><path d='M12 2v6M12 16v6M2 12h6M16 12h6' stroke='#D04040' stroke-width='2' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='8' stroke='#D04040' stroke-width='2.5' fill='none'/><circle cx='12' cy='12' r='2.5' fill='#FF4444'/><path d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='#D04040' stroke-width='2.5' stroke-linecap='round'/></svg></div>
+  </div>
+  <span class="nm crimson">저격</span><span class="badge ok">OK</span>
+  <span class="desc">반격을 받지 않습니다.</span>
+</div>
+
+<!-- 기습 ambush — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">🌫️</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><rect x='3' y='3' width='18' height='18' rx='4' fill='#404050' stroke='#666' stroke-width='0.8'/><circle cx='12' cy='11' r='5' fill='#888' opacity='0.5'/><circle cx='10' cy='10' r='3' fill='#AAA' opacity='0.4'/><circle cx='14' cy='13' r='4' fill='#777' opacity='0.4'/><path d='M9 16h6' stroke='#AAA' stroke-width='1.2' stroke-linecap='round' stroke-dasharray='2 1.5'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><rect x='3' y='3' width='18' height='18' rx='4' fill='#404050' stroke='#666' stroke-width='1'/><circle cx='12' cy='11' r='5' fill='#888' opacity='0.5'/><circle cx='10' cy='10' r='3' fill='#AAA' opacity='0.4'/><circle cx='14' cy='13' r='4' fill='#777' opacity='0.4'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><rect x='2' y='2' width='20' height='20' rx='4' fill='#404050' stroke='#666' stroke-width='1.5'/><circle cx='12' cy='12' r='6' fill='#999' opacity='0.5'/><circle cx='10' cy='10' r='4' fill='#BBB' opacity='0.4'/></svg></div>
+  </div>
+  <span class="nm gray">기습</span><span class="badge ok">OK</span>
+  <span class="desc">첫 공격 전까지 대상 지정 불가.</span>
+</div>
+
+<!-- 자폭 selfdestruct — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">💣</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><circle cx='11' cy='14' r='7.5' fill='url(#bg)'/><path d='M14.5 7l1.5-3.5' stroke='#888' stroke-width='2' stroke-linecap='round'/><path d='M15.5 3l1.5.8M17 2.5l-.5 1.5' stroke='#FF8800' stroke-width='1.5' stroke-linecap='round'/><circle cx='8.5' cy='12' r='1.5' fill='rgba(255,255,255,0.15)'/><defs><radialGradient id='bg' cx='0.4' cy='0.35'><stop offset='0' stop-color='#8855BB'/><stop offset='1' stop-color='#3D1F5C'/></radialGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><circle cx='11' cy='14' r='7.5' fill='#6A3D9A'/><path d='M14.5 7l1.5-3.5' stroke='#888' stroke-width='2.5' stroke-linecap='round'/><path d='M15.5 3l1.5.8M17 2.5l-.5 1.5' stroke='#FF8800' stroke-width='2' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='11' cy='14' r='8' fill='#6A3D9A'/><path d='M15 6l1.5-3' stroke='#999' stroke-width='3' stroke-linecap='round'/><circle cx='18' cy='2.5' r='2' fill='#FF8800'/></svg></div>
+  </div>
+  <span class="nm purple">자폭</span><span class="badge ok">OK</span>
+  <span class="desc">공격력과 체력을 더하여 공격 후 쓰러집니다.</span>
+</div>
+
+<div class="section">특수 능력</div>
+
+<!-- 개전 SOC — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">📣</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='url(#mg)' stroke='#CC7700' stroke-width='0.8' stroke-linejoin='round'/><path d='M15 9a4 4 0 0 1 0 6' stroke='#FFD700' stroke-width='1.8' stroke-linecap='round'/><path d='M18 6.5a8 8 0 0 1 0 11' stroke='#FFD700' stroke-width='1.5' stroke-linecap='round'/><defs><linearGradient id='mg' x1='6' y1='4' x2='10' y2='20'><stop offset='0' stop-color='#FFE066'/><stop offset='1' stop-color='#FF9500'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1' stroke-linejoin='round'/><path d='M15 9a4 4 0 0 1 0 6' stroke='#FFD700' stroke-width='2' stroke-linecap='round'/><path d='M18 6.5a8 8 0 0 1 0 11' stroke='#FFD700' stroke-width='1.8' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg></div>
+  </div>
+  <span class="nm orange">개전</span><span class="badge ok">OK</span>
+  <span class="desc">전투 시작 시 발동합니다.</span>
+</div>
+
+<!-- ★ 첫인사 BC — 크기 10% 축소 -->
+<div class="row">
+  <div class="vs"><span class="old">🔔</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='url(#blg)' stroke='#CC8800' stroke-width='0.8'/><path d='M13.73 21a2 2 0 0 1-3.46 0' stroke='#CC8800' stroke-width='1.5' stroke-linecap='round'/><circle cx='12' cy='4.5' r='1' fill='#CC8800'/><ellipse cx='9.5' cy='10' rx='2' ry='1.5' fill='rgba(255,255,255,0.2)' transform='rotate(-15 9.5 10)'/><defs><linearGradient id='blg' x1='12' y1='2' x2='12' y2='17'><stop offset='0' stop-color='#FFE566'/><stop offset='1' stop-color='#E8A800'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1'/><path d='M13.73 21a2 2 0 0 1-3.46 0' stroke='#CC8800' stroke-width='1.8' stroke-linecap='round'/><circle cx='12' cy='4.5' r='1' fill='#CC8800'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/><path d='M14 21a2.5 2.5 0 0 1-4 0' stroke='#CC8800' stroke-width='2' stroke-linecap='round'/></svg></div>
+  </div>
+  <span class="nm gold">첫인사</span><span class="badge changed">CHANGED</span>
+  <span class="desc">살레에 놓을 때 발동합니다.</span>
+</div>
+
+<!-- ★ 뒤끝 DR — 하얀 해골, 외곽선 진하게 -->
+<div class="row">
+  <div class="vs"><span class="old">💀</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M12 2C7.5 2 4 5.5 4 10c0 3 1.5 5.5 4 7v3h2v-2h4v2h2v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z' fill='#F0F0F0' stroke='#222' stroke-width='1.8'/><circle cx='9' cy='10' r='2.2' fill='#333'/><circle cx='15' cy='10' r='2.2' fill='#333'/><path d='M9 15l1.5 1 1.5-1 1.5 1 1.5-1' stroke='#333' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 2C7.5 2 4 5.5 4 10c0 3 1.5 5.5 4 7v3h2v-2h4v2h2v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z' fill='#F0F0F0' stroke='#222' stroke-width='2.2'/><circle cx='9' cy='10' r='2.2' fill='#333'/><circle cx='15' cy='10' r='2.2' fill='#333'/><path d='M9 15l1.5 1 1.5-1 1.5 1 1.5-1' stroke='#333' stroke-width='1.5' fill='none'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg></div>
+  </div>
+  <span class="nm white">뒤끝</span><span class="badge changed">CHANGED</span>
+  <span class="desc">쓰러질 때 발동합니다.</span>
+</div>
+
+<!-- ★ 버티기 survive — 둥근 돔형 군대 헬멧 + 턱끈 -->
+<div class="row">
+  <div class="vs"><span class="old">💪</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8' fill='url(#hmg2)' stroke='#222' stroke-width='1.2'/><path d='M3 13c0 0 0 2.5 1.5 3.5h15c1.5-1 1.5-3.5 1.5-3.5' fill='url(#hmg)' stroke='#222' stroke-width='1.2'/><path d='M2 13h20' stroke='#3A7A20' stroke-width='1.8'/><ellipse cx='9' cy='8.5' rx='3' ry='1.5' fill='#A0E870' opacity='0.25'/></g><path d='M8 17.5l-1 3.5' stroke='#5A5A3A' stroke-width='1.8' stroke-linecap='round'/><path d='M16 17.5l1 3.5' stroke='#5A5A3A' stroke-width='1.8' stroke-linecap='round'/><defs><linearGradient id='hmg' x1='12' y1='13' x2='12' y2='17'><stop offset='0' stop-color='#5A9A30'/><stop offset='1' stop-color='#3A7A20'/></linearGradient><linearGradient id='hmg2' x1='12' y1='2' x2='12' y2='13'><stop offset='0' stop-color='#8CD050'/><stop offset='1' stop-color='#5A9A30'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8' fill='#70B840' stroke='#222' stroke-width='1.8'/><path d='M3 13c0 0 0 2.5 1.5 3.5h15c1.5-1 1.5-3.5 1.5-3.5' fill='#4A8A28' stroke='#222' stroke-width='1.8'/><path d='M2 13h20' stroke='#3A7A20' stroke-width='2.2'/></g><path d='M8 17.5l-1 3.5' stroke='#5A5A3A' stroke-width='2' stroke-linecap='round'/><path d='M16 17.5l1 3.5' stroke='#5A5A3A' stroke-width='2' stroke-linecap='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g><path d='M8 17l-1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/><path d='M16 17l1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/></svg></div>
+  </div>
+  <span class="nm green">버티기</span><span class="badge changed">CHANGED</span>
+  <span class="desc">피격 후 살아남으면 발동합니다.</span>
+</div>
+
+<!-- ★ 선빵 preemptive — 번개 (기존 연사 디자인→선빵으로 이동) -->
+<div class="row">
+  <div class="vs"><span class="old">👊</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='url(#lg2)' stroke='#CC8800' stroke-width='0.8' stroke-linejoin='round'/><defs><linearGradient id='lg2' x1='11' y1='2' x2='13' y2='22'><stop offset='0' stop-color='#FFE44D'/><stop offset='1' stop-color='#FFAB00'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1' stroke-linejoin='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1.5' stroke-linejoin='round'/></svg></div>
+  </div>
+  <span class="nm orange">선빵</span><span class="badge changed">CHANGED</span>
+  <span class="desc">공격 시 발동합니다.</span>
+</div>
+
+<!-- 패시브 passive — OK 유지 -->
+<div class="row">
+  <div class="vs"><span class="old">✨</span>→</div>
+  <div class="icon-set">
+    <div class="sz"><svg width='36' height='36' viewBox='0 0 24 24' fill='none'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='url(#spg)' stroke='#CC2060' stroke-width='0.8' stroke-linejoin='round'/><circle cx='12' cy='10.5' r='2' fill='rgba(255,255,255,0.35)'/><defs><linearGradient id='spg' x1='12' y1='1' x2='12' y2='20'><stop offset='0' stop-color='#FF80AB'/><stop offset='1' stop-color='#E02070'/></linearGradient></defs></svg></div>
+    <div class="sz"><svg width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#FF4081' stroke='#CC2060' stroke-width='1' stroke-linejoin='round'/></svg></div>
+    <div class="sz"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#FF4081' stroke='#CC2060' stroke-width='1.5' stroke-linejoin='round'/></svg></div>
+  </div>
+  <span class="nm hotpink">패시브</span><span class="badge ok">OK</span>
+  <span class="desc">조건 충족 시 자동으로 발동합니다.</span>
+</div>
+
+<h2>실제 카드 시뮬레이션 (16px)</h2>
+
+<div class="mock">
+  <div class="label">이오리</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></span>
+  </div>
+  <span class="info">보호막 + 연사</span>
+</div>
+
+<div class="mock">
+  <div class="label">미네</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='2'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg></span>
+  </div>
+  <span class="info">지켜줌 + 보호막 + 부활</span>
+</div>
+
+<div class="mock">
+  <div class="label">게헨나 선도부</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='2.2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='3.2' stroke-linecap='round' fill='none'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg></span>
+  </div>
+  <span class="info">개전 + 보호막 + 연사 + 광역 + 부활</span>
+</div>
+
+<div class="mock">
+  <div class="label">하나코</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#A050E0'/><circle cx='9' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='15' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='9' cy='10' r='0.7' fill='#FF60FF'/><circle cx='15' cy='10' r='0.7' fill='#FF60FF'/><path d='M9 15.5c1.5 1.2 4.5 1.2 6 0' stroke='#1A0030' stroke-width='2' stroke-linecap='round' fill='none'/></svg></span>
+  </div>
+  <span class="info">독사굴</span>
+</div>
+
+<div class="mock">
+  <div class="label">아코</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='2'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg></span>
+  </div>
+  <span class="info">지켜줌 + 뒤끝</span>
+</div>
+
+<div class="mock">
+  <div class="label">네루</div>
+  <div class="icons">
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg></span>
+    <span class="abi"><svg width='16' height='16' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g><path d='M8 17l-1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/><path d='M16 17l1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/></svg></span>
+  </div>
+  <span class="info">보호막 + 버티기</span>
+</div>
+
+</body>
+</html>

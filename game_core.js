@@ -5690,24 +5690,43 @@ function miniCardHtml(m){
     counterHtml='<div class="battle-counter" style="background:rgba(251,191,36,0.3);border:1px solid rgba(251,191,36,0.6);color:#fde68a">⚔ '+m._keiseisenCounter+'</div>';
   }
   var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
+  var SVG_ICONS={
+    SOC:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg>",
+    BC:"<svg width='16' height='16' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/><path d='M14 21a2.5 2.5 0 0 1-4 0' stroke='#CC8800' stroke-width='2' stroke-linecap='round'/></svg>",
+    DR:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg>",
+    PASSIVE:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#E85D75' stroke='#CC2060' stroke-width='1.5' stroke-linejoin='round'/></svg>",
+    PRE:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1.5' stroke-linejoin='round'/></svg>",
+    SURV:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g><path d='M8 17l-1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/><path d='M16 17l1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/></svg>",
+    reborn:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg>",
+    poison:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#A050E0'/><circle cx='9' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='15' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='9' cy='10' r='0.7' fill='#FF60FF'/><circle cx='15' cy='10' r='0.7' fill='#FF60FF'/><path d='M9 15.5c1.5 1.2 4.5 1.2 6 0' stroke='#1A0030' stroke-width='2' stroke-linecap='round' fill='none'/></svg>",
+    selfdestruct:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='11' cy='14' r='8' fill='#6A3D9A'/><path d='M15 6l1.5-3' stroke='#999' stroke-width='3' stroke-linecap='round'/><circle cx='18' cy='2.5' r='2' fill='#FF8800'/></svg>",
+    taunt:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='2'/></svg>",
+    shield:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg>",
+    cleave:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='2.2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='3.2' stroke-linecap='round' fill='none'/></svg>",
+    windfury:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",
+    pierce:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3.5' stroke-linecap='round'/><path d='M12 2v4M6 7l6-5 6 5M4 10l2-3M20 10l-2-3' stroke='#FFD700' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",
+    ranged:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='8' stroke='#D04040' stroke-width='2.5' fill='none'/><circle cx='12' cy='12' r='2.5' fill='#FF4444'/><path d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='#D04040' stroke-width='2.5' stroke-linecap='round'/></svg>",
+    invincible:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M5 18h14v2.5H5z' fill='#E8A800'/><path d='M5 18L3 7l4.5 4L12 4l4.5 7L21 7l-2 11z' fill='#FFD700' stroke='#B8860B' stroke-width='1.5' stroke-linejoin='round'/></svg>",
+    ambush:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><rect x='2' y='2' width='20' height='20' rx='4' fill='#404050' stroke='#666' stroke-width='1.5'/><circle cx='12' cy='12' r='6' fill='#999' opacity='0.5'/><circle cx='10' cy='10' r='4' fill='#BBB' opacity='0.4'/></svg>"
+  };
   var mIconBar='';
-  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='<span class="abi">📣</span>';
-  if(BC_IDS[bid]) mIconBar+='<span class="abi">🔔</span>';
-  if(DR_IDS[bid]) mIconBar+='<span class="abi">💀</span>';
-  if(PASSIVE_IDS[bid]) mIconBar+='<span class="abi">✨</span>';
-  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='<span class="abi">👊</span>';
-  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='<span class="abi">💪</span>';
-  if(hasKw(m,'reborn')) mIconBar+='<span class="abi">🌱</span>';
-  if(hasKw(m,'poison')) mIconBar+='<span class="abi">🐍</span>';
-  if(hasKw(m,'selfdestruct')) mIconBar+='<span class="abi">💣</span>';
-  if(hasKw(m,'taunt')) mIconBar+='<span class="abi">🛡️</span>';
-  if(hasKw(m,'shield')) mIconBar+='<span class="abi">💎</span>';
-  if(hasKw(m,'cleave')) mIconBar+='<span class="abi">🌊</span>';
-  if(hasKw(m,'windfury')) mIconBar+='<span class="abi">⚡</span>';
-  if(hasKw(m,'pierce')) mIconBar+='<span class="abi">🔱</span>';
-  if(hasKw(m,'ranged')) mIconBar+='<span class="abi">🏹</span>';
-  if(hasKw(m,'invincible')) mIconBar+='<span class="abi">🏆</span>';
-  if(hasKw(m,'ambush')) mIconBar+='<span class="abi">🌫️</span>';
+  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='<span class="abi">'+SVG_ICONS.SOC+'</span>';
+  if(BC_IDS[bid]) mIconBar+='<span class="abi">'+SVG_ICONS.BC+'</span>';
+  if(DR_IDS[bid]) mIconBar+='<span class="abi">'+SVG_ICONS.DR+'</span>';
+  if(PASSIVE_IDS[bid]) mIconBar+='<span class="abi">'+SVG_ICONS.PASSIVE+'</span>';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='<span class="abi">'+SVG_ICONS.PRE+'</span>';
+  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='<span class="abi">'+SVG_ICONS.SURV+'</span>';
+  if(hasKw(m,'reborn')) mIconBar+='<span class="abi">'+SVG_ICONS.reborn+'</span>';
+  if(hasKw(m,'poison')) mIconBar+='<span class="abi">'+SVG_ICONS.poison+'</span>';
+  if(hasKw(m,'selfdestruct')) mIconBar+='<span class="abi">'+SVG_ICONS.selfdestruct+'</span>';
+  if(hasKw(m,'taunt')) mIconBar+='<span class="abi">'+SVG_ICONS.taunt+'</span>';
+  if(hasKw(m,'shield')) mIconBar+='<span class="abi">'+SVG_ICONS.shield+'</span>';
+  if(hasKw(m,'cleave')) mIconBar+='<span class="abi">'+SVG_ICONS.cleave+'</span>';
+  if(hasKw(m,'windfury')) mIconBar+='<span class="abi">'+SVG_ICONS.windfury+'</span>';
+  if(hasKw(m,'pierce')) mIconBar+='<span class="abi">'+SVG_ICONS.pierce+'</span>';
+  if(hasKw(m,'ranged')) mIconBar+='<span class="abi">'+SVG_ICONS.ranged+'</span>';
+  if(hasKw(m,'invincible')) mIconBar+='<span class="abi">'+SVG_ICONS.invincible+'</span>';
+  if(hasKw(m,'ambush')) mIconBar+='<span class="abi">'+SVG_ICONS.ambush+'</span>';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
