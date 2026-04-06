@@ -3503,12 +3503,22 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='kasumi'||id==='nagusa'){
     // 카스미/나구사를 죽인 상대를 쓰러뜨림 (부활 존중)
+    // killUnit은 runBattle 스코프 안이라 여기서 접근 불가 → 인라인 처리
     if(unit._killedBy){
       var killer=unit._killedBy;
       if(killer.alive&&!killer.abilityImmune){
         log.push({cls:'kill',text:'[뒤끝] '+unit.name+': '+killer.name+'을(를) 쓰러뜨렸다!'});
         killer.hp=0;
-        killUnit(killer,otherSide,mySide,log,unit); // killUnit이 부활/뒤끝 처리
+        if(hasKw(killer,'reborn')){
+          killer.kw.splice(killer.kw.indexOf('reborn'),1);
+          killer.hp=(killer.isSkin&&killer.baseId==='reisa')?(killer._reisaFullHp||killer.maxHp||1):1;
+          log.push({cls:'shield',text:killer.name+'이(가) 부활했다! (HP:'+killer.hp+')'});
+          triggerDeathrattle(killer,otherSide,mySide,log);
+        } else {
+          killer.alive=false;
+          killer._killedBy=unit;
+          triggerDeathrattle(killer,otherSide,mySide,log);
+        }
       } else if(killer.alive&&killer.abilityImmune){
         log.push({cls:'shield',text:killer.name+': 미카의 면역! (효과 사망 무효)'});
       }
