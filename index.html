@@ -237,6 +237,10 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .pajdik-text{position:absolute;top:50%;left:50%;font-size:1.3em;font-weight:900;font-style:italic;color:#ff4500;text-shadow:0 0 6px #ff8c00,0 2px 4px rgba(0,0,0,0.8);pointer-events:none;z-index:20;animation:pajdikPop 1.2s ease-out forwards;white-space:nowrap}
 @keyframes pajdikPop{0%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}40%{opacity:1;transform:translate(-50%,-70%) scale(1.0)}100%{opacity:0;transform:translate(-50%,-90%) scale(0.8)}}
 @keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+.sweeper-proj{position:fixed;width:70px;height:100px;z-index:50;pointer-events:none;transition:none}
+.sweeper-proj .minicard{transform:scale(0.65);transform-origin:center center}
+@keyframes sweeperSpawn{0%{opacity:0;transform:scale(0.3)}100%{opacity:1;transform:scale(1)}}
+@keyframes sweeperExplode{0%{opacity:1;transform:scale(1)}50%{opacity:1;transform:scale(1.4);filter:brightness(3)}100%{opacity:0;transform:scale(2);filter:brightness(5)}}
 .battle-log{width:260px;min-width:260px;overflow-y:auto;font-size:12px;color:#8ab0cc;background:rgba(10,18,28,0.85);backdrop-filter:blur(8px);padding:14px 12px;border-right:1px solid rgba(0,200,255,0.15);height:100%}
 .battle-log div{padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 .battle-log .hit{color:#ff6b6b}.battle-log .shield{color:#60c0f0}.battle-log .kill{color:#fbbf24}.battle-log .soc{color:#60b8e8}
@@ -302,7 +306,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .hover-tooltip .tt-stat.hp::before{content:'';position:absolute;left:5px;top:50%;transform:translateY(-50%);width:16px;height:16px;background:url('img/UI/HP.png') center/contain no-repeat;opacity:0.35}
 .hover-tooltip .tt-stat.tier{background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.2)}
 .hover-tooltip .tt-keywords{padding:8px 14px;background:rgba(10,24,38,0.4)}
-.hover-tooltip .tt-kw-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(0,200,255,0.06)}
+.hover-tooltip .tt-kw-item{display:flex;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,200,255,0.06)}
 .hover-tooltip .tt-kw-item:last-child{border-bottom:none}
 .hover-tooltip .tt-kw-name{font-weight:700;color:#50b8e0;white-space:nowrap;min-width:40px}
 .hover-tooltip .tt-kw-desc{color:#88aec8;font-size:12px;line-height:1.4}
@@ -1379,13 +1383,15 @@ function showTooltip(baseId,rect,cardEl){
   };
   var hasKwSection=displayKw.length>0;
   var info=ABILITY_DESCS[baseId];
+  var _TT_EMOJI={'도발':'👊','보호막':'💎','부활':'✨','무적':'🛡','연사':'⚡','광역':'💥','독사굴':'☠️','관통':'🔱','저격':'🎯','기습':'🌙','자폭':'💣','선제':'⚔️','버티기':'🏔️','개전':'⚔️','첫인사':'👋','뒤끝':'🔥','패시브':'⭐'};
   // 능력 타이밍 표시 여부 (복합 타이밍은 / 로 분리)
   var timingTypes=info?info.type.split(' / '):[];
   if(hasKwSection||timingTypes.length>0){
     html+='<div class="tt-keywords">';
     for(var k=0;k<displayKw.length;k++){
       var kwId=displayKw[k];
-      html+='<div class="tt-kw-item"><span class="tt-kw-name">'+(KW_LABELS[kwId]||kwId)+'</span><span class="tt-kw-desc">'+(KW_DESCS[kwId]||'')+'</span></div>';
+      var kwLabel=KW_LABELS[kwId]||kwId;
+      html+='<div class="tt-kw-item"><span class="tt-kw-name">'+(_TT_EMOJI[kwLabel]?_TT_EMOJI[kwLabel]+' ':'')+kwLabel+'</span><span class="tt-kw-desc">'+(KW_DESCS[kwId]||'')+'</span></div>';
     }
     // kw 라벨 및 원본 charData kw와 중복되는 타이밍은 건너뛰기
     var kwLabelSet={};
@@ -1397,7 +1403,7 @@ function showTooltip(baseId,rect,cardEl){
       if(kwLabelSet[tt2]) continue;
       var tDesc=TIMING_DESCS[tt2]||'';
       var tColor=TIMING_COLORS[tt2]||'';
-      html+='<div class="tt-kw-item"><span class="tt-kw-name" style="'+(tColor)+'">'+tt2+'</span><span class="tt-kw-desc">'+tDesc+'</span></div>';
+      html+='<div class="tt-kw-item"><span class="tt-kw-name" style="'+(tColor)+'">'+(_TT_EMOJI[tt2]?_TT_EMOJI[tt2]+' ':'')+tt2+'</span><span class="tt-kw-desc">'+tDesc+'</span></div>';
     }
     html+='</div>';
   }
@@ -1410,7 +1416,7 @@ function showTooltip(baseId,rect,cardEl){
     else if(info.type==='버티기') typeCls='surv';
     else if(info.type==='패시브') typeCls='passive';
     html+='<div class="tt-ability">';
-    html+='<div class="tt-type '+typeCls+'">'+info.type+'</div>';
+    html+='<div class="tt-type '+typeCls+'">'+(_TT_EMOJI[info.type]?_TT_EMOJI[info.type]+' ':'')+info.type+'</div>';
     html+='<div class="tt-desc">'+info.desc+'</div>';
     if(info.skinEffect) html+='<div class="tt-skin">'+info.skinEffect+'</div>';
     html+='</div>';
