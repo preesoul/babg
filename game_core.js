@@ -173,6 +173,9 @@ var HIDDEN_CHARS = [
   {id:'Shiroko_Terror',          name:'시로코 테러',          school:'아비도스', tier:7, atk:10, hp:10, kw:['shield'],                                   img:'unique/Shiroko_Terror.png'},
   // 산해경
   {id:'shanhai_kiki',            name:'키키',                 school:'산해경',   tier:7, atk:1,  hp:1,  kw:['ambush'],                                   img:'unique/Kiki.png'},
+  // 밀레니엄 (케이 계열)
+  {id:'Kei_usb',                 name:'케이(USB)',            school:'밀레니엄', tier:7, atk:1,  hp:1,  kw:['shield'],                                   img:'unique/Kei_usb.png'},
+  {id:'Arisu_Kei',               name:'아리스&케이',          school:'밀레니엄', tier:7, atk:40, hp:40, kw:['shield','ranged','preemptive'],              img:'unique/Arisu_Kei.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -249,8 +252,8 @@ var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisa
 var DR_IDS  = {chinatsu:1, ako:1, kazusa:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1}; // 패시브 (영입 턴/상시)
-var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1}; // 패시브 (영입 턴/상시)
+var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
@@ -358,6 +361,8 @@ var ABILITY_DESCS = {
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면,\n무작위 다음 대상에게 남은 데미지를 줍니다.',skinEffect:'어린이 슌: 추가 공격',skinEffectDesc:'패시브: 공격에 적이 쓰러지면,\n무작위 다음 대상을 <span style="color:#ffd700;font-weight:700">추가로 공격</span>합니다.'},
   kisaki:   {type:'첫인사',desc:'아군 산해경 학생 1인을\n스킨 학생으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 산해경 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
+  Kei_usb: {type:'패시브',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
+  Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
   reisa:    {type:'',desc:'',skinEffect:'마법소녀 레이사: 최대 체력으로 부활',skinEffectDesc:'패시브: 최대 체력으로 부활합니다.'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
@@ -802,6 +807,9 @@ function checkHiddenConditionsFor(p) {
     var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
     if(shCount>=5) eligible.push('shanhai_kiki');
   }
+  // 케이(USB): 밀레니엄 온리 구매 + Lv.6 + 아리스 보드
+  if(notOwned('Kei_usb')&&inPool('Kei_usb')&&onlySchool('밀레니엄')&&p.tier>=6&&boardHas('arisu'))
+    eligible.push('Kei_usb');
   // === 특수 조건 (Lv.6 유지 — 보드 조건이 없거나 약한 경우) ===
   // 열차포: 게헨나 온리 구매
   if(notOwned('gehenna_traingun')&&inPool('gehenna_traingun')&&onlySchool('게헨나')&&p.tier>=6)
@@ -1067,7 +1075,7 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror','shanhai_kiki'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror','shanhai_kiki','Kei_usb'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.stone-=3;
@@ -1207,6 +1215,11 @@ function buyHiddenCard(idx) {
     p.board=newBoard;
   }
 
+  // 케이(USB): 아리스는 흡수하지 않음 — 보드에 같이 존재
+  else if(bid==='Kei_usb'){
+    // 아리스 스탯을 흡수하지 않고 그대로 추가 (아리스는 보드에 남음)
+  }
+
   // 왕녀: 아리스 상점 제외
   if(bid==='millennium_nameless'){
     if(G.shopExclusions.indexOf('arisu')===-1) G.shopExclusions.push('arisu');
@@ -1326,6 +1339,7 @@ var HIDDEN_CARD_ENTRANCE = {
 
   // === 산해경 ===
   shanhai_kiki: function(m,p){_entranceGlow(m,p);},
+  Kei_usb: function(m,p){_entranceDark(m,p);},
 
   trinity_mika: function(m,p){
     var footSfx=new Audio('sfx/mika_footstep.webm');
@@ -3866,7 +3880,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       alive:skipSOC?(m.alive!==undefined?m.alive:true):true,
       _abilitiesStripped:skipSOC?(!!m.stripped):false,
       poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,
-      noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'),
+      noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'||m.baseId==='Kei_usb'),
       abilityImmune:(m.baseId==='trinity_mika'),
       _battlesSurvived:m._battlesSurvived||0,
       _keiseisenCounter:m._keiseisenCounter||0,
@@ -3978,6 +3992,19 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(dst._mySide[_sv].alive&&dst._mySide[_sv].baseId==='trinity_seia'&&dst._mySide[_sv]!==dst){
           log2.push({cls:'shield',text:dst.name+': 세이아의 예지로 회피했다!'});
           return {blocked:true,overflow:0};
+        }
+      }
+    }
+    // 케이(USB) 패시브: 전투 데미지를 아리스에게 전가
+    if(dst.baseId==='Kei_usb'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&dst._mySide){
+      for(var _ka=0;_ka<dst._mySide.length;_ka++){
+        if(dst._mySide[_ka].alive&&dst._mySide[_ka].baseId==='arisu'){
+          var _arisuProxy=dst._mySide[_ka];
+          log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+_arisuProxy.name+'이(가) 대신 피해를 받습니다!'});
+          _arisuProxy.hp-=dmg;
+          log2.push({cls:'hit',text:src.name+'가 '+_arisuProxy.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,_arisuProxy.hp)+')'});
+          var overflow2=dmg-(_arisuProxy.hp+dmg);
+          return {blocked:false,overflow:overflow2>0?overflow2:0,_keiRedirect:true};
         }
       }
     }
@@ -4263,6 +4290,31 @@ function runBattle(boardA, boardB, startWithA, opts) {
         steps.push({atkSide:_mSide,atkIdx:atkArr.indexOf(_sw),atkId:_sw.id,defSide:_mDefSide,defIdx:defArr.indexOf(target),defId:target.id,log:swLog,snap:snapshot()});
       }
       return true; // stepLog 비워서 메인 스텝 push 방지
+    }
+    else if(attacker.baseId==='Arisu_Kei'){
+      // 아리스&케이 선빵: 적 전원을 왼쪽부터 1회씩 공격 (보호막 무시, HP 직격)
+      var _akSide=(atkArr===a)?'a':'b';
+      var _akDefSide=(_akSide==='a')?'b':'a';
+      var _akAtkI=atkArr.indexOf(attacker);
+      var akLog=[];
+      akLog.push({cls:'soc',text:'[선빵] '+attacker.name+': 적 전원 순차 공격!'});
+      for(var _ei=0;_ei<defArr.length;_ei++){
+        var _enemy=defArr[_ei];
+        if(!_enemy.alive)continue;
+        // 보호막 무시하고 HP 직격
+        var _akDmg=attacker.atk;
+        if(hasKw(_enemy,'shield')){
+          _enemy.kw.splice(_enemy.kw.indexOf('shield'),1);
+          akLog.push({cls:'shield',text:_enemy.name+'의 보호막 무시!'});
+        }
+        _enemy.hp-=_akDmg;
+        akLog.push({cls:'hit',text:attacker.name+'가 '+_enemy.name+'에게 '+_akDmg+' 피해! (HP:'+Math.max(0,_enemy.hp)+')'});
+        checkSurvive(_enemy,defArr,akLog,attacker);
+        resolveDeath(_enemy,defArr,atkArr,akLog,attacker);
+      }
+      for(var _akl=0;_akl<akLog.length;_akl++)log.push(akLog[_akl]);
+      steps.push({atkSide:_akSide,atkIdx:_akAtkI,atkId:attacker.id,defSide:_akDefSide,defIdx:0,defId:(defArr[0]||{}).id,log:akLog,snap:snapshot()});
+      return true;
     }
     else if(attacker.baseId==='millennium_death_momoi'){
       // 데스 모모이 선빵: 적 부여 수치 초기화
@@ -4886,6 +4938,34 @@ function startBattle() {
       if(G._ayaneDeathsThisBattle>0){
         G.bonusStone=(G.bonusStone||0)+G._ayaneDeathsThisBattle;
         G._ayaneDeathsThisBattle=0;
+      }
+      // 케이(USB) 생존 → 아리스&케이로 변환
+      if(chosen.survivorsA){
+        var _keiSurvived=false;
+        for(var _ki=0;_ki<chosen.survivorsA.length;_ki++){
+          if(chosen.survivorsA[_ki].baseId==='Kei_usb'){_keiSurvived=true;break;}
+        }
+        if(_keiSurvived){
+          var akTmpl=findHiddenChar('Arisu_Kei');
+          if(akTmpl){
+            // 보드에서 Kei_usb와 arisu 제거, Arisu_Kei 추가
+            var akBonusAtk=0,akBonusHp=0;
+            var akNewBoard=[];
+            for(var _ki2=0;_ki2<p.board.length;_ki2++){
+              if(p.board[_ki2].baseId==='Kei_usb'||p.board[_ki2].baseId==='arisu'){
+                akBonusAtk+=p.board[_ki2].atk;akBonusHp+=p.board[_ki2].hp;
+                returnToPool(p.board[_ki2].baseId,p.board[_ki2].isSkin?3:1);
+              } else { akNewBoard.push(p.board[_ki2]); }
+            }
+            p.board=akNewBoard;
+            var akUnit={id:'arisu_kei_'+Math.random().toString(36).substr(2,4),baseId:'Arisu_Kei',isHidden:true,
+              name:akTmpl.name,school:akTmpl.school,tier:akTmpl.tier,
+              atk:akTmpl.atk+akBonusAtk,hp:akTmpl.hp+akBonusHp,maxHp:akTmpl.hp+akBonusHp,
+              kw:akTmpl.kw.slice(),img:akTmpl.img,isSkin:false,alive:true};
+            p.board.push(akUnit);
+            G.hiddenCardsOwned['Arisu_Kei']=true;G.hiddenCardsEverOwned['Arisu_Kei']=true;
+          }
+        }
       }
       // 시로코 테러 DR: 뒤끝 발동 시 흡수된 학생들 보드 귀환
       if(_stDRFired){
