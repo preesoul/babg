@@ -1534,78 +1534,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:16:48",
-          "placement": 7,
-          "turn": 13,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 9,
-              "hp": 9,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 3,
-              "hp": 5,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "유우카(체육복)",
-              "baseId": "yuuka",
-              "atk": 13,
-              "hp": 13,
-              "tier": 3,
-              "kw": [
-                "taunt",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Yuuka_(Sportswear).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "모모이",
-              "baseId": "momoi",
-              "atk": 12,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 2,
-              "hp": 6,
-              "tier": 4,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:21:53",
           "placement": 8,
           "turn": 10,
@@ -2122,26 +2050,104 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:08:27",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 9,
+              "hp": 9,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 10,
+              "hp": 7,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 6,
+              "hp": 8,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 20,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "이름없는 신들의 왕녀",
+              "baseId": "millennium_nameless",
+              "atk": 31,
+              "hp": 29,
+              "tier": 7,
+              "kw": [
+                "reborn",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/millennium_Nameless_God.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 7,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 38,
+              "completed": true
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
