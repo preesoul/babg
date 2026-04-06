@@ -1536,40 +1536,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T17:34:25",
-          "placement": 8,
-          "turn": 10,
-          "tier": 6,
-          "board": [
-            {
-              "name": "주리",
-              "baseId": "juri",
-              "atk": 18,
-              "hp": 10,
-              "tier": 1,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Juri.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "주리",
-              "baseId": "juri",
-              "atk": 21,
-              "hp": 11,
-              "tier": 1,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Juri.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T17:41:55",
           "placement": 1,
           "turn": 16,
@@ -2138,9 +2104,65 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T15:46:13",
+          "placement": 7,
+          "turn": 12,
+          "tier": 5,
+          "board": [
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세리카",
+              "baseId": "serika",
+              "atk": 7,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Serika.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 48,
+              "hp": 53,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
