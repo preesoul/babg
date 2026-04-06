@@ -4,89 +4,6 @@
       "pw": "aqula88",
       "records": [
         {
-          "date": "2026-04-05T03:12:09",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "네루",
-              "baseId": "neru",
-              "atk": 15,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Neru.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 24,
-              "hp": 24,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury",
-                "reborn",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "우이",
-              "baseId": "ui",
-              "atk": 16,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Ui.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 23,
-              "hp": 21,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "네루",
-              "baseId": "neru",
-              "atk": 15,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush",
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Neru.png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-05T03:38:32",
           "placement": 1,
           "turn": 15,
@@ -736,9 +653,53 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T18:02:48",
+          "placement": 1,
+          "turn": 10,
+          "tier": 6,
+          "board": [
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 11,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 60,
+              "hp": 60,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 11,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 160,
+      "points": 172,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -750,13 +711,13 @@
             },
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 4,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -776,7 +737,7 @@
             },
             {
               "id": "discover10",
-              "progress": 2,
+              "progress": 6,
               "completed": false
             }
           ]
