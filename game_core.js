@@ -1425,7 +1425,7 @@ var HIDDEN_CARD_ENTRANCE = {
   millennium_death_momoi: function(m,p){_entranceBang(m,p);},
   hkyk_saikyo: function(m,p){_entranceBang(m,p);},
   trinity_justice: function(m,p){_entranceBang(m,p);},
-  millennium_cc: function(m,p){_entranceBang(m,p);},
+  millennium_cc: function(m,p){_entranceGlow(m,p);},
   // === 금빛 밝아짐 (5초) ===
   trinity_seia: function(m,p){_entranceGlow(m,p);},
   trinity_nagisa: function(m,p){_entranceGlow(m,p);},
