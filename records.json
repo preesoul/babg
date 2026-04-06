@@ -631,21 +631,21 @@
       "points": 139,
       "questState": {
         "daily": {
-          "date": "2026-04-06",
+          "date": "2026-04-07",
           "quests": [
             {
-              "id": "millennium10",
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin3",
               "progress": 0,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
-            },
-            {
-              "id": "play3",
-              "progress": 2,
+              "progress": 0,
               "completed": false
             }
           ],
@@ -671,7 +671,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-06",
+        "_lastLoginDate": "2026-04-07",
         "repeat": {
           "quests": [
             {
