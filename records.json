@@ -5245,7 +5245,60 @@
     },
     "debug_tester": {
       "records": [],
-      "points": 0
+      "points": 0,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "hidden_win",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play10",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "_lastLoginDate": "2026-04-06"
+      }
     }
   }
 }
