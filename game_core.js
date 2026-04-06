@@ -5106,28 +5106,32 @@ function bSettleCoin(sid,isHeads){
   img.src=BCOIN_BASE+(isHeads?'coin_front.png':'coin_back.png');
 }
 function bCalcTurnOrder(cr,nA,nB,eFirst){
-  // 1단계: 앞면 개수 비교
-  var headsA=0,headsB=0;
-  for(var i=0;i<nA;i++){if(cr['a'+i])headsA++;}
-  for(var i=0;i<nB;i++){if(cr['b'+i])headsB++;}
-
+  // 왼쪽부터 열(col) 단위 스캔으로 선공 결정
+  // - 한 쪽만 앞면 → 그 쪽 선공
+  // - 양쪽 앞면 + 기물 수 동일 → 재토스 (규칙5)
+  // - 양쪽 앞면 + 기물 수 다름 → 다음 열로
+  // - 양쪽 뒷면(또는 한 쪽 칸 없음+뒷면) → 다음 열로
+  // 스캔 끝까지 결판 안 남:
+  // - 기물 수 다름 → 많은 쪽 선공 (규칙7,8)
+  // - 기물 수 동일 → 재토스 (규칙9)
   var tied=false;
-  if(headsA>headsB){
-    eFirst=false; // 아군 앞면 더 많음 → 아군 선공
-  } else if(headsB>headsA){
-    eFirst=true; // 적 앞면 더 많음 → 적 선공
-  } else if(headsA===0){
-    tied=true; // 둘 다 앞면 없음 → 동률 (재토스)
-  } else {
-    // 개수 동률(>0) → 가장 왼쪽 앞면 위치로 타이브레이크
-    var firstHeadA=-1,firstHeadB=-1;
-    for(var i=0;i<nA;i++){if(cr['a'+i]){firstHeadA=i;break;}}
-    for(var i=0;i<nB;i++){if(cr['b'+i]){firstHeadB=i;break;}}
-    var posA=(firstHeadA*2+1)*nB; // (firstHeadA+0.5)/nA 정규화 × 공통배수
-    var posB=(firstHeadB*2+1)*nA;
-    if(posA<posB) eFirst=false; // 아군 첫 앞면이 더 왼쪽 → 아군 선공
-    else if(posB<posA) eFirst=true; // 적 첫 앞면이 더 왼쪽 → 적 선공
-    else tied=true; // 정규화 위치도 완전히 같음 → 동률
+  var resolved=false;
+  var maxN=Math.max(nA,nB);
+  for(var i=0;i<maxN;i++){
+    var aHead=(i<nA)&&(cr['a'+i]===true);
+    var bHead=(i<nB)&&(cr['b'+i]===true);
+    if(aHead&&bHead){
+      if(nA===nB){tied=true;resolved=true;break;}
+      continue;
+    }
+    if(aHead&&!bHead){eFirst=false;resolved=true;break;}
+    if(bHead&&!aHead){eFirst=true;resolved=true;break;}
+    // 둘 다 뒷면 혹은 한 쪽 없음+뒷면 → 다음 열
+  }
+  if(!resolved){
+    if(nA>nB)eFirst=false;
+    else if(nB>nA)eFirst=true;
+    else tied=true;
   }
   if(eFirst===undefined)eFirst=Math.random()<0.5;
 
