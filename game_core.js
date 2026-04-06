@@ -161,7 +161,7 @@ var HIDDEN_CHARS = [
   {id:'millennium_malkuth',     name:'말쿠트',               school:'밀레니엄', tier:7, atk:10, hp:20, kw:['shield','preemptive'],                img:'unique/Millennium_Malkuth.png'},
   {id:'millennium_death_momoi', name:'데스 모모이',          school:'밀레니엄', tier:7, atk:10, hp:10, kw:['shield','windfury','preemptive'],      img:'unique/Millennium_Death_momoi.png'},
   // 백귀야행
-  {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:50, hp:50, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
+  {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:40, hp:40, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
   {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:1, hp:1, kw:['shield','poison'],                    img:'unique/HKYK_Kuzunoha.png'},
   // 신규 7성
   {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.png'},
@@ -936,15 +936,24 @@ function checkHiddenConditions() { return checkHiddenConditionsFor(G.players[0])
 
 function injectHiddenToShop() {
   var eligible=checkHiddenConditions();
+  // 플레이어 티어 기반 7성 확률 테이블 (조합형 7성용)
+  var _pTier=(G.players[0]&&G.players[0].tier)||1;
+  var _tierRates={1:0, 2:0, 3:0.10, 4:0.15, 5:0.30, 6:0.60};
+  var _baseRate=_tierRates[_pTier]||0;
+  // 단일 학교 전용/세레모니형 7성: 6T 제한 자체가 난이도라 고정 확률 유지
+  var _singleSchoolRates={
+    hkyk_saikyo:0.05,
+    gehenna_traingun:0.10,
+    trinity_mika:0.10,
+    trinity_seia:0.30,
+    Kei_usb:0.30,
+    millennium_nameless:0.30,
+    millennium_malkuth:0.80,
+    hkyk_kuzunoha:0.60
+  };
   for(var h=0;h<eligible.length;h++){
     var hid=eligible[h];
-    var rate=0.30;
-    if(hid==='hkyk_saikyo') rate=0.05;
-    else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
-    else if(hid==='hkyk_kuzunoha') rate=0.60;
-    else if(hid==='Shiroko_Terror') rate=0.50;
-    else if(hid==='shanhai_kiki') rate=0.60;
-    else if(hid==='millennium_malkuth') rate=0.80;
+    var rate=(_singleSchoolRates[hid]!==undefined)?_singleSchoolRates[hid]:_baseRate;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(htmpl&&G.pool[htmpl.id]>0){
