@@ -5280,7 +5280,10 @@ function bSettleCoin(sid,isHeads){
   img.src=BCOIN_BASE+(isHeads?'coin_front.png':'coin_back.png');
 }
 function bCalcTurnOrder(cr,nA,nB,eFirst){
-  // 왼쪽부터 열(col) 단위 스캔으로 선공 결정
+  // 왼쪽부터 시각 열(visual col) 단위 스캔으로 선공 결정
+  // 카드는 중앙 정렬이므로, 기물 수가 적은 쪽의 col 0는 기물 수가 많은 쪽의 col 0보다 더 오른쪽에 위치.
+  // offset = floor((maxN - sideCount)/2)
+  // 시각 col k → 실제 인덱스 (k - offset)
   // - 한 쪽만 앞면 → 그 쪽 선공
   // - 양쪽 앞면 + 기물 수 동일 → 재토스 (규칙5)
   // - 양쪽 앞면 + 기물 수 다름 → 다음 열로
@@ -5291,16 +5294,22 @@ function bCalcTurnOrder(cr,nA,nB,eFirst){
   var tied=false;
   var resolved=false;
   var maxN=Math.max(nA,nB);
-  for(var i=0;i<maxN;i++){
-    var aHead=(i<nA)&&(cr['a'+i]===true);
-    var bHead=(i<nB)&&(cr['b'+i]===true);
+  var aOff=Math.floor((maxN-nA)/2);
+  var bOff=Math.floor((maxN-nB)/2);
+  for(var vi=0;vi<maxN;vi++){
+    var aIdx=vi-aOff;
+    var bIdx=vi-bOff;
+    var aHasCard=(aIdx>=0&&aIdx<nA);
+    var bHasCard=(bIdx>=0&&bIdx<nB);
+    var aHead=aHasCard&&(cr['a'+aIdx]===true);
+    var bHead=bHasCard&&(cr['b'+bIdx]===true);
     if(aHead&&bHead){
       if(nA===nB){tied=true;resolved=true;break;}
       continue;
     }
     if(aHead&&!bHead){eFirst=false;resolved=true;break;}
     if(bHead&&!aHead){eFirst=true;resolved=true;break;}
-    // 둘 다 뒷면 혹은 한 쪽 없음+뒷면 → 다음 열
+    // 둘 다 뒷면 혹은 한 쪽 없음+뒷면(카드 자체 없음) → 다음 열
   }
   if(!resolved){
     if(nA>nB)eFirst=false;
