@@ -22,7 +22,7 @@ var CHARS = [
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:2,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
   // 밀레니엄 2학년
-  {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:3,atk:4,hp:4,kw:['taunt'],     skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
+  {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:3,atk:4,hp:4,kw:['taunt','shield'],skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
   // 트리니티 1학년
   {id:'kazusa',  name:'카즈사', school:'트리니티',tier:2,atk:3,hp:2,kw:[],            skin:'카즈사(밴드)',     img:'Kazusa.png',         imgGold:'Kazusa_(Band).png'},
   {id:'mashiro', name:'마시로', school:'트리니티',tier:2,atk:4,hp:2,kw:['ranged'],    skin:'마시로(수영복)',   img:'Mashiro.png',        imgGold:'Mashiro_(Swimsuit).png'},
@@ -38,13 +38,13 @@ var CHARS = [
   {id:'hibiki',  name:'히비키', school:'밀레니엄',tier:3,atk:4,hp:3,kw:[],             skin:'히비키(치어리더)',img:'Hibiki.png',          imgGold:'Hibiki_(Cheerleader).png'},
   {id:'yuzu',    name:'유즈',   school:'밀레니엄',tier:2,atk:2,hp:3,kw:[],            skin:'유즈(메이드)',     img:'Yuzu.png',           imgGold:'Yuzu_(Maid).png'},
   // 트리니티 2학년
-  {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:4,hp:1,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
+  {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:5,hp:1,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
   {id:'hanako',  name:'하나코', school:'트리니티',tier:4,atk:3,hp:6,kw:['poison'],    skin:'하나코(수영복)',   img:'Hanako.png',         imgGold:'Hanako_(Swimsuit).png'},
   {id:'hifumi',  name:'히후미', school:'트리니티',tier:3,atk:2,hp:3,kw:[],    skin:'히후미(수영복)',   img:'Hifumi.png',         imgGold:'Hifumi_(Swimsuit).png'},
 
   // ===== Tier 4 (밸류12) =====
   // 게헨나 2학년
-  {id:'iori',    name:'이오리', school:'게헨나',  tier:3,atk:4,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
+  {id:'iori',    name:'이오리', school:'게헨나',  tier:3,atk:5,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:3,atk:3,hp:3,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:3,hp:4,kw:['shield'],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
@@ -257,8 +257,8 @@ var ABILITY_DESCS = {
   juri:     {type:'뒤끝',desc:'다른 아군이 남아 있다면\n<팬짱>을 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.',skinEffect:'웨이트리스 주리: 팬짱 2마리 소환',skinEffectDesc:'뒤끝: 다른 아군이 남아 있다면\n<팬짱>을 <span style="color:#ffd700;font-weight:700">2마리</span> 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.'},
   chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 아군 두 명에게 부여',skinEffectDesc:'뒤끝: 아군 무작위 <span style="color:#ffd700;font-weight:700">2인에게</span> 보호막을 부여합니다.'},
   kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 도발 뒤집기',skinEffectDesc:'개전: 상대의 <span style="color:#ffd700;font-weight:700">도발을 해제하고, 도발 없던 학생에게 도발을 부여</span>합니다.\n배치를 역순으로 뒤집습니다.'},
-  midori:   {type:'개전',desc:'<모모이> 수만큼 +1/+1',skinEffect:'메이드 미도리: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
-  momoi:    {type:'개전',desc:'<미도리> 수만큼 +1/+1',skinEffect:'메이드 모모이: 수×+2/+2\n둘 다 메이드: 수×+4/+4',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
+  midori:   {type:'개전',desc:'<모모이> 수만큼 +2/+2',skinEffect:'메이드 미도리: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
+  momoi:    {type:'개전',desc:'<미도리> 수만큼 +2/+2',skinEffect:'메이드 모모이: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
   mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+2',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+2</span>'},
   aru:      {type:'선제',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',skinEffect:'드레스 아루: 3배',skinEffectDesc:'선제: 공격 시, 5~6티어 학생에게는 공격력이 <span style="color:#ffd700;font-weight:700">3배</span>가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.'},
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
@@ -334,7 +334,7 @@ var ABILITY_DESCS = {
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
   suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n30% 내립니다.',skinEffect:'마법소녀 스즈미: 60% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">60%</span> 내립니다.'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
-  haruka:   {type:'선제',desc:'한 번에 1~2회 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 5회 공격합니다.',skinEffect:'새해 하루카: 2~5회 / 조건 시 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">2~5회</span> 공격을 합니다.\n이번 전투에서 무츠키, 카요코, 아루를 공격한\n적을 공격할 시 <span style="color:#ffd700;font-weight:700">10회</span> 공격합니다.'},
+  haruka:   {type:'선제',desc:'한 번에 5회 공격을 합니다.',skinEffect:'새해 하루카: 10회',skinEffectDesc:'선제: 한 번에 <span style="color:#ffd700;font-weight:700">10회</span> 공격을 합니다.'},
   // 총학생회
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',skinEffect:'인터뷰 하이네: +4/+4',skinEffectDesc:'패시브: 팔면 아군 전체에 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다.'},
   momoka:   {type:'패시브',desc:'매 턴 추가 리롤이 1회 무료입니다.',skinEffect:'승무원 모모카: 2회 무료',skinEffectDesc:'패시브: 매 턴 추가 리롤이 <span style="color:#ffd700;font-weight:700">2회</span> 무료입니다.'},
@@ -2808,10 +2808,10 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 공격력 +5! ('+u.atk+')'});
   }
   else if(id==='midori'){
-    // 모모이 수만큼 버프 (메이드면 수×+2/+2, 둘 다 메이드면 수×+4/+4)
+    // 모모이 수만큼 버프 (메이드면 수×+4/+4, 둘 다 메이드면 수×+8/+8)
     for(var i=0;i<mySide.length;i++){
       if(mySide[i].alive&&mySide[i].baseId==='momoi'){
-        var buff=(u.isSkin&&mySide[i].isSkin)?4:(u.isSkin||mySide[i].isSkin)?2:1;
+        var buff=(u.isSkin&&mySide[i].isSkin)?8:(u.isSkin||mySide[i].isSkin)?4:2;
         u.atk+=buff;u.hp+=buff;
         log.push({cls:'soc',text:'[개전] '+u.name+': 모모이 → +'+buff+'/+'+buff});
       }
@@ -2821,7 +2821,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     // 미도리 수만큼 버프
     for(var i=0;i<mySide.length;i++){
       if(mySide[i].alive&&mySide[i].baseId==='midori'){
-        var buff=(u.isSkin&&mySide[i].isSkin)?4:(u.isSkin||mySide[i].isSkin)?2:1;
+        var buff=(u.isSkin&&mySide[i].isSkin)?8:(u.isSkin||mySide[i].isSkin)?4:2;
         u.atk+=buff;u.hp+=buff;
         log.push({cls:'soc',text:'[개전] '+u.name+': 미도리 → +'+buff+'/+'+buff});
       }
@@ -3902,8 +3902,6 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   function dealHit(src,dst,log2,dmgOverride,isCombatDefense){
     var dmg=dmgOverride!==undefined?dmgOverride:src.atk;
-    // 하루카 추적: 무츠키/카요코/아루를 공격한 유닛 마킹
-    if(['mutsuki','kayoko','aru'].indexOf(dst.baseId)!==-1) src._attackedHarukaAlly=true;
     // invincible 키워드 (일반 무적)
     if(hasKw(dst,'invincible')){
       log2.push({cls:'shield',text:dst.name+': 무적! 데미지 무효'});
@@ -4375,14 +4373,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(['haruka','hinata','nagusa','wakamo'].indexOf(attacker.baseId)!==-1){
           var msMin,msMax,msHits;
           if(attacker.baseId==='haruka'){
-            // 하루카: 무츠키/카요코/아루를 공격한 적 → 5회(황금:10회), 아니면 1~2회(황금:2~4회)
-            if(target._attackedHarukaAlly){
-              msHits=attacker.isSkin?10:5;
-              stepLog.push({cls:'hit',text:'[선제] '+attacker.name+': 흥신소68 추적! '+msHits+'회 공격!'});
-            }else{
-              msMin=attacker.isSkin?2:1;msMax=attacker.isSkin?4:2;
-              msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
-            }
+            msHits=attacker.isSkin?10:5;
           }else{
             msMin=attacker.isSkin?4:2;msMax=attacker.isSkin?10:5;
             msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
@@ -4524,6 +4515,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         for(var _pp=0;_pp<b.length;_pp++){if(b[_pp].hp>(b[_pp]._peakHp||0))b[_pp]._peakHp=b[_pp].hp;}
         var stepObj={atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:defI,atkId:attacker.id,defId:target.id,log:stepLog,snap:snapshot()};
         if(stepMultiHits>0) stepObj.multiHits=stepMultiHits;
+        if(attacker.baseId==='haruka'&&stepMultiHits>0) stepObj.pajdikUid=attacker.id;
         steps.push(stepObj);
       }
       if(!attacker.alive)break;if(getAlive(defArr2).length===0)break;
@@ -5392,6 +5384,12 @@ function applyHitEffects(changes,step,atkIsAlly){
       }
     }
   });
+  // 하루카 빠직 이펙트
+  if(step.pajdikUid){
+    var pajRow=(step.atkSide==='a')?allyRow:enemyRow;
+    var pajCard=pajRow.querySelector('[data-uid="'+step.pajdikUid+'"]');
+    if(pajCard) spawnPajdik(pajCard);
+  }
 }
 
 function spawnImpactFlash(parentEl){
@@ -5429,6 +5427,15 @@ function applySocEffects(prevSnap,currSnap){
       }
     }
   });
+}
+
+function spawnPajdik(parentEl){
+  var el=document.createElement('div');
+  el.className='pajdik-text';
+  el.textContent='빠직!';
+  parentEl.style.position='relative';
+  parentEl.appendChild(el);
+  setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1200);
 }
 
 function spawnDmgNum(parentEl,text,isShield){

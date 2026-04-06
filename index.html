@@ -234,6 +234,8 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 @keyframes dmgFloat{0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1.3)}30%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-35px) scale(0.7)}}
 .battle-overlay.screen-shake{animation:screenShake 0.4s ease}
 @keyframes screenShake{0%{transform:translate(0,0)}10%{transform:translate(-12px,6px)}20%{transform:translate(10px,-8px)}30%{transform:translate(-8px,10px)}40%{transform:translate(8px,-4px)}50%{transform:translate(-6px,6px)}60%{transform:translate(4px,-2px)}80%{transform:translate(-2px,2px)}100%{transform:translate(0,0)}}
+.pajdik-text{position:absolute;top:50%;left:50%;font-size:1.3em;font-weight:900;font-style:italic;color:#ff4500;text-shadow:0 0 6px #ff8c00,0 2px 4px rgba(0,0,0,0.8);pointer-events:none;z-index:20;animation:pajdikPop 1.2s ease-out forwards;white-space:nowrap}
+@keyframes pajdikPop{0%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}40%{opacity:1;transform:translate(-50%,-70%) scale(1.0)}100%{opacity:0;transform:translate(-50%,-90%) scale(0.8)}}
 @keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
 .battle-log{width:260px;min-width:260px;overflow-y:auto;font-size:12px;color:#8ab0cc;background:rgba(10,18,28,0.85);backdrop-filter:blur(8px);padding:14px 12px;border-right:1px solid rgba(0,200,255,0.15);height:100%}
 .battle-log div{padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
@@ -621,26 +623,26 @@ img.tutorial-highlight{border-radius:50%!important}
           <div class="kw-guide-panel" id="kw-guide-panel">
             <div class="guide-section">
               <div class="guide-section-title">기본 능력</div>
-              <div class="kw-guide-row"><span class="kw-name">도발</span><span class="kw-desc">이 학생부터 공격합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">보호막</span><span class="kw-desc">피해를 1회 막아줍니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">부활</span><span class="kw-desc">처음 쓰러진 후, 체력 1로 부활합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">무적</span><span class="kw-desc">피해를 입지 않습니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">연사</span><span class="kw-desc">한 턴에 두 번 공격합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">광역</span><span class="kw-desc">양 옆의 적도 공격합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">독사굴</span><span class="kw-desc">피해를 주면 대상을 즉시 쓰러뜨립니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">관통</span><span class="kw-desc">초과한 데미지가 양 옆으로 전달됩니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">저격</span><span class="kw-desc">반격을 받지 않습니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">기습</span><span class="kw-desc">첫 공격 전까지 대상 지정 불가.</span></div>
-              <div class="kw-guide-row"><span class="kw-name">자폭</span><span class="kw-desc">공격력과 체력을 더하여 공격 후 쓰러집니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">👊 도발</span><span class="kw-desc">이 학생부터 공격합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">💎 보호막</span><span class="kw-desc">피해를 1회 막아줍니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">✨ 부활</span><span class="kw-desc">처음 쓰러진 후, 체력 1로 부활합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🛡 무적</span><span class="kw-desc">피해를 입지 않습니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">⚡ 연사</span><span class="kw-desc">한 턴에 두 번 공격합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">💥 광역</span><span class="kw-desc">양 옆의 적도 공격합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">☠️ 독사굴</span><span class="kw-desc">피해를 주면 대상을 즉시 쓰러뜨립니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🔱 관통</span><span class="kw-desc">초과한 데미지가 양 옆으로 전달됩니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🎯 저격</span><span class="kw-desc">반격을 받지 않습니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">🌙 기습</span><span class="kw-desc">첫 공격 전까지 대상 지정 불가.</span></div>
+              <div class="kw-guide-row"><span class="kw-name">💣 자폭</span><span class="kw-desc">공격력과 체력을 더하여 공격 후 쓰러집니다.</span></div>
             </div>
             <div class="guide-section">
               <div class="guide-section-title">특수 능력</div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#93c5fd">개전</span><span class="kw-desc">전투 시작 시 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#fbbf24">첫인사</span><span class="kw-desc">샬레에 놓을 때 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#fca5a5">뒤끝</span><span class="kw-desc">쓰러질 때 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#6ee7b7">버티기</span><span class="kw-desc">피격 후 살아남으면 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#c4b5fd">선제</span><span class="kw-desc">공격 시 발동합니다.</span></div>
-              <div class="kw-guide-row"><span class="kw-name" style="color:#c084fc">패시브</span><span class="kw-desc">조건 충족 시 자동으로 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#93c5fd">⚔️ 개전</span><span class="kw-desc">전투 시작 시 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#fbbf24">👋 첫인사</span><span class="kw-desc">샬레에 놓을 때 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#fca5a5">🔥 뒤끝</span><span class="kw-desc">쓰러질 때 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#6ee7b7">🏔️ 버티기</span><span class="kw-desc">피격 후 살아남으면 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#c4b5fd">⚔️ 선제</span><span class="kw-desc">공격 시 발동합니다.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#c084fc">⭐ 패시브</span><span class="kw-desc">조건 충족 시 자동으로 발동합니다.</span></div>
             </div>
           </div>
         </div>
