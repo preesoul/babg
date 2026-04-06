@@ -1927,6 +1927,15 @@ document.addEventListener('click',function(e){
 // btn-reroll, btn-fight, btn-continue는 래핑 후 바인딩 (아래 튜토리얼 섹션에서)
 document.getElementById('btn-freeze').addEventListener('click',doFreeze);
 document.getElementById('btn-upgrade').addEventListener('click',doUpgrade);
+// 안전장치: 전투 중이 아닌데 battle-overlay가 활성화된 상태에서 클릭하면 자동 닫기
+document.getElementById('battle-overlay').addEventListener('click',function(e){
+  if(G.phase==='recruit'&&!e.target.closest('.discover-pick')&&!e.target.closest('#dfp-select')&&!e.target.closest('#dfp-detail')&&!e.target.closest('.school-pick')){
+    this.classList.remove('active');this.style.zIndex='';
+    var bia=document.getElementById('battle-intro-area');if(bia)bia.innerHTML='';
+    G.pendingSpell=null;
+    var sho=document.querySelector('.spell-hint-overlay');if(sho)sho.remove();
+  }
+});
 document.getElementById('btn-skip').addEventListener('click',function(){battleState.skip=true;});
 document.getElementById('btn-restart').addEventListener('click',function(){
   document.getElementById('game-over').classList.remove('active');
