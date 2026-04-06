@@ -1803,6 +1803,13 @@ function showTooltip(baseId,rect,cardEl){
     }
     html+='</div>';
   }
+  // 7성 히든 등장 조건 (능력 설명 위쪽)
+  if(info&&info.hiddenCond){
+    html+='<div class="tt-ability" style="border-left:3px solid #e070ff">';
+    html+='<div class="tt-type" style="color:#e070ff">⭐ 히든</div>';
+    html+='<div class="tt-desc" style="color:#d0c0e0">'+info.hiddenCond+'</div>';
+    html+='</div>';
+  }
   // 능력 세부 설명 (아래쪽)
   if(info&&info.desc){
     var typeCls='';
@@ -2819,6 +2826,21 @@ function renderRoster(){
           }
           html+='</div>';
         });
+        // 백귀야행 7성 액션카드: 백화요란 계승전
+        if(school==='백귀야행'){
+          var _showdownLocked=!_t7AdminBypass && (_t7Recruited.indexOf('hkyk_showdown')===-1);
+          if(_showdownLocked){
+            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
+            html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
+            html+='<div class="r-name" style="color:#666">???</div>';
+            html+='</div>';
+          } else {
+            html+='<div class="roster-card" data-showdown="1" style="border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4);background:linear-gradient(135deg,#2a1832,#1a1028);cursor:pointer">';
+            html+='<img class="r-portrait" src="img/unique/HKYK_Showdown.png" style="object-fit:contain" onerror="this.style.display=\'none\'">';
+            html+='<div class="r-name" style="color:#e070ff">백화요란 계승전</div>';
+            html+='</div>';
+          }
+        }
         html+='</div>';
       });
       html+='</div>';
@@ -2880,6 +2902,34 @@ function renderRoster(){
         hideTooltip();
         var tip=getTooltipEl();if(!tip)return;
         tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">아직 영입한 적 없는 <span style="color:#ffd700">7성 유니크</span>입니다.<br><span style="color:#ffd700">직접 영입하면 공개됩니다.</span></div></div>';
+        tip.style.display='block';tip.classList.add('visible');
+        var rect=el.getBoundingClientRect();
+        var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+        var left=rect.left+rect.width/2-tipW/2;
+        var top=rect.top-tipH-8;
+        if(top<0)top=rect.bottom+8;
+        if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+        tip.style.left=left+'px';tip.style.top=top+'px';
+      });
+    }
+    if(el.getAttribute('data-showdown')){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        hideTooltip();
+        var tip=getTooltipEl();if(!tip)return;
+        var spDesc=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.desc:'유카리/렌게/키쿄/나구사에게 +10/+10, 보호막, 연사, 부활');
+        var spCost=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.cost:3);
+        tip.innerHTML='<div style="padding:12px;max-width:280px">'
+          +'<div style="font-size:16px;font-weight:700;color:#e070ff;margin-bottom:4px">백화요란 계승전</div>'
+          +'<div style="font-size:12px;color:#888;margin-bottom:8px">'+spCost+'코스트 · 7티어 액션카드</div>'
+          +'<img src="img/unique/HKYK_Showdown.png" style="width:140px;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block" onerror="this.style.display=\'none\'">'
+          +'<div class="tt-ability" style="border-left:3px solid #e070ff;margin-bottom:6px;padding:6px 8px">'
+          +'<div style="color:#e070ff;font-weight:700;font-size:13px;margin-bottom:4px">⭐ 히든</div>'
+          +'<div style="color:#d0c0e0;font-size:12px;line-height:1.5">샬레에 유카리·렌게·키쿄·나구사가 모두 있고,<br>각 학생의 계승전 카운터가 7 이상일 때 등장.</div>'
+          +'</div>'
+          +'<div style="font-size:13px;color:#d0d8e0;white-space:pre-line">'+spDesc+'</div>'
+          +'<div style="margin-top:6px;font-size:11px;color:#fca5a5">게임당 1회</div>'
+          +'</div>';
         tip.style.display='block';tip.classList.add('visible');
         var rect=el.getBoundingClientRect();
         var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
