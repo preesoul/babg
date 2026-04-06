@@ -4267,8 +4267,131 @@
       "points": 0
     },
     "GULIM": {
-      "records": [],
-      "points": 0
+      "records": [
+        {
+          "date": "2026-04-06T04:17:27",
+          "placement": 8,
+          "turn": 10,
+          "tier": 3,
+          "board": [
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 14,
+              "hp": 10,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 9,
+              "hp": 3,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 5,
+              "hp": 5,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 2,
+              "hp": 4,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 3,
+              "hp": 9,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
+        }
+      ],
+      "points": 7,
+      "questState": {
+        "daily": {
+          "date": "2026-04-06",
+          "quests": [
+            {
+              "id": "play3",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "skin3",
+              "progress": 3,
+              "completed": true
+            },
+            {
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin10",
+              "progress": 3,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 3,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
+      }
     }
   }
 }
