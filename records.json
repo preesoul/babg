@@ -3798,7 +3798,8 @@
               "img": "Kasumi.png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 4,
