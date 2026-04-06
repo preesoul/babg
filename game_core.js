@@ -333,6 +333,7 @@ var ABILITY_DESCS = {
   millennium_malkuth:     {type:'선빵',hiddenCond:'스케쥴 Lv.6 이상, 이번 게임에서 밀레니엄 토큰을 10회 이상 소환했을 때 등장.',desc:'선빵: 자신은 공격하지 않습니다.\n대신 스위퍼(10/10, 보호막, 자폭)를\n아군 밀레니엄 학생 수만큼 소환합니다.\n스위퍼로 적이 쓰러지면 말쿠트는 공격하지 않습니다.',skinEffect:'',quote:'말쿠트: 깃발 아래 창조된 하나의 의지. 세상에 끝네 도달한 왕국의 순례자.',quote2:'말쿠트: …말쿠트라고 합니다.'},
   millennium_death_momoi: {type:'패시브 / 선빵',hiddenCond:'샬레에 모모이·미도리·유즈·아리스가 모두 있을 때 등장.',desc:'샬레의 모든 모모이를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 모모이들의 공격력 합, 체력 합을 각각 더합니다.\n선빵: 적 스탯이 기본보다 높으면 부여 수치를 제거하고 공격합니다.',skinEffect:'',quote:'데스 모모이: FATALITY!!!!',quoteCls:'chat-fatal'},
   sweeper:  {type:'자폭',desc:'보호막. 자폭 공격.',skinEffect:''},
+  black_lord:{type:'패시브 / 선빵',desc:'키키가 쓰러질 때 소환되는 토큰입니다.\n패시브: 모든 효과 사망/부여에 면역입니다.\n선빵: 공격 시 발동합니다.',skinEffect:''},
   // 백귀야행
   izuna:    {type:'첫인사',desc:'아군 전체 +1/+1 (자신 포함)',skinEffect:'수영복 이즈나: +2/+2',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+2</span> (자신 포함)'},
   tsukuyo:  {type:'첫인사',desc:'아군 전체 +1/+2 (자신 포함)',skinEffect:'드레스 츠쿠요: +2/+4',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+4</span>를 부여합니다. (자신 포함)'},
@@ -3673,7 +3674,7 @@ function _doDR(unit, mySide, otherSide, log) {
           triggerDeathrattle(killer,otherSide,mySide,log);
         }
       } else if(killer.alive&&killer.abilityImmune){
-        log.push({cls:'shield',text:killer.name+': 미카의 면역! (효과 사망 무효)'});
+        log.push({cls:'shield',text:killer.name+': 면역! (효과 사망 무효)'});
       }
     }
   }
@@ -4100,7 +4101,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   function killUnit(unit,myArr,oppArr,log2,killedBy){
     // 미카: 능력/효과에 의한 사망 면역 (killedBy가 없거나 능력 사망인 경우)
     if(unit.abilityImmune&&killedBy&&killedBy._isAbilityKill){
-      log2.push({cls:'shield',text:unit.name+': 미카의 면역!'});
+      log2.push({cls:'shield',text:unit.name+': 면역!'});
       unit.hp=1;return;
     }
     if(hasKw(unit,'reborn')){
