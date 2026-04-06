@@ -2116,77 +2116,6 @@
       "pw": "aqula88!",
       "records": [
         {
-          "date": "2026-04-05T22:56:57",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "시즈코(수영복)",
-              "baseId": "shizuko",
-              "atk": 75,
-              "hp": 71,
-              "tier": 5,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Shizuko_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리(수영복)",
-              "baseId": "yukari",
-              "atk": 73,
-              "hp": 63,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive",
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 74,
-              "hp": 65,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 69,
-              "hp": 61,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 50,
-              "hp": 50,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-05T23:27:10",
           "placement": 1,
           "turn": 16,
@@ -2852,9 +2781,82 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T07:48:36",
+          "placement": 3,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "호시노(수영복)",
+              "baseId": "hoshino",
+              "atk": 18,
+              "hp": 20,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Hoshino_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "호시노(수영복)",
+              "baseId": "hoshino",
+              "atk": 18,
+              "hp": 20,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Hoshino_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 13,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "poison",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 8,
+              "hp": 8,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 8,
+              "hp": 8,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-06",
