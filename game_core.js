@@ -5106,18 +5106,28 @@ function bSettleCoin(sid,isHeads){
   img.src=BCOIN_BASE+(isHeads?'coin_front.png':'coin_back.png');
 }
 function bCalcTurnOrder(cr,nA,nB,eFirst){
-  // 앞면 개수 비교: 더 많은 쪽이 선공, 같으면 동률
+  // 1단계: 앞면 개수 비교
   var headsA=0,headsB=0;
   for(var i=0;i<nA;i++){if(cr['a'+i])headsA++;}
   for(var i=0;i<nB;i++){if(cr['b'+i])headsB++;}
 
   var tied=false;
-  if(headsA===headsB){
-    tied=true; // 같은 수의 앞면 → 동률
-  } else if(headsA>headsB){
+  if(headsA>headsB){
     eFirst=false; // 아군 앞면 더 많음 → 아군 선공
-  } else {
+  } else if(headsB>headsA){
     eFirst=true; // 적 앞면 더 많음 → 적 선공
+  } else if(headsA===0){
+    tied=true; // 둘 다 앞면 없음 → 동률 (재토스)
+  } else {
+    // 개수 동률(>0) → 가장 왼쪽 앞면 위치로 타이브레이크
+    var firstHeadA=-1,firstHeadB=-1;
+    for(var i=0;i<nA;i++){if(cr['a'+i]){firstHeadA=i;break;}}
+    for(var i=0;i<nB;i++){if(cr['b'+i]){firstHeadB=i;break;}}
+    var posA=(firstHeadA*2+1)*nB; // (firstHeadA+0.5)/nA 정규화 × 공통배수
+    var posB=(firstHeadB*2+1)*nA;
+    if(posA<posB) eFirst=false; // 아군 첫 앞면이 더 왼쪽 → 아군 선공
+    else if(posB<posA) eFirst=true; // 적 첫 앞면이 더 왼쪽 → 적 선공
+    else tied=true; // 정규화 위치도 완전히 같음 → 동률
   }
   if(eFirst===undefined)eFirst=Math.random()<0.5;
 
