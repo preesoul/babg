@@ -1592,9 +1592,8 @@ var RECRUIT_VOICES = {
   gehenna_p68: 'audio/gehenna_p68.mp3',
   kisaki: 'audio/kisaki.mp3',
   rumi: 'audio/rumi.mp3',
-  shun: 'audio/shun.mp3'
-  // shanhai_kiki: 제거됨 — shanhai_kiki.mp3 파일이 실제로는 검은 군주 보이스라 키키 영입 시 오발 재생됨.
-  //                      검은 군주 보이스는 뒤끝 발동 시 (game_core.js:3960)에서만 audio/black_lord.mp3 로 재생.
+  shun: 'audio/shun.mp3',
+  shanhai_kiki: 'audio/shanhai_kiki.mp3'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
@@ -3957,8 +3956,8 @@ function _doDR(unit, mySide, otherSide, log) {
       // 패시브 면역
       bl.abilityImmune=true;bl._effectImmune=true;
       mySide.push(bl);
-      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 현룡문의 검은 군주 소환! ('+bl.atk+'/'+bl.hp+')'});
-      try{var snd=new Audio('audio/black_lord.mp3');snd.volume=0.7;snd.play();}catch(e){}
+      // audio 플래그를 로그 엔트리에 심어 애니메이션 재생 시점(nextStep)에서 발동
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 현룡문의 검은 군주 소환! ('+bl.atk+'/'+bl.hp+')',audio:'black_lord'});
     }
   }
   // ===== 아비도스 뒤끝 =====
@@ -5745,6 +5744,8 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
           }
           // 뒤끝 등 광역 데미지 로그 감지 (아즈사 등)
           if(step.log){for(var _al=0;_al<step.log.length;_al++){var _at=step.log[_al].text||'';if(_at.indexOf('적 전체')!==-1){setTimeout(function(){playSfx('aoe_damage',0.4);},300);break;}}}
+          // 커스텀 audio 플래그 감지 (키키 뒤끝 → 검은 군주 소환음 등)
+          if(step.log){for(var _cl=0;_cl<step.log.length;_cl++){var _le=step.log[_cl];if(_le&&_le.audio==='black_lord'){setTimeout(function(){try{var snd=new Audio('audio/black_lord.mp3');snd.volume=0.7;snd.play();}catch(e){}},300);break;}}}
           renderBattleSnap(currSnap);
           // 공격자 원위치 복귀
           var atkRow2=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
