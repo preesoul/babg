@@ -4359,81 +4359,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T13:45:39",
-          "placement": 1,
-          "turn": 18,
-          "tier": 5,
-          "board": [
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 45,
-              "hp": 33,
-              "tier": 1,
-              "kw": [
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "모모이(메이드)",
-              "baseId": "momoi",
-              "atk": 31,
-              "hp": 30,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "reborn",
-                "selfdestruct"
-              ],
-              "isSkin": true,
-              "img": "Momoi_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 37,
-              "hp": 36,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아리스",
-              "baseId": "arisu",
-              "atk": 26,
-              "hp": 19,
-              "tier": 4,
-              "kw": [
-                "pierce",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Arisu.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "모모이",
-              "baseId": "momoi",
-              "atk": 10,
-              "hp": 10,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Momoi.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T14:16:46",
           "placement": 1,
           "turn": 16,
@@ -5105,9 +5030,83 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T17:29:58",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 23,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 42,
+              "hp": 38,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 17,
+              "hp": 17,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 14,
+              "hp": 8,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 5,
       "questState": {
         "daily": {
           "date": "2026-04-07",
