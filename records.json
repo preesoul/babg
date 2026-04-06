@@ -4841,26 +4841,105 @@
       }
     },
     "규재파크": {
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-06T13:16:46",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 17,
+              "hp": 8,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아(파자마)",
+              "baseId": "noa",
+              "atk": 15,
+              "hp": 23,
+              "tier": 4,
+              "kw": [
+                "survive",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Noa_(Pajama).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 19,
+              "hp": 19,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 18,
+              "hp": 18,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
+        }
+      ],
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-06",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 5,
               "completed": false
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 4,
               "completed": false
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4870,17 +4949,17 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
