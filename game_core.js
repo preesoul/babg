@@ -4968,19 +4968,8 @@ function startBattle() {
               kw:akTmpl.kw.slice(),img:akTmpl.img,isSkin:false,alive:true};
             p.board.push(akUnit);
             G.hiddenCardsOwned['Arisu_Kei']=true;G.hiddenCardsEverOwned['Arisu_Kei']=true;
-            // 하얀 연출 (glow) + 사운드
-            renderAll();
-            try{var _akSnd=new Audio('audio/arisu_kei.mp3');_akSnd.volume=0.6;_akSnd.play();
-              // 끝나기 0.3초 전부터 페이드아웃
-              _akSnd.addEventListener('timeupdate',function(){if(_akSnd.duration-_akSnd.currentTime<0.3&&_akSnd.volume>0){_akSnd.volume=Math.max(0,_akSnd.volume-0.05);}});
-            }catch(e){}
-            var _akFl=document.createElement('div');_akFl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
-            document.body.appendChild(_akFl);
-            requestAnimationFrame(function(){_akFl.style.opacity='1';});
-            var _akBoardEl=document.getElementById('ui-board');var _akCards=_akBoardEl?_akBoardEl.querySelectorAll('.card'):[];
-            var _akLast=_akCards[_akCards.length-1];
-            if(_akLast){_akLast.style.filter='brightness(3) saturate(0)';_akLast.style.transition='filter 3s ease-out 1.5s';requestAnimationFrame(function(){requestAnimationFrame(function(){_akLast.style.filter='brightness(1) saturate(1)';});});}
-            setTimeout(function(){_akFl.style.transition='opacity 2.5s ease-out';_akFl.style.opacity='0';setTimeout(function(){if(_akFl.parentNode)_akFl.remove();},2500);},1500);
+            // 연출은 continueBattle → 영입 페이즈 진입 시 재생
+            G._pendingArisuKeiEntrance=true;
           }
         }
       }
@@ -5875,6 +5864,20 @@ function continueBattle() {
   if(p.dead){showGameOver();return;}
   if(G.aliveCount<=1){G.placement=1;showGameOver();return;}
   nextTurn();
+  // 아리스&케이 변환 연출 (영입 페이즈 진입 직후)
+  if(G._pendingArisuKeiEntrance){
+    delete G._pendingArisuKeiEntrance;
+    try{var _akSnd=new Audio('audio/arisu_kei.mp3');_akSnd.volume=0.6;_akSnd.play();
+      _akSnd.addEventListener('timeupdate',function(){if(_akSnd.duration-_akSnd.currentTime<0.3&&_akSnd.volume>0){_akSnd.volume=Math.max(0,_akSnd.volume-0.05);}});
+    }catch(e){}
+    var _akFl=document.createElement('div');_akFl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
+    document.body.appendChild(_akFl);
+    requestAnimationFrame(function(){_akFl.style.opacity='1';});
+    var _akBoardEl=document.getElementById('ui-board');var _akCards=_akBoardEl?_akBoardEl.querySelectorAll('.card'):[];
+    var _akLast=_akCards[_akCards.length-1];
+    if(_akLast){_akLast.style.filter='brightness(3) saturate(0)';_akLast.style.transition='filter 3s ease-out 1.5s';requestAnimationFrame(function(){requestAnimationFrame(function(){_akLast.style.filter='brightness(1) saturate(1)';});});}
+    setTimeout(function(){_akFl.style.transition='opacity 2.5s ease-out';_akFl.style.opacity='0';setTimeout(function(){if(_akFl.parentNode)_akFl.remove();},2500);},1500);
+  }
 }
 
 function nextTurn() {
