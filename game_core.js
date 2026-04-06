@@ -4671,6 +4671,11 @@ function _playBattleHiddenSfx(p,opp){
   }
 }
 function startBattle() {
+  // 잔여 상태 초기화 (스펠 사용 후 상태가 남아있을 경우 방어)
+  G.pendingSpell=null;
+  var _sho=document.querySelector('.spell-hint-overlay');if(_sho)_sho.remove();
+  var _bov=document.getElementById('battle-overlay');if(_bov)_bov.classList.remove('active');
+  var _bia=document.getElementById('battle-intro-area');if(_bia)_bia.innerHTML='';
   playSfx('battle_start');
   lastSold=null;
   _activeCoinOverlay=null;
