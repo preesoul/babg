@@ -5268,9 +5268,85 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T14:19:12",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 24,
+              "hp": 28,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 10,
+              "hp": 11,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 14,
+              "hp": 12,
+              "tier": 0,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 23,
+              "hp": 15,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 23,
+              "hp": 15,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -5287,7 +5363,7 @@
             },
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ],
