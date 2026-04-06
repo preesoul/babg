@@ -5676,23 +5676,23 @@ function miniCardHtml(m){
   }
   var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
   var mIconBar='';
-  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='📣';
-  if(BC_IDS[bid]) mIconBar+='🔔';
-  if(DR_IDS[bid]) mIconBar+='💀';
-  if(PASSIVE_IDS[bid]) mIconBar+='✨';
-  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='👊';
-  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='💪';
-  if(hasKw(m,'reborn')) mIconBar+='🌱';
-  if(hasKw(m,'poison')) mIconBar+='🐍';
-  if(hasKw(m,'selfdestruct')) mIconBar+='💣';
-  if(hasKw(m,'taunt')) mIconBar+='🛡️';
-  if(hasKw(m,'shield')) mIconBar+='💎';
-  if(hasKw(m,'cleave')) mIconBar+='🌊';
-  if(hasKw(m,'windfury')) mIconBar+='⚡';
-  if(hasKw(m,'pierce')) mIconBar+='🔱';
-  if(hasKw(m,'ranged')) mIconBar+='🏹';
-  if(hasKw(m,'invincible')) mIconBar+='🏆';
-  if(hasKw(m,'ambush')) mIconBar+='🌫️';
+  if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC_M[bid]&&!m.isSkin)) mIconBar+='<span class="abi">📣</span>';
+  if(BC_IDS[bid]) mIconBar+='<span class="abi">🔔</span>';
+  if(DR_IDS[bid]) mIconBar+='<span class="abi">💀</span>';
+  if(PASSIVE_IDS[bid]) mIconBar+='<span class="abi">✨</span>';
+  if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='<span class="abi">👊</span>';
+  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='<span class="abi">💪</span>';
+  if(hasKw(m,'reborn')) mIconBar+='<span class="abi">🌱</span>';
+  if(hasKw(m,'poison')) mIconBar+='<span class="abi">🐍</span>';
+  if(hasKw(m,'selfdestruct')) mIconBar+='<span class="abi">💣</span>';
+  if(hasKw(m,'taunt')) mIconBar+='<span class="abi">🛡️</span>';
+  if(hasKw(m,'shield')) mIconBar+='<span class="abi">💎</span>';
+  if(hasKw(m,'cleave')) mIconBar+='<span class="abi">🌊</span>';
+  if(hasKw(m,'windfury')) mIconBar+='<span class="abi">⚡</span>';
+  if(hasKw(m,'pierce')) mIconBar+='<span class="abi">🔱</span>';
+  if(hasKw(m,'ranged')) mIconBar+='<span class="abi">🏹</span>';
+  if(hasKw(m,'invincible')) mIconBar+='<span class="abi">🏆</span>';
+  if(hasKw(m,'ambush')) mIconBar+='<span class="abi">🌫️</span>';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
     '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
