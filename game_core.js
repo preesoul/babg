@@ -4207,20 +4207,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
     // 와카모: 선빵 킬 후에 처리
     else if(attacker.baseId==='wakamo'){}
     else if(attacker.baseId==='millennium_malkuth'){
-      // 말쿠트 선빵: 아군 밀레니엄 학생 수만큼 스위퍼 소환 → 개별 스텝으로 공격
-      var milCount=0;
-      for(var _mc=0;_mc<atkArr.length;_mc++){if(atkArr[_mc].alive&&atkArr[_mc].school==='밀레니엄'&&atkArr[_mc]!==attacker)milCount++;}
-      milCount=Math.max(1,milCount);
-      if(!_G._malkuthPendingSweepers)_G._malkuthPendingSweepers=[];
+      // 말쿠트 선빵: 스위퍼 2체 소환 (자폭 공격은 스위퍼 자기 차례에 자동 실행)
+      var milCount=2;
       for(var sw=0;sw<milCount;sw++){
         var swp=makeSweeper(atkArr);swp._mySide=atkArr;swp.alive=true;
         atkArr.push(swp);
         _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
-        log2.push({cls:'soc',text:'[선빵] '+attacker.name+': 스위퍼 #'+(sw+1)+' 소환! ('+swp.atk+'/'+swp.hp+', 보호막, 자폭)'});
-        // 공격은 개별 스텝에서 처리 (애니메이션용)
-        _G._malkuthPendingSweepers.push({sweeper:swp,target:target,defArr:defArr,atkArr:atkArr});
+        log2.push({cls:'soc',text:'[선빵] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+', 보호막, 자폭)'});
       }
-      return true;
+      return true; // 말쿠트 자체는 공격하지 않음
     }
     else if(attacker.baseId==='millennium_death_momoi'){
       // 데스 모모이 선빵: 적 부여 수치 초기화
@@ -4590,26 +4585,6 @@ function runBattle(boardA, boardB, startWithA, opts) {
           }
           _G._shunPendingSteps=[];
         }
-        // 말쿠트 스위퍼 공격 steps (각 스위퍼가 개별 공격 애니메이션)
-        if(_G._malkuthPendingSweepers&&_G._malkuthPendingSweepers.length>0){
-          for(var _msi=0;_msi<_G._malkuthPendingSweepers.length;_msi++){
-            var _ms=_G._malkuthPendingSweepers[_msi];
-            if(!_ms.target.alive){_ms.sweeper.alive=false;continue;}
-            var msLog=[];
-            var swDmg=_ms.sweeper.atk+_ms.sweeper.hp;
-            msLog.push({cls:'hit',text:'스위퍼: '+_ms.target.name+'에게 자폭 공격! ('+swDmg+' 데미지)'});
-            var swHit=dealHit(_ms.sweeper,_ms.target,msLog,swDmg);
-            if(!swHit.blocked) checkSurvive(_ms.target,_ms.defArr,msLog,_ms.sweeper);
-            resolveDeath(_ms.target,_ms.defArr,_ms.atkArr,msLog,_ms.sweeper);
-            _ms.sweeper.alive=false;
-            for(var _msl=0;_msl<msLog.length;_msl++)log.push(msLog[_msl]);
-            var msSide=(_ms.atkArr===a)?'a':'b';
-            var msAtkI=_ms.atkArr.indexOf(_ms.sweeper);
-            var msDefI=(_ms.defArr===a)?a.indexOf(_ms.target):b.indexOf(_ms.target);
-            steps.push({atkSide:msSide,atkIdx:msAtkI,defSide:msSide==='a'?'b':'a',defIdx:msDefI,atkId:_ms.sweeper.id,defId:_ms.target.id,log:msLog,snap:snapshot()});
-          }
-          _G._malkuthPendingSweepers=[];
-        }
         // 하루카 패시브 반격 step
         if(_G._harukaCounterPending){
           var _hcp=_G._harukaCounterPending;
@@ -4686,6 +4661,9 @@ function _playBattleHiddenSfx(p,opp){
   }
 }
 function startBattle() {
+  console.log('[DEBUG] startBattle called, phase='+G.phase+', turn='+G.turn);
+  document.title='[전투시작] 턴'+G.turn+' '+Date.now();
+  try {
   // 잔여 상태 초기화 (스펠 사용 후 상태가 남아있을 경우 방어)
   G.pendingSpell=null;
   var _sho=document.querySelector('.spell-hint-overlay');if(_sho)_sho.remove();
@@ -4882,6 +4860,12 @@ function startBattle() {
       aiAutoBattles();
     }
   },1500);
+  } catch(e) {
+    console.error('[startBattle ERROR]',e);
+    document.title='[에러!] '+e.message;
+    alert('전투 시작 에러: '+e.message);
+    var _bov2=document.getElementById('battle-overlay');if(_bov2)_bov2.classList.remove('active');
+  }
 }
 
 function restoreBoardFromSnapshot(player, snapshot) {
@@ -5302,13 +5286,13 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
     // 공격 단계: 3페이즈 애니메이션
     var atkIsAlly=(step.atkSide==='a');
     var changes=findChanges(prevSnap,currSnap);
-    // 말쿠트 선언 스텝: 소환 로그만 표시하고 넘어감 (실제 공격은 개별 스위퍼 스텝에서)
-    var isMalkuth=prevSnap[step.atkSide]&&prevSnap[step.atkSide][step.atkIdx]&&prevSnap[step.atkSide][step.atkIdx].baseId==='millennium_malkuth';
-    if(isMalkuth){
-      renderBattleSnap(prevSnap);
+    // 말쿠트 선언 스텝: 소환 로그만 표시하고 넘어감
+    var isMalkuthDecl=prevSnap[step.atkSide]&&prevSnap[step.atkSide][step.atkIdx]&&prevSnap[step.atkSide][step.atkIdx].baseId==='millennium_malkuth';
+    if(isMalkuthDecl&&step.log&&step.log.some(function(l){return(l.text||'').indexOf('스위퍼 소환')!==-1;})){
+      renderBattleSnap(currSnap);
       appendLog(step.log,logEl);
       playSfx('soc_trigger',0.4);
-      setTimeout(function(){renderBattleSnap(currSnap);stepIdx++;setTimeout(nextStep,400);},600);
+      stepIdx++;setTimeout(nextStep,600);
       return;
     }
     // Phase 1: 느리게 들어올리기 (350ms)
