@@ -595,47 +595,51 @@ var _mysteryUnlocking=false;
 function doMysteryUnlock() {
   if(_mysteryUnlocking)return;
   if(!window._babgLogin||!window._babgLogin.name){alert('로그인이 필요합니다.');return;}
-  var unlocked = getUnlockedAbydos();
-  var locked = MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
-  if(locked.length===0){alert('더 이상 해방할 신비해방 카드가 없습니다.');return;}
   _mysteryUnlocking=true;
-  fetchRecords(function(err,data,sha){
-    if(err||!data){_mysteryUnlocking=false;alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
-    var pd=data.players[window._babgLogin.name];
-    if(!pd){_mysteryUnlocking=false;alert('플레이어 데이터를 찾을 수 없습니다.');return;}
-    if(!pd.points||pd.points<ENIGMA_UNLOCK_COST){
-      _mysteryUnlocking=false;alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
-    }
-    pd.points-=ENIGMA_UNLOCK_COST;
-    // 서버 데이터 기준으로 잠금 목록 병합 (다른 기기에서 해금한 것 반영)
-    var serverUnlocked=pd.unlockedAbydos||[];
-    for(var _ui=0;_ui<serverUnlocked.length;_ui++){
-      if(unlocked.indexOf(serverUnlocked[_ui])===-1) unlocked.push(serverUnlocked[_ui]);
-    }
-    var locked2=MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
-    if(locked2.length===0){_mysteryUnlocking=false;alert('더 이상 해방할 신비해방 카드가 없습니다.');pd.points+=ENIGMA_UNLOCK_COST;return;}
-    var pick=locked2[Math.floor(Math.random()*locked2.length)];
-    unlocked.push(pick);
-    pd.unlockedAbydos=unlocked.slice();
-    saveRecords(data,sha,function(saveErr){
-      _mysteryUnlocking=false;
-      if(saveErr){
-        // 서버 저장 실패 시 로컬 해금도 롤백
-        unlocked.pop();
-        setUnlockedAbydos(unlocked);
-        alert('저장 실패. 잠시 후 다시 시도해주세요.');
-        return;
+  var _retries=0;
+  function _tryUnlock(){
+    var unlocked = getUnlockedAbydos();
+    var locked = MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
+    if(locked.length===0){_mysteryUnlocking=false;alert('더 이상 해방할 신비해방 카드가 없습니다.');return;}
+    fetchRecords(function(err,data,sha){
+      if(err||!data){_mysteryUnlocking=false;alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
+      var pd=data.players[window._babgLogin.name];
+      if(!pd){_mysteryUnlocking=false;alert('플레이어 데이터를 찾을 수 없습니다.');return;}
+      if(!pd.points||pd.points<ENIGMA_UNLOCK_COST){
+        _mysteryUnlocking=false;alert('엘리그마가 부족합니다.\n필요: '+ENIGMA_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
       }
-      setUnlockedAbydos(unlocked);
-      window._enigmaPointsCache=pd.points;
-      var pickedName=pick,pickedImg='',pickedSchool='';
-      for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;pickedSchool=CHARS[i].school||'';break;}}
-      if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool);
-      else alert('[신비해방] '+pickedName+' 해방!');
-      if(typeof renderQuestUI==='function') renderQuestUI();
-      if(typeof renderAll==='function') renderAll();
+      pd.points-=ENIGMA_UNLOCK_COST;
+      // 서버 데이터 기준으로 잠금 목록 병합 (다른 기기에서 해금한 것 반영)
+      var serverUnlocked=pd.unlockedAbydos||[];
+      for(var _ui=0;_ui<serverUnlocked.length;_ui++){
+        if(unlocked.indexOf(serverUnlocked[_ui])===-1) unlocked.push(serverUnlocked[_ui]);
+      }
+      var locked2=MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
+      if(locked2.length===0){_mysteryUnlocking=false;alert('더 이상 해방할 신비해방 카드가 없습니다.');pd.points+=ENIGMA_UNLOCK_COST;return;}
+      var pick=locked2[Math.floor(Math.random()*locked2.length)];
+      unlocked.push(pick);
+      pd.unlockedAbydos=unlocked.slice();
+      saveRecords(data,sha,function(saveErr){
+        if(saveErr){
+          _retries++;
+          if(_retries<=2){setTimeout(_tryUnlock,500);return;}
+          _mysteryUnlocking=false;
+          alert('저장 실패. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+        _mysteryUnlocking=false;
+        setUnlockedAbydos(unlocked);
+        window._enigmaPointsCache=pd.points;
+        var pickedName=pick,pickedImg='',pickedSchool='';
+        for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;pickedSchool=CHARS[i].school||'';break;}}
+        if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool);
+        else alert('[신비해방] '+pickedName+' 해방!');
+        if(typeof renderQuestUI==='function') renderQuestUI();
+        if(typeof renderAll==='function') renderAll();
+      });
     });
-  });
+  }
+  _tryUnlock();
 }
 
 // 개발용: 엘리그마 +10P (서버에 반영)
