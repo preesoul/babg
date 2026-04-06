@@ -3815,9 +3815,87 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T09:54:58",
+          "placement": 8,
+          "turn": 13,
+          "tier": 4,
+          "board": [
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 25,
+              "hp": 19,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 5,
+              "hp": 8,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 25,
+              "hp": 19,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 7,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 46,
+      "points": 48,
       "questState": {
         "daily": {
           "date": "2026-04-06",
