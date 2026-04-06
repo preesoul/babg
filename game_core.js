@@ -5092,7 +5092,19 @@ function runBattleCoinPhase(snap,callback){
         // 아스나 우선권: 동률 시 아군에 아스나가 있으면 아군 선공
         if(calcResult.tied){
           var _hasAsuna=aliveAlly.some(function(u){return u.baseId==='asuna'||u.baseId==='millennium_cc';});
-          if(_hasAsuna){calcResult.tied=false;eFirst=false;calcResult.eFirst=false;
+          if(_hasAsuna){
+            calcResult.tied=false;eFirst=false;calcResult.eFirst=false;
+            // order 배열을 새 eFirst(아군 선공) 기준으로 재계산
+            var _newOrder=[],_maxN=Math.max(nA,nB);
+            for(var _oi=0;_oi<_maxN;_oi++){
+              if(_oi<nA&&cr['a'+_oi])_newOrder.push('a'+_oi);
+              if(_oi<nB&&cr['b'+_oi])_newOrder.push('b'+_oi);
+            }
+            for(var _oi=0;_oi<_maxN;_oi++){
+              if(_oi<nA&&!cr['a'+_oi])_newOrder.push('a'+_oi);
+              if(_oi<nB&&!cr['b'+_oi])_newOrder.push('b'+_oi);
+            }
+            order=_newOrder;calcResult.order=_newOrder;
             var logEl2=document.getElementById('battle-log');
             if(logEl2){var asunaMsg=document.createElement('div');asunaMsg.style.cssText='text-align:center;color:#fbbf24;font-weight:700;font-size:13px;padding:2px';asunaMsg.textContent='⭐ 아스나의 우선권!';logEl2.appendChild(asunaMsg);logEl2.scrollTop=logEl2.scrollHeight;}
           }
