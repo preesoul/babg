@@ -5130,16 +5130,73 @@
       ]
     },
     "어흐": {
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-06T14:02:37",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 1,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "모모카",
+              "baseId": "momoka",
+              "atk": 4,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Momoka.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 13,
+              "hp": 9,
+              "tier": 0,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-06",
           "quests": [
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "discover3",
@@ -5148,7 +5205,7 @@
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
