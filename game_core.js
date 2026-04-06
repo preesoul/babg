@@ -4064,6 +4064,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
       _battlesSurvived:m._battlesSurvived||0,
       _keiseisenCounter:m._keiseisenCounter||0,
       _hovercraftCounter:m._hovercraftCounter||0,
+      // 뒤끝 흡수 복원용 스냅샷 (흥신소68, 시로코 테러 등)
+      _p68Absorbed:(m._p68Absorbed||null),
+      _shirokoAbsorbed:(m._shirokoAbsorbed||null),
       isHidden:m.isHidden||false,coinOff:m.coinOff||false};
   }
   var a=boardA.map(copyUnit);
