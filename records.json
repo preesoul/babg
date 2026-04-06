@@ -4952,9 +4952,83 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T16:15:54",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 6,
+              "hp": 3,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치나츠(온천)",
+              "baseId": "chinatsu",
+              "atk": 7,
+              "hp": 13,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Chinatsu_(Hot_Spring).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 89,
+              "hp": 91,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "selfdestruct"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 20,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -4966,8 +5040,8 @@
             },
             {
               "id": "gehenna10",
-              "progress": 3,
-              "completed": false
+              "progress": 20,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
@@ -4987,8 +5061,8 @@
             },
             {
               "id": "play10",
-              "progress": 9,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win3",
