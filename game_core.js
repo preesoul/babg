@@ -353,7 +353,7 @@ var ABILITY_DESCS = {
   hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게 부여합니다.',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 적 가장 체력이 높은 1인(동률 시 무작위)과 자신을 제외한 모든 학생을 쓰러뜨립니다.\n뒤끝: 흡수한 학생들을 흡수했을 때의 상태로 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 산해경 =====
-  kokona:   {type:'첫인사',desc:'무작위 산해경 학생을 샬레에 불러옵니다.\n(스케쥴 레벨 이하)',skinEffect:'아르바이트 코코나: 발견',skinEffectDesc:'첫인사: 무작위 산해경 학생을 <span style="color:#ffd700;font-weight:700">발견</span>합니다.\n(스케쥴 레벨 이하)'},
+  kokona:   {type:'첫인사',desc:'스케쥴 레벨 이하의 무작위 산해경 학생을\n<span style="color:#ffd700;font-weight:700">벤치</span>로 불러옵니다.\n벤치가 차 있으면 발동하지 않습니다.',skinEffect:'',skinEffectDesc:''},
   mina:     {type:'개전 / 뒤끝',desc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 +3/+3을 부여합니다.',skinEffect:'리코더 미나: 뒤끝 +6/+6',skinEffectDesc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
   reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
   saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
@@ -2067,23 +2067,17 @@ function _doBC(m, p) {
 
   // ===== 산해경 첫인사 =====
   else if(id==='kokona'){
-    // 코코나: 무작위 산해경 학생 소환 (스케쥴 레벨 이하)
-    // 자기 자신(kokona)은 후보에서 제외 — 자기-소환 루프 방지
-    var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier&&c.id!=='kokona';});
-    var unlockedAby=getUnlockedAbydos();
-    shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
-    if(shChars.length>0&&p.board.length<MAX_BOARD){
-      var pick=shChars[Math.floor(Math.random()*shChars.length)];
-      if(m.isSkin){
-        // 스킨: 발견 (플레이어만 UI 표시, AI는 자동 선택)
-        if(p.isPlayer){
-          showDiscoverCustom(shChars.length>=3?[shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)],shChars[Math.floor(Math.random()*shChars.length)]]:shChars);
-        } else {
-          // AI: 랜덤 산해경 자동 소환
-          if(takeFromPool(pick.id)){var nu2=makeMinion(pick,false);p.board.push(nu2);if(nu2.baseId!=='kokona')triggerBattlecry(nu2,p);}
+    // 코코나: 스케쥴 레벨 이하의 무작위 산해경 학생을 '벤치'로 불러옵니다.
+    // 벤치가 차 있으면 발동하지 않습니다. (자기-소환 루프 방지 + 간접적 트리플 기여 기믹)
+    if(!p.bench){
+      var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier&&c.id!=='kokona';});
+      var unlockedAby=getUnlockedAbydos();
+      shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
+      if(shChars.length>0){
+        var pick=shChars[Math.floor(Math.random()*shChars.length)];
+        if(takeFromPool(pick.id)){
+          p.bench=makeMinion(pick,false);
         }
-      } else {
-        if(takeFromPool(pick.id)){var nu=makeMinion(pick,false);p.board.push(nu);if(nu.baseId!=='kokona')triggerBattlecry(nu,p);}
       }
     }
   }

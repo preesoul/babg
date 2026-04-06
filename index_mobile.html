@@ -2767,18 +2767,18 @@ function renderRoster(){
         if(!_list||!_list.length)return;
         var _icon=SCHOOL_ICONS[school]||'';
         html+='<div class="roster-tier-chunk">';
-        html+='<div class="rt-sep" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:28px">';
-        if(_icon)html+='<img src="'+_icon+'" style="width:18px;height:18px;filter:invert(1);opacity:0.85">';
-        html+='<span style="font-size:9px;color:#9ab8d8;font-weight:600;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:-1px">'+school+'</span>';
+        html+='<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:24px;height:117px;border-right:2px solid #6a3080;padding-right:3px">';
+        if(_icon)html+='<img src="'+_icon+'" style="width:14px;height:14px;filter:invert(1);opacity:0.9">';
+        html+='<span style="font-size:9px;color:#cda0e8;font-weight:700;line-height:1.05;text-align:center;word-break:keep-all;white-space:normal;max-width:22px">'+school+'</span>';
         html+='</div>';
         _list.forEach(function(c){
           var _isLocked=_t7Recruited.indexOf(c.id)===-1;
           if(_isLocked){
-            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#c030d0;box-shadow:0 0 10px rgba(192,48,208,0.35)">';
+            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
             html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
             html+='<div class="r-name" style="color:#666">???</div>';
           } else {
-            html+='<div class="roster-card" data-rid="'+c.id+'" style="border-color:#c030d0;box-shadow:0 0 10px rgba(192,48,208,0.35)">';
+            html+='<div class="roster-card" data-rid="'+c.id+'" style="border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
             if(c.img)html+='<img class="r-portrait" src="img/'+c.img+'" onerror="this.style.display=\'none\'">';
             html+='<div class="r-name" style="color:#e070ff">'+c.name+'</div>';
           }
