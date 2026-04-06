@@ -569,85 +569,6 @@
       "pw": "0903",
       "records": [
         {
-          "date": "2026-04-05T22:59:33",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "마시로(수영복)",
-              "baseId": "mashiro",
-              "atk": 27,
-              "hp": 23,
-              "tier": 2,
-              "kw": [
-                "ranged",
-                "poison",
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠루기(수영복)",
-              "baseId": "tsurugi",
-              "atk": 51,
-              "hp": 51,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이치카(수영복)",
-              "baseId": "ichika",
-              "atk": 37,
-              "hp": 31,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Ichika_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 16,
-              "hp": 16,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 16,
-              "hp": 16,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T23:10:32",
           "placement": 1,
           "turn": 17,
@@ -1319,9 +1240,79 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:25:28",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 106,
+              "hp": 96,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 78,
+              "hp": 72,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 73,
+              "hp": 67,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 43,
+              "hp": 41,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 40,
+              "hp": 37,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 6,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-06",
