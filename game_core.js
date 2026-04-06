@@ -5135,18 +5135,40 @@ function bCalcTurnOrder(cr,nA,nB,eFirst){
   }
   if(eFirst===undefined)eFirst=Math.random()<0.5;
 
-  var starOrder=[],circOrder=[];
-  var n=Math.max(nA,nB);
-  for(var i=0;i<n;i++){
-    var e='b'+i,a='a'+i;
-    if(eFirst){if(i<nB&&cr[e])starOrder.push(e);if(i<nA&&cr[a])starOrder.push(a);}
-    else{if(i<nA&&cr[a])starOrder.push(a);if(i<nB&&cr[e])starOrder.push(e);}
+  // 각 사이드의 그룹별 리스트 (왼쪽부터)
+  var aHeads=[],bHeads=[],aTails=[],bTails=[];
+  for(var i=0;i<nA;i++){if(cr['a'+i]===true)aHeads.push('a'+i);else aTails.push('a'+i);}
+  for(var i=0;i<nB;i++){if(cr['b'+i]===true)bHeads.push('b'+i);else bTails.push('b'+i);}
+
+  // 번갈아 머지: bFirst가 true면 b부터 시작, false면 a부터 시작. 한 쪽 소진되면 나머지 연속.
+  function _interleave(listA,listB,bFirst){
+    var res=[],ia=0,ib=0,bTurn=bFirst;
+    while(ia<listA.length||ib<listB.length){
+      if(bTurn){
+        if(ib<listB.length)res.push(listB[ib++]);
+        else res.push(listA[ia++]);
+      }else{
+        if(ia<listA.length)res.push(listA[ia++]);
+        else res.push(listB[ib++]);
+      }
+      bTurn=!bTurn;
+    }
+    return res;
   }
-  for(var i=0;i<n;i++){
-    var e='b'+i,a='a'+i;
-    if(eFirst){if(i<nB&&!cr[e])circOrder.push(e);if(i<nA&&!cr[a])circOrder.push(a);}
-    else{if(i<nA&&!cr[a])circOrder.push(a);if(i<nB&&!cr[e])circOrder.push(e);}
+
+  // 앞면 그룹: eFirst면 b(적)부터, 아니면 a(아군)부터
+  var starOrder=_interleave(aHeads,bHeads,eFirst);
+  // 뒷면 그룹: 앞면 그룹 마지막 턴자의 반대 사이드부터 시작 (턴 이어감)
+  // 앞면 그룹이 비었다면 eFirst 그대로.
+  var tailsBFirst;
+  if(starOrder.length===0){
+    tailsBFirst=eFirst;
+  }else{
+    var lastWasB=(starOrder[starOrder.length-1].charAt(0)==='b');
+    tailsBFirst=!lastWasB;
   }
+  var circOrder=_interleave(aTails,bTails,tailsBFirst);
+
   return{order:starOrder.concat(circOrder),eFirst:eFirst,tied:tied};
 }
 
