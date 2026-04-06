@@ -1452,73 +1452,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-05T10:47:25",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "준코",
-              "baseId": "junko",
-              "atk": 2,
-              "hp": 2,
-              "tier": 1,
-              "kw": [
-                "selfdestruct"
-              ],
-              "isSkin": false,
-              "img": "Junko.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "미도리",
-              "baseId": "midori",
-              "atk": 2,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Midori.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아코",
-              "baseId": "ako",
-              "atk": 3,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ako.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "사츠키",
-              "baseId": "satsuki",
-              "atk": 5,
-              "hp": 6,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Satsuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히후미",
-              "baseId": "hifumi",
-              "atk": 2,
-              "hp": 3,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hifumi.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-05T10:51:35",
           "placement": 8,
           "turn": 9,
@@ -2112,9 +2045,81 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T13:28:37",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 27,
+              "hp": 23,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 25,
+              "hp": 21,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코(수영복)",
+              "baseId": "shizuko",
+              "atk": 29,
+              "hp": 31,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Shizuko_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 25,
+              "hp": 23,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "나구사(수영복)",
+              "baseId": "nagusa",
+              "atk": 11,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Nagusa_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-06",
