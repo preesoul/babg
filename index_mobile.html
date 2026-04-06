@@ -2757,6 +2757,8 @@ function renderRoster(){
     var _t7All=(typeof HIDDEN_CHARS!=="undefined"?HIDDEN_CHARS:[]).slice();
     if(_t7All.length>0){
       var _t7Recruited=(typeof getRecruitedTier7==='function')?getRecruitedTier7():[];
+      // 관리자 계정: 모든 7성 공개
+      var _t7AdminBypass=(window._babgLogin&&window._babgLogin.name==='preesoul');
       html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(192,48,208,0.45);padding-top:12px">';
       html+='<span class="roster-school-name" style="color:#e070ff">⭐ 7성 유니크</span></div>';
       var _t7BySchool={};
@@ -2772,7 +2774,7 @@ function renderRoster(){
         html+='<span style="font-size:10px;color:#cda0e8;font-weight:700;line-height:1.1;text-align:center;writing-mode:horizontal-tb">'+school.split("").join("<br>")+'</span>';
         html+='</div>';
         _list.forEach(function(c){
-          var _isLocked=_t7Recruited.indexOf(c.id)===-1;
+          var _isLocked=!_t7AdminBypass && _t7Recruited.indexOf(c.id)===-1;
           if(_isLocked){
             html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
             html+='<img class="r-portrait" src="img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
