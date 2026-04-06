@@ -4519,21 +4519,27 @@ function runBattle(boardA, boardB, startWithA, opts) {
             }
           }
           // 슌 패시브: 킬 시 연쇄 (기본: 오버킬 데미지 전달, 스킨: 추가 공격 연쇄)
+          // 별도 스텝으로 분리해서 애니메이션 재생
           if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
+            if(!_G._shunPendingSteps)_G._shunPendingSteps=[];
             var _shunOverflow=hitResult.overflow;
             var _shunChain=0;
             while(_shunChain<20&&attacker.alive){
               var shunNext=findTarget(defArr2);
               if(!shunNext)break;
+              var shunDefI2=(defSide==='a')?a.indexOf(shunNext):b.indexOf(shunNext);
+              var shunLog=[];
               if(attacker.isSkin){
-                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
-                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true);
+                shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
+                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true);
+                _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
                 if(!shunNext.alive){_shunChain++;continue;}
                 break;
               } else {
                 if(_shunOverflow<=0)break;
-                stepLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+_shunOverflow+'을(를) '+shunNext.name+'에게!'});
-                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,stepLog,true,_shunOverflow);
+                shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+_shunOverflow+'을(를) '+shunNext.name+'에게!'});
+                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true,_shunOverflow);
+                _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
                 if(!shunNext.alive&&shunHit&&shunHit.overflow>0){_shunOverflow=shunHit.overflow;_shunChain++;continue;}
                 break;
               }
@@ -4580,6 +4586,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(stepMultiHits>0) stepObj.multiHits=stepMultiHits;
         if(attacker.baseId==='haruka'&&stepMultiHits>0) stepObj.pajdikUid=attacker.id;
         steps.push(stepObj);
+        // 슌 패시브 추가공격 steps
+        if(_G._shunPendingSteps&&_G._shunPendingSteps.length>0){
+          for(var _ss=0;_ss<_G._shunPendingSteps.length;_ss++){
+            var _sStep=_G._shunPendingSteps[_ss];
+            for(var _ssl=0;_ssl<_sStep.log.length;_ssl++)log.push(_sStep.log[_ssl]);
+            steps.push(_sStep);
+          }
+          _G._shunPendingSteps=[];
+        }
         // 하루카 패시브 반격 step
         if(_G._harukaCounterPending){
           var _hcp=_G._harukaCounterPending;
@@ -5275,7 +5290,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       var sweepCount=0;for(var _sl=0;_sl<step.log.length;_sl++){if((step.log[_sl].text||'').indexOf('스위퍼 소환')!==-1)sweepCount++;}
       var atkRowM=atkIsAlly?document.getElementById('ally-row'):document.getElementById('enemy-row');
       var defRowM=atkIsAlly?document.getElementById('enemy-row'):document.getElementById('ally-row');
-      var malkuthCard=atkRowM.children[step.atkIdx];
+      var malkuthCard=step.atkId?atkRowM.querySelector('[data-uid="'+step.atkId+'"]'):atkRowM.children[step.atkIdx];
       var _swIdx=0;
       function fireSweeper(){
         if(_swIdx>=sweepCount){
@@ -5298,7 +5313,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         playSfx('soc_trigger',0.3);
         // 0.3초 후 적 방향으로 이동
         setTimeout(function(){
-          var tgtCard=defRowM.children[Math.min(_swIdx,defRowM.children.length-1)];
+          var tgtCard=(step.defId&&_swIdx===0)?defRowM.querySelector('[data-uid="'+step.defId+'"]'):defRowM.children[Math.min(_swIdx,defRowM.children.length-1)];
           var endRect=tgtCard?tgtCard.getBoundingClientRect():{left:window.innerWidth/2,top:atkIsAlly?100:window.innerHeight-200,width:70,height:100};
           var ex=endRect.left+endRect.width/2-35;
           var ey=endRect.top+endRect.height/2-50;
