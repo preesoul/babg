@@ -3800,9 +3800,87 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-06T04:06:57",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 27,
+              "hp": 26,
+              "tier": 1,
+              "kw": [
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 42,
+              "hp": 38,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 22,
+              "hp": 14,
+              "tier": 6,
+              "kw": [
+                "windfury",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미모리",
+              "baseId": "mimori",
+              "atk": 14,
+              "hp": 17,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mimori.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카즈사",
+              "baseId": "kazusa",
+              "atk": 3,
+              "hp": 2,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kazusa.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 16,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -3835,13 +3913,13 @@
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ]
         },
