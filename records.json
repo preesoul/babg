@@ -2190,80 +2190,6 @@
       "pw": "aqula88!",
       "records": [
         {
-          "date": "2026-04-05T23:55:13",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 12,
-              "hp": 20,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아스나(버니걸)",
-              "baseId": "asuna",
-              "atk": 19,
-              "hp": 17,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Asuna_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미네(아이돌)",
-              "baseId": "mine",
-              "atk": 13,
-              "hp": 13,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Mine_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 9,
-              "hp": 13,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하",
-              "baseId": "utaha",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Utaha.png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-06T01:36:04",
           "placement": 2,
           "turn": 16,
@@ -2936,9 +2862,92 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T13:35:35",
+          "placement": 1,
+          "turn": 10,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 36,
+              "hp": 46,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 32,
+              "hp": 42,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 16,
+              "hp": 16,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 56,
+              "hp": 68,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-06",
