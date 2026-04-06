@@ -4967,8 +4967,12 @@ function startBattle() {
               kw:akTmpl.kw.slice(),img:akTmpl.img,isSkin:false,alive:true};
             p.board.push(akUnit);
             G.hiddenCardsOwned['Arisu_Kei']=true;G.hiddenCardsEverOwned['Arisu_Kei']=true;
-            // 하얀 연출 (glow)
+            // 하얀 연출 (glow) + 사운드
             renderAll();
+            try{var _akSnd=new Audio('audio/arisu_kei.mp3');_akSnd.volume=0.6;_akSnd.play();
+              // 끝나기 0.3초 전부터 페이드아웃
+              _akSnd.addEventListener('timeupdate',function(){if(_akSnd.duration-_akSnd.currentTime<0.3&&_akSnd.volume>0){_akSnd.volume=Math.max(0,_akSnd.volume-0.05);}});
+            }catch(e){}
             var _akFl=document.createElement('div');_akFl.style.cssText='position:fixed;inset:0;background:rgba(255,248,220,0.85);pointer-events:none;z-index:9999;opacity:0;transition:opacity 1.2s ease-in;';
             document.body.appendChild(_akFl);
             requestAnimationFrame(function(){_akFl.style.opacity='1';});
