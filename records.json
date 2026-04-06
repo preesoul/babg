@@ -4,70 +4,6 @@
       "pw": "aqula88",
       "records": [
         {
-          "date": "2026-04-05T02:58:17",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아코(드레스)",
-              "baseId": "ako",
-              "atk": 27,
-              "hp": 31,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ako_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히나(드레스)",
-              "baseId": "hina",
-              "atk": 37,
-              "hp": 17,
-              "tier": 6,
-              "kw": [
-                "cleave",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hina_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히나(드레스)",
-              "baseId": "hina",
-              "atk": 37,
-              "hp": 17,
-              "tier": 6,
-              "kw": [
-                "cleave",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hina_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-05T03:12:09",
           "placement": 1,
           "turn": 16,
@@ -714,9 +650,95 @@
               "school": "산해경"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T17:34:20",
+          "placement": 1,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 46,
+              "hp": 45,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield",
+                "selfdestruct",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "호시노",
+              "baseId": "hoshino",
+              "atk": 15,
+              "hp": 17,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "cleave",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Hoshino.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 13,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "preemptive",
+                "windfury",
+                "poison",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "루미",
+              "baseId": "rumi",
+              "atk": 21,
+              "hp": 21,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Rumi.png",
+              "school": "산해경"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 21,
+              "hp": 21,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "shield",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 158,
+      "points": 160,
       "questState": {
         "daily": {
           "date": "2026-04-07",
