@@ -885,6 +885,7 @@ function injectHiddenToShop() {
     else if(hid==='hkyk_kuzunoha') rate=0.60;
     else if(hid==='Shiroko_Terror') rate=0.50;
     else if(hid==='shanhai_kiki') rate=0.60;
+    else if(hid==='millennium_malkuth') rate=0.80;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(htmpl&&G.pool[htmpl.id]>0){
@@ -2756,6 +2757,7 @@ function aiCheckHidden(p) {
     else if(hid==='hkyk_kuzunoha') rate=0.60;
     else if(hid==='Shiroko_Terror') rate=0.50;
     else if(hid==='shanhai_kiki') rate=0.60;
+    else if(hid==='millennium_malkuth') rate=0.80;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(!htmpl||G.pool[htmpl.id]<=0) continue;
