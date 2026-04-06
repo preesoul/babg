@@ -3313,9 +3313,69 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-06T00:24:43",
+          "placement": 7,
+          "turn": 12,
+          "tier": 3,
+          "board": [
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 29,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 9,
+              "hp": 8,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 41,
+              "hp": 31,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 7,
+              "hp": 3,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 20,
+      "points": 22,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -3343,7 +3403,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             },
             {
@@ -3353,7 +3413,7 @@
             },
             {
               "id": "discover10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             }
           ]
