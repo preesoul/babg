@@ -2580,6 +2580,8 @@ function doLogin(name,auto){
     }
     window._babgLogin={name:name};
     localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+    // 서버에서 7성 영입 이력 병합 (크로스 디바이스 동기화)
+    try{if(typeof syncRecruitedTier7FromPd==='function')syncRecruitedTier7FromPd(data.players[name]);}catch(e){}
     goToMainMenu(name);
     try{checkLoginQuest();}catch(e){}
   });

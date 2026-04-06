@@ -632,6 +632,16 @@ function recordRecruitTier7(baseId){
     }
   }
 }
+// 로그인 시 서버 pd.recruitedTier7 → localStorage 병합 (크로스 디바이스 동기화)
+function syncRecruitedTier7FromPd(pd){
+  if(!pd||!pd.recruitedTier7||!pd.recruitedTier7.length)return;
+  var list=getRecruitedTier7();
+  var changed=false;
+  for(var i=0;i<pd.recruitedTier7.length;i++){
+    if(list.indexOf(pd.recruitedTier7[i])===-1){list.push(pd.recruitedTier7[i]);changed=true;}
+  }
+  if(changed)setRecruitedTier7(list);
+}
 
 // 신비해방 — 퀘스트 창에서 호출. pd.points에서 차감 후 서버 저장.
 var _mysteryUnlocking=false;
