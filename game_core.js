@@ -2547,6 +2547,28 @@ function aiProactiveSell(p,aiStrat){
   }
 }
 
+// AI가 이미 takeFromPool 후 tmpl을 board에 추가할 때 공통 처리 (트리플 체크 포함)
+function aiAddToBoardWithTriple(p,tmpl){
+  var count=0;
+  for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===tmpl.id&&!p.board[i].isSkin)count++;
+  if(count>=2){
+    var srcs=[];
+    for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===tmpl.id&&!p.board[i].isSkin)srcs.push(p.board[i]);
+    var mKw=[],bAtk=0,bHp=0;
+    for(var i=0;i<srcs.length;i++){var u=srcs[i];for(var k=0;k<(u.kw||[]).length;k++)if(mKw.indexOf(u.kw[k])===-1)mKw.push(u.kw[k]);bAtk+=u.atk-tmpl.atk;bHp+=u.hp-tmpl.hp;}
+    var nb=[],rm=0;
+    for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===tmpl.id&&!p.board[i].isSkin&&rm<2){rm++;}else{nb.push(p.board[i]);}}
+    p.board=nb;
+    var skin=makeMinion(tmpl,true);skin.kw=mKw;skin.atk+=bAtk;skin.hp+=bHp;skin.maxHp=skin.hp;
+    applySkinKwTransform(tmpl,skin);
+    p.board.push(skin);triggerBattlecry(skin,p);aiDiscover(p);
+    return skin;
+  } else {
+    var nu=makeMinion(tmpl,false);p.board.push(nu);triggerBattlecry(nu,p);
+    return nu;
+  }
+}
+
 function aiSellReplace(p,aiStrat,aiPool){
   if(p.board.length<MAX_BOARD||p.stone<2) return;
   var pers=p.personality||AI_PERSONALITIES.standard;
@@ -2584,7 +2606,7 @@ function aiSellReplace(p,aiStrat,aiPool){
     }
     returnToPool(p.board[weakIdx].baseId);p.stone+=1;p.board.splice(weakIdx,1);
     if(p.stone>=3&&takeFromPool(bestTmpl.id)){
-      var nu=makeMinion(bestTmpl,false);p.board.push(nu);p.stone-=3;triggerBattlecry(nu,p);
+      aiAddToBoardWithTriple(p,bestTmpl);p.stone-=3;
     }
   }
 }
@@ -2840,7 +2862,7 @@ function aiTurns() {
         for(var _uj=0;_uj<_upgPool.length;_uj++){var _us=_upgPool[_uj].atk+_upgPool[_uj].hp+_upgPool[_uj].tier*1.5;if(DR_IDS[_upgPool[_uj].id])_us+=5;if(SOC_IDS[_upgPool[_uj].id])_us+=4;if(_us>_bestUpgSc){_bestUpgSc=_us;_bestUpg=_upgPool[_uj];}}
         if(_bestUpg&&_bestUpgSc>aiUnitScore(p.board[_kIdx])+2){
           returnToPool(p.board[_kIdx].baseId);p.stone+=1;p.board.splice(_kIdx,1);
-          if(p.stone>=3&&takeFromPool(_bestUpg.id)){var _nu=makeMinion(_bestUpg,false);p.board.push(_nu);p.stone-=3;triggerBattlecry(_nu,p);}
+          if(p.stone>=3&&takeFromPool(_bestUpg.id)){aiAddToBoardWithTriple(p,_bestUpg);p.stone-=3;}
         }
       }
     }
