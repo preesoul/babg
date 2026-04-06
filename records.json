@@ -2771,9 +2771,81 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-06T04:30:22",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 28,
+              "hp": 38,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 52,
+              "hp": 54,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 20,
+              "hp": 22,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 29,
+              "hp": 29,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 34,
+              "hp": 35,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -2811,8 +2883,8 @@
             },
             {
               "id": "play10",
-              "progress": 9,
-              "completed": false
+              "progress": 10,
+              "completed": true
             }
           ]
         },
