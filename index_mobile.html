@@ -271,10 +271,10 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 .spell-hint-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:100;background:rgba(20,10,40,0.92);color:#c4b5fd;font-weight:700;font-size:18px;padding:16px 32px;border-radius:10px;border:2px solid rgba(139,92,246,0.5);box-shadow:0 4px 24px rgba(139,92,246,0.3);text-align:center;pointer-events:none;white-space:nowrap}
 
 /* 호버 툴팁 — BA TCG 카드 스타일 */
-.hover-tooltip{position:fixed;z-index:2500;pointer-events:none;background:linear-gradient(180deg,#1a3248,#162838);border:2.5px solid #2a5878;border-radius:10px;padding:0;width:280px;box-shadow:0 12px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(0,200,255,0.08);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;transform:translateY(8px);font-size:13px;overflow:hidden;color:#c0d8e8}
+.hover-tooltip{position:fixed;z-index:2500;pointer-events:none;background:linear-gradient(180deg,#1a3248,#162838);border:2.5px solid #2a5878;border-radius:10px;padding:0;width:280px;box-shadow:0 12px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(0,200,255,0.08);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;transform:translateY(8px);font-size:13px;overflow-y:auto;overflow-x:hidden;color:#c0d8e8;max-height:90vh}
 .hover-tooltip.visible{opacity:1;transform:translateY(0)}
-.hover-tooltip .tt-portrait{width:100%;height:260px;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e2838,#142838)}
-.hover-tooltip .tt-portrait img{width:85%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)}
+.hover-tooltip .tt-portrait{width:100%;height:180px;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e2838,#142838)}
+.hover-tooltip .tt-portrait img{width:85%;height:auto;object-fit:contain;position:absolute;top:-20px;left:50%;transform:translateX(-50%)}
 .hover-tooltip .tt-portrait::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,#1a3248,transparent)}
 .hover-tooltip .tt-header{position:relative;padding:10px 14px 10px;margin-top:-20px;z-index:1;background:linear-gradient(135deg,rgba(14,106,158,0.3),rgba(14,152,192,0.15));border-bottom:1px solid rgba(0,200,255,0.12)}
 .hover-tooltip .tt-name{font-size:17px;font-weight:900;margin-bottom:2px;color:#e8f0f8;text-shadow:0 1px 3px rgba(0,0,0,0.5)}
@@ -2919,10 +2919,10 @@ function renderRoster(){
         var tip=getTooltipEl();if(!tip)return;
         var spDesc=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.desc:'유카리/렌게/키쿄/나구사에게 +10/+10, 보호막, 연사, 부활');
         var spCost=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.cost:3);
-        tip.innerHTML='<div style="padding:12px;max-width:280px">'
+        tip.innerHTML='<div style="padding:12px">'
           +'<div style="font-size:16px;font-weight:700;color:#e070ff;margin-bottom:4px">백화요란 계승전</div>'
           +'<div style="font-size:12px;color:#888;margin-bottom:8px">'+spCost+'코스트 · 7티어 액션카드</div>'
-          +'<img src="img/unique/HKYK_Showdown.png" style="width:140px;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block" onerror="this.style.display=\'none\'">'
+          +'<img src="img/unique/HKYK_Showdown.png" style="width:100%;max-width:240px;height:auto;object-fit:contain;border-radius:8px;margin-bottom:8px;display:block" onerror="this.style.display=\'none\'">'
           +'<div class="tt-ability" style="border-left:3px solid #e070ff;margin-bottom:6px;padding:6px 8px">'
           +'<div style="color:#e070ff;font-weight:700;font-size:13px;margin-bottom:4px">⭐ 히든</div>'
           +'<div style="color:#d0c0e0;font-size:12px;line-height:1.5">샬레에 유카리·렌게·키쿄·나구사가 모두 있고,<br>각 학생의 계승전 카운터가 7 이상일 때 등장.</div>'
@@ -2932,12 +2932,15 @@ function renderRoster(){
           +'</div>';
         tip.style.display='block';tip.classList.add('visible');
         var rect=el.getBoundingClientRect();
-        var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
-        var left=rect.left+rect.width/2-tipW/2;
-        var top=rect.top-tipH-8;
-        if(top<0)top=rect.bottom+8;
-        if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
-        tip.style.left=left+'px';tip.style.top=top+'px';
+        var ttW=tip.offsetWidth||280;
+        var ttH=tip.offsetHeight||400;
+        var x=rect.right+12;
+        var y=rect.top+(rect.height/2)-(ttH/2);
+        if(x+ttW>window.innerWidth) x=rect.left-ttW-12;
+        if(x<0) x=8;
+        if(y+ttH>window.innerHeight) y=window.innerHeight-ttH-8;
+        if(y<0) y=8;
+        tip.style.left=x+'px';tip.style.top=y+'px';
       });
     }
   });
