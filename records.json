@@ -3270,84 +3270,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-07T00:15:00",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 11,
-              "hp": 13,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하스미(수영복)",
-              "baseId": "hasumi",
-              "atk": 28,
-              "hp": 22,
-              "tier": 5,
-              "kw": [
-                "ambush",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hasumi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 10,
-              "hp": 10,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": false
-        },
-        {
           "date": "2026-04-07T00:29:20",
           "placement": 4,
           "turn": 14,
@@ -4012,16 +3934,82 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T23:32:14",
+          "placement": 2,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 13,
+              "hp": 11,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 11,
+              "hp": 13,
+              "tier": 5,
+              "kw": [
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 9,
+              "hp": 7,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
@@ -4031,7 +4019,7 @@
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
