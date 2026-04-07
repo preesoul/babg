@@ -2101,11 +2101,12 @@ function _doBC(m, p) {
 
   // ===== 백귀야행 첫인사 =====
   else if(id==='izuna') {
-    var atkBuff=1,hpBuff=m.isSkin?1:0;
+    // 아군 전체 +1/+1 (스킨 +2/+2)
+    var izBuff=m.isSkin?2:1;
     for(var i=0;i<p.board.length;i++){
-      p.board[i].atk+=atkBuff;
-      if(hpBuff>0){p.board[i].hp+=hpBuff;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp);p.board[i].maxHp+=hpBuff;}
-      logBuff(p.board[i],m.name,atkBuff,hpBuff);
+      p.board[i].atk+=izBuff;p.board[i].hp+=izBuff;
+      p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp);p.board[i].maxHp+=izBuff;
+      logBuff(p.board[i],m.name,izBuff,izBuff);
     }
   }
   else if(id==='tsukuyo') {
