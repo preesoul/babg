@@ -4668,77 +4668,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T16:24:09",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 12,
-              "hp": 4,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 4,
-              "hp": 3,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리",
-              "baseId": "yukari",
-              "atk": 9,
-              "hp": 7,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Yukari.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "피나",
-              "baseId": "pina",
-              "atk": 5,
-              "hp": 4,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Pina.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "피나",
-              "baseId": "pina",
-              "atk": 4,
-              "hp": 5,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Pina.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T16:38:48",
           "placement": 1,
           "turn": 16,
@@ -5392,9 +5321,85 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T04:16:01",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 22,
+              "hp": 24,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 37,
+              "hp": 29,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 25,
+              "hp": 19,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 12,
+              "hp": 13,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 13,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
