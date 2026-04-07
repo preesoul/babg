@@ -1465,7 +1465,48 @@ var HIDDEN_CARD_ENTRANCE = {
   // === 산해경 ===
   shanhai_kiki: function(m,p){_entranceGlow(m,p);},
   // === 붉은겨울 ===
-  red_winter_minori: function(m,p){_entranceBang(m,p);},
+  red_winter_minori: function(m,p){
+    // 쿵쿵쾅 — 쿵×2 (400ms 간격) 후 쾅으로 착지
+    var step=0;
+    function doStep(){
+      if(step>=2){
+        // 쾅! 착지
+        p.board.push(m);
+        if(BC_IDS[m.baseId]) triggerBattlecry(m,p);
+        playSfx('attack_impact_large',0.8);
+        shakeScreen('heavy');
+        // 하얀 플래시
+        var ov=document.createElement('div');
+        ov.style.cssText='position:fixed;inset:0;background:#fff;opacity:0.7;pointer-events:none;z-index:9999;transition:opacity 0.35s';
+        document.body.appendChild(ov);
+        setTimeout(function(){ov.style.opacity='0';setTimeout(function(){ov.remove();},400);},50);
+        playCardDrop(7);
+        playRecruitVoice('red_winter_minori');
+        renderAll();
+        // 카드 흔들림
+        var boardEl=document.getElementById('ui-board');
+        var cards=boardEl?boardEl.querySelectorAll('.card'):[];
+        var lastCard=cards[cards.length-1];
+        if(lastCard){
+          lastCard.style.transition='transform 0.07s ease-in-out';
+          lastCard.style.transform='scale(1.2)';
+          setTimeout(function(){
+            lastCard.style.transform='translateX(-10px) rotate(-3deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(8px) rotate(3deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(-6px) rotate(-2deg)';
+            setTimeout(function(){lastCard.style.transform='translateX(0) rotate(0) scale(1)';},70);},70);},70);
+          },80);
+        }
+        return;
+      }
+      // 쿵!
+      playSfx('attack_impact_large',0.4);
+      shakeScreen('heavy');
+      step++;
+      setTimeout(doStep,400);
+    }
+    doStep();
+  },
   Kei_usb: function(m,p){
     // 일반 1~2성 소환처럼 조용하게
     p.board.push(m);playCardDrop(1);renderAll();
@@ -1620,7 +1661,8 @@ var RECRUIT_VOICES = {
   kisaki: 'audio/kisaki.mp3',
   rumi: 'audio/rumi.mp3',
   shun: 'audio/shun.mp3',
-  shanhai_kiki: 'audio/shanhai_kiki.mp3'
+  shanhai_kiki: 'audio/shanhai_kiki.mp3',
+  red_winter_minori: 'audio/red_winter_minori.mp3'
 };
 function playRecruitVoice(baseId){
   var src=RECRUIT_VOICES[baseId];
