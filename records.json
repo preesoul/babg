@@ -6459,7 +6459,7 @@
           ]
         }
       ],
-      "points": 22,
+      "points": 17,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
@@ -6514,7 +6514,10 @@
             }
           ]
         }
-      }
+      },
+      "unlockedAbydos": [
+        "shiroko"
+      ]
     }
   }
 }
