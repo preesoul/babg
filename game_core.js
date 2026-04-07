@@ -186,7 +186,7 @@ function findAnyChar(id){for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===id)retu
 function statColor(baseId,isSkin,type,current){
   var tmpl=findAnyChar(baseId);if(!tmpl)return'';
   var base=isSkin?(type==='atk'?tmpl.atk*2+1:tmpl.hp*2+1):(type==='atk'?tmpl.atk:tmpl.hp);
-  if(current>base)return'color:#4ade80';if(current<base)return'color:#f87171';return'';
+  if(current>base)return'color:#22ff55;font-weight:900;font-size:1.5em';if(current<base)return'color:#ff4444;font-weight:900;font-size:1.5em';return'';
 }
 
 // 버프 로그 헬퍼
@@ -6163,7 +6163,7 @@ function miniCardHtml(m){
   if(hasKw(m,'ambush')) mIconBar+='<span class="abi">'+SVG_ICONS.ambush+'</span>';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
-    '<div class="mini-stats"><div class="mini-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="mini-hp" style="'+(m.maxHp?(m.hp>=m.maxHp?'color:#4ade80':m.hp<m.maxHp?'color:#f87171':''):statColor(m.baseId,m.isSkin,'hp',m.hp))+'">'+m.hp+'</div></div>'+
+    '<div class="mini-stats"><div class="mini-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="mini-hp" style="'+(m.maxHp?(m.hp>=m.maxHp?'color:#22ff55;font-weight:900;font-size:1.5em':m.hp<m.maxHp?'color:#ff4444;font-weight:900;font-size:1.5em':''):statColor(m.baseId,m.isSkin,'hp',m.hp))+'">'+m.hp+'</div></div>'+
     kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }
 
