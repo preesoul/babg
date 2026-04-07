@@ -6145,7 +6145,7 @@
           ]
         }
       ],
-      "points": 21,
+      "points": 16,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -6200,7 +6200,8 @@
         "_lastLoginDate": "2026-04-07"
       },
       "unlockedAbydos": [
-        "kisaki"
+        "kisaki",
+        "kokona"
       ]
     },
     "어흐": {
