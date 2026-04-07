@@ -2168,8 +2168,8 @@ function _doBC(m, p) {
         for(var _ki=0;_ki<ksTargets.length;_ki++){
           _applySkinUpgrade(p.board[ksTargets[_ki]]);
         }
-      } else {
-        // 일반 키사키: pendingSpell로 대상 선택 UI
+      } else if(p.isPlayer){
+        // 일반 키사키 (플레이어): 대상 선택 UI
         G.pendingSpell={id:'kisaki_bc',name:'키사키 첫인사',target:'select_ally',
           effect:function(G2,idx){
             var p2=G2.players[0];if(!p2.board[idx]||p2.board[idx].isSkin||p2.board[idx].isHidden)return false;
@@ -2177,6 +2177,10 @@ function _doBC(m, p) {
             return true;
           }};
         renderAll();
+      } else {
+        // AI: 무작위 1인 자동 스킨 변환
+        var aiPick=ksTargets[Math.floor(Math.random()*ksTargets.length)];
+        _applySkinUpgrade(p.board[aiPick]);
       }
     }
   }
