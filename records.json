@@ -3584,9 +3584,91 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T05:36:51",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 19,
+              "hp": 21,
+              "tier": 5,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 29,
+              "hp": 27,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 22,
+              "hp": 16,
+              "tier": 5,
+              "kw": [
+                "ranged",
+                "shield",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 14,
+              "hp": 14,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 13,
+              "hp": 13,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "selfdestruct"
+              ],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
