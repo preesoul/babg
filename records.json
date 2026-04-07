@@ -6683,9 +6683,80 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T04:24:32",
+          "placement": 5,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미",
+              "baseId": "hasumi",
+              "atk": 7,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Hasumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 6,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코(아이돌)",
+              "baseId": "sakurako",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sakurako_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 11,
+      "points": 13,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
@@ -6721,7 +6792,7 @@
             },
             {
               "id": "skin10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             },
             {
