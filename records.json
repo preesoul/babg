@@ -7045,9 +7045,81 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T10:25:31",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "카요코",
+              "baseId": "kayoko",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kayoko.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 3,
+              "hp": 2,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 4,
+              "hp": 5,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 3,
+              "hp": 4,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 3,
+              "hp": 4,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 15,
+      "points": 17,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
