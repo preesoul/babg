@@ -6707,9 +6707,11 @@ function renderRecords(){
     if(myName&&data.players[myName]){
       var p=data.players[myName];
       var recs=p.records||[];
-      var wins=recs.filter(function(r){return r.placement===1;}).length;
+      // 4등 이상을 '승'으로 집계, 1등 횟수 별도 표기
+      var wins=recs.filter(function(r){return r.placement&&r.placement<=4;}).length;
+      var firsts=recs.filter(function(r){return r.placement===1;}).length;
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
-      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승)</span></div>';
+      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
       html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{for(var i=recs.length-1;i>=0;i--) html+=_renderRecordCard(recs[i],true,i);}
