@@ -3666,9 +3666,79 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T10:26:08",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 80,
+              "hp": 78,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 55,
+              "hp": 55,
+              "tier": 5,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 61,
+              "hp": 61,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 73,
+              "hp": 73,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키(가이드)",
+              "baseId": "tsubaki",
+              "atk": 66,
+              "hp": 58,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Tsubaki_(Guide).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-07",
