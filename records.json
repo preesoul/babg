@@ -6976,9 +6976,78 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T10:22:08",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 5,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 5,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 13,
+      "points": 15,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
