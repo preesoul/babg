@@ -186,7 +186,7 @@ function findAnyChar(id){for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===id)retu
 function statColor(baseId,isSkin,type,current){
   var tmpl=findAnyChar(baseId);if(!tmpl)return'';
   var base=isSkin?(type==='atk'?tmpl.atk*2+1:tmpl.hp*2+1):(type==='atk'?tmpl.atk:tmpl.hp);
-  if(current>base)return'color:#ffdd00;font-weight:900';if(current<base)return'color:#ff4444;font-weight:900';return'';
+  if(current>base)return'color:#f0ff44;font-weight:900';if(current<base)return'color:#ff4444;font-weight:900';return'';
 }
 
 // 버프 로그 헬퍼
