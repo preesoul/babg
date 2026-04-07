@@ -4591,88 +4591,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T14:16:46",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 31,
-              "hp": 24,
-              "tier": 5,
-              "kw": [
-                "ranged",
-                "pierce",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "나구사",
-              "baseId": "nagusa",
-              "atk": 26,
-              "hp": 27,
-              "tier": 6,
-              "kw": [
-                "preemptive",
-                "reborn",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Nagusa.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "히후미",
-              "baseId": "hifumi",
-              "atk": 35,
-              "hp": 32,
-              "tier": 3,
-              "kw": [
-                "windfury",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Hifumi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이오리(수영복)",
-              "baseId": "iori",
-              "atk": 53,
-              "hp": 46,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Iori_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이오리(수영복)",
-              "baseId": "iori",
-              "atk": 53,
-              "hp": 46,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Iori_(Swimsuit).png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T14:35:53",
           "placement": 7,
           "turn": 12,
@@ -5337,9 +5255,86 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T00:20:53",
+          "placement": 8,
+          "turn": 10,
+          "tier": 4,
+          "board": [
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 13,
+              "hp": 9,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 10,
+              "hp": 5,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미모리",
+              "baseId": "mimori",
+              "atk": 6,
+              "hp": 7,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mimori.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 7,
+              "hp": 6,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 2,
+              "hp": 1,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
