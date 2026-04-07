@@ -972,8 +972,8 @@ function renderAll() {
     benchHtml+='<div class="card-spacer"></div>';
     benchHtml+='<div class="name-banner" style="font-size:11px;padding:2px 4px">'+bm.name+'</div>';
     benchHtml+='<div style="display:flex;flex-direction:row;justify-content:space-between;padding:3px 4px">';
-    benchHtml+='<div class="stat-atk" style="width:28px;height:28px;font-size:16px">'+bm.atk+'</div>';
-    benchHtml+='<div class="stat-hp" style="width:28px;height:28px;font-size:16px">'+bm.hp+'</div>';
+    benchHtml+='<div class="stat-atk" style="width:28px;height:28px;font-size:16px;'+statColor(bm.baseId,bm.isSkin,'atk',bm.atk)+'">'+bm.atk+'</div>';
+    benchHtml+='<div class="stat-hp" style="width:28px;height:28px;font-size:16px;'+statColor(bm.baseId,bm.isSkin,'hp',bm.hp)+'">'+bm.hp+'</div>';
     benchHtml+='</div></div></div>';
     benchHtml+='<div class="bench-btns">';
     benchHtml+='<button class="btn btn-red" id="bench-sell" style="padding:4px 8px;font-size:10px;flex:1"><span class="btn-inner">판매</span></button>';
@@ -1124,7 +1124,7 @@ function cardHtml(m,idx,isBoard){
   var kwt=kwText(m);html+='<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
   var aTag=abilityTag(m.baseId,m.isSkin);if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
   else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
-  html+='<div class="stat-row"><div class="stat-atk">'+m.atk+'</div><div class="stat-hp">'+m.hp+'</div></div>';
+  html+='<div class="stat-row"><div class="stat-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="stat-hp" style="'+statColor(m.baseId,m.isSkin,'hp',m.hp)+'">'+m.hp+'</div></div>';
   html+='</div>';
   if(!isBoard){var cost=m.cost||3;html+='<div class="cost-badge"><img src="img/UI/stone.png"><span>'+cost+'</span></div>';}
   if(isBoard){html+='<button class="coin-toggle'+(m.coinOff?' off':'')+'" data-idx="'+idx+'"><img src="img/Icon/'+(m.coinOff?'coin_back.png':'coin_front.png')+'"></button>';}

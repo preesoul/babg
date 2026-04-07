@@ -182,6 +182,13 @@ var HIDDEN_CHARS = [
 function findHiddenChar(id){for(var i=0;i<HIDDEN_CHARS.length;i++)if(HIDDEN_CHARS[i].id===id)return HIDDEN_CHARS[i];return null;}
 function findAnyChar(id){for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===id)return CHARS[i];return findHiddenChar(id);}
 
+// 스탯 색상 (기본보다 높으면 초록, 낮으면 빨강)
+function statColor(baseId,isSkin,type,current){
+  var tmpl=findAnyChar(baseId);if(!tmpl)return'';
+  var base=isSkin?(type==='atk'?tmpl.atk*2+1:tmpl.hp*2+1):(type==='atk'?tmpl.atk:tmpl.hp);
+  if(current>base)return'color:#4ade80';if(current<base)return'color:#f87171';return'';
+}
+
 // 버프 로그 헬퍼
 function logBuff(unit, source, atkDelta, hpDelta) {
   if(!unit._buffLog) unit._buffLog=[];
@@ -485,7 +492,10 @@ var SPELLS = [
   {id:'savings',name:'비상금',cost:1,tier:2,desc:'다음 리롤/턴 시 골드 +2',target:'auto',img:'img/spell/savings.png',
     effect:function(G){G.bonusStone=(G.bonusStone||0)+2;}},
   {id:'visit_plan',name:'정기 일정',cost:3,tier:2,desc:'이번 게임 동안 스케쥴 학생 공/체 +2',target:'auto',img:'img/spell/visit_plan.png',
-    effect:function(G){var ab=getAyumuBonus();G.shopBuff=(G.shopBuff||0)+2+ab;}},
+    effect:function(G){var ab=getAyumuBonus();var buff=2+ab;G.shopBuff=(G.shopBuff||0)+buff;
+      // 현재 상점에도 즉시 적용
+      for(var _vi=0;_vi<G.shop.length;_vi++){if(G.shop[_vi]&&!G.shop[_vi].isSpell&&!G.shop[_vi].isHidden){G.shop[_vi].atk+=buff;G.shop[_vi].hp+=buff;}}
+    }},
   {id:'visit_buff',name:'방과 후 수업',cost:2,tier:2,desc:'선택 학생 +4/+4',target:'select_ally',img:'img/spell/Hard_work.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=4+ab;p.board[idx].hp+=4+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+4+ab;logBuff(p.board[idx],'방문 예정',4+ab,4+ab);return true;}},
   {id:'aggro',name:'어그로꾼',cost:1,tier:3,desc:'선택 학생에게 지켜줌 부여',target:'select_ally',img:'img/spell/aggro.png',
@@ -577,7 +587,7 @@ function getAvailableSpells(tier) {
 function applyShopBuff(shop) {
   if(G.shopBuff && G.shopBuff>0){
     for(var i=0;i<shop.length;i++){if(shop[i]&&!shop[i].isSpell){shop[i].atk+=G.shopBuff;shop[i].hp+=G.shopBuff;}}
-    G.shopBuff=0;
+    // shopBuff는 리셋하지 않음 — 게임 내내 유지
   }
 }
 
@@ -1777,7 +1787,7 @@ function showDiscover(p) {
     html += '<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
     if(aTag) html += '<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html += '<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
-    html += '<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div>';
+    html += '<div class="stat-row"><div class="stat-atk" style="'+statColor(c.id,false,'atk',c.atk)+'">'+c.atk+'</div><div class="stat-hp" style="'+statColor(c.id,false,'hp',c.hp)+'">'+c.hp+'</div></div>';
     html += '</div></div>';
   }
   html += '</div></div>';
@@ -1906,7 +1916,7 @@ function showDiscoverCustom(choices) {
     html+='<div class="name-banner">'+c.name+'</div><div class="keywords">'+(kwt||'&nbsp;')+'</div>';
     if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
     else html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
-    html+='<div class="stat-row"><div class="stat-atk">'+c.atk+'</div><div class="stat-hp">'+c.hp+'</div></div></div></div>';
+    html+='<div class="stat-row"><div class="stat-atk" style="'+statColor(c.id,false,'atk',c.atk)+'">'+c.atk+'</div><div class="stat-hp" style="'+statColor(c.id,false,'hp',c.hp)+'">'+c.hp+'</div></div></div></div>';
   }
   html+='</div></div>';
   document.getElementById('battle-intro-area').innerHTML=html;
@@ -6153,7 +6163,7 @@ function miniCardHtml(m){
   if(hasKw(m,'ambush')) mIconBar+='<span class="abi">'+SVG_ICONS.ambush+'</span>';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
-    '<div class="mini-stats"><div class="mini-atk">'+m.atk+'</div><div class="mini-hp">'+m.hp+'</div></div>'+
+    '<div class="mini-stats"><div class="mini-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="mini-hp" style="'+statColor(m.baseId,m.isSkin,'hp',m.hp)+'">'+m.hp+'</div></div>'+
     kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }
 
