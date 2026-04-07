@@ -1050,6 +1050,8 @@ function renderAll() {
   var upgradeBtn=document.getElementById('btn-upgrade');
   upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
   upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
+  // 매 렌더 시 자동 저장 (상점 포함 항상 최신 유지)
+  if(typeof saveGame==='function')saveGame();
 }
 
 function spellCardHtml(item,idx){
