@@ -5190,71 +5190,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T00:48:06",
-          "placement": 8,
-          "turn": 11,
-          "tier": 5,
-          "board": [
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 11,
-              "hp": 3,
-              "tier": 5,
-              "kw": [
-                "ranged"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "히후미",
-              "baseId": "hifumi",
-              "atk": 2,
-              "hp": 3,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hifumi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "유즈",
-              "baseId": "yuzu",
-              "atk": 2,
-              "hp": 3,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yuzu.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T01:11:22",
           "placement": 8,
           "turn": 9,
@@ -5849,27 +5784,95 @@
               "school": "붉은겨울"
             }
           ]
-        }
-      ],
-      "points": 4,
-      "questState": {
-        "daily": {
-          "date": "2026-04-07",
-          "quests": [
+        },
+        {
+          "date": "2026-04-07T15:04:38",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
             {
-              "id": "millennium10",
-              "progress": 14,
-              "completed": true
+              "name": "미노리(성난 군중)",
+              "baseId": "red_winter_minori",
+              "atk": 4,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Revolution.png",
+              "school": "붉은겨울"
             },
             {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 7,
+              "hp": 7,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 23,
+              "hp": 13,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 36,
+              "hp": 40,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 21,
+              "hp": 19,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            }
+          ]
+        }
+      ],
+      "points": 6,
+      "questState": {
+        "daily": {
+          "date": "2026-04-08",
+          "quests": [
+            {
               "id": "gehenna10",
-              "progress": 20,
-              "completed": true
+              "progress": 3,
+              "completed": false
+            },
+            {
+              "id": "discover3",
+              "progress": 2,
+              "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 16,
-              "completed": true
+              "progress": 3,
+              "completed": false
             }
           ],
           "rerolled": false
