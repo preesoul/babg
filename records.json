@@ -4,80 +4,6 @@
       "pw": "aqula88",
       "records": [
         {
-          "date": "2026-04-05T03:38:32",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아스나",
-              "baseId": "asuna",
-              "atk": 7,
-              "hp": 6,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Asuna.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 29,
-              "hp": 31,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 11,
-              "hp": 15,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 15,
-              "hp": 11,
-              "tier": 5,
-              "kw": [
-                "ambush",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-05T04:35:36",
           "placement": 1,
           "turn": 17,
@@ -697,9 +623,76 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T05:02:19",
+          "placement": 7,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시로코(수영복)",
+              "baseId": "shiroko",
+              "atk": 23,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Shiroko_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 27,
+              "hp": 23,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미(수영복)",
+              "baseId": "nonomi",
+              "atk": 13,
+              "hp": 13,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Nonomi_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "사야(사복)",
+              "baseId": "saya",
+              "atk": 13,
+              "hp": 15,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Saya_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 4,
+              "hp": 4,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 172,
+      "points": 174,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -737,7 +730,7 @@
             },
             {
               "id": "discover10",
-              "progress": 6,
+              "progress": 9,
               "completed": false
             }
           ]
