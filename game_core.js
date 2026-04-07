@@ -177,7 +177,7 @@ var HIDDEN_CHARS = [
   {id:'Kei_usb',                 name:'케이(USB)',            school:'밀레니엄', tier:7, atk:1,  hp:1,  kw:['shield'],                                   img:'unique/Kei_usb.png'},
   {id:'Arisu_Kei',               name:'아리스&케이',          school:'밀레니엄', tier:7, atk:40, hp:40, kw:['shield','ranged','preemptive'],              img:'unique/Arisu_Kei.png'},
   // 붉은겨울
-  {id:'red_winter_minori',       name:'성난 군중 미노리',     school:'붉은겨울', tier:7, atk:0,  hp:10, kw:[],                                                img:'unique/Revolution.png'},
+  {id:'red_winter_minori',       name:'미노리(성난 군중)',     school:'붉은겨울', tier:7, atk:0,  hp:10, kw:[],                                                img:'unique/Revolution.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -209,7 +209,7 @@ function logBuff(unit, source, atkDelta, hpDelta) {
 
 // 키워드 헬퍼
 function hasKw(unit, kw) { return unit.kw && unit.kw.indexOf(kw) !== -1; }
-function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
+function addKw(unit, kw) { if(!unit.kw) unit.kw=[]; var basicKws=['taunt','shield','cleave','reborn','windfury','poison','pierce','ranged','selfdestruct','invincible','ambush']; if(unit._noBC&&basicKws.indexOf(kw)!==-1) return; if(unit.kw.indexOf(kw)===-1) unit.kw.push(kw); }
 function kwText(unit) { if(!unit.kw||unit.kw.length===0) return ''; var bid=unit.baseId||''; return unit.kw.filter(function(k){ if(k==='survive') return false; if(k==='preemptive') return false; return true; }).map(function(k){return '<span class="kw-tag">'+(KW_LABELS[k]||k)+'</span>';}).join(''); }
 
 var KW_LABELS = {taunt:'지켜줌',shield:'보호막',cleave:'광역',reborn:'부활',windfury:'연사',poison:'독사굴',pierce:'관통',survive:'버티기',preemptive:'선빵',ranged:'저격',selfdestruct:'자폭',invincible:'무적',ambush:'기습'};
@@ -403,7 +403,7 @@ var ABILITY_DESCS = {
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
-  red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'붉은겨울 학교 7성 유니크.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
+  red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'8턴 이상, 스케쥴 Lv.1 유지 시 리롤 100% 등장.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
@@ -798,7 +798,7 @@ function newGame() {
     players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
-    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
+    purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
     nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0};
   rollShop();
   aiTurns();
@@ -933,6 +933,9 @@ function checkHiddenConditionsFor(p) {
   // 말쿠트: 밀레니엄 토큰 소환 10회+
   if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
     eligible.push('millennium_malkuth');
+  // 미노리: 8턴까지 스케쥴 1레벨 유지
+  if(notOwned('red_winter_minori')&&inPool('red_winter_minori')&&G.turn>=8&&p.tier===1)
+    eligible.push('red_winter_minori');
   // === 누적 조건 (Lv 무관) ===
   // 쿠즈노하: 백귀야행 13명 전원 구매/발견 기록
   if(notOwned('hkyk_kuzunoha')&&inPool('hkyk_kuzunoha')){
@@ -1002,7 +1005,8 @@ function injectHiddenToShop() {
     Kei_usb:0.60,
     millennium_nameless:0.60,
     millennium_malkuth:0.60,
-    hkyk_kuzunoha:0.60
+    hkyk_kuzunoha:0.60,
+    red_winter_minori:1.00
   };
   for(var h=0;h<eligible.length;h++){
     var hid=eligible[h];
@@ -1499,11 +1503,11 @@ var HIDDEN_CARD_ENTRANCE = {
         }
         return;
       }
-      // 쿵!
-      playSfx('attack_impact_large',0.4);
-      shakeScreen('heavy');
+      // 쿵 (작은 소리 — 미카와 동일)
+      playSfx('attack_impact_large',0.2);
+      shakeScreen('light');
       step++;
-      setTimeout(doStep,400);
+      setTimeout(doStep,1500);
     }
     doStep();
   },
@@ -1568,6 +1572,7 @@ function buyMinion(idx, insertIdx) {
   trackNonomiStone(3);
   G.shop[idx]=null;
   if(m.school) G.purchasedSchools[m.school]=true;
+  if(m.tier>G.maxPurchasedTier) G.maxPurchasedTier=m.tier;
   // 아리스 구매 기록 (왕녀 해금 조건: 아리스를 산 적 없어야 함)
   if(m.baseId==='arisu') G.arisuPurchased=true;
   // 백귀야행 구매 기록 (쿠즈노하 해금 조건)
@@ -1660,6 +1665,7 @@ var RECRUIT_VOICES = {
   gehenna_p68: 'audio/gehenna_p68.mp3',
   kisaki: 'audio/kisaki.mp3',
   rumi: 'audio/rumi.mp3',
+  red_winter_minori: 'audio/red_winter_minori.mp3',
   shun: 'audio/shun.mp3',
   shanhai_kiki: 'audio/shanhai_kiki.mp3',
   red_winter_minori: 'audio/red_winter_minori.mp3'
@@ -1870,6 +1876,7 @@ function showDiscover(p) {
     // 백귀야행 발견도 구매 기록으로 인정 (쿠즈노하 조건)
     if(HKYK_ALL_IDS.indexOf(tmpl.id)!==-1) G.soldHkyk[tmpl.id]=true;
     if(tmpl.id==='arisu') G.arisuPurchased=true;
+    if(tmpl.tier>G.maxPurchasedTier) G.maxPurchasedTier=tmpl.tier;
     if(takeFromPool(tmpl.id)){
       var added = addToBoard(p, makeMinion(tmpl, false));
       if(!added){
@@ -3503,9 +3510,15 @@ function triggerSOC(u, mySide, otherSide, log) {
     if(spared) log.push({cls:'soc',text:'[개전] '+u.name+': '+spared.name+'은(는) 살아남았다! (체력 '+spared.hp+')'});
   }
   else if(id==='red_winter_minori'){
-    // 미노리 개전: 기본 능력(BC) 전체 해제 + 이후 BC 영구 면역
+    // 미노리 개전: 기본 능력 전체 해제 + 이후 기본 능력 영구 면역
+    var basicKws=['taunt','shield','cleave','reborn','windfury','poison','pierce','ranged','selfdestruct','invincible','ambush'];
+    var removed=[];
+    for(var _bk=u.kw.length-1;_bk>=0;_bk--){
+      if(basicKws.indexOf(u.kw[_bk])!==-1){removed.push(KW_LABELS[u.kw[_bk]]||u.kw[_bk]);u.kw.splice(_bk,1);}
+    }
     u._noBC=true;
-    log.push({cls:'soc',text:'[개전] '+u.name+': 모든 기본 능력이 해제됩니다! 이후 기본 능력 면역.'});
+    if(removed.length>0) log.push({cls:'soc',text:'[개전] '+u.name+': '+removed.join(', ')+' 해제! 이후 기본 능력 면역.'});
+    else log.push({cls:'soc',text:'[개전] '+u.name+': 모든 기본 능력이 해제됩니다! 이후 기본 능력 면역.'});
   }
 }
 
@@ -3559,8 +3572,8 @@ function triggerSOC_battlecry_inner(u, mySide, log){
 
 function resolveStartOfCombat(a, b, log) {
   // 미노리 전투 시작 대사
-  for(var _mn=0;_mn<a.length;_mn++){if(a[_mn].alive&&a[_mn].baseId==='red_winter_minori'){log.push({cls:'soc',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
-  for(var _mn=0;_mn<b.length;_mn++){if(b[_mn].alive&&b[_mn].baseId==='red_winter_minori'){log.push({cls:'soc',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
+  for(var _mn=0;_mn<a.length;_mn++){if(a[_mn].alive&&a[_mn].baseId==='red_winter_minori'){log.push({cls:'chat',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
+  for(var _mn=0;_mn<b.length;_mn++){if(b[_mn].alive&&b[_mn].baseId==='red_winter_minori'){log.push({cls:'chat',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
   var aFirst=(a.length>b.length)?true:(b.length>a.length)?false:(Math.random()<0.5);
   function processSide(side, other){
     // 쿠즈노하: 모든 개전보다 먼저 발동 — 자신+적1번 제외 전원 효과삭제+처치
@@ -4108,7 +4121,7 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='red_winter_minori'){
     // 미노리 뒤끝: 성난 군중 1번 소환
-    log.push({cls:'soc',text:'미노리: 붉은겨울에서 이 정도 탄압은 인삿말도 안 된다!!!!'});
+    log.push({cls:'chat',text:'미노리: 붉은겨울에서 이 정도 탄압은 인삿말도 안 된다!!!!'});
     if(countAlive(mySide)<BATTLE_MAX){
       var cw=makeToken('citizen_wave');
       cw.alive=true;cw.poisonImmune=false;cw._mySide=mySide;cw._citizenCount=1;
@@ -4795,16 +4808,16 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   for(var round=0;round<maxRounds;round++){
     var aliveA=getAlive(a),aliveB=getAlive(b);
-    if(aliveA.length===0||aliveB.length===0)break;
-    // 미노리 패시브: 아군에서 마지막으로 남으면 패배
+    // 미노리 패시브: 아군에서 마지막으로 남으면 패배 (종료 판정보다 먼저)
     if(aliveA.length===1&&aliveA[0].baseId==='red_winter_minori'){
       log.push({cls:'kill',text:'[패시브] '+aliveA[0].name+': 마지막으로 남아 패배!'});
-      aliveA[0].alive=false;break;
+      aliveA[0].alive=false;aliveA=getAlive(a);
     }
     if(aliveB.length===1&&aliveB[0].baseId==='red_winter_minori'){
       log.push({cls:'kill',text:'[패시브] '+aliveB[0].name+': 마지막으로 남아 패배!'});
-      aliveB[0].alive=false;break;
+      aliveB[0].alive=false;aliveB=getAlive(b);
     }
+    if(aliveA.length===0||aliveB.length===0)break;
     var atkArr2,defArr2;
     var nextAtk;
     if(coinSeq){
