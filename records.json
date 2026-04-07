@@ -6535,9 +6535,76 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T03:26:20",
+          "placement": 2,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마코토(수영복)",
+              "baseId": "makoto",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Makoto_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 18,
+              "hp": 16,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
@@ -6547,7 +6614,7 @@
           "quests": [
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -6573,7 +6640,7 @@
             },
             {
               "id": "skin10",
-              "progress": 3,
+              "progress": 6,
               "completed": false
             },
             {
