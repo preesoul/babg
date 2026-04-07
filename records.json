@@ -2324,7 +2324,7 @@
           ]
         }
       ],
-      "points": 10,
+      "points": 5,
       "questState": {
         "daily": {
           "date": "2026-04-08",
@@ -2395,7 +2395,8 @@
         "shiroko",
         "lin",
         "ui",
-        "wakamo"
+        "wakamo",
+        "hoshino"
       ],
       "recruitedTier7": [
         "millennium_nameless",
