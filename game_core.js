@@ -3365,7 +3365,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       for(var _nli=0;_nli<mySide.length;_nli++){if(mySide[_nli].alive){leftmost=mySide[_nli];break;}}
       if(leftmost){
         leftmost.atk+=nonomiStone;leftmost.hp+=nonomiStone;
-        log.push({cls:'soc',text:'[개전] '+u.name+': '+leftmost.name+'에게 +'+nonomiStone+'/+'+nonomiStone+' (소비 청휘석 '+(G.nonomiStoneSinceJoined||0)+'의 절반)'});
+        log.push({cls:'soc',text:'[개전] '+u.name+': '+leftmost.name+'에게 +'+nonomiStone+'/+'+nonomiStone+' (소비 청휘석 '+(G.nonomiStoneSinceJoined||0)+(u.isSkin?'':' 의 절반')+')'});
       }
     } else {
       log.push({cls:'soc',text:'[개전] '+u.name+': 소비 청휘석 없음 (0)'});
