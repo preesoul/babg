@@ -920,7 +920,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260408a"></script>
+<script src="game_core.js?v=20260408b"></script>
 <script>
 
 var _endMusic=null;
@@ -2905,7 +2905,7 @@ function renderRoster(){
         e.stopPropagation();
         hideTooltip();
         var tip=getTooltipEl();if(!tip)return;
-        tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">아직 영입한 적 없는 <span style="color:#ffd700">7성 유니크</span>입니다.<br><span style="color:#ffd700">직접 영입하면 공개됩니다.</span></div></div>';
+        tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">아직 만난 적 없는 카드입니다.<br><span style="color:#ffd700">조우하면 공개됩니다.</span></div></div>';
         tip.style.display='block';tip.classList.add('visible');
         var rect=el.getBoundingClientRect();
         var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
