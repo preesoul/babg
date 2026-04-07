@@ -6163,7 +6163,7 @@ function miniCardHtml(m){
   if(hasKw(m,'ambush')) mIconBar+='<span class="abi">'+SVG_ICONS.ambush+'</span>';
   var mIconHtml=mIconBar?'<div class="ability-icons">'+mIconBar+'</div>':'';
   return '<div class="'+cls+'"'+baseAttr+'>'+bgTag+sLogoTag+mIconHtml+'<div class="mini-inner"><div class="name">'+m.name+'</div>'+
-    '<div class="mini-stats"><div class="mini-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="mini-hp" style="'+(m.maxHp?(m.hp<m.maxHp?'color:#ff4444;font-weight:900':''):statColor(m.baseId,m.isSkin,'hp',m.hp))+'">'+m.hp+'</div></div>'+
+    '<div class="mini-stats"><div class="mini-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="mini-hp" style="'+(m.maxHp&&m.hp<m.maxHp?'color:#ff4444;font-weight:900':statColor(m.baseId,m.isSkin,'hp',m.hp))+'">'+m.hp+'</div></div>'+
     kwHtml+miniAbilHtml+counterHtml+'</div></div>';
 }
 
