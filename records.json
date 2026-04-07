@@ -1605,64 +1605,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-06T15:25:57",
-          "placement": 3,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "세리카",
-              "baseId": "serika",
-              "atk": 32,
-              "hp": 32,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Serika.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 90,
-              "hp": 81,
-              "tier": 7,
-              "kw": [
-                "pierce",
-                "taunt",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 17,
-              "hp": 17,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "아오이",
-              "baseId": "aoi",
-              "atk": 17,
-              "hp": 16,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Aoi.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T15:46:13",
           "placement": 7,
           "turn": 12,
@@ -2305,21 +2247,96 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T15:04:54",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 23,
+              "hp": 21,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 7,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 9,
+              "hp": 9,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 35,
+              "hp": 31,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 15,
       "questState": {
         "daily": {
-          "date": "2026-04-07",
+          "date": "2026-04-08",
           "quests": [
             {
-              "id": "millennium10",
-              "progress": 15,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "kill10",
-              "progress": 38,
+              "progress": 58,
               "completed": true
             },
             {
