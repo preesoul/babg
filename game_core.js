@@ -398,7 +398,7 @@ var ABILITY_DESCS = {
   reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
   saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
-  shun:     {type:'패시브',desc:'공격에 적이 쓰러지면,\n무작위 다음 대상에게 남은 데미지를 줍니다.',skinEffect:'어린이 슌: 추가 공격',skinEffectDesc:'패시브: 공격에 적이 쓰러지면,\n무작위 다음 대상을 <span style="color:#ffd700;font-weight:700">추가로 공격</span>합니다.'},
+  shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
@@ -834,6 +834,8 @@ function applySkinKwTransform(tmpl, unit){
   if(tmpl.id==='reijo'){if(unit.kw.indexOf('pierce')===-1)unit.kw.push('pierce');}
   // 이치카 수영복: 부활 추가
   if(tmpl.id==='ichika'){if(unit.kw.indexOf('reborn')===-1)unit.kw.push('reborn');}
+  // 어린이 슌: 보호막 추가
+  if(tmpl.id==='shun'){if(unit.kw.indexOf('shield')===-1)unit.kw.push('shield');}
 }
 
 function makeMinion(template, skinUnit) {
