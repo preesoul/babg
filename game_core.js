@@ -2065,12 +2065,16 @@ function triggerBattlecry(m, p) {
   var id=m.baseId;
   if(!BC_IDS[id]) return;
   if(G.permanentAbilityBan) return;
-  if(p===G.players[0]) playSfx('battlecry',0.3);
-  // 미치루 연쇄 중이면 순수 1회만 발동 (시즈코/린 증폭 안 됨)
+  // 미치루 연쇄는 다른 유닛의 첫인사를 복제 발동하는 로직이라 _bcFired 체크 우회.
   if(G._michiruChaining){
+    if(p===G.players[0]) playSfx('battlecry',0.3);
     _doBC(m,p);
     return;
   }
+  // 이미 첫인사를 발동한 유닛은 재발동 금지 (벤치 왕복 중복 발동 방지)
+  if(m._bcFired) return;
+  m._bcFired=true;
+  if(p===G.players[0]) playSfx('battlecry',0.3);
   var linRepeat=1+getLinExtraRecruit(p);
   var shizukoRepeat=getShizukoExtraRecruit(p);
   var totalRepeat=linRepeat+shizukoRepeat;
@@ -5054,6 +5058,15 @@ function startBattle() {
   if(alive.length===0)return;
   var opp=alive[Math.floor(Math.random()*alive.length)];
   _playBattleHiddenSfx(p,opp);
+  // 적 7성/히든 카드 마주치면 자동 해금 (학생명부 노출용)
+  if(opp&&opp.board){
+    for(var _ei=0;_ei<opp.board.length;_ei++){
+      var _eu=opp.board[_ei];
+      if(_eu&&(_eu.tier>=7||_eu.isHidden)&&_eu.baseId){
+        if(typeof recordRecruitTier7==='function')recordRecruitTier7(_eu.baseId);
+      }
+    }
+  }
 
   var boardSnapshot=p.board.map(function(u){
     return{id:u.id,atk:u.atk,hp:u.hp,maxHp:u.maxHp,kw:(u.kw||[]).slice(),name:u.name};
