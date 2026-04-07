@@ -5254,7 +5254,8 @@
               "img": "Sakurako.png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-07T00:20:53",
