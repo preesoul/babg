@@ -4059,6 +4059,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   _G.permanentAbilityBan=false;
   _G.battleSchoolBuff={};
+  _G._reisaSummonedKazusa=false;
+  _G._kazusaSummonedReisa=false;
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
@@ -4308,10 +4310,11 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     else if(unit.baseId==='reisa'){
-      // 레이사 버티기: 카즈사 소환 (전투 전용 토큰)
-      if(countAlive(side)<BATTLE_MAX){
+      // 레이사 버티기: 카즈사 소환 (전투 중 1회)
+      if(!_G._reisaSummonedKazusa&&countAlive(side)<BATTLE_MAX){
         var kazTmpl=findAnyChar('kazusa');
         if(kazTmpl){
+          _G._reisaSummonedKazusa=true;
           var kaz={id:'kaz_'+Math.random().toString(36).substr(2,4),baseId:'kazusa',isToken:true,
             name:kazTmpl.name,school:kazTmpl.school,tier:kazTmpl.tier,
             atk:unit.isSkin?(kazTmpl.atk*2+1):kazTmpl.atk,hp:unit.isSkin?(kazTmpl.hp*2+1):kazTmpl.hp,
@@ -4861,11 +4864,12 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
 
-          // 카즈사 패시브: 킬 시 레이사 소환 (전투 전용 토큰)
-          if(attacker.baseId==='kazusa'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
+          // 카즈사 패시브: 킬 시 레이사 소환 (전투 중 1회)
+          if(attacker.baseId==='kazusa'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked&&!_G._kazusaSummonedReisa){
             if(countAlive(atkArr2)<BATTLE_MAX){
               var reiTmpl=findAnyChar('reisa');
               if(reiTmpl){
+                _G._kazusaSummonedReisa=true;
                 var rei={id:'rei_'+Math.random().toString(36).substr(2,4),baseId:'reisa',isToken:true,
                   name:reiTmpl.name,school:reiTmpl.school,tier:reiTmpl.tier,
                   atk:attacker.isSkin?(reiTmpl.atk*2+1):reiTmpl.atk,hp:attacker.isSkin?(reiTmpl.hp*2+1):reiTmpl.hp,
