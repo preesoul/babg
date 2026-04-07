@@ -300,7 +300,7 @@ var ABILITY_DESCS = {
   himari:   {type:'개전',desc:'아군 2인에게 무작위 기본능력 키워드를 추가합니다.',skinEffect:'임전 히마리: 아군 전원',skinEffectDesc:'개전: 아군 <span style="color:#ffd700;font-weight:700">전원</span>에게 무작위 기본능력 키워드를 추가합니다.'},
   rio:      {type:'개전',desc:'아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.',skinEffect:'임전 리오: 적 학교 태그 삭제',skinEffectDesc:'개전: 아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.\n<span style="color:#ffd700;font-weight:700">적의 학교 태그를 삭제합니다.</span>\n이 효과는 가장 먼저 발동합니다.'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',skinEffect:'드레스 아코: +8/+8',skinEffectDesc:'뒤끝: 이번 전투에서 게헨나 학생들에게 <span style="color:#ffd700;font-weight:700">+8/+8</span>을 부여합니다.'},
-  kazusa:   {type:'패시브',desc:'관통. 공격으로 적을 쓰러뜨렸을 시,\n레이사를 불러옵니다.',skinEffect:'밴드 카즈사: 부활 추가',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">부활</span>, 관통. 패시브: 공격으로 적을 쓰러뜨렸을 시,\n레이사를 불러옵니다.'},
+  kazusa:   {type:'패시브',desc:'관통. 공격으로 적을 쓰러뜨렸을 시,\n레이사를 불러옵니다.',skinEffect:'밴드 카즈사: 마법소녀 레이사 소환',skinEffectDesc:'관통. 패시브: 공격으로 적을 쓰러뜨렸을 시,\n마법소녀 레이사를 불러옵니다.'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (3/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',skinEffect:'수영복 히후미: 페로로님 6/2',skinEffectDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">6/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',skinEffect:'수영복 아즈사: -4 데미지',skinEffectDesc:'뒤끝: 적 전체에게 <span style="color:#ffd700;font-weight:700">-4</span>의 데미지를 줍니다.'},
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 두 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
@@ -396,7 +396,7 @@ var ABILITY_DESCS = {
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
-  reisa:    {type:'버티기',desc:'카즈사를 불러옵니다.',skinEffect:'마법소녀 레이사: 스킨 카즈사 소환',skinEffectDesc:'버티기: 스킨 카즈사를 불러옵니다.'},
+  reisa:    {type:'버티기',desc:'카즈사를 불러옵니다.',skinEffect:'마법소녀 레이사: 밴드 카즈사 소환',skinEffectDesc:'버티기: 밴드 카즈사를 불러옵니다.'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
   hanako:   {type:'',desc:'',skinEffect:'수영복 하나코: 개전 체력+5',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+0/+5</span>를 부여합니다.'},
   ichika:   {type:'',desc:'',skinEffect:'수영복 이치카: 부활 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">부활</span>'},
