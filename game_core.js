@@ -403,7 +403,7 @@ var ABILITY_DESCS = {
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
-  red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'8턴 이상, 스케쥴 Lv.1 유지 시 리롤 100% 등장.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
+  red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'10턴 이상, 스케쥴 Lv.1 유지 시 리롤 60% 등장.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
@@ -933,8 +933,8 @@ function checkHiddenConditionsFor(p) {
   // 말쿠트: 밀레니엄 토큰 소환 10회+
   if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
     eligible.push('millennium_malkuth');
-  // 미노리: 8턴까지 스케쥴 1레벨 유지
-  if(notOwned('red_winter_minori')&&inPool('red_winter_minori')&&G.turn>=8&&p.tier===1)
+  // 미노리: 10턴까지 스케쥴 1레벨 유지
+  if(notOwned('red_winter_minori')&&inPool('red_winter_minori')&&G.turn>=10&&p.tier===1)
     eligible.push('red_winter_minori');
   // === 누적 조건 (Lv 무관) ===
   // 쿠즈노하: 백귀야행 13명 전원 구매/발견 기록
@@ -1006,7 +1006,7 @@ function injectHiddenToShop() {
     millennium_nameless:0.60,
     millennium_malkuth:0.60,
     hkyk_kuzunoha:0.60,
-    red_winter_minori:1.00
+    red_winter_minori:0.60
   };
   for(var h=0;h<eligible.length;h++){
     var hid=eligible[h];
