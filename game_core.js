@@ -974,13 +974,13 @@ function injectHiddenToShop() {
   var _baseRate=_tierRates[_pTier]||0;
   // 단일 학교 전용/세레모니형 7성: 6T 제한 자체가 난이도라 고정 확률 유지
   var _singleSchoolRates={
-    hkyk_saikyo:0.05,
-    gehenna_traingun:0.10,
-    trinity_mika:0.10,
-    trinity_seia:0.30,
-    Kei_usb:0.30,
-    millennium_nameless:0.30,
-    millennium_malkuth:0.80,
+    hkyk_saikyo:0.60,
+    gehenna_traingun:0.60,
+    trinity_mika:0.60,
+    trinity_seia:0.60,
+    Kei_usb:0.60,
+    millennium_nameless:0.60,
+    millennium_malkuth:0.60,
     hkyk_kuzunoha:0.60
   };
   for(var h=0;h<eligible.length;h++){
@@ -2905,13 +2905,7 @@ function aiCheckHidden(p) {
   var eligible=checkHiddenConditionsFor(p);
   for(var h=0;h<eligible.length;h++){
     var hid=eligible[h];
-    var rate=0.30;
-    if(hid==='hkyk_saikyo') rate=0.05;
-    else if(hid==='gehenna_traingun'||hid==='trinity_mika') rate=0.10;
-    else if(hid==='hkyk_kuzunoha') rate=0.60;
-    else if(hid==='Shiroko_Terror') rate=0.50;
-    else if(hid==='shanhai_kiki') rate=0.60;
-    else if(hid==='millennium_malkuth') rate=0.80;
+    var rate=0.60;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
       if(!htmpl||G.pool[htmpl.id]<=0) continue;
