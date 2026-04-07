@@ -4854,31 +4854,21 @@ function runBattle(boardA, boardB, startWithA, opts) {
               if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
             }
           }
-          // 슌 패시브: 킬 시 연쇄 (기본: 오버킬 데미지 전달, 스킨: 추가 공격 연쇄)
-          // 별도 스텝으로 분리해서 애니메이션 재생
+          // 슌 패시브: 킬 시 다음 무작위 대상 추가 공격 연쇄 (기본/스킨 동일)
+          // 스킨(어린이)은 보호막 추가만 다름. 추가 공격 로직은 동일.
           if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
             if(!_G._shunPendingSteps)_G._shunPendingSteps=[];
-            var _shunOverflow=hitResult.overflow;
             var _shunChain=0;
             while(_shunChain<20&&attacker.alive){
               var shunNext=findTarget(defArr2);
               if(!shunNext)break;
               var shunDefI2=(defSide==='a')?a.indexOf(shunNext):b.indexOf(shunNext);
               var shunLog=[];
-              if(attacker.isSkin){
-                shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
-                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true);
-                _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
-                if(!shunNext.alive){_shunChain++;continue;}
-                break;
-              } else {
-                if(_shunOverflow<=0)break;
-                shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': 남은 데미지 '+_shunOverflow+'을(를) '+shunNext.name+'에게!'});
-                var shunHit=dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true,_shunOverflow);
-                _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
-                if(!shunNext.alive&&shunHit&&shunHit.overflow>0){_shunOverflow=shunHit.overflow;_shunChain++;continue;}
-                break;
-              }
+              shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
+              dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true);
+              _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
+              if(!shunNext.alive){_shunChain++;continue;}
+              break;
             }
           }
         }
