@@ -5462,7 +5462,8 @@
               "img": "Michiru_(Dress).png",
               "school": "백귀야행"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 4,
