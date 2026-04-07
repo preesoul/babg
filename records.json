@@ -3361,17 +3361,94 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T00:15:00",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 11,
+              "hp": 13,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미(수영복)",
+              "baseId": "hasumi",
+              "atk": 28,
+              "hp": 22,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hasumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 21,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "trinity10",
-              "progress": 4,
-              "completed": false
+              "progress": 15,
+              "completed": true
             },
             {
               "id": "win1",
@@ -3391,7 +3468,7 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 4,
+              "progress": 6,
               "completed": false
             },
             {
@@ -3401,8 +3478,8 @@
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ]
         },
