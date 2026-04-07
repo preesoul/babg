@@ -18,7 +18,7 @@ var CHARS = [
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
   {id:'juri',    name:'주리',   school:'게헨나',  tier:1,atk:2,hp:2,kw:[],             skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
-  {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:['reborn'],    skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
+  {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:[],            skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:2,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
   // 밀레니엄 2학년
@@ -289,7 +289,7 @@ var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, mille
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
   juri:     {type:'뒤끝',desc:'다른 아군이 남아 있다면\n<팬짱>을 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.',skinEffect:'웨이트리스 주리: 팬짱 2마리 소환',skinEffectDesc:'뒤끝: 다른 아군이 남아 있다면\n<팬짱>을 <span style="color:#ffd700;font-weight:700">2마리</span> 소환합니다. (1/1)\n이번 게임에서 아군 팬짱이 쓰러진 수만큼\n+1/+1이 추가됩니다.'},
-  chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 아군 두 명에게 부여',skinEffectDesc:'뒤끝: 아군 무작위 <span style="color:#ffd700;font-weight:700">2인에게</span> 보호막을 부여합니다.'},
+  chinatsu: {type:'뒤끝',desc:'아군 무작위 1인에게 보호막을 부여합니다.',skinEffect:'온천 치나츠: 부활 추가',skinEffectDesc:'부활. 뒤끝: 아군 무작위 1인에게 보호막을 부여합니다.'},
   kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 지켜줌 뒤집기',skinEffectDesc:'개전: 상대의 <span style="color:#ffd700;font-weight:700">지켜줌을 해제하고, 지켜줌 없던 학생에게 지켜줌을 부여</span>합니다.\n배치를 역순으로 뒤집습니다.'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +2/+2',skinEffect:'메이드 미도리: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +2/+2',skinEffect:'메이드 모모이: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
@@ -795,6 +795,8 @@ function newGame() {
 // 스킨(황금) 키워드 변환: 각 캐릭터 스킨 효과 (원본 능력은 유지됨)
 function applySkinKwTransform(tmpl, unit){
   if(tmpl.id==='shimiko'){if(unit.kw.indexOf('cleave')===-1)unit.kw.push('cleave');if(unit.kw.indexOf('shield')===-1)unit.kw.push('shield');}
+  // 치나츠 온천: 부활 추가
+  if(tmpl.id==='chinatsu'){if(unit.kw.indexOf('reborn')===-1)unit.kw.push('reborn');}
   // 아리스 메이드: 관통→광역 (변경)
   if(tmpl.id==='arisu'){var pi=unit.kw.indexOf('pierce');if(pi!==-1)unit.kw.splice(pi,1);if(unit.kw.indexOf('cleave')===-1)unit.kw.push('cleave');}
   // 히나 드레스: 광역 유지 + 보호막+연사 추가
@@ -3654,14 +3656,13 @@ function _doDR(unit, mySide, otherSide, log) {
     }
   }
   else if(id==='chinatsu'){
-    // 아군 무작위 1인에게 보호막 부여 (황금: 2인) — 학교 제한 해제
-    var count=unit.isSkin?2:1;
+    // 아군 무작위 1인에게 보호막 부여 (스킨도 1인 동일)
     var candidates=[];
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&!hasKw(mySide[i],'shield'))candidates.push(mySide[i]);}
-    candidates.sort(function(){return Math.random()-0.5;});
-    for(var i=0;i<Math.min(count,candidates.length);i++){
-      addKw(candidates[i],'shield');
-      log.push({cls:'shield',text:'[뒤끝] '+unit.name+': '+candidates[i].name+'에게 보호막 부여!'});
+    if(candidates.length>0){
+      var pick=candidates[Math.floor(Math.random()*candidates.length)];
+      addKw(pick,'shield');
+      log.push({cls:'shield',text:'[뒤끝] '+unit.name+': '+pick.name+'에게 보호막 부여!'});
     }
   }
   else if(id==='kasumi'||id==='nagusa'){
