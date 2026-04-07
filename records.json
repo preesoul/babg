@@ -6069,26 +6069,100 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T03:17:51",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리스(메이드)",
+              "baseId": "arisu",
+              "atk": 60,
+              "hp": 50,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "cleave",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Arisu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 23,
+              "hp": 13,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 23,
+              "hp": 13,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "모모이(메이드)",
+              "baseId": "momoi",
+              "atk": 40,
+              "hp": 40,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Momoi_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 49,
+              "hp": 49,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 21,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 8,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 53,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -6099,17 +6173,17 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 3,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
