@@ -4966,81 +4966,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T17:29:58",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 10,
-              "hp": 10,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 23,
-              "hp": 29,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "시미코(악의 간부)",
-              "baseId": "shimiko",
-              "atk": 42,
-              "hp": 38,
-              "tier": 2,
-              "kw": [
-                "cleave",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네(아이돌)",
-              "baseId": "mine",
-              "atk": 17,
-              "hp": 17,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Mine_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 14,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-07T00:20:53",
           "placement": 8,
           "turn": 10,
@@ -5686,9 +5611,63 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T11:12:26",
+          "placement": 8,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "하이네(인터뷰)",
+              "baseId": "haine",
+              "atk": 38,
+              "hp": 26,
+              "tier": 1,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Haine_(Interview).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "하이네",
+              "baseId": "haine",
+              "atk": 11,
+              "hp": 10,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Haine.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "하이네",
+              "baseId": "haine",
+              "atk": 11,
+              "hp": 10,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Haine.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 9,
+              "hp": 9,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 8,
+      "points": 10,
       "questState": {
         "daily": {
           "date": "2026-04-07",
