@@ -5402,7 +5402,7 @@
           ]
         }
       ],
-      "points": 6,
+      "points": 1,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -5470,7 +5470,8 @@
         "serika",
         "shiroko",
         "kaya",
-        "himari"
+        "himari",
+        "wakamo"
       ],
       "recruitedTier7": [
         "millennium_death_momoi",
