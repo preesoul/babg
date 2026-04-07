@@ -313,7 +313,7 @@ var ABILITY_DESCS = {
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.'},
-  satsuki:  {type:'뒤끝',desc:'상대 필드의 무작위 1명을 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2명 빼앗기',skinEffectDesc:'뒤끝: 상대 필드의 무작위 <span style="color:#ffd700;font-weight:700">2명</span>을 1턴간 빼앗습니다.'},
+  satsuki:  {type:'뒤끝',desc:'자신을 쓰러뜨린 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗기',skinEffectDesc:'뒤끝: 자신을 쓰러뜨린 상대를 <span style="color:#ffd700;font-weight:700">2턴</span>간 빼앗습니다.'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',skinEffect:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공격력/체력, 자폭)'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
@@ -3769,19 +3769,18 @@ function _doDR(unit, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 당고 '+count+'개 소환! (각 1/1)'});
   }
   else if(id==='satsuki'){
-    // 뒤끝: 적 무작위 1명(스킨: 2명)을 1턴간 빼앗기
-    var stealCount=unit.isSkin?2:1;
-    for(var _stc=0;_stc<stealCount;_stc++){
-      var stealCandidates=[];
-      for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive&&!otherSide[i]._stolenTurns)stealCandidates.push(i);}
-      if(stealCandidates.length===0)break;
-      var stealIdx=stealCandidates[Math.floor(Math.random()*stealCandidates.length)];
-      var stolen=otherSide[stealIdx];
-      otherSide.splice(stealIdx,1);
-      stolen._stolenTurns=1;
-      stolen._stolenFrom=otherSide;
-      mySide.push(stolen);
-      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+stolen.name+'을(를) 1턴간 빼앗았다!'});
+    // 뒤끝: 자신을 죽인 상대를 빼앗기 (1턴, 스킨: 2턴)
+    if(unit._killedBy&&unit._killedBy.alive){
+      var stolen=unit._killedBy;
+      var stolenIdx=otherSide.indexOf(stolen);
+      if(stolenIdx!==-1){
+        var turns=unit.isSkin?2:1;
+        otherSide.splice(stolenIdx,1);
+        stolen._stolenTurns=turns;
+        stolen._stolenFrom=otherSide;
+        mySide.push(stolen);
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+stolen.name+'을(를) '+turns+'턴간 빼앗았다!'});
+      }
     }
   }
   else if(id==='yuzu'){
