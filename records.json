@@ -5225,69 +5225,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T01:11:22",
-          "placement": 8,
-          "turn": 9,
-          "tier": 5,
-          "board": [
-            {
-              "name": "주리",
-              "baseId": "juri",
-              "atk": 2,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Juri.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "하이네",
-              "baseId": "haine",
-              "atk": 6,
-              "hp": 3,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Haine.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "아유무",
-              "baseId": "ayumu",
-              "atk": 5,
-              "hp": 2,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Ayumu.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "모모카",
-              "baseId": "momoka",
-              "atk": 4,
-              "hp": 3,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Momoka.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "모모카",
-              "baseId": "momoka",
-              "atk": 4,
-              "hp": 3,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Momoka.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T03:36:32",
           "placement": 1,
           "turn": 16,
@@ -5887,9 +5824,81 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T15:19:42",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 17,
+              "hp": 17,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "세리카(수영복)",
+              "baseId": "serika",
+              "atk": 87,
+              "hp": 83,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Serika_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "아야네(수영복)",
+              "baseId": "ayane",
+              "atk": 37,
+              "hp": 41,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Ayane_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "호시노",
+              "baseId": "hoshino",
+              "atk": 23,
+              "hp": 25,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Hoshino.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 28,
+              "hp": 24,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 6,
+      "points": 13,
       "questState": {
         "daily": {
           "date": "2026-04-08",
@@ -5901,12 +5910,12 @@
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 4,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 3,
+              "progress": 5,
               "completed": false
             }
           ],
