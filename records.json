@@ -7187,9 +7187,84 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T10:31:57",
+          "placement": 6,
+          "turn": 13,
+          "tier": 5,
+          "board": [
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 9,
+              "hp": 7,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아루",
+              "baseId": "aru",
+              "atk": 6,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Aru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아루",
+              "baseId": "aru",
+              "atk": 7,
+              "hp": 8,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "ambush",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Aru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카요코",
+              "baseId": "kayoko",
+              "atk": 7,
+              "hp": 7,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kayoko.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 17,
+      "points": 29,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
@@ -7225,8 +7300,8 @@
             },
             {
               "id": "skin10",
-              "progress": 8,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win3",
