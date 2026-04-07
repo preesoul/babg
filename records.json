@@ -3809,9 +3809,84 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T11:46:06",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 23,
+              "hp": 19,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하스미(수영복)",
+              "baseId": "hasumi",
+              "atk": 41,
+              "hp": 33,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Hasumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미(수영복)",
+              "baseId": "hasumi",
+              "atk": 41,
+              "hp": 33,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Hasumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사야",
+              "baseId": "saya",
+              "atk": 33,
+              "hp": 32,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Saya.png",
+              "school": "산해경"
+            },
+            {
+              "name": "이부키(수영복)",
+              "baseId": "ibuki",
+              "atk": 33,
+              "hp": 35,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ibuki_(Swimsuit).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-07",
