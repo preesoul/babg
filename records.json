@@ -6378,7 +6378,10 @@
     },
     "누크": {
       "records": [],
-      "points": 0
+      "points": 0,
+      "recruitedTier7": [
+        "millennium_death_momoi"
+      ]
     }
   }
 }
