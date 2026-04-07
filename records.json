@@ -6604,9 +6604,83 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T04:12:41",
+          "placement": 8,
+          "turn": 10,
+          "tier": 5,
+          "board": [
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 4,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 9,
+              "hp": 2,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 11,
       "recruitedTier7": [
         "millennium_death_momoi"
       ],
@@ -6616,8 +6690,8 @@
           "quests": [
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "millennium10",
