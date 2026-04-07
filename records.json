@@ -4822,75 +4822,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T16:49:21",
-          "placement": 8,
-          "turn": 10,
-          "tier": 6,
-          "board": [
-            {
-              "name": "모모이",
-              "baseId": "momoi",
-              "atk": 3,
-              "hp": 5,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈",
-              "baseId": "yuzu",
-              "atk": 2,
-              "hp": 3,
-              "tier": 2,
-              "kw": [
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Yuzu.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 5,
-              "hp": 5,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리",
-              "baseId": "midori",
-              "atk": 2,
-              "hp": 2,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Midori.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "에이미(수영복)",
-              "baseId": "eimi",
-              "atk": 7,
-              "hp": 9,
-              "tier": 3,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Eimi_(Swimsuit).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T16:58:34",
           "placement": 8,
           "turn": 11,
@@ -5546,9 +5477,82 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T09:27:55",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치나츠(온천)",
+              "baseId": "chinatsu",
+              "atk": 19,
+              "hp": 25,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Chinatsu_(Hot_Spring).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치나츠(온천)",
+              "baseId": "chinatsu",
+              "atk": 19,
+              "hp": 25,
+              "tier": 2,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Chinatsu_(Hot_Spring).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 15,
+              "hp": 17,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토(수영복)",
+              "baseId": "makoto",
+              "atk": 21,
+              "hp": 21,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Makoto_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나(사복)",
+              "baseId": "sena",
+              "atk": 28,
+              "hp": 24,
+              "tier": 5,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Sena_(Casual).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-07",
