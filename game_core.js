@@ -3974,8 +3974,9 @@ function _doDR(unit, mySide, otherSide, log) {
   // ===== 아비도스 뒤끝 =====
   else if(id==='ayane'){
     // 아야네 뒤끝: 다음 턴 청휘석 +1
-    G._ayaneDeathsThisBattle=(G._ayaneDeathsThisBattle||0)+(unit.isSkin?2:1);
-    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다음 턴 청휘석 +1!'});
+    var _ayaneBonus=unit.isSkin?2:1;
+    G._ayaneDeathsThisBattle=(G._ayaneDeathsThisBattle||0)+_ayaneBonus;
+    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 다음 턴 청휘석 +'+_ayaneBonus+'!'});
   }
   else if(id==='hoshino'){
     // 호시노 뒤끝: 자신의 공격력과 체력을 무작위 아군 1인에게 부여
