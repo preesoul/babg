@@ -5190,81 +5190,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T00:31:53",
-          "placement": 1,
-          "turn": 17,
-          "tier": 5,
-          "board": [
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 34,
-              "hp": 31,
-              "tier": 1,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 25,
-              "hp": 22,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "하루카(새해)",
-              "baseId": "haruka",
-              "atk": 33,
-              "hp": 31,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "렌게(수영복)",
-              "baseId": "renge",
-              "atk": 15,
-              "hp": 13,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "세리카(수영복)",
-              "baseId": "serika",
-              "atk": 124,
-              "hp": 120,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-07T00:48:06",
           "placement": 8,
           "turn": 11,
@@ -5889,9 +5814,44 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T14:44:29",
+          "placement": 2,
+          "turn": 29,
+          "tier": 5,
+          "board": [
+            {
+              "name": "무츠키(새해)",
+              "baseId": "mutsuki",
+              "atk": 203,
+              "hp": 123,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mutsuki_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미노리(성난 군중)",
+              "baseId": "red_winter_minori",
+              "atk": 7,
+              "hp": 11,
+              "tier": 7,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Revolution.png",
+              "school": "붉은겨울"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-07",
