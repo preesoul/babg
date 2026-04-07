@@ -5892,7 +5892,8 @@
               "img": "Mari_(Idol).png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 15,
