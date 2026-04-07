@@ -7115,8 +7115,130 @@
       "points": 0
     },
     "CHOTORO": {
-      "records": [],
-      "points": 0
+      "records": [
+        {
+          "date": "2026-04-07T10:22:42",
+          "placement": 7,
+          "turn": 13,
+          "tier": 5,
+          "board": [
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 9,
+              "hp": 7,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 7,
+              "hp": 9,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키",
+              "baseId": "ibuki",
+              "atk": 2,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ibuki.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 7,
+      "questState": {
+        "daily": {
+          "date": "2026-04-07",
+          "quests": [
+            {
+              "id": "play3",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "discover3",
+              "progress": 2,
+              "completed": false
+            },
+            {
+              "id": "gehenna10",
+              "progress": 13,
+              "completed": true
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-06",
+          "quests": [
+            {
+              "id": "play10",
+              "progress": 1,
+              "completed": false
+            },
+            {
+              "id": "hidden_win",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 2,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        }
+      }
     }
   }
 }
