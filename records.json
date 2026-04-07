@@ -3286,16 +3286,90 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T00:00:05",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 27,
+              "hp": 30,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 16,
+              "hp": 18,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "호시노",
+              "baseId": "hoshino",
+              "atk": 26,
+              "hp": 26,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Hoshino.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 35,
+              "hp": 37,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 25,
+              "hp": 25,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-07",
           "quests": [
             {
               "id": "trinity10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -3305,8 +3379,8 @@
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 4,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -3316,7 +3390,7 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 2,
+              "progress": 4,
               "completed": false
             },
             {
@@ -3326,7 +3400,7 @@
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
