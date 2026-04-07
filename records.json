@@ -5225,80 +5225,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T03:36:32",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "이름없는 신들의 왕녀",
-              "baseId": "millennium_nameless",
-              "atk": 34,
-              "hp": 30,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/millennium_Nameless_God.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 37,
-              "hp": 39,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "모모이(메이드)",
-              "baseId": "momoi",
-              "atk": 31,
-              "hp": 31,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Momoi_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 18,
-              "hp": 20,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카린",
-              "baseId": "karin",
-              "atk": 21,
-              "hp": 20,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Karin.png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-07T04:16:01",
           "placement": 1,
           "turn": 16,
@@ -5896,16 +5822,87 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T15:43:56",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마시로(수영복)",
+              "baseId": "mashiro",
+              "atk": 56,
+              "hp": 50,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Mashiro_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 21,
+              "hp": 21,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 21,
+              "hp": 21,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "코하루(수영복)",
+              "baseId": "koharu",
+              "atk": 45,
+              "hp": 43,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Koharu_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 35,
+              "hp": 37,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 13,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 3,
+              "progress": 5,
               "completed": false
             },
             {
@@ -5915,7 +5912,7 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             }
           ],
