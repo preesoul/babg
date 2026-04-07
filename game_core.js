@@ -929,14 +929,14 @@ function checkHiddenConditionsFor(p) {
 
 // 백화요란 계승전: 히든 액션카드
 var HKYK_SHOWDOWN_SPELL = {
-  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 연사, 부활',target:'auto',once:true,
+  id:'hkyk_showdown',name:'백화요란 계승전',cost:3,tier:7,desc:'유카리/렌게/키쿄/나구사에게\n+10/+10, 보호막, 연사, 부활, 독사굴',target:'auto',once:true,
   effect:function(G2){
     var p=G2.players[0];
     var targets=['yukari','renge','kikyou','nagusa'];
     for(var i=0;i<p.board.length;i++){
       if(targets.indexOf(p.board[i].baseId)!==-1){
         p.board[i].atk+=10;p.board[i].hp+=10;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+10;
-        addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');
+        addKw(p.board[i],'shield');addKw(p.board[i],'windfury');addKw(p.board[i],'reborn');addKw(p.board[i],'poison');
         p.board[i]._keiseisenBuffed=true;
       }
     }
