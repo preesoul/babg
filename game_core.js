@@ -322,7 +322,7 @@ var ABILITY_DESCS = {
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.'},
   satsuki:  {type:'뒤끝',desc:'자신을 쓰러뜨린 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗기',skinEffectDesc:'뒤끝: 자신을 쓰러뜨린 상대를 <span style="color:#ffd700;font-weight:700">2턴</span>간 빼앗습니다.'},
-  makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 아군 수×2 공격력/체력, 자폭',skinEffect:'수영복 마코토: 아군 수×4\n비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공격력/체력, 자폭)'},
+  makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
   noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',skinEffect:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',skinEffectDesc:'버티기: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
@@ -3121,11 +3121,9 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 적 전체 -'+debuff+'/-'+debuff});
   }
   else if(id==='makoto'){
-    // 마코토 → 비행선으로 교체
-    var allyCount=0;for(var i=0;i<mySide.length;i++)if(mySide[i].alive)allyCount++;
-    var mult=u.isSkin?4:2;
+    // 마코토 → 비행선으로 교체 (비행선 공/체 = 마코토 현재 공/체 × 2)
     var as=makeToken('airship');
-    as.atk=allyCount*mult;as.hp=allyCount*mult;as.alive=true;as.poisonImmune=false;
+    as.atk=(u.atk||0)*2;as.hp=(u.hp||0)*2;as.alive=true;as.poisonImmune=false;
     as.isSkin=u.isSkin;as.school='게헨나';as.baseId='airship';
     as.makotoGolden=u.isSkin; // 비행선 DR에서 파마머리 마코토 소환 시 참조
     var idx=-1;for(var i=0;i<mySide.length;i++)if(mySide[i]===u){idx=i;break;}
