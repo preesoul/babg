@@ -3439,9 +3439,85 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-07T00:29:20",
+          "placement": 4,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ambush",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 55,
+              "hp": 49,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 9,
+              "hp": 7,
+              "tier": 3,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -3469,7 +3545,7 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             },
             {
