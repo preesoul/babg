@@ -7336,9 +7336,87 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T10:42:33",
+          "placement": 2,
+          "turn": 19,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 13,
+              "hp": 9,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 30,
+              "hp": 30,
+              "tier": 7,
+              "kw": [
+                "reborn",
+                "cleave",
+                "shield",
+                "taunt",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 10,
+              "hp": 9,
+              "tier": 5,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 3,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "recruitedTier7": [
         "millennium_death_momoi",
         "trinity_mika"
