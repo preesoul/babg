@@ -1605,81 +1605,6 @@
       "pw": "",
       "records": [
         {
-          "date": "2026-04-06T15:18:50",
-          "placement": 2,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "세리카(수영복)",
-              "baseId": "serika",
-              "atk": 83,
-              "hp": 79,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 4,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하루카",
-              "baseId": "haruka",
-              "atk": 6,
-              "hp": 9,
-              "tier": 1,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Haruka.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 11,
-              "hp": 11,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "poison",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "나구사",
-              "baseId": "nagusa",
-              "atk": 5,
-              "hp": 7,
-              "tier": 6,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Nagusa.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T15:25:57",
           "placement": 3,
           "turn": 15,
@@ -2302,9 +2227,87 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T14:27:41",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 23,
+              "hp": 23,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈",
+              "baseId": "yuzu",
+              "atk": 20,
+              "hp": 21,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuzu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 33,
+              "hp": 33,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 66,
+              "hp": 58,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 62,
+              "hp": 58,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 6,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-07",
