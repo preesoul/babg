@@ -2393,7 +2393,7 @@ function moveFromBench() {
     }
   }
   p.board.push(m);
-  triggerBattlecry(m,p);
+  // 벤치→샬레 이동은 재획득이 아니므로 첫인사(BC) 발동 안 함
   renderAll();
 }
 function sellBench() {
