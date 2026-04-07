@@ -6300,9 +6300,85 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T09:17:45",
+          "placement": 7,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 17,
+              "hp": 12,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카요코",
+              "baseId": "kayoko",
+              "atk": 5,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Kayoko.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "무츠키",
+              "baseId": "mutsuki",
+              "atk": 3,
+              "hp": 2,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Mutsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아루",
+              "baseId": "aru",
+              "atk": 6,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Aru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카",
+              "baseId": "haruka",
+              "atk": 1,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Haruka.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -6340,7 +6416,7 @@
             },
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             }
           ]
