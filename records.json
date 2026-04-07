@@ -4668,77 +4668,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-06T15:48:40",
-          "placement": 8,
-          "turn": 12,
-          "tier": 5,
-          "board": [
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 24,
-              "hp": 20,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리(수영복)",
-              "baseId": "yukari",
-              "atk": 18,
-              "hp": 16,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "시즈코",
-              "baseId": "shizuko",
-              "atk": 17,
-              "hp": 18,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Shizuko.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "키쿄",
-              "baseId": "kikyou",
-              "atk": 16,
-              "hp": 16,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Kikyou.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요",
-              "baseId": "tsukuyo",
-              "atk": 15,
-              "hp": 14,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsukuyo.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-06T16:15:54",
           "placement": 2,
           "turn": 17,
@@ -5400,9 +5329,72 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T01:11:22",
+          "placement": 8,
+          "turn": 9,
+          "tier": 5,
+          "board": [
+            {
+              "name": "주리",
+              "baseId": "juri",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Juri.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하이네",
+              "baseId": "haine",
+              "atk": 6,
+              "hp": 3,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Haine.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "아유무",
+              "baseId": "ayumu",
+              "atk": 5,
+              "hp": 2,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ayumu.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "모모카",
+              "baseId": "momoka",
+              "atk": 4,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Momoka.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "모모카",
+              "baseId": "momoka",
+              "atk": 4,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Momoka.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-07",
