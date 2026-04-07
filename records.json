@@ -3202,85 +3202,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-06T23:25:39",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아즈사(수영복)",
-              "baseId": "azusa",
-              "atk": 11,
-              "hp": 11,
-              "tier": 4,
-              "kw": [
-                "ambush",
-                "reborn",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Azusa_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 30,
-              "hp": 30,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나(드레스)",
-              "baseId": "hina",
-              "atk": 27,
-              "hp": 7,
-              "tier": 6,
-              "kw": [
-                "cleave",
-                "shield",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Hina_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 7,
-              "hp": 5,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T00:00:05",
           "placement": 1,
           "turn": 15,
@@ -3960,9 +3881,82 @@
               "school": "산해경"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T12:40:52",
+          "placement": 1,
+          "turn": 14,
+          "tier": 5,
+          "board": [
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 19,
+              "hp": 23,
+              "tier": 2,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            },
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 25,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "사야(사복)",
+              "baseId": "saya",
+              "atk": 39,
+              "hp": 41,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Saya_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "레이죠(사복)",
+              "baseId": "reijo",
+              "atk": 23,
+              "hp": 19,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Reijo_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 18,
+              "hp": 18,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-07",
