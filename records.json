@@ -5406,7 +5406,8 @@
               "img": "Serika_(Swimsuit).png",
               "school": "아비도스"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 4,
