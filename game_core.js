@@ -176,6 +176,8 @@ var HIDDEN_CHARS = [
   // 밀레니엄 (케이 계열)
   {id:'Kei_usb',                 name:'케이(USB)',            school:'밀레니엄', tier:7, atk:1,  hp:1,  kw:['shield'],                                   img:'unique/Kei_usb.png'},
   {id:'Arisu_Kei',               name:'아리스&케이',          school:'밀레니엄', tier:7, atk:40, hp:40, kw:['shield','ranged','preemptive'],              img:'unique/Arisu_Kei.png'},
+  // 붉은겨울
+  {id:'red_winter_minori',       name:'성난 군중 미노리',     school:'붉은겨울', tier:7, atk:0,  hp:10, kw:[],                                                img:'unique/Revolution.png'},
 ];
 
 // 히든 캐릭터 조회 헬퍼
@@ -227,7 +229,7 @@ var KW_DESCS = {
   ambush:'첫 공격 전까지 대상 지정 불가.'
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
-var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png','산해경':'img/Icon/Shanhaijing.png'};
+var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png','산해경':'img/Icon/Shanhaijing.png','붉은겨울':'img/icon/Red_Winter.png'};
 var CHAR_GRADES = {
   kayoko:3, junko:1, toki:1, midori:1, mari:1, reisa:1,
   juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
@@ -288,10 +290,10 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1}; // 개전
+var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1}; // 뒤끝
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1}; // 패시브 (영입 턴/상시)
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -401,6 +403,7 @@ var ABILITY_DESCS = {
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
+  red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'붉은겨울 학교 7성 유니크.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
@@ -435,6 +438,7 @@ var TOKENS = {
   tnt:       {id:'tnt',       name:'TNT',         school:'밀레니엄', tier:0, atk:1, hp:20, kw:['selfdestruct'], img:'token/C4.png'},
   abi_eshuh_proto:{id:'abi_eshuh_proto',name:'아비 에슈흐 프로토',school:'밀레니엄',tier:0, atk:10, hp:10, kw:[], img:'token/Abi_Eshuh.png'},
   black_lord:{id:'black_lord',name:'현룡문의 검은 군주',school:'산해경',tier:0,atk:30,hp:30,kw:['shield','preemptive'],img:'token/Black_lord.png'},
+  citizen_wave:{id:'citizen_wave',name:'성난 군중',school:'붉은겨울',tier:0,atk:15,hp:15,kw:['selfdestruct'],img:'token/Citizen_wave.png'},
 };
 
 function makeToken(tokenId) {
@@ -1460,6 +1464,8 @@ var HIDDEN_CARD_ENTRANCE = {
 
   // === 산해경 ===
   shanhai_kiki: function(m,p){_entranceGlow(m,p);},
+  // === 붉은겨울 ===
+  red_winter_minori: function(m,p){_entranceBang(m,p);},
   Kei_usb: function(m,p){
     // 일반 1~2성 소환처럼 조용하게
     p.board.push(m);playCardDrop(1);renderAll();
@@ -2066,6 +2072,7 @@ function addToBoard(p, m) {
 function triggerBattlecry(m, p) {
   var id=m.baseId;
   if(!BC_IDS[id]) return;
+  if(m._noBC) return; // 미노리 개전: 기본 능력 영구 면역
   if(G.permanentAbilityBan) return;
   // 미치루 연쇄는 다른 유닛의 첫인사를 복제 발동하는 로직이라 _bcFired 체크 우회.
   if(G._michiruChaining){
@@ -3453,6 +3460,11 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
     if(spared) log.push({cls:'soc',text:'[개전] '+u.name+': '+spared.name+'은(는) 살아남았다! (체력 '+spared.hp+')'});
   }
+  else if(id==='red_winter_minori'){
+    // 미노리 개전: 기본 능력(BC) 전체 해제 + 이후 BC 영구 면역
+    u._noBC=true;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 모든 기본 능력이 해제됩니다! 이후 기본 능력 면역.'});
+  }
 }
 
 // 리오 개전용: 전투 시 첫인사 효과 (임시 버프, 전투 후 원복)
@@ -3504,6 +3516,9 @@ function triggerSOC_battlecry_inner(u, mySide, log){
 }
 
 function resolveStartOfCombat(a, b, log) {
+  // 미노리 전투 시작 대사
+  for(var _mn=0;_mn<a.length;_mn++){if(a[_mn].alive&&a[_mn].baseId==='red_winter_minori'){log.push({cls:'soc',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
+  for(var _mn=0;_mn<b.length;_mn++){if(b[_mn].alive&&b[_mn].baseId==='red_winter_minori'){log.push({cls:'soc',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
   var aFirst=(a.length>b.length)?true:(b.length>a.length)?false:(Math.random()<0.5);
   function processSide(side, other){
     // 쿠즈노하: 모든 개전보다 먼저 발동 — 자신+적1번 제외 전원 효과삭제+처치
@@ -4049,6 +4064,28 @@ function _doDR(unit, mySide, otherSide, log) {
       log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+pRev.name+' 귀환! ('+pRev.atk+'/'+pRev.hp+')'});
     }
   }
+  else if(id==='red_winter_minori'){
+    // 미노리 뒤끝: 성난 군중 1번 소환
+    log.push({cls:'soc',text:'미노리: 붉은겨울에서 이 정도 탄압은 인삿말도 안 된다!!!!'});
+    if(countAlive(mySide)<BATTLE_MAX){
+      var cw=makeToken('citizen_wave');
+      cw.alive=true;cw.poisonImmune=false;cw._mySide=mySide;cw._citizenCount=1;
+      cw.name='성난 군중 1';
+      mySide.push(cw);
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': <성난 군중 1> 소환! ('+cw.atk+'/'+cw.hp+')'});
+    }
+  }
+  else if(id==='citizen_wave'){
+    // 성난 군중 연쇄: 다음 번호 소환 (최대 13)
+    var nextCount=(unit._citizenCount||1)+1;
+    if(nextCount<=13&&countAlive(mySide)<BATTLE_MAX){
+      var ncw=makeToken('citizen_wave');
+      ncw.alive=true;ncw.poisonImmune=false;ncw._mySide=mySide;ncw._citizenCount=nextCount;
+      ncw.name='성난 군중 '+nextCount;
+      mySide.push(ncw);
+      log.push({cls:'soc',text:'[뒤끝] 성난 군중 '+(nextCount-1)+': <성난 군중 '+nextCount+'> 소환! ('+ncw.atk+'/'+ncw.hp+')'});
+    }
+  }
 }
 
 // 말쿠트 헬퍼 (전역)
@@ -4092,7 +4129,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       alive:skipSOC?(m.alive!==undefined?m.alive:true):true,
       _abilitiesStripped:skipSOC?(!!m.stripped):false,
       poisonImmune:false,irohaRef:m.irohaRef||null,_akaneC4DR:m._akaneC4DR||false,_akaneC4Golden:m._akaneC4Golden||false,
-      noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'||m.baseId==='Kei_usb'),
+      noAttack:(m.baseId==='gehenna_traingun'||m.baseId==='trinity_seia'||m.baseId==='Kei_usb'||m.baseId==='red_winter_minori'),
       abilityImmune:(m.baseId==='trinity_mika'),
       _battlesSurvived:m._battlesSurvived||0,
       _keiseisenCounter:m._keiseisenCounter||0,
@@ -4717,6 +4754,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
   for(var round=0;round<maxRounds;round++){
     var aliveA=getAlive(a),aliveB=getAlive(b);
     if(aliveA.length===0||aliveB.length===0)break;
+    // 미노리 패시브: 아군에서 마지막으로 남으면 패배
+    if(aliveA.length===1&&aliveA[0].baseId==='red_winter_minori'){
+      log.push({cls:'kill',text:'[패시브] '+aliveA[0].name+': 마지막으로 남아 패배!'});
+      aliveA[0].alive=false;break;
+    }
+    if(aliveB.length===1&&aliveB[0].baseId==='red_winter_minori'){
+      log.push({cls:'kill',text:'[패시브] '+aliveB[0].name+': 마지막으로 남아 패배!'});
+      aliveB[0].alive=false;break;
+    }
     var atkArr2,defArr2;
     var nextAtk;
     if(coinSeq){
