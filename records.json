@@ -3508,9 +3508,85 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-07T05:14:18",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 38,
+              "hp": 38,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 44,
+              "hp": 18,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마시로(수영복)",
+              "baseId": "mashiro",
+              "atk": 29,
+              "hp": 25,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Mashiro_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "호시노(수영복)",
+              "baseId": "hoshino",
+              "atk": 46,
+              "hp": 48,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hoshino_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 49,
+              "hp": 49,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-07",
@@ -3538,8 +3614,8 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 8,
-              "completed": false
+              "progress": 13,
+              "completed": true
             },
             {
               "id": "hidden1",
