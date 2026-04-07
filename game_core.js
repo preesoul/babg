@@ -385,13 +385,13 @@ var ABILITY_DESCS = {
   hoshino:  {type:'뒤끝',desc:'자신의 공격력과 체력을 무작위 아군 1인에게 부여합니다.',skinEffect:'수영복 호시노: 2인에게 부여합니다.',skinEffectDesc:'뒤끝: 자신의 공격력과 체력을 무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   Shiroko_Terror: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 시로코·호시노·노노미·아야네·세리카가 모두 있을 때 등장.',desc:'패시브: 샬레의 시로코, 호시노, 노노미, 아야네, 세리카를 흡수하며 등장합니다.\n개전: 가장 체력이 높은 적과 자신만 남고 모두 파괴합니다.\n뒤끝: 흡수한 모두를 다시 불러냅니다.',skinEffect:'',quote:'시로코: 그러니까 아마 나도…… 괜찮을 거야.'},
   // ===== 산해경 =====
-  kokona:   {type:'첫인사',desc:'스케쥴 레벨 이하의 자기 자신을 제외한\n무작위 산해경 학생을 <span style="color:#ffd700;font-weight:700">벤치</span>로 불러옵니다.\n벤치가 차 있으면 발동하지 않습니다.',skinEffect:'',skinEffectDesc:''},
+  kokona:   {type:'첫인사',desc:'스케쥴 레벨 이하의 자기 자신을 제외한\n무작위 학생을 <span style="color:#ffd700;font-weight:700">벤치</span>로 불러옵니다.\n벤치가 차 있으면 발동하지 않습니다.',skinEffect:'',skinEffectDesc:''},
   mina:     {type:'개전 / 뒤끝',desc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 +3/+3을 부여합니다.',skinEffect:'리코더 미나: 뒤끝 +6/+6',skinEffectDesc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
   reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
   saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면,\n무작위 다음 대상에게 남은 데미지를 줍니다.',skinEffect:'어린이 슌: 추가 공격',skinEffectDesc:'패시브: 공격에 적이 쓰러지면,\n무작위 다음 대상을 <span style="color:#ffd700;font-weight:700">추가로 공격</span>합니다.'},
-  kisaki:   {type:'첫인사',desc:'아군 산해경 학생 1인을\n스킨 학생으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 산해경 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
+  kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
@@ -2130,14 +2130,14 @@ function _doBC(m, p) {
 
   // ===== 산해경 첫인사 =====
   else if(id==='kokona'){
-    // 코코나: 스케쥴 레벨 이하의 무작위 산해경 학생을 '벤치'로 불러옵니다.
-    // 벤치가 차 있으면 발동하지 않습니다. (자기-소환 루프 방지 + 간접적 트리플 기여 기믹)
+    // 코코나: 스케쥴 레벨 이하의 무작위 학생(코코나 제외)을 벤치로 불러옵니다.
     if(!p.bench){
-      var shChars=CHARS.filter(function(c){return c.school==='산해경'&&c.tier<=p.tier&&c.id!=='kokona';});
+      var kkCands=CHARS.filter(function(c){return c.tier<=p.tier&&c.id!=='kokona';});
       var unlockedAby=getUnlockedAbydos();
-      shChars=shChars.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
-      if(shChars.length>0){
-        var pick=shChars[Math.floor(Math.random()*shChars.length)];
+      kkCands=kkCands.filter(function(c){return !c.locked||unlockedAby.indexOf(c.id)!==-1;});
+      kkCands=kkCands.filter(function(c){return G.pool[c.id]>0;});
+      if(kkCands.length>0){
+        var pick=kkCands[Math.floor(Math.random()*kkCands.length)];
         if(takeFromPool(pick.id)){
           p.bench=makeMinion(pick,false);
         }
@@ -2145,24 +2145,36 @@ function _doBC(m, p) {
     }
   }
   else if(id==='kisaki'){
-    // 키사키: 아군 산해경 1인(스킨: 전원)을 스킨으로 교체
-    var shTargets=[];
-    for(var i=0;i<p.board.length;i++){if(p.board[i].school==='산해경'&&!p.board[i].isSkin&&p.board[i].baseId!=='kisaki')shTargets.push(i);}
-    if(shTargets.length>0){
-      var count=m.isSkin?shTargets.length:1;
-      var picks=m.isSkin?shTargets:([shTargets[Math.floor(Math.random()*shTargets.length)]]);
-      for(var _ki=0;_ki<picks.length;_ki++){
-        var idx=picks[_ki];var u=p.board[idx];
-        var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===u.baseId){tmpl=CHARS[j];break;}
-        if(!tmpl)continue;
-        var bonusAtk=u.atk-tmpl.atk,bonusHp=u.hp-tmpl.hp;
-        u.name=tmpl.skin;u.atk=tmpl.atk*2+1+bonusAtk;u.hp=tmpl.hp*2+1+bonusHp;u.maxHp=u.hp;
-        u.isSkin=true;u.img=tmpl.imgGold;
-        applySkinKwTransform(tmpl,u);
+    // 키사키: 아군 학생(키사키 제외, 비스킨) 1인 선택(스킨: 전원)을 스킨으로 교체
+    var ksTargets=[];
+    for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin&&p.board[i].baseId!=='kisaki'&&!p.board[i].isHidden)ksTargets.push(i);}
+    if(ksTargets.length>0){
+      if(m.isSkin){
+        // 골든 키사키: 전원 자동 스킨 변환
+        for(var _ki=0;_ki<ksTargets.length;_ki++){
+          _applySkinUpgrade(p.board[ksTargets[_ki]]);
+        }
+      } else {
+        // 일반 키사키: pendingSpell로 대상 선택 UI
+        G.pendingSpell={id:'kisaki_bc',name:'키사키 첫인사',target:'select_ally',
+          effect:function(G2,idx){
+            var p2=G2.players[0];if(!p2.board[idx]||p2.board[idx].isSkin||p2.board[idx].isHidden)return false;
+            _applySkinUpgrade(p2.board[idx]);
+            return true;
+          }};
+        renderAll();
       }
     }
   }
   // 히마리: 첫인사 제거 → 개전(SOC)으로 이동
+}
+function _applySkinUpgrade(u){
+  var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===u.baseId){tmpl=CHARS[j];break;}
+  if(!tmpl||!tmpl.skin)return;
+  var bonusAtk=u.atk-tmpl.atk,bonusHp=u.hp-tmpl.hp;
+  u.name=tmpl.skin;u.atk=tmpl.atk*2+1+bonusAtk;u.hp=tmpl.hp*2+1+bonusHp;u.maxHp=u.hp;
+  u.isSkin=true;u.img=tmpl.imgGold;
+  applySkinKwTransform(tmpl,u);
 }
 
 // ========== 총학생회 패시브 헬퍼 ==========
@@ -6183,6 +6195,8 @@ function saveGame(){
         };
       }),
       turn:G.turn,phase:G.phase,aliveCount:G.aliveCount,placement:G.placement,
+      shop:G.shop.map(function(s){if(!s)return null;if(s.isSpell)return{isSpell:true,spell:s.spell,name:s.name,cost:s.cost,desc:s.desc,tier:s.tier,target:s.target,img:s.img||null};if(s.isHidden)return{isHidden:true,baseId:s.baseId,name:s.name,school:s.school,tier:s.tier,atk:s.atk,hp:s.hp,kw:(s.kw||[]).slice(),img:s.img};return{id:s.id,baseId:s.baseId,name:s.name,school:s.school,tier:s.tier,atk:s.atk,hp:s.hp,kw:(s.kw||[]).slice(),img:s.img,isSkin:s.isSkin||false,cost:s.cost||3};}),
+      frozen:G.frozen||false,
       bonusStone:G.bonusStone||0,shopBuff:G.shopBuff||0,freeRerolls:G.freeRerolls||0,
       pool:G.pool,hiddenCardsOwned:G.hiddenCardsOwned,hiddenCardsEverOwned:G.hiddenCardsEverOwned,
       permanentAbilityBan:G.permanentAbilityBan,shopExclusions:G.shopExclusions,
@@ -6235,8 +6249,8 @@ function restoreGame(save){
     return restored;
   });
   G={players:players,turn:save.turn,phase:save.phase||'recruit',
-    shop:[],aliveCount:save.aliveCount,placement:save.placement||0,
-    frozen:false,bonusStone:save.bonusStone||0,shopBuff:save.shopBuff||0,
+    shop:save.shop||[],aliveCount:save.aliveCount,placement:save.placement||0,
+    frozen:save.frozen||false,bonusStone:save.bonusStone||0,shopBuff:save.shopBuff||0,
     pendingSpell:null,pool:save.pool,rioSchool:null,freeRerolls:save.freeRerolls||0,
     purchasedSchools:players[0].purchasedSchools||{},
     totalDamageTaken:save.totalDamageTaken||0,

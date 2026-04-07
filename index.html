@@ -1566,6 +1566,7 @@ document.getElementById('btn-continue-game').addEventListener('click',function()
   var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
   fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),function(){
     restoreGame(save);
+    if(!G.shop||G.shop.length===0)rollShop();
     renderAll();
   });
 });
