@@ -3883,7 +3883,8 @@
               "img": "Ibuki_(Swimsuit).png",
               "school": "게헨나"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 3,
