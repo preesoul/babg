@@ -5943,12 +5943,12 @@
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-04-06",
