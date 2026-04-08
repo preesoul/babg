@@ -3270,79 +3270,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-07T10:34:47",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기(수영복)",
-              "baseId": "tsurugi",
-              "atk": 59,
-              "hp": 63,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "시미코(악의 간부)",
-              "baseId": "shimiko",
-              "atk": 64,
-              "hp": 62,
-              "tier": 2,
-              "kw": [
-                "cleave",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "네루",
-              "baseId": "neru",
-              "atk": 29,
-              "hp": 29,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Neru.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 43,
-              "hp": 45,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 7,
-              "hp": 7,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-07T11:46:06",
           "placement": 1,
           "turn": 15,
@@ -4003,9 +3930,80 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T07:24:56",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 31,
+              "hp": 35,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            },
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 51,
+              "hp": 47,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "시로코(수영복)",
+              "baseId": "shiroko",
+              "atk": 61,
+              "hp": 55,
+              "tier": 5,
+              "kw": [
+                "reborn",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shiroko_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 49,
+              "hp": 49,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 38,
+              "hp": 38,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-08",
