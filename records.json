@@ -6110,26 +6110,106 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T01:27:31",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 25,
+              "hp": 25,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "reborn",
+                "windfury",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "레이사",
+              "baseId": "reisa",
+              "atk": 15,
+              "hp": 14,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Reisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 9,
+              "hp": 15,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 7,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 28,
+              "hp": 26,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "reborn",
+                "windfury",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 26,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 1,
-              "completed": false
+              "progress": 13,
+              "completed": true
             },
             {
               "id": "skin3",
-              "progress": 2,
-              "completed": false
+              "progress": 6,
+              "completed": true
             },
             {
               "id": "gehenna10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             }
           ],
@@ -6140,12 +6220,12 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 7,
-              "completed": false
+              "progress": 11,
+              "completed": true
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
