@@ -3270,82 +3270,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-07T00:29:20",
-          "placement": 4,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아즈사",
-              "baseId": "azusa",
-              "atk": 5,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "ambush",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Azusa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "아즈사",
-              "baseId": "azusa",
-              "atk": 5,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "ambush",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Azusa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사츠키",
-              "baseId": "satsuki",
-              "atk": 5,
-              "hp": 6,
-              "tier": 5,
-              "kw": [
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Satsuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 55,
-              "hp": 49,
-              "tier": 7,
-              "kw": [
-                "pierce",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "히비키(치어리더)",
-              "baseId": "hibiki",
-              "atk": 9,
-              "hp": 7,
-              "tier": 3,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T05:14:18",
           "placement": 1,
           "turn": 16,
@@ -4000,22 +3924,93 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T02:27:09",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 37,
+              "hp": 33,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 25,
+              "hp": 21,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 42,
+              "hp": 42,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 44,
+              "hp": 42,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "린(승무원)",
+              "baseId": "lin",
+              "atk": 29,
+              "hp": 29,
+              "tier": 6,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Lin_(flight).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 13,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 3,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "gehenna10",
