@@ -6861,21 +6861,21 @@
       "points": 3,
       "questState": {
         "daily": {
-          "date": "2026-04-07",
+          "date": "2026-04-08",
           "quests": [
             {
-              "id": "millennium10",
-              "progress": 8,
+              "id": "skin3",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 53,
-              "completed": true
+              "id": "discover3",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 2,
+              "id": "gehenna10",
+              "progress": 0,
               "completed": false
             }
           ],
@@ -6910,7 +6910,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-07"
+        "_lastLoginDate": "2026-04-08"
       },
       "unlockedAbydos": [
         "kisaki",
