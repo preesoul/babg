@@ -5222,83 +5222,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T11:31:09",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "이치카(수영복)",
-              "baseId": "ichika",
-              "atk": 43,
-              "hp": 35,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ichika_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마시로(수영복)",
-              "baseId": "mashiro",
-              "atk": 33,
-              "hp": 25,
-              "tier": 2,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 36,
-              "hp": 37,
-              "tier": 7,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 30,
-              "hp": 30,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 26,
-              "hp": 26,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": false
-        },
-        {
           "date": "2026-04-07T14:44:29",
           "placement": 2,
           "turn": 29,
@@ -5896,9 +5819,79 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T10:49:58",
+          "placement": 1,
+          "turn": 16,
+          "tier": 5,
+          "board": [
+            {
+              "name": "미노리(성난 군중)",
+              "baseId": "red_winter_minori",
+              "atk": 0,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Revolution.png",
+              "school": "붉은겨울"
+            },
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 31,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 16,
+              "hp": 16,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 21,
+              "hp": 23,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "와카모",
+              "baseId": "wakamo",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Wakamo.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 30,
+      "points": 32,
       "questState": {
         "daily": {
           "date": "2026-04-08",
