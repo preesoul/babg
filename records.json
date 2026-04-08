@@ -5214,82 +5214,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T04:16:01",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "하루카(새해)",
-              "baseId": "haruka",
-              "atk": 22,
-              "hp": 24,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "치아키(수영복)",
-              "baseId": "chiaki",
-              "atk": 37,
-              "hp": 29,
-              "tier": 3,
-              "kw": [
-                "ranged",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Chiaki_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "무츠키(새해)",
-              "baseId": "mutsuki",
-              "atk": 25,
-              "hp": 19,
-              "tier": 2,
-              "kw": [
-                "pierce",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이부키",
-              "baseId": "ibuki",
-              "atk": 12,
-              "hp": 13,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Ibuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아코",
-              "baseId": "ako",
-              "atk": 13,
-              "hp": 15,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "poison",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Ako.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T05:24:08",
           "placement": 1,
           "turn": 18,
@@ -5883,9 +5807,82 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-08T00:08:47",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 35,
+              "hp": 31,
+              "tier": 4,
+              "kw": [
+                "pierce",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 51,
+              "hp": 51,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 33,
+              "hp": 35,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 44,
+              "hp": 38,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "케이(USB)",
+              "baseId": "Kei_usb",
+              "atk": 1,
+              "hp": 1,
+              "tier": 7,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Kei_usb.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 15,
+      "points": 17,
       "questState": {
         "daily": {
           "date": "2026-04-08",
@@ -5902,7 +5899,7 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             }
           ],
