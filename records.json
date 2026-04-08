@@ -5222,41 +5222,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T14:44:29",
-          "placement": 2,
-          "turn": 29,
-          "tier": 5,
-          "board": [
-            {
-              "name": "무츠키(새해)",
-              "baseId": "mutsuki",
-              "atk": 203,
-              "hp": 123,
-              "tier": 2,
-              "kw": [
-                "pierce",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "미노리(성난 군중)",
-              "baseId": "red_winter_minori",
-              "atk": 7,
-              "hp": 11,
-              "tier": 7,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Revolution.png",
-              "school": "붉은겨울"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T15:04:38",
           "placement": 1,
           "turn": 17,
@@ -5889,9 +5854,83 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T11:08:16",
+          "placement": 1,
+          "turn": 17,
+          "tier": 5,
+          "board": [
+            {
+              "name": "미노리(성난 군중)",
+              "baseId": "red_winter_minori",
+              "atk": 0,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Revolution.png",
+              "school": "붉은겨울"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 29,
+              "hp": 39,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury",
+                "shield",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 32,
+              "hp": 26,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "selfdestruct"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "준코(새해)",
+              "baseId": "junko",
+              "atk": 28,
+              "hp": 26,
+              "tier": 1,
+              "kw": [
+                "selfdestruct",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Junko_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 13,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 32,
+      "points": 34,
       "questState": {
         "daily": {
           "date": "2026-04-08",
