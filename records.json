@@ -3270,88 +3270,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-07T05:36:51",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "사츠키(수영복)",
-              "baseId": "satsuki",
-              "atk": 19,
-              "hp": 21,
-              "tier": 5,
-              "kw": [
-                "cleave"
-              ],
-              "isSkin": true,
-              "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 29,
-              "hp": 27,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 22,
-              "hp": 16,
-              "tier": 5,
-              "kw": [
-                "ranged",
-                "shield",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 14,
-              "hp": 14,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 13,
-              "hp": 13,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "selfdestruct"
-              ],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T10:26:08",
           "placement": 1,
           "turn": 15,
@@ -3993,9 +3911,91 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T04:17:26",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아즈사(수영복)",
+              "baseId": "azusa",
+              "atk": 25,
+              "hp": 25,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Azusa_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 33,
+              "hp": 35,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "windfury",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 33,
+              "hp": 35,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "windfury",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 35,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "survive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 31,
+              "hp": 31,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-08",
