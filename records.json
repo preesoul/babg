@@ -3922,7 +3922,8 @@
               "img": "Mine_(Idol).png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         },
         {
           "date": "2026-04-08T07:03:28",
