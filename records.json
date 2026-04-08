@@ -5930,22 +5930,22 @@
       "points": 34,
       "questState": {
         "daily": {
-          "date": "2026-04-08",
+          "date": "2026-04-09",
           "quests": [
             {
-              "id": "gehenna10",
-              "progress": 15,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "discover3",
-              "progress": 4,
-              "completed": true
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 11,
-              "completed": true
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -5979,7 +5979,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-08"
+        "_lastLoginDate": "2026-04-09"
       },
       "unlockedAbydos": [
         "kokona",
