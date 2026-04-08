@@ -5214,79 +5214,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T09:27:55",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "치나츠(온천)",
-              "baseId": "chinatsu",
-              "atk": 19,
-              "hp": 25,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Chinatsu_(Hot_Spring).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "치나츠(온천)",
-              "baseId": "chinatsu",
-              "atk": 19,
-              "hp": 25,
-              "tier": 2,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Chinatsu_(Hot_Spring).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "하루카(새해)",
-              "baseId": "haruka",
-              "atk": 15,
-              "hp": 17,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마코토(수영복)",
-              "baseId": "makoto",
-              "atk": 21,
-              "hp": 21,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Makoto_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "세나(사복)",
-              "baseId": "sena",
-              "atk": 28,
-              "hp": 24,
-              "tier": 5,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Sena_(Casual).png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T09:44:13",
           "placement": 1,
           "turn": 17,
@@ -5877,17 +5804,85 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T02:13:08",
+          "placement": 3,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 12,
+              "hp": 16,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "치나츠(온천)",
+              "baseId": "chinatsu",
+              "atk": 26,
+              "hp": 28,
+              "tier": 2,
+              "kw": [
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Chinatsu_(Hot_Spring).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 16,
+              "hp": 16,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 19,
+      "points": 26,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 8,
-              "completed": false
+              "progress": 15,
+              "completed": true
             },
             {
               "id": "discover3",
