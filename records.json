@@ -5211,77 +5211,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T09:44:13",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "세리카",
-              "baseId": "serika",
-              "atk": 83,
-              "hp": 77,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Serika.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "아야네(수영복)",
-              "baseId": "ayane",
-              "atk": 25,
-              "hp": 29,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ayane_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "시로코",
-              "baseId": "shiroko",
-              "atk": 15,
-              "hp": 8,
-              "tier": 5,
-              "kw": [
-                "reborn",
-                "poison",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Shiroko.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "린(승무원)",
-              "baseId": "lin",
-              "atk": 25,
-              "hp": 25,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Lin_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "노노미",
-              "baseId": "nonomi",
-              "atk": 12,
-              "hp": 8,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Nonomi.png",
-              "school": "아비도스"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T11:12:26",
           "placement": 8,
           "turn": 11,
@@ -5869,9 +5798,78 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T05:01:34",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 13,
+              "hp": 9,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "shield",
+                "cleave"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 33,
+              "hp": 31,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 4,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 26,
+      "points": 28,
       "questState": {
         "daily": {
           "date": "2026-04-08",
