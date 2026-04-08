@@ -5214,79 +5214,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T05:24:08",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 65,
-              "hp": 65,
-              "tier": 7,
-              "kw": [
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 65,
-              "hp": 65,
-              "tier": 7,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게(수영복)",
-              "baseId": "renge",
-              "atk": 44,
-              "hp": 42,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 54,
-              "hp": 43,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미치루(드레스)",
-              "baseId": "michiru",
-              "atk": 43,
-              "hp": 43,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Michiru_(Dress).png",
-              "school": "백귀야행"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-07T09:27:55",
           "placement": 1,
           "turn": 17,
@@ -5880,16 +5807,86 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-08T01:41:10",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 17,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미노리(성난 군중)",
+              "baseId": "red_winter_minori",
+              "atk": 0,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Revolution.png",
+              "school": "붉은겨울"
+            },
+            {
+              "name": "준코(새해)",
+              "baseId": "junko",
+              "atk": 29,
+              "hp": 23,
+              "tier": 1,
+              "kw": [
+                "selfdestruct"
+              ],
+              "isSkin": true,
+              "img": "Junko_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 40,
+              "hp": 44,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 12,
+      "points": 19,
       "questState": {
         "daily": {
           "date": "2026-04-08",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 5,
+              "progress": 8,
               "completed": false
             },
             {
@@ -5899,8 +5896,8 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 7,
-              "completed": false
+              "progress": 11,
+              "completed": true
             }
           ],
           "rerolled": false
