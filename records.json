@@ -6240,21 +6240,21 @@
       "points": 26,
       "questState": {
         "daily": {
-          "date": "2026-04-08",
+          "date": "2026-04-09",
           "quests": [
             {
-              "id": "millennium10",
-              "progress": 13,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "skin3",
-              "progress": 6,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "gehenna10",
-              "progress": 6,
+              "id": "hyakkiyako10",
+              "progress": 0,
               "completed": false
             }
           ],
@@ -6289,7 +6289,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-08"
+        "_lastLoginDate": "2026-04-09"
       },
       "unlockedAbydos": [
         "kokona"
