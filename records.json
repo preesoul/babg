@@ -3270,81 +3270,6 @@
       "pw": "5056",
       "records": [
         {
-          "date": "2026-04-07T11:59:11",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "호시노(수영복)",
-              "baseId": "hoshino",
-              "atk": 26,
-              "hp": 32,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "호시노(수영복)",
-              "baseId": "hoshino",
-              "atk": 26,
-              "hp": 32,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "슌(어린이)",
-              "baseId": "shun",
-              "atk": 29,
-              "hp": 17,
-              "tier": 5,
-              "kw": [
-                "ranged"
-              ],
-              "isSkin": true,
-              "img": "Shun_(Kid).png",
-              "school": "산해경"
-            },
-            {
-              "name": "레이죠",
-              "baseId": "reijo",
-              "atk": 17,
-              "hp": 17,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Reijo.png",
-              "school": "산해경"
-            },
-            {
-              "name": "키키",
-              "baseId": "shanhai_kiki",
-              "atk": 9,
-              "hp": 9,
-              "tier": 7,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "unique/Kiki.png",
-              "school": "산해경"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T12:40:52",
           "placement": 1,
           "turn": 14,
@@ -3998,26 +3923,100 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-09T04:13:07",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 26,
+              "hp": 34,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 33,
+              "hp": 39,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 24,
+              "hp": 26,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 11,
+              "hp": 14,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 27,
+              "hp": 27,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-09",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "millennium10",
-              "progress": 0,
-              "completed": false
+              "progress": 11,
+              "completed": true
             },
             {
               "id": "skin3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
