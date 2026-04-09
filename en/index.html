@@ -1,0 +1,2899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){var p=location.pathname;if(p.indexOf('index_mobile')===-1){var base=p.endsWith('/')?p:p.replace(/\/[^\/]*$/,'/');location.replace(base+'index_mobile.html');}}</script>
+<title>Blue Archive Battlegrounds</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min-height:100vh;overflow-x:hidden;overflow-y:hidden}
+#app{max-width:1400px;margin:0 auto;padding:14px}
+.schale-frame{position:relative;border:3px solid rgba(160,210,230,0.35);border-radius:18px;padding:6px;background:linear-gradient(135deg,rgba(140,200,220,0.08) 0%,rgba(100,170,200,0.03) 50%,rgba(140,200,220,0.08) 100%);box-shadow:0 0 20px rgba(120,190,220,0.08),inset 0 0 30px rgba(120,190,220,0.03)}
+.schale-frame::before{content:'';position:absolute;top:3px;left:3px;right:3px;bottom:3px;border:1px solid rgba(160,210,230,0.12);border-radius:14px;pointer-events:none}
+.schale-frame::after{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:rgba(160,210,230,0.25);border-radius:0 0 4px 4px;pointer-events:none}
+
+/* 게임 레이아웃 */
+.game-layout{display:flex;gap:8px;align-items:stretch;height:auto}
+.side-panel{width:195px;min-width:195px;display:flex;flex-direction:column;gap:6px;overflow:hidden;padding:6px;background:#141e28;border-radius:10px;border:1px solid #1c2838}
+.stone-display{display:flex;align-items:center;justify-content:center;gap:14px;padding:18px 0 6px;position:relative;z-index:1}
+.stone-display .stone-num{font-size:28px;font-weight:900;color:#fff}
+.stone-icon.xl{width:36px;height:36px}
+.side-panel-right{width:140px;flex-shrink:0;display:flex;flex-direction:column;padding:0 4px}
+.sell-zone{height:180px;border:2px dashed #5a3a3a;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(40,20,20,0.3);transition:all 0.2s;cursor:default}
+.sell-zone.drag-hover{border-color:#e04040;background:rgba(220,40,40,0.15);box-shadow:0 0 12px rgba(220,40,40,0.3)}
+.sell-zone-inner{text-align:center;color:#8a6a6a;font-size:24px;line-height:1.6;pointer-events:none}
+@media(max-width:900px){.side-panel-right{display:none}}
+.bench-empty-slot{width:120px;height:100%;border:2px dashed #3a5a6e;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#5a7a8e;font-size:10px;line-height:1.4;margin:0 auto}
+.bench-card-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.bench-btns{display:flex;gap:4px;width:100%}
+.main-content{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;position:relative}
+.main-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:10px}
+.hp-bar-wrap{display:flex;align-items:center;gap:8px;flex:1;max-width:400px}
+.hp-bar-label{font-size:15px;font-weight:900;color:#fff;white-space:nowrap}
+.hp-bar-track{flex:1;height:10px;background:rgba(255,255,255,0.1);border-radius:5px;overflow:hidden}
+.hp-bar-fill{height:100%;border-radius:5px;background:#4ade80;transition:width 0.4s ease,background 0.4s ease}
+
+/* 상단 바 */
+.top-bar{display:flex;flex-direction:column;gap:4px;padding:6px 8px;position:relative;z-index:50}
+.top-bar .turn{font-size:15px;font-weight:900;color:#e0eaf4;display:flex;align-items:center;gap:6px}
+.turn-circle{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1a6a9e,#2888c0);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;box-shadow:0 1px 4px rgba(40,120,180,0.5);flex-shrink:0}
+.top-bar .stone{color:#e0eaf4;font-weight:700;font-size:12px;display:flex;align-items:center;gap:3px}
+.stone-icon{display:inline-block;width:27px;height:27px;vertical-align:middle;object-fit:contain}
+.stone-icon.lg{width:22px;height:22px}
+.top-bar .hp{color:#ff6b6b;font-weight:700;font-size:12px}
+.top-bar .tier{color:#c0a0ff;font-weight:700;font-size:11px}
+
+/* 플레이어 목록 */
+.players-bar{display:flex;flex-direction:column;gap:2px}
+.player-chip{padding:3px 6px;border-radius:4px;font-size:12px;background:rgba(20,30,40,0.5);border:1px solid #1c2838;color:#c0d0e0}
+.player-chip.you{border-color:rgba(22,147,222,0.5);background:rgba(22,147,222,0.2);font-weight:700;color:#80c0ff}
+.player-chip.dead{opacity:0.35;text-decoration:line-through}
+.player-chip .chip-hp{color:#fff;margin-left:4px}
+.player-chip .chip-hp.low{color:#ff6b6b}
+.chip-hp-bar{width:100%;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:2px}
+.chip-hp-fill{height:100%;border-radius:2px;transition:width 0.3s ease}
+
+/* 보드 */
+.section-label{font-size:12px;color:#6a8098;margin:6px 0 4px 4px;text-transform:uppercase;letter-spacing:1px;font-weight:700;display:flex;align-items:center;gap:6px}
+.schedule-icon{width:22px;height:24px;background:linear-gradient(135deg,#3a7bd5,#5aa0f0);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+.schedule-icon::before{content:'';position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(135deg,#2a5fb0,#4080d0);border-radius:4px 4px 0 0}
+.schedule-icon::after{content:'31';font-size:10px;font-weight:900;color:#fff;margin-top:3px;letter-spacing:0;text-transform:none}
+.ba-logo-deco{position:absolute;bottom:5px;right:10px;height:76px;width:auto;opacity:0.8;pointer-events:none;z-index:0}
+.arona-deco{display:flex;justify-content:center;margin-top:20px;padding:0 10px}
+.arona-img{width:80%;max-width:140px;border-radius:12px;opacity:1;pointer-events:none}
+.schale-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.schale-label-icon{width:20px;height:20px;object-fit:contain;transform:skewX(8deg)}
+.schedule-label{display:inline-flex;align-items:center;gap:6px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;padding:6px 14px;border-radius:4px;transform:skewX(-8deg);box-shadow:0 2px 8px rgba(0,0,0,0.15);margin:0;position:relative;z-index:1}
+.board{display:flex;gap:10px;min-height:240px;padding:6px 12px;background:#141e28;border-radius:14px;border:1.5px dashed #1c2838;margin-bottom:4px;flex-wrap:nowrap;justify-content:center;align-items:flex-start;box-shadow:inset 0 1px 2px rgba(0,0,0,0.2)}
+
+/* 카드 — BA TCG 솔리드 프레임 */
+.card{width:170px;height:250px;background:#1e2d3d;border:3px solid #3a5a6e;border-radius:6px;padding:0;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;flex-shrink:0;overflow:visible;box-shadow:0 3px 12px rgba(0,0,0,0.25)}
+.board .card{flex-shrink:1;min-width:80px}
+.board.compact .card{width:150px;height:220px}
+.board.compact .card .card-bg img{width:87%}
+.board.compact .card .name-banner{font-size:12px;padding:2px 5px}
+.board.compact .card .stat-atk,.board.compact .card .stat-hp{width:30px;height:30px;font-size:17px}
+.board.compact .card .stat-atk::before{width:24px;height:24px}
+.board.compact .card .stat-hp::before{width:22px;height:22px}
+.board.compact .card .sell-x{width:20px;height:20px;font-size:12px}
+.board.compact .card .tier-bar{width:18px;padding:2px 0}
+.board.compact .card .tier-bar .star{width:10px;height:10px}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+.card.tier1{border-color:#6a8090}.card.tier2{border-color:#3a8a4a}.card.tier3{border-color:#3070cc}.card.tier4{border-color:#7a50c0}.card.tier5{border-color:#c88a10}.card.tier6{border-color:#cc3030}.card.tier7{border-color:#c030d0;box-shadow:0 0 15px rgba(192,48,208,0.4);background:linear-gradient(180deg,#2a1838,#1a1028)}
+.card.skin{border-color:#c8a010;box-shadow:0 0 12px rgba(200,160,16,0.3)}
+.card.token-card{border-color:#6a8090}
+.card.swap-selected{border-color:#00c8ff!important;box-shadow:0 0 14px rgba(0,200,255,0.5)!important}
+.rec-card .sell-x{display:none!important}
+.rec-card .coin-toggle{display:none!important}
+.ability-icons{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:4;font-size:16px;letter-spacing:0;text-align:center;pointer-events:none;background:transparent;border:none;padding:0;white-space:nowrap;display:flex;gap:0}
+.ability-icons .abi{background:rgba(0,0,0,0.5);border-radius:4px;padding:2px 3px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6)) drop-shadow(0 0 1.5px rgba(0,0,0,0.9));display:inline-flex;align-items:center;line-height:0;margin-left:-5px;position:relative}
+.ability-icons .abi:first-child{margin-left:0}
+.ability-icons .abi:nth-child(1){z-index:8}.ability-icons .abi:nth-child(2){z-index:7}.ability-icons .abi:nth-child(3){z-index:6}.ability-icons .abi:nth-child(4){z-index:5}.ability-icons .abi:nth-child(5){z-index:4}.ability-icons .abi:nth-child(6){z-index:3}
+.ability-icons .abi svg{width:22px;height:22px}
+.minicard .ability-icons{font-size:13px;top:-10px;padding:0}
+.minicard .ability-icons .abi{padding:1px 1px}
+.shake-light{animation:shake-l 0.4s ease-out}
+.shake-heavy{animation:shake-h 0.5s ease-out}
+@keyframes shake-l{0%{transform:translateX(0)}10%{transform:translateX(-4px)}20%{transform:translateX(4px)}30%{transform:translateX(-3px)}40%{transform:translateX(3px)}50%{transform:translateX(-2px)}60%{transform:translateX(2px)}100%{transform:translateX(0)}}
+@keyframes shake-h{0%{transform:translateX(0)}8%{transform:translateX(-8px)}16%{transform:translateY(3px) translateX(8px)}24%{transform:translateY(-3px) translateX(-6px)}32%{transform:translateX(6px)}40%{transform:translateX(-4px)}50%{transform:translateX(4px)}60%{transform:translateX(-2px)}100%{transform:translateX(0)}}
+.card.ambush .card-bg img{filter:grayscale(100%);opacity:0.7}
+.shield-orb{position:absolute;width:132px;height:132px;top:calc(31% - 66px);left:50%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,230,140,0.2) 0%,rgba(255,200,60,0.5) 60%,rgba(240,180,40,0.6) 100%);border:1.5px solid rgba(255,210,80,0.7);box-shadow:0 0 20px rgba(255,200,60,0.4);z-index:1;pointer-events:none}
+.card .card-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;border-radius:3px}
+.card .card-bg img{width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)}
+.card .card-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(14,24,38,0.98) 0%,rgba(16,28,42,0.75) 40%,transparent 100%)}
+.card.skin .card-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 35%,transparent 100%)}
+.card.tier7 .card-bg::after{background:linear-gradient(to top,rgba(30,16,40,0.95) 0%,rgba(30,16,40,0.6) 35%,transparent 100%)}
+.card-inner{position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:0;overflow:hidden;border-radius:3px}
+.card-inner .abi svg{width:32px;height:32px}
+.school-logo{position:absolute;bottom:28px;right:6px;width:40px;height:40px;opacity:0.18;filter:invert(1);pointer-events:none;z-index:0}
+.minicard .school-logo{bottom:18px;right:3px;width:26px;height:26px;opacity:0.2}
+.card .tier-stars{position:absolute;top:6px;left:6px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1px}
+.tier-bar{width:20px;background:rgba(0,0,0,0.5);border-radius:10px;display:flex;flex-direction:column;align-items:center;padding:3px 0;gap:1px;backdrop-filter:blur(2px)}
+.tier-bar .star{width:11px;height:11px;line-height:0}
+.tier-bar .star img{width:100%;height:100%;object-fit:contain}
+.card .portrait{display:none}
+.card .card-spacer{flex:1}
+.card .name-banner{background:rgba(8,16,28,0.85);padding:3px 6px;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f0f4fa;text-shadow:0 1px 3px rgba(0,0,0,0.8)}
+.card .keywords{font-size:10px;color:#b0d0e8;padding:2px 4px;min-height:14px;background:rgba(8,16,28,0.7);text-shadow:0 1px 2px rgba(0,0,0,0.6);display:flex;flex-wrap:wrap;gap:3px;justify-content:center}
+.kw-tag{display:inline-block;padding:1px 5px;border-radius:4px;font-size:10px;font-weight:700;background:rgba(180,210,230,0.4);border:1px solid rgba(200,225,240,0.6);color:#f0f8ff}
+.card .ability-tag{font-size:10px;margin-top:0;padding:2px 6px;border-radius:4px;display:inline-block;font-weight:700}
+.ability-tag.bc{background:rgba(251,191,36,0.25);color:#fbbf24;border:1px solid rgba(251,191,36,0.45)}
+.ability-tag.dr{background:rgba(239,68,68,0.25);color:#fca5a5;border:1px solid rgba(239,68,68,0.4)}
+.ability-tag.soc{background:rgba(96,200,255,0.2);color:#80d0ff;border:1px solid rgba(96,200,255,0.35)}
+.battle-counter{font-size:10px;font-weight:700;text-align:center;padding:1px 4px;border-radius:3px;margin-top:1px}
+.card .stat-row{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 6px;background:rgba(10,20,35,0.5)}
+.card .stat-atk,.card .stat-hp{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:33px;font-weight:900;position:relative;overflow:hidden;background:linear-gradient(135deg,#042838,#063a50);color:#fff;box-shadow:0 2px 6px rgba(4,30,50,0.7)}
+.card .stat-atk::before,.card .stat-hp::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:0.12}
+.card .stat-atk::before{width:28px;height:28px;background-image:url('../img/UI/Attack.png')}
+.card .stat-hp::before{width:26px;height:26px;background-image:url('../img/UI/HP.png')}
+.card .sell-x{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(220,38,38,0.8);border:none;color:#fff;font-size:13px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background 0.2s;z-index:2}
+.card .sell-x:hover{background:rgba(220,38,38,1)}
+.card .cost-badge{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:2px;background:#1a2a3a;border:1px solid #3a5a6e;border-radius:2px;padding:2px 6px 2px 3px}
+.card .cost-badge img{width:18px;height:auto}
+.card .cost-badge span{color:#fff;font-size:13px;font-weight:900;line-height:1}
+.coin-toggle{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);z-index:4;width:39px;height:39px;padding:0;border:2px solid rgba(255,255,255,0.3);border-radius:50%;background:rgba(10,20,35,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.coin-toggle img{width:27px;height:27px;object-fit:contain}
+.coin-toggle.off{border-color:rgba(239,68,68,0.5);background:rgba(60,20,20,0.7);opacity:0.6}
+.coin-toggle:hover{transform:translateX(-50%) scale(1.15);border-color:rgba(255,255,255,0.6)}
+.frozen-badge{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1693de,#00c8ff);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 2px 6px rgba(22,147,222,0.3)}
+/* 미니카드 (전투용) */
+.minicard{width:140px;height:195px;background:#1e2d3d;border:2.5px solid #3a5a6e;border-radius:5px;padding:0;text-align:center;position:relative;overflow:visible;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
+.minicard .mini-bg{overflow:hidden;border-radius:3px}
+.minicard.skin{border-color:#c8a010;box-shadow:0 0 10px rgba(200,160,16,0.3)}
+.minicard.ambush .mini-bg img{filter:grayscale(100%);opacity:0.7}
+.minicard .shield-orb{width:99px;height:99px;top:calc(28% - 50px);left:50%;transform:translateX(-50%)}
+.minicard.has-taunt{transform:scale(1.1);z-index:2;margin:0 4px}
+.minicard.tier7{border-color:#c030d0;box-shadow:0 0 8px rgba(192,48,208,0.35)}
+.minicard .mini-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
+.minicard .mini-bg img{width:85%;height:auto;object-fit:contain;position:absolute;top:2px;left:50%;transform:translateX(-50%)}
+.minicard .mini-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(20,32,48,0.95) 0%,rgba(20,32,48,0.6) 30%,transparent 100%)}
+.minicard.skin .mini-bg::after{background:linear-gradient(to top,rgba(36,28,10,0.95) 0%,rgba(36,28,10,0.6) 30%,transparent 100%)}
+.minicard .mini-portrait{display:none}
+.minicard .mini-inner{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+.minicard .name{font-size:13px;font-weight:700;margin-top:auto;padding:1px 5px;background:rgba(10,20,35,0.65);color:#e0eaf4;text-shadow:0 1px 2px rgba(0,0,0,0.5)}
+.minicard .mini-stats{display:flex;justify-content:space-between;padding:3px 6px 4px;background:rgba(10,20,35,0.5)}
+.minicard .mini-atk,.minicard .mini-hp{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;background:linear-gradient(135deg,#042838,#063a50);color:#fff;box-shadow:0 1px 4px rgba(4,30,50,0.7);position:relative;overflow:hidden}
+.minicard .mini-atk::before,.minicard .mini-hp::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:0.12}
+.minicard .mini-atk::before{width:24px;height:24px;background-image:url('../img/UI/Attack.png')}
+.minicard .mini-hp::before{width:22px;height:22px;background-image:url('../img/UI/HP.png')}
+.minicard .keywords{font-size:10px;color:#8ab4d8;background:rgba(10,20,35,0.5);padding:1px 3px 2px;position:relative;text-shadow:0 1px 1px rgba(0,0,0,0.4);display:flex;flex-wrap:wrap;gap:2px;justify-content:center}
+.minicard .kw-tag{font-size:8px;padding:0 3px;border-radius:3px}
+.minicard .stripped-x{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:#ef4444;text-shadow:0 0 10px rgba(239,68,68,0.9),0 0 20px rgba(239,68,68,0.5),0 2px 6px rgba(0,0,0,0.9);pointer-events:none;z-index:5;line-height:1}
+
+/* 상점 */
+.shop{background:#141e28;border-radius:14px;padding:0;margin-bottom:0;border:1px solid #1c2838;box-shadow:0 2px 12px rgba(0,0,0,0.3);position:relative}
+.shop-inner{position:relative;padding:12px;overflow:hidden;border-radius:13px}
+.shop-row{display:flex;gap:8px;justify-content:center;flex-wrap:nowrap;position:relative;z-index:1}
+.shop-row .card{flex-shrink:1;min-width:120px}
+.shop-actions{display:flex;gap:8px;justify-content:center;margin-top:22px;position:relative;z-index:1}
+
+/* 버튼 */
+.btn-wrap{display:inline-block;transform:skewX(-8deg)}
+.btn{border:none;color:#1a2a3a;padding:10px 20px;border-radius:4px;font-size:14px;font-weight:800;cursor:pointer;transition:all 0.2s;font-family:inherit;background:#e8ecf0;border:2px solid #d0d8e0;box-shadow:0 2px 8px rgba(0,0,0,0.15);transform:skewX(-8deg)}
+.btn-inner{display:inline-flex;align-items:center;gap:4px;transform:skewX(8deg)}
+.btn:hover{box-shadow:0 4px 14px rgba(0,0,0,0.25);background:#f0f4f8}
+.btn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
+.btn-stone{background:#e8ecf0;color:#1a2a3a;border:2px solid #d0d8e0}
+.btn-blue{background:#4a9ad5;color:#fff;border:2px solid #5aabe6}
+.btn-blue:hover{background:#5aabe6;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.btn-red{background:#8b3a3a;color:#f0d0d0;border:2px solid #a04848}
+.btn-red:hover{background:#a04848;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.btn-green{background:#f5c831;color:#4a3a00;border:2px solid #f7d44a;text-shadow:none}
+.btn-green:hover{background:#f7d44a;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.btn-purple{background:#e8ecf0;color:#1a2a3a;border:2px solid #d0d8e0}
+.btn-big{padding:12px 28px;font-size:16px}
+
+/* 전투 */
+.battle-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(14,28,42,0.96) 0%,rgba(10,20,34,0.98) 100%);z-index:100;flex-direction:row;align-items:stretch;padding:0;overflow:hidden}
+.battle-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;overflow-y:auto}
+.battle-overlay::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:url('../img/UI/wallpaper02.png') center/cover no-repeat;opacity:0.06;pointer-events:none;z-index:0}
+.battle-overlay>*{position:relative;z-index:1}
+.battle-main>*{position:relative;z-index:1}
+.battle-overlay.active{display:flex}
+.battle-intro{text-align:center;margin-top:60px;animation:fadeInUp 0.5s ease}
+.battle-intro .vs-text{font-size:48px;font-weight:900;color:#ef4444;margin:16px 0;text-shadow:0 0 20px rgba(239,68,68,0.4)}
+.battle-intro .vs-name{font-size:22px;font-weight:700;color:#e0eaf4}
+.battle-intro .vs-tier{font-size:14px;color:#60b8e8}
+.battle-arena{width:100%;max-width:1000px;margin-top:16px}
+.battle-side-label{font-size:12px;color:#60a0c0;margin-bottom:4px;text-align:center;font-weight:700;letter-spacing:0.5px}
+.battle-row{display:flex;gap:8px;justify-content:center;min-height:130px;padding:10px;flex-wrap:nowrap;align-items:flex-end;background:rgba(22,50,72,0.25);border-radius:12px;border:1px solid rgba(0,200,255,0.08)}
+.battle-row .bcard{flex-shrink:1;min-width:0}
+.battle-row.compact .minicard{width:115px;height:160px}
+.battle-row.compact .minicard .name{font-size:11px}
+.battle-row.compact .minicard .mini-atk,.battle-row.compact .minicard .mini-hp{width:24px;height:24px;font-size:14px}
+.battle-row.compact .minicard .mini-atk::before{width:20px;height:20px}
+.battle-row.compact .minicard .mini-hp::before{width:18px;height:18px}
+.battle-row.enemy{align-items:flex-start}
+.battle-divider{text-align:center;padding:8px;font-size:20px;font-weight:900;color:rgba(0,200,255,0.2);letter-spacing:4px}
+.bcard{transition:opacity 0.3s ease,filter 0.3s ease;position:relative}
+.bcard.has-coin{display:flex;flex-direction:column;align-items:center;gap:4px}
+.bcard.dead-card{opacity:0.15;transform:scale(0.75);filter:grayscale(1)}
+.bcard.lift{animation:liftUp 0.35s cubic-bezier(0.2,0,0.4,1) forwards;z-index:10}
+.bcard.slam{animation:slamTo 0.2s cubic-bezier(0.6,0,1,0.4) forwards;z-index:10}
+.bcard.slam-return{animation:slamReturn 0.3s cubic-bezier(0,0,0.3,1) forwards}
+.bcard.multihit{z-index:10;animation:multiHitShake 0.06s ease-in-out infinite alternate}
+@keyframes multiHitShake{0%{transform:translate(calc(var(--slam-x,0px) - 4px),calc(var(--slam-y,0px) - 2px)) scale(1.15) rotate(var(--lunge-rot,0deg));filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}100%{transform:translate(calc(var(--slam-x,0px) + 4px),calc(var(--slam-y,0px) + 2px)) scale(1.15) rotate(var(--lunge-rot,0deg));filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}}
+.multi-flash{position:absolute;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,100,0.9),rgba(255,100,50,0) 70%);pointer-events:none;animation:multiFlashPop 0.12s ease-out forwards;z-index:20}
+@keyframes multiFlashPop{0%{transform:scale(0.3);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.bcard.hit-shake{animation:hitShake 0.45s cubic-bezier(0.2,0,0.3,1)}
+.bcard.knockback{animation:knockbackDown 0.35s cubic-bezier(0,0,0.3,1)}
+.bcard.enemy.knockback{animation:knockbackUp 0.35s cubic-bezier(0,0,0.3,1)}
+.impact-flash{position:absolute;top:50%;left:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.9) 0%,rgba(255,200,100,0.4) 40%,transparent 70%);animation:impactBurst 0.35s ease-out forwards;pointer-events:none;z-index:30}
+@keyframes liftUp{0%{transform:translateY(0) scale(1);filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3))}60%{transform:translateY(-12px) scale(1.18);filter:drop-shadow(0 10px 20px rgba(0,0,0,0.5))}100%{transform:translateY(-18px) scale(1.22);filter:drop-shadow(0 14px 28px rgba(0,0,0,0.6))}}
+@keyframes slamTo{0%{transform:translate(0,-18px) scale(1.22) rotate(0);filter:drop-shadow(0 14px 28px rgba(0,0,0,0.6))}100%{transform:translate(var(--slam-x,0px),var(--slam-y,-80px)) scale(1.15) rotate(var(--lunge-rot,0deg));filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}}
+@keyframes slamReturn{0%{transform:translate(var(--slam-x,0px),var(--slam-y,0px)) scale(1.15) rotate(var(--lunge-rot,0deg))}40%{transform:translate(0,0) scale(1.05) rotate(0)}100%{transform:translate(0,0) scale(1) rotate(0);filter:none}}
+@keyframes knockbackDown{0%{transform:translateY(0)}30%{transform:translateY(12px) scale(0.95)}100%{transform:translateY(0) scale(1)}}
+@keyframes knockbackUp{0%{transform:translateY(0)}30%{transform:translateY(-12px) scale(0.95)}100%{transform:translateY(0) scale(1)}}
+@keyframes impactBurst{0%{transform:scale(0.3);opacity:1}50%{transform:scale(1.2);opacity:0.7}100%{transform:scale(1.8);opacity:0}}
+.bcard.soc-glow{animation:socGlow 0.6s ease}
+@keyframes socGlow{0%{filter:brightness(1)}20%{filter:brightness(2.5) drop-shadow(0 0 12px rgba(100,180,255,0.9))}50%{filter:brightness(1.8) drop-shadow(0 0 8px rgba(100,180,255,0.5))}100%{filter:brightness(1)}}
+.soc-buff-num{position:absolute;top:50%;left:50%;font-size:16px;font-weight:900;color:#60b0ff;text-shadow:0 0 8px rgba(96,176,255,0.8),0 2px 4px rgba(0,0,0,0.8);animation:socBuffFloat 0.8s ease forwards;pointer-events:none;z-index:20;white-space:nowrap}
+@keyframes socBuffFloat{0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}20%{opacity:1;transform:translate(-50%,-60%) scale(1.2)}50%{opacity:1;transform:translate(-50%,-80%) scale(1)}100%{opacity:0;transform:translate(-50%,-100%) scale(0.8)}}
+.bcard.hit-shake{animation:hitShake 0.4s ease}
+@keyframes hitShake{0%{transform:translate(0,0);filter:brightness(1)}8%{transform:translate(-10px,4px);filter:brightness(3) saturate(0)}16%{transform:translate(8px,-3px);filter:brightness(2)}24%{transform:translate(-6px,2px);filter:brightness(1.5)}35%{transform:translate(5px,-2px)}50%{transform:translate(-3px,1px)}70%{transform:translate(1px,0)}100%{transform:translate(0,0);filter:brightness(1)}}
+.bcard.shield-pop{animation:shieldPop 0.4s ease}
+@keyframes shieldPop{0%{filter:brightness(1)}30%{filter:brightness(2) drop-shadow(0 0 16px #60a5fa)}100%{filter:brightness(1)}}
+.bcard.dying{animation:deathFade 0.5s ease forwards}
+@keyframes deathFade{0%{opacity:1;transform:scale(1)}100%{opacity:0.15;transform:scale(0.75);filter:grayscale(1)}}
+.dmg-num{position:absolute;top:8px;left:50%;font-size:22px;font-weight:900;color:#ff4444;text-shadow:0 0 10px rgba(255,68,68,0.8),0 2px 4px rgba(0,0,0,0.8);animation:dmgFloat 0.9s ease forwards;pointer-events:none;z-index:20;white-space:nowrap}
+.dmg-num.shield-txt{color:#60a5fa;text-shadow:0 0 10px rgba(96,165,250,0.8),0 2px 4px rgba(0,0,0,0.8);font-size:16px}
+@keyframes dmgFloat{0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1.3)}30%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-35px) scale(0.7)}}
+.battle-overlay.screen-shake{animation:screenShake 0.4s ease}
+@keyframes screenShake{0%{transform:translate(0,0)}10%{transform:translate(-12px,6px)}20%{transform:translate(10px,-8px)}30%{transform:translate(-8px,10px)}40%{transform:translate(8px,-4px)}50%{transform:translate(-6px,6px)}60%{transform:translate(4px,-2px)}80%{transform:translate(-2px,2px)}100%{transform:translate(0,0)}}
+.pajdik-text{position:absolute;top:50%;left:50%;font-size:1.3em;font-weight:900;font-style:italic;color:#ff4500;text-shadow:0 0 6px #ff8c00,0 2px 4px rgba(0,0,0,0.8);pointer-events:none;z-index:20;animation:pajdikPop 1.2s ease-out forwards;white-space:nowrap}
+@keyframes pajdikPop{0%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}40%{opacity:1;transform:translate(-50%,-70%) scale(1.0)}100%{opacity:0;transform:translate(-50%,-90%) scale(0.8)}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+.sweeper-proj{position:fixed;width:70px;height:100px;z-index:50;pointer-events:none;transition:none}
+.sweeper-proj .minicard{transform:scale(0.65);transform-origin:center center}
+@keyframes sweeperSpawn{0%{opacity:0;transform:scale(0.3)}100%{opacity:1;transform:scale(1)}}
+@keyframes sweeperExplode{0%{opacity:1;transform:scale(1)}50%{opacity:1;transform:scale(1.4);filter:brightness(3)}100%{opacity:0;transform:scale(2);filter:brightness(5)}}
+.battle-log{width:260px;min-width:260px;overflow-y:auto;font-size:12px;color:#8ab0cc;background:rgba(10,18,28,0.85);backdrop-filter:blur(8px);padding:14px 12px;border-right:1px solid rgba(0,200,255,0.15);height:100%}
+.battle-log div{padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.battle-log .hit{color:#ff6b6b}.battle-log .shield{color:#60c0f0}.battle-log .kill{color:#fbbf24}.battle-log .soc{color:#60b8e8}
+.battle-log .chat{color:#f0d890;font-style:italic;padding:3px 0 3px 6px;border-left:2px solid rgba(240,216,144,0.4);margin:2px 0}
+.battle-log .chat-fatal{color:#ff3333;font-style:normal;font-weight:900;letter-spacing:1px}
+.battle-result-box{text-align:center;margin-top:12px;animation:fadeInUp 0.4s ease}
+.battle-result{font-size:32px;font-weight:900;margin:8px 0}
+.battle-result.win{color:#10b981}.battle-result.lose{color:#ef4444}.battle-result.draw{color:#fbbf24}
+.battle-damage{font-size:15px;color:#8ab0cc;margin-bottom:10px}
+.battle-controls{display:flex;gap:8px;justify-content:center;margin-top:10px}
+
+/* ===== 코인 페이즈 ===== */
+.bcoin-wrap{visibility:hidden;display:flex;flex-direction:column;align-items:center;}
+.bcoin-wrap.show{visibility:visible;}
+.bcoin-ow{position:relative;width:32px;height:32px;}
+.bcoin-img{width:32px;height:32px;object-fit:contain;display:block;}
+.bcoin-img.spinning{animation:bcoin-spin 0.115s linear infinite;}
+@keyframes bcoin-spin{0%,100%{transform:scaleX(1);}45%{transform:scaleX(0.08);}55%{transform:scaleX(0.08);}}
+.bnum{position:absolute;top:50%;left:calc(100% + 4px);transform:translateY(-50%);
+  font-size:18px;font-weight:900;color:#fff;white-space:nowrap;
+  text-shadow:0 1px 3px rgba(0,0,0,0.9);pointer-events:none;z-index:10;
+  opacity:0;transition:opacity 0.35s;}
+.bnum.show{opacity:1;}.bnum.first-num{color:#ffd700;}
+.bcrown{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  font-size:13px;line-height:1;pointer-events:none;z-index:11;
+  opacity:0;transition:opacity 0.35s;}
+.bcrown.show{opacity:1;}
+.bmini-sg{position:absolute;left:50%;top:29%;
+  transform:translateX(-50%) translateY(-8px);
+  width:36%;opacity:0;pointer-events:none;z-index:6;
+  transition:opacity 0.4s 0.1s,transform 0.4s 0.1s cubic-bezier(0.2,1.4,0.4,1);}
+.bmini-sg.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* 결과 화면 */
+.game-over{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(14,28,42,0.94),rgba(10,20,34,0.97));z-index:200;justify-content:center;align-items:center;flex-direction:column}
+.game-over.active{display:flex}
+.game-over h1{font-size:48px;font-weight:900;margin-bottom:8px;color:#e0eaf4}
+.game-over .placement{font-size:24px;color:#60a0c0;margin-bottom:24px}
+
+/* 드래그앤드롭 */
+.card[draggable="true"]{cursor:grab}
+.card[draggable="true"]:active{cursor:grabbing}
+.card.dragging{opacity:0.4;transform:scale(0.95)!important;box-shadow:none!important}
+.card.drag-over{border-color:#1693de!important;box-shadow:0 0 16px rgba(22,147,222,0.5)!important;transform:translateY(-6px)!important}
+.board.drag-active{border-color:rgba(22,147,222,0.3);background:rgba(22,147,222,0.06)}
+.drop-indicator{width:4px;min-height:200px;background:#1693de;border-radius:2px;box-shadow:0 0 10px rgba(22,147,222,0.6);flex-shrink:0;pointer-events:none;margin:0 -2px;z-index:10}
+.spell-hint-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:100;background:rgba(20,10,40,0.92);color:#c4b5fd;font-weight:700;font-size:18px;padding:16px 32px;border-radius:10px;border:2px solid rgba(139,92,246,0.5);box-shadow:0 4px 24px rgba(139,92,246,0.3);text-align:center;pointer-events:none;white-space:nowrap}
+
+/* 호버 툴팁 — BA TCG 카드 스타일 */
+.hover-tooltip{position:fixed;z-index:2500;pointer-events:none;background:linear-gradient(180deg,#1a3248,#162838);border:2.5px solid #2a5878;border-radius:10px;padding:0;width:280px;box-shadow:0 12px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(0,200,255,0.08);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;transform:translateY(8px);font-size:13px;overflow-y:auto;overflow-x:hidden;color:#c0d8e8;max-height:92vh;scrollbar-width:none}
+.hover-tooltip::-webkit-scrollbar{width:0;height:0;display:none}
+.hover-tooltip.visible{opacity:1;transform:translateY(0)}
+.hover-tooltip .tt-portrait{width:100%;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e2838,#142838);line-height:0;max-height:275px}
+.hover-tooltip .tt-portrait img{width:100%;height:auto;display:block;position:static;transform:none}
+.hover-tooltip .tt-portrait::after{content:'';position:absolute;bottom:0;left:0;right:0;height:14%;background:linear-gradient(to top,#1a3248,transparent);pointer-events:none}
+.hover-tooltip .tt-header{position:relative;padding:10px 14px 10px;margin-top:0;z-index:1;background:linear-gradient(135deg,rgba(14,106,158,0.3),rgba(14,152,192,0.15));border-bottom:1px solid rgba(0,200,255,0.12)}
+.hover-tooltip .tt-name{font-size:17px;font-weight:900;margin-bottom:2px;color:#e8f0f8;text-shadow:0 1px 3px rgba(0,0,0,0.5)}
+.hover-tooltip .tt-school{font-size:11px;color:#6a98b8;margin-bottom:8px}
+.hover-tooltip .tt-stats-row{display:flex;gap:8px;margin-bottom:0}
+.hover-tooltip .tt-stat{padding:3px 10px;border-radius:14px;font-weight:900;font-size:13px}
+.hover-tooltip .tt-stat.atk{background:linear-gradient(135deg,#0a5a80,#0c7a98);color:#fff;padding-left:28px;position:relative;box-shadow:0 1px 4px rgba(10,90,128,0.5)}
+.hover-tooltip .tt-stat.atk::before{content:'';position:absolute;left:5px;top:50%;transform:translateY(-50%);width:18px;height:18px;background:url('../img/UI/Attack.png') center/contain no-repeat;opacity:0.35}
+.hover-tooltip .tt-stat.hp{background:linear-gradient(135deg,#0a5a80,#0c7a98);color:#fff;padding-left:28px;position:relative;box-shadow:0 1px 4px rgba(10,90,128,0.5)}
+.hover-tooltip .tt-stat.hp::before{content:'';position:absolute;left:5px;top:50%;transform:translateY(-50%);width:16px;height:16px;background:url('../img/UI/HP.png') center/contain no-repeat;opacity:0.35}
+.hover-tooltip .tt-stat.tier{background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.2)}
+.hover-tooltip .tt-keywords{padding:8px 14px;background:rgba(10,24,38,0.4)}
+.hover-tooltip .tt-kw-item{display:flex;flex-direction:column;gap:2px;padding:6px 0;border-bottom:1px solid rgba(0,200,255,0.06)}
+.hover-tooltip .tt-kw-item:last-child{border-bottom:none}
+.hover-tooltip .tt-kw-name{font-weight:700;color:#50b8e0;white-space:nowrap}
+.hover-tooltip .tt-kw-desc{color:#88aec8;font-size:12px;line-height:1.4}
+.hover-tooltip .tt-ability{padding:10px 14px;margin:0;background:rgba(14,40,60,0.5);border-top:1px solid rgba(0,200,255,0.1)}
+.hover-tooltip .tt-type{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:6px}
+.hover-tooltip .tt-type.bc{background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)}
+.hover-tooltip .tt-type.dr{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.12)}
+.hover-tooltip .tt-type.soc{background:rgba(96,192,232,0.15);color:#60c0e8;border:1px solid rgba(96,192,232,0.12)}
+.hover-tooltip .tt-type.surv{background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.12)}
+.hover-tooltip .tt-type.passive{background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.12)}
+.hover-tooltip .tt-desc{color:#b0c8d8;line-height:1.5;white-space:pre-line;margin-bottom:4px;font-size:12px}
+.hover-tooltip .tt-skin{font-size:11px;color:#ffd700;line-height:1.4;white-space:pre-line;padding:6px 10px;background:linear-gradient(135deg,rgba(14,106,158,0.2),rgba(14,152,192,0.1));border-radius:8px;border:1px solid rgba(0,200,255,0.12);margin-top:6px;margin-bottom:8px}
+
+.empty-hint{color:#8aa8c8;font-size:13px;padding:20px;text-align:center;width:100%}
+.shake{animation:shake 0.3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.pop{animation:pop 0.3s ease}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+.screen{display:none;opacity:0}.screen.active{display:block;opacity:1}.screen.fading{display:block;opacity:0;transition:opacity 0.4s ease}
+#title-screen.active,#login-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
+#title-screen.fading,#login-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
+#title-screen .title-logo,#login-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
+#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
+
+/* 능력 팝업 — BA TCG 다크 블루 */
+.ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:800;justify-content:center;align-items:center}
+.ability-popup-overlay.active{display:flex}
+.ability-popup{background:#1a2a3a;border-radius:6px;padding:20px 24px;max-width:360px;width:90%;border:2.5px solid #3a5a6e;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:fadeInUp 0.2s ease;color:#c0d8e8}
+.ability-popup .ap-type{display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:8px}
+.ability-popup .ap-type.bc{background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.3)}
+.ability-popup .ap-type.dr{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.25)}
+.ability-popup .ap-type.soc{background:rgba(96,192,232,0.15);color:#60c0e8;border:1px solid rgba(96,192,232,0.2)}
+.ability-popup .ap-name{font-size:18px;font-weight:900;margin-bottom:10px;color:#e0eaf4}
+.ability-popup .ap-desc{font-size:14px;line-height:1.6;color:#b0c8d8;white-space:pre-line;margin-bottom:8px}
+.ability-popup .ap-skin{font-size:12px;color:#ffd700;line-height:1.5;white-space:pre-line;padding:6px 10px;background:rgba(255,215,0,0.08);border-radius:8px;border:1px solid rgba(255,215,0,0.15);margin-bottom:4px}
+.ability-popup .ap-close{display:block;margin:12px auto 0;padding:8px 24px;border-radius:22px;background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
+.ability-popup .ap-close:hover{background:#f0f4f8;color:#1a2a3a}
+
+/* 키워드 가이드 — BA TCG 다크 블루 */
+.kw-guide{position:relative;display:inline-block;z-index:600}
+.kw-guide-btn{background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;cursor:pointer;padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15);transform:skewX(-8deg)}
+.kw-guide-btn:hover{background:#f0f4f8;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.vol-guide{position:relative;display:inline-block;z-index:600;margin-left:auto;margin-right:2px}
+.vol-guide-btn{background:#e8ecf0;border:2px solid #d0d8e0;color:#1a2a3a;font-size:14px;font-weight:700;cursor:pointer;padding:6px 14px;border-radius:4px;transition:all 0.2s;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15);transform:skewX(-8deg)}
+.vol-guide-btn:hover{background:#f0f4f8;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.vol-guide-panel{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:#1a2a3a;border:2.5px solid #3a5a6e;border-radius:8px;padding:14px 16px;box-shadow:0 8px 40px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 0.2s ease;z-index:500}
+.vol-guide-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.vol-guide-panel .vol-label{font-size:13px;color:#60c0e8;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.vol-guide-panel input[type=range]{width:100%;accent-color:#60c0e8}
+.kw-guide-panel{position:absolute;top:calc(100% + 8px);right:0;width:360px;background:#1a2a3a;border:2.5px solid #3a5a6e;border-radius:8px;padding:18px 20px;box-shadow:0 8px 40px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transform:translateY(-4px);transition:all 0.2s ease;max-height:none;overflow-y:visible;z-index:500}
+.kw-guide-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.kw-guide-panel h3{font-size:15px;color:#60c0e8;margin-bottom:12px;letter-spacing:1px}
+.kw-guide-panel .guide-section{margin-bottom:14px}
+.kw-guide-panel .guide-section-title{font-size:13px;color:#6a90a8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(0,200,255,0.1)}
+.kw-guide-row{display:flex;gap:10px;padding:3px 0;align-items:baseline}
+.kw-guide-row .kw-name{font-weight:700;font-size:15px;color:#60c0e8;white-space:nowrap;min-width:50px}
+.kw-guide-row .kw-desc{font-size:14px;color:#8ab0c8;line-height:1.5}
+
+/* ========== 튜토리얼 ========== */
+.tutorial-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;pointer-events:none}
+.tutorial-overlay.active{display:block}
+.tutorial-dim{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);pointer-events:auto;z-index:500;transition:opacity 0.3s}
+.tutorial-dim.hidden{opacity:0;pointer-events:none}
+.tutorial-highlight{position:relative;z-index:510!important;pointer-events:auto!important;box-shadow:0 0 0 4px rgba(100,200,255,0.7),0 0 20px rgba(100,200,255,0.3)!important}
+img.tutorial-highlight{border-radius:50%!important}
+.tutorial-interact{position:relative;z-index:510!important;pointer-events:auto!important}
+.tutorial-bubble{position:fixed;z-index:600;background:linear-gradient(135deg,#1a3a50,#1e4a60);border:2px solid rgba(100,200,255,0.5);border-radius:14px;padding:16px 20px;max-width:380px;min-width:260px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 12px rgba(100,200,255,0.15);pointer-events:auto;animation:tutBubbleIn 0.3s ease}
+.tutorial-bubble::after{content:'';position:absolute;width:16px;height:16px;background:linear-gradient(135deg,#1a3a50,#1e4a60);border-right:2px solid rgba(100,200,255,0.5);border-bottom:2px solid rgba(100,200,255,0.5);transform:rotate(45deg);bottom:-9px;left:40px}
+.tutorial-bubble.arrow-top::after{bottom:auto;top:-9px;transform:rotate(-135deg)}
+.tutorial-bubble.arrow-right::after{bottom:auto;right:-9px;top:30px;left:auto;transform:rotate(-45deg)}
+.tutorial-bubble.arrow-left::after{bottom:auto;left:-9px;top:30px;transform:rotate(135deg)}
+.tutorial-bubble .tut-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(100,200,255,0.4);flex-shrink:0}
+.tutorial-bubble .tut-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tutorial-bubble .tut-name{font-size:15px;font-weight:700;color:#60c0e8}
+.tutorial-bubble .tut-text{font-size:15px;color:#c0dce8;line-height:1.7}
+.tutorial-bubble .tut-btns{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}
+.tutorial-bubble .tut-btn{padding:6px 18px;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s}
+.tut-btn-next{background:linear-gradient(135deg,#2888c0,#1a6a9e);color:#fff}.tut-btn-next:hover{background:linear-gradient(135deg,#30a0e0,#2080b0)}
+.tut-btn-skip{background:rgba(255,255,255,0.1);color:#8ab0c8;border:1px solid rgba(255,255,255,0.15)!important}.tut-btn-skip:hover{background:rgba(255,255,255,0.2)}
+.tutorial-bubble.tut-compact{max-width:300px;min-width:200px;padding:10px 14px;top:10px!important;right:80px!important;left:auto!important;bottom:auto!important;transform:none!important;animation:none;opacity:0.92}
+.tutorial-bubble.tut-compact::after{display:none}
+.tutorial-bubble.tut-compact .tut-header{margin-bottom:4px}
+.tutorial-bubble.tut-compact .tut-text{font-size:12px;line-height:1.5}
+.tutorial-bubble.tut-arona{position:fixed;bottom:auto;top:auto;left:20px;right:auto;transform:none!important;max-width:400px;min-width:300px;padding:18px 22px}
+.tutorial-bubble.tut-arona::after{content:'';position:absolute;width:16px;height:16px;background:linear-gradient(135deg,#1a3a50,#1e4a60);border-right:2px solid rgba(100,200,255,0.5);border-bottom:2px solid rgba(100,200,255,0.5);transform:rotate(45deg);bottom:-9px;left:40px}
+.tutorial-bubble.tut-arona .tut-text{font-size:16px;line-height:1.7}
+.tutorial-bubble.tut-arona .tut-name{font-size:16px}
+.tutorial-bubble.tut-battle{position:fixed;right:40px;left:auto!important;bottom:180px!important;top:auto!important;transform:none!important;max-width:400px;min-width:280px;padding:18px 22px}
+.tutorial-bubble.tut-battle::after{content:'';position:absolute;width:16px;height:16px;background:linear-gradient(135deg,#1a3a50,#1e4a60);border-right:2px solid rgba(100,200,255,0.5);border-bottom:2px solid rgba(100,200,255,0.5);transform:rotate(45deg);bottom:-9px;right:60px;left:auto}
+.tutorial-bubble.tut-battle .tut-text{font-size:16px;line-height:1.7}
+.tutorial-bubble.tut-battle .tut-name{font-size:16px}
+.tut-battle-arona{position:fixed;right:40px;bottom:20px;width:140px;height:140px;border-radius:50%;border:3px solid rgba(100,200,255,0.5);object-fit:cover;z-index:600;box-shadow:0 0 20px rgba(100,200,255,0.3);display:none}
+#ui-shop.tut-hover-only .card{pointer-events:auto;cursor:default}
+#ui-shop.tut-hover-only .card[draggable]{-webkit-user-drag:none;-moz-user-drag:none}
+.tutorial-skip-fixed{position:fixed;top:12px;right:12px;z-index:610;padding:6px 14px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.2);border-radius:6px;color:#8ab0c8;font-size:11px;cursor:pointer;pointer-events:auto}
+.tutorial-skip-fixed:hover{background:rgba(0,0,0,0.7);color:#fff}
+@keyframes tutBubbleIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tut-arrow{position:fixed;z-index:610;pointer-events:none;display:none}
+.tut-arrow.active{display:block}
+.tut-arrow-inner{font-size:36px;color:#fbbf24;animation:tutArrowBounce 0.8s ease infinite;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+@keyframes tutArrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+.tut-center-arona{position:fixed;z-index:600;border-radius:50%;border:3px solid rgba(100,200,255,0.5);object-fit:cover;box-shadow:0 0 20px rgba(100,200,255,0.3);display:none;left:50%;transform:translateX(-50%)}
+.tut-center-arona.s1{width:120px;height:120px;bottom:20px}
+.tut-center-arona.s2{width:180px;height:180px;bottom:20px}
+.tut-center-arona.s3{width:270px;height:270px;bottom:20px}
+.tut-center-arona.s4{width:400px;height:400px;bottom:20px}
+.tutorial-bubble.tut-center{position:fixed;left:50%!important;transform:translateX(-50%)!important;top:auto!important;right:auto!important;max-width:450px;min-width:280px;padding:18px 22px}
+.tutorial-bubble.tut-center::after{content:'';position:absolute;width:16px;height:16px;background:linear-gradient(135deg,#1a3a50,#1e4a60);border-right:2px solid rgba(100,200,255,0.5);border-bottom:2px solid rgba(100,200,255,0.5);transform:rotate(45deg) translateX(50%);bottom:-9px;left:50%}
+.tutorial-bubble.tut-center.sz1{bottom:155px!important;font-size:16px}
+.tutorial-bubble.tut-center.sz1 .tut-text{font-size:16px;line-height:1.7}
+.tutorial-bubble.tut-center.sz2{bottom:215px!important;font-size:20px}
+.tutorial-bubble.tut-center.sz2 .tut-text{font-size:20px;line-height:1.7}
+.tutorial-bubble.tut-center.sz2 .tut-name{font-size:20px}
+.tutorial-bubble.tut-center.sz3{bottom:305px!important;font-size:26px}
+.tutorial-bubble.tut-center.sz3 .tut-text{font-size:26px;line-height:1.6}
+.tutorial-bubble.tut-center.sz3 .tut-name{font-size:26px}
+.tutorial-bubble.tut-center.sz4{bottom:435px!important;font-size:34px}
+.tutorial-bubble.tut-center.sz4 .tut-text{font-size:34px;line-height:1.5}
+.tutorial-bubble.tut-center.sz4 .tut-name{font-size:34px}
+.pc-notice-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:1;transition:opacity 0.6s ease;pointer-events:none}
+.pc-notice-overlay.fade-out{opacity:0}
+.pc-notice-bubble{position:relative;background:#fff;border-radius:20px;padding:24px 32px;max-width:420px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.4);animation:popIn 0.4s ease}
+.pc-notice-bubble::after{content:'';position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);border:10px solid transparent;border-top-color:#fff}
+.pc-notice-bubble p{margin:0;font-size:15px;color:#1a2a3a;line-height:1.6;font-weight:600}
+.pc-notice-arona{width:180px;margin-top:20px;border-radius:50%;border:3px solid #4a9ff5;animation:popIn 0.4s ease 0.15s both}
+@keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes screen-shake{
+  0%{transform:translate(0,0) rotate(0deg)}
+  10%{transform:translate(-12px,8px) rotate(-1.5deg)}
+  20%{transform:translate(10px,-10px) rotate(1.2deg)}
+  30%{transform:translate(-8px,6px) rotate(-0.8deg)}
+  40%{transform:translate(8px,-4px) rotate(1deg)}
+  50%{transform:translate(-6px,3px) rotate(-0.5deg)}
+  60%{transform:translate(4px,-2px) rotate(0.3deg)}
+  70%{transform:translate(-3px,2px) rotate(-0.2deg)}
+  80%{transform:translate(2px,-1px) rotate(0.1deg)}
+  90%{transform:translate(-1px,1px) rotate(0deg)}
+  100%{transform:translate(0,0) rotate(0deg)}
+}
+@keyframes impact-ring{0%{transform:translate(-50%,-50%) scale(0);opacity:1}60%{opacity:0.6}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
+@keyframes screen-flash{0%{opacity:0.7}100%{opacity:0}}
+@keyframes crack-line{0%{opacity:1;transform:scaleX(0)}30%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+.shaking{animation:screen-shake 0.5s ease-out}
+#elim-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(255,100,100,0.8),rgba(200,50,50,0.4));pointer-events:none;opacity:0;z-index:9999}
+#elim-flash.active{animation:screen-flash 0.5s ease-out forwards}
+.elim-ring{position:fixed;width:200px;height:200px;border:4px solid rgba(255,80,80,0.9);border-radius:50%;pointer-events:none;z-index:9998;animation:impact-ring 0.6s ease-out forwards}
+.elim-crack{position:fixed;height:3px;background:linear-gradient(90deg,transparent,rgba(255,100,100,0.9),transparent);pointer-events:none;z-index:9997;transform-origin:center;animation:crack-line 0.7s ease-out forwards}
+.btn-teal{background:#2d7d9a;color:#e0f4ff;border:2px solid #3a9abf}
+.btn-teal:hover{background:#3a9abf;box-shadow:0 4px 14px rgba(0,0,0,0.2)}
+.enigma-display{text-align:center;font-size:12px;color:#c4b5fd;padding:4px 0 2px;font-weight:700}
+.enigma-actions{display:flex;gap:6px;justify-content:center;padding:2px 0 4px}
+.roster-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,20,0.97);z-index:2000;overflow-y:auto;padding:14px 10px;box-sizing:border-box}
+.roster-overlay.active{display:block}
+.roster-hdr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #1e3a5f}
+.roster-title{font-size:18px;font-weight:700;color:#e2e8f0;letter-spacing:1px}
+.roster-close{margin-left:200px;background:#c0392b;color:#fff;border:2px solid #e74c3c;font-size:14px;font-weight:700;cursor:pointer;padding:5px 14px;border-radius:6px}
+.roster-close:hover{background:#e74c3c}
+.roster-school-hdr{display:flex;align-items:center;gap:8px;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid #1e3a5f}
+.roster-school-icon{width:26px;height:26px;filter:invert(1);opacity:0.85}
+.roster-school-name{font-size:14px;font-weight:700;color:#93c5fd}
+.roster-cards-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:4px}
+.roster-tier-chunk{display:flex;flex-wrap:nowrap;gap:5px;align-items:flex-start}
+.rt-sep{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px;height:232px;border-right:2px solid #2a5070;padding-right:4px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:16px;font-weight:800;color:#7a98b8}
+.roster-filters{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.roster-filter{background:#0f2236;color:#93c5fd;border:1px solid #1e3a5f;border-radius:5px;padding:5px 8px;font-size:12px;cursor:pointer;outline:none;font-family:inherit}
+.roster-filter:focus{border-color:#3a9abf}
+.roster-card{cursor:pointer;border-radius:5px;overflow:hidden;background:#0a1828;position:relative;width:155px;aspect-ratio:2/3;border:1.5px solid #1e3a5f;flex-shrink:0}
+.roster-card.rt1{border-color:#6a8090}.roster-card.rt2{border-color:#3a8a4a}.roster-card.rt3{border-color:#3070cc}.roster-card.rt4{border-color:#7a50c0}.roster-card.rt5{border-color:#c88a10}.roster-card.rt6{border-color:#cc3030}
+.roster-card:hover{filter:brightness(1.2)}.roster-card[data-locked]{transition:opacity 0.3s}.roster-card[data-locked]:hover{filter:none!important;opacity:1!important}.roster-card[data-locked]:hover .r-portrait{filter:none!important}
+.r-portrait{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.r-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.82);color:#e0e8f0;font-size:9px;font-weight:700;text-align:center;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:600px){
+  .roster-card{width:78px}.rt-sep{height:117px}
+  body{padding:0 6px}
+  .game-layout{gap:4px}
+  .side-panel{width:160px;min-width:160px;padding:4px}
+  .board{padding:4px 6px;gap:6px}
+  .board .card{min-width:60px}
+  .shop-row{gap:4px;padding:0 2px}
+  .shop .card{flex-shrink:1}
+  .shop-actions{gap:4px;padding:0 2px}
+  .shop-actions .btn{font-size:11px;padding:6px 8px}
+}
+</style>
+</head>
+<body>
+<div id="elim-flash"></div>
+<div class="pc-notice-overlay" id="pc-notice">
+  <div class="pc-notice-bubble">
+    <p>This game is designed for<br>PC resolution.<br>Please play on PC, Sensei!</p>
+  </div>
+  <img src="../img/Icon/arona.jpg" alt="Arona" class="pc-notice-arona">
+</div>
+<div id="app">
+<div class="schale-frame" id="schale-frame" style="background-image:url('../img/UI/wallpaper01.jpg');background-size:cover;background-position:center">
+  <!-- 로그인 화면 -->
+  <div id="login-screen" class="screen active">
+    <img src="../img/UI/bluearchive2.png" class="title-logo">
+    <p class="sub">Battle Grounds</p>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <input id="login-name" type="text" placeholder="Enter your name, Sensei." style="width:280px;padding:8px 12px;border-radius:6px;border:2px solid #3a5a6e;background:#1e2d3d;color:#fff;font-size:14px;text-align:center">
+    </div>
+    <div id="login-status" style="font-size:11px;color:#e04040;margin-bottom:8px"></div>
+    <button class="btn btn-blue btn-big" id="btn-login" style="min-width:200px"><span class="btn-inner">Enter</span></button>
+    <div style="font-size:10px;color:#6a8a9e;margin-top:12px">Enter your name to proceed</div>
+  </div>
+
+  <!-- 메인 메뉴 -->
+  <div id="title-screen" class="screen">
+    <img src="../img/UI/bluearchive2.png" class="title-logo" style="height:200px">
+    <p class="sub" style="font-size:28px">Battle Grounds</p>
+    <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
+    <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">Start Game</span></button>
+    <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">Continue</span></button>
+    <button class="btn btn-teal btn-big" id="btn-quests" style="margin-top:16px;min-width:200px"><span class="btn-inner" style="color:#ffd700">Quests/Unlock</span></button>
+    <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">Student Roster</span></button>
+    <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">Match Records</span></button>
+    <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">Tutorial</span></button>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">
+      <button class="btn btn-stone" id="btn-logout" style="min-width:100px;opacity:0.6"><span class="btn-inner">Logout</span></button>
+      <button class="btn" id="btn-reset-account" style="min-width:100px;opacity:0.4;font-size:11px;padding:4px 8px;background:#1a1a2e;border:1px solid #ef4444;color:#ef4444"><span class="btn-inner">Reset Account</span></button>
+    </div>
+  </div>
+
+  <!-- 퀘스트 오버레이 -->
+  <div id="quest-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:700px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <h2 style="color:#ffd700;margin:0">Quests/Unlock</h2>
+          <button class="btn btn-teal" onclick="doMysteryUnlock()"><span class="btn-inner">Mystery Unlock</span></button><span style="color:#c4b5fd;font-size:11px;font-weight:600;margin-left:4px">(5 Eligma)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span id="quest-points" style="color:#fbbf24;font-size:18px;font-weight:700"></span>
+          <button class="btn btn-stone" id="btn-quest-close"><span class="btn-inner">Close</span></button>
+        </div>
+      </div>
+      <div id="quest-content" style="color:#c0d0e0;font-size:13px">Loading...</div>
+    </div>
+  </div>
+
+  <!-- 신비해방 팝업 -->
+  <div id="unlock-popup-overlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;overflow:hidden" onclick="this.style.display='none'">
+    <div id="unlock-popup-inner" style="text-align:center" onclick="event.stopPropagation()">
+      <img id="unlock-popup-img" src="" style="width:160px;height:160px;object-fit:cover;border-radius:12px;border:3px solid #ffd700;margin-bottom:16px">
+      <div id="unlock-popup-text" style="color:#ffd700;font-size:20px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5);line-height:1.5"></div>
+      <button class="btn btn-stone" style="margin-top:20px" onclick="document.getElementById('unlock-popup-overlay').style.display='none'"><span class="btn-inner">Confirm</span></button>
+    </div>
+    <div id="unlock-particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+  </div>
+  <style>
+  @keyframes unlockSpin{0%{transform:scale(0.3) rotate(0deg);opacity:0}60%{transform:scale(1.1) rotate(720deg);opacity:1}100%{transform:scale(1) rotate(720deg);opacity:1}}
+  @keyframes particleRise{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-600px) scale(0.5);opacity:0}}
+  </style>
+
+  <!-- 전적 기록 오버레이 -->
+  <div id="records-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.8);overflow-y:auto;padding:20px">
+    <div style="max-width:800px;margin:0 auto;background:#1a2a3a;border-radius:12px;padding:20px;border:2px solid #3a5a6e">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="color:#ffd700;margin:0">Match Records</h2>
+        <button class="btn btn-stone" id="btn-records-close"><span class="btn-inner">Close</span></button>
+      </div>
+      <div id="records-content" style="color:#c0d0e0;font-size:13px">Loading...</div>
+    </div>
+  </div>
+
+  <div id="roster-overlay" class="roster-overlay">
+    <div class="roster-hdr">
+      <div class="roster-title">Student Roster</div>
+      <div class="roster-filters">
+        <select id="filter-kw" class="roster-filter">
+          <option value="">Basic Ability</option>
+          <option value="taunt">Taunt</option>
+          <option value="shield">Shield</option>
+          <option value="cleave">Cleave</option>
+          <option value="reborn">Reborn</option>
+          <option value="windfury">Rapid Fire</option>
+          <option value="poison">Venom</option>
+          <option value="pierce">Pierce</option>
+          <option value="ranged">Snipe</option>
+          <option value="ambush">Ambush</option>
+          <option value="selfdestruct">Self-Destruct</option>
+          <option value="invincible">Invincible</option>
+        </select>
+        <select id="filter-abil" class="roster-filter">
+          <option value="">Special Ability</option>
+          <option value="bc">Battlecry</option>
+          <option value="dr">Deathrattle</option>
+          <option value="soc">Start of Combat</option>
+          <option value="surv">Survivor</option>
+          <option value="passive">Passive</option>
+          <option value="pre">Preemptive</option>
+        </select>
+      </div>
+      <button class="roster-close" id="btn-roster-close">Close</button>
+    </div>
+    <div id="roster-content"></div>
+  </div>
+
+  <div id="game-screen" class="screen">
+    <div class="game-layout">
+    <div class="side-panel">
+      <div class="top-bar">
+        <span class="turn" id="ui-turn"><span class="turn-circle" id="ui-turn-num">1</span> Turn</span>
+        <span class="tier" id="ui-tier" style="display:none">Schedule Lv.1</span>
+        <span class="hp" id="ui-hp" style="display:none">HP: 40</span>
+      </div>
+      <div class="players-bar" id="ui-players"></div>
+      <div style="margin-top:20px">
+        <div class="section-label" style="margin:0 0 2px 0;font-size:10px">Bench</div>
+        <div id="ui-bench" style="display:flex;justify-content:center;align-items:center;height:220px;padding:6px;background:rgba(20,30,40,0.5);border-radius:6px;border:1px dashed #1c2838;overflow:hidden"></div>
+      </div>
+      <div class="arona-deco"><img src="../img/Icon/arona.jpg" class="arona-img" id="arona-face"></div>
+    </div>
+    <div class="main-content">
+      <div class="main-top-row">
+        <div class="schale-label"><img src="../img/Icon/schale.png" class="schale-label-icon"><span class="btn-inner">SCHALE</span></div>
+        <div class="hp-bar-wrap" id="hp-bar-wrap">
+          <span class="hp-bar-label" id="hp-bar-label">HP: 40</span>
+          <div class="hp-bar-track"><div class="hp-bar-fill" id="hp-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="vol-guide" id="vol-guide">
+          <button class="vol-guide-btn" id="vol-guide-btn"><span class="btn-inner">Sound</span></button>
+          <div class="vol-guide-panel" id="vol-guide-panel">
+            <div class="vol-label"><span>Master Volume</span><span id="vol-value">100%</span></div>
+            <input type="range" id="vol-slider" min="0" max="100" value="100" step="1">
+          </div>
+        </div>
+        <div class="kw-guide" id="kw-guide">
+          <button class="kw-guide-btn" id="kw-guide-btn"><span class="btn-inner">Ability List</span></button>
+          <div class="kw-guide-panel" id="kw-guide-panel">
+            <div class="guide-section">
+              <div class="guide-section-title">Basic Abilities</div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='1.5'/><path d='M12 8.5L9.5 12h1.8v3.5h1.4V12h1.8L12 8.5z' fill='#fff' opacity='0.85'/></svg> Taunt</span><span class="kw-desc">This student is attacked first.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.12' stroke='#FFD700' stroke-width='2.8'/><circle cx='12' cy='12' r='5.5' fill='none' stroke='#FFD700' stroke-width='0.8' opacity='0.35'/><circle cx='9' cy='7.5' r='1' fill='#FFE880' opacity='0.5'/></svg> Shield</span><span class="kw-desc">Blocks damage once.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 22V11' stroke='#4A8C10' stroke-width='3.5' stroke-linecap='round'/><path d='M12 11c0-6 5.5-8.5 10-9.5-1.5 5-5 8-10 9.5z' fill='#7ED321' stroke='#4A8C10' stroke-width='1.5' stroke-linejoin='round'/><path d='M12 13c0-5-5-7.5-9-8.5 1.5 4.5 5 7 9 8.5z' fill='#9BE94A' stroke='#4A8C10' stroke-width='1.5' stroke-linejoin='round'/></svg> Reborn</span><span class="kw-desc">Revives with 1 HP after being defeated for the first time.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M5 18h14v2H5z' fill='#E8A800'/><path d='M5 18L3 8l4.5 3.5L12 5l4.5 6.5L21 8l-2 10z' fill='#FFD700' stroke='#B8860B' stroke-width='1.2' stroke-linejoin='round'/><circle cx='8.5' cy='15' r='1.2' fill='#FF6B35'/><circle cx='12' cy='14.5' r='1.3' fill='#FF6B35'/><circle cx='15.5' cy='15' r='1.2' fill='#FF6B35'/></svg> Invincible</span><span class="kw-desc">Takes no damage.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M4 6l8 6-8 6' stroke='#FF8C00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M10 6l8 6-8 6' stroke='#FF6600' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M16 6l6 6-6 6' stroke='#FF4400' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg> Rapid Fire</span><span class="kw-desc">Attacks twice per turn.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='20' r='2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='2.8' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='2.8' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='2.8' stroke-linecap='round' fill='none'/></svg> Cleave</span><span class="kw-desc">Also attacks adjacent enemies.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='11' r='8' fill='#A050E0'/><circle cx='9' cy='10' r='1.8' fill='#1A0030'/><circle cx='15' cy='10' r='1.8' fill='#1A0030'/><circle cx='9' cy='9.3' r='0.6' fill='#FF60FF'/><circle cx='15' cy='9.3' r='0.6' fill='#FF60FF'/><path d='M9 14.5c1 1 2 1.2 3 1.2s2-.2 3-1.2' stroke='#1A0030' stroke-width='1.5' stroke-linecap='round' fill='none'/><circle cx='8' cy='20.5' r='1.5' fill='#80FF40' opacity='0.7'/></svg> Venom</span><span class="kw-desc">Instantly defeats the target when dealing damage.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3' stroke-linecap='round'/><path d='M12 2v4M7 6l5-4 5 4M5 9l2-3M19 9l-2-3' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg> Pierce</span><span class="kw-desc">Excess damage is dealt to adjacent enemies.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='12' r='8.5' stroke='#D04040' stroke-width='2' fill='none'/><circle cx='12' cy='12' r='2' fill='#FF4444'/><path d='M12 2v6M12 16v6M2 12h6M16 12h6' stroke='#D04040' stroke-width='2' stroke-linecap='round'/></svg> Snipe</span><span class="kw-desc">Does not take counterattack damage.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><rect x='3' y='3' width='18' height='18' rx='4' fill='#404050' stroke='#666' stroke-width='1'/><circle cx='12' cy='11' r='5' fill='#888' opacity='0.5'/><circle cx='10' cy='10' r='3' fill='#AAA' opacity='0.4'/><circle cx='14' cy='13' r='4' fill='#777' opacity='0.4'/></svg> Ambush</span><span class="kw-desc">Cannot be targeted until first attack.</span></div>
+              <div class="kw-guide-row"><span class="kw-name"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='11' cy='14' r='7.5' fill='#6A3D9A'/><path d='M14.5 7l1.5-3.5' stroke='#888' stroke-width='2.5' stroke-linecap='round'/><path d='M15.5 3l1.5.8M17 2.5l-.5 1.5' stroke='#FF8800' stroke-width='2' stroke-linecap='round'/></svg> Self-Destruct</span><span class="kw-desc">Attacks with ATK + HP combined, then is defeated.</span></div>
+            </div>
+            <div class="guide-section">
+              <div class="guide-section-title">Special Abilities</div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#93c5fd"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1' stroke-linejoin='round'/><path d='M15 9a4 4 0 0 1 0 6' stroke='#FFD700' stroke-width='2' stroke-linecap='round'/><path d='M18 6.5a8 8 0 0 1 0 11' stroke='#FFD700' stroke-width='1.8' stroke-linecap='round'/></svg> Start of Combat</span><span class="kw-desc">Triggers at the start of battle.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#fbbf24"><svg width='20' height='20' viewBox='-1 -1 26 26' fill='none' style='vertical-align:middle'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1'/><path d='M13.73 21a2 2 0 0 1-3.46 0' stroke='#CC8800' stroke-width='1.8' stroke-linecap='round'/><circle cx='12' cy='4.5' r='1' fill='#CC8800'/></svg> Battlecry</span><span class="kw-desc">Triggers when placed on SCHALE.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#fca5a5"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 2C7.5 2 4 5.5 4 10c0 3 1.5 5.5 4 7v3h2v-2h4v2h2v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z' fill='#F0F0F0' stroke='#222' stroke-width='2.2'/><circle cx='9' cy='10' r='2.2' fill='#333'/><circle cx='15' cy='10' r='2.2' fill='#333'/><path d='M9 15l1.5 1 1.5-1 1.5 1 1.5-1' stroke='#333' stroke-width='1.5' fill='none'/></svg> Deathrattle</span><span class="kw-desc">Triggers when defeated.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#6ee7b7"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8' fill='#70B840' stroke='#222' stroke-width='1.8'/><path d='M3 13c0 0 0 2.5 1.5 3.5h15c1.5-1 1.5-3.5 1.5-3.5' fill='#4A8A28' stroke='#222' stroke-width='1.8'/><path d='M2 13h20' stroke='#3A7A20' stroke-width='2.2'/></g><path d='M8 17.5l-1 3.5' stroke='#5A5A3A' stroke-width='2' stroke-linecap='round'/><path d='M16 17.5l1 3.5' stroke='#5A5A3A' stroke-width='2' stroke-linecap='round'/></svg> Survivor</span><span class="kw-desc">Triggers after surviving a hit.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#c4b5fd"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1' stroke-linejoin='round'/></svg> Preemptive</span><span class="kw-desc">Triggers when attacking.</span></div>
+              <div class="kw-guide-row"><span class="kw-name" style="color:#c084fc"><svg width='20' height='20' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#E85D75' stroke='#CC2060' stroke-width='1' stroke-linejoin='round'/></svg> Passive</span><span class="kw-desc">Triggers automatically when conditions are met.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="board" id="ui-board"><div class="empty-hint">Buy characters from the Schedule</div></div>
+      <div class="shop">
+        <div class="shop-inner">
+        <div class="shop-row" id="ui-shop"></div>
+        <div class="stone-display" id="ui-stone"><div class="schedule-label"><div class="schedule-icon"></div><span class="btn-inner">Schedule <span id="ui-tier2" style="color:#7a6aaa;font-size:13px">Lv.1</span></span></div><button class="btn btn-blue" id="btn-freeze" style="margin:0"><span class="btn-inner">Freeze Schedule</span></button><img src="../img/UI/stone.png" class="stone-icon xl"><span class="stone-num">3</span></div>
+        <div class="enigma-display" id="ui-enigma" style="display:none">Eligma <span id="enigma-count">0</span>P</div>
+        <div class="shop-actions">
+          <button class="btn btn-stone" id="btn-reroll"><span class="btn-inner">Reroll <img src="../img/UI/stone.png" class="stone-icon">1</span></button>
+          <button class="btn btn-purple" id="btn-upgrade"><span class="btn-inner">Upgrade <img src="../img/UI/stone.png" class="stone-icon">5</span></button>
+          <button class="btn btn-green btn-big" id="btn-fight"><span class="btn-inner">Start Battle</span></button>
+        </div>
+        <img src="../img/UI/bluearchive.png" class="ba-logo-deco">
+        </div>
+      </div>
+    </div>
+    <div class="side-panel-right" id="side-panel-right">
+      <div style="margin-top:20px">
+        <div class="section-label" style="margin:0 0 2px 0;font-size:10px">Return</div>
+        <div id="ui-sell-zone" class="sell-zone">
+          <div class="sell-zone-inner">🔄<br><span style="font-size:11px">Drag here<br>to sell</span></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 튜토리얼 오버레이 (dim만) -->
+<div class="tutorial-overlay" id="tutorial-overlay">
+  <div class="tutorial-dim" id="tutorial-dim"></div>
+</div>
+<!-- 튜토리얼 말풍선 (overlay 바깥, 최상위 레이어) -->
+<div class="tutorial-bubble" id="tutorial-bubble" style="display:none">
+  <div class="tut-header"><img src="../img/Icon/arona.jpg" class="tut-icon"><span class="tut-name">Arona</span></div>
+  <div class="tut-text" id="tut-text"></div>
+  <div class="tut-btns" id="tut-btns">
+    <button class="tut-btn tut-btn-next" id="tut-btn-next">Next</button>
+  </div>
+</div>
+<button class="tutorial-skip-fixed" id="tut-skip" style="display:none">Skip</button>
+<img src="../img/Icon/arona.jpg" class="tut-battle-arona" id="tut-battle-arona">
+<div class="tut-arrow" id="tut-arrow"><span class="tut-arrow-inner">👉</span></div>
+<img src="../img/Icon/arona.jpg" class="tut-center-arona" id="tut-center-arona">
+
+<div class="battle-overlay" id="battle-overlay">
+  <div class="battle-log" id="battle-log" style="display:none"></div>
+  <div class="battle-main">
+    <div id="battle-intro-area"></div>
+    <div class="battle-arena" id="battle-arena" style="display:none">
+      <div class="battle-side-label" id="enemy-label"></div>
+      <div class="battle-row enemy" id="enemy-row"></div>
+      <div class="battle-divider">⚔ ⚔ ⚔</div>
+      <div class="battle-row" id="ally-row"></div>
+      <div class="battle-side-label" id="ally-label"></div>
+    </div>
+    <div class="battle-result-box" id="battle-result-box" style="display:none">
+      <div class="battle-result" id="battle-result"></div>
+      <div class="battle-damage" id="battle-damage"></div>
+    </div>
+    <div class="battle-controls">
+      <button class="btn btn-stone" id="btn-skip" style="display:none"><span class="btn-inner">Skip</span></button>
+      <button class="btn btn-blue btn-big" id="btn-continue" style="display:none"><span class="btn-inner">Continue</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="ability-popup-overlay" id="ability-popup-overlay">
+  <div class="ability-popup" id="ability-popup">
+    <div class="ap-type" id="ap-type"></div>
+    <div class="ap-name" id="ap-name"></div>
+    <div class="ap-desc" id="ap-desc"></div>
+    <div class="ap-skin" id="ap-skin" style="display:none"></div>
+    <button class="ap-close" id="ap-close">Close</button>
+  </div>
+</div>
+
+<div class="hover-tooltip" id="hover-tooltip"></div>
+
+<div class="game-over" id="game-over">
+  <h1 id="go-title"></h1>
+  <div class="placement" id="go-placement"></div>
+  <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">Play Again</span></button>
+</div>
+
+<script src="game_core.js?v=20260407c"></script>
+<script>
+
+var _endMusic=null;
+function showGameOver() {
+  deleteSave();
+  // 전적 기록 저장
+  try{submitGameRecord();}catch(e){}
+  // 전투 중 잔여 SFX 정지
+  for(var k in SFX_CACHE){try{SFX_CACHE[k].pause();SFX_CACHE[k].currentTime=0;}catch(e){}}
+  if(_endMusic){_endMusic.pause();_endMusic=null;}
+  var isWin=G.placement===1;
+  _endMusic=new Audio(isWin?'../sfx/victory_music.webm':'../sfx/defeat_music.webm');
+  _endMusic.volume=0.5;_endMusic.play().catch(function(){});
+  if(isWin){shakeScreen('heavy');startCelebration();}
+  var go=document.getElementById('game-over');go.classList.add('active');
+  document.getElementById('go-title').textContent=isWin?'1st Place!':'Game Over';
+  document.getElementById('go-title').style.color=isWin?'#ffd700':'#ef4444';
+  document.getElementById('go-placement').textContent='#'+G.placement+' / 8 players (Turn '+G.turn+')';
+}
+var _celebInterval=null;
+function startCelebration(){
+  if(_celebInterval)clearInterval(_celebInterval);
+  var emojis=['🎉','🎊','🎈','❤️','⭐','🏆','✨','💛'];
+  _celebInterval=setInterval(function(){
+    var el=document.createElement('div');
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText='position:fixed;bottom:-30px;left:'+(5+Math.random()*90)+'%;font-size:'+(24+Math.random()*20)+'px;z-index:9999;pointer-events:none;opacity:0.9;transition:none;';
+    document.body.appendChild(el);
+    var dur=2000+Math.random()*1500;
+    el.animate([
+      {transform:'translateY(0) rotate(0deg)',opacity:0.9},
+      {transform:'translateY(-'+(window.innerHeight+60)+'px) rotate('+(Math.random()*360-180)+'deg)',opacity:0}
+    ],{duration:dur,easing:'ease-out'});
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},dur);
+  },150);
+  // 다시하기 누르면 정리
+  var restartBtn=document.getElementById('btn-restart');
+  restartBtn.addEventListener('click',function(){
+    if(_celebInterval){clearInterval(_celebInterval);_celebInterval=null;}
+    if(_endMusic){_endMusic.pause();_endMusic=null;}
+  },{once:true});
+}
+
+// ========== RENDER ==========
+function abilityTag(baseId,isSkin) {
+  var tags='';
+  var SKIN_ONLY_SOC={iori:1,hanako:1,pina:1,kasumi:1};
+  if(BC_IDS[baseId])   tags+='<span class="ability-tag bc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Battlecry</span>';
+  if(DR_IDS[baseId])   tags+='<span class="ability-tag dr" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Deathrattle</span>';
+  if(SOC_IDS[baseId]&&!(SKIN_ONLY_SOC[baseId]&&!isSkin))  tags+='<span class="ability-tag soc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Start of Combat</span>';
+  if(SURV_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Survivor</span>';
+  if(PASSIVE_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Passive</span>';
+  var _c=findAnyChar(baseId);
+  var _hasKw=_c&&_c.kw?_c.kw:[];
+  if(PRE_IDS[baseId]||_hasKw.indexOf('preemptive')!==-1) tags+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Preemptive</span>';
+  if(!SURV_IDS[baseId]&&_hasKw.indexOf('survive')!==-1) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">Survivor</span>';
+  return tags;
+}
+
+function showAbilityPopup(baseId, e, isSkin) {
+  e.stopPropagation();
+  playSfx('roster_click',0.3);
+  var info = ABILITY_DESCS[baseId];
+  if(!info) return;
+  // 골든 여부: 인자로 안 오면 이벤트 소스 카드에서 추적
+  if(isSkin===undefined){
+    var card=e.target.closest('.card,.minicard');
+    if(card) isSkin=card.classList.contains('skin')||(card.getAttribute('data-mini-golden')==='1');
+  }
+  // 캐릭터 이름 찾기
+  var charName = baseId;
+  var _ch=findAnyChar(baseId);
+  if(_ch) charName=_ch.name;
+  if(TOKENS[baseId]) charName=TOKENS[baseId].name;
+
+  var _apCh=findAnyChar(baseId);
+  var popupEl=document.getElementById('ability-popup');
+  var html='';
+  // 카드 이미지
+  var imgSrc=_apCh?(isSkin&&_apCh.imgGold?_apCh.imgGold:_apCh.img):'';
+  if(imgSrc) html+='<div style="height:200px;overflow:hidden;border-radius:6px 6px 0 0;margin:-16px -16px 12px -16px;position:relative"><img src="../img/'+imgSrc+'" style="width:100%;height:auto;position:absolute;top:0;left:0" onerror="this.parentElement.style.display=\'none\'"></div>';
+  // 이름 + 학교
+  html+='<div style="font-size:20px;font-weight:700;color:#e0eaf4;margin-bottom:2px">'+charName+'</div>';
+  if(_apCh) html+='<div style="font-size:12px;color:#6a8a9e;margin-bottom:8px">'+(_apCh.school||'')+' · '+(['1st Year','1st Year','2nd Year','2nd Year','3rd Year','3rd Year','7-Star'][(_apCh.tier||1)-1]||'')+'</div>';
+  // 티어 + 기본 스탯
+  if(_apCh) html+='<div style="display:flex;gap:8px;margin-bottom:10px"><span style="background:#c8a010;color:#000;padding:2px 8px;border-radius:10px;font-weight:900;font-size:12px">★'+_apCh.tier+'</span><span style="color:#5ab0e8;font-weight:700;font-size:13px">⚔ '+_apCh.atk+'</span><span style="color:#e04040;font-weight:700;font-size:13px">❤ '+_apCh.hp+'</span></div>';
+  // 키워드
+  if(_apCh&&_apCh.kw&&_apCh.kw.length>0){
+    var kwLabels2={taunt:'Taunt',shield:'Shield',cleave:'Cleave',reborn:'Reborn',windfury:'Rapid Fire',poison:'Venom',pierce:'Pierce',survive:'Survivor',preemptive:'Preemptive',ranged:'Snipe',selfdestruct:'Self-Destruct',ambush:'Ambush',invincible:'Invincible'};
+    html+='<div style="margin-bottom:8px">';
+    for(var _k=0;_k<_apCh.kw.length;_k++){
+      var kn=_apCh.kw[_k];if(kn==='survive'||kn==='preemptive')continue;
+      html+='<span style="display:inline-block;padding:2px 8px;margin:1px;border-radius:4px;background:rgba(180,210,230,0.3);border:1px solid rgba(200,225,240,0.5);color:#f0f8ff;font-size:12px">'+(kwLabels2[kn]||kn)+'</span>';
+    }
+    html+='</div>';
+  }
+  // 능력 타입
+  var typeColor={'Battlecry':'#93c5fd','Deathrattle':'#fca5a5','Start of Combat':'#fde68a','Survivor':'#6ee7b7','Passive':'#c084fc','Preemptive':'#fbbf24','첫인사':'#93c5fd','뒤끝':'#fca5a5','개전':'#fde68a','버티기':'#6ee7b7','패시브':'#c084fc','선빵':'#fbbf24'};
+  var _AP_ICON={'자폭':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='11' cy='14' r='8' fill='#6A3D9A'/><path d='M15 6l1.5-3' stroke='#999' stroke-width='3' stroke-linecap='round'/><circle cx='18' cy='2.5' r='2' fill='#FF8800'/></svg>",'선빵':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1.5' stroke-linejoin='round'/></svg>",'버티기':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g></svg>",'개전':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg>",'첫인사':"<svg width='16' height='16' viewBox='-1 -1 26 26' fill='none' style='vertical-align:middle'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/></svg>",'뒤끝':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg>",'패시브':"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#E85D75' stroke='#CC2060' stroke-width='1.5' stroke-linejoin='round'/></svg>"};
+  html+='<div style="margin-bottom:6px"><span style="display:inline-block;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700;color:'+(typeColor[info.type]||'#c0d0e0')+';background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)">'+(_AP_ICON[info.type]?_AP_ICON[info.type]+' ':'')+info.type+'</span></div>';
+  // 능력 설명
+  html+='<div style="font-size:13px;color:#c0d0e0;line-height:1.6;white-space:pre-line;margin-bottom:8px">'+info.desc+'</div>';
+  // 스킨 효과
+  if(info.skinEffect) html+='<div style="font-size:12px;color:#ffd700;padding:6px 10px;background:rgba(200,160,16,0.1);border:1px solid rgba(200,160,16,0.3);border-radius:6px;margin-bottom:8px">'+info.skinEffect+'</div>';
+  // 트리플 안내
+  if(_apCh&&_apCh.skin&&_apCh.tier<7) html+='<div style="font-size:12px;color:#fbbf24;margin-top:4px">Collect 3 to become '+_apCh.skin+'!</div>';
+
+  popupEl.innerHTML=html+'<button class="ap-close" id="ap-close" onclick="document.getElementById(\'ability-popup-overlay\').classList.remove(\'active\')">Close</button>';
+  document.getElementById('ability-popup-overlay').classList.add('active');
+}
+
+function renderAll() {
+  var p=G.players[0];
+  // 보드 정리: undefined/null 제거
+  p.board=p.board.filter(function(u){return !!u;});
+  var turnNumEl=document.getElementById('ui-turn-num');if(turnNumEl)turnNumEl.textContent=G.turn;
+  document.getElementById('ui-tier').textContent='Schedule Lv.'+p.tier;
+  var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
+  // schedule-label/btn-freeze 보존하면서 stone 업데이트
+  var _pcStoneEl=document.getElementById('ui-stone');
+  var _pcStoneNum=_pcStoneEl.querySelector('.stone-num');
+  if(_pcStoneNum){_pcStoneNum.textContent=p.stone;}
+  else{_pcStoneEl.innerHTML='<img src="../img/UI/stone.png" class="stone-icon xl"><span class="stone-num">'+p.stone+'</span>';}
+  var enigmaCountEl=document.getElementById('enigma-count');if(enigmaCountEl)enigmaCountEl.textContent=getEnigmaPoints();
+  document.getElementById('ui-hp').textContent='HP: '+p.hp;
+  // HP 바 업데이트
+  var hpPct=Math.max(0,Math.min(100,p.hp/40*100));
+  var hpFill=document.getElementById('hp-bar-fill');
+  var hpLabel=document.getElementById('hp-bar-label');
+  if(hpFill){hpFill.style.width=hpPct+'%';hpFill.style.background=p.hp>25?'#4ade80':p.hp>15?'#facc15':'#ef4444';}
+  if(hpLabel){hpLabel.textContent='HP: '+p.hp;hpLabel.style.color=p.hp>25?'#4ade80':p.hp>15?'#facc15':'#ef4444';}
+  var aronaFace=document.getElementById('arona-face');
+  if(aronaFace)aronaFace.src=p.hp<=15?'../img/Icon/arona_bad.png':'../img/Icon/arona.jpg';
+  // upgradeCost는 renderShop에서 버튼 innerHTML로 처리
+
+  var pHtml='';
+  for(var i=0;i<G.players.length;i++){
+    var pl=G.players[i];
+    var cls='player-chip'+(pl.isPlayer?' you':'')+(pl.dead?' dead':'');
+    var chipHpPct=Math.max(0,Math.min(100,pl.hp/40*100));
+    var chipBarColor=pl.hp<=15?'#ef4444':'rgba(255,255,255,0.7)';
+    pHtml+='<div class="'+cls+'">'+pl.name+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+  }
+  document.getElementById('ui-players').innerHTML=pHtml;
+
+  var boardEl=document.getElementById('ui-board');
+  // 풀필드 안내
+  var fullHint=document.getElementById('fullboard-hint');
+  if(p.board.length>=MAX_BOARD){
+    if(!fullHint){
+      fullHint=document.createElement('div');
+      fullHint.id='fullboard-hint';
+      fullHint.style.cssText='font-size:12px;color:#fbbf24;padding:4px 8px;margin-bottom:4px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:8px;text-align:center';
+      fullHint.textContent='Right-click to send up to 1 student from SCHALE to the bench.';
+      boardEl.parentNode.insertBefore(fullHint,boardEl);
+    }
+    fullHint.style.display='block';
+  } else if(fullHint){fullHint.style.display='none';}
+
+  // 보드 드래그 이벤트 항상 바인딩 (shop/bench→board 드롭용)
+  if(!boardEl._boardDragBound){
+    boardEl._boardDragBound=true;
+    boardEl.addEventListener('dragover',onBoardDragOver);
+    boardEl.addEventListener('dragleave',onBoardDragLeave);
+    boardEl.addEventListener('drop',onBoardDrop);
+  }
+  if(p.board.length===0){boardEl.innerHTML='<div class="empty-hint">Buy characters from the Schedule</div>';}
+  else{
+    var bHtml='';for(var i=0;i<p.board.length;i++){if(!p.board[i])continue;bHtml+=cardHtml(p.board[i],i,true);}
+    boardEl.innerHTML=bHtml;
+    initBoardDrag(boardEl);
+    // 5명이면 compact 모드
+    if(p.board.length>=5){boardEl.classList.add('compact');}else{boardEl.classList.remove('compact');}
+    if(!boardEl._bound){
+      boardEl._bound=true;
+      boardEl.addEventListener('click',function(e){
+        var coinBtn=e.target.closest('.coin-toggle');
+        if(coinBtn){var ci=parseInt(coinBtn.getAttribute('data-idx'));var p2=G.players[0];if(p2.board[ci]){p2.board[ci].coinOff=!p2.board[ci].coinOff;playSfx('coin_toggle',0.4);renderAll();if(TUT.active&&typeof TUT.coinToggleCount==='number'){TUT.coinToggleCount++;if(TUT.coinToggleCount>=2){var ts=TUTORIAL_STEPS[TUT.step];if(ts&&ts.action==='waitCoinToggle')setTimeout(function(){tutNext();},300);}}}return;}
+        var btn=e.target.closest('.sell-btn');
+        if(btn){var _si=parseInt(btn.getAttribute('data-idx'));showSellConfirm(function(){sellMinion(_si);});return;}
+        var card=e.target.closest('.card');if(!card)return;
+        var allCards=boardEl.querySelectorAll('.card');var cardIdx=-1;
+        for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
+        if(cardIdx<0)return;
+        if(G.pendingSpell){applyPendingSpell(cardIdx);return;}
+      });
+      // 우클릭으로 보관
+      boardEl.addEventListener('contextmenu',function(e){
+        var card=e.target.closest('.card');if(!card)return;
+        e.preventDefault();
+        var allCards=boardEl.querySelectorAll('.card');var cardIdx=-1;
+        for(var j=0;j<allCards.length;j++)if(allCards[j]===card)cardIdx=j;
+        if(cardIdx>=0) moveToBench(cardIdx);
+      });
+    }
+  }
+
+  // 벤치 렌더
+  var benchEl=document.getElementById('ui-bench');
+  if(p.bench){
+    var bm=p.bench;
+    var tierCls='tier'+Math.min(bm.tier||1,7);
+    var skinCls=bm.isSkin?' skin':'';
+    var benchHtml='<div class="bench-card-wrap" draggable="true">';
+    benchHtml+='<div class="card '+tierCls+skinCls+'" style="width:120px;height:176px;cursor:grab">';
+    benchHtml+='<div class="card-bg">';
+    if(bm.img) benchHtml+='<img src="../img/'+bm.img+'" onerror="this.parentElement.style.display=\'none\'">';
+    benchHtml+='</div>';
+    benchHtml+='<div class="card-inner" style="padding:4px">';
+    var sIcon=SCHOOL_ICONS[bm.school];
+    if(sIcon) benchHtml+='<img class="school-logo" src="'+sIcon+'">';
+    benchHtml+=starStr(bm.tier||1);
+    benchHtml+='<div class="card-spacer"></div>';
+    benchHtml+='<div class="name-banner" style="font-size:11px;padding:2px 4px">'+bm.name+'</div>';
+    benchHtml+='<div style="display:flex;flex-direction:row;justify-content:space-between;padding:3px 4px">';
+    benchHtml+='<div class="stat-atk" style="width:28px;height:28px;font-size:16px;'+statColor(bm.baseId,bm.isSkin,'atk',bm.atk)+'">'+bm.atk+'</div>';
+    benchHtml+='<div class="stat-hp" style="width:28px;height:28px;font-size:16px;'+statColor(bm.baseId,bm.isSkin,'hp',bm.hp)+'">'+bm.hp+'</div>';
+    benchHtml+='</div></div></div>';
+    benchHtml+='<div class="bench-btns">';
+    benchHtml+='<button class="btn btn-red" id="bench-sell" style="padding:4px 8px;font-size:10px;flex:1"><span class="btn-inner">Sell</span></button>';
+    benchHtml+='</div></div>';
+    benchEl.innerHTML=benchHtml;
+    if(!benchEl._bound){
+      benchEl._bound=true;
+      benchEl.addEventListener('click',function(e){
+        if(e.target.closest('#bench-sell')){showSellConfirm(function(){sellBench();});return;}
+      });
+    }
+  } else {
+    benchEl.innerHTML='<div class="bench-empty-slot"><span>Right-click from SCHALE<br>to store here</span></div>';
+  }
+  if(!_benchDragBound){_benchDragBound=true;initBenchDrag();}
+  initSellZone();
+
+  var shopEl=document.getElementById('ui-shop');
+  var sHtml='';var prevWasSpell=false;
+  for(var i=0;i<G.shop.length;i++){
+    if(G.shop[i]===null) continue;
+    var isSpellItem=G.shop[i].isSpell;
+    if(sHtml!==''&&isSpellItem!==prevWasSpell)sHtml+='<div style="width:8px;flex-shrink:0"></div>';
+    if(isSpellItem)sHtml+=spellCardHtml(G.shop[i],i);
+    else if(G.shop[i].isHidden)sHtml+=cardHtml(G.shop[i],i,false);
+    else sHtml+=cardHtml(G.shop[i],i,false);
+    prevWasSpell=isSpellItem;
+  }
+  shopEl.innerHTML=sHtml;
+  if(!shopEl._bound){
+    shopEl._bound=true;
+    // 스케쥴 카드 드래그 시작
+    shopEl.addEventListener('dragstart',function(e){
+      if(TUT.active&&TUT.hoverOnly){e.preventDefault();return;}
+      var card=e.target.closest('[data-shop]');if(!card){e.preventDefault();return;}
+      var idx=card.getAttribute('data-shop');
+      e.dataTransfer.setData('text/plain','shop:'+idx);
+      dragSource='shop';dragSrcIdx=parseInt(idx);
+      playCardPick();
+    });
+    // 스펠/히든카드는 여전히 클릭으로 구매
+    shopEl.addEventListener('click',function(e){
+      var card=e.target.closest('[data-shop]');if(!card)return;
+      var idx=parseInt(card.getAttribute('data-shop'));
+      var item=G.shop[idx];
+      if(item&&item.isSpell)buySpell(idx);
+      else if(item&&item.isHidden)buyHiddenCard(idx);
+    });
+  }
+  // 보드 드래그 이벤트는 initBoardDrag에서 처리
+  var boardEl3=document.getElementById('ui-board');
+  if(!boardEl3._shopDropBound){
+    boardEl3._shopDropBound=true;
+  }
+
+  var boardEl2=document.getElementById('ui-board');
+  var existingHint=document.querySelector('.spell-hint-overlay');if(existingHint)existingHint.remove();
+  if(G.pendingSpell){
+    var hint=document.createElement('div');hint.className='spell-hint-overlay';
+    hint.textContent='⚡ '+G.pendingSpell.name+' — Click a target student';
+    document.querySelector('.main-content').appendChild(hint);
+    var boardCards=boardEl2.querySelectorAll('.card');
+    for(var ci=0;ci<boardCards.length;ci++){boardCards[ci].style.border='3px solid #fbbf24';boardCards[ci].style.boxShadow='0 0 12px rgba(251,191,36,0.5)';}
+  }
+
+  // undo 제거됨
+
+  var freezeBtn=document.getElementById('btn-freeze');
+  if(G.frozen){freezeBtn.innerHTML='<span class="btn-inner">Unfreeze</span>';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
+  else{freezeBtn.innerHTML='<span class="btn-inner">Freeze Schedule</span>';freezeBtn.style.background='';shopEl.style.border='';}
+  var rerollBtn=document.getElementById('btn-reroll');
+  if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">Reroll (Free x'+G.freeRerolls+')</span>';rerollBtn.disabled=false;}
+  else{rerollBtn.innerHTML='<span class="btn-inner">Reroll <img src="../img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}
+  var upgradeBtn=document.getElementById('btn-upgrade');
+  upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">Upgrade <img src="../img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
+  upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
+  // 매 렌더 시 자동 저장 (게임 종료 상태가 아닐 때만)
+  if(typeof saveGame==='function'&&G.players&&G.players[0]&&!G.players[0].dead&&G.aliveCount>1)saveGame();
+}
+
+function spellCardHtml(item,idx){
+  var borderColor=item.isHidden?'#c030d0':'#1693de';
+  var blocked=item.spell&&item.spell.id==='gacha'&&isGachaBlocked();
+  var html='<div class="card'+(item.tier>=7?' tier7':'')+(blocked?' spell-blocked':'')+'" data-shop="'+idx+'" draggable="true" style="background:linear-gradient(180deg,#162838,#0e1c2a);border-color:'+borderColor+(blocked?';opacity:0.4;pointer-events:none':'')+'">';
+  if(item.isHidden&&item.spell&&item.spell.id==='hkyk_showdown'){
+    html+='<div class="card-bg"><img src="../img/unique/HKYK_Showdown.png" style="width:88%;height:auto;object-fit:contain;position:absolute;top:4px;left:50%;transform:translateX(-50%)"></div>';
+  } else {
+    var spellImg=item.img||(item.spell&&item.spell.img)||null;
+    var spellId=item.spell?item.spell.id:(item.id||'');
+    var imgSrc=spellImg||('../img/spell/'+spellId+'.png');
+    html+='<div class="card-bg"><img src="'+imgSrc+'" onerror="this.parentElement.innerHTML=\'<div style=\\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#1a3048,#0e2030)\\\'\><div style=\\\'font-size:48px;opacity:0.4\\\'\>⚡</div></div>\'"></div>';
+  }
+  html+='<div class="card-inner">';
+  html+='<div class="tier-stars">'+starStr(item.tier)+'</div>';
+  html+='<div class="card-spacer"></div>';
+  html+='<div class="name-banner" style="color:#80d0ff">'+item.name+'</div>';
+  html+='<div class="keywords" style="line-height:1.3">'+item.desc+'</div>';
+  html+='<div style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
+  html+='<div class="stat-row" style="visibility:hidden;padding:4px 6px 6px"><div class="stat-atk" style="visibility:hidden">0</div><div class="stat-hp" style="visibility:hidden">0</div></div>';
+  html+='</div>';
+  html+='<div class="cost-badge"><img src="../img/UI/stone.png"><span>'+item.cost+'</span></div>';
+  html+='</div>';
+  return html;
+}
+
+function starStr(tier){var s='<div class="tier-bar">';for(var i=0;i<7;i++){var src=tier>=7?'../img/UI/star_blue.png':(i<tier?'../img/UI/star.png':'../img/UI/star_off.png');s+='<div class="star"><img src="'+src+'"></div>';}s+='</div>';return s;}
+
+function cardHtml(m,idx,isBoard){
+  if(!m) return '<div style="width:150px;height:220px"></div>';
+  var isToken=m.isToken||false;
+  var cls='card tier'+m.tier+(m.isSkin?' skin':'')+(isToken?' token-card':'')+(hasKw(m,'ambush')?' ambush':'');
+  var dragAttr=isBoard?' draggable="true" data-board-idx="'+idx+'"':' draggable="true"';
+  var baseAttr=' data-base-id="'+(m.baseId||'')+'"';
+  var html='<div class="'+cls+'"'+(isBoard?'':' data-shop="'+idx+'"')+dragAttr+baseAttr+'>';
+  if(isBoard)html+='<button class="sell-x sell-btn" data-idx="'+idx+'">✕</button>';
+  // 계승전/호버크래프트/열차포 카운터 표시
+  var counterStyle='position:absolute;top:4px;right:28px;z-index:3;color:#fff;font-size:11px;font-weight:900;padding:2px 6px;border-radius:4px;line-height:1.3;min-width:18px;text-align:center';
+  var keiTargets=['yukari','renge','kikyou','nagusa'];
+  if(keiTargets.indexOf(m.baseId)!==-1&&G.keiseisenCounters&&G.keiseisenCounters[m.baseId]>0)html+='<div style="'+counterStyle+';background:rgba(220,38,38,0.9)">'+G.keiseisenCounters[m.baseId]+'</div>';
+  if(m._hovercraftCounter&&m._hovercraftCounter>0)html+='<div style="'+counterStyle+';background:rgba(168,85,247,0.9)">'+m._hovercraftCounter+'</div>';
+  if(m.baseId==='gehenna_traingun')html+='<div style="'+counterStyle+';background:rgba(220,38,38,0.9)">'+(1+(m._battlesSurvived||0))+'</div>';
+  if(m.img){html+='<div class="card-bg"><img src="../img/'+m.img+'" onerror="this.parentElement.style.display=\'none\'">';if(hasKw(m,'shield'))html+='<div class="shield-orb"></div>';html+='</div>';}
+  // 능력 아이콘 바 (카드 바깥, 상단 중앙)
+  var SKIN_ONLY_SOC_C={iori:1,hanako:1,pina:1,kasumi:1};
+  var _CI={SOC:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg>",BC:"<svg width='16' height='16' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/><path d='M14 21a2.5 2.5 0 0 1-4 0' stroke='#CC8800' stroke-width='2' stroke-linecap='round'/></svg>",DR:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg>",PASSIVE:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#E85D75' stroke='#CC2060' stroke-width='1.5' stroke-linejoin='round'/></svg>",PRE:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1.5' stroke-linejoin='round'/></svg>",SURV:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g><path d='M8 17l-1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/><path d='M16 17l1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/></svg>",reborn:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg>",poison:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#A050E0'/><circle cx='9' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='15' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='9' cy='10' r='0.7' fill='#FF60FF'/><circle cx='15' cy='10' r='0.7' fill='#FF60FF'/><path d='M9 15.5c1.5 1.2 4.5 1.2 6 0' stroke='#1A0030' stroke-width='2' stroke-linecap='round' fill='none'/></svg>",selfdestruct:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='11' cy='14' r='8' fill='#6A3D9A'/><path d='M15 6l1.5-3' stroke='#999' stroke-width='3' stroke-linecap='round'/><circle cx='18' cy='2.5' r='2' fill='#FF8800'/></svg>",taunt:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='2'/></svg>",cleave:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='20' r='2.2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='3.2' stroke-linecap='round' fill='none'/></svg>",windfury:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",pierce:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3.5' stroke-linecap='round'/><path d='M12 2v4M6 7l6-5 6 5M4 10l2-3M20 10l-2-3' stroke='#FFD700' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",ranged:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='8' stroke='#D04040' stroke-width='2.5' fill='none'/><circle cx='12' cy='12' r='2.5' fill='#FF4444'/><path d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='#D04040' stroke-width='2.5' stroke-linecap='round'/></svg>",invincible:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M5 18h14v2.5H5z' fill='#E8A800'/><path d='M5 18L3 7l4.5 4L12 4l4.5 7L21 7l-2 11z' fill='#FFD700' stroke='#B8860B' stroke-width='1.5' stroke-linejoin='round'/></svg>",ambush:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><rect x='2' y='2' width='20' height='20' rx='4' fill='#404050' stroke='#666' stroke-width='1.5'/><circle cx='12' cy='12' r='6' fill='#999' opacity='0.5'/><circle cx='10' cy='10' r='4' fill='#BBB' opacity='0.4'/></svg>"};
+  var iconBar='';
+  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) iconBar+='<span class="abi">'+_CI.SOC+'</span>';
+  if(BC_IDS[m.baseId||'']) iconBar+='<span class="abi">'+_CI.BC+'</span>';
+  if(DR_IDS[m.baseId||'']) iconBar+='<span class="abi">'+_CI.DR+'</span>';
+  if(PASSIVE_IDS[m.baseId||'']) iconBar+='<span class="abi">'+_CI.PASSIVE+'</span>';
+  if(PRE_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('preemptive')!==-1)) iconBar+='<span class="abi">'+_CI.PRE+'</span>';
+  if(SURV_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('survive')!==-1)) iconBar+='<span class="abi">'+_CI.SURV+'</span>';
+  if(hasKw(m,'reborn')) iconBar+='<span class="abi">'+_CI.reborn+'</span>';
+  if(hasKw(m,'poison')) iconBar+='<span class="abi">'+_CI.poison+'</span>';
+  if(hasKw(m,'selfdestruct')) iconBar+='<span class="abi">'+_CI.selfdestruct+'</span>';
+  if(hasKw(m,'taunt')) iconBar+='<span class="abi">'+_CI.taunt+'</span>';
+  if(hasKw(m,'cleave')) iconBar+='<span class="abi">'+_CI.cleave+'</span>';
+  if(hasKw(m,'windfury')) iconBar+='<span class="abi">'+_CI.windfury+'</span>';
+  if(hasKw(m,'pierce')) iconBar+='<span class="abi">'+_CI.pierce+'</span>';
+  if(hasKw(m,'ranged')) iconBar+='<span class="abi">'+_CI.ranged+'</span>';
+  if(hasKw(m,'invincible')) iconBar+='<span class="abi">'+_CI.invincible+'</span>';
+  html+='<div class="card-inner">';
+  var sIcon=SCHOOL_ICONS[m.school];if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
+  html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
+  html+='<div class="card-spacer"></div>';
+  html+='<div class="name-banner">'+m.name+'</div>';
+  // 기본능력 아이콘 줄 (키워드)
+  var kwIcons='';
+  if(hasKw(m,'taunt')) kwIcons+='<span class="abi">'+_CI.taunt+'</span>';
+  if(hasKw(m,'shield')) kwIcons+='<span class="abi">'+(typeof _CI.shield!=='undefined'?_CI.shield:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3.5'/></svg>")+'</span>';
+  if(hasKw(m,'reborn')) kwIcons+='<span class="abi">'+_CI.reborn+'</span>';
+  if(hasKw(m,'invincible')) kwIcons+='<span class="abi">'+_CI.invincible+'</span>';
+  if(hasKw(m,'windfury')) kwIcons+='<span class="abi">'+_CI.windfury+'</span>';
+  if(hasKw(m,'cleave')) kwIcons+='<span class="abi">'+_CI.cleave+'</span>';
+  if(hasKw(m,'poison')) kwIcons+='<span class="abi">'+_CI.poison+'</span>';
+  if(hasKw(m,'pierce')) kwIcons+='<span class="abi">'+_CI.pierce+'</span>';
+  if(hasKw(m,'ranged')) kwIcons+='<span class="abi">'+_CI.ranged+'</span>';
+  if(hasKw(m,'selfdestruct')) kwIcons+='<span class="abi">'+_CI.selfdestruct+'</span>';
+  if(hasKw(m,'ambush')) kwIcons+='<span class="abi">'+_CI.ambush+'</span>';
+  if(hasKw(m,'survive')||(SURV_IDS[m.baseId||''])) kwIcons+='<span class="abi">'+_CI.SURV+'</span>';
+  // 특수능력 아이콘 줄 (SOC/BC/DR/PASSIVE/PRE)
+  var specIcons='';
+  if(SOC_IDS[m.baseId||'']&&!(SKIN_ONLY_SOC_C[m.baseId||'']&&!m.isSkin)) specIcons+='<span class="abi">'+_CI.SOC+'</span>';
+  if(BC_IDS[m.baseId||'']) specIcons+='<span class="abi">'+_CI.BC+'</span>';
+  if(DR_IDS[m.baseId||'']) specIcons+='<span class="abi">'+_CI.DR+'</span>';
+  if(PASSIVE_IDS[m.baseId||'']) specIcons+='<span class="abi">'+_CI.PASSIVE+'</span>';
+  if(PRE_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('preemptive')!==-1)) specIcons+='<span class="abi">'+_CI.PRE+'</span>';
+  var allIcons=kwIcons+specIcons;
+  html+='<div style="display:flex;justify-content:center;gap:3px;padding:3px 4px;background:rgba(0,0,0,0.4);min-height:28px;align-items:center;flex-wrap:wrap">'+(allIcons||'&nbsp;')+'</div>';
+  html+='<div class="stat-row"><div class="stat-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="stat-hp" style="'+statColor(m.baseId,m.isSkin,'hp',m.hp)+'">'+m.hp+'</div></div>';
+  html+='</div>';
+  if(!isBoard){var cost=m.cost||3;html+='<div class="cost-badge"><img src="../img/UI/stone.png"><span>'+cost+'</span></div>';}
+  if(isBoard){html+='<button class="coin-toggle'+(m.coinOff?' off':'')+'" data-idx="'+idx+'"><img src="../img/Icon/'+(m.coinOff?'coin_back.png':'coin_front.png')+'"></button>';}
+  html+='</div>';
+  return html;
+}
+
+// ========== DRAG & DROP ==========
+var dragSrcIdx=-1;
+var dragSource=''; // 'board','bench','shop'
+var dropInsertIdx=-1;
+
+function initBoardDrag(boardEl){
+  var cards=boardEl.querySelectorAll('.card[draggable="true"]');
+  for(var i=0;i<cards.length;i++){
+    cards[i].addEventListener('dragstart',onDragStart);
+    cards[i].addEventListener('dragend',onDragEnd);
+  }
+  if(!boardEl._boardDragBound){
+    boardEl._boardDragBound=true;
+    boardEl.addEventListener('dragover',onBoardDragOver);
+    boardEl.addEventListener('dragleave',onBoardDragLeave);
+    boardEl.addEventListener('drop',onBoardDrop);
+  }
+}
+
+function onDragStart(e){
+  dragSrcIdx=parseInt(this.getAttribute('data-board-idx'));
+  dragSource='board';
+  this.classList.add('dragging');
+  document.getElementById('ui-board').classList.add('drag-active');
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain','board:'+dragSrcIdx);
+  hideTooltip();
+  playCardPick();
+}
+function onDragEnd(e){
+  this.classList.remove('dragging');
+  var boardEl=document.getElementById('ui-board');
+  boardEl.classList.remove('drag-active');
+  document.getElementById('ui-bench').classList.remove('drag-over');
+  removeDropIndicator(boardEl);
+  dragSrcIdx=-1;dragSource='';dropInsertIdx=-1;
+}
+
+function getInsertIndex(boardEl,mouseX){
+  var cards=boardEl.querySelectorAll('.card[draggable="true"]');
+  if(cards.length===0) return 0;
+  for(var i=0;i<cards.length;i++){
+    var r=cards[i].getBoundingClientRect();
+    var mid=r.left+r.width/2;
+    if(mouseX<mid) return parseInt(cards[i].getAttribute('data-board-idx'));
+  }
+  return G.players[0].board.length;
+}
+
+function removeDropIndicator(boardEl){
+  var old=boardEl.querySelector('.drop-indicator');
+  if(old) old.remove();
+}
+
+function showDropIndicator(boardEl,insertIdx){
+  removeDropIndicator(boardEl);
+  var indicator=document.createElement('div');
+  indicator.className='drop-indicator';
+  var cards=boardEl.querySelectorAll('.card[draggable="true"]');
+  // Find the card at insertIdx position
+  var refCard=null;
+  for(var i=0;i<cards.length;i++){
+    if(parseInt(cards[i].getAttribute('data-board-idx'))===insertIdx){refCard=cards[i];break;}
+  }
+  if(refCard){
+    boardEl.insertBefore(indicator,refCard);
+  } else {
+    // insert at end (after last card)
+    var lastCard=cards[cards.length-1];
+    if(lastCard&&lastCard.nextSibling) boardEl.insertBefore(indicator,lastCard.nextSibling);
+    else boardEl.appendChild(indicator);
+  }
+}
+
+function onBoardDragOver(e){
+  if(dragSource!=='board'&&dragSource!=='bench'&&dragSource!=='shop') return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect=dragSource==='shop'?'copy':'move';
+  var boardEl=document.getElementById('ui-board');
+  var insertIdx=getInsertIndex(boardEl,e.clientX);
+  if(insertIdx!==dropInsertIdx){
+    dropInsertIdx=insertIdx;
+    showDropIndicator(boardEl,insertIdx);
+  }
+}
+
+function onBoardDragLeave(e){
+  var boardEl=document.getElementById('ui-board');
+  if(!boardEl.contains(e.relatedTarget)){
+    removeDropIndicator(boardEl);
+    dropInsertIdx=-1;
+  }
+}
+
+function onBoardDrop(e){
+  e.preventDefault();
+  var boardEl=document.getElementById('ui-board');
+  removeDropIndicator(boardEl);
+  var p=G.players[0];
+  if(dragSource==='board'&&dragSrcIdx>=0&&dropInsertIdx>=0){
+    var card=p.board.splice(dragSrcIdx,1)[0];
+    var toIdx=dropInsertIdx>dragSrcIdx?dropInsertIdx-1:dropInsertIdx;
+    if(toIdx<0)toIdx=0;
+    if(toIdx>p.board.length)toIdx=p.board.length;
+    p.board.splice(toIdx,0,card);
+    renderAll();
+  } else if(dragSource==='bench'&&p.bench){
+    if(dropInsertIdx>=0){
+      if(p.board.length<MAX_BOARD){
+        var bCard=p.bench;p.bench=null;
+        var toIdx2=dropInsertIdx>p.board.length?p.board.length:dropInsertIdx;
+        p.board.splice(toIdx2,0,bCard);
+        renderAll();
+      }
+    } else {
+      moveFromBench();
+    }
+  } else if(dragSource==='shop'){
+    var idx=dragSrcIdx;
+    var item=G.shop[idx];
+    if(item&&!item.isSpell&&!item.isHidden)buyMinion(idx,dropInsertIdx>=0?dropInsertIdx:undefined);
+  }
+  dragSrcIdx=-1;dragSource='';dropInsertIdx=-1;
+}
+
+// 벤치 드래그앤드롭
+function initBenchDrag(){
+  var benchEl=document.getElementById('ui-bench');
+  // 벤치 위에 보드 카드 드롭 → 교환 or 보관
+  benchEl.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';});
+  benchEl.addEventListener('dragenter',function(e){e.preventDefault();benchEl.classList.add('drag-over');});
+  benchEl.addEventListener('dragleave',function(e){
+    if(!benchEl.contains(e.relatedTarget)) benchEl.classList.remove('drag-over');
+  });
+  benchEl.addEventListener('drop',function(e){
+    e.preventDefault();benchEl.classList.remove('drag-over');
+    var p=G.players[0];
+    if(dragSource==='board'&&dragSrcIdx>=0){
+      if(p.bench){
+        // 교환: 보드 카드와 벤치 카드를 스왑
+        var tmp=p.board[dragSrcIdx];
+        p.board[dragSrcIdx]=p.bench;
+        p.bench=tmp;
+      } else {
+        // 벤치가 비어있으면 보관
+        moveToBench(dragSrcIdx);return;
+      }
+      renderAll();
+    }
+  });
+  // 벤치 카드에서 드래그 시작
+  benchEl.addEventListener('dragstart',function(e){
+    var draggable=e.target.closest('[draggable="true"]');
+    if(!draggable)return;
+    dragSource='bench';dragSrcIdx=-1;
+    draggable.classList.add('dragging');
+    document.getElementById('ui-board').classList.add('drag-active');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain','bench');
+    hideTooltip();
+  });
+  benchEl.addEventListener('dragend',function(e){
+    var draggable=e.target.closest('[draggable="true"]');
+    if(draggable) draggable.classList.remove('dragging');
+    document.getElementById('ui-board').classList.remove('drag-active');
+    benchEl.classList.remove('drag-over');
+    var all=document.querySelectorAll('.drag-over');
+    for(var i=0;i<all.length;i++)all[i].classList.remove('drag-over');
+    dragSrcIdx=-1;dragSource='';
+  });
+}
+var _sellZoneBound=false;
+function initSellZone(){
+  if(_sellZoneBound)return;
+  var sz=document.getElementById('ui-sell-zone');
+  if(!sz)return;
+  _sellZoneBound=true;
+  sz.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';});
+  sz.addEventListener('dragenter',function(e){e.preventDefault();sz.classList.add('drag-hover');});
+  sz.addEventListener('dragleave',function(e){
+    if(!sz.contains(e.relatedTarget))sz.classList.remove('drag-hover');
+  });
+  sz.addEventListener('drop',function(e){
+    e.preventDefault();sz.classList.remove('drag-hover');
+    if(dragSource==='board'&&dragSrcIdx>=0){
+      sellMinion(dragSrcIdx);
+    } else if(dragSource==='bench'){
+      sellBench();
+    }
+    dragSrcIdx=-1;dragSource='';
+  });
+}
+var _benchDragBound=false;
+
+// ========== HOVER TOOLTIP ==========
+var tooltipEl=null;
+var tooltipTimer=null;
+
+function getTooltipEl(){
+  if(!tooltipEl) tooltipEl=document.getElementById('hover-tooltip');
+  return tooltipEl;
+}
+
+function showTooltip(baseId,rect,cardEl){
+  // 카드 데이터 찾기
+  var charData=findAnyChar(baseId);
+  if(!charData&&TOKENS[baseId]) charData=TOKENS[baseId];
+  if(!charData) return;
+
+  // 보드/상점/전투 미니카드의 실제 유닛 데이터 가져오기
+  var unitData=null;
+  if(cardEl){
+    var shopIdx=cardEl.getAttribute('data-shop');
+    var boardIdx=cardEl.getAttribute('data-board-idx');
+    var miniAtk=cardEl.getAttribute('data-mini-atk');
+    var p=G.players[0];
+    if(boardIdx!==null&&p.board[parseInt(boardIdx)]) unitData=p.board[parseInt(boardIdx)];
+    else if(shopIdx!==null&&G.shop[parseInt(shopIdx)]) unitData=G.shop[parseInt(shopIdx)];
+    else if(miniAtk!==null){
+      // 전투 미니카드에서 data 속성으로 스탯 읽기
+      var kwStr=cardEl.getAttribute('data-mini-kw')||'';
+      unitData={
+        atk:parseInt(miniAtk),
+        hp:parseInt(cardEl.getAttribute('data-mini-hp')||'0'),
+        kw:kwStr?kwStr.split(','):[],
+        name:cardEl.getAttribute('data-mini-name')||charData.name,
+        img:cardEl.getAttribute('data-mini-img')||charData.img,
+        skin:cardEl.getAttribute('data-mini-golden')==='1',
+        school:charData.school
+      };
+    }
+  }
+  var displayAtk=unitData?unitData.atk:charData.atk;
+  var displayHp=unitData?unitData.hp:charData.hp;
+  var displayKw=unitData?(unitData.kw||[]):(charData.kw||[]);
+  var displayName=unitData?unitData.name:charData.name;
+  var displayImg=unitData?unitData.img:charData.img;
+  var displaySkin=unitData?unitData.isSkin:false;
+  var displaySchool=charData.school||'';
+
+  var tt=getTooltipEl();
+  // 초상화
+  var html='<div class="tt-portrait'+(displaySkin?' skin':'')+'">';
+  if(displayImg) html+='<img src="../img/'+displayImg+'" onerror="this.style.display=\'none\'">';
+  html+='</div>';
+  // 헤더: 이름, 학교, 스탯
+  var ttIcon=SCHOOL_ICONS[displaySchool];
+  html+='<div class="tt-header" style="position:relative;overflow:hidden">';
+  if(ttIcon) html+='<img src="'+ttIcon+'" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);width:50px;height:50px;opacity:0.12;filter:invert(1);pointer-events:none">';
+  html+='<div class="tt-name">'+displayName+'</div>';
+  var gradeStr=CHAR_GRADES[baseId]?CHAR_GRADES[baseId]+' Year':'';
+  html+='<div class="tt-school">'+displaySchool+(gradeStr?' · '+gradeStr:'')+'</div>';
+  html+='<div class="tt-stats-row">';
+  html+='<div class="tt-stat tier"><img src="../img/UI/star.png" style="width:16px;height:16px;vertical-align:middle">'+charData.tier+'</div>';
+  html+='<div class="tt-stat atk">'+displayAtk+'</div>';
+  html+='<div class="tt-stat hp">'+displayHp+'</div>';
+  html+='</div></div>';
+  // 키워드 + 능력 타이밍 설명 (위쪽 개요)
+  var TIMING_DESCS = {
+    '개전':'Triggers at the start of battle.',
+    '첫인사':'Triggers when placed on SCHALE.',
+    '뒤끝':'Triggers when defeated.',
+    '버티기':'Triggers after surviving a hit.',
+    '선빵':'Triggers when attacking.',
+    '패시브':'Triggers automatically when conditions are met.',
+    '관통(회복)':'Excess damage is dealt to adjacent enemies.',
+    '저격':'Does not take counterattack damage.',
+    '자폭':'Attacks with ATK + HP combined, then is defeated.',
+    '히든':'Appears under special conditions.',
+    '액션카드':'Activates immediately when used.',
+    'Start of Combat':'Triggers at the start of battle.',
+    'Battlecry':'Triggers when placed on SCHALE.',
+    'Deathrattle':'Triggers when defeated.',
+    'Survivor':'Triggers after surviving a hit.',
+    'Preemptive':'Triggers when attacking.',
+    'Passive':'Triggers automatically when conditions are met.'
+  };
+  var TIMING_COLORS = {
+    '개전':'color:#93c5fd','첫인사':'color:#fbbf24','뒤끝':'color:#fca5a5',
+    '버티기':'color:#6ee7b7','선빵':'color:#c4b5fd','패시브':'color:#c084fc',
+    'Start of Combat':'color:#93c5fd','Battlecry':'color:#fbbf24','Deathrattle':'color:#fca5a5',
+    'Survivor':'color:#6ee7b7','Preemptive':'color:#c4b5fd','Passive':'color:#c084fc'
+  };
+  var hasKwSection=displayKw.length>0;
+  var info=ABILITY_DESCS[baseId];
+  var _TT_EMOJI={'지켜줌':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 3L4 7v5c0 5.5 3.5 9 8 11 4.5-2 8-5.5 8-11V7l-8-4z' fill='#3B7DD8' stroke='#5BA0F0' stroke-width='1.5'/></svg>",'보호막':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='12' r='9' fill='#FFD700' fill-opacity='0.15' stroke='#FFD700' stroke-width='3'/></svg>",'부활':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 22V10' stroke='#4A8C10' stroke-width='4' stroke-linecap='round'/><path d='M12 10c0-6 6-9 10-10-1.5 5-5 8.5-10 10z' fill='#7ED321' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/><path d='M12 12c0-5-5.5-8-9-9 1.5 4.5 5 7.5 9 9z' fill='#9BE94A' stroke='#4A8C10' stroke-width='2' stroke-linejoin='round'/></svg>",'무적':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M5 18h14v2H5z' fill='#E8A800'/><path d='M5 18L3 8l4.5 3.5L12 5l4.5 6.5L21 8l-2 10z' fill='#FFD700' stroke='#B8860B' stroke-width='1.2' stroke-linejoin='round'/></svg>",'연사':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M3 5l9 7-9 7' stroke='#FF8C00' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12 5l9 7-9 7' stroke='#FF4400' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",'광역':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='20' r='2.2' fill='#60C0FF'/><path d='M8.5 17a5 5 0 0 1 7 0' stroke='#60C0FF' stroke-width='3' stroke-linecap='round' fill='none'/><path d='M5.5 14a9.5 9.5 0 0 1 13 0' stroke='#40A0E0' stroke-width='3' stroke-linecap='round' fill='none'/><path d='M2.5 11a14 14 0 0 1 19 0' stroke='#3090D0' stroke-width='3' stroke-linecap='round' fill='none'/></svg>",'독사굴':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='12' r='9' fill='#A050E0'/><circle cx='9' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='15' cy='10.5' r='2.2' fill='#1A0030'/><circle cx='9' cy='10' r='0.7' fill='#FF60FF'/><circle cx='15' cy='10' r='0.7' fill='#FF60FF'/></svg>",'관통':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><line x1='12' y1='22' x2='12' y2='6' stroke='#D4A020' stroke-width='3' stroke-linecap='round'/><path d='M12 2v4M6 7l6-5 6 5M4 10l2-3M20 10l-2-3' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>",'저격':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='12' cy='12' r='8' stroke='#D04040' stroke-width='2.5' fill='none'/><circle cx='12' cy='12' r='2' fill='#FF4444'/><path d='M12 2v5M12 17v5M2 12h5M17 12h5' stroke='#D04040' stroke-width='2' stroke-linecap='round'/></svg>",'기습':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><rect x='2' y='2' width='20' height='20' rx='4' fill='#404050' stroke='#666' stroke-width='1.5'/><circle cx='12' cy='12' r='6' fill='#999' opacity='0.5'/><circle cx='10' cy='10' r='4' fill='#BBB' opacity='0.4'/></svg>",'자폭':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><circle cx='11' cy='14' r='8' fill='#6A3D9A'/><path d='M15 6l1.5-3' stroke='#999' stroke-width='3' stroke-linecap='round'/><circle cx='18' cy='2.5' r='2' fill='#FF8800'/></svg>",'선빵':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M13 2L5 13h6l-1 9 9-12h-6l2-8z' fill='#FFBB00' stroke='#CC8800' stroke-width='1.5' stroke-linejoin='round'/></svg>",'버티기':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><g transform='rotate(-10 12 12)'><ellipse cx='12' cy='10' rx='10' ry='8.5' fill='#70B840' stroke='#222' stroke-width='2.5'/><path d='M3 13.5c0 0 0 2 1.5 3h15c1.5-1 1.5-3 1.5-3' fill='#4A8A28' stroke='#222' stroke-width='2.5'/></g><path d='M8 17l-1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/><path d='M16 17l1 4' stroke='#5A5A3A' stroke-width='2.5' stroke-linecap='round'/></svg>",'개전':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg>",'첫인사':"<svg width='18' height='18' viewBox='-1 -1 26 26' fill='none' style='vertical-align:middle'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/><path d='M14 21a2.5 2.5 0 0 1-4 0' stroke='#CC8800' stroke-width='2' stroke-linecap='round'/></svg>",'뒤끝':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 2C7 2 3 5.5 3 10.5c0 3.5 2 6 4.5 7.5L8 22h8l.5-4c2.5-1.5 4.5-4 4.5-7.5C21 5.5 17 2 12 2z' fill='#F0F0F0' stroke='#222' stroke-width='2.8'/><circle cx='9' cy='10.5' r='2.5' fill='#333'/><circle cx='15' cy='10.5' r='2.5' fill='#333'/></svg>",'패시브':"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' style='vertical-align:middle'><path d='M12 1l2 7h7l-5.5 4.5 2 7L12 15l-5.5 4.5 2-7L3 8h7l2-7z' fill='#E85D75' stroke='#CC2060' stroke-width='1.5' stroke-linejoin='round'/></svg>"};
+  // 능력 타이밍 표시 여부 (복합 타이밍은 / 로 분리)
+  var timingTypes=info?info.type.split(' / '):[];
+  if(hasKwSection||timingTypes.length>0){
+    html+='<div class="tt-keywords">';
+    for(var k=0;k<displayKw.length;k++){
+      var kwId=displayKw[k];
+      var kwLabel=KW_LABELS[kwId]||kwId;
+      html+='<div class="tt-kw-item"><span class="tt-kw-name">'+(_TT_EMOJI[kwLabel]?_TT_EMOJI[kwLabel]+' ':'')+kwLabel+'</span><span class="tt-kw-desc">'+(KW_DESCS[kwId]||'')+'</span></div>';
+    }
+    // kw 라벨 및 원본 charData kw와 중복되는 타이밍은 건너뛰기
+    var kwLabelSet={};
+    for(var k2=0;k2<displayKw.length;k2++){kwLabelSet[KW_LABELS[displayKw[k2]]||displayKw[k2]]=1;}
+    var origKw=charData.kw||[];
+    for(var k3=0;k3<origKw.length;k3++){kwLabelSet[KW_LABELS[origKw[k3]]||origKw[k3]]=1;}
+    for(var t=0;t<timingTypes.length;t++){
+      var tt2=timingTypes[t].trim();
+      if(kwLabelSet[tt2]) continue;
+      var tDesc=TIMING_DESCS[tt2]||'';
+      var tColor=TIMING_COLORS[tt2]||'';
+      html+='<div class="tt-kw-item"><span class="tt-kw-name" style="'+(tColor)+'">'+(_TT_EMOJI[tt2]?_TT_EMOJI[tt2]+' ':'')+tt2+'</span><span class="tt-kw-desc">'+tDesc+'</span></div>';
+    }
+    html+='</div>';
+  }
+  // 7성 히든 등장 조건 (능력 설명 위쪽)
+  if(info&&info.hiddenCond){
+    html+='<div class="tt-ability" style="border-left:3px solid #e070ff">';
+    html+='<div class="tt-type" style="color:#e070ff">⭐ Hidden</div>';
+    html+='<div class="tt-desc" style="color:#d0c0e0">'+info.hiddenCond+'</div>';
+    html+='</div>';
+  }
+  // 능력 세부 설명 (아래쪽)
+  if(info&&info.desc){
+    var typeCls='';
+    if(info.type==='첫인사') typeCls='bc';
+    else if(info.type==='뒤끝') typeCls='dr';
+    else if(info.type==='개전') typeCls='soc';
+    else if(info.type==='버티기') typeCls='surv';
+    else if(info.type==='패시브') typeCls='passive';
+    html+='<div class="tt-ability">';
+    html+='<div class="tt-type '+typeCls+'">'+(_TT_EMOJI[info.type]?_TT_EMOJI[info.type]+' ':'')+info.type+'</div>';
+    html+='<div class="tt-desc">'+info.desc+'</div>';
+    if(info.skinEffect) html+='<div class="tt-skin">'+info.skinEffect+'</div>';
+    html+='</div>';
+  } else if(info&&info.skinEffect){
+    html+='<div class="tt-ability">';
+    html+='<div class="tt-skin">'+info.skinEffect+'</div>';
+    html+='</div>';
+  }
+  // 트리플 안내 (gold 칸 자리에 표시, 히든 제외)
+  if(charData&&charData.skin&&charData.tier<7){
+    html+='<div class="tt-skin">Collect 3 to become <span style="color:#ffd700">'+charData.skin+'</span>!</div>';
+  }
+  // 버프 이력 표시
+  var buffLog=unitData&&unitData._buffLog?unitData._buffLog:null;
+  if(!buffLog&&unitData){
+    // 보드 유닛에서 직접 가져오기
+    var p2=G.players[0];
+    if(cardEl){
+      var bIdx=cardEl.getAttribute('data-board-idx');
+      if(bIdx!==null&&p2.board[parseInt(bIdx)]) buffLog=p2.board[parseInt(bIdx)]._buffLog;
+    }
+  }
+  if(buffLog&&buffLog.length>0){
+    html+='<div style="padding:8px 14px 10px;border-top:1px solid rgba(0,200,255,0.08);background:rgba(10,24,38,0.4)">';
+    html+='<div style="font-size:10px;color:#4a7a98;margin-bottom:4px;font-weight:700">Buff History</div>';
+    for(var bl=0;bl<buffLog.length;bl++){
+      var b=buffLog[bl];
+      var parts=[];
+      if(b.atk>0) parts.push('<span style="color:#40b0e0">+'+b.atk+'</span>');
+      if(b.hp>0) parts.push('<span style="color:#40b0e0">+'+b.hp+'</span>');
+      html+='<div style="font-size:11px;color:#88aec8;padding:1px 0"><span style="color:#a090e0">'+b.src+'</span> '+parts.join('/')+'</div>';
+    }
+    html+='</div>';
+  }
+  tt.innerHTML=html;
+
+  // 위치: 카드 오른쪽에, 화면 밖이면 왼쪽에
+  tt.style.display='block';
+  tt.classList.remove('visible');
+  var ttW=tt.offsetWidth||280;
+  var ttH=tt.offsetHeight||400;
+  var x=rect.right+12;
+  var y=rect.top+(rect.height/2)-(ttH/2);
+  if(x+ttW>window.innerWidth) x=rect.left-ttW-12;
+  if(x<0) x=8;
+  if(y+ttH>window.innerHeight) y=window.innerHeight-ttH-8;
+  if(y<0) y=8;
+  tt.style.left=x+'px';
+  tt.style.top=y+'px';
+  tt.classList.add('visible');
+}
+
+function hideTooltip(){
+  var tt=getTooltipEl();
+  if(tt){tt.classList.remove('visible');tt.style.display='none';}
+  if(tooltipTimer){clearTimeout(tooltipTimer);tooltipTimer=null;}
+}
+
+// 전역 마우스 이벤트: 카드 호버 시 툴팁 (mousemove 기반)
+var tooltipCard=null;
+document.addEventListener('mousemove',function(e){
+  // 보드/상점 카드
+  var card=e.target.closest('.card[data-base-id]');
+  // 전투 미니카드
+  if(!card) card=e.target.closest('.minicard[data-base-id]');
+  if(card){
+    var baseId=card.getAttribute('data-base-id');
+    if(baseId){
+      if(tooltipCard!==card){
+        tooltipCard=card;
+        hideTooltip();
+        tooltipTimer=setTimeout(function(){
+          if(tooltipCard===card){
+            var rect=card.getBoundingClientRect();
+            showTooltip(baseId,rect,card);
+          }
+        },200);
+      }
+      return;
+    }
+  }
+  if(tooltipCard){
+    tooltipCard=null;
+    hideTooltip();
+  }
+});
+
+// ========== INIT ==========
+function fadeSwitch(from,to,cb){
+  from.classList.remove('active');
+  from.classList.add('fading');
+  // force reflow so transition triggers
+  void from.offsetWidth;
+  from.style.opacity='0';
+  setTimeout(function(){
+    from.classList.remove('fading');
+    from.style.opacity='';
+    to.classList.add('active');
+    window.scrollTo(0,0);
+    if(cb)cb();
+  },400);
+}
+// PC 안내 팝업 자동 닫기
+(function(){var n=document.getElementById('pc-notice');if(!n)return;n.style.pointerEvents='auto';n.addEventListener('click',function(){n.classList.add('fade-out');setTimeout(function(){n.remove();},600);});})();
+
+document.getElementById('btn-play').addEventListener('click',function(){
+  playSfx('game_start',0.5);
+  var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
+  fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),newGame);
+});
+// 이어하기 버튼
+document.getElementById('btn-continue-game').addEventListener('click',function(){
+  playSfx('game_start',0.5);
+  var save=loadGame();
+  if(!save){alert('No saved game found.');return;}
+  var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
+  fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),function(){
+    restoreGame(save);
+    if(!G.shop||G.shop.length===0)rollShop();
+    renderAll();
+  });
+});
+// 타이틀 진입 시 저장 감지 → 이어하기 버튼 표시
+(function(){
+  var btn=document.getElementById('btn-continue-game');
+  if(hasSavedGame()){
+    var save=loadGame();
+    if(save){
+      btn.style.display='';
+      btn.querySelector('.btn-inner').textContent='Continue (Turn '+save.turn+')';
+    }
+  }
+})();
+// test.html 경유 시 타이틀 건너뛰고 바로 게임 시작
+if(SANDBOX){
+  setTimeout(function(){
+    var ts=document.getElementById('title-screen');
+    var gs=document.getElementById('game-screen');
+    if(ts)ts.classList.remove('active');
+    if(gs)gs.classList.add('active');
+    newGame();
+  },100);
+}
+// 능력 팝업 닫기
+document.getElementById('ap-close').addEventListener('click',function(){document.getElementById('ability-popup-overlay').classList.remove('active');});
+document.getElementById('ability-popup-overlay').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
+
+// 키워드 가이드 토글
+document.getElementById('kw-guide-btn').addEventListener('click',function(e){
+  e.stopPropagation();
+  var panel=document.getElementById('kw-guide-panel');
+  panel.classList.toggle('open');
+  // 액션카드 섹션 제거 (능력 리스트에서 제외)
+});
+document.addEventListener('click',function(e){
+  var panel=document.getElementById('kw-guide-panel');
+  if(panel.classList.contains('open')&&!document.getElementById('kw-guide').contains(e.target)){
+    panel.classList.remove('open');
+  }
+  var vpanel=document.getElementById('vol-guide-panel');
+  if(vpanel&&vpanel.classList.contains('open')&&!document.getElementById('vol-guide').contains(e.target)){
+    vpanel.classList.remove('open');
+  }
+});
+// 소리 볼륨 토글 + 슬라이더
+(function(){
+  var vbtn=document.getElementById('vol-guide-btn');
+  var vpanel=document.getElementById('vol-guide-panel');
+  var slider=document.getElementById('vol-slider');
+  var vval=document.getElementById('vol-value');
+  if(!vbtn||!slider)return;
+  var init=Math.round(((window._masterVolume!==undefined?window._masterVolume:1))*100);
+  slider.value=init;vval.textContent=init+'%';
+  vbtn.addEventListener('click',function(e){e.stopPropagation();vpanel.classList.toggle('open');});
+  slider.addEventListener('input',function(){
+    var v=parseInt(slider.value,10)/100;
+    if(typeof setMasterVolume==='function')setMasterVolume(v);
+    vval.textContent=slider.value+'%';
+  });
+})();
+
+// undo 제거됨
+// btn-reroll, btn-fight, btn-continue는 래핑 후 바인딩 (아래 튜토리얼 섹션에서)
+document.getElementById('btn-freeze').addEventListener('click',doFreeze);
+document.getElementById('btn-upgrade').addEventListener('click',doUpgrade);
+document.getElementById('btn-skip').addEventListener('click',function(){battleState.skip=true;});
+document.getElementById('btn-restart').addEventListener('click',function(){
+  if(_endMusic){_endMusic.pause();_endMusic=null;}
+  if(_celebInterval){clearInterval(_celebInterval);_celebInterval=null;}
+  document.getElementById('game-over').classList.remove('active');
+  document.getElementById('battle-overlay').classList.remove('active');
+  var sf2=document.getElementById('schale-frame');sf2.style.backgroundImage="url('../img/UI/wallpaper01.jpg')";sf2.style.backgroundSize='cover';sf2.style.backgroundPosition='center';
+  fadeSwitch(document.getElementById('game-screen'),document.getElementById('title-screen'));
+});
+
+// ========== 튜토리얼 시스템 ==========
+var TUT = {active:false, step:0, steps:[], waitingFor:null};
+
+var TUTORIAL_STEPS = [
+  // 1. 인사
+  {text:'Hello, Sensei!\nWelcome to <b>Blue Archive Battlegrounds</b>.\nArona will now teach you\nthe rules of this place!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big',
+   onEnter:function(){ G.players[0].stone=3; G.players[0].turnStone=3; tutSetShop(['junko','midori','mari']); }},
+
+  // 2. 8인 경쟁
+  {text:'This game has <b>8 players</b> competing\nuntil only one remains.\nThe last one standing wins!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'.side-panel'},
+
+  // 3. 코인 오토체스 — 아로나가 말한다
+  {text:'This genre is called <b>Coin Auto Chess</b>.\nAuto Chess is, as the name suggests,\n<b>"chess that plays automatically"</b>!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 4. 스케쥴에서 영입
+  {text:'Sensei, you recruit students\nfrom the <b>Schedule</b> to <b>SCHALE</b>,',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'.shop'},
+
+  // 5. 배치하면 자동 플레이
+  {text:'Once you place them, everything after that\nis <b>played automatically</b>!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board'},
+
+  // 6. 드래그 & 호버 설명 — 아로나가 말한다 + 스케쥴 강조 (호버만)
+  {text:'You can drag students to SCHALE,\nand hovering over a card shows detailed info.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-shop', interact:true, hoverOnly:true},
+
+  // 7. 액션카드 설명 — 아로나가 말한다
+  {text:'The Schedule can also offer\n<b>Spell Cards</b> besides students.\nSpell Cards are <b>one-time use cards</b>\nwith unique effects!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 8. 청휘석 경고 — 아로나가 말한다
+  {text:'But be careful!\nYour <b>Pyroxene</b> is limited!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 8.1 청휘석 증가 설명
+  {text:'Pyroxene starts at <b style="color:#fbbf24">3</b> on Turn 1, then increases by 1 each turn: 4, 5, 6... up to <b style="color:#fbbf24">10</b> max. Later turns allow bolder recruiting and strategy!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-stone'},
+
+  // 9. 영입 실습 — 아로나가 말한다
+  {text:'Now let\'s pick one and move them to SCHALE!\n<b style="color:#fbbf24">Drag</b> from the Schedule to SCHALE!',
+   target:'#arona-face', action:'waitBoard', interact:true, bubbleMode:'arona-big',
+   check:function(){return G.players[0].board.length>=1;}},
+
+  // 10. 칭찬
+  {text:'Well done, Sensei!\nThe basic preparation is essentially complete!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 11. 코인 오토체스 예고
+  {text:'Now let me explain why Blue Archive Battlegrounds\nis called <b style="color:#fbbf24">Coin</b> Auto Chess.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 12. 코인토스 설명
+  {text:'It\'s because you can assign\n<b>Coin Tosses</b> to students in SCHALE!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 13. 코인 UI 강조 — 보드의 코인 토글 강조
+  {text:'This is the coin.\nYou can toggle this coin\n<b style="color:#fbbf24">ON/OFF</b>.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board',
+   onEnter:function(){
+     var coins=document.querySelectorAll('.bcoin-wrap');
+     for(var i=0;i<coins.length;i++) coins[i].style.visibility='visible';
+     var toggles=document.querySelectorAll('.coin-toggle');
+     for(var i=0;i<toggles.length;i++) toggles[i].classList.add('tutorial-highlight');
+   }},
+
+  // 14. 코인 토글 실습 — 코인만 클릭 가능하게
+  {text:'Go ahead, press the coin twice to toggle it off and on!',
+   target:'#arona-face', action:'waitCoinToggle', bubbleMode:'arona-big', highlight:'#ui-board',
+   onEnter:function(){TUT.coinToggleCount=0;}},
+
+  // 15. 코인 전략 설명
+  {text:'The coin decides whether to challenge for\n<b>first strike priority</b> in battle.\nUse it strategically!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 16. 1턴 마무리
+  {text:'It seems you\'ve done everything\nyou can on Turn 1.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 17. 전투 시작 유도 — 버튼 쪽 말풍선 + 버튼 활성화
+  {text:'Press <b>Start Battle</b>\nto enter combat!',
+   target:'#btn-fight', action:'waitFight', position:'bottom', highlight:'#btn-fight'},
+
+  // === 전투 페이즈 ===
+  // 18. 전투 진입 — 잠시 대기 후 자동 진행
+  {text:'', target:null, action:'auto', bubbleMode:'battle',
+   onEnter:function(){
+     document.getElementById('tut-battle-arona').style.display='block';
+     setTimeout(function(){tutNext();},600);
+   }},
+
+  // 19. 전투 페이즈입니다 — 아로나가 말한다
+  {text:'From here on, it\'s the <b>Battle Phase</b>!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 20. 개입 불필요 — 아로나가 말한다
+  {text:'As I mentioned, during the Battle Phase\nyou don\'t need to intervene.\nJust watch!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 21. 전투 필드 강조 — 아로나가 말한다
+  {text:'Battles take place here,',
+   target:null, action:'next', bubbleMode:'battle', highlight:'#battle-arena'},
+
+  // 22. 로그 필드 — 테두리 강조
+  {text:'Detailed battle logs are recorded\nhere on the left side!',
+   target:null, action:'next', bubbleMode:'battle', highlight:'#battle-log'},
+
+  // 23. 코인토스 선공 설명 — 아로나가 말한다
+  {text:'The <b style="color:#fbbf24">coin toss winner</b> attacks first,\nand among them, attacks go\n<b style="color:#fbbf24">from left to right</b>!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 24. 지켜보기 → 다음 누르면 전투 재개
+  {text:'Let\'s see what happens!\nPlease watch!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 25. 전투 재개 (전투 진행, 결과창 뜰 때까지 대기)
+  {text:'', target:null, action:'waitBattleResult', bubbleMode:'hide',
+   onEnter:function(){
+     TUT.waitingFor='battleResult';
+     document.getElementById('tut-battle-arona').style.display='none';
+     document.getElementById('tutorial-overlay').classList.remove('active');
+     document.getElementById('tutorial-bubble').style.display='none';
+     if(TUT.battleResumeFn){TUT.battleResumeFn();TUT.battleResumeFn=null;}
+   }},
+
+  // 26. 결과창 위에 아로나 — 경쟁 반복 설명
+  {text:'The competition continues\nuntil only 1 person remains standing!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 27. 무승부 설명
+  {text:'If everyone falls, it\'s a draw!',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 27-1. 코인 동률 무승부
+  {text:'Oh, if all three priority coin tosses are tied,\nthat also results in a draw.\nBut that rarely happens, right?',
+   target:null, action:'next', bubbleMode:'battle'},
+
+  // 28. 계속 버튼 유도 — 버튼 바로 위에 말풍선 직접 배치
+  {text:'Now press <b>Continue</b>\nto go to the second turn!',
+   target:null, action:'waitContinue', highlight:'#btn-continue',
+   onEnter:function(){
+     TUT.waitingFor='continue';
+     document.getElementById('btn-continue').style.display='';
+     document.getElementById('tut-battle-arona').style.display='none';
+     // 말풍선을 계속 버튼 바로 위에 배치
+     var btn=document.getElementById('btn-continue');
+     var bubble=document.getElementById('tutorial-bubble');
+     if(btn){
+       var r=btn.getBoundingClientRect();
+       bubble.classList.remove('tut-compact','tut-arona','tut-battle');
+       bubble.style.left=(r.left-60)+'px';
+       bubble.style.top=(r.top-190)+'px';
+       bubble.style.right='';bubble.style.bottom='';
+       bubble.style.transform='';
+     }
+   }},
+
+  // 29. 2턴 시작
+  {text:'It\'s now the second turn!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 30. 감상
+  {text:'How was that fight?\nYou probably don\'t understand everything yet.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 31. 승패 결정 예고
+  {text:'From now on, Arona will teach you about\n<b style="color:#fbbf24">what decides victory and defeat</b>!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 32. 치나츠 소개 — 치나츠 카드만 강조
+  {text:'First, look at <b>Chinatsu</b>\non the far right of the Schedule!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#tut-chinatsu-card',
+   onEnter:function(){
+     var cards=document.querySelectorAll('#ui-shop .card');
+     for(var i=0;i<cards.length;i++){
+       if(cards[i].textContent.indexOf('치나츠')!==-1) cards[i].id='tut-chinatsu-card';
+     }
+   }},
+
+  // 33. 별(등급) 설명 — 치나츠 카드의 별 부분 강조
+  {text:'The stars on the left show Chinatsu\'s <b>tier</b>.\nIt means she appears in SCHALE\nfrom Schedule Level 2!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#tut-chinatsu-card',
+   onEnter:function(){
+     var cards=document.querySelectorAll('#ui-shop .card');
+     for(var i=0;i<cards.length;i++){
+       if(cards[i].textContent.indexOf('치나츠')!==-1){
+         cards[i].id='tut-chinatsu-card';
+         var tb=cards[i].querySelector('.tier-bar');
+         if(tb) tb.classList.add('tutorial-highlight');
+       }
+     }
+   }},
+
+  // 34. 능력 설명 — 치나츠 카드의 능력 태그 강조
+  {text:'Below the name are Chinatsu\'s <b>abilities</b>.\nTop row is basic abilities, bottom is special abilities!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#tut-chinatsu-card',
+   onEnter:function(){
+     // 치나츠 카드 찾아서 id 부여 + 능력 부분 강조
+     var cards=document.querySelectorAll('#ui-shop .card');
+     for(var i=0;i<cards.length;i++){
+       if(cards[i].textContent.indexOf('치나츠')!==-1){
+         cards[i].id='tut-chinatsu-card';
+         var kws=cards[i].querySelector('.keywords');
+         if(kws) kws.classList.add('tutorial-highlight');
+         var atags=cards[i].querySelectorAll('.ability-tag');
+         for(var j=0;j<atags.length;j++) atags[j].classList.add('tutorial-highlight');
+       }
+     }
+   }},
+
+  // 34-1. 호버로 자세히 보기
+  {text:'For detailed ability info, hover your mouse\nover Chinatsu to see an expanded card!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#tut-chinatsu-card'},
+
+  // 35. 능력 리스트 버튼 — 화살표로 가리킴
+  {text:'You can see all abilities by pressing\n<b style="color:#fbbf24">Ability List</b> in the top right.\nThere are many abilities, so enjoy exploring!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big',
+   onEnter:function(){ tutPointArrow('#kw-guide-btn'); }},
+
+  // 36. 공격력/체력 설명 — 치나츠 카드만 강조
+  {text:'At the very bottom are <b>ATK</b> and <b>HP</b>!\nThese stats determine how they fight!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#tut-chinatsu-card',
+   onEnter:function(){
+     var cards=document.querySelectorAll('#ui-shop .card');
+     for(var i=0;i<cards.length;i++){
+       if(cards[i].textContent.indexOf('치나츠')!==-1){
+         cards[i].id='tut-chinatsu-card';
+         var atk=cards[i].querySelector('.stat-atk');
+         var hp=cards[i].querySelector('.stat-hp');
+         if(atk) atk.classList.add('tutorial-highlight');
+         if(hp) hp.classList.add('tutorial-highlight');
+       }
+     }
+   }},
+
+  // 37. 확률 설명
+  {text:'That\'s all the info to help\nyou pick students.\nBut whether the student you want appears\nin the Schedule is up to chance!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 38. 리롤 설명 — 화살표
+  {text:'If the student you want isn\'t in the Schedule,\nyou can spend one Pyroxene to\nreroll the Schedule.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big',
+   onEnter:function(){ tutPointArrow('#btn-reroll'); }},
+
+  // 39. 스케쥴 고정 설명 — 화살표
+  {text:'Conversely, if the student you want is in the Schedule\nbut you\'re short on Pyroxene, you can\nfreeze the Schedule for the next turn!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big',
+   onEnter:function(){ tutPointArrow('#btn-freeze'); }},
+
+  // 35.1 샬레 5명 제한 + X 버튼 설명
+  {text:'SCHALE can hold up to 5 students at a time. When it\'s full, you can\'t add more. In that case, you can send students back.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board',
+   onEnter:function(){
+     var sells=document.querySelectorAll('#ui-board .sell-btn');
+     for(var i=0;i<sells.length;i++) sells[i].classList.add('tutorial-highlight');
+     tutPointArrow('#ui-board .sell-btn');
+   }},
+
+  // 35.2 돌려보내면 청휘석 1 회수
+  {text:'Press the <b style="color:#ef4444">X</b> on the top right of the student you want to return. You\'ll get 1 Pyroxene back.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board',
+   onEnter:function(){
+     var sells=document.querySelectorAll('#ui-board .sell-btn');
+     for(var i=0;i<sells.length;i++) sells[i].classList.add('tutorial-highlight');
+     tutPointArrow('#ui-board .sell-btn');
+   }},
+
+  // 35.3 무분별한 돌려보내기 경고
+  {text:'But since recruiting costs 3 Pyroxene, selling carelessly is a big loss. Be careful!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board',
+   onEnter:function(){
+     var sells=document.querySelectorAll('#ui-board .sell-btn');
+     for(var i=0;i<sells.length;i++) sells[i].classList.add('tutorial-highlight');
+     tutPointArrow('#ui-board .sell-btn');
+   }},
+
+  // 35.4 벤치 설명
+  {text:'If SCHALE is full but you don\'t want to sell anyone, you can temporarily store one student on the Bench!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-bench',
+   onEnter:function(){ tutPointArrow('#ui-bench'); }},
+
+  // 35.5 드래그로 교체
+  {text:'Just <b style="color:#fbbf24">drag</b> to swap them!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-bench',
+   onEnter:function(){ tutPointArrow('#ui-bench'); }},
+
+  // 35.6 벤치 학생은 싸움 불참
+  {text:'Note that students on the Bench don\'t participate in battles!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-bench',
+   onEnter:function(){ tutPointArrow('#ui-bench'); }},
+
+  // 40. 스케쥴 레벨 설명
+  {text:'Actually... the Schedule is Level 1 right now, so Momoi and Chinatsu normally can\'t appear.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 41. 업그레이드 유도
+  {text:'I only showed them to explain the Schedule and stars. Let\'s press <b>Upgrade</b> so you can recruit them yourself!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 42. 업그레이드 버튼 클릭
+  {text:'Press here to raise the Schedule level!',
+   target:'#btn-upgrade', action:'waitUpgrade', position:'top', highlight:'#btn-upgrade',
+   onEnter:function(){ tutPointArrow('#btn-upgrade'); }},
+
+  // 43. 레벨업 완료
+  {text:'The Schedule is now <b>Level 2</b>!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'.schedule-label',
+   onEnter:function(){ tutPointArrow('.schedule-label'); }},
+
+  // 39.1 스케쥴 최대 레벨
+  {text:'The Schedule can go up to <b>Level 6</b>! What amazing students will come visit!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'.schedule-label',
+   onEnter:function(){ tutPointArrow('.schedule-label'); }},
+
+  // 44. 한 가지 더
+  {text:'Just one more thing and I\'ll have covered all the basics.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 45. 스킨 학생 예고
+  {text:'The highlight and essence of this game: <b style="color:#fbbf24">Golden Students</b>!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 46. 청휘석 지급 + 스케쥴 변경
+  {text:'I\'ll give you extra Pyroxene temporarily\nand rearrange the Schedule to show you.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big',
+   onEnter:function(){
+     G.players[0].stone=9;
+     tutSetShop(['chinatsu','chinatsu','chinatsu']);
+   }},
+
+  // 47. 스킨 학생 설명 + 치나츠 3명 강조
+  {text:'<b style="color:#fbbf24">Golden Students</b> are created by\nrecruiting three copies of the same student.',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-shop'},
+
+  // 48. 치나츠 3명 영입 유도
+  {text:'Bring all the Chinatsus to SCHALE!\nJust <b style="color:#fbbf24">drag</b> them over!',
+   target:'#arona-face', action:'waitBoard', bubbleMode:'arona-big', highlight:'#ui-shop', interact:true,
+   check:function(){
+     // 골든 치나츠가 보드에 있으면 완료
+     var p=G.players[0];
+     for(var i=0;i<p.board.length;i++){
+       if(p.board[i].baseId==='chinatsu'&&p.board[i].isSkin) return true;
+     }
+     return false;
+   }},
+
+  // 49. 발견 창 설명 — 발견 창 위에 말풍선
+  {text:'When you collect 3 of the same student, before they merge into a Golden, you get a choice! Since 3 become 1, you get a bonus student of the next tier as a Discover!',
+   target:null, action:'next', bubbleMode:'battle',
+   onEnter:function(){
+     document.getElementById('tut-battle-arona').style.display='block';
+   }},
+
+  // 50. 발견 선택 유도 — 차단 해제, 클릭 가능
+  {text:'Pick anyone you want!',
+   target:null, action:'waitDiscover', bubbleMode:'battle', interact:true,
+   onEnter:function(){
+     TUT.discoverBlocked=false;
+     document.getElementById('tut-battle-arona').style.display='block';
+   }},
+
+  // 51. 스킨 결과
+  {text:'Look! As you can see, Chinatsu has become Golden!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 49.1 3레벨 학생 확인
+  {text:'The Tier 3 student you just picked has also joined SCHALE. See them?',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board'},
+
+  // 49.2 드래그로 순서 변경
+  {text:'You can also <b style="color:#fbbf24">drag</b> to reorder students within SCHALE. Remember, <b style="color:#fbbf24">attacks go from left to right</b>! Arrange them strategically!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big', highlight:'#ui-board'},
+
+  // 52. 스킨 능력 설명
+  {text:'Golden Students have stronger <b>stats</b> than normal students, and their basic and special abilities may also be enhanced!',
+   target:'#arona-face', action:'next', bubbleMode:'arona-big'},
+
+  // 53. 학생들을 모으시고 — 중앙 아로나 sz1
+  {text:'Now go collect more students!',
+   target:null, action:'next', bubbleMode:'center', centerSize:1,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s1';ca.style.display='block';
+   }},
+
+  // 54. 스킨을 입히시고 — sz2
+  {text:'Collect three to make them Golden!!',
+   target:null, action:'next', bubbleMode:'center', centerSize:2,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s2';ca.style.display='block';
+   }},
+
+  // 55. 시너지 — sz3
+  {text:'Create synergies with their abilities!!',
+   target:null, action:'next', bubbleMode:'center', centerSize:3,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s3';ca.style.display='block';
+   }},
+
+  // 56. 특별한 학생 — sz4
+  {text:'Under special conditions, you may encounter special students or clubs, so keep exploring!!!',
+   target:null, action:'next', bubbleMode:'center', centerSize:4,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s4';ca.style.display='block';
+   }},
+
+  // 57. 응원 — sz1로 돌아옴
+  {text:'Then until you become the last one standing,\nArona will be cheering for you, Sensei!',
+   target:null, action:'next', bubbleMode:'center', centerSize:1,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s1';ca.style.display='block';
+   }},
+
+  // 58. 화이팅 + 시작하기
+  {text:'You can do it!!',
+   target:null, action:'end', bubbleMode:'center', centerSize:1,
+   onEnter:function(){
+     var ca=document.getElementById('tut-center-arona');
+     ca.className='tut-center-arona s1';ca.style.display='block';
+   }}
+];
+
+function startTutorial(){
+  TUT.active=true; TUT.step=0; TUT.waitingFor=null; TUT.hoverOnly=false;
+  var sf=document.getElementById('schale-frame');sf.style.backgroundImage='';sf.style.backgroundSize='';sf.style.backgroundPosition='';
+  fadeSwitch(document.getElementById('title-screen'),document.getElementById('game-screen'),function(){
+    newGame();
+    G.isTutorial=true;
+    G.players[0].stone=3;
+    G.players[0].turnStone=3;
+    // 1턴 적: 하이네
+    for(var i=1;i<G.players.length;i++){
+      G.players[i].board=[makeMinion(findAnyChar('haine'),false)];
+      G.players[i].tier=1;
+    }
+    tutSetShop(['junko','midori','mari']);
+    renderAll();
+    tutShowStep();
+  });
+}
+
+function tutPointArrow(selector){
+  var arrow=document.getElementById('tut-arrow');
+  var el=document.querySelector(selector);
+  if(!el){arrow.classList.remove('active');return;}
+  var rect=el.getBoundingClientRect();
+  arrow.style.left=(rect.left-44)+'px';
+  arrow.style.top=(rect.top+rect.height/2-20)+'px';
+  arrow.classList.add('active');
+}
+
+function tutSetShop(ids){
+  G.shop=[];
+  for(var i=0;i<ids.length;i++){
+    var tmpl=findAnyChar(ids[i]);
+    if(tmpl) G.shop.push(makeMinion(tmpl,false));
+  }
+  renderAll();
+}
+
+function tutShowStep(){
+  if(TUT.step>=TUTORIAL_STEPS.length){tutEnd();return;}
+  var s=TUTORIAL_STEPS[TUT.step];
+  var overlay=document.getElementById('tutorial-overlay');
+  var bubble=document.getElementById('tutorial-bubble');
+  var dim=document.getElementById('tutorial-dim');
+  overlay.classList.add('active');
+  bubble.style.display='block';
+  document.getElementById('tut-skip').style.display='block';
+
+  // 텍스트
+  document.getElementById('tut-text').innerHTML=s.text.replace(/\n/g,'<br>');
+
+  // 하이라이트 & interact 해제
+  var prev=document.querySelectorAll('.tutorial-highlight,.tutorial-interact');
+  for(var i=0;i<prev.length;i++){prev[i].classList.remove('tutorial-highlight');prev[i].classList.remove('tutorial-interact');}
+  dim.classList.remove('passthrough');
+  // kw-guide 위치 복원
+  var kg=document.getElementById('kw-guide');
+  if(kg){kg.style.position='';kg.style.top='';kg.style.right='';kg.style.zIndex='';}
+  // 화살표 숨김
+  document.getElementById('tut-arrow').classList.remove('active');
+
+  // 하이라이트 적용
+  var targetEl=null;
+  if(s.target){
+    targetEl=document.querySelector(s.target);
+    if(targetEl) targetEl.classList.add('tutorial-highlight');
+  }
+  // 별도 강조 요소 (target과 다른 곳을 강조할 때)
+  if(s.highlight){
+    var hlEl=document.querySelector(s.highlight);
+    if(hlEl) hlEl.classList.add('tutorial-highlight');
+  }
+
+  // interact 모드: 드래그/클릭이 필요한 스텝에서 dim을 통과시키고 상점+보드 활성화
+  if(s.interact){
+    dim.classList.add('passthrough');
+    var shop=document.querySelector('.shop');
+    var board=document.getElementById('ui-board');
+    if(shop) shop.classList.add('tutorial-interact');
+    if(board) board.classList.add('tutorial-interact');
+  }
+  // waitClick: 대상 버튼 클릭 가능하게
+  if(s.action==='waitClick'){
+    dim.classList.add('passthrough');
+    if(targetEl) targetEl.classList.add('tutorial-interact');
+    // highlight 대상도 클릭 가능하게
+    if(s.highlight){var hlBtn=document.querySelector(s.highlight);if(hlBtn)hlBtn.classList.add('tutorial-interact');}
+  }
+  // waitCoinToggle: 보드 클릭 가능하게 (코인 토글용)
+  if(s.action==='waitCoinToggle'){
+    dim.classList.add('passthrough');
+    var board=document.getElementById('ui-board');
+    if(board) board.classList.add('tutorial-interact');
+  }
+  // waitContinue: highlight된 버튼 클릭 가능하게
+  if(s.action==='waitContinue' && s.highlight){
+    dim.classList.add('passthrough');
+    var hlCont=document.querySelector(s.highlight);
+    if(hlCont) hlCont.classList.add('tutorial-interact');
+  }
+  // waitUpgrade: 업그레이드 버튼 클릭 가능하게
+  if(s.action==='waitUpgrade'){
+    dim.classList.add('passthrough');
+    var shopEl=document.querySelector('.shop');
+    if(shopEl) shopEl.classList.add('tutorial-interact');
+    var upBtn=document.getElementById('btn-upgrade');
+    if(upBtn) upBtn.classList.add('tutorial-highlight');
+  }
+  // waitDiscover: 발견 창 클릭 가능하게
+  if(s.action==='waitDiscover'){
+    dim.classList.add('passthrough');
+  }
+  // waitFight: 전투 시작 버튼 클릭 가능하게 — 상점 영역 전체를 올림
+  if(s.action==='waitFight'){
+    dim.classList.add('passthrough');
+    var shopEl=document.querySelector('.shop');
+    if(shopEl) shopEl.classList.add('tutorial-interact');
+    var fightBtn=document.getElementById('btn-fight');
+    if(fightBtn) fightBtn.classList.add('tutorial-highlight');
+  }
+
+  // 버튼 설정
+  var btns=document.getElementById('tut-btns');
+  if(s.action==='auto'){
+    btns.innerHTML='';
+  } else if(s.action==='end'){
+    btns.innerHTML='<button class="tut-btn tut-btn-next" onclick="tutEnd()">Let\'s go!</button>';
+  } else if(s.action==='next'){
+    btns.innerHTML='<button class="tut-btn tut-btn-next" onclick="tutNext()">Next</button>';
+  } else if(s.action==='waitBoard'||s.action==='waitClick'||s.action==='waitContinue'||s.action==='waitCoinToggle'||s.action==='waitFight'||s.action==='waitUpgrade'||s.action==='waitDiscover'||s.action==='waitBattleResult'){
+    btns.innerHTML='<span style="font-size:11px;color:#6a90a8">Please follow the instructions above</span>';
+  }
+
+  // 말풍선 위치 모드
+  bubble.classList.remove('tut-compact','tut-arona','tut-battle','tut-center','sz1','sz2','sz3','sz4','arrow-top','arrow-left','arrow-right');
+  document.getElementById('tut-center-arona').style.display='none';
+  bubble.style.left='';bubble.style.top='';bubble.style.right='';bubble.style.bottom='';bubble.style.transform='';
+  if(s.bubbleMode==='hide'){
+    bubble.style.display='none';
+    document.getElementById('tut-battle-arona').style.display='none';
+    if(s.onEnter) s.onEnter();
+    return;
+  } else if(s.bubbleMode==='battle'){
+    bubble.classList.add('tut-battle');
+    dim.classList.add('hidden');
+    document.getElementById('tut-battle-arona').style.display='block';
+  } else if(s.bubbleMode==='battle-local'){
+    // 전투 중 특정 요소 옆에 말풍선 (아로나 얼굴 숨김)
+    dim.classList.add('hidden');
+    document.getElementById('tut-battle-arona').style.display='none';
+  } else if(s.bubbleMode==='center'){
+    bubble.classList.add('tut-center');
+    var sz=s.centerSize||1;
+    bubble.classList.add('sz'+sz);
+    dim.classList.remove('hidden');
+    // 다른 아로나 얼굴 숨김
+    document.getElementById('tut-battle-arona').style.display='none';
+  } else if(s.bubbleMode==='arona-big'){
+    bubble.classList.add('tut-arona');
+    // highlight가 있으면 dim 유지 (배경 어둡게), 없으면 숨김
+    if(!s.highlight){
+      dim.classList.add('hidden');
+    }
+    // 아로나 이미지 바로 위에 배치
+    var aronaEl=document.getElementById('arona-face');
+    if(aronaEl){
+      aronaEl.classList.add('tutorial-highlight');
+      var ar=aronaEl.getBoundingClientRect();
+      bubble.style.left=ar.left+'px';
+      bubble.style.top=Math.max(10,ar.top-bubble.offsetHeight-12)+'px';
+    } else {
+      bubble.style.left='20px';bubble.style.top='50%';
+    }
+  } else if(s.bubbleMode==='battle-local'){
+    tutPositionBubble(bubble, targetEl, s.position||'right');
+  } else if(s.interact && !s.bubbleMode){
+    bubble.classList.add('tut-compact');
+  } else if(s.action==='waitClick' && s.target && !s.bubbleMode){
+    bubble.classList.add('tut-compact');
+  } else {
+    tutPositionBubble(bubble, targetEl, s.position||'bottom');
+  }
+
+  // hoverOnly: 상점 호버만 가능, 드래그/구매 불가
+  document.getElementById('ui-shop').classList.remove('tut-hover-only');
+  TUT.hoverOnly=!!s.hoverOnly;
+  if(s.hoverOnly){
+    document.getElementById('ui-shop').classList.add('tut-hover-only');
+  }
+
+  // onEnter 콜백
+  if(s.onEnter) s.onEnter();
+}
+
+function tutPositionBubble(bubble, targetEl, pos){
+  // 기본 클래스 유지 (tut-compact, tut-arona 등은 호출 전에 처리됨)
+  bubble.classList.remove('arrow-top','arrow-left','arrow-right');
+  if(!targetEl){
+    bubble.style.left='50%';bubble.style.top='50%';
+    bubble.style.transform='translate(-50%,-50%)';
+    return;
+  }
+  var rect=targetEl.getBoundingClientRect();
+  var bh=200; // 말풍선 예상 높이
+  var vw=window.innerWidth, vh=window.innerHeight;
+  bubble.style.transform='';
+
+  // 아래쪽 대상 → 말풍선을 위에
+  if(pos==='top' || rect.top > vh*0.5){
+    var topPos=rect.top-bh-14;
+    if(topPos<10){ // 위로 잘리면 아래로
+      bubble.classList.add('arrow-top');
+      bubble.style.top=(rect.bottom+14)+'px';
+    } else {
+      bubble.style.top=topPos+'px';
+    }
+    bubble.style.left=Math.min(Math.max(12,rect.left),vw-400)+'px';
+  }
+  // 위쪽 대상 → 말풍선을 아래에
+  else if(pos==='bottom' || rect.bottom < vh*0.5){
+    bubble.classList.add('arrow-top');
+    bubble.style.top=(rect.bottom+14)+'px';
+    bubble.style.left=Math.min(Math.max(12,rect.left),vw-400)+'px';
+  }
+  // 오른쪽
+  else if(pos==='right'){
+    bubble.classList.add('arrow-left');
+    bubble.style.left=Math.min(rect.right+14,vw-400)+'px';
+    bubble.style.top=Math.max(12,rect.top)+'px';
+  }
+}
+
+function tutNext(){
+  TUT.step++;
+  tutShowStep();
+}
+
+function tutEnd(){
+  TUT.active=false; TUT.step=0; TUT.waitingFor=null;
+  G.isTutorial=false;
+  var overlay=document.getElementById('tutorial-overlay');
+  overlay.classList.remove('active');
+  document.getElementById('tutorial-bubble').style.display='none';
+  document.getElementById('tut-skip').style.display='none';
+  document.getElementById('tut-battle-arona').style.display='none';
+  document.getElementById('tut-center-arona').style.display='none';
+  document.getElementById('ui-shop').classList.remove('tut-hover-only');
+  var prev=document.querySelectorAll('.tutorial-highlight,.tutorial-interact');
+  for(var i=0;i<prev.length;i++){prev[i].classList.remove('tutorial-highlight');prev[i].classList.remove('tutorial-interact');}
+  // 타이틀로 돌아가기
+  document.getElementById('battle-overlay').classList.remove('active');
+  var go=document.getElementById('game-over');if(go)go.classList.remove('active');
+  var sf2=document.getElementById('schale-frame');sf2.style.backgroundImage="url('../img/UI/wallpaper01.jpg')";sf2.style.backgroundSize='cover';sf2.style.backgroundPosition='center';
+  fadeSwitch(document.getElementById('game-screen'),document.getElementById('title-screen'));
+}
+
+// 튜토리얼 중 게임 이벤트 감지
+var _origContinueBattle=continueBattle;
+continueBattle=function(){
+  _origContinueBattle();
+  if(TUT.active){
+    if(TUT.waitingFor==='continue'){
+      TUT.waitingFor=null;
+      // 2턴 진입 시 상점 세팅 + 골드 6
+      if(G.turn===2){
+        setTimeout(function(){
+          G.players[0].stone=6;
+          tutSetShop(['mari','mari','momoi','chinatsu']);
+          renderAll();
+          tutNext();
+        },300);
+      } else {
+        setTimeout(function(){tutNext();},300);
+      }
+    } else {
+      setTimeout(function(){tutShowStep();},400);
+    }
+  }
+};
+
+// 보드 변경 감지: renderAll 후 체크
+var _origRenderAll=renderAll;
+renderAll=function(){
+  _origRenderAll();
+  if(TUT.active){
+    var s=TUTORIAL_STEPS[TUT.step];
+    if(s&&s.action==='waitBoard'&&s.check&&s.check()){
+      setTimeout(function(){tutNext();},300);
+    }
+  }
+};
+
+// 버튼 클릭 감지: startBattle
+function tutCleanupForBattle(){
+  document.getElementById('tutorial-overlay').classList.remove('active');
+  var els=document.querySelectorAll('.tutorial-highlight,.tutorial-interact');
+  for(var i=0;i<els.length;i++){els[i].classList.remove('tutorial-highlight');els[i].classList.remove('tutorial-interact');}
+  document.getElementById('tutorial-dim').classList.remove('hidden');
+}
+
+var _origStartBattle=startBattle;
+startBattle=function(){
+  if(TUT.active){
+    var s=TUTORIAL_STEPS[TUT.step];
+    if(s&&(s.action==='waitClick'||s.action==='waitFight')){
+      TUT.step++;
+    }
+    tutCleanupForBattle();
+  }
+  _origStartBattle();
+};
+document.getElementById('btn-fight').addEventListener('click',startBattle);
+
+// 리롤 클릭 감지
+var _origDoReroll=doReroll;
+doReroll=function(){
+  // 튜토리얼 중 골드 최소 4 보장 (업그레이드 비용 확보)
+  if(TUT.active && G.players[0].stone<=4){G.players[0].stone=4;renderAll();return;}
+  _origDoReroll();
+  if(TUT.active){
+    if(G.players[0].stone<4) G.players[0].stone=4;
+    var s=TUTORIAL_STEPS[TUT.step];
+    if(s&&s.action==='waitClick'&&s.target==='#btn-reroll'){
+      setTimeout(function(){tutNext();},300);
+    }
+  }
+};
+
+// 래핑 후 이벤트 바인딩
+document.getElementById('btn-reroll').addEventListener('click',doReroll);
+document.getElementById('btn-continue').addEventListener('click',continueBattle);
+
+function renderRoster(){
+  var kwFilter=document.getElementById('filter-kw').value;
+  var abilFilter=document.getElementById('filter-abil').value;
+  var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','아비도스','산해경','총학생회'];
+  var SCHOOL_EN={'게헨나':'Gehenna','트리니티':'Trinity','밀레니엄':'Millennium','백귀야행':'Hyakkiyako','아비도스':'Abydos','산해경':'Shanhaijing','총학생회':'General Student Council'};
+  var bySchool={};
+  SCHOOL_ORDER.forEach(function(s){bySchool[s]=[];});
+  CHARS.forEach(function(c){
+    if(c.tier<1||c.tier>6||bySchool[c.school]===undefined) return;
+    if(kwFilter&&(!c.kw||c.kw.indexOf(kwFilter)===-1)) return;
+    if(abilFilter){
+      var id=c.id,has=false;
+      if(abilFilter==='bc') has=!!BC_IDS[id];
+      else if(abilFilter==='dr') has=!!DR_IDS[id];
+      else if(abilFilter==='soc') has=!!SOC_IDS[id];
+      else if(abilFilter==='surv') has=!!SURV_IDS[id]||(c.kw&&c.kw.indexOf('survive')!==-1);
+      else if(abilFilter==='passive') has=!!PASSIVE_IDS[id];
+      else if(abilFilter==='pre') has=!!PRE_IDS[id]||(c.kw&&c.kw.indexOf('preemptive')!==-1);
+      if(!has) return;
+    }
+    bySchool[c.school].push(c);
+  });
+  var html='';
+  SCHOOL_ORDER.forEach(function(school){
+    var chars=bySchool[school];
+    if(!chars||!chars.length)return;
+    var icon=SCHOOL_ICONS[school]||'';
+    html+='<div class="roster-school-hdr">';
+    if(icon)html+='<img src="'+icon+'" class="roster-school-icon">';
+    html+='<span class="roster-school-name">'+(SCHOOL_EN[school]||school)+'</span></div>';
+    var byTier={};
+    chars.forEach(function(c){if(!byTier[c.tier])byTier[c.tier]=[];byTier[c.tier].push(c);});
+    html+='<div class="roster-cards-flow">';
+    for(var t=1;t<=6;t++){
+      var tc=byTier[t];
+      if(!tc||!tc.length)continue;
+      html+='<div class="roster-tier-chunk">';
+      html+='<div class="rt-sep">'+t+'T</div>';
+      var _unlockedAby=getUnlockedAbydos();
+      tc.forEach(function(c){
+        var isLocked=c.locked&&_unlockedAby.indexOf(c.id)===-1;
+        if(isLocked){
+          html+='<div class="roster-card rt'+c.tier+'" data-locked="1" style="opacity:0.6;cursor:pointer">';
+          html+='<img class="r-portrait" src="../img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
+          html+='<div class="r-name" style="color:#666">???</div>';
+        } else {
+          html+='<div class="roster-card rt'+c.tier+'" data-rid="'+c.id+'">';
+          if(c.img)html+='<img class="r-portrait" src="../img/'+c.img+'" onerror="this.style.display=\'none\'">';
+          html+='<div class="r-name">'+c.name+'</div>';
+        }
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  // 7성 유니크 섹션 (필터 미적용 시에만 표시, 학교 섹션 뒤 / 액션카드 앞)
+  if(!kwFilter&&!abilFilter){
+    var _t7All=(typeof HIDDEN_CHARS!=="undefined"?HIDDEN_CHARS:[]).slice();
+    if(_t7All.length>0){
+      var _t7Recruited=(typeof getRecruitedTier7==='function')?getRecruitedTier7():[];
+      // 관리자 계정: 모든 7성 공개
+      var _t7AdminBypass=(window._babgLogin&&window._babgLogin.name==='preesoul');
+      html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(192,48,208,0.45);padding-top:12px">';
+      html+='<span class="roster-school-name" style="color:#e070ff">⭐ 7-Star Unique</span></div>';
+      var _t7BySchool={};
+      _t7All.forEach(function(c){if(!_t7BySchool[c.school])_t7BySchool[c.school]=[];_t7BySchool[c.school].push(c);});
+      // 학교별 청크를 tier chunk 스타일로 한 줄에 flex-wrap 방식으로 배치 (게헨나/트리니티/밀레니엄은 자연스럽게 별도 줄, 나머지 3개는 남은 공간에 붙음)
+      html+='<div class="roster-cards-flow">';
+      SCHOOL_ORDER.forEach(function(school){
+        var _list=_t7BySchool[school];
+        if(!_list||!_list.length)return;
+        var _icon=SCHOOL_ICONS[school]||'';
+        html+='<div class="roster-tier-chunk">';
+        html+='<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:30px;height:232px;border-right:2px solid #6a3080;padding-right:4px">';
+        if(_icon)html+='<img src="'+_icon+'" style="width:18px;height:18px;filter:invert(1);opacity:0.9">';
+        html+='<span style="font-size:11px;color:#cda0e8;font-weight:700;line-height:1.15;text-align:center;writing-mode:horizontal-tb">'+school.split("").join("<br>")+'</span>';
+        html+='</div>';
+        _list.forEach(function(c){
+          var _isLocked=!_t7AdminBypass && _t7Recruited.indexOf(c.id)===-1;
+          if(_isLocked){
+            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
+            html+='<img class="r-portrait" src="../img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
+            html+='<div class="r-name" style="color:#666">???</div>';
+          } else {
+            html+='<div class="roster-card" data-rid="'+c.id+'" style="border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
+            if(c.img)html+='<img class="r-portrait" src="../img/'+c.img+'" onerror="this.style.display=\'none\'">';
+            html+='<div class="r-name" style="color:#e070ff">'+c.name+'</div>';
+          }
+          html+='</div>';
+        });
+        // 백귀야행 7성 액션카드: 백화요란 계승전
+        if(school==='백귀야행'){
+          var _showdownLocked=!_t7AdminBypass && (_t7Recruited.indexOf('hkyk_showdown')===-1);
+          if(_showdownLocked){
+            html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
+            html+='<img class="r-portrait" src="../img/Hidden_card.png" style="filter:grayscale(1);object-fit:contain;transition:filter 0.3s">';
+            html+='<div class="r-name" style="color:#666">???</div>';
+            html+='</div>';
+          } else {
+            html+='<div class="roster-card" data-showdown="1" style="border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4);background:linear-gradient(135deg,#2a1832,#1a1028);cursor:pointer">';
+            html+='<img class="r-portrait" src="../img/unique/HKYK_Showdown.png" style="object-fit:contain" onerror="this.style.display=\'none\'">';
+            html+='<div class="r-name" style="color:#e070ff">Hyakkaryouran Succession</div>';
+            html+='</div>';
+          }
+        }
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+  }
+  // 액션카드 섹션 (필터 미적용 시에만 표시)
+  if(!kwFilter&&!abilFilter&&typeof SPELLS!=='undefined'){
+    html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(251,191,36,0.3);padding-top:12px">';
+    html+='<span class="roster-school-name" style="color:#fbbf24">📜 Spell Cards</span></div>';
+    var spellsByTier={};
+    SPELLS.forEach(function(s){if(!spellsByTier[s.tier])spellsByTier[s.tier]=[];spellsByTier[s.tier].push(s);});
+    html+='<div class="roster-cards-flow">';
+    for(var t=1;t<=6;t++){
+      var ts=spellsByTier[t];
+      if(!ts||!ts.length)continue;
+      html+='<div class="roster-tier-chunk">';
+      html+='<div class="rt-sep">'+t+'T</div>';
+      ts.forEach(function(s){
+        html+='<div class="roster-card rt-spell" data-spell-id="'+s.id+'" style="border-color:#c8a010;background:linear-gradient(135deg,#2a2a1a,#1a2a2a)">';
+        if(s.img)html+='<img class="r-portrait" src="'+s.img+'" onerror="this.style.display=\'none\'">';
+        html+='<div class="r-name" style="color:#fbbf24">'+s.name+'</div>';
+        html+='<div style="font-size:9px;color:#888;text-align:center">'+s.cost+' Cost</div>';
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  }
+  if(!html) html='<div style="color:#4a6880;padding:60px;text-align:center;font-size:14px">No matching students found.</div>';
+  var content=document.getElementById('roster-content');
+  content.innerHTML=html;
+  content.querySelectorAll('.roster-card').forEach(function(el){
+    var bid=el.getAttribute('data-rid');
+    if(bid){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        var rect=el.getBoundingClientRect();showTooltip(bid,rect,null);
+      });
+    }
+    if(el.getAttribute('data-locked')){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        hideTooltip();
+        var tip=getTooltipEl();if(!tip)return;
+        tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">This student is locked.<br><span style="color:#c4b5fd">Unlock them through quests!</span></div></div>';
+        tip.style.display='block';tip.classList.add('visible');
+        var rect=el.getBoundingClientRect();
+        var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+        var left=rect.left+rect.width/2-tipW/2;
+        var top=rect.top-tipH-8;
+        if(top<0)top=rect.bottom+8;
+        if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+        tip.style.left=left+'px';tip.style.top=top+'px';
+      });
+    }
+    if(el.getAttribute('data-t7locked')){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        hideTooltip();
+        var tip=getTooltipEl();if(!tip)return;
+        tip.innerHTML='<div style="padding:14px 16px;max-width:240px;text-align:center"><div style="font-size:13px;color:#c0d0e0;line-height:1.6">A <span style="color:#ffd700">7-Star Unique</span> you haven\'t recruited yet.<br><span style="color:#ffd700">Recruit them to reveal!</span></div></div>';
+        tip.style.display='block';tip.classList.add('visible');
+        var rect=el.getBoundingClientRect();
+        var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+        var left=rect.left+rect.width/2-tipW/2;
+        var top=rect.top-tipH-8;
+        if(top<0)top=rect.bottom+8;
+        if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+        tip.style.left=left+'px';tip.style.top=top+'px';
+      });
+    }
+    if(el.getAttribute('data-showdown')){
+      el.addEventListener('click',function(e){
+        e.stopPropagation();
+        hideTooltip();
+        var tip=getTooltipEl();if(!tip)return;
+        var spDesc=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.desc:'Give Yukari/Renge/Kikyou/Nagusa +10/+10, Shield, Rapid Fire, Reborn');
+        var spCost=(typeof HKYK_SHOWDOWN_SPELL!=='undefined'?HKYK_SHOWDOWN_SPELL.cost:3);
+        tip.innerHTML='<div style="padding:12px">'
+          +'<div style="font-size:16px;font-weight:700;color:#e070ff;margin-bottom:4px">Hyakkaryouran Succession Battle</div>'
+          +'<div style="font-size:12px;color:#888;margin-bottom:8px">'+spCost+' Cost · Tier 7 Spell Card</div>'
+          +'<img src="../img/unique/HKYK_Showdown.png" style="width:100%;max-width:240px;height:auto;object-fit:contain;border-radius:8px;margin-bottom:8px;display:block" onerror="this.style.display=\'none\'">'
+          +'<div class="tt-ability" style="border-left:3px solid #e070ff;margin-bottom:6px;padding:6px 8px">'
+          +'<div style="color:#e070ff;font-weight:700;font-size:13px;margin-bottom:4px">⭐ Hidden</div>'
+          +'<div style="color:#d0c0e0;font-size:12px;line-height:1.5">Appears when Yukari, Renge, Kikyou, and Nagusa are all in SCHALE,<br>and each student\'s succession counter is 7 or higher.</div>'
+          +'</div>'
+          +'<div style="font-size:13px;color:#d0d8e0;white-space:pre-line">'+spDesc+'</div>'
+          +'<div style="margin-top:6px;font-size:11px;color:#fca5a5">Once per game</div>'
+          +'</div>';
+        tip.style.display='block';tip.classList.add('visible');
+        // 옆에 띄우는 로직 (showTooltip과 동일)
+        var rect=el.getBoundingClientRect();
+        var ttW=tip.offsetWidth||280;
+        var ttH=tip.offsetHeight||400;
+        var x=rect.right+12;
+        var y=rect.top+(rect.height/2)-(ttH/2);
+        if(x+ttW>window.innerWidth) x=rect.left-ttW-12;
+        if(x<0) x=8;
+        if(y+ttH>window.innerHeight) y=window.innerHeight-ttH-8;
+        if(y<0) y=8;
+        tip.style.left=x+'px';tip.style.top=y+'px';
+      });
+    }
+  });
+  // 액션카드 클릭 → 툴팁
+  content.querySelectorAll('.rt-spell').forEach(function(el){
+    var sid=el.getAttribute('data-spell-id');
+    el.addEventListener('click',function(e){
+      e.stopPropagation();
+      var sp=null;for(var i=0;i<SPELLS.length;i++){if(SPELLS[i].id===sid){sp=SPELLS[i];break;}}
+      if(!sp)return;
+      hideTooltip();
+      var tip=getTooltipEl();if(!tip)return;
+      tip.innerHTML='<div style="padding:12px;max-width:280px"><div style="font-size:16px;font-weight:700;color:#fbbf24;margin-bottom:6px">'+sp.name+'</div><div style="font-size:12px;color:#888;margin-bottom:8px">'+sp.cost+' Cost · Tier '+sp.tier+'</div>'+(sp.img?'<img src="'+sp.img+'" style="width:160px;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block">':'')+'<div style="font-size:13px;color:#d0d8e0;white-space:pre-line">'+sp.desc+'</div>'+(sp.once?'<div style="margin-top:6px;font-size:11px;color:#fca5a5">Once per game</div>':'')+'</div>';
+      tip.style.display='block';tip.classList.add('visible');
+      var rect2=el.getBoundingClientRect();
+      var tipW=tip.offsetWidth,tipH=tip.offsetHeight;
+      var left=rect2.left+rect2.width/2-tipW/2;
+      var top=rect2.top-tipH-8;
+      if(top<0)top=rect2.bottom+8;
+      if(left<0)left=4;if(left+tipW>window.innerWidth)left=window.innerWidth-tipW-4;
+      tip.style.left=left+'px';tip.style.top=top+'px';
+    });
+  });
+}
+function showRoster(){
+  document.getElementById('filter-kw').value='';
+  document.getElementById('filter-abil').value='';
+  renderRoster();
+  document.getElementById('roster-overlay').classList.add('active');
+}
+
+// 튜토리얼 버튼 & 건너뛰기
+// 로그인 상태 복원
+(function(){
+  var saved=localStorage.getItem('babg_login');
+  if(saved){
+    try{
+      var d=JSON.parse(saved);
+      document.getElementById('login-name').value=d.name||'';
+      // 자동 로그인
+      doLogin(d.name,true);
+    }catch(e){}
+  }
+})();
+function doLogin(name,auto){
+  if(!name){document.getElementById('login-status').textContent='Please enter your name.';return;}
+  document.getElementById('login-status').textContent='Checking...';
+  fetchRecords(function(err,data,sha){
+    if(err){
+      // 네트워크 오류 시 오프라인 모드
+      window._babgLogin={name:name};
+      localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+      goToMainMenu(name);
+      return;
+    }
+    if(!data.players)data.players={};
+    if(!data.players[name]){
+      // 신규 유저: 자동 가입
+      data.players[name]={records:[],points:0};
+      saveRecords(data,sha);
+    }
+    window._babgLogin={name:name};
+    localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
+    // 서버에서 7성 영입 이력 병합 (크로스 디바이스 동기화)
+    try{if(typeof syncRecruitedTier7FromPd==='function')syncRecruitedTier7FromPd(data.players[name]);}catch(e){}
+    goToMainMenu(name);
+    try{checkLoginQuest();}catch(e){}
+  });
+}
+function goToMainMenu(name){
+  document.getElementById('welcome-msg').textContent='Welcome, Sensei '+name+'!';
+  document.getElementById('login-screen').classList.remove('active');
+  document.getElementById('title-screen').classList.add('active');
+}
+document.getElementById('btn-login').addEventListener('click',function(){
+  var name=document.getElementById('login-name').value.trim();
+  doLogin(name,false);
+});
+document.getElementById('login-name').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-login').click();});
+document.getElementById('btn-logout').addEventListener('click',function(){
+  window._babgLogin=null;
+  localStorage.removeItem('babg_login');
+  document.getElementById('title-screen').classList.remove('active');
+  document.getElementById('login-screen').classList.add('active');
+  document.getElementById('login-name').value='';
+  document.getElementById('login-status').textContent='';
+});
+// 계정 초기화
+document.getElementById('btn-reset-account').addEventListener('click',function(){
+  if(!window._babgLogin||!window._babgLogin.name)return;
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center';
+  var box=document.createElement('div');
+  box.style.cssText='background:#1a2a3a;border:2px solid #ef4444;border-radius:12px;padding:24px;text-align:center;max-width:320px';
+  box.innerHTML='<div style="color:#ef4444;font-size:18px;font-weight:700;margin-bottom:12px">Reset Account</div>'
+    +'<div style="color:#c0d0e0;font-size:13px;margin-bottom:20px">All records, Eligma, unlocked cards, and quests<br>will be reset. This cannot be undone.<br><br>Are you sure?</div>'
+    +'<div style="display:flex;gap:12px;justify-content:center">'
+    +'<button id="reset-yes" style="padding:8px 24px;border:none;border-radius:8px;font-size:14px;font-weight:bold;background:#ef4444;color:#fff;cursor:pointer">Yes</button>'
+    +'<button id="reset-no" style="padding:8px 24px;border:none;border-radius:8px;font-size:14px;font-weight:bold;background:#475569;color:#fff;cursor:pointer">No</button>'
+    +'</div>';
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  document.getElementById('reset-no').addEventListener('click',function(){overlay.remove();});
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
+  document.getElementById('reset-yes').addEventListener('click',function(){
+    var name=window._babgLogin.name;
+    fetchRecords(function(err,data,sha){
+      if(err||!data){alert('Server connection failed');overlay.remove();return;}
+      if(data.players&&data.players[name]){
+        data.players[name]={records:[],points:0,questState:null,unlockedAbydos:[]};
+      }
+      saveRecords(data,sha,function(e){
+        if(e){alert('Server save failed. Reset was not applied.');overlay.remove();return;}
+        setUnlockedAbydos([]);
+        localStorage.removeItem('babg_save');
+        overlay.remove();
+        alert('Account has been reset.');
+        document.getElementById('btn-logout').click();
+      });
+    });
+  });
+});
+// 전적 기록 버튼
+document.getElementById('btn-records').addEventListener('click',function(){
+  playSfx('ui_open',0.4);
+  document.getElementById('records-overlay').style.display='block';
+  renderRecords();
+});
+document.getElementById('btn-records-close').addEventListener('click',function(){
+  playSfx('ui_close',0.4);
+  document.getElementById('records-overlay').style.display='none';
+});
+// 퀘스트 버튼
+document.getElementById('btn-quests').addEventListener('click',function(){
+  if(!window._babgLogin||!window._babgLogin.name){alert('Please enter a nickname.');return;}
+  playSfx('ui_open',0.4);
+  document.getElementById('quest-overlay').style.display='block';
+  renderQuestUI();
+});
+document.getElementById('btn-quest-close').addEventListener('click',function(){
+  playSfx('ui_close',0.4);
+  document.getElementById('quest-overlay').style.display='none';
+});
+function showUnlockPopup(name,img,school){
+  var overlay=document.getElementById('unlock-popup-overlay');
+  var inner=document.getElementById('unlock-popup-inner');
+  document.getElementById('unlock-popup-img').src='../img/'+img;
+  var hl='<span style="color:#ffd700;font-weight:700">';
+  document.getElementById('unlock-popup-text').innerHTML=hl+name+'</span> from '+hl+(school||'')+'</span> has been unlocked!<br><span style="font-size:14px;color:#c4b5fd">Check the Student Roster!</span>';
+  inner.style.animation='none';inner.offsetHeight;inner.style.animation='unlockSpin 0.7s ease-out forwards';
+  overlay.style.display='flex';
+  try{var snd=new Audio('../sfx/victory_screen_start.ogg');snd.volume=0.5;snd.play();}catch(e){}
+  var pc=document.getElementById('unlock-particles');pc.innerHTML='';
+  var emojis=['🎉','⭐','🎊','✨','🥳','💫','🎆','🌟'];
+  for(var i=0;i<20;i++){
+    var span=document.createElement('span');
+    span.textContent=emojis[i%emojis.length];
+    span.style.cssText='position:absolute;font-size:'+(20+Math.random()*16)+'px;bottom:-40px;left:'+(Math.random()*100)+'%;animation:particleRise '+(1.2+Math.random()*1.5)+'s ease-out '+(Math.random()*0.5)+'s forwards;';
+    pc.appendChild(span);
+  }
+}
+function renderQuestUI(){
+  var el=document.getElementById('quest-content');
+  var pts=document.getElementById('quest-points');
+  el.innerHTML='Loading...';
+  fetchRecords(function(err,data,sha){
+    if(err||!data){el.innerHTML='Unable to load data.';return;}
+    var name=window._babgLogin.name;
+    if(!data.players||!data.players[name]){el.innerHTML='No game records. Please play a game first.';pts.textContent='';return;}
+    var pd=data.players[name];
+    initQuestState(pd);
+    // 서버 해금 목록을 localStorage에 동기화 (서버 기준으로 교체)
+    setUnlockedAbydos(pd.unlockedAbydos||[]);
+    window._enigmaPointsCache=pd.points||0;
+    pts.innerHTML='<img src="../img/Icon/quest_stone.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px">'+(pd.points||0)+' Eligma';
+    var html='';
+    // 반복 퀘스트
+    if(pd.questState.repeat&&pd.questState.repeat.quests){
+      html+='<h3 style="color:#22c55e;margin:12px 0 8px">Repeating Quests <span style="font-size:11px;color:#6a8a9e">(Infinite)</span></h3>';
+      var rq=pd.questState.repeat.quests;
+      for(var i=0;i<rq.length;i++){
+        var q=rq[i];var def=null;for(var j=0;j<REPEAT_QUESTS.length;j++){if(REPEAT_QUESTS[j].id===q.id){def=REPEAT_QUESTS[j];break;}}
+        if(!def)continue;
+        var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+        html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid #2a3a4a">';
+        html+='<div style="flex:1"><div style="font-weight:600;color:#e0eaf4">'+def.name+'</div>';
+        html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:#22c55e;border-radius:4px"></div></div>';
+        html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+' Eligma)</div></div></div>';
+      }
+    }
+    // 일일 퀘스트
+    html+='<h3 style="color:#60a5fa;margin:12px 0 8px">Daily Quests <span style="font-size:11px;color:#6a8a9e">(Refreshes daily, 1 swap per day)</span></h3>';
+    var dq=pd.questState.daily.quests;
+    var canReroll=!pd.questState.daily.rerolled;
+    for(var i=0;i<dq.length;i++){
+      var q=dq[i];var def=null;for(var j=0;j<DAILY_QUESTS.length;j++){if(DAILY_QUESTS[j].id===q.id){def=DAILY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#3b82f6')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+' Eligma)</div></div>';
+      if(!done&&canReroll) html+='<button class="btn btn-stone" onclick="doRerollQuest('+i+',\''+sha+'\')" style="font-size:10px;padding:2px 8px"><span class="btn-inner">🔄</span></button>';
+      html+='</div>';
+    }
+    // 주간 퀘스트
+    html+='<h3 style="color:#a78bfa;margin:16px 0 8px">Weekly Quests <span style="font-size:11px;color:#6a8a9e">(Refreshes every Monday)</span></h3>';
+    var wq=pd.questState.weekly.quests;
+    for(var i=0;i<wq.length;i++){
+      var q=wq[i];var def=null;for(var j=0;j<WEEKLY_QUESTS.length;j++){if(WEEKLY_QUESTS[j].id===q.id){def=WEEKLY_QUESTS[j];break;}}
+      if(!def)continue;
+      var pct=Math.min(100,Math.floor(q.progress/def.target*100));
+      var done=q.completed;
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;margin:4px 0;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid '+(done?'#22c55e':'#2a3a4a')+'">';
+      html+='<div style="flex:1"><div style="font-weight:600;color:'+(done?'#22c55e':'#e0eaf4')+'">'+def.name+(done?' ✅':'')+'</div>';
+      html+='<div style="background:#0a1520;border-radius:4px;height:6px;margin-top:4px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(done?'#22c55e':'#a78bfa')+';border-radius:4px"></div></div>';
+      html+='<div style="font-size:10px;color:#6a8a9e;margin-top:2px">'+q.progress+'/'+def.target+' ('+def.points+' Eligma)</div></div>';
+      html+='</div>';
+    }
+    el.innerHTML=html;
+    // sha 저장 (reroll용)
+    window._questSha=sha;window._questData=data;
+  });
+}
+function doRerollQuest(idx,sha){
+  if(!window._babgLogin)return;
+  fetchRecords(function(err,data,latestSha){
+    if(err||!data)return;
+    var pd=data.players[window._babgLogin.name];
+    if(!pd||!pd.questState)return;
+    if(pd.questState.daily.rerolled){alert('Already swapped today.');return;}
+    var active=pd.questState.daily.quests.map(function(q){return q.id;});
+    var pool=DAILY_QUESTS.filter(function(q){return active.indexOf(q.id)===-1;});
+    if(pool.length===0)return;
+    var pick=pool[Math.floor(Math.random()*pool.length)];
+    pd.questState.daily.quests[idx]={id:pick.id,progress:0,completed:false};
+    pd.questState.daily.rerolled=true;
+    saveRecords(data,latestSha,function(){renderQuestUI();});
+  });
+}
+document.getElementById('btn-tutorial').addEventListener('click',startTutorial);
+document.getElementById('tut-skip').addEventListener('click',tutEnd);
+document.getElementById('btn-roster').addEventListener('click',function(){playSfx('roster_open',0.4);showRoster();});
+document.getElementById('btn-roster-close').addEventListener('click',function(){
+  playSfx('roster_close',0.4);
+  hideTooltip();
+  document.getElementById('roster-overlay').classList.remove('active');
+});
+document.getElementById('roster-overlay').addEventListener('click',function(e){
+  if(!e.target.closest('.roster-card')) hideTooltip();
+});
+document.getElementById('filter-kw').addEventListener('change',renderRoster);
+document.getElementById('filter-abil').addEventListener('change',renderRoster);
+</script>
+</body>
+</html>
