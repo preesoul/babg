@@ -5219,74 +5219,6 @@
       "pw": "88",
       "records": [
         {
-          "date": "2026-04-07T15:04:38",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미노리(성난 군중)",
-              "baseId": "red_winter_minori",
-              "atk": 4,
-              "hp": 10,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Revolution.png",
-              "school": "붉은겨울"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 7,
-              "hp": 7,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "히나",
-              "baseId": "hina",
-              "atk": 23,
-              "hp": 13,
-              "tier": 6,
-              "kw": [
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Hina.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 36,
-              "hp": 40,
-              "tier": 1,
-              "kw": [
-                "survive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "유즈(메이드)",
-              "baseId": "yuzu",
-              "atk": 21,
-              "hp": 19,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T15:19:42",
           "placement": 1,
           "turn": 16,
@@ -5925,21 +5857,51 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-09T02:24:40",
+          "placement": 8,
+          "turn": 9,
+          "tier": 1,
+          "board": [
+            {
+              "name": "주리",
+              "baseId": "juri",
+              "atk": 5,
+              "hp": 3,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Juri.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "주리",
+              "baseId": "juri",
+              "atk": 2,
+              "hp": 2,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Juri.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 34,
+      "points": 36,
       "questState": {
         "daily": {
           "date": "2026-04-09",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
+              "progress": 9,
               "completed": false
             },
             {
