@@ -6235,26 +6235,106 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-09T01:02:34",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "에이미",
+              "baseId": "eimi",
+              "atk": 13,
+              "hp": 14,
+              "tier": 3,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Eimi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "마시로(수영복)",
+              "baseId": "mashiro",
+              "atk": 17,
+              "hp": 5,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "pierce",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mashiro_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 15,
+              "hp": 17,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 24,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "taunt",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 24,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "taunt",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 26,
+      "points": 43,
       "questState": {
         "daily": {
           "date": "2026-04-09",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -6270,8 +6350,8 @@
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "hidden_win",
