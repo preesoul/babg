@@ -6581,30 +6581,25 @@ function rerollDailyQuest(questIndex) {
   });
 }
 
-// ===== 전enemy record 시스템 (GitHub API) =====
-var RECORDS_PAT='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';
-var RECORDS_REPO='preesoul/babg';
-var RECORDS_FILE='records.json';
+// ===== Record System (Worker Proxy) =====
+var RECORDS_API='https://babg-records.preesoul.workers.dev';
 
 function fetchRecords(cb){
-  fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
-    headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json'}
-  }).then(function(r){
-    if(!r.ok) throw new Error('GitHub API '+r.status);
+  fetch(RECORDS_API).then(function(r){
+    if(!r.ok) throw new Error('API '+r.status);
     return r.json();
   }).then(function(data){
-    var content=JSON.parse(decodeURIComponent(escape(atob(data.content))));
-    cb(null,content,data.sha);
+    cb(null,data.content,data.sha);
   }).catch(function(e){cb(e,null,null);});
 }
 
 function saveRecords(data,sha,cb){
-  fetch('https://api.github.com/repos/'+RECORDS_REPO+'/contents/'+RECORDS_FILE,{
-    method:'PUT',
-    headers:{'Authorization':'token '+RECORDS_PAT,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-    body:JSON.stringify({message:'record update',content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha:sha})
+  fetch(RECORDS_API,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({content:data,sha:sha})
   }).then(function(r){
-    if(!r.ok) throw new Error('GitHub API '+r.status);
+    if(!r.ok) throw new Error('API '+r.status);
     return r.json();
   }).then(function(res){
     if(cb)cb(null,res);
