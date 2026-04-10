@@ -50,6 +50,12 @@ export default {
         if (!res.ok) throw new Error(`GitHub API ${res.status}`);
         const data = await res.json();
         const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+        // pw 필드 제거 (평문 비밀번호 노출 방지)
+        if (content.players) {
+          for (const name in content.players) {
+            delete content.players[name].pw;
+          }
+        }
         return new Response(JSON.stringify({ content, sha: data.sha }), {
           headers: { ...cors, 'Content-Type': 'application/json' },
         });
