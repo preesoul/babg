@@ -12,14 +12,18 @@ canvas{border:2px solid #2a2a4a;border-radius:8px;margin-bottom:8px}
 button{background:#2a1a3a;color:#ff8888;border:1px solid #3a2a4a;padding:5px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600}
 button:hover{background:#3a2a4a}
 button.primary{background:linear-gradient(135deg,#ff4444,#cc2222);color:#fff;border:none}
-.dcard{background:#1a1a2e;border:2px solid #2a2a3a;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;min-width:100px}
-.dcard:hover{border-color:#ff4444}
-.dcard.selected{border-color:#4fc3f7;background:#1a2a4a}
-.dcard.placed{border-color:#66bb6a;opacity:0.5;cursor:default}
-.dcard .dc-name{font-weight:700;font-size:11px}
-.dcard .dc-tier{font-size:9px;padding:1px 4px;border-radius:3px;color:#fff}
-.dcard.runner-card{border-color:#4fc3f7;background:#0a1a2a}
-.dcard.runner-card.selected{background:#1a3a5a}
+.dcard{background:#1a1a2e;border:2px solid #2a2a3a;border-radius:10px;padding:6px;font-size:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;width:80px;transition:all 0.15s}
+.dcard:hover{border-color:#ff4444;transform:translateY(-2px)}
+.dcard.selected{border-color:#4fc3f7;background:#1a2a4a;transform:translateY(-4px);box-shadow:0 4px 12px rgba(79,195,247,0.3)}
+.dcard.placed{border-color:#66bb6a;opacity:0.4;cursor:default;transform:none}
+.dcard .dc-img{width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid #333;background:#111}
+.dcard .dc-img img{width:100%;height:100%;object-fit:cover}
+.dcard .dc-name{font-weight:700;font-size:10px;color:#ddd}
+.dcard .dc-tier{font-size:8px;padding:1px 6px;border-radius:8px;color:#fff}
+.dcard .dc-stats{font-size:8px;color:#888}
+.dcard.runner-card{border-color:#ffcc00;background:#1a1a0a}
+.dcard.runner-card.selected{background:#2a2a1a;border-color:#ffcc00;box-shadow:0 4px 12px rgba(255,204,0,0.3)}
+.dcard.runner-card .dc-img{border-color:#ffcc00}
 #log{width:960px;height:160px;background:#0a0a14;border:1px solid #1a1a2a;border-radius:6px;padding:8px;overflow-y:auto;font-size:10px;line-height:1.6;font-family:monospace}
 .legend{display:flex;gap:12px;font-size:10px;color:#666;margin-bottom:6px}
 .legend span{display:flex;align-items:center;gap:3px}
@@ -237,11 +241,31 @@ function startDeploy(){
   deployPlaced=[];
   deployRunnerPlaced=false;
 
-  // 배치 가능 칸: 우측 6열, 비어있는 칸
+  // 배치 포인트: 우측 진영에서 8개 슬롯 자동 선정
   deploySlots=[];
-  for(var r=1;r<ROWS-1;r++){
-    for(var c=COLS-8;c<COLS-1;c++){
-      if(map[r][c]===EMPTY)deploySlots.push({col:c,row:r});
+  var slotCandidates=[];
+  for(var r=2;r<ROWS-2;r++){
+    for(var c=COLS-7;c<COLS-2;c++){
+      if(map[r][c]===EMPTY)slotCandidates.push({col:c,row:r});
+    }
+  }
+  // 고르게 분포되도록 8개 선택 (격자 분할)
+  var numSlots=8;
+  var gridR=3,gridC=3; // 3x3 격자에서 8개
+  for(var gr=0;gr<gridR;gr++){
+    for(var gc=0;gc<gridC;gc++){
+      if(deploySlots.length>=numSlots)break;
+      var targetR=2+Math.floor((gr+0.5)*(ROWS-4)/gridR);
+      var targetC=COLS-7+Math.floor((gc+0.5)*5/gridC);
+      // 가장 가까운 빈 칸 찾기
+      var best=null,bestD=999;
+      slotCandidates.forEach(function(s){
+        var d=Math.abs(s.row-targetR)+Math.abs(s.col-targetC);
+        if(d<bestD&&!deploySlots.find(function(ds){return ds.col===s.col&&ds.row===s.row})){
+          bestD=d;best=s;
+        }
+      });
+      if(best)deploySlots.push(best);
     }
   }
 
@@ -263,12 +287,18 @@ function updateDeployCards(){
   var html='';
   // 러너 카드
   var rCls='dcard runner-card'+(deploySelected==='runner'?' selected':'')+(deployRunnerPlaced?' placed':'');
-  html+='<div class="'+rCls+'" onclick="'+(deployRunnerPlaced?'':'selectDeployCard(\'runner\'')+')">🏃 <span class="dc-name">러너</span></div>';
+  html+='<div class="'+rCls+'" onclick="'+(deployRunnerPlaced?'':'selectDeployCard(\'runner\'')+')"><div class="dc-img" style="border-color:#ffcc00;background:#1a1a0a;display:flex;align-items:center;justify-content:center;font-size:24px">🏃</div><span class="dc-name" style="color:#ffcc00">러너</span></div>';
   // 스톰퍼 카드
   deployPool.forEach(function(d,i){
     var cls='dcard'+(deploySelected===i?' selected':'')+(d.placed?' placed':'');
     var tierBg=TIER_COLORS[d.card.tier]||'#888';
-    html+='<div class="'+cls+'" onclick="'+(d.placed?'':'selectDeployCard('+i+')')+'"><span class="dc-tier" style="background:'+tierBg+'">T'+d.card.tier+'</span><span class="dc-name">'+d.card.name+'</span><span style="color:#888">ATK'+d.card.atk+' DEF'+d.card.def+'</span></div>';
+    var imgSrc=IMG_BASE+d.card.img;
+    html+='<div class="'+cls+'" onclick="'+(d.placed?'':'selectDeployCard('+i+')')+'">'
+      +'<div class="dc-img" style="border-color:'+tierBg+'"><img src="'+imgSrc+'" onerror="this.style.display=\'none\'"></div>'
+      +'<span class="dc-tier" style="background:'+tierBg+'">'+TIER_NAMES[d.card.tier]+'</span>'
+      +'<span class="dc-name">'+d.card.name+'</span>'
+      +'<span class="dc-stats">ATK'+d.card.atk+' DEF'+d.card.def+'</span>'
+      +'</div>';
   });
   el.innerHTML=html;
 }
@@ -292,14 +322,20 @@ cv.addEventListener('click',function(e){
   var rect=cv.getBoundingClientRect();
   var mx=(e.clientX-rect.left)*(W/rect.width);
   var my=(e.clientY-rect.top)*(H/rect.height);
-  var col=Math.floor(mx/T),row=Math.floor(my/T);
+  // 가장 가까운 슬롯 찾기 (20px 이내)
+  var bestSlot=null,bestDist=20;
+  deploySlots.forEach(function(s){
+    var sx=s.col*T+T/2,sy=s.row*T+T/2;
+    var d=Math.sqrt((mx-sx)*(mx-sx)+(my-sy)*(my-sy));
+    if(d<bestDist){bestDist=d;bestSlot=s}
+  });
+  if(!bestSlot)return;
+  var col=bestSlot.col,row=bestSlot.row;
 
-  // 배치 가능 칸인지 확인
-  var valid=deploySlots.find(function(s){return s.col===col&&s.row===row});
-  if(!valid)return;
   // 이미 다른 유닛이 있는지 확인
   var occupied=deployPlaced.find(function(p){return p.col===col&&p.row===row});
-  if(occupied)return;
+  var runnerHere=deployRunnerPlaced&&deployRunnerPlaced.col===col&&deployRunnerPlaced.row===row;
+  if(occupied||runnerHere)return;
 
   if(deploySelected==='runner'){
     deployRunnerPlaced={col:col,row:row};
@@ -769,19 +805,30 @@ function aiStomper(u){
   }else{
     // 공격형 AI
     var enemyStompersLeft=units.filter(function(e){return e.s!==u.s&&e.type==='stomper'&&!e.ko}).length;
+    // 수세 판정: 아군이 적보다 2명+ 적거나, 아군 1명만 남음
+    var desperate=(allyStompersAlive<=1)||(allyStompersAlive<=enemyStompersLeft-1);
 
     if(enemyStompersLeft===0&&enemyRunner&&!enemyRunner.ko){
-      // 적 스톰퍼 전멸 → 전원 러너 직행 (시야 무시, 위치 직접 추적)
+      // 적 스톰퍼 전멸 → 러너 직행
       tx=enemyRunner.x;ty=enemyRunner.y;
-      u.facing=Math.atan2(ty-u.y,tx-u.x); // 러너 방향으로 시야 고정
-    }else if(seesRunner){
+      u.facing=Math.atan2(ty-u.y,tx-u.x);
+    }else if(desperate&&enemyRunner&&!enemyRunner.ko){
+      // ★ 수세: 정면승부 포기, 러너만 집요하게 추적
       tx=enemyRunner.x;ty=enemyRunner.y;
-    }else if(visEnemies.length>0){
+      u.facing=Math.atan2(ty-u.y,tx-u.x);
+      // 러너를 태운 스톰퍼에게 밀치기 → 러너 떨어뜨리기
+      if(enemyRunner.carriedBy&&!enemyRunner.carriedBy.ko&&dist(u,enemyRunner.carriedBy)<50){
+        if(u.abCD<=0&&u.abilities.indexOf('smash')>=0) trySmash(u);
+      }
+    }else if(seesRunner&&!desperate){
+      tx=enemyRunner.x;ty=enemyRunner.y;
+    }else if(visEnemies.length>0&&!desperate){
       var closest=visEnemies.sort(function(a,b){return dist(u,a)-dist(u,b)})[0];
       tx=closest.x;ty=closest.y;
     }else if(enemyRunner&&!enemyRunner.ko){
-      tx=enemyRunner.x+(Math.random()-0.5)*80;
-      ty=enemyRunner.y+(Math.random()-0.5)*80;
+      // 러너 방향 수색 (수세 시 직행, 평시 약간 흔들림)
+      tx=enemyRunner.x+(desperate?0:(Math.random()-0.5)*80);
+      ty=enemyRunner.y+(desperate?0:(Math.random()-0.5)*80);
     }else{
       tx=W/2+(Math.random()-0.5)*W*0.6;
       ty=H/2+(Math.random()-0.5)*H*0.6;
@@ -936,13 +983,17 @@ function checkCapture(){
       u.combatCD=Math.max(u.combatCD,1); // 포획 중 다른 행동 제한
     });
 
-    var grdPower=2; // 러너 기본 저항
+    var grdPower=0.3; // 러너 혼자서는 거의 저항 불가
     guards.forEach(function(u){
       grdPower+=u.c.grd*0.25*(0.8+Math.random()*0.4);
     });
     // 러너가 태워져 있으면 운반자 DEF도 저항
     if(runner.carriedBy&&!runner.carriedBy.ko){
       grdPower+=runner.carriedBy.c.def*0.2;
+    }
+    // 수비가 전혀 없으면 포획 게이지 폭주 (거의 즉시 포획)
+    if(guards.length===0&&!runner.carriedBy){
+      capPower*=3;
     }
 
     var delta=capPower-grdPower;
@@ -1061,10 +1112,11 @@ function applyFrame(idx){
   // 맵 복원
   for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++)map[r][c]=f.map[r][c];
 
-  // 유닛 복원 (렌더용)
-  units=f.units;
+  // 유닛 복원 (렌더용) — 정지 상태이므로 shake 제거
+  units=f.units.map(function(u){var o={};for(var k in u)o[k]=u[k];o.shake=0;return o});
   winner=f.winner;
   tick=f.tick;
+  screenShake=0;
 
   // 로그 복원
   logEl.innerHTML=f.logs.join('');
@@ -1171,34 +1223,48 @@ function draw(){
     cx.fillStyle='rgba(255,68,68,0.3)';cx.font='bold 40px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
     cx.fillText('?',W*0.22,H*0.35);cx.fillText('?',W*0.15,H*0.65);cx.fillText('?',W*0.3,H*0.5);
 
-    // 배치 가능 칸 하이라이트
-    deploySlots.forEach(function(s){
+    // 배치 슬롯: 빈 슬롯은 점선 원, 채워진 슬롯은 캐릭터 표시
+    deploySlots.forEach(function(s,si){
+      var sx=s.col*T+T/2,sy=s.row*T+T/2;
       var occupied=deployPlaced.find(function(p){return p.col===s.col&&p.row===s.row});
-      if(occupied)return;
-      if(deployRunnerPlaced&&deployRunnerPlaced.col===s.col&&deployRunnerPlaced.row===s.row)return;
-      cx.fillStyle=deploySelected!==null?'rgba(79,195,247,0.15)':'rgba(79,195,247,0.06)';
-      cx.fillRect(s.col*T,s.row*T,T,T);
-      if(deploySelected!==null){
-        cx.strokeStyle='rgba(79,195,247,0.3)';cx.strokeRect(s.col*T,s.row*T,T,T);
+      var isRunner=deployRunnerPlaced&&deployRunnerPlaced.col===s.col&&deployRunnerPlaced.row===s.row;
+
+      if(isRunner){
+        // 러너 배치됨
+        cx.fillStyle='#1a1a0a';
+        cx.beginPath();cx.arc(sx,sy,14,0,Math.PI*2);cx.fill();
+        cx.shadowColor='#ffcc00';cx.shadowBlur=8;
+        cx.strokeStyle='#ffcc00';cx.lineWidth=2.5;
+        cx.beginPath();cx.arc(sx,sy,14,0,Math.PI*2);cx.stroke();
+        cx.shadowBlur=0;
+        cx.font='16px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+        cx.fillText('🏃',sx,sy);
+      }else if(occupied){
+        // 스톰퍼 배치됨 — 이미지 원
+        var img=getImg(occupied.card.img);
+        var bdr=TIER_COLORS[occupied.card.tier]||'#888';
+        cx.save();cx.beginPath();cx.arc(sx,sy,18,0,Math.PI*2);cx.clip();
+        if(img)cx.drawImage(img,sx-18,sy-18,36,36);
+        else{cx.fillStyle='#1a4a8a';cx.fillRect(sx-18,sy-18,36,36)}
+        cx.restore();
+        cx.strokeStyle='#44cc66';cx.lineWidth=2.5;
+        cx.beginPath();cx.arc(sx,sy,18,0,Math.PI*2);cx.stroke();
+        cx.fillStyle='#fff';cx.font='bold 8px sans-serif';cx.textAlign='center';cx.textBaseline='top';
+        cx.fillText(occupied.card.name,sx,sy+20);
+      }else{
+        // 빈 슬롯 — 점선 원
+        var isActive=deploySelected!==null;
+        cx.setLineDash([4,4]);
+        cx.strokeStyle=isActive?'rgba(79,195,247,0.6)':'rgba(79,195,247,0.25)';
+        cx.lineWidth=isActive?2:1.5;
+        cx.beginPath();cx.arc(sx,sy,16,0,Math.PI*2);cx.stroke();
+        cx.setLineDash([]);
+        // 슬롯 번호
+        cx.fillStyle=isActive?'rgba(79,195,247,0.5)':'rgba(79,195,247,0.15)';
+        cx.font='bold 10px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+        cx.fillText(si+1,sx,sy);
       }
     });
-
-    // 배치된 유닛 표시
-    deployPlaced.forEach(function(p){
-      cx.fillStyle=TIER_COLORS[p.card.tier]||'#888';
-      cx.beginPath();cx.arc(p.col*T+T/2,p.row*T+T/2,14,0,Math.PI*2);cx.fill();
-      cx.fillStyle='#fff';cx.font='bold 9px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
-      cx.fillText(p.card.name.substring(0,3),p.col*T+T/2,p.row*T+T/2);
-    });
-
-    // 배치된 러너 표시
-    if(deployRunnerPlaced){
-      cx.fillStyle='#1a3a5a';
-      cx.beginPath();cx.arc(deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2,10,0,Math.PI*2);cx.fill();
-      cx.strokeStyle='#4fc3f7';cx.lineWidth=2;
-      cx.beginPath();cx.arc(deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2,10,0,Math.PI*2);cx.stroke();
-      cx.font='12px sans-serif';cx.fillText('🏃',deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2);
-    }
     return; // 배치 모드에서는 유닛/시야 안 그림
   }
 
