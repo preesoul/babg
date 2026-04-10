@@ -4,7 +4,7 @@
 const REPO = 'preesoul/babg';
 const FILE = 'records.json';
 const API_BASE = `https://api.github.com/repos/${REPO}/contents/${FILE}`;
-const RAW_URL = `https://raw.githubusercontent.com/${REPO}/main/${FILE}`;
+const RAW_URL = `https://api.github.com/repos/${REPO}/contents/${FILE}`;
 const ALLOWED_ORIGINS = [
   'https://preesoul.github.io',
   'http://localhost:3333',
@@ -53,9 +53,9 @@ export default {
         const meta = await metaRes.json();
         const sha = meta.sha;
 
-        // Raw 파일 직접 다운로드 (인코딩 문제 없음)
+        // API raw media type으로 직접 다운로드 (인코딩 문제 없음)
         const rawRes = await fetch(RAW_URL, {
-          headers: { 'Authorization': `token ${pat}`, 'User-Agent': 'babg-worker' },
+          headers: { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3.raw', 'User-Agent': 'babg-worker' },
         });
         if (!rawRes.ok) throw new Error(`GitHub Raw ${rawRes.status}`);
         const content = await rawRes.json();
