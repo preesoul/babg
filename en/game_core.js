@@ -542,7 +542,7 @@ var SPELLS = [
   {id:'school_visit',name:'School Visit',cost:2,tier:5,desc:'Reroll with only selected school students',target:'select_school',img:'../img/spell/school_visit.png',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'Sensei\'s Command',cost:7,tier:5,desc:'All allies +5/+5 (triggers twice)',target:'auto',img:'../img/spell/sensei.png',
-    effect:function(G){var p=G.players[0];var ab=getAyumuBonus();for(var r=0;r<2;r++){for(var i=0;i<p.board.length;i++){p.board[i].atk+=5+ab;p.board[i].hp+=5+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5+ab;logBuff(p.board[i],'Sensei's Command',5+ab,5+ab);}}}},
+    effect:function(G){var p=G.players[0];var ab=getAyumuBonus();for(var r=0;r<2;r++){for(var i=0;i<p.board.length;i++){p.board[i].atk+=5+ab;p.board[i].hp+=5+ab;p.board[i].maxHp=(p.board[i].maxHp||p.board[i].hp)+5+ab;logBuff(p.board[i],'Sensei\'s Command',5+ab,5+ab);}}}},
   // ===== New Spell Cards =====
   {id:'higher_body',name:'Upper Body Focus',cost:1,tier:1,desc:'select student +3/+1',target:'select_ally',img:'../img/spell/higher_body.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var ab=getAyumuBonus();p.board[idx].atk+=3+ab;p.board[idx].hp+=1+ab;p.board[idx].maxHp=(p.board[idx].maxHp||p.board[idx].hp)+1+ab;logBuff(p.board[idx],'Upper Body Focus',3+ab,1+ab);return true;}},
@@ -556,7 +556,7 @@ var SPELLS = [
     effect:function(G){if(Math.random()<0.33){var p=G.players[0];var cands=[];for(var i=0;i<CHARS.length;i++){if(CHARS[i].tier===p.tier&&G.pool[CHARS[i].id]>0)cands.push(CHARS[i]);}if(cands.length===0)return true;cands.sort(function(){return Math.random()-0.5;});showDiscoverCustom(cands.slice(0,3));return true;}return true;}},
   {id:'revive_standby',name:'Revive Standby',cost:2,tier:3,desc:'Grant Reborn to selected student',target:'select_ally',img:'../img/spell/Momoi_revive.jpg',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'reborn');return true;}},
-  {id:'on_duty',name:'Who Visited Most?',cost:4,tier:4,desc:'Discover the most common school's student!',target:'auto',img:'../img/spell/on_duty.png',
+  {id:'on_duty',name:'Who Visited Most?',cost:4,tier:4,desc:'Discover the most common school\'s student!',target:'auto',img:'../img/spell/on_duty.png',
     effect:function(G){var p=G.players[0];var sc={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;sc[s]=(sc[s]||0)+1;}var best=null,bc=0;for(var s in sc){if(sc[s]>bc){bc=sc[s];best=s;}}if(!best)return false;var cands=[];for(var i=0;i<CHARS.length;i++){if(CHARS[i].school===best&&CHARS[i].tier<=p.tier&&G.pool[CHARS[i].id]>0)cands.push(CHARS[i]);}if(cands.length===0)return false;cands.sort(function(){return Math.random()-0.5;});showDiscoverCustom(cands.slice(0,3));return true;}},
   {id:'get_set_go',name:'Get, Set, Go!',cost:5,tier:4,desc:'+8/+8 to 1 random per school',target:'auto',img:'../img/spell/get_set_go.jpg',
     effect:function(G){var p=G.players[0];var ab=getAyumuBonus();var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];p.board[pick].atk+=8+ab;p.board[pick].hp+=8+ab;p.board[pick].maxHp=(p.board[pick].maxHp||p.board[pick].hp)+8+ab;logBuff(p.board[pick],'Get, Set, Go!',8+ab,8+ab);}return true;}},
@@ -3316,7 +3316,7 @@ function triggerSOC(u, mySide, otherSide, log) {
         var _t=otherSide[i],_rm=[],_kp=[];
         for(var _k=0;_k<_t.kw.length;_k++){if(_t.kw[_k]==='preemptive')_kp.push(_t.kw[_k]);else _rm.push(KW_LABELS[_t.kw[_k]]||_t.kw[_k]);}
         _t.kw=_kp;_t._abilitiesStripped=true;
-        if(_rm.length>0)log.push({cls:'kill',text:'[Battle Start] Seminar: '+_t.name+''s ability removed: '+_rm.join(', ')});
+        if(_rm.length>0)log.push({cls:'kill',text:'[Battle Start] Seminar: '+_t.name+'\'s ability removed: '+_rm.join(', ')});
       }
     }
     // opponent all ATK/HP swap
@@ -3669,7 +3669,7 @@ function _doDR(unit, mySide, otherSide, log) {
         log.push({cls:'soc',text:'[Deathrattle] '+unit.name+' → Fanchan summon! ('+pc.atk+'/'+pc.hp+')'});
       }
     } else {
-      log.push({cls:'soc',text:'[Deathrattle] '+unit.name+': No other allies — couldn't summon Fanchan!'});
+      log.push({cls:'soc',text:'[Deathrattle] '+unit.name+': No other allies — couldn\'t summon Fanchan!'});
     }
   }
   else if(id==='chinatsu'){
@@ -3964,7 +3964,7 @@ function _doDR(unit, mySide, otherSide, log) {
       } else {
         var pick=hkykBC[Math.floor(Math.random()*hkykBC.length)];
         triggerSOC_battlecry_inner(pick,mySide,log);
-        log.push({cls:'soc',text:'[Deathrattle] '+unit.name+': '+pick.name+''s Battlecry triggered!'});
+        log.push({cls:'soc',text:'[Deathrattle] '+unit.name+': '+pick.name+'\'s Battlecry triggered!'});
       }
     }
   }
@@ -4201,7 +4201,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(isCombatDefense&&dst.school==='Trinity'&&dst._mySide&&dst.baseId!=='trinity_seia'){
       for(var _sv=0;_sv<dst._mySide.length;_sv++){
         if(dst._mySide[_sv].alive&&dst._mySide[_sv].baseId==='trinity_seia'&&dst._mySide[_sv]!==dst){
-          log2.push({cls:'shield',text:dst.name+': Evaded by Seia's foresight!'});
+          log2.push({cls:'shield',text:dst.name+': Evaded by Seia\'s foresight!'});
           return {blocked:true,overflow:0};
         }
       }
@@ -4215,7 +4215,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
           if(hasKw(_arisuProxy,'shield')){
             _arisuProxy.kw.splice(_arisuProxy.kw.indexOf('shield'),1);
             log2.push({cls:'soc',text:'[Passive] '+dst.name+': '+_arisuProxy.name+'takes the hit instead!'});
-            log2.push({cls:'shield',text:_arisuProxy.name+''s Shield is broken!'});
+            log2.push({cls:'shield',text:_arisuProxy.name+'\'s Shield is broken!'});
             return {blocked:true,overflow:0,_keiRedirect:true};
           }
           log2.push({cls:'soc',text:'[Passive] '+dst.name+': '+_arisuProxy.name+'takes the damage instead!'});
@@ -4243,7 +4243,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
     if(hasKw(dst,'shield')){
       dst.kw.splice(dst.kw.indexOf('shield'),1);
-      log2.push({cls:'shield',text:dst.name+''s Shield is broken!'});
+      log2.push({cls:'shield',text:dst.name+'\'s Shield is broken!'});
       return {blocked:true,overflow:0};
     } else {
       var hpBefore=dst.hp;
@@ -4263,7 +4263,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
       if(hasKw(src,'poison')&&dmg>=1&&dst.hp>0&&!dst.poisonImmune&&!dst.abilityImmune){
         dst.hp=0;dst._poisonKilled=true;
-        log2.push({cls:'kill',text:src.name+''s Venom! '+dst.name+' instant kill!'});
+        log2.push({cls:'kill',text:src.name+'\'s Venom! '+dst.name+' instant kill!'});
       }
       var overflow=dmg-hpBefore;
       return {blocked:false,overflow:overflow>0?overflow:0};
@@ -4358,7 +4358,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         if(!hasKw(unit,kk)){addKw(unit,kk);copied.push(KW_LABELS[kk]||kk);}
       }
       if(copied.length>0){
-        log2.push({cls:'soc',text:'[Survive] '+unit.name+': '+hitBy.name+''s ability copied! ('+copied.join(', ')+')'});
+        log2.push({cls:'soc',text:'[Survive] '+unit.name+': '+hitBy.name+'\'s ability copied! ('+copied.join(', ')+')'});
         // Yuuka 있으면 Yuukaalso granted (golden: Millennium all)
         var targets=[];
         if(unit.isSkin){
@@ -4403,7 +4403,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     target.kw=keepKw;
     // Deathrattle·Battle Start 등 ability 등록 무효화
     target._abilitiesStripped=true;
-    if(removed.length>0) log2.push({cls:'kill',text:'[Preemptive] '+target.name+''s ability removed: '+removed.join(', ')});
+    if(removed.length>0) log2.push({cls:'kill',text:'[Preemptive] '+target.name+'\'s ability removed: '+removed.join(', ')});
   }
 
   function triggerPreemptive(attacker,target,defArr,atkArr,log2){
@@ -4432,7 +4432,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(attacker.isSkin&&target.kw&&target.kw.length>0){
         var rmIdx=Math.floor(Math.random()*target.kw.length);
         var rmKw=target.kw.splice(rmIdx,1)[0];
-        log2.push({cls:'kill',text:'[Preemptive] '+attacker.name+': '+target.name+' 's '+(KW_LABELS[rmKw]||rmKw)+' remove!'});
+        log2.push({cls:'kill',text:'[Preemptive] '+attacker.name+': '+target.name+'\'s '+(KW_LABELS[rmKw]||rmKw)+' remove!'});
       }
       return false;
     }
@@ -4488,7 +4488,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(target.kw&&target.kw.length>0){
         var removed=target.kw.map(function(k){return KW_LABELS[k]||k;}).join(', ');
         target.kw=[];
-        log2.push({cls:'kill',text:'[Preemptive] '+attacker.name+': '+target.name+''s all effects removed! ('+removed+')'});
+        log2.push({cls:'kill',text:'[Preemptive] '+attacker.name+': '+target.name+'\'s all effects removed! ('+removed+')'});
       }
       stripAbilities(target,log2);
     }
@@ -4521,7 +4521,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         var _sw=sweepers[sw2];
         var swLog=[];
         var swDmg=_sw.atk+_sw.hp;
-        swLog.push({cls:'hit',text:_sw.name+''s Self-destruct! ('+_sw.atk+'+'+_sw.hp+'='+swDmg+' damage)'});
+        swLog.push({cls:'hit',text:_sw.name+'\'s Self-destruct! ('+_sw.atk+'+'+_sw.hp+'='+swDmg+' damage)'});
         dealHit(_sw,target,swLog,swDmg);
         checkSurvive(target,defArr,swLog,_sw);
         resolveDeath(target,defArr,atkArr,swLog,_sw);
@@ -4545,7 +4545,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         var _akDmg=attacker.atk;
         if(hasKw(_enemy,'shield')){
           _enemy.kw.splice(_enemy.kw.indexOf('shield'),1);
-          akLog.push({cls:'shield',text:_enemy.name+''s Shield ignored!'});
+          akLog.push({cls:'shield',text:_enemy.name+'\'s Shield ignored!'});
         }
         _enemy.hp-=_akDmg;
         akLog.push({cls:'hit',text:attacker.name+' '+_enemy.name+'to '+_akDmg+' damage! (HP:'+Math.max(0,_enemy.hp)+')'});
@@ -4609,7 +4609,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
           if(atkOrigBoard[_ob].baseId===target.baseId){atkOrigBoard[_ob].stripped=true;break;}
         }
       }
-      log2.push({cls:'kill',text:'[Chise] '+target.name+''s ability removed!'+(isGolden?' (permanent)':'')});
+      log2.push({cls:'kill',text:'[Chise] '+target.name+'\'s ability removed!'+(isGolden?' (permanent)':'')});
     } else {
       var kwIdx=target.kw.indexOf(pick);
       if(kwIdx!==-1){
@@ -4624,7 +4624,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
             }
           }
         }
-        log2.push({cls:'kill',text:'[Chise] '+target.name+' 's '+(KW_LABELS[pick]||pick)+' remove!'+(isGolden?' (permanent)':'')});
+        log2.push({cls:'kill',text:'[Chise] '+target.name+'\'s '+(KW_LABELS[pick]||pick)+' remove!'+(isGolden?' (permanent)':'')});
       }
     }
   }
@@ -4639,7 +4639,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       // Haruka counter: 5회(skin 10회) 다회 counter
       if(defender.baseId==='haruka'&&defender.alive&&!defender._abilitiesStripped){
         var counterHits=defender.isSkin?10:5;
-        log2.push({cls:'hit',text:defender.name+''s counter! '+counterHits+'hits!'});
+        log2.push({cls:'hit',text:defender.name+'\'s counter! '+counterHits+'hits!'});
         for(var _ch=0;_ch<counterHits;_ch++){
           if(!attacker.alive||attacker.hp<=0)break;
           dealHit(defender,attacker,log2);
@@ -4774,7 +4774,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
             msHits=msMin+Math.floor(Math.random()*(msMax-msMin+1));
           }
           stepMultiHits=msHits;
-          stepLog.push({cls:'hit',text:attacker.name+''s Preemptive! '+msHits+'hit attack!'});
+          stepLog.push({cls:'hit',text:attacker.name+'\'s Preemptive! '+msHits+'hit attack!'});
           var msKillCount=0;
           for(var ms=0;ms<msHits;ms++){
             if(!target.alive||target.hp<=0)break;
@@ -4816,7 +4816,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         // Self-destruct: 공+체 합산 attack 후 defeat
         else if(hasKw(attacker,'selfdestruct')){
           var sdDmg=attacker.atk+attacker.hp;
-          stepLog.push({cls:'hit',text:attacker.name+''s Self-destruct! ('+attacker.atk+'+'+attacker.hp+'='+sdDmg+' damage)'});
+          stepLog.push({cls:'hit',text:attacker.name+'\'s Self-destruct! ('+attacker.atk+'+'+attacker.hp+'='+sdDmg+' damage)'});
           var hitResult=dealDamage(attacker,atkArr2,target,defArr2,stepLog,false,sdDmg);
           // Self-destruct unit 강제 death
           if(attacker.alive){
@@ -4839,13 +4839,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
             // Sena: overflow damage로 allied all 회복
             if(attacker.baseId==='sena'){
               var healAmt=attacker.isSkin?hitResult.overflow*2:hitResult.overflow;
-              stepLog.push({cls:'shield',text:attacker.name+''s Pierce! allied all HP +'+healAmt+' healed!'});
+              stepLog.push({cls:'shield',text:attacker.name+'\'s Pierce! allied all HP +'+healAmt+' healed!'});
               for(var h=0;h<atkArr2.length;h++){if(atkArr2[h].alive)atkArr2[h].hp+=healAmt;}
             } else {
               // Arisu: overflow damage 양옆 전달
               var aliveD=getAlive(defArr2);var tIdx=-1;
               for(var k=0;k<aliveD.length;k++)if(aliveD[k]===target)tIdx=k;
-              stepLog.push({cls:'hit',text:attacker.name+''s Pierce! overflow damage '+hitResult.overflow+'!'});
+              stepLog.push({cls:'hit',text:attacker.name+'\'s Pierce! overflow damage '+hitResult.overflow+'!'});
               if(tIdx>0&&aliveD[tIdx-1])dealDamage(attacker,atkArr2,aliveD[tIdx-1],defArr2,stepLog,true,hitResult.overflow);
               if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
             }
@@ -5129,7 +5129,7 @@ function startBattle() {
       } else if(chosen.result==='win'){
         if(chosen._makeupInstakill){
           opp.hp=0;
-          chosen.damageText='Victory! Make-Up Work Club's Passive: '+opp.name+''s HP set to 0!';
+          chosen.damageText='Victory! Make-Up Work Club\'s Passive: '+opp.name+'\'s HP set to 0!';
         } else {
           var dmg=0;for(var i=0;i<chosen.survivorsA.length;i++)dmg+=chosen.survivorsA[i].tier;
           dmg+=p.tier;if(dmg>dmgCap)dmg=dmgCap;opp.hp-=dmg;
@@ -5578,7 +5578,7 @@ function runBattleCoinPhase(snap,callback){
             }
             order=_newOrder;calcResult.order=_newOrder;
             var logEl2=document.getElementById('battle-log');
-            if(logEl2){var asunaMsg=document.createElement('div');asunaMsg.style.cssText='text-align:center;color:#fbbf24;font-weight:700;font-size:13px;padding:2px';asunaMsg.textContent='⭐ Asuna's priority!';logEl2.appendChild(asunaMsg);logEl2.scrollTop=logEl2.scrollHeight;}
+            if(logEl2){var asunaMsg=document.createElement('div');asunaMsg.style.cssText='text-align:center;color:#fbbf24;font-weight:700;font-size:13px;padding:2px';asunaMsg.textContent='⭐ Asuna\'s priority!';logEl2.appendChild(asunaMsg);logEl2.scrollTop=logEl2.scrollHeight;}
           }
         }
         // 동률 detect → 재토스 또는 draw
@@ -6713,7 +6713,7 @@ function renderRecords(){
       otherPinned.sort(function(){return Math.random()-0.5;});
       otherPinned=otherPinned.slice(0,10);
       html+='<div style="margin-top:24px;border-top:2px solid rgba(255,255,255,0.1);padding-top:16px">';
-      html+='<div style="font-size:15px;font-weight:700;color:#a78bfa;margin-bottom:12px">Other Senseis' Records</div>';
+      html+='<div style="font-size:15px;font-weight:700;color:#a78bfa;margin-bottom:12px">Other Senseis Records</div>';
       for(var i=0;i<otherPinned.length;i++) html+=_renderRecordCard(otherPinned[i],false,-1);
       html+='</div>';
     }
