@@ -2436,8 +2436,8 @@ document.getElementById('btn-continue').addEventListener('click',continueBattle)
 function renderRoster(){
   var kwFilter=document.getElementById('filter-kw').value;
   var abilFilter=document.getElementById('filter-abil').value;
-  var SCHOOL_ORDER=['게헨나','트리니티','밀레니엄','백귀야행','아비도스','산해경','총학생회'];
-  var SCHOOL_EN={'게헨나':'Gehenna','트리니티':'Trinity','밀레니엄':'Millennium','백귀야행':'Hyakkiyako','아비도스':'Abydos','산해경':'Shanhaijing','총학생회':'General Student Council'};
+  var SCHOOL_ORDER=['Gehenna','Trinity','Millennium','Hyakkiyako','Abydos','Shanhaijing','GSC'];
+  var SCHOOL_EN={};
   var bySchool={};
   SCHOOL_ORDER.forEach(function(s){bySchool[s]=[];});
   CHARS.forEach(function(c){
@@ -2525,7 +2525,7 @@ function renderRoster(){
           html+='</div>';
         });
         // 백귀야행 7성 액션카드: 백화요란 계승전
-        if(school==='백귀야행'){
+        if(school==='Hyakkiyako'){
           var _showdownLocked=!_t7AdminBypass && (_t7Recruited.indexOf('hkyk_showdown')===-1);
           if(_showdownLocked){
             html+='<div class="roster-card" data-t7locked="1" style="opacity:0.6;cursor:pointer;border-color:#e070ff;box-shadow:0 0 10px rgba(224,112,255,0.4)">';
