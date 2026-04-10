@@ -49,7 +49,7 @@ export default {
         const res = await fetch(API_BASE, { headers: ghHeaders });
         if (!res.ok) throw new Error(`GitHub API ${res.status}`);
         const data = await res.json();
-        const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+        const content = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
         // pw 필드 제거 (평문 비밀번호 노출 방지)
         if (content.players) {
           for (const name in content.players) {
