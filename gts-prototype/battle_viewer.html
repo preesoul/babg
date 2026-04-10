@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>GTS Battle Viewer — City Map</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;padding:16px}
+h1{color:#ff4444;font-size:20px;letter-spacing:3px;margin-bottom:8px}
+canvas{border:2px solid #2a2a4a;border-radius:8px;margin-bottom:8px}
+.controls{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+button{background:#2a1a3a;color:#ff8888;border:1px solid #3a2a4a;padding:5px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600}
+button:hover{background:#3a2a4a}
+button.primary{background:linear-gradient(135deg,#ff4444,#cc2222);color:#fff;border:none}
+.dcard{background:#1a1a2e;border:2px solid #2a2a3a;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;min-width:100px}
+.dcard:hover{border-color:#ff4444}
+.dcard.selected{border-color:#4fc3f7;background:#1a2a4a}
+.dcard.placed{border-color:#66bb6a;opacity:0.5;cursor:default}
+.dcard .dc-name{font-weight:700;font-size:11px}
+.dcard .dc-tier{font-size:9px;padding:1px 4px;border-radius:3px;color:#fff}
+.dcard.runner-card{border-color:#4fc3f7;background:#0a1a2a}
+.dcard.runner-card.selected{background:#1a3a5a}
+#log{width:960px;height:160px;background:#0a0a14;border:1px solid #1a1a2a;border-radius:6px;padding:8px;overflow-y:auto;font-size:10px;line-height:1.6;font-family:monospace}
+.legend{display:flex;gap:12px;font-size:10px;color:#666;margin-bottom:6px}
+.legend span{display:flex;align-items:center;gap:3px}
+.leg-box{width:12px;height:12px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body>
+<h1>GTS BATTLE — CITY MAP</h1>
+<div class="legend">
+  <span><span class="leg-box" style="background:#3a3a4a"></span>건물</span>
+  <span><span class="leg-box" style="background:#1a3a5a"></span>강</span>
+  <span><span class="leg-box" style="background:#5a4a2a"></span>다리</span>
+  <span><span class="leg-box" style="background:#2a2a2a"></span>잔해</span>
+  <span><span class="leg-box" style="background:rgba(79,195,247,0.2)"></span>아군 시야</span>
+  <span><span class="leg-box" style="background:rgba(255,68,68,0.2)"></span>적 시야</span>
+</div>
+<canvas id="c" width="960" height="352"></canvas>
+<!-- 배치 UI (전투 시작 전) -->
+<div id="deploy-panel" style="width:960px;display:none;margin-bottom:8px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <span style="color:#ff8888;font-size:13px;font-weight:700" id="deploy-status">스톰퍼를 선택하고 맵에 배치하세요</span>
+    <div>
+      <button class="primary" onclick="finishDeploy()" id="btn-deploy-done" disabled>배치 완료 → 전투 개시</button>
+    </div>
+  </div>
+  <div id="deploy-cards" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+</div>
+<!-- 재생 컨트롤 (전투 중/후) -->
+<div id="play-panel" style="width:960px;display:none">
+  <div class="controls">
+    <button onclick="startDeploy()" style="font-size:11px">새 전투</button>
+    <button onclick="togglePlay()" id="btn-play">▶ 재생</button>
+    <span id="frame-label" style="color:#666;font-size:11px;min-width:60px">0 / 0</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+    <span style="color:#555;font-size:10px">진행도</span>
+    <div style="position:relative;flex:1;height:20px;cursor:pointer" id="timeline" onclick="seekTimeline(event)" onmousemove="if(event.buttons)seekTimeline(event)">
+      <div style="position:absolute;left:0;top:8px;width:100%;height:4px;background:#1a1a2a;border-radius:2px"></div>
+      <div id="tl-fill" style="position:absolute;left:0;top:8px;height:4px;background:#ff4444;border-radius:2px;width:0%;pointer-events:none"></div>
+      <div id="tl-thumb" style="position:absolute;top:4px;width:12px;height:12px;background:#ff4444;border-radius:50%;pointer-events:none;left:0%;transform:translateX(-50%)"></div>
+    </div>
+  </div>
+</div>
+<!-- 시작 버튼 (최초) -->
+<div id="start-panel" class="controls">
+  <button class="primary" onclick="startDeploy()">전투 시작</button>
+</div>
+<div id="log"></div>
+
+<script src="data.js"></script>
+<script>
+// ========== CONFIG ==========
+var W=960,H=352,T=16; // 타일 크기, 세로 좁게 (352/16=22 정수)
+var COLS=W/T,ROWS=H/T; // 60x22
+var cv=document.getElementById('c'),cx=cv.getContext('2d');
+var logEl=document.getElementById('log');
+
+// 타일 타입
+var EMPTY=0,BUILDING=1,RIVER=2,BRIDGE=3,RUBBLE=4;
+
+// ========== STATE ==========
+var map=[]; // 2D 타일 배열 [row][col]
+var units=[];
+var tick=0,winner=null,paused=false;
+
+// 이미지 캐시
+var IMG_BASE='../img/';
+var imgCache={};
+function getImg(filename){
+  if(!filename)return null;
+  if(imgCache[filename])return imgCache[filename].complete?imgCache[filename]:null;
+  var img=new Image();img.src=IMG_BASE+filename;imgCache[filename]=img;
+  return null;
+}
+// VFX 파티클
+var vfx=[];
+function addVfx(x,y,type,data){vfx.push({x:x,y:y,type:type,timer:0,maxTimer:20,data:data||{}})}
+var screenShake=0;
+
+function lg(s){logEl.innerHTML+=s+'<br>';logEl.scrollTop=9999}
+
+// ========== MAP GENERATION ==========
+function genMap(){
+  map=[];
+  for(var r=0;r<ROWS;r++){
+    map[r]=[];
+    for(var c=0;c<COLS;c++) map[r][c]=EMPTY;
+  }
+
+  // 밀집된 도시 블록 (많이, 작게)
+  for(var i=0;i<30;i++){
+    var bx=4+Math.floor(Math.random()*(COLS-10));
+    var by=1+Math.floor(Math.random()*(ROWS-4));
+    var bw=1+Math.floor(Math.random()*3);
+    var bh=1+Math.floor(Math.random()*2);
+    for(var r=by;r<by+bh&&r<ROWS-1;r++)
+      for(var c=bx;c<bx+bw&&c<COLS-1;c++)
+        map[r][c]=BUILDING;
+  }
+
+  // L자, ㄱ자 건물 (복잡한 형태)
+  for(var i=0;i<8;i++){
+    var ox=6+Math.floor(Math.random()*(COLS-14));
+    var oy=2+Math.floor(Math.random()*(ROWS-5));
+    var len=2+Math.floor(Math.random()*3);
+    var dir=Math.random()>0.5;
+    // 가로줄
+    for(var c=ox;c<ox+len&&c<COLS-1;c++) map[oy][c]=BUILDING;
+    // 꺾이는 세로줄
+    var bend=dir?1:-1;
+    for(var r=oy;r!==oy+bend*2&&r>=0&&r<ROWS;r+=bend) map[r][ox+len-1]=BUILDING;
+  }
+
+  // 좁은 골목길 (가로 3줄, 세로 4줄)
+  var alleyRows=[Math.floor(ROWS*0.25),Math.floor(ROWS*0.5),Math.floor(ROWS*0.75)];
+  alleyRows.forEach(function(r){
+    if(r>=ROWS)return;
+    for(var c=0;c<COLS;c++)map[r][c]=EMPTY;
+  });
+  var alleyCols=[Math.floor(COLS*0.15),Math.floor(COLS*0.38),Math.floor(COLS*0.62),Math.floor(COLS*0.85)];
+  alleyCols.forEach(function(c){
+    if(c>=COLS)return;
+    for(var r=0;r<ROWS;r++)map[r][c]=EMPTY;
+  });
+
+  // 강 (가로, 살짝 구불구불)
+  var riverBase=Math.floor(ROWS*0.5);
+  for(var c=0;c<COLS;c++){
+    var rr=riverBase+Math.round(Math.sin(c*0.15)*1.5);
+    if(rr>=0&&rr<ROWS)map[rr][c]=RIVER;
+  }
+
+  // 다리 4개
+  var bridgeCols=[Math.floor(COLS*0.15),Math.floor(COLS*0.38),Math.floor(COLS*0.62),Math.floor(COLS*0.85)];
+  bridgeCols.forEach(function(bc){
+    for(var r=0;r<ROWS;r++){
+      if(map[r][bc]===RIVER){map[r][bc]=BRIDGE;if(bc+1<COLS&&map[r][bc+1]===RIVER)map[r][bc+1]=BRIDGE}
+    }
+  });
+
+  // 스폰 지역 비우기 (좌=적 3칸, 우=아군 3칸)
+  for(var r=0;r<ROWS;r++){
+    for(var c=0;c<3;c++)map[r][c]=EMPTY;
+    for(var c=COLS-3;c<COLS;c++)map[r][c]=EMPTY;
+  }
+}
+
+function passable(r,c,isStomper){
+  if(r<0||r>=ROWS||c<0||c>=COLS)return false;
+  var t=map[r][c];
+  if(t===RIVER)return isStomper; // 스톰퍼는 강도 건널 수 있음 (거인)
+  if(t===BUILDING)return isStomper; // 스톰퍼는 건물 부수고 진행 가능
+  return true;
+}
+
+function destroyBuilding(r,c){
+  if(r>=0&&r<ROWS&&c>=0&&c<COLS&&map[r][c]===BUILDING){
+    map[r][c]=RUBBLE;
+  }
+}
+
+// ========== LOS (시야) ==========
+function hasLOS(x1,y1,x2,y2){
+  // 레이캐스트: 시작→끝 사이에 건물이 있으면 false
+  var dx=x2-x1,dy=y2-y1;
+  var dist=Math.sqrt(dx*dx+dy*dy);
+  var steps=Math.ceil(dist/8);
+  for(var i=1;i<steps;i++){
+    var t=i/steps;
+    var px=x1+dx*t,py=y1+dy*t;
+    var tc=Math.floor(px/T),tr=Math.floor(py/T);
+    if(tr>=0&&tr<ROWS&&tc>=0&&tc<COLS){
+      if(map[tr][tc]===BUILDING)return false;
+    }
+  }
+  return true;
+}
+
+function inVisionCone(unit,tx,ty){
+  var dx=tx-unit.x,dy=ty-unit.y;
+  var dist=Math.sqrt(dx*dx+dy*dy);
+  if(dist>unit.vRange)return false;
+  var angle=Math.atan2(dy,dx);
+  var diff=angleDiff(angle,unit.facing);
+  if(Math.abs(diff)>unit.vAngle/2)return false;
+  return hasLOS(unit.x,unit.y,tx,ty);
+}
+
+function angleDiff(a,b){
+  var d=a-b;
+  while(d>Math.PI)d-=Math.PI*2;
+  while(d<-Math.PI)d+=Math.PI*2;
+  return d;
+}
+
+// ========== DEPLOY (배치) ==========
+var phase='idle'; // idle, deploy, battle
+var deployPool=[]; // 배치 가능 스톰퍼 4장
+var deploySelected=null; // 현재 선택된 카드 인덱스
+var deploySlots=[]; // 배치 가능 칸 [{col,row}]
+var deployPlaced=[]; // 배치된 유닛 [{card,col,row}]
+var deployRunnerPlaced=false;
+
+function startDeploy(){
+  phase='deploy';
+  tick=0;winner=null;units=[];logEl.innerHTML='';frames=[];playing=false;
+  genMap();
+
+  // 랜덤 4명 선발
+  var pool=sh(STOMPERS.slice());
+  deployPool=pool.slice(0,4).map(function(c,i){
+    return{card:c,placed:false,idx:i};
+  });
+  deploySelected=null;
+  deployPlaced=[];
+  deployRunnerPlaced=false;
+
+  // 배치 가능 칸: 우측 6열, 비어있는 칸
+  deploySlots=[];
+  for(var r=1;r<ROWS-1;r++){
+    for(var c=COLS-8;c<COLS-1;c++){
+      if(map[r][c]===EMPTY)deploySlots.push({col:c,row:r});
+    }
+  }
+
+  // 적은 랜덤 배치 (보이지 않음)
+  var oppPool=pool.slice(4,8);
+  // 적 유닛은 시뮬 시 생성
+
+  // UI 전환
+  document.getElementById('start-panel').style.display='none';
+  document.getElementById('play-panel').style.display='none';
+  document.getElementById('deploy-panel').style.display='block';
+  updateDeployCards();
+  updateDeployStatus();
+  draw();
+}
+
+function updateDeployCards(){
+  var el=document.getElementById('deploy-cards');
+  var html='';
+  // 러너 카드
+  var rCls='dcard runner-card'+(deploySelected==='runner'?' selected':'')+(deployRunnerPlaced?' placed':'');
+  html+='<div class="'+rCls+'" onclick="'+(deployRunnerPlaced?'':'selectDeployCard(\'runner\'')+')">🏃 <span class="dc-name">러너</span></div>';
+  // 스톰퍼 카드
+  deployPool.forEach(function(d,i){
+    var cls='dcard'+(deploySelected===i?' selected':'')+(d.placed?' placed':'');
+    var tierBg=TIER_COLORS[d.card.tier]||'#888';
+    html+='<div class="'+cls+'" onclick="'+(d.placed?'':'selectDeployCard('+i+')')+'"><span class="dc-tier" style="background:'+tierBg+'">T'+d.card.tier+'</span><span class="dc-name">'+d.card.name+'</span><span style="color:#888">ATK'+d.card.atk+' DEF'+d.card.def+'</span></div>';
+  });
+  el.innerHTML=html;
+}
+
+function selectDeployCard(idx){
+  deploySelected=idx;
+  updateDeployCards();
+  draw();
+}
+
+function updateDeployStatus(){
+  var placed=deployPlaced.length+(deployRunnerPlaced?1:0);
+  var total=deployPool.length+1; // 스톰퍼 4 + 러너 1
+  document.getElementById('deploy-status').textContent='배치: '+placed+'/'+total+' — 카드를 선택 후 맵을 클릭하세요';
+  document.getElementById('btn-deploy-done').disabled=(placed<total);
+}
+
+// 캔버스 클릭 → 배치
+cv.addEventListener('click',function(e){
+  if(phase!=='deploy'||deploySelected===null)return;
+  var rect=cv.getBoundingClientRect();
+  var mx=(e.clientX-rect.left)*(W/rect.width);
+  var my=(e.clientY-rect.top)*(H/rect.height);
+  var col=Math.floor(mx/T),row=Math.floor(my/T);
+
+  // 배치 가능 칸인지 확인
+  var valid=deploySlots.find(function(s){return s.col===col&&s.row===row});
+  if(!valid)return;
+  // 이미 다른 유닛이 있는지 확인
+  var occupied=deployPlaced.find(function(p){return p.col===col&&p.row===row});
+  if(occupied)return;
+
+  if(deploySelected==='runner'){
+    deployRunnerPlaced={col:col,row:row};
+    deploySelected=null;
+  }else{
+    var dp=deployPool[deploySelected];
+    if(dp.placed)return;
+    dp.placed=true;
+    deployPlaced.push({card:dp.card,col:col,row:row});
+    deploySelected=null;
+  }
+
+  updateDeployCards();
+  updateDeployStatus();
+  draw();
+});
+
+function finishDeploy(){
+  if(deployPlaced.length<deployPool.length||!deployRunnerPlaced)return;
+  phase='battle';
+
+  // 아군 유닛 배치
+  units=[];
+  units.push(mkRunner('a',deployRunnerPlaced.col,deployRunnerPlaced.row));
+
+  // 적 러너
+  units.push(mkRunner('e',1,Math.floor(ROWS/2)));
+
+  // 아군 스톰퍼
+  deployPlaced.forEach(function(p){
+    units.push(mkStomper(p.card,'a',p.col,p.row));
+  });
+
+  // 적 스톰퍼 (랜덤 배치)
+  var pool=sh(STOMPERS.slice());
+  var oppCards=pool.filter(function(p){
+    return !deployPlaced.find(function(d){return d.card.id===p.id});
+  }).slice(0,4);
+  for(var i=0;i<oppCards.length;i++){
+    var c=3+Math.floor(Math.random()*2);
+    var r=2+Math.floor(i*(ROWS-4)/4);
+    units.push(mkStomper(oppCards[i],'e',c,r));
+  }
+
+  lg('<b style="color:#ff4444">── 전투 개시 ──</b>');
+
+  simulateAll();
+
+  // UI 전환
+  document.getElementById('deploy-panel').style.display='none';
+  document.getElementById('play-panel').style.display='block';
+
+  playhead=0;playing=true;
+  document.getElementById('btn-play').textContent='⏸ 정지';
+  applyFrame(0);
+}
+
+function mkRunner(side,col,row){
+  return{type:'runner',s:side,x:col*T+T/2,y:row*T+T/2,hp:50,ko:false,
+    speed:0.8,facing:side==='a'?Math.PI:0,
+    vAngle:Math.PI*0.8,vRange:140,
+    name:(side==='a'?'아군':'적')+' 러너',
+    shake:0,flashAlpha:0,dmgText:null,dmgTimer:0,
+    carriedBy:null}; // 태우고 있는 스톰퍼 참조
+}
+
+function mkStomper(card,side,col,row){
+  var mobSpeed=1.2+card.mob*0.12; // 이동속도 2배
+  // 시야각: 수비형은 넓고 짧음, 공격형은 좁고 김
+  var isAtk=(card.atk+card.cap)>(card.def+card.grd);
+  var vAngle=isAtk?Math.PI*0.4:Math.PI*0.7;
+  var vRange=isAtk?180:120;
+
+  // 특수 행동: 스탯 기반 배정 (복수 가능)
+  var abilities=[];
+  if(card.atk>=18) abilities.push('throw');    // 건물 투척
+  if(card.mob>=16) abilities.push('jump');      // 뛰어넘기
+  if(card.def>=18) abilities.push('grab');      // 붙잡고 늘어지기
+  if(card.atk>=15&&card.mob>=14) abilities.push('smash'); // 밀쳐서 날려보내기
+  if(card.cap>=15) abilities.push('tackle');    // 태클 (러너 추적 특화)
+  if(card.grd>=16) abilities.push('shield');    // 몸빵 (아군 대신 피격)
+  if(abilities.length===0) abilities.push('none');
+
+  return{type:'stomper',c:card,s:side,x:col*T+T/2,y:row*T+T/2,hp:100,ko:false,
+    speed:mobSpeed,facing:side==='a'?Math.PI:0,
+    vAngle:vAngle,vRange:vRange,
+    name:card.name,shake:0,flashAlpha:0,dmgText:null,dmgTimer:0,
+    combatCD:0,target:null,
+    abilities:abilities,abCD:0,
+    jumping:false,jumpTimer:0,jumpFrom:null,jumpTo:null,
+    throwing:false,throwTarget:null,throwTimer:0,
+    grabbed:null,grabTimer:0, // 붙잡힌 대상
+    smashing:false,smashTarget:null,smashTimer:0, // 밀치기 대상
+    stunned:0, // 스턴 (밀쳐져서 날아간 후)
+    shielding:null, // 몸빵 대상
+    runnerBuff:false,
+    carryingRunner:false}; // 러너를 태우고 있는지
+}
+
+function sh(a){for(var i=a.length-1;i>0;i--){var j=0|Math.random()*(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+// ========== AI ==========
+function aiTick(){
+  // 러너 근접 버프 갱신
+  units.filter(function(u){return u.type==='stomper'&&!u.ko}).forEach(function(u){
+    var allyRunner=units.find(function(r){return r.type==='runner'&&r.s===u.s&&!r.ko});
+    u.runnerBuff=allyRunner&&dist(u,allyRunner)<100;
+
+    // 교착 방지: 러너를 태운 채 적 스톰퍼와 근접하면 강제 하차
+    if(u.carryingRunner){
+      var nearEnemy=units.filter(function(e){return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(u,e)<50});
+      if(nearEnemy.length>0){
+        var carried=units.find(function(r){return r.carriedBy===u});
+        if(carried)dropRunner(carried);
+      }
+    }
+  });
+
+  units.forEach(function(u){
+    if(u.ko)return;
+    if(u.type==='stomper'){
+      if(u.abCD>0)u.abCD--;
+      if(u.stunned>0){u.stunned--;return} // 스턴 중 행동불가
+      // 붙잡기 지속
+      if(u.grabbed){
+        u.grabTimer--;
+        if(u.grabTimer<=0||u.grabbed.ko){u.grabbed=null}
+        else{u.grabbed.x=u.x;u.grabbed.y=u.y;return} // 붙잡는 동안 둘 다 못 움직임
+      }
+    }
+    if(u.combatCD>0){u.combatCD--;return}
+
+    // 점프 중
+    if(u.jumping){
+      u.jumpTimer--;
+      if(u.jumpTimer<=0){u.x=u.jumpTo.x;u.y=u.jumpTo.y;u.jumping=false}
+      return;
+    }
+    // 밀치기 날아가는 중
+    if(u.smashing){
+      u.smashTimer--;
+      if(u.smashTimer<=0)u.smashing=false;
+      return;
+    }
+
+    if(u.type==='runner') aiRunner(u);
+    else{
+      if(u.abCD<=0) tryAbilities(u);
+      aiStomper(u);
+    }
+  });
+  // 전체 유닛 최종 경계 클램프
+  units.forEach(function(u){
+    if(u.ko)return;
+    u.x=Math.max(24,Math.min(W-24,u.x));
+    u.y=Math.max(24,Math.min(H-24,u.y));
+  });
+}
+
+// ========== 통합 스킬 시도 ==========
+function tryAbilities(u){
+  var abs=u.abilities;
+  if(abs.indexOf('throw')>=0) tryThrow(u);
+  if(u.abCD>0)return;
+  if(abs.indexOf('jump')>=0) tryJump(u);
+  if(u.abCD>0)return;
+  if(abs.indexOf('grab')>=0) tryGrab(u);
+  if(u.abCD>0)return;
+  if(abs.indexOf('smash')>=0) trySmash(u);
+  if(u.abCD>0)return;
+  if(abs.indexOf('tackle')>=0) tryTackle(u);
+  if(u.abCD>0)return;
+  if(abs.indexOf('shield')>=0) tryShield(u);
+}
+
+// 건물 투척
+function tryThrow(u){
+  var visEnemies=units.filter(function(e){
+    return e.s!==u.s&&!e.ko&&e.type==='stomper'&&inVisionCone(u,e.x,e.y)&&dist(u,e)>60&&dist(u,e)<200;
+  });
+  if(!visEnemies.length)return;
+
+  // 근처에 건물이 있어야 함
+  var uc=Math.floor(u.x/T),ur=Math.floor(u.y/T);
+  var hasBuilding=false;
+  for(var dr=-2;dr<=2;dr++)for(var dc=-2;dc<=2;dc++){
+    if(ur+dr>=0&&ur+dr<ROWS&&uc+dc>=0&&uc+dc<COLS&&map[ur+dr][uc+dc]===BUILDING){
+      hasBuilding=true;destroyBuilding(ur+dr,uc+dc);break;
+    }
+    if(hasBuilding)break;
+  }
+  if(!hasBuilding)return;
+
+  var target=visEnemies[0];
+  u.abCD=15;u.throwing=true;u.throwTarget={x:target.x,y:target.y};u.throwTimer=5;
+
+  // 투척 데미지
+  var dmg=u.c.atk*0.8*(0.8+Math.random()*0.4);
+  if(u.runnerBuff)dmg*=1.3;
+  target.hp-=dmg;target.shake=12;
+  target.dmgText=Math.round(dmg);target.dmgTimer=25;
+  u.combatCD=2;
+
+  var ac=u.s==='a'?'#4fc3f7':'#ff6666';
+  var dc=target.s==='a'?'#4fc3f7':'#ff6666';
+  var tName=target.c?target.c.name:target.name;
+  lg('<span style="color:'+ac+'">'+u.c.name+'</span> <span style="color:#ffa726">건물 투척!</span> → <span style="color:'+dc+'">'+tName+'</span> <span style="color:#ffa726">'+Math.round(dmg)+'</span>');
+  if(target.hp<=0){target.ko=true;target.hp=0;target.flashAlpha=1;lg('<span style="color:#ef5350;font-weight:700">'+tName+' 행동불능!</span>')}
+}
+
+// 점프: 적을 뛰어넘어 뒤쪽으로 착지
+function tryJump(u){
+  // 앞에 적이 있을 때만 점프
+  var blocking=units.filter(function(e){
+    return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(u,e)<60;
+  });
+  if(!blocking.length)return;
+
+  var blocker=blocking[0];
+  // 블로커 반대편으로 점프 (120px 뒤)
+  var dx=blocker.x-u.x,dy=blocker.y-u.y;
+  var d=Math.sqrt(dx*dx+dy*dy)||1;
+  var landX=blocker.x+dx/d*80;
+  var landY=blocker.y+dy/d*80;
+  landX=Math.max(24,Math.min(W-24,landX));
+  landY=Math.max(24,Math.min(H-24,landY));
+
+  u.jumping=true;
+  u.jumpFrom={x:u.x,y:u.y};
+  u.jumpTo={x:landX,y:landY};
+  u.jumpTimer=8;
+  u.abCD=20;
+
+  lg('<span style="color:'+(u.s==='a'?'#4fc3f7':'#ff6666')+'">'+u.c.name+'</span> <span style="color:#ffa726">뛰어넘기!</span> '+blocker.c.name+'의 머리 위를 넘었다!');
+}
+
+// 붙잡고 늘어지기: DEF 높은 유닛이 적을 잡아서 이동 봉쇄
+function tryGrab(u){
+  var nearby=units.filter(function(e){
+    return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(u,e)<40&&!e.grabbed;
+  });
+  if(!nearby.length)return;
+  var target=nearby[0];
+  u.grabbed=target;
+  u.grabTimer=8; // 8틱 동안 붙잡음
+  target.stunned=8;
+  u.abCD=25;
+  u.combatCD=8;
+  var ac=u.s==='a'?'#4fc3f7':'#ff6666';
+  var dc=target.s==='a'?'#4fc3f7':'#ff6666';
+  lg('<span style="color:'+ac+'">'+u.c.name+'</span> <span style="color:#ff66ff">붙잡고 늘어졌다!</span> <span style="color:'+dc+'">'+target.c.name+'</span> 이동 봉쇄!');
+}
+
+// 밀쳐서 날려보내기: 적을 멀리 날림 + 스턴
+function trySmash(u){
+  var nearby=units.filter(function(e){
+    return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(u,e)<45;
+  });
+  if(!nearby.length)return;
+  var target=nearby[0];
+  // 밀치는 방향 (유닛 → 적 방향으로 120px 날림)
+  var dx=target.x-u.x,dy=target.y-u.y;
+  var d=Math.sqrt(dx*dx+dy*dy)||1;
+  var flyX=target.x+dx/d*120;
+  var flyY=target.y+dy/d*120;
+  flyX=Math.max(24,Math.min(W-24,flyX));
+  flyY=Math.max(24,Math.min(H-24,flyY));
+  target.x=flyX;target.y=flyY;
+  target.shake=15;
+  target.stunned=6; // 날아간 뒤 6틱 스턴
+  // 날아간 곳 건물 파괴
+  var tc=Math.floor(flyX/T),tr=Math.floor(flyY/T);
+  destroyBuilding(tr,tc);
+  // 약간의 데미지
+  var dmg=u.c.atk*0.4;
+  target.hp-=dmg;target.dmgText=Math.round(dmg);target.dmgTimer=20;
+  if(target.hp<=0){
+    target.ko=true;target.hp=0;target.flashAlpha=1;
+    if(target.carryingRunner){var cr=units.find(function(r){return r.carriedBy===target});if(cr)dropRunner(cr)}
+  }
+  u.abCD=18;u.combatCD=3;
+  // 밀쳐진 적이 러너를 붙잡고 있었으면 실랑이 게이지 리셋
+  units.filter(function(r){return r.type==='runner'&&r.capState&&r.capState.active}).forEach(function(r){
+    r.capState.gauge=Math.max(0,r.capState.gauge-30);
+  });
+  var ac=u.s==='a'?'#4fc3f7':'#ff6666';
+  var dc=target.s==='a'?'#4fc3f7':'#ff6666';
+  lg('<span style="color:'+ac+'">'+u.c.name+'</span> <span style="color:#ff8800">밀쳐서 날려보냈다!</span> <span style="color:'+dc+'">'+target.c.name+'</span> 날아갔다!');
+}
+
+// 태클: 러너 근처에서 빠르게 접근하여 포획 보조
+function tryTackle(u){
+  var enemyRunner=units.find(function(r){return r.type==='runner'&&r.s!==u.s&&!r.ko});
+  if(!enemyRunner)return;
+  var d=dist(u,enemyRunner);
+  if(d>120||d<30)return; // 120px 이내에서만, 너무 가까우면 그냥 포획
+  // 러너 쪽으로 순간 돌진
+  var dx=enemyRunner.x-u.x,dy=enemyRunner.y-u.y;
+  var dd=Math.sqrt(dx*dx+dy*dy)||1;
+  u.x+=dx/dd*(d-20); // 러너 바로 앞까지 순간이동
+  u.y+=dy/dd*(d-20);
+  u.x=Math.max(24,Math.min(W-24,u.x));
+  u.y=Math.max(24,Math.min(H-24,u.y));
+  u.shake=5;
+  u.abCD=22;u.combatCD=2;
+  var ac=u.s==='a'?'#4fc3f7':'#ff6666';
+  lg('<span style="color:'+ac+'">'+u.c.name+'</span> <span style="color:#ffaa00">슬라이딩 태클!</span> 러너에게 돌진!');
+}
+
+// 몸빵: 근처 아군이 피격당할 때 대신 맞음
+function tryShield(u){
+  var allyRunner=units.find(function(r){return r.type==='runner'&&r.s===u.s&&!r.ko});
+  if(!allyRunner)return;
+  var d=dist(u,allyRunner);
+  if(d>80)return; // 러너 근처에 있을 때만
+  var threats=units.filter(function(e){return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(e,allyRunner)<60});
+  if(!threats.length)return;
+  // 러너와 적 사이에 끼어듦
+  var enemy=threats[0];
+  var mx=(allyRunner.x+enemy.x)/2;
+  var my=(allyRunner.y+enemy.y)/2;
+  u.x=mx;u.y=my;
+  u.abCD=15;
+  var ac=u.s==='a'?'#4fc3f7':'#ff6666';
+  lg('<span style="color:'+ac+'">'+u.c.name+'</span> <span style="color:#66bbff">몸빵!</span> 러너를 감싸 보호한다!');
+}
+
+function aiRunner(r){
+  // 태워져 있으면 이동 안 함 (스톰퍼가 움직여줌)
+  if(r.carriedBy){
+    var carrier=r.carriedBy;
+    if(carrier.ko){
+      // 태운 스톰퍼가 행동불능 → 강제 하차
+      dropRunner(r);
+    }else{
+      // 스톰퍼 어깨 위에 위치
+      r.x=carrier.x;
+      r.y=carrier.y-20;
+      r.facing=carrier.facing;
+      return;
+    }
+  }
+
+  var allies=units.filter(function(u){return u.type==='stomper'&&u.s===r.s&&!u.ko});
+  var threats=units.filter(function(u){return u.type==='stomper'&&u.s!==r.s&&!u.ko});
+  var nearThreats=threats.filter(function(t){return dist(r,t)<80});
+
+  // 태울 수 있는 아군이 가까이 있으면 탑승
+  var nearAlly=allies.filter(function(a){return !a.carryingRunner&&dist(r,a)<30});
+  if(nearAlly.length>0&&!r.carriedBy){
+    // 가장 가까운 아군에게 탑승
+    var best=nearAlly.sort(function(a,b){return dist(r,a)-dist(r,b)})[0];
+    pickupRunner(r,best);
+    return;
+  }
+
+  var tx,ty;
+
+  if(nearThreats.length>0){
+    // 긴급 도주 + 아군 쪽으로
+    var nearest=nearThreats.sort(function(a,b){return dist(r,a)-dist(r,b)})[0];
+    var dx=r.x-nearest.x,dy=r.y-nearest.y;
+    var d=Math.sqrt(dx*dx+dy*dy)||1;
+    tx=r.x+dx/d*30;ty=r.y+dy/d*30;
+    if(allies.length>0){
+      var na=allies.sort(function(a,b){return dist(r,a)-dist(r,b)})[0];
+      tx=(tx*0.3+na.x*0.7);ty=(ty*0.3+na.y*0.7);
+    }
+  }else if(allies.length>0){
+    // 가장 가까운 아군에게 달려감 (태워달라고)
+    var closest=allies.sort(function(a,b){return dist(r,a)-dist(r,b)})[0];
+    tx=closest.x;ty=closest.y;
+  }else{
+    tx=r.s==='a'?W-20:20;
+    ty=H/2+(Math.random()-0.5)*60;
+  }
+
+  tx=Math.max(24,Math.min(W-24,tx));
+  ty=Math.max(24,Math.min(H-24,ty));
+  moveToward(r,tx,ty,false);
+}
+
+function pickupRunner(runner,stomper){
+  runner.carriedBy=stomper;
+  stomper.carryingRunner=true;
+  runner.x=stomper.x;runner.y=stomper.y-20;
+  lg('<span style="color:'+(stomper.s==='a'?'#4fc3f7':'#ff6666')+'">'+stomper.c.name+'</span> <span style="color:#66bb6a">러너를 태웠다!</span>');
+}
+
+function dropRunner(runner){
+  if(runner.carriedBy){
+    var old=runner.carriedBy;
+    old.carryingRunner=false;
+    runner.carriedBy=null;
+    lg('<span style="color:#ffa726">러너가 내려졌다!</span>');
+  }
+}
+
+function aiStomper(u){
+  var enemyRunner=units.find(function(r){return r.type==='runner'&&r.s!==u.s&&!r.ko});
+  var allyRunner=units.find(function(r){return r.type==='runner'&&r.s===u.s&&!r.ko});
+
+  // 수비형 판정: 같은 팀 스톰퍼 중 GRD 1위만 수비. 나머지는 전부 공격
+  var allies=units.filter(function(e){return e.type==='stomper'&&e.s===u.s&&!e.ko});
+  var isGuard=false;
+  if(allies.length>0){
+    var topGrd=allies.slice().sort(function(a,b){return b.c.grd-a.c.grd})[0];
+    isGuard=(u===topGrd||u.c===topGrd.c);
+  }
+
+  // 시야 내 적 확인
+  var visEnemies=units.filter(function(e){
+    return e.s!==u.s&&!e.ko&&e.type==='stomper'&&inVisionCone(u,e.x,e.y);
+  });
+  var seesRunner=enemyRunner&&!enemyRunner.ko&&inVisionCone(u,enemyRunner.x,enemyRunner.y);
+
+  var tx,ty;
+
+  // 공격 전환 조건: 적 전멸 / 아군 1명 / 교착(틱400+)
+  var enemyStompersAlive=units.filter(function(e){return e.s!==u.s&&e.type==='stomper'&&!e.ko}).length;
+  var allyStompersAlive=allies.length;
+  if(enemyStompersAlive===0||allyStompersAlive<=1||tick>250)isGuard=false;
+
+  if(isGuard){
+    // 수비: 러너를 태우고 전선 뒤에서 따라감
+    if(allyRunner&&!allyRunner.ko){
+      // 러너가 안 태워져있고 가까우면 태움
+      if(!allyRunner.carriedBy&&!u.carryingRunner&&dist(u,allyRunner)<40){
+        pickupRunner(allyRunner,u);
+      }
+
+      if(u.carryingRunner){
+        // 태우고 있을 때: 전선 뒤에서 따라감
+        var frontAllies=allies.filter(function(a){return a!==u&&!a.ko});
+        if(frontAllies.length>0){
+          var front=frontAllies.sort(function(a,b){
+            return u.s==='a'?(a.x-b.x):(b.x-a.x);
+          })[0];
+          // 전방 아군 뒤 60px
+          tx=u.s==='a'?front.x+60:front.x-60;
+          ty=front.y+(Math.random()-0.5)*20;
+        }else{
+          tx=u.s==='a'?W-30:30;ty=H/2;
+        }
+
+        // 적이 너무 가까우면 하차 후 전투
+        var nearEnemy=units.filter(function(e){
+          return e.s!==u.s&&!e.ko&&e.type==='stomper'&&dist(u,e)<60;
+        });
+        if(nearEnemy.length>0){
+          dropRunner(allyRunner);
+        }
+      }else{
+        // 러너 태우러 감
+        var d=dist(u,allyRunner);
+        if(d>30){tx=allyRunner.x;ty=allyRunner.y}
+        else{
+          var nearEnemy=units.filter(function(e){return e.s!==u.s&&!e.ko&&dist(u,e)<150});
+          if(nearEnemy.length>0){tx=nearEnemy[0].x;ty=nearEnemy[0].y}
+          else{tx=allyRunner.x+(Math.random()-0.5)*40;ty=allyRunner.y+(Math.random()-0.5)*40}
+        }
+      }
+    }else{
+      if(enemyRunner&&!enemyRunner.ko){tx=enemyRunner.x;ty=enemyRunner.y}
+      else{tx=W/2;ty=H/2}
+    }
+  }else{
+    // 공격형 AI
+    var enemyStompersLeft=units.filter(function(e){return e.s!==u.s&&e.type==='stomper'&&!e.ko}).length;
+
+    if(enemyStompersLeft===0&&enemyRunner&&!enemyRunner.ko){
+      // 적 스톰퍼 전멸 → 전원 러너 직행 (시야 무시, 위치 직접 추적)
+      tx=enemyRunner.x;ty=enemyRunner.y;
+      u.facing=Math.atan2(ty-u.y,tx-u.x); // 러너 방향으로 시야 고정
+    }else if(seesRunner){
+      tx=enemyRunner.x;ty=enemyRunner.y;
+    }else if(visEnemies.length>0){
+      var closest=visEnemies.sort(function(a,b){return dist(u,a)-dist(u,b)})[0];
+      tx=closest.x;ty=closest.y;
+    }else if(enemyRunner&&!enemyRunner.ko){
+      tx=enemyRunner.x+(Math.random()-0.5)*80;
+      ty=enemyRunner.y+(Math.random()-0.5)*80;
+    }else{
+      tx=W/2+(Math.random()-0.5)*W*0.6;
+      ty=H/2+(Math.random()-0.5)*H*0.6;
+    }
+  }
+
+  moveToward(u,tx,ty,true);
+}
+
+function moveToward(u,tx,ty,isStomper){
+  var dx=tx-u.x,dy=ty-u.y;
+  var d=Math.sqrt(dx*dx+dy*dy);
+  if(d<2)return;
+
+  // 방향 업데이트
+  u.facing=Math.atan2(dy,dx);
+
+  var mx=dx/d*u.speed;
+  var my=dy/d*u.speed;
+  var nx=u.x+mx,ny=u.y+my;
+
+  // 경계
+  nx=Math.max(24,Math.min(W-24,nx));
+  ny=Math.max(24,Math.min(H-24,ny));
+
+  // 타일 충돌
+  var nc=Math.floor(nx/T),nr=Math.floor(ny/T);
+  if(passable(nr,nc,isStomper)){
+    if(isStomper)destroyBuilding(nr,nc);
+    u.x=nx;u.y=ny;
+  }else if(isStomper){
+    // 스톰퍼는 건물을 부수고 직진 (강만 못 지나감)
+    if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&map[nr][nc]===BUILDING){
+      destroyBuilding(nr,nc);
+      u.x=nx;u.y=ny;
+    }else{
+      // 강 등 → 우회
+      var alt1x=u.x+my,alt1y=u.y-mx;
+      var ac1=Math.floor(alt1x/T),ar1=Math.floor(alt1y/T);
+      if(passable(ar1,ac1,true)){
+        destroyBuilding(ar1,ac1);
+        u.x=Math.max(24,Math.min(W-24,alt1x));
+        u.y=Math.max(24,Math.min(H-24,alt1y));
+      }
+    }
+  }else{
+    // 러너: 우회만
+    var alt1x=u.x+my,alt1y=u.y-mx;
+    var ac1=Math.floor(alt1x/T),ar1=Math.floor(alt1y/T);
+    if(passable(ar1,ac1,false)){
+      u.x=Math.max(24,Math.min(W-24,alt1x));
+      u.y=Math.max(24,Math.min(H-24,alt1y));
+    }else{
+      var alt2x=u.x-my,alt2y=u.y+mx;
+      var ac2=Math.floor(alt2x/T),ar2=Math.floor(alt2y/T);
+      if(passable(ar2,ac2,false)){
+        u.x=Math.max(24,Math.min(W-24,alt2x));
+        u.y=Math.max(24,Math.min(H-24,alt2y));
+      }
+    }
+  }
+}
+
+function dist(a,b){var dx=a.x-b.x,dy=a.y-b.y;return Math.sqrt(dx*dx+dy*dy)}
+
+// ========== COMBAT ==========
+function combatTick(){
+  // 스톰퍼 vs 스톰퍼 (근접 + 시야 내)
+  var stompers=units.filter(function(u){return u.type==='stomper'&&!u.ko});
+  for(var i=0;i<stompers.length;i++){
+    for(var j=i+1;j<stompers.length;j++){
+      var a=stompers[i],b=stompers[j];
+      if(a.s===b.s)continue;
+      if(dist(a,b)>35)continue; // 근접 범위
+      if(a.combatCD>0||b.combatCD>0)continue;
+      doFight(a,b);
+      doFight(b,a);
+    }
+  }
+
+  // 포획 체크
+  if(!winner)checkCapture();
+}
+
+function doFight(a,d){
+  var ap=a.c.atk*(0.85+Math.random()*0.3);
+  if(a.runnerBuff)ap*=1.25; // 러너 근접 시 ATK +25%
+  var dp=d.c.def*(0.85+Math.random()*0.3);
+  var dmg=Math.max(0,(ap-dp*0.5))*0.6;
+  d.hp-=dmg;d.shake=10;
+  d.dmgText=Math.round(dmg);d.dmgTimer=20;
+  a.combatCD=3;d.combatCD=3;
+  if(dmg>8)screenShake=Math.max(screenShake,dmg/3); // 큰 타격 시 화면 흔들림
+
+  var ac=a.s==='a'?'#4fc3f7':'#ff6666';
+  var dc=d.s==='a'?'#4fc3f7':'#ff6666';
+  if(dmg>3)lg('<span style="color:'+ac+'">'+a.c.name+'</span> → <span style="color:'+dc+'">'+d.c.name+'</span> <span style="color:#ffa726">'+Math.round(dmg)+'</span>');
+  if(d.hp<=0){
+    d.ko=true;d.hp=0;d.flashAlpha=1;
+    lg('<span style="color:#ef5350;font-weight:700">'+d.c.name+' 행동불능!</span>');
+    // 러너 태우고 있었으면 하차
+    if(d.carryingRunner){
+      var carried=units.find(function(r){return r.type==='runner'&&r.carriedBy===d});
+      if(carried)dropRunner(carried);
+    }
+  }
+}
+
+// ========== 포획 실랑이 시스템 ==========
+// 각 러너에 captureState 추가: {active, gauge, attackers[], announced}
+function initCaptureState(runner){
+  if(!runner.capState) runner.capState={active:false, gauge:0, attackerIds:[], announced:false};
+}
+
+function checkCapture(){
+  units.filter(function(r){return r.type==='runner'&&!r.ko}).forEach(function(runner){
+    initCaptureState(runner);
+    var cs=runner.capState;
+
+    var attackers=units.filter(function(u){
+      return u.type==='stomper'&&u.s!==runner.s&&!u.ko&&dist(u,runner)<50&&!u.stunned;
+    });
+    var guards=units.filter(function(u){
+      return u.type==='stomper'&&u.s===runner.s&&!u.ko&&dist(u,runner)<60;
+    });
+
+    if(!attackers.length){
+      // 공격자 없으면 게이지 급속 감소
+      if(cs.active){
+        cs.gauge=Math.max(0,cs.gauge-8);
+        if(cs.gauge<=0){
+          cs.active=false;cs.announced=false;
+          lg('<span style="color:#66bb6a">포획 실랑이 종료 — 밀어냈다!</span>');
+        }
+      }
+      return;
+    }
+
+    // 실랑이 시작
+    if(!cs.active){
+      cs.active=true;cs.gauge=0;cs.announced=false;
+      var nm=attackers.map(function(u){return u.c.name}).join(', ');
+      var label=runner.s==='a'?'아군':'적';
+      lg('<span style="color:#ff4444;font-weight:700">'+nm+' → '+label+' 러너에게 달려들었다! 실랑이 시작!</span>');
+    }
+
+    // 매 틱: CAP vs GRD
+    var capPower=0;
+    attackers.forEach(function(u){
+      var capMul=tick>500?0.6:0.3; // 500틱 이후 포획력 2배 (교착 방지)
+      capPower+=u.c.cap*capMul*(0.8+Math.random()*0.4);
+      u.combatCD=Math.max(u.combatCD,1); // 포획 중 다른 행동 제한
+    });
+
+    var grdPower=2; // 러너 기본 저항
+    guards.forEach(function(u){
+      grdPower+=u.c.grd*0.25*(0.8+Math.random()*0.4);
+    });
+    // 러너가 태워져 있으면 운반자 DEF도 저항
+    if(runner.carriedBy&&!runner.carriedBy.ko){
+      grdPower+=runner.carriedBy.c.def*0.2;
+    }
+
+    var delta=capPower-grdPower;
+    cs.gauge=Math.max(0,Math.min(100,cs.gauge+delta));
+
+    // 게이지 진행 알림 (25%, 50%, 75%)
+    if(cs.gauge>=75&&!cs.hit75){
+      cs.hit75=true;
+      lg('<span style="color:#ff6666;font-weight:700">포획 임박! ['+Math.round(cs.gauge)+'%]</span>');
+    }else if(cs.gauge>=50&&!cs.hit50){
+      cs.hit50=true;
+      lg('<span style="color:#ffa726">실랑이 격화! ['+Math.round(cs.gauge)+'%]</span>');
+    }else if(cs.gauge>=25&&!cs.hit25){
+      cs.hit25=true;
+      lg('<span style="color:#ffa726">포획 저항 중... ['+Math.round(cs.gauge)+'%]</span>');
+    }
+
+    // 러너 흔들림
+    runner.shake=Math.max(runner.shake, cs.gauge/15);
+
+    // 포획 성공
+    if(cs.gauge>=100){
+      var nm=attackers.map(function(u){return u.c.name}).join(', ');
+      var label=runner.s==='a'?'아군':'적';
+      // 태워져 있었으면 하차
+      if(runner.carriedBy)dropRunner(runner);
+      lg('<b style="color:#ff4444;font-size:13px">'+nm+' → '+label+' 러너 포획 완료!</b>');
+      runner.ko=true;runner.flashAlpha=1;runner.shake=20;
+      winner=runner.s==='a'?'lose':'win';
+      lg('<b style="color:'+(winner==='win'?'#66bb6a':'#ef5350')+';font-size:15px">★ '+(winner==='win'?'승리!':'패배...')+'</b>');
+    }
+
+    // 게이지가 0으로 떨어지면 실랑이 종료 → 공격자 밀려남 + 쿨다운
+    if(cs.gauge<=0&&cs.active){
+      cs.active=false;cs.announced=false;cs.hit25=false;cs.hit50=false;cs.hit75=false;
+      // 공격자들을 러너에서 멀리 밀어냄 + 재시도 쿨다운
+      attackers.forEach(function(a){
+        var dx=a.x-runner.x,dy=a.y-runner.y;
+        var d=Math.sqrt(dx*dx+dy*dy)||1;
+        a.x+=dx/d*80;a.y+=dy/d*80; // 80px 밀려남
+        a.x=Math.max(24,Math.min(W-24,a.x));
+        a.y=Math.max(24,Math.min(H-24,a.y));
+        a.combatCD=12; // 12틱 동안 재접근 불가
+        a.stunned=5;
+      });
+      lg('<span style="color:#66bb6a">포획 저항 성공! 밀어냈다!</span>');
+    }
+  });
+}
+
+// ========== REPLAY SYSTEM ==========
+var frames=[]; // 스냅샷 배열: [{units:[...], map:[...], logs:[...], winner}]
+var playhead=0; // 현재 재생 위치
+var playing=false;
+var playInterval=null;
+
+// 전투 전체를 사전 시뮬레이션하여 frames에 저장
+function simulateAll(){
+  frames=[];
+  var logs=[];
+  // 초기 프레임 저장
+  frames.push(captureFrame(logs.slice()));
+
+  for(var i=0;i<1000;i++){
+    tick++;
+    var prevLogLen=logEl.innerHTML.length;
+    aiTick();
+    combatTick();
+    // 전멸 체크
+    if(!winner){
+      var aLive=units.filter(function(u){return u.s==='a'&&u.type==='stomper'&&!u.ko}).length;
+      var eLive=units.filter(function(u){return u.s==='e'&&u.type==='stomper'&&!u.ko}).length;
+      if(aLive===0&&eLive===0){winner='draw';lg('<b style="color:#ffa726">★ 양측 스톰퍼 동시 전멸 — 무승부</b>')}
+    }
+    // 새 로그 캡처
+    var newLog=logEl.innerHTML.substring(prevLogLen);
+    if(newLog)logs.push(newLog);
+    frames.push(captureFrame(logs.slice()));
+    if(winner)break;
+  }
+
+  playhead=0;
+  document.getElementById('frame-label').textContent='0 / '+frames.length;
+}
+
+function captureFrame(logs){
+  // 유닛 상태 딥카피
+  var snap=units.map(function(u){
+    var o={type:u.type,s:u.s,x:u.x,y:u.y,hp:u.hp,ko:u.ko,
+      name:u.name,facing:u.facing,shake:u.shake,flashAlpha:u.flashAlpha,
+      dmgText:u.dmgText,dmgTimer:u.dmgTimer,
+      vAngle:u.vAngle,vRange:u.vRange};
+    if(u.type==='stomper'){
+      o.c=u.c;o.runnerBuff=u.runnerBuff;o.carryingRunner=u.carryingRunner;
+      o.jumping=u.jumping;o.jumpFrom=u.jumpFrom?{x:u.jumpFrom.x,y:u.jumpFrom.y}:null;
+      o.jumpTo=u.jumpTo?{x:u.jumpTo.x,y:u.jumpTo.y}:null;o.jumpTimer=u.jumpTimer;
+      o.throwing=u.throwing;o.throwTarget=u.throwTarget?{x:u.throwTarget.x,y:u.throwTarget.y}:null;o.throwTimer=u.throwTimer;
+    }
+    if(u.type==='runner'){
+      o.carriedBy=u.carriedBy?true:false;
+      o.capState=u.capState?{active:u.capState.active,gauge:u.capState.gauge}:null;
+    }
+    return o;
+  });
+  // 맵 딥카피
+  var mapSnap=map.map(function(row){return row.slice()});
+  return{units:snap,map:mapSnap,logs:logs,winner:winner,tick:tick};
+}
+
+// 프레임을 화면에 적용
+function applyFrame(idx){
+  if(idx<0||idx>=frames.length)return;
+  var f=frames[idx];
+  playhead=idx;
+
+  // 맵 복원
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++)map[r][c]=f.map[r][c];
+
+  // 유닛 복원 (렌더용)
+  units=f.units;
+  winner=f.winner;
+  tick=f.tick;
+
+  // 로그 복원
+  logEl.innerHTML=f.logs.join('');
+  logEl.scrollTop=logEl.scrollHeight;
+
+  // UI 업데이트
+  var pct=(idx/(frames.length-1))*100;
+  document.getElementById('tl-fill').style.width=pct+'%';
+  document.getElementById('tl-thumb').style.left=pct+'%';
+  document.getElementById('frame-label').textContent=idx+' / '+(frames.length-1);
+
+  draw();
+}
+
+function togglePlay(){
+  if(!frames.length)return;
+  playing=!playing;
+  document.getElementById('btn-play').textContent=playing?'⏸ 정지':'▶ 재생';
+  if(playing&&playhead>=frames.length-1)playhead=0; // 끝이면 처음부터
+}
+
+function seekTimeline(e){
+  if(!frames.length)return;
+  var rect=document.getElementById('timeline').getBoundingClientRect();
+  var pct=(e.clientX-rect.left)/rect.width;
+  pct=Math.max(0,Math.min(1,pct));
+  var idx=Math.round(pct*(frames.length-1));
+  playing=false;
+  document.getElementById('btn-play').textContent='▶ 재생';
+  applyFrame(idx);
+}
+
+// ========== RENDER LOOP ==========
+function gameLoop(ts){
+  requestAnimationFrame(gameLoop);
+
+  if(playing&&frames.length>0){
+    // 재생 중: 매 프레임 50ms 간격으로 진행
+    if(!gameLoop._last)gameLoop._last=ts;
+    if(ts-gameLoop._last>50){
+      gameLoop._last=ts;
+      if(playhead<frames.length-1){
+        playhead++;
+        applyFrame(playhead);
+      }else{
+        playing=false;
+        document.getElementById('btn-play').textContent='▶ 재생';
+      }
+    }
+  }
+
+  // 비재생 시에도 감쇠 애니메이션 (shake 등)
+  if(!playing){
+    draw();
+  }
+}
+
+// ========== DRAW ==========
+function draw(){
+  cx.clearRect(0,0,W,H);
+
+  // 화면 흔들림
+  cx.save();
+  if(screenShake>0.5){
+    cx.translate((Math.random()-0.5)*screenShake*2,(Math.random()-0.5)*screenShake*2);
+    screenShake*=0.85;
+  }else{screenShake=0}
+
+  // 타일맵
+  for(var r=0;r<ROWS;r++){
+    for(var c=0;c<COLS;c++){
+      var t=map[r][c];
+      if(t===EMPTY)continue; // 빈 곳은 배경색으로
+      var x=c*T,y=r*T;
+      switch(t){
+        case BUILDING:cx.fillStyle='#2a2a3a';break;
+        case RIVER:cx.fillStyle='#0a2a4a';break;
+        case BRIDGE:cx.fillStyle='#4a3a1a';break;
+        case RUBBLE:cx.fillStyle='#1a1a1a';break;
+      }
+      cx.fillRect(x,y,T,T);
+      if(t===BUILDING){
+        cx.strokeStyle='#3a3a4a';cx.strokeRect(x,y,T,T);
+      }
+    }
+  }
+
+  // 강 반짝임
+  for(var r=0;r<ROWS;r++){
+    for(var c=0;c<COLS;c++){
+      if(map[r][c]===RIVER){
+        cx.fillStyle='rgba(40,120,200,'+(0.1+Math.sin(tick*0.05+c*0.3)*0.05)+')';
+        cx.fillRect(c*T,r*T,T,T);
+      }
+    }
+  }
+
+  // 배치 모드: 적 진영 안개 + 배치 가능 칸
+  if(phase==='deploy'){
+    // 적 진영 안개 (왼쪽 절반)
+    cx.fillStyle='rgba(10,5,20,0.7)';
+    cx.fillRect(0,0,W*0.45,H);
+    // ? 표시
+    cx.fillStyle='rgba(255,68,68,0.3)';cx.font='bold 40px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillText('?',W*0.22,H*0.35);cx.fillText('?',W*0.15,H*0.65);cx.fillText('?',W*0.3,H*0.5);
+
+    // 배치 가능 칸 하이라이트
+    deploySlots.forEach(function(s){
+      var occupied=deployPlaced.find(function(p){return p.col===s.col&&p.row===s.row});
+      if(occupied)return;
+      if(deployRunnerPlaced&&deployRunnerPlaced.col===s.col&&deployRunnerPlaced.row===s.row)return;
+      cx.fillStyle=deploySelected!==null?'rgba(79,195,247,0.15)':'rgba(79,195,247,0.06)';
+      cx.fillRect(s.col*T,s.row*T,T,T);
+      if(deploySelected!==null){
+        cx.strokeStyle='rgba(79,195,247,0.3)';cx.strokeRect(s.col*T,s.row*T,T,T);
+      }
+    });
+
+    // 배치된 유닛 표시
+    deployPlaced.forEach(function(p){
+      cx.fillStyle=TIER_COLORS[p.card.tier]||'#888';
+      cx.beginPath();cx.arc(p.col*T+T/2,p.row*T+T/2,14,0,Math.PI*2);cx.fill();
+      cx.fillStyle='#fff';cx.font='bold 9px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+      cx.fillText(p.card.name.substring(0,3),p.col*T+T/2,p.row*T+T/2);
+    });
+
+    // 배치된 러너 표시
+    if(deployRunnerPlaced){
+      cx.fillStyle='#1a3a5a';
+      cx.beginPath();cx.arc(deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2,10,0,Math.PI*2);cx.fill();
+      cx.strokeStyle='#4fc3f7';cx.lineWidth=2;
+      cx.beginPath();cx.arc(deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2,10,0,Math.PI*2);cx.stroke();
+      cx.font='12px sans-serif';cx.fillText('🏃',deployRunnerPlaced.col*T+T/2,deployRunnerPlaced.row*T+T/2);
+    }
+    return; // 배치 모드에서는 유닛/시야 안 그림
+  }
+
+  // 시야 콘 그리기
+  units.filter(function(u){return !u.ko}).forEach(function(u){
+    drawVisionCone(u);
+  });
+
+  // 유닛
+  units.filter(function(u){return u.ko}).forEach(drawUnit);
+  units.filter(function(u){return !u.ko}).forEach(drawUnit);
+
+  // 포획 게이지 바 (실랑이 중일 때 러너 위에 표시)
+  units.filter(function(r){return r.type==='runner'&&!r.ko&&r.capState&&r.capState.active}).forEach(function(r){
+    var rx=r.carriedBy?r.carriedBy.x:r.x;
+    var ry=(r.carriedBy?r.carriedBy.y-22:r.y)-20;
+    var bw=50,bh=6;
+    // 배경
+    cx.fillStyle='rgba(0,0,0,0.7)';
+    cx.fillRect(rx-bw/2-1,ry-1,bw+2,bh+2);
+    // 게이지 바
+    cx.fillStyle='#333';cx.fillRect(rx-bw/2,ry,bw,bh);
+    var pct=r.capState.gauge/100;
+    var gCol=pct>0.75?'#ff2222':pct>0.5?'#ff6622':'#ff9944';
+    cx.fillStyle=gCol;cx.fillRect(rx-bw/2,ry,bw*pct,bh);
+    // 텍스트
+    cx.fillStyle='#fff';cx.font='bold 8px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillText('포획 '+Math.round(r.capState.gauge)+'%',rx,ry+bh/2);
+  });
+
+  // HUD
+  cx.fillStyle='#333';cx.font='10px sans-serif';cx.textAlign='left';cx.textBaseline='bottom';
+  cx.fillText('틱 '+tick,6,H-4);
+  if(winner){
+    cx.fillStyle=winner==='win'?'#66bb6a':winner==='lose'?'#ef5350':'#ffa726';
+    cx.font='bold 24px sans-serif';cx.textAlign='center';
+    cx.fillText(winner==='win'?'VICTORY':winner==='lose'?'DEFEAT':'DRAW',W/2,H/2);
+  }
+  cx.restore(); // 화면 흔들림 복원
+}
+
+function drawVisionCone(u){
+  var col=u.s==='a'?'rgba(79,195,247,0.06)':'rgba(255,68,68,0.06)';
+  var borderCol=u.s==='a'?'rgba(79,195,247,0.12)':'rgba(255,68,68,0.12)';
+
+  cx.save();
+  cx.beginPath();
+  cx.moveTo(u.x,u.y);
+  cx.arc(u.x,u.y,u.vRange,u.facing-u.vAngle/2,u.facing+u.vAngle/2);
+  cx.closePath();
+  cx.fillStyle=col;
+  cx.fill();
+  cx.strokeStyle=borderCol;
+  cx.lineWidth=1;
+  cx.stroke();
+  cx.restore();
+}
+
+function drawUnit(u){
+  var x=u.x,y=u.y;
+  var R=u.type==='runner'?12:24; // 원 크기 확대
+
+  // 점프 포물선
+  if(u.jumping&&u.jumpFrom&&u.jumpTo){
+    var jt=1-u.jumpTimer/8;
+    x=u.jumpFrom.x+(u.jumpTo.x-u.jumpFrom.x)*jt;
+    y=u.jumpFrom.y+(u.jumpTo.y-u.jumpFrom.y)*jt-Math.sin(jt*Math.PI)*70;
+    R=24+Math.sin(jt*Math.PI)*10; // 점프 중 커짐
+  }
+  // 투척 이펙트
+  if(u.throwing&&u.throwTarget&&u.throwTimer>0){
+    var tt=1-u.throwTimer/5;
+    cx.save();
+    var bx=u.x+(u.throwTarget.x-u.x)*tt;
+    var by=u.y+(u.throwTarget.y-u.y)*tt-Math.sin(tt*Math.PI)*50;
+    var bs=8-tt*4;
+    cx.fillStyle='rgba(200,150,50,0.8)';
+    cx.translate(bx,by);cx.rotate(tt*Math.PI*3);
+    cx.fillRect(-bs,-bs,bs*2,bs*2);
+    cx.restore();
+  }
+
+  // KO: 회색 작은 원 + X
+  if(u.ko){
+    cx.globalAlpha=0.2;
+    var kr=u.type==='runner'?6:12;
+    cx.fillStyle='#1a1a1a';
+    cx.beginPath();cx.arc(x,y,kr,0,Math.PI*2);cx.fill();
+    // 이미지도 흐리게
+    var img=u.c?getImg(u.c.img):null;
+    if(img){
+      cx.save();cx.beginPath();cx.arc(x,y,kr,0,Math.PI*2);cx.clip();
+      cx.filter='grayscale(100%)';
+      cx.drawImage(img,x-kr,y-kr,kr*2,kr*2);
+      cx.filter='none';cx.restore();
+    }
+    cx.strokeStyle='#333';cx.lineWidth=1;
+    cx.beginPath();cx.arc(x,y,kr,0,Math.PI*2);cx.stroke();
+    cx.strokeStyle='#555';cx.lineWidth=1.5;
+    cx.beginPath();cx.moveTo(x-5,y-5);cx.lineTo(x+5,y+5);cx.stroke();
+    cx.beginPath();cx.moveTo(x+5,y-5);cx.lineTo(x-5,y+5);cx.stroke();
+    cx.globalAlpha=1;
+    return;
+  }
+
+  // 흔들림 (피격)
+  if(u.shake>0){x+=(Math.random()-0.5)*u.shake*2.5;y+=(Math.random()-0.5)*u.shake*2.5}
+
+  if(u.type==='runner'){
+    var r=R;
+    if(u.carriedBy){x=u.carriedBy.x;y=u.carriedBy.y-28;r=9}
+    // 노란 글로우
+    cx.shadowColor='#ffcc00';cx.shadowBlur=u.carriedBy?6:12;
+    cx.fillStyle=u.s==='a'?'#1a3a5a':'#5a1a1a';
+    cx.beginPath();cx.arc(x,y,r,0,Math.PI*2);cx.fill();
+    cx.strokeStyle='#ffcc00';cx.lineWidth=u.carriedBy?1.5:3;
+    cx.beginPath();cx.arc(x,y,r,0,Math.PI*2);cx.stroke();
+    cx.shadowBlur=0;
+    cx.font=(u.carriedBy?'10':'16')+'px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillText('🏃',x,y);
+    if(!u.carriedBy){cx.font='bold 9px sans-serif';cx.fillStyle='#ffcc00';cx.fillText(u.name,x,y+r+10)}
+  }else{
+    var r=R;
+    var bdr=TIER_COLORS[u.c.tier]||'#888';
+    var img=getImg(u.c.img);
+
+    // 그림자
+    cx.fillStyle='rgba(0,0,0,0.3)';
+    cx.beginPath();cx.arc(x+2,y+3,r,0,Math.PI*2);cx.fill();
+
+    // 본체: 이미지 or 색상
+    cx.save();
+    cx.beginPath();cx.arc(x,y,r,0,Math.PI*2);cx.clip();
+    if(img){
+      cx.drawImage(img,x-r,y-r,r*2,r*2);
+    }else{
+      cx.fillStyle=u.s==='a'?'#1a4a8a':'#8a1a1a';
+      cx.fillRect(x-r,y-r,r*2,r*2);
+      cx.fillStyle='#fff';cx.font='bold 12px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+      cx.fillText(u.c.name.substring(0,2),x,y);
+    }
+    cx.restore();
+
+    // 테두리: 러너 태우면 노란색, 아니면 아군=초록 적=빨강
+    if(u.carryingRunner){
+      cx.shadowColor='#ffcc00';cx.shadowBlur=10;
+      cx.strokeStyle='#ffcc00';cx.lineWidth=3;
+    }else{
+      cx.strokeStyle=u.s==='a'?'#44cc66':'#ee3333';
+      cx.lineWidth=2.5;
+    }
+    cx.beginPath();cx.arc(x,y,r,0,Math.PI*2);cx.stroke();
+    cx.shadowBlur=0;
+
+    // 러너 버프 외곽 링
+    if(u.runnerBuff&&!u.carryingRunner){
+      cx.strokeStyle=u.s==='a'?'rgba(79,195,247,0.5)':'rgba(255,100,100,0.5)';
+      cx.lineWidth=2;cx.setLineDash([3,3]);
+      cx.beginPath();cx.arc(x,y,r+5,0,Math.PI*2);cx.stroke();
+      cx.setLineDash([]);
+    }
+
+    // 방향 삼각형
+    cx.fillStyle=bdr;
+    cx.beginPath();
+    cx.moveTo(x+Math.cos(u.facing)*(r+5),y+Math.sin(u.facing)*(r+5));
+    cx.lineTo(x+Math.cos(u.facing+0.35)*r,y+Math.sin(u.facing+0.35)*r);
+    cx.lineTo(x+Math.cos(u.facing-0.35)*r,y+Math.sin(u.facing-0.35)*r);
+    cx.fill();
+
+    // HP 바
+    var bw=r*2.2,bh=3,bx=x-bw/2,by=y-r-8;
+    cx.fillStyle='#000';cx.fillRect(bx-1,by-1,bw+2,bh+2);
+    cx.fillStyle='#222';cx.fillRect(bx,by,bw,bh);
+    cx.fillStyle=u.hp>60?'#4caf50':u.hp>30?'#ff9800':'#f44336';
+    cx.fillRect(bx,by,bw*(u.hp/100),bh);
+
+    // 이름 (이미지 아래)
+    cx.fillStyle='#ddd';cx.font='bold 8px sans-serif';cx.textAlign='center';cx.textBaseline='top';
+    cx.fillText(u.c.name,x,y+r+2);
+
+    // 데미지 텍스트 (큰 빨간 숫자, 위로 튀어오름)
+    if(u.dmgTimer>0&&u.dmgText){
+      var dt=1-u.dmgTimer/20;
+      var bounce=Math.sin(dt*Math.PI)*1.3; // 바운스
+      cx.globalAlpha=1-dt*dt; // 서서히 사라짐
+      cx.fillStyle='#ff2222';
+      cx.font='bold '+(14+bounce*4)+'px sans-serif';
+      cx.textAlign='center';cx.textBaseline='middle';
+      cx.fillText('-'+u.dmgText,x,y-r-10-dt*25+Math.sin(dt*Math.PI*2)*3);
+      cx.globalAlpha=1;
+    }
+  }
+}
+
+// ========== INIT ==========
+genMap();
+draw();
+requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>
