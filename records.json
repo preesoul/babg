@@ -1,7 +1,6 @@
 {
   "players": {
     "preesoul": {
-      "pw": "aqula88",
       "records": [
         {
           "date": "2026-04-05T04:35:36",
@@ -10,7 +9,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "와카모(수영복)",
+              "name": "ìì¹´ëª¨(ììë³µ)",
               "baseId": "wakamo",
               "atk": 16,
               "hp": 20,
@@ -23,10 +22,10 @@
               ],
               "isSkin": true,
               "img": "Wakamo_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "미네(아이돌)",
+              "name": "ë¯¸ë¤(ìì´ë)",
               "baseId": "mine",
               "atk": 14,
               "hp": 14,
@@ -38,10 +37,10 @@
               ],
               "isSkin": true,
               "img": "Mine_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "하스미",
+              "name": "íì¤ë¯¸",
               "baseId": "hasumi",
               "atk": 8,
               "hp": 6,
@@ -51,10 +50,10 @@
               ],
               "isSkin": false,
               "img": "Hasumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "하스미",
+              "name": "íì¤ë¯¸",
               "baseId": "hasumi",
               "atk": 14,
               "hp": 12,
@@ -65,10 +64,10 @@
               ],
               "isSkin": false,
               "img": "Hasumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "와카모(수영복)",
+              "name": "ìì¹´ëª¨(ììë³µ)",
               "baseId": "wakamo",
               "atk": 16,
               "hp": 20,
@@ -81,7 +80,7 @@
               ],
               "isSkin": true,
               "img": "Wakamo_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ],
           "pinned": false
@@ -93,7 +92,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시로코 테러",
+              "name": "ìë¡ì½ íë¬",
               "baseId": "Shiroko_Terror",
               "atk": 101,
               "hp": 98,
@@ -103,10 +102,10 @@
               ],
               "isSkin": false,
               "img": "unique/Shiroko_Terror.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 5,
               "hp": 6,
@@ -114,7 +113,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ],
           "pinned": false
@@ -126,7 +125,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 9,
               "hp": 10,
@@ -134,10 +133,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "네루",
+              "name": "ë¤ë£¨",
               "baseId": "neru",
               "atk": 5,
               "hp": 5,
@@ -150,10 +149,10 @@
               ],
               "isSkin": false,
               "img": "Neru.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "츠쿠요(드레스)",
+              "name": "ì¸ ì¿ ì(ëë ì¤)",
               "baseId": "tsukuyo",
               "atk": 19,
               "hp": 17,
@@ -161,10 +160,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "이즈나(수영복)",
+              "name": "ì´ì¦ë(ììë³µ)",
               "baseId": "izuna",
               "atk": 20,
               "hp": 17,
@@ -172,10 +171,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -183,7 +182,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ],
           "pinned": false
@@ -195,7 +194,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아코(드레스)",
+              "name": "ìì½(ëë ì¤)",
               "baseId": "ako",
               "atk": 11,
               "hp": 15,
@@ -205,10 +204,10 @@
               ],
               "isSkin": true,
               "img": "Ako_(Dress).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 18,
               "hp": 11,
@@ -218,10 +217,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "준코(새해)",
+              "name": "ì¤ì½(ìí´)",
               "baseId": "junko",
               "atk": 21,
               "hp": 19,
@@ -231,10 +230,10 @@
               ],
               "isSkin": true,
               "img": "Junko_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "린",
+              "name": "ë¦°",
               "baseId": "lin",
               "atk": 8,
               "hp": 8,
@@ -242,10 +241,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Lin.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -253,7 +252,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -264,7 +263,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "티파티(미카 호스트)",
+              "name": "í°íí°(ë¯¸ì¹´ í¸ì¤í¸)",
               "baseId": "trinity_mika",
               "atk": 58,
               "hp": 50,
@@ -275,10 +274,10 @@
               ],
               "isSkin": false,
               "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(미카 호스트)",
+              "name": "í°íí°(ë¯¸ì¹´ í¸ì¤í¸)",
               "baseId": "trinity_mika",
               "atk": 58,
               "hp": 54,
@@ -289,10 +288,10 @@
               ],
               "isSkin": false,
               "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 36,
               "hp": 32,
@@ -306,10 +305,10 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(나기사 호스트)",
+              "name": "í°íí°(ëê¸°ì¬ í¸ì¤í¸)",
               "baseId": "trinity_nagisa",
               "atk": 28,
               "hp": 28,
@@ -317,10 +316,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(세이아 호스트)",
+              "name": "í°íí°(ì¸ì´ì í¸ì¤í¸)",
               "baseId": "trinity_seia",
               "atk": 18,
               "hp": 20,
@@ -330,7 +329,7 @@
               ],
               "isSkin": false,
               "img": "unique/Trinity_seia.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -341,7 +340,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아리스&케이",
+              "name": "ìë¦¬ì¤&ì¼ì´",
               "baseId": "Arisu_Kei",
               "atk": 99,
               "hp": 91,
@@ -354,10 +353,10 @@
               ],
               "isSkin": false,
               "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스&케이",
+              "name": "ìë¦¬ì¤&ì¼ì´",
               "baseId": "Arisu_Kei",
               "atk": 99,
               "hp": 91,
@@ -370,10 +369,10 @@
               ],
               "isSkin": false,
               "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 44,
               "hp": 44,
@@ -385,10 +384,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 15,
               "hp": 16,
@@ -396,10 +395,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "유즈",
+              "name": "ì ì¦",
               "baseId": "yuzu",
               "atk": 22,
               "hp": 23,
@@ -407,7 +406,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Yuzu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ],
           "pinned": true
@@ -419,7 +418,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "키키",
+              "name": "í¤í¤",
               "baseId": "shanhai_kiki",
               "atk": 10,
               "hp": 12,
@@ -431,10 +430,10 @@
               ],
               "isSkin": false,
               "img": "unique/Kiki.png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "루미(어린이)",
+              "name": "ë£¨ë¯¸(ì´ë¦°ì´)",
               "baseId": "rumi",
               "atk": 19,
               "hp": 19,
@@ -447,10 +446,10 @@
               ],
               "isSkin": true,
               "img": "Rumi_(Kid).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 6,
               "hp": 6,
@@ -462,10 +461,10 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "사야(사복)",
+              "name": "ì¬ì¼(ì¬ë³µ)",
               "baseId": "saya",
               "atk": 30,
               "hp": 30,
@@ -476,10 +475,10 @@
               ],
               "isSkin": true,
               "img": "Saya_(Casual).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "키키",
+              "name": "í¤í¤",
               "baseId": "shanhai_kiki",
               "atk": 10,
               "hp": 12,
@@ -490,7 +489,7 @@
               ],
               "isSkin": false,
               "img": "unique/Kiki.png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             }
           ]
         },
@@ -514,10 +513,10 @@
               ],
               "isSkin": false,
               "img": "unique/Cleaning_Clearing.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "호시노",
+              "name": "í¸ìë¸",
               "baseId": "hoshino",
               "atk": 15,
               "hp": 17,
@@ -530,10 +529,10 @@
               ],
               "isSkin": false,
               "img": "Hoshino.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "히나타",
+              "name": "íëí",
               "baseId": "hinata",
               "atk": 13,
               "hp": 15,
@@ -546,10 +545,10 @@
               ],
               "isSkin": false,
               "img": "Hinata.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "루미",
+              "name": "ë£¨ë¯¸",
               "baseId": "rumi",
               "atk": 21,
               "hp": 21,
@@ -561,10 +560,10 @@
               ],
               "isSkin": false,
               "img": "Rumi.png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "우타하(치어리더)",
+              "name": "ì°íí(ì¹ì´ë¦¬ë)",
               "baseId": "utaha",
               "atk": 21,
               "hp": 21,
@@ -576,7 +575,7 @@
               ],
               "isSkin": true,
               "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -587,7 +586,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "사츠키(수영복)",
+              "name": "ì¬ì¸ í¤(ììë³µ)",
               "baseId": "satsuki",
               "atk": 11,
               "hp": 13,
@@ -595,10 +594,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "시로코 테러",
+              "name": "ìë¡ì½ íë¬",
               "baseId": "Shiroko_Terror",
               "atk": 60,
               "hp": 60,
@@ -609,10 +608,10 @@
               ],
               "isSkin": false,
               "img": "unique/Shiroko_Terror.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "사츠키(수영복)",
+              "name": "ì¬ì¸ í¤(ììë³µ)",
               "baseId": "satsuki",
               "atk": 11,
               "hp": 13,
@@ -620,7 +619,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -631,7 +630,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시로코(수영복)",
+              "name": "ìë¡ì½(ììë³µ)",
               "baseId": "shiroko",
               "atk": 23,
               "hp": 17,
@@ -641,10 +640,10 @@
               ],
               "isSkin": true,
               "img": "Shiroko_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "세리카(수영복)",
+              "name": "ì¸ë¦¬ì¹´(ììë³µ)",
               "baseId": "serika",
               "atk": 27,
               "hp": 23,
@@ -654,10 +653,10 @@
               ],
               "isSkin": true,
               "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "노노미(수영복)",
+              "name": "ë¸ë¸ë¯¸(ììë³µ)",
               "baseId": "nonomi",
               "atk": 13,
               "hp": 13,
@@ -665,10 +664,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Nonomi_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "사야(사복)",
+              "name": "ì¬ì¼(ì¬ë³µ)",
               "baseId": "saya",
               "atk": 13,
               "hp": 15,
@@ -676,10 +675,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Saya_(Casual).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "노노미",
+              "name": "ë¸ë¸ë¯¸",
               "baseId": "nonomi",
               "atk": 4,
               "hp": 4,
@@ -687,7 +686,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Nonomi.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             }
           ]
         }
@@ -787,8 +786,7 @@
         "red_winter_minori"
       ]
     },
-    "쿼츠": {
-      "pw": "0903",
+    "ì¿¼ì¸ ": {
       "records": [
         {
           "date": "2026-04-05T23:18:07",
@@ -797,7 +795,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 3,
               "hp": 5,
@@ -807,10 +805,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 7,
               "hp": 7,
@@ -818,10 +816,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 12,
               "hp": 11,
@@ -832,10 +830,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -843,10 +841,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 3,
               "hp": 2,
@@ -856,7 +854,7 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -867,7 +865,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 13,
               "hp": 15,
@@ -877,10 +875,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 13,
               "hp": 15,
@@ -890,10 +888,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "히나",
+              "name": "íë",
               "baseId": "hina",
               "atk": 23,
               "hp": 13,
@@ -903,10 +901,10 @@
               ],
               "isSkin": false,
               "img": "Hina.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "만마전",
+              "name": "ë§ë§ì ",
               "baseId": "gehenna_pandemonium",
               "atk": 74,
               "hp": 65,
@@ -914,10 +912,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "만마전",
+              "name": "ë§ë§ì ",
               "baseId": "gehenna_pandemonium",
               "atk": 74,
               "hp": 65,
@@ -925,7 +923,7 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ],
           "pinned": true
@@ -937,7 +935,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "카린",
+              "name": "ì¹´ë¦°",
               "baseId": "karin",
               "atk": 27,
               "hp": 22,
@@ -948,10 +946,10 @@
               ],
               "isSkin": false,
               "img": "Karin.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "네루(바니걸)",
+              "name": "ë¤ë£¨(ë°ëê±¸)",
               "baseId": "neru",
               "atk": 42,
               "hp": 48,
@@ -963,10 +961,10 @@
               ],
               "isSkin": true,
               "img": "Neru_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "카린",
+              "name": "ì¹´ë¦°",
               "baseId": "karin",
               "atk": 10,
               "hp": 7,
@@ -977,10 +975,10 @@
               ],
               "isSkin": false,
               "img": "Karin.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 7,
               "hp": 7,
@@ -988,10 +986,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "아카네(버니걸)",
+              "name": "ìì¹´ë¤(ë²ëê±¸)",
               "baseId": "akane",
               "atk": 37,
               "hp": 41,
@@ -999,7 +997,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -1010,7 +1008,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 5,
               "hp": 4,
@@ -1020,10 +1018,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 5,
               "hp": 7,
@@ -1033,10 +1031,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 8,
               "hp": 7,
@@ -1047,10 +1045,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 8,
               "hp": 7,
@@ -1061,10 +1059,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 6,
               "hp": 6,
@@ -1076,7 +1074,7 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -1087,7 +1085,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "히나",
+              "name": "íë",
               "baseId": "hina",
               "atk": 13,
               "hp": 3,
@@ -1097,10 +1095,10 @@
               ],
               "isSkin": false,
               "img": "Hina.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아즈사(수영복)",
+              "name": "ìì¦ì¬(ììë³µ)",
               "baseId": "azusa",
               "atk": 19,
               "hp": 19,
@@ -1111,10 +1109,10 @@
               ],
               "isSkin": true,
               "img": "Azusa_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "코하루(수영복)",
+              "name": "ì½íë£¨(ììë³µ)",
               "baseId": "koharu",
               "atk": 9,
               "hp": 15,
@@ -1124,10 +1122,10 @@
               ],
               "isSkin": true,
               "img": "Koharu_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "나구사",
+              "name": "ëêµ¬ì¬",
               "baseId": "nagusa",
               "atk": 5,
               "hp": 7,
@@ -1137,10 +1135,10 @@
               ],
               "isSkin": false,
               "img": "Nagusa.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "히후미(수영복)",
+              "name": "ííë¯¸(ììë³µ)",
               "baseId": "hifumi",
               "atk": 9,
               "hp": 11,
@@ -1148,7 +1146,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Hifumi_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -1159,7 +1157,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "나구사",
+              "name": "ëêµ¬ì¬",
               "baseId": "nagusa",
               "atk": 30,
               "hp": 28,
@@ -1170,10 +1168,10 @@
               ],
               "isSkin": false,
               "img": "Nagusa.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "키쿄",
+              "name": "í¤ì¿",
               "baseId": "kikyou",
               "atk": 14,
               "hp": 14,
@@ -1186,10 +1184,10 @@
               ],
               "isSkin": false,
               "img": "Kikyou.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "유카리(수영복)",
+              "name": "ì ì¹´ë¦¬(ììë³µ)",
               "baseId": "yukari",
               "atk": 35,
               "hp": 29,
@@ -1201,10 +1199,10 @@
               ],
               "isSkin": true,
               "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "렌게(수영복)",
+              "name": "ë ê²(ììë³µ)",
               "baseId": "renge",
               "atk": 37,
               "hp": 29,
@@ -1216,10 +1214,10 @@
               ],
               "isSkin": true,
               "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "최강일각라이온",
+              "name": "ìµê°ì¼ê°ë¼ì´ì¨",
               "baseId": "hkyk_saikyo",
               "atk": 50,
               "hp": 50,
@@ -1227,7 +1225,7 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -1238,7 +1236,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 49,
               "hp": 45,
@@ -1252,10 +1250,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "피나(가이드)",
+              "name": "í¼ë(ê°ì´ë)",
               "baseId": "pina",
               "atk": 28,
               "hp": 24,
@@ -1266,10 +1264,10 @@
               ],
               "isSkin": true,
               "img": "Pina_(Guide).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "준코",
+              "name": "ì¤ì½",
               "baseId": "junko",
               "atk": 28,
               "hp": 29,
@@ -1280,10 +1278,10 @@
               ],
               "isSkin": false,
               "img": "Junko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "히비키(치어리더)",
+              "name": "íë¹í¤(ì¹ì´ë¦¬ë)",
               "baseId": "hibiki",
               "atk": 35,
               "hp": 33,
@@ -1293,10 +1291,10 @@
               ],
               "isSkin": true,
               "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "와카모",
+              "name": "ìì¹´ëª¨",
               "baseId": "wakamo",
               "atk": 13,
               "hp": 15,
@@ -1306,7 +1304,7 @@
               ],
               "isSkin": false,
               "img": "Wakamo.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -1317,7 +1315,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "유카리",
+              "name": "ì ì¹´ë¦¬",
               "baseId": "yukari",
               "atk": 22,
               "hp": 21,
@@ -1328,10 +1326,10 @@
               ],
               "isSkin": false,
               "img": "Yukari.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "키쿄",
+              "name": "í¤ì¿",
               "baseId": "kikyou",
               "atk": 17,
               "hp": 19,
@@ -1344,10 +1342,10 @@
               ],
               "isSkin": false,
               "img": "Kikyou.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "나구사",
+              "name": "ëêµ¬ì¬",
               "baseId": "nagusa",
               "atk": 50,
               "hp": 54,
@@ -1357,10 +1355,10 @@
               ],
               "isSkin": false,
               "img": "Nagusa.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "렌게(수영복)",
+              "name": "ë ê²(ììë³µ)",
               "baseId": "renge",
               "atk": 81,
               "hp": 79,
@@ -1372,10 +1370,10 @@
               ],
               "isSkin": true,
               "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "아유무(승무원)",
+              "name": "ìì ë¬´(ì¹ë¬´ì)",
               "baseId": "ayumu",
               "atk": 65,
               "hp": 55,
@@ -1385,7 +1383,7 @@
               ],
               "isSkin": true,
               "img": "Ayumu_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -1396,7 +1394,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 106,
               "hp": 96,
@@ -1406,10 +1404,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 78,
               "hp": 72,
@@ -1417,10 +1415,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "아유무(승무원)",
+              "name": "ìì ë¬´(ì¹ë¬´ì)",
               "baseId": "ayumu",
               "atk": 73,
               "hp": 67,
@@ -1428,10 +1426,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Ayumu_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "하스미",
+              "name": "íì¤ë¯¸",
               "baseId": "hasumi",
               "atk": 43,
               "hp": 41,
@@ -1441,10 +1439,10 @@
               ],
               "isSkin": false,
               "img": "Hasumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 40,
               "hp": 37,
@@ -1455,7 +1453,7 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -1466,7 +1464,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 93,
               "hp": 83,
@@ -1479,10 +1477,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 93,
               "hp": 83,
@@ -1495,10 +1493,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 49,
               "hp": 55,
@@ -1508,10 +1506,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아유무(승무원)",
+              "name": "ìì ë¬´(ì¹ë¬´ì)",
               "baseId": "ayumu",
               "atk": 35,
               "hp": 29,
@@ -1519,10 +1517,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Ayumu_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "우타하(치어리더)",
+              "name": "ì°íí(ì¹ì´ë¦¬ë)",
               "baseId": "utaha",
               "atk": 11,
               "hp": 11,
@@ -1532,7 +1530,7 @@
               ],
               "isSkin": true,
               "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -1601,8 +1599,7 @@
         "sena"
       ]
     },
-    "ㄱㄱ": {
-      "pw": "",
+    "ã±ã±": {
       "records": [
         {
           "date": "2026-04-06T15:57:35",
@@ -1611,7 +1608,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "마코토",
+              "name": "ë§ì½í ",
               "baseId": "makoto",
               "atk": 7,
               "hp": 7,
@@ -1619,10 +1616,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Makoto.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 11,
               "hp": 8,
@@ -1632,10 +1629,10 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "세리카(수영복)",
+              "name": "ì¸ë¦¬ì¹´(ììë³µ)",
               "baseId": "serika",
               "atk": 48,
               "hp": 42,
@@ -1648,10 +1645,10 @@
               ],
               "isSkin": true,
               "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "주리(웨이트리스)",
+              "name": "ì£¼ë¦¬(ì¨ì´í¸ë¦¬ì¤)",
               "baseId": "juri",
               "atk": 12,
               "hp": 6,
@@ -1659,10 +1656,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Juri_(maid).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 11,
               "hp": 11,
@@ -1672,7 +1669,7 @@
               ],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -1683,7 +1680,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 16,
               "hp": 14,
@@ -1691,10 +1688,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "세리카",
+              "name": "ì¸ë¦¬ì¹´",
               "baseId": "serika",
               "atk": 30,
               "hp": 28,
@@ -1704,10 +1701,10 @@
               ],
               "isSkin": false,
               "img": "Serika.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "아리스(메이드)",
+              "name": "ìë¦¬ì¤(ë©ì´ë)",
               "baseId": "arisu",
               "atk": 23,
               "hp": 15,
@@ -1718,10 +1715,10 @@
               ],
               "isSkin": true,
               "img": "Arisu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 23,
               "hp": 23,
@@ -1734,10 +1731,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 23,
               "hp": 23,
@@ -1749,7 +1746,7 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -1760,7 +1757,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 15,
               "hp": 17,
@@ -1770,10 +1767,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 12,
               "hp": 9,
@@ -1783,10 +1780,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "치나츠",
+              "name": "ì¹ëì¸ ",
               "baseId": "chinatsu",
               "atk": 5,
               "hp": 8,
@@ -1796,10 +1793,10 @@
               ],
               "isSkin": false,
               "img": "Chinatsu.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -1809,10 +1806,10 @@
               ],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -1820,7 +1817,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -1831,7 +1828,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시즈코",
+              "name": "ìì¦ì½",
               "baseId": "shizuko",
               "atk": 9,
               "hp": 6,
@@ -1839,10 +1836,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Shizuko.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "이즈나",
+              "name": "ì´ì¦ë",
               "baseId": "izuna",
               "atk": 6,
               "hp": 2,
@@ -1850,10 +1847,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Izuna.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "미치루(드레스)",
+              "name": "ë¯¸ì¹ë£¨(ëë ì¤)",
               "baseId": "michiru",
               "atk": 13,
               "hp": 11,
@@ -1861,10 +1858,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Michiru_(Dress).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "렌게",
+              "name": "ë ê²",
               "baseId": "renge",
               "atk": 7,
               "hp": 2,
@@ -1875,10 +1872,10 @@
               ],
               "isSkin": false,
               "img": "Renge.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "피나",
+              "name": "í¼ë",
               "baseId": "pina",
               "atk": 6,
               "hp": 3,
@@ -1888,7 +1885,7 @@
               ],
               "isSkin": false,
               "img": "Pina.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -1899,7 +1896,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "츠루기(수영복)",
+              "name": "ì¸ ë£¨ê¸°(ììë³µ)",
               "baseId": "tsurugi",
               "atk": 15,
               "hp": 15,
@@ -1907,10 +1904,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마시로(수영복)",
+              "name": "ë§ìë¡(ììë³µ)",
               "baseId": "mashiro",
               "atk": 21,
               "hp": 17,
@@ -1921,10 +1918,10 @@
               ],
               "isSkin": true,
               "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(미카 호스트)",
+              "name": "í°íí°(ë¯¸ì¹´ í¸ì¤í¸)",
               "baseId": "trinity_mika",
               "atk": 48,
               "hp": 52,
@@ -1936,10 +1933,10 @@
               ],
               "isSkin": false,
               "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 3,
               "hp": 5,
@@ -1949,10 +1946,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 6,
               "hp": 6,
@@ -1964,7 +1961,7 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -1975,7 +1972,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "츠쿠요(드레스)",
+              "name": "ì¸ ì¿ ì(ëë ì¤)",
               "baseId": "tsukuyo",
               "atk": 26,
               "hp": 24,
@@ -1983,10 +1980,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "츠바키",
+              "name": "ì¸ ë°í¤",
               "baseId": "tsubaki",
               "atk": 66,
               "hp": 65,
@@ -1997,10 +1994,10 @@
               ],
               "isSkin": false,
               "img": "Tsubaki.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "피나(가이드)",
+              "name": "í¼ë(ê°ì´ë)",
               "baseId": "pina",
               "atk": 19,
               "hp": 17,
@@ -2011,10 +2008,10 @@
               ],
               "isSkin": true,
               "img": "Pina_(Guide).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 11,
               "hp": 11,
@@ -2024,10 +2021,10 @@
               ],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "츠바키",
+              "name": "ì¸ ë°í¤",
               "baseId": "tsubaki",
               "atk": 66,
               "hp": 65,
@@ -2039,7 +2036,7 @@
               ],
               "isSkin": false,
               "img": "Tsubaki.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -2050,7 +2047,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 3,
               "hp": 2,
@@ -2060,10 +2057,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -2071,10 +2068,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 1,
               "hp": 2,
@@ -2084,10 +2081,10 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "세리카",
+              "name": "ì¸ë¦¬ì¹´",
               "baseId": "serika",
               "atk": 21,
               "hp": 19,
@@ -2097,10 +2094,10 @@
               ],
               "isSkin": false,
               "img": "Serika.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "세리카",
+              "name": "ì¸ë¦¬ì¹´",
               "baseId": "serika",
               "atk": 16,
               "hp": 14,
@@ -2110,7 +2107,7 @@
               ],
               "isSkin": false,
               "img": "Serika.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             }
           ]
         },
@@ -2121,7 +2118,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 23,
               "hp": 23,
@@ -2131,10 +2128,10 @@
               ],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈",
+              "name": "ì ì¦",
               "baseId": "yuzu",
               "atk": 20,
               "hp": 21,
@@ -2142,10 +2139,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Yuzu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 33,
               "hp": 33,
@@ -2158,10 +2155,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스&케이",
+              "name": "ìë¦¬ì¤&ì¼ì´",
               "baseId": "Arisu_Kei",
               "atk": 66,
               "hp": 58,
@@ -2173,10 +2170,10 @@
               ],
               "isSkin": false,
               "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스&케이",
+              "name": "ìë¦¬ì¤&ì¼ì´",
               "baseId": "Arisu_Kei",
               "atk": 62,
               "hp": 58,
@@ -2188,7 +2185,7 @@
               ],
               "isSkin": false,
               "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -2199,7 +2196,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 23,
               "hp": 21,
@@ -2211,10 +2208,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 7,
               "hp": 5,
@@ -2224,10 +2221,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "우타하",
+              "name": "ì°íí",
               "baseId": "utaha",
               "atk": 9,
               "hp": 9,
@@ -2237,10 +2234,10 @@
               ],
               "isSkin": false,
               "img": "Utaha.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "세리카(수영복)",
+              "name": "ì¸ë¦¬ì¹´(ììë³µ)",
               "baseId": "serika",
               "atk": 35,
               "hp": 31,
@@ -2252,10 +2249,10 @@
               ],
               "isSkin": true,
               "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "리오",
+              "name": "ë¦¬ì¤",
               "baseId": "rio",
               "atk": 7,
               "hp": 7,
@@ -2263,7 +2260,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Rio.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -2274,7 +2271,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "피나(가이드)",
+              "name": "í¼ë(ê°ì´ë)",
               "baseId": "pina",
               "atk": 18,
               "hp": 14,
@@ -2285,10 +2282,10 @@
               ],
               "isSkin": true,
               "img": "Pina_(Guide).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "츠쿠요",
+              "name": "ì¸ ì¿ ì",
               "baseId": "tsukuyo",
               "atk": 9,
               "hp": 8,
@@ -2296,10 +2293,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsukuyo.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "이즈나",
+              "name": "ì´ì¦ë",
               "baseId": "izuna",
               "atk": 7,
               "hp": 7,
@@ -2307,10 +2304,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Izuna.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "미모리",
+              "name": "ë¯¸ëª¨ë¦¬",
               "baseId": "mimori",
               "atk": 6,
               "hp": 7,
@@ -2320,10 +2317,10 @@
               ],
               "isSkin": false,
               "img": "Mimori.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "유카리",
+              "name": "ì ì¹´ë¦¬",
               "baseId": "yukari",
               "atk": 2,
               "hp": 1,
@@ -2334,7 +2331,7 @@
               ],
               "isSkin": false,
               "img": "Yukari.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         }
@@ -2424,13 +2421,11 @@
         "Kei_usb"
       ]
     },
-    "도도새": {
-      "pw": "3778",
+    "ëëì": {
       "records": [],
       "points": 0
     },
     "Prenguin": {
-      "pw": "aqula88!",
       "records": [
         {
           "date": "2026-04-06T01:36:04",
@@ -2439,7 +2434,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "흥신소 68",
+              "name": "í¥ì ì 68",
               "baseId": "gehenna_p68",
               "atk": 43,
               "hp": 43,
@@ -2449,10 +2444,10 @@
               ],
               "isSkin": false,
               "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 30,
               "hp": 22,
@@ -2462,10 +2457,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "사츠키(수영복)",
+              "name": "ì¬ì¸ í¤(ììë³µ)",
               "baseId": "satsuki",
               "atk": 21,
               "hp": 23,
@@ -2475,10 +2470,10 @@
               ],
               "isSkin": true,
               "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "사츠키(수영복)",
+              "name": "ì¬ì¸ í¤(ììë³µ)",
               "baseId": "satsuki",
               "atk": 21,
               "hp": 23,
@@ -2488,10 +2483,10 @@
               ],
               "isSkin": true,
               "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "네루",
+              "name": "ë¤ë£¨",
               "baseId": "neru",
               "atk": 5,
               "hp": 5,
@@ -2503,7 +2498,7 @@
               ],
               "isSkin": false,
               "img": "Neru.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -2514,7 +2509,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "에이미(수영복)",
+              "name": "ìì´ë¯¸(ììë³µ)",
               "baseId": "eimi",
               "atk": 23,
               "hp": 25,
@@ -2525,10 +2520,10 @@
               ],
               "isSkin": true,
               "img": "Eimi_(Swimsuit).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "와카모(수영복)",
+              "name": "ìì¹´ëª¨(ììë³µ)",
               "baseId": "wakamo",
               "atk": 19,
               "hp": 23,
@@ -2540,10 +2535,10 @@
               ],
               "isSkin": true,
               "img": "Wakamo_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "와카모(수영복)",
+              "name": "ìì¹´ëª¨(ììë³µ)",
               "baseId": "wakamo",
               "atk": 19,
               "hp": 23,
@@ -2555,10 +2550,10 @@
               ],
               "isSkin": true,
               "img": "Wakamo_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "츠루기(수영복)",
+              "name": "ì¸ ë£¨ê¸°(ììë³µ)",
               "baseId": "tsurugi",
               "atk": 27,
               "hp": 27,
@@ -2566,10 +2561,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "리오",
+              "name": "ë¦¬ì¤",
               "baseId": "rio",
               "atk": 7,
               "hp": 7,
@@ -2577,7 +2572,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Rio.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -2588,7 +2583,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미네(아이돌)",
+              "name": "ë¯¸ë¤(ìì´ë)",
               "baseId": "mine",
               "atk": 23,
               "hp": 23,
@@ -2600,10 +2595,10 @@
               ],
               "isSkin": true,
               "img": "Mine_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 19,
               "hp": 21,
@@ -2613,10 +2608,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "사쿠라코",
+              "name": "ì¬ì¿ ë¼ì½",
               "baseId": "sakurako",
               "atk": 11,
               "hp": 11,
@@ -2624,10 +2619,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Sakurako.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(나기사 호스트)",
+              "name": "í°íí°(ëê¸°ì¬ í¸ì¤í¸)",
               "baseId": "trinity_nagisa",
               "atk": 10,
               "hp": 10,
@@ -2635,10 +2630,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리",
+              "name": "ë§ë¦¬",
               "baseId": "mari",
               "atk": 32,
               "hp": 31,
@@ -2648,7 +2643,7 @@
               ],
               "isSkin": false,
               "img": "Mari.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ],
           "pinned": false
@@ -2660,7 +2655,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "말쿠트",
+              "name": "ë§ì¿ í¸",
               "baseId": "millennium_malkuth",
               "atk": 28,
               "hp": 38,
@@ -2671,10 +2666,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 52,
               "hp": 54,
@@ -2682,10 +2677,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아카네",
+              "name": "ìì¹´ë¤",
               "baseId": "akane",
               "atk": 20,
               "hp": 22,
@@ -2695,10 +2690,10 @@
               ],
               "isSkin": false,
               "img": "Akane.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "우타하(치어리더)",
+              "name": "ì°íí(ì¹ì´ë¦¬ë)",
               "baseId": "utaha",
               "atk": 29,
               "hp": 29,
@@ -2708,10 +2703,10 @@
               ],
               "isSkin": true,
               "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키",
+              "name": "í í¤",
               "baseId": "toki",
               "atk": 34,
               "hp": 35,
@@ -2721,7 +2716,7 @@
               ],
               "isSkin": false,
               "img": "Toki.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -2732,7 +2727,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미나(리코더)",
+              "name": "ë¯¸ë(ë¦¬ì½ë)",
               "baseId": "mina",
               "atk": 39,
               "hp": 43,
@@ -2742,10 +2737,10 @@
               ],
               "isSkin": true,
               "img": "Mina_(Recorder).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "슌(어린이)",
+              "name": "ì(ì´ë¦°ì´)",
               "baseId": "shun",
               "atk": 25,
               "hp": 17,
@@ -2757,10 +2752,10 @@
               ],
               "isSkin": true,
               "img": "Shun_(Kid).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "치아키",
+              "name": "ì¹ìí¤",
               "baseId": "chiaki",
               "atk": 38,
               "hp": 30,
@@ -2771,10 +2766,10 @@
               ],
               "isSkin": false,
               "img": "Chiaki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "치아키",
+              "name": "ì¹ìí¤",
               "baseId": "chiaki",
               "atk": 23,
               "hp": 21,
@@ -2784,10 +2779,10 @@
               ],
               "isSkin": false,
               "img": "Chiaki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 32,
               "hp": 32,
@@ -2799,7 +2794,7 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ],
           "pinned": true
@@ -2811,7 +2806,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "말쿠트",
+              "name": "ë§ì¿ í¸",
               "baseId": "millennium_malkuth",
               "atk": 18,
               "hp": 28,
@@ -2823,10 +2818,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키",
+              "name": "í í¤",
               "baseId": "toki",
               "atk": 9,
               "hp": 16,
@@ -2837,10 +2832,10 @@
               ],
               "isSkin": false,
               "img": "Toki.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아카네",
+              "name": "ìì¹´ë¤",
               "baseId": "akane",
               "atk": 6,
               "hp": 4,
@@ -2848,10 +2843,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Akane.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "네루(바니걸)",
+              "name": "ë¤ë£¨(ë°ëê±¸)",
               "baseId": "neru",
               "atk": 11,
               "hp": 11,
@@ -2864,10 +2859,10 @@
               ],
               "isSkin": true,
               "img": "Neru_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "호시노",
+              "name": "í¸ìë¸",
               "baseId": "hoshino",
               "atk": 13,
               "hp": 15,
@@ -2878,7 +2873,7 @@
               ],
               "isSkin": false,
               "img": "Hoshino.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             }
           ]
         },
@@ -2889,7 +2884,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "호시노(수영복)",
+              "name": "í¸ìë¸(ììë³µ)",
               "baseId": "hoshino",
               "atk": 18,
               "hp": 20,
@@ -2900,10 +2895,10 @@
               ],
               "isSkin": true,
               "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "호시노(수영복)",
+              "name": "í¸ìë¸(ììë³µ)",
               "baseId": "hoshino",
               "atk": 18,
               "hp": 20,
@@ -2914,10 +2909,10 @@
               ],
               "isSkin": true,
               "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "우이(수영복)",
+              "name": "ì°ì´(ììë³µ)",
               "baseId": "ui",
               "atk": 13,
               "hp": 11,
@@ -2929,10 +2924,10 @@
               ],
               "isSkin": true,
               "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "노노미",
+              "name": "ë¸ë¸ë¯¸",
               "baseId": "nonomi",
               "atk": 8,
               "hp": 8,
@@ -2940,10 +2935,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Nonomi.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "노노미",
+              "name": "ë¸ë¸ë¯¸",
               "baseId": "nonomi",
               "atk": 8,
               "hp": 8,
@@ -2951,7 +2946,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Nonomi.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             }
           ]
         },
@@ -2962,7 +2957,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 24,
               "hp": 22,
@@ -2974,10 +2969,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "사쿠라코",
+              "name": "ì¬ì¿ ë¼ì½",
               "baseId": "sakurako",
               "atk": 7,
               "hp": 7,
@@ -2985,10 +2980,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Sakurako.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 25,
               "hp": 31,
@@ -2999,10 +2994,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 6,
               "hp": 6,
@@ -3014,10 +3009,10 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(나기사 호스트)",
+              "name": "í°íí°(ëê¸°ì¬ í¸ì¤í¸)",
               "baseId": "trinity_nagisa",
               "atk": 13,
               "hp": 11,
@@ -3025,7 +3020,7 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -3036,7 +3031,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아즈사",
+              "name": "ìì¦ì¬",
               "baseId": "azusa",
               "atk": 19,
               "hp": 19,
@@ -3048,10 +3043,10 @@
               ],
               "isSkin": false,
               "img": "Azusa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "린(승무원)",
+              "name": "ë¦°(ì¹ë¬´ì)",
               "baseId": "lin",
               "atk": 17,
               "hp": 17,
@@ -3061,10 +3056,10 @@
               ],
               "isSkin": true,
               "img": "Lin_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "린(승무원)",
+              "name": "ë¦°(ì¹ë¬´ì)",
               "baseId": "lin",
               "atk": 17,
               "hp": 17,
@@ -3074,10 +3069,10 @@
               ],
               "isSkin": true,
               "img": "Lin_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -3087,10 +3082,10 @@
               ],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "우이(수영복)",
+              "name": "ì°ì´(ììë³µ)",
               "baseId": "ui",
               "atk": 28,
               "hp": 16,
@@ -3102,7 +3097,7 @@
               ],
               "isSkin": true,
               "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -3113,7 +3108,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "말쿠트",
+              "name": "ë§ì¿ í¸",
               "baseId": "millennium_malkuth",
               "atk": 36,
               "hp": 46,
@@ -3125,10 +3120,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "말쿠트",
+              "name": "ë§ì¿ í¸",
               "baseId": "millennium_malkuth",
               "atk": 32,
               "hp": 42,
@@ -3140,10 +3135,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미네",
+              "name": "ë¯¸ë¤",
               "baseId": "mine",
               "atk": 16,
               "hp": 16,
@@ -3155,10 +3150,10 @@
               ],
               "isSkin": false,
               "img": "Mine.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "네루",
+              "name": "ë¤ë£¨",
               "baseId": "neru",
               "atk": 5,
               "hp": 5,
@@ -3170,10 +3165,10 @@
               ],
               "isSkin": false,
               "img": "Neru.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 56,
               "hp": 68,
@@ -3185,7 +3180,7 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -3266,8 +3261,7 @@
         "rumi"
       ]
     },
-    "남민철": {
-      "pw": "5056",
+    "ë¨ë¯¼ì² ": {
       "records": [
         {
           "date": "2026-04-07T12:40:52",
@@ -3276,7 +3270,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "미나(리코더)",
+              "name": "ë¯¸ë(ë¦¬ì½ë)",
               "baseId": "mina",
               "atk": 19,
               "hp": 23,
@@ -3287,10 +3281,10 @@
               ],
               "isSkin": true,
               "img": "Mina_(Recorder).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "슌",
+              "name": "ì",
               "baseId": "shun",
               "atk": 25,
               "hp": 17,
@@ -3300,10 +3294,10 @@
               ],
               "isSkin": false,
               "img": "Shun.png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "사야(사복)",
+              "name": "ì¬ì¼(ì¬ë³µ)",
               "baseId": "saya",
               "atk": 39,
               "hp": 41,
@@ -3313,10 +3307,10 @@
               ],
               "isSkin": true,
               "img": "Saya_(Casual).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "레이죠(사복)",
+              "name": "ë ì´ì£ (ì¬ë³µ)",
               "baseId": "reijo",
               "atk": 23,
               "hp": 19,
@@ -3327,10 +3321,10 @@
               ],
               "isSkin": true,
               "img": "Reijo_(Casual).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "린",
+              "name": "ë¦°",
               "baseId": "lin",
               "atk": 18,
               "hp": 18,
@@ -3338,7 +3332,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Lin.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -3349,7 +3343,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미노리(성난 군중)",
+              "name": "ë¯¸ë¸ë¦¬(ì±ë êµ°ì¤)",
               "baseId": "red_winter_minori",
               "atk": 10,
               "hp": 12,
@@ -3359,10 +3353,10 @@
               ],
               "isSkin": false,
               "img": "unique/Revolution.png",
-              "school": "붉은겨울"
+              "school": "ë¶ìê²¨ì¸"
             },
             {
-              "name": "이즈나",
+              "name": "ì´ì¦ë",
               "baseId": "izuna",
               "atk": 10,
               "hp": 8,
@@ -3370,10 +3364,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Izuna.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 11,
               "hp": 7,
@@ -3381,10 +3375,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 11,
               "hp": 11,
@@ -3392,10 +3386,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "리오",
+              "name": "ë¦¬ì¤",
               "baseId": "rio",
               "atk": 7,
               "hp": 7,
@@ -3403,7 +3397,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Rio.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -3414,7 +3408,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "히비키(치어리더)",
+              "name": "íë¹í¤(ì¹ì´ë¦¬ë)",
               "baseId": "hibiki",
               "atk": 13,
               "hp": 11,
@@ -3422,10 +3416,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "사츠키(수영복)",
+              "name": "ì¬ì¸ í¤(ììë³µ)",
               "baseId": "satsuki",
               "atk": 11,
               "hp": 13,
@@ -3436,10 +3430,10 @@
               ],
               "isSkin": true,
               "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 11,
               "hp": 11,
@@ -3447,10 +3441,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "히비키(치어리더)",
+              "name": "íë¹í¤(ì¹ì´ë¦¬ë)",
               "baseId": "hibiki",
               "atk": 9,
               "hp": 7,
@@ -3458,10 +3452,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "사쿠라코",
+              "name": "ì¬ì¿ ë¼ì½",
               "baseId": "sakurako",
               "atk": 7,
               "hp": 7,
@@ -3469,7 +3463,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Sakurako.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -3480,7 +3474,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "우이(수영복)",
+              "name": "ì°ì´(ììë³µ)",
               "baseId": "ui",
               "atk": 37,
               "hp": 33,
@@ -3491,10 +3485,10 @@
               ],
               "isSkin": true,
               "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "우이(수영복)",
+              "name": "ì°ì´(ììë³µ)",
               "baseId": "ui",
               "atk": 25,
               "hp": 21,
@@ -3505,10 +3499,10 @@
               ],
               "isSkin": true,
               "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "이즈나(수영복)",
+              "name": "ì´ì¦ë(ììë³µ)",
               "baseId": "izuna",
               "atk": 42,
               "hp": 42,
@@ -3516,10 +3510,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "츠쿠요(드레스)",
+              "name": "ì¸ ì¿ ì(ëë ì¤)",
               "baseId": "tsukuyo",
               "atk": 44,
               "hp": 42,
@@ -3527,10 +3521,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "린(승무원)",
+              "name": "ë¦°(ì¹ë¬´ì)",
               "baseId": "lin",
               "atk": 29,
               "hp": 29,
@@ -3540,7 +3534,7 @@
               ],
               "isSkin": true,
               "img": "Lin_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -3551,7 +3545,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "히나",
+              "name": "íë",
               "baseId": "hina",
               "atk": 17,
               "hp": 7,
@@ -3562,10 +3556,10 @@
               ],
               "isSkin": false,
               "img": "Hina.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 13,
               "hp": 15,
@@ -3575,10 +3569,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 12,
               "hp": 11,
@@ -3589,10 +3583,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 12,
               "hp": 11,
@@ -3603,10 +3597,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 7,
               "hp": 7,
@@ -3614,7 +3608,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -3625,7 +3619,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아즈사(수영복)",
+              "name": "ìì¦ì¬(ììë³µ)",
               "baseId": "azusa",
               "atk": 25,
               "hp": 25,
@@ -3635,10 +3629,10 @@
               ],
               "isSkin": true,
               "img": "Azusa_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 33,
               "hp": 35,
@@ -3651,10 +3645,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 33,
               "hp": 35,
@@ -3667,10 +3661,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 35,
               "hp": 29,
@@ -3681,10 +3675,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "미네(아이돌)",
+              "name": "ë¯¸ë¤(ìì´ë)",
               "baseId": "mine",
               "atk": 31,
               "hp": 31,
@@ -3696,7 +3690,7 @@
               ],
               "isSkin": true,
               "img": "Mine_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ],
           "pinned": true
@@ -3708,7 +3702,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "말쿠트",
+              "name": "ë§ì¿ í¸",
               "baseId": "millennium_malkuth",
               "atk": 22,
               "hp": 32,
@@ -3719,10 +3713,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 44,
               "hp": 42,
@@ -3734,10 +3728,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 48,
               "hp": 56,
@@ -3750,10 +3744,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "시로코(수영복)",
+              "name": "ìë¡ì½(ììë³µ)",
               "baseId": "shiroko",
               "atk": 49,
               "hp": 39,
@@ -3763,10 +3757,10 @@
               ],
               "isSkin": true,
               "img": "Shiroko_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "우타하(치어리더)",
+              "name": "ì°íí(ì¹ì´ë¦¬ë)",
               "baseId": "utaha",
               "atk": 15,
               "hp": 15,
@@ -3776,7 +3770,7 @@
               ],
               "isSkin": true,
               "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -3787,7 +3781,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미나(리코더)",
+              "name": "ë¯¸ë(ë¦¬ì½ë)",
               "baseId": "mina",
               "atk": 31,
               "hp": 35,
@@ -3797,10 +3791,10 @@
               ],
               "isSkin": true,
               "img": "Mina_(Recorder).png",
-              "school": "산해경"
+              "school": "ì°í´ê²½"
             },
             {
-              "name": "치아키(수영복)",
+              "name": "ì¹ìí¤(ììë³µ)",
               "baseId": "chiaki",
               "atk": 51,
               "hp": 47,
@@ -3811,10 +3805,10 @@
               ],
               "isSkin": true,
               "img": "Chiaki_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "시로코(수영복)",
+              "name": "ìë¡ì½(ììë³µ)",
               "baseId": "shiroko",
               "atk": 61,
               "hp": 55,
@@ -3825,10 +3819,10 @@
               ],
               "isSkin": true,
               "img": "Shiroko_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "츠루기(수영복)",
+              "name": "ì¸ ë£¨ê¸°(ììë³µ)",
               "baseId": "tsurugi",
               "atk": 49,
               "hp": 49,
@@ -3836,10 +3830,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "린",
+              "name": "ë¦°",
               "baseId": "lin",
               "atk": 38,
               "hp": 38,
@@ -3847,7 +3841,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Lin.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ],
           "pinned": true
@@ -3859,7 +3853,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아오이(인터뷰)",
+              "name": "ìì¤ì´(ì¸í°ë·°)",
               "baseId": "aoi",
               "atk": 151,
               "hp": 149,
@@ -3869,10 +3863,10 @@
               ],
               "isSkin": true,
               "img": "Aoi_(Interview).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "아유무(승무원)",
+              "name": "ìì ë¬´(ì¹ë¬´ì)",
               "baseId": "ayumu",
               "atk": 91,
               "hp": 85,
@@ -3882,10 +3876,10 @@
               ],
               "isSkin": true,
               "img": "Ayumu_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "아유무(승무원)",
+              "name": "ìì ë¬´(ì¹ë¬´ì)",
               "baseId": "ayumu",
               "atk": 94,
               "hp": 90,
@@ -3895,10 +3889,10 @@
               ],
               "isSkin": true,
               "img": "Ayumu_(flight).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 151,
               "hp": 151,
@@ -3908,10 +3902,10 @@
               ],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 151,
               "hp": 151,
@@ -3919,7 +3913,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ],
           "pinned": true
@@ -3931,7 +3925,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 26,
               "hp": 34,
@@ -3943,10 +3937,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 33,
               "hp": 39,
@@ -3956,10 +3950,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아카네",
+              "name": "ìì¹´ë¤",
               "baseId": "akane",
               "atk": 24,
               "hp": 26,
@@ -3967,10 +3961,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Akane.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키",
+              "name": "í í¤",
               "baseId": "toki",
               "atk": 11,
               "hp": 14,
@@ -3980,10 +3974,10 @@
               ],
               "isSkin": false,
               "img": "Toki.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "우타하",
+              "name": "ì°íí",
               "baseId": "utaha",
               "atk": 27,
               "hp": 27,
@@ -3994,7 +3988,7 @@
               ],
               "isSkin": false,
               "img": "Utaha.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -4084,8 +4078,7 @@
         "nonomi"
       ]
     },
-    "킹갓프리소울": {
-      "pw": "1111",
+    "í¹ê°íë¦¬ìì¸": {
       "records": [],
       "points": 0,
       "questState": {
@@ -4143,7 +4136,6 @@
       }
     },
     "admin": {
-      "pw": "",
       "records": [],
       "points": 0,
       "questState": {
@@ -4201,12 +4193,10 @@
       }
     },
     "a": {
-      "pw": "",
       "records": [],
       "points": 0
     },
     "Laker": {
-      "pw": "47008543",
       "records": [],
       "points": 0,
       "questState": {
@@ -4263,13 +4253,11 @@
         "_lastLoginDate": "2026-04-07"
       }
     },
-    "슈퍼그레이트조예빈쨩": {
-      "pw": "",
+    "ìí¼ê·¸ë ì´í¸ì¡°ìë¹ì¨©": {
       "records": [],
       "points": 0
     },
     "dsefddg": {
-      "pw": "22123",
       "records": [
         {
           "date": "2026-04-05T20:12:48",
@@ -4278,7 +4266,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 16,
               "hp": 6,
@@ -4289,10 +4277,10 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 7,
               "hp": 3,
@@ -4302,10 +4290,10 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아즈사",
+              "name": "ìì¦ì¬",
               "baseId": "azusa",
               "atk": 5,
               "hp": 5,
@@ -4315,10 +4303,10 @@
               ],
               "isSkin": false,
               "img": "Azusa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "유우카",
+              "name": "ì ì°ì¹´",
               "baseId": "yuuka",
               "atk": 4,
               "hp": 4,
@@ -4328,10 +4316,10 @@
               ],
               "isSkin": false,
               "img": "Yuuka.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "노아",
+              "name": "ë¸ì",
               "baseId": "noa",
               "atk": 2,
               "hp": 6,
@@ -4341,7 +4329,7 @@
               ],
               "isSkin": false,
               "img": "Noa.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -4400,8 +4388,7 @@
         }
       }
     },
-    "디트": {
-      "pw": "2853",
+    "ëí¸": {
       "records": [],
       "points": 0,
       "questState": {
@@ -4459,7 +4446,6 @@
       }
     },
     "Test1": {
-      "pw": "2853",
       "records": [],
       "points": 0,
       "questState": {
@@ -4516,8 +4502,7 @@
         "_lastLoginDate": "2026-04-06"
       }
     },
-    "파란파랑별": {
-      "pw": "2853",
+    "íëíëë³": {
       "records": [
         {
           "date": "2026-04-05T23:33:52",
@@ -4526,7 +4511,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 3,
               "hp": 5,
@@ -4537,10 +4522,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 1,
               "hp": 2,
@@ -4550,10 +4535,10 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "히후미",
+              "name": "ííë¯¸",
               "baseId": "hifumi",
               "atk": 2,
               "hp": 3,
@@ -4561,10 +4546,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Hifumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 7,
               "hp": 5,
@@ -4575,10 +4560,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -4586,7 +4571,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -4597,7 +4582,7 @@
           "tier": 4,
           "board": [
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 11,
               "hp": 3,
@@ -4607,10 +4592,10 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "모모이",
+              "name": "ëª¨ëª¨ì´",
               "baseId": "momoi",
               "atk": 2,
               "hp": 2,
@@ -4620,10 +4605,10 @@
               ],
               "isSkin": false,
               "img": "Momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "모모이",
+              "name": "ëª¨ëª¨ì´",
               "baseId": "momoi",
               "atk": 2,
               "hp": 2,
@@ -4633,10 +4618,10 @@
               ],
               "isSkin": false,
               "img": "Momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 9,
               "hp": 5,
@@ -4644,10 +4629,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 7,
               "hp": 3,
@@ -4657,7 +4642,7 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -4668,7 +4653,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 6,
               "hp": 3,
@@ -4678,10 +4663,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 3,
               "hp": 2,
@@ -4691,10 +4676,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 2,
               "hp": 3,
@@ -4704,10 +4689,10 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 2,
               "hp": 3,
@@ -4717,7 +4702,7 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -4728,7 +4713,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 16,
               "hp": 16,
@@ -4738,10 +4723,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "모모카",
+              "name": "ëª¨ëª¨ì¹´",
               "baseId": "momoka",
               "atk": 6,
               "hp": 5,
@@ -4749,10 +4734,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Momoka.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 5,
               "hp": 4,
@@ -4762,7 +4747,7 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -4773,7 +4758,7 @@
           "tier": 4,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 23,
               "hp": 25,
@@ -4783,10 +4768,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 6,
               "hp": 3,
@@ -4797,10 +4782,10 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 9,
               "hp": 7,
@@ -4810,10 +4795,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 6,
               "hp": 3,
@@ -4824,7 +4809,7 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -4835,7 +4820,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 29,
               "hp": 20,
@@ -4846,10 +4831,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 9,
               "hp": 8,
@@ -4859,10 +4844,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 41,
               "hp": 31,
@@ -4873,10 +4858,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토라마루",
+              "name": "í ë¼ë§ë£¨",
               "baseId": "iroha",
               "atk": 7,
               "hp": 3,
@@ -4884,7 +4869,7 @@
               "kw": [],
               "isSkin": false,
               "img": "token/toramaru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -4895,7 +4880,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "유즈",
+              "name": "ì ì¦",
               "baseId": "yuzu",
               "atk": 13,
               "hp": 14,
@@ -4903,10 +4888,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Yuzu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "모모이(메이드)",
+              "name": "ëª¨ëª¨ì´(ë©ì´ë)",
               "baseId": "momoi",
               "atk": 40,
               "hp": 26,
@@ -4918,10 +4903,10 @@
               ],
               "isSkin": true,
               "img": "Momoi_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 32,
               "hp": 22,
@@ -4931,10 +4916,10 @@
               ],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 17,
               "hp": 14,
@@ -4942,10 +4927,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 7,
               "hp": 3,
@@ -4955,7 +4940,7 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -4966,7 +4951,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 9,
               "hp": 5,
@@ -4977,10 +4962,10 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "유우카",
+              "name": "ì ì°ì¹´",
               "baseId": "yuuka",
               "atk": 7,
               "hp": 5,
@@ -4991,10 +4976,10 @@
               ],
               "isSkin": false,
               "img": "Yuuka.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "이즈나(수영복)",
+              "name": "ì´ì¦ë(ììë³µ)",
               "baseId": "izuna",
               "atk": 40,
               "hp": 25,
@@ -5002,10 +4987,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "츠쿠요",
+              "name": "ì¸ ì¿ ì",
               "baseId": "tsukuyo",
               "atk": 4,
               "hp": 3,
@@ -5013,7 +4998,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsukuyo.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -5024,7 +5009,7 @@
           "tier": 4,
           "board": [
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 3,
               "hp": 5,
@@ -5034,10 +5019,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 25,
               "hp": 19,
@@ -5049,10 +5034,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토키",
+              "name": "í í¤",
               "baseId": "toki",
               "atk": 5,
               "hp": 8,
@@ -5062,10 +5047,10 @@
               ],
               "isSkin": false,
               "img": "Toki.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 25,
               "hp": 19,
@@ -5077,10 +5062,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 7,
               "hp": 3,
@@ -5091,7 +5076,7 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -5102,7 +5087,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 19,
               "hp": 17,
@@ -5113,10 +5098,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토키",
+              "name": "í í¤",
               "baseId": "toki",
               "atk": 3,
               "hp": 6,
@@ -5126,10 +5111,10 @@
               ],
               "isSkin": false,
               "img": "Toki.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 27,
               "hp": 25,
@@ -5141,10 +5126,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아즈사",
+              "name": "ìì¦ì¬",
               "baseId": "azusa",
               "atk": 5,
               "hp": 5,
@@ -5154,7 +5139,7 @@
               ],
               "isSkin": false,
               "img": "Azusa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         }
@@ -5215,7 +5200,6 @@
       }
     },
     "sen": {
-      "pw": "88",
       "records": [
         {
           "date": "2026-04-07T15:19:42",
@@ -5224,7 +5208,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 17,
               "hp": 17,
@@ -5232,10 +5216,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "세리카(수영복)",
+              "name": "ì¸ë¦¬ì¹´(ììë³µ)",
               "baseId": "serika",
               "atk": 87,
               "hp": 83,
@@ -5246,10 +5230,10 @@
               ],
               "isSkin": true,
               "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "아야네(수영복)",
+              "name": "ìì¼ë¤(ììë³µ)",
               "baseId": "ayane",
               "atk": 37,
               "hp": 41,
@@ -5259,10 +5243,10 @@
               ],
               "isSkin": true,
               "img": "Ayane_(Swimsuit).png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "호시노",
+              "name": "í¸ìë¸",
               "baseId": "hoshino",
               "atk": 23,
               "hp": 25,
@@ -5274,10 +5258,10 @@
               ],
               "isSkin": false,
               "img": "Hoshino.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             },
             {
-              "name": "노노미",
+              "name": "ë¸ë¸ë¯¸",
               "baseId": "nonomi",
               "atk": 28,
               "hp": 24,
@@ -5285,7 +5269,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Nonomi.png",
-              "school": "아비도스"
+              "school": "ìë¹ëì¤"
             }
           ]
         },
@@ -5296,7 +5280,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "마시로(수영복)",
+              "name": "ë§ìë¡(ììë³µ)",
               "baseId": "mashiro",
               "atk": 56,
               "hp": 50,
@@ -5307,10 +5291,10 @@
               ],
               "isSkin": true,
               "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 21,
               "hp": 21,
@@ -5318,10 +5302,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야(쿠데타)",
+              "name": "ì¹´ì¼(ì¿ ë°í)",
               "baseId": "kaya",
               "atk": 21,
               "hp": 21,
@@ -5329,10 +5313,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Kaya_(Coup).png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "코하루(수영복)",
+              "name": "ì½íë£¨(ììë³µ)",
               "baseId": "koharu",
               "atk": 45,
               "hp": 43,
@@ -5343,10 +5327,10 @@
               ],
               "isSkin": true,
               "img": "Koharu_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 35,
               "hp": 37,
@@ -5356,7 +5340,7 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ],
           "pinned": true
@@ -5368,7 +5352,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아리스",
+              "name": "ìë¦¬ì¤",
               "baseId": "arisu",
               "atk": 35,
               "hp": 31,
@@ -5379,10 +5363,10 @@
               ],
               "isSkin": false,
               "img": "Arisu.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 51,
               "hp": 51,
@@ -5395,10 +5379,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 33,
               "hp": 35,
@@ -5406,10 +5390,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 44,
               "hp": 38,
@@ -5417,10 +5401,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "케이(USB)",
+              "name": "ì¼ì´(USB)",
               "baseId": "Kei_usb",
               "atk": 1,
               "hp": 1,
@@ -5430,7 +5414,7 @@
               ],
               "isSkin": false,
               "img": "unique/Kei_usb.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -5441,7 +5425,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "우타하",
+              "name": "ì°íí",
               "baseId": "utaha",
               "atk": 17,
               "hp": 17,
@@ -5451,10 +5435,10 @@
               ],
               "isSkin": false,
               "img": "Utaha.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미노리(성난 군중)",
+              "name": "ë¯¸ë¸ë¦¬(ì±ë êµ°ì¤)",
               "baseId": "red_winter_minori",
               "atk": 0,
               "hp": 10,
@@ -5462,10 +5446,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Revolution.png",
-              "school": "붉은겨울"
+              "school": "ë¶ìê²¨ì¸"
             },
             {
-              "name": "준코(새해)",
+              "name": "ì¤ì½(ìí´)",
               "baseId": "junko",
               "atk": 29,
               "hp": 23,
@@ -5475,10 +5459,10 @@
               ],
               "isSkin": true,
               "img": "Junko_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 40,
               "hp": 44,
@@ -5489,10 +5473,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "리오",
+              "name": "ë¦¬ì¤",
               "baseId": "rio",
               "atk": 11,
               "hp": 11,
@@ -5500,7 +5484,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Rio.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -5511,7 +5495,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 12,
               "hp": 16,
@@ -5521,10 +5505,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -5532,10 +5516,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "치나츠(온천)",
+              "name": "ì¹ëì¸ (ì¨ì²)",
               "baseId": "chinatsu",
               "atk": 26,
               "hp": 28,
@@ -5546,10 +5530,10 @@
               ],
               "isSkin": true,
               "img": "Chinatsu_(Hot_Spring).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "린",
+              "name": "ë¦°",
               "baseId": "lin",
               "atk": 16,
               "hp": 16,
@@ -5557,10 +5541,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Lin.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 5,
               "hp": 5,
@@ -5568,7 +5552,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -5579,7 +5563,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 9,
               "hp": 9,
@@ -5587,10 +5571,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 13,
               "hp": 9,
@@ -5602,10 +5586,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(미카 호스트)",
+              "name": "í°íí°(ë¯¸ì¹´ í¸ì¤í¸)",
               "baseId": "trinity_mika",
               "atk": 33,
               "hp": 31,
@@ -5613,10 +5597,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 4,
               "hp": 8,
@@ -5626,10 +5610,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 11,
               "hp": 11,
@@ -5637,7 +5621,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -5648,7 +5632,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "모모이(메이드)",
+              "name": "ëª¨ëª¨ì´(ë©ì´ë)",
               "baseId": "momoi",
               "atk": 37,
               "hp": 33,
@@ -5659,10 +5643,10 @@
               ],
               "isSkin": true,
               "img": "Momoi_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 17,
               "hp": 17,
@@ -5670,10 +5654,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 23,
               "hp": 23,
@@ -5683,10 +5667,10 @@
               ],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "모모이",
+              "name": "ëª¨ëª¨ì´",
               "baseId": "momoi",
               "atk": 20,
               "hp": 16,
@@ -5696,10 +5680,10 @@
               ],
               "isSkin": false,
               "img": "Momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 27,
               "hp": 29,
@@ -5709,7 +5693,7 @@
               ],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -5720,7 +5704,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "미노리(성난 군중)",
+              "name": "ë¯¸ë¸ë¦¬(ì±ë êµ°ì¤)",
               "baseId": "red_winter_minori",
               "atk": 0,
               "hp": 10,
@@ -5728,10 +5712,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Revolution.png",
-              "school": "붉은겨울"
+              "school": "ë¶ìê²¨ì¸"
             },
             {
-              "name": "주리(웨이트리스)",
+              "name": "ì£¼ë¦¬(ì¨ì´í¸ë¦¬ì¤)",
               "baseId": "juri",
               "atk": 31,
               "hp": 29,
@@ -5742,10 +5726,10 @@
               ],
               "isSkin": true,
               "img": "Juri_(maid).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 16,
               "hp": 16,
@@ -5755,10 +5739,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 21,
               "hp": 23,
@@ -5766,10 +5750,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "와카모",
+              "name": "ìì¹´ëª¨",
               "baseId": "wakamo",
               "atk": 5,
               "hp": 7,
@@ -5779,7 +5763,7 @@
               ],
               "isSkin": false,
               "img": "Wakamo.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -5790,7 +5774,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "미노리(성난 군중)",
+              "name": "ë¯¸ë¸ë¦¬(ì±ë êµ°ì¤)",
               "baseId": "red_winter_minori",
               "atk": 0,
               "hp": 10,
@@ -5798,10 +5782,10 @@
               "kw": [],
               "isSkin": false,
               "img": "unique/Revolution.png",
-              "school": "붉은겨울"
+              "school": "ë¶ìê²¨ì¸"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 29,
               "hp": 39,
@@ -5814,10 +5798,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 32,
               "hp": 26,
@@ -5828,10 +5812,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "준코(새해)",
+              "name": "ì¤ì½(ìí´)",
               "baseId": "junko",
               "atk": 28,
               "hp": 26,
@@ -5842,10 +5826,10 @@
               ],
               "isSkin": true,
               "img": "Junko_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카야",
+              "name": "ì¹´ì¼",
               "baseId": "kaya",
               "atk": 13,
               "hp": 13,
@@ -5853,7 +5837,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Kaya.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             }
           ]
         },
@@ -5864,7 +5848,7 @@
           "tier": 1,
           "board": [
             {
-              "name": "주리",
+              "name": "ì£¼ë¦¬",
               "baseId": "juri",
               "atk": 5,
               "hp": 3,
@@ -5872,10 +5856,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Juri.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "주리",
+              "name": "ì£¼ë¦¬",
               "baseId": "juri",
               "atk": 2,
               "hp": 2,
@@ -5883,7 +5867,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Juri.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         }
@@ -5974,8 +5958,7 @@
         "Kei_usb"
       ]
     },
-    "마오비": {
-      "pw": "2089",
+    "ë§ì¤ë¹": {
       "records": [
         {
           "date": "2026-04-06T00:47:28",
@@ -5984,7 +5967,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "토라마루",
+              "name": "í ë¼ë§ë£¨",
               "baseId": "iroha",
               "atk": 10,
               "hp": 8,
@@ -5996,10 +5979,10 @@
               ],
               "isSkin": false,
               "img": "token/toramaru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "마코토(수영복)",
+              "name": "ë§ì½í (ììë³µ)",
               "baseId": "makoto",
               "atk": 15,
               "hp": 15,
@@ -6007,10 +5990,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Makoto_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 5,
               "hp": 6,
@@ -6018,10 +6001,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키(수영복)",
+              "name": "ì´ë¶í¤(ììë³µ)",
               "baseId": "ibuki",
               "atk": 5,
               "hp": 7,
@@ -6029,10 +6012,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Ibuki_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 16,
               "hp": 16,
@@ -6042,7 +6025,7 @@
               ],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -6053,7 +6036,7 @@
           "tier": 4,
           "board": [
             {
-              "name": "주리",
+              "name": "ì£¼ë¦¬",
               "baseId": "juri",
               "atk": 2,
               "hp": 2,
@@ -6061,10 +6044,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Juri.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 3,
               "hp": 5,
@@ -6074,10 +6057,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -6085,10 +6068,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이즈나(수영복)",
+              "name": "ì´ì¦ë(ììë³µ)",
               "baseId": "izuna",
               "atk": 12,
               "hp": 12,
@@ -6096,10 +6079,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 35,
               "hp": 33,
@@ -6113,7 +6096,7 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -6124,7 +6107,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "미모리(수영복)",
+              "name": "ë¯¸ëª¨ë¦¬(ììë³µ)",
               "baseId": "mimori",
               "atk": 25,
               "hp": 25,
@@ -6138,10 +6121,10 @@
               ],
               "isSkin": true,
               "img": "Mimori_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "레이사",
+              "name": "ë ì´ì¬",
               "baseId": "reisa",
               "atk": 15,
               "hp": 14,
@@ -6152,10 +6135,10 @@
               ],
               "isSkin": false,
               "img": "Reisa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 9,
               "hp": 15,
@@ -6165,10 +6148,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 7,
               "hp": 8,
@@ -6176,10 +6159,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "미모리(수영복)",
+              "name": "ë¯¸ëª¨ë¦¬(ììë³µ)",
               "baseId": "mimori",
               "atk": 28,
               "hp": 26,
@@ -6193,7 +6176,7 @@
               ],
               "isSkin": true,
               "img": "Mimori_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -6204,7 +6187,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "에이미",
+              "name": "ìì´ë¯¸",
               "baseId": "eimi",
               "atk": 13,
               "hp": 14,
@@ -6214,10 +6197,10 @@
               ],
               "isSkin": false,
               "img": "Eimi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "마시로(수영복)",
+              "name": "ë§ìë¡(ììë³µ)",
               "baseId": "mashiro",
               "atk": 17,
               "hp": 5,
@@ -6230,10 +6213,10 @@
               ],
               "isSkin": true,
               "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 15,
               "hp": 17,
@@ -6241,10 +6224,10 @@
               "kw": [],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 24,
               "hp": 20,
@@ -6257,10 +6240,10 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 24,
               "hp": 20,
@@ -6273,7 +6256,7 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -6336,8 +6319,7 @@
         "kokona"
       ]
     },
-    "닉네임": {
-      "pw": "qlqjs",
+    "ëë¤ì": {
       "records": [
         {
           "date": "2026-04-06T01:59:15",
@@ -6346,7 +6328,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "흥신소 68",
+              "name": "í¥ì ì 68",
               "baseId": "gehenna_p68",
               "atk": 104,
               "hp": 101,
@@ -6356,10 +6338,10 @@
               ],
               "isSkin": false,
               "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 9,
               "hp": 9,
@@ -6367,10 +6349,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 27,
               "hp": 29,
@@ -6381,10 +6363,10 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "마코토",
+              "name": "ë§ì½í ",
               "baseId": "makoto",
               "atk": 11,
               "hp": 11,
@@ -6392,7 +6374,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Makoto.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         }
@@ -6452,7 +6434,6 @@
       }
     },
     "KUJIRH": {
-      "pw": "3361",
       "records": [],
       "points": 0
     },
@@ -6522,7 +6503,7 @@
           "tier": 3,
           "board": [
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 14,
               "hp": 10,
@@ -6532,10 +6513,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "레이사(마법소녀)",
+              "name": "ë ì´ì¬(ë§ë²ìë)",
               "baseId": "reisa",
               "atk": 9,
               "hp": 3,
@@ -6545,10 +6526,10 @@
               ],
               "isSkin": true,
               "img": "Reisa_(Magical).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "스즈미",
+              "name": "ì¤ì¦ë¯¸",
               "baseId": "suzumi",
               "atk": 5,
               "hp": 5,
@@ -6556,10 +6537,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Suzumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "스즈미",
+              "name": "ì¤ì¦ë¯¸",
               "baseId": "suzumi",
               "atk": 2,
               "hp": 4,
@@ -6567,10 +6548,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Suzumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "토키(바니걸)",
+              "name": "í í¤(ë°ëê±¸)",
               "baseId": "toki",
               "atk": 3,
               "hp": 9,
@@ -6581,7 +6562,7 @@
               ],
               "isSkin": true,
               "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         }
@@ -6641,7 +6622,7 @@
         "_lastLoginDate": "2026-04-06"
       }
     },
-    "규재파크": {
+    "ê·ì¬íí¬": {
       "records": [
         {
           "date": "2026-04-06T13:16:46",
@@ -6650,7 +6631,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "카린",
+              "name": "ì¹´ë¦°",
               "baseId": "karin",
               "atk": 17,
               "hp": 8,
@@ -6663,10 +6644,10 @@
               ],
               "isSkin": false,
               "img": "Karin.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "노아(파자마)",
+              "name": "ë¸ì(íìë§)",
               "baseId": "noa",
               "atk": 15,
               "hp": 23,
@@ -6678,10 +6659,10 @@
               ],
               "isSkin": true,
               "img": "Noa_(Pajama).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "주리(웨이트리스)",
+              "name": "ì£¼ë¦¬(ì¨ì´í¸ë¦¬ì¤)",
               "baseId": "juri",
               "atk": 19,
               "hp": 19,
@@ -6691,10 +6672,10 @@
               ],
               "isSkin": true,
               "img": "Juri_(maid).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "유우카",
+              "name": "ì ì°ì¹´",
               "baseId": "yuuka",
               "atk": 18,
               "hp": 18,
@@ -6706,10 +6687,10 @@
               ],
               "isSkin": false,
               "img": "Yuuka.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "리오",
+              "name": "ë¦¬ì¤",
               "baseId": "rio",
               "atk": 7,
               "hp": 7,
@@ -6717,7 +6698,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Rio.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -6728,7 +6709,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아리스(메이드)",
+              "name": "ìë¦¬ì¤(ë©ì´ë)",
               "baseId": "arisu",
               "atk": 34,
               "hp": 20,
@@ -6741,10 +6722,10 @@
               ],
               "isSkin": true,
               "img": "Arisu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "나구사",
+              "name": "ëêµ¬ì¬",
               "baseId": "nagusa",
               "atk": 5,
               "hp": 7,
@@ -6755,10 +6736,10 @@
               ],
               "isSkin": false,
               "img": "Nagusa.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "렌게(수영복)",
+              "name": "ë ê²(ììë³µ)",
               "baseId": "renge",
               "atk": 19,
               "hp": 17,
@@ -6771,10 +6752,10 @@
               ],
               "isSkin": true,
               "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "유카리(수영복)",
+              "name": "ì ì¹´ë¦¬(ììë³µ)",
               "baseId": "yukari",
               "atk": 18,
               "hp": 16,
@@ -6786,10 +6767,10 @@
               ],
               "isSkin": true,
               "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             },
             {
-              "name": "미모리",
+              "name": "ë¯¸ëª¨ë¦¬",
               "baseId": "mimori",
               "atk": 15,
               "hp": 16,
@@ -6800,7 +6781,7 @@
               ],
               "isSkin": false,
               "img": "Mimori.png",
-              "school": "백귀야행"
+              "school": "ë°±ê·ì¼í"
             }
           ]
         },
@@ -6811,7 +6792,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아리스(메이드)",
+              "name": "ìë¦¬ì¤(ë©ì´ë)",
               "baseId": "arisu",
               "atk": 60,
               "hp": 50,
@@ -6824,10 +6805,10 @@
               ],
               "isSkin": true,
               "img": "Arisu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "히나",
+              "name": "íë",
               "baseId": "hina",
               "atk": 23,
               "hp": 13,
@@ -6837,10 +6818,10 @@
               ],
               "isSkin": false,
               "img": "Hina.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "히나",
+              "name": "íë",
               "baseId": "hina",
               "atk": 23,
               "hp": 13,
@@ -6850,10 +6831,10 @@
               ],
               "isSkin": false,
               "img": "Hina.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "모모이(메이드)",
+              "name": "ëª¨ëª¨ì´(ë©ì´ë)",
               "baseId": "momoi",
               "atk": 40,
               "hp": 40,
@@ -6863,10 +6844,10 @@
               ],
               "isSkin": true,
               "img": "Momoi_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 49,
               "hp": 49,
@@ -6874,7 +6855,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -6885,7 +6866,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 17,
               "hp": 12,
@@ -6897,10 +6878,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -6910,10 +6891,10 @@
               ],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 3,
               "hp": 2,
@@ -6923,10 +6904,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 6,
               "hp": 5,
@@ -6937,10 +6918,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 1,
               "hp": 2,
@@ -6950,7 +6931,7 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         }
@@ -7017,7 +6998,7 @@
         "ayane"
       ]
     },
-    "어흐": {
+    "ì´í": {
       "records": [
         {
           "date": "2026-04-06T14:02:37",
@@ -7026,7 +7007,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "치나츠",
+              "name": "ì¹ëì¸ ",
               "baseId": "chinatsu",
               "atk": 1,
               "hp": 4,
@@ -7036,10 +7017,10 @@
               ],
               "isSkin": false,
               "img": "Chinatsu.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7047,10 +7028,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "모모카",
+              "name": "ëª¨ëª¨ì¹´",
               "baseId": "momoka",
               "atk": 4,
               "hp": 3,
@@ -7058,10 +7039,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Momoka.png",
-              "school": "총학생회"
+              "school": "ì´íìí"
             },
             {
-              "name": "토라마루",
+              "name": "í ë¼ë§ë£¨",
               "baseId": "iroha",
               "atk": 13,
               "hp": 9,
@@ -7071,7 +7052,7 @@
               ],
               "isSkin": false,
               "img": "token/toramaru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -7082,7 +7063,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 24,
               "hp": 28,
@@ -7093,10 +7074,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 10,
               "hp": 11,
@@ -7104,10 +7085,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토라마루",
+              "name": "í ë¼ë§ë£¨",
               "baseId": "iroha",
               "atk": 14,
               "hp": 12,
@@ -7117,10 +7098,10 @@
               ],
               "isSkin": false,
               "img": "token/toramaru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "치아키(수영복)",
+              "name": "ì¹ìí¤(ììë³µ)",
               "baseId": "chiaki",
               "atk": 23,
               "hp": 15,
@@ -7132,10 +7113,10 @@
               ],
               "isSkin": true,
               "img": "Chiaki_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "치아키(수영복)",
+              "name": "ì¹ìí¤(ììë³µ)",
               "baseId": "chiaki",
               "atk": 23,
               "hp": 15,
@@ -7147,7 +7128,7 @@
               ],
               "isSkin": true,
               "img": "Chiaki_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         }
@@ -7264,7 +7245,7 @@
         "_lastLoginDate": "2026-04-07"
       }
     },
-    "누크": {
+    "ëí¬": {
       "records": [
         {
           "date": "2026-04-07T03:14:11",
@@ -7273,7 +7254,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "유우카",
+              "name": "ì ì°ì¹´",
               "baseId": "yuuka",
               "atk": 4,
               "hp": 4,
@@ -7284,10 +7265,10 @@
               ],
               "isSkin": false,
               "img": "Yuuka.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "데스 모모이",
+              "name": "ë°ì¤ ëª¨ëª¨ì´",
               "baseId": "millennium_death_momoi",
               "atk": 20,
               "hp": 22,
@@ -7299,10 +7280,10 @@
               ],
               "isSkin": false,
               "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "미도리(메이드)",
+              "name": "ë¯¸ëë¦¬(ë©ì´ë)",
               "baseId": "midori",
               "atk": 13,
               "hp": 9,
@@ -7314,10 +7295,10 @@
               ],
               "isSkin": true,
               "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "유즈(메이드)",
+              "name": "ì ì¦(ë©ì´ë)",
               "baseId": "yuzu",
               "atk": 13,
               "hp": 15,
@@ -7328,10 +7309,10 @@
               ],
               "isSkin": true,
               "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             },
             {
-              "name": "아리스(메이드)",
+              "name": "ìë¦¬ì¤(ë©ì´ë)",
               "baseId": "arisu",
               "atk": 23,
               "hp": 15,
@@ -7342,7 +7323,7 @@
               ],
               "isSkin": true,
               "img": "Arisu_(Maid).png",
-              "school": "밀레니엄"
+              "school": "ë°ë ëì"
             }
           ]
         },
@@ -7353,7 +7334,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "마코토(수영복)",
+              "name": "ë§ì½í (ììë³µ)",
               "baseId": "makoto",
               "atk": 15,
               "hp": 15,
@@ -7363,10 +7344,10 @@
               ],
               "isSkin": true,
               "img": "Makoto_(Swimsuit).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7374,10 +7355,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7385,10 +7366,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 5,
               "hp": 6,
@@ -7396,10 +7377,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 18,
               "hp": 16,
@@ -7409,7 +7390,7 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -7420,7 +7401,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "하나코",
+              "name": "íëì½",
               "baseId": "hanako",
               "atk": 4,
               "hp": 6,
@@ -7430,10 +7411,10 @@
               ],
               "isSkin": false,
               "img": "Hanako.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "아즈사",
+              "name": "ìì¦ì¬",
               "baseId": "azusa",
               "atk": 5,
               "hp": 5,
@@ -7443,10 +7424,10 @@
               ],
               "isSkin": false,
               "img": "Azusa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "아즈사",
+              "name": "ìì¦ì¬",
               "baseId": "azusa",
               "atk": 5,
               "hp": 5,
@@ -7456,10 +7437,10 @@
               ],
               "isSkin": false,
               "img": "Azusa.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "이치카",
+              "name": "ì´ì¹ì¹´",
               "baseId": "ichika",
               "atk": 9,
               "hp": 2,
@@ -7470,10 +7451,10 @@
               ],
               "isSkin": false,
               "img": "Ichika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리",
+              "name": "ë§ë¦¬",
               "baseId": "mari",
               "atk": 2,
               "hp": 2,
@@ -7483,7 +7464,7 @@
               ],
               "isSkin": false,
               "img": "Mari.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -7494,7 +7475,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 7,
               "hp": 7,
@@ -7504,10 +7485,10 @@
               ],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "하스미",
+              "name": "íì¤ë¯¸",
               "baseId": "hasumi",
               "atk": 7,
               "hp": 5,
@@ -7517,10 +7498,10 @@
               ],
               "isSkin": false,
               "img": "Hasumi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "우이",
+              "name": "ì°ì´",
               "baseId": "ui",
               "atk": 6,
               "hp": 5,
@@ -7530,10 +7511,10 @@
               ],
               "isSkin": false,
               "img": "Ui.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 3,
               "hp": 5,
@@ -7543,10 +7524,10 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "사쿠라코(아이돌)",
+              "name": "ì¬ì¿ ë¼ì½(ìì´ë)",
               "baseId": "sakurako",
               "atk": 15,
               "hp": 15,
@@ -7554,7 +7535,7 @@
               "kw": [],
               "isSkin": true,
               "img": "Sakurako_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         },
@@ -7565,7 +7546,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "치아키",
+              "name": "ì¹ìí¤",
               "baseId": "chiaki",
               "atk": 5,
               "hp": 3,
@@ -7575,10 +7556,10 @@
               ],
               "isSkin": false,
               "img": "Chiaki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7586,10 +7567,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7599,10 +7580,10 @@
               ],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "토라마루",
+              "name": "í ë¼ë§ë£¨",
               "baseId": "iroha",
               "atk": 5,
               "hp": 1,
@@ -7610,10 +7591,10 @@
               "kw": [],
               "isSkin": false,
               "img": "token/toramaru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 5,
               "hp": 4,
@@ -7623,7 +7604,7 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -7634,7 +7615,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 5,
               "hp": 5,
@@ -7642,10 +7623,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 3,
               "hp": 2,
@@ -7656,10 +7637,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "무츠키",
+              "name": "ë¬´ì¸ í¤",
               "baseId": "mutsuki",
               "atk": 4,
               "hp": 5,
@@ -7669,10 +7650,10 @@
               ],
               "isSkin": false,
               "img": "Mutsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 3,
               "hp": 4,
@@ -7682,10 +7663,10 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카",
+              "name": "íë£¨ì¹´",
               "baseId": "haruka",
               "atk": 3,
               "hp": 4,
@@ -7695,7 +7676,7 @@
               ],
               "isSkin": false,
               "img": "Haruka.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -7706,7 +7687,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "무츠키(새해)",
+              "name": "ë¬´ì¸ í¤(ìí´)",
               "baseId": "mutsuki",
               "atk": 9,
               "hp": 7,
@@ -7717,10 +7698,10 @@
               ],
               "isSkin": true,
               "img": "Mutsuki_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 6,
               "hp": 5,
@@ -7731,10 +7712,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아루",
+              "name": "ìë£¨",
               "baseId": "aru",
               "atk": 7,
               "hp": 8,
@@ -7746,10 +7727,10 @@
               ],
               "isSkin": false,
               "img": "Aru.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "카요코",
+              "name": "ì¹´ìì½",
               "baseId": "kayoko",
               "atk": 7,
               "hp": 7,
@@ -7757,10 +7738,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Kayoko.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "하루카(새해)",
+              "name": "íë£¨ì¹´(ìí´)",
               "baseId": "haruka",
               "atk": 3,
               "hp": 5,
@@ -7770,7 +7751,7 @@
               ],
               "isSkin": true,
               "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         },
@@ -7781,7 +7762,7 @@
           "tier": 6,
           "board": [
             {
-              "name": "시미코(악의 간부)",
+              "name": "ìë¯¸ì½(ìì ê°ë¶)",
               "baseId": "shimiko",
               "atk": 13,
               "hp": 9,
@@ -7794,10 +7775,10 @@
               ],
               "isSkin": true,
               "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "티파티(미카 호스트)",
+              "name": "í°íí°(ë¯¸ì¹´ í¸ì¤í¸)",
               "baseId": "trinity_mika",
               "atk": 30,
               "hp": 30,
@@ -7811,10 +7792,10 @@
               ],
               "isSkin": false,
               "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "우이",
+              "name": "ì°ì´",
               "baseId": "ui",
               "atk": 10,
               "hp": 9,
@@ -7824,10 +7805,10 @@
               ],
               "isSkin": false,
               "img": "Ui.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "츠루기",
+              "name": "ì¸ ë£¨ê¸°",
               "baseId": "tsurugi",
               "atk": 7,
               "hp": 7,
@@ -7835,10 +7816,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Tsurugi.png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             },
             {
-              "name": "마리(아이돌)",
+              "name": "ë§ë¦¬(ìì´ë)",
               "baseId": "mari",
               "atk": 3,
               "hp": 5,
@@ -7848,7 +7829,7 @@
               ],
               "isSkin": true,
               "img": "Mari_(Idol).png",
-              "school": "트리니티"
+              "school": "í¸ë¦¬ëí°"
             }
           ]
         }
@@ -7922,7 +7903,7 @@
         "reijo"
       ]
     },
-    "호롤롤": {
+    "í¸ë¡¤ë¡¤": {
       "records": [],
       "points": 0
     },
@@ -7935,7 +7916,7 @@
           "tier": 5,
           "board": [
             {
-              "name": "치아키",
+              "name": "ì¹ìí¤",
               "baseId": "chiaki",
               "atk": 9,
               "hp": 7,
@@ -7945,10 +7926,10 @@
               ],
               "isSkin": false,
               "img": "Chiaki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "사츠키",
+              "name": "ì¬ì¸ í¤",
               "baseId": "satsuki",
               "atk": 5,
               "hp": 6,
@@ -7956,10 +7937,10 @@
               "kw": [],
               "isSkin": false,
               "img": "Satsuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 7,
               "hp": 9,
@@ -7969,10 +7950,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "아코",
+              "name": "ìì½",
               "baseId": "ako",
               "atk": 3,
               "hp": 5,
@@ -7982,10 +7963,10 @@
               ],
               "isSkin": false,
               "img": "Ako.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             },
             {
-              "name": "이부키",
+              "name": "ì´ë¶í¤",
               "baseId": "ibuki",
               "atk": 2,
               "hp": 3,
@@ -7993,7 +7974,7 @@
               "kw": [],
               "isSkin": false,
               "img": "Ibuki.png",
-              "school": "게헨나"
+              "school": "ê²í¨ë"
             }
           ]
         }
@@ -8052,7 +8033,11 @@
         }
       }
     },
-    "시엔": {
+    "ìì": {
+      "records": [],
+      "points": 0
+    },
+    "남민철": {
       "records": [],
       "points": 0
     }
