@@ -6,8 +6,11 @@
 <script>if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){var p=location.pathname;if(p.indexOf('index_mobile')===-1){var base=p.endsWith('/')?p:p.replace(/\/[^\/]*$/,'/');location.replace(base+'index_mobile.html');}}</script>
 <title>블루아카 전장</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min-height:100vh;overflow-x:hidden;overflow-y:hidden}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none}
+*:focus{outline:none}
+img,a{-webkit-user-drag:none}
+[draggable="true"]{-webkit-user-drag:element}
+body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min-height:100vh;overflow-x:hidden;overflow-y:hidden;overscroll-behavior:none}
 #app{max-width:1400px;margin:0 auto;padding:14px}
 .schale-frame{position:relative;border:3px solid rgba(160,210,230,0.35);border-radius:18px;padding:6px;background:linear-gradient(135deg,rgba(140,200,220,0.08) 0%,rgba(100,170,200,0.03) 50%,rgba(140,200,220,0.08) 100%);box-shadow:0 0 20px rgba(120,190,220,0.08),inset 0 0 30px rgba(120,190,220,0.03)}
 .schale-frame::before{content:'';position:absolute;top:3px;left:3px;right:3px;bottom:3px;border:1px solid rgba(160,210,230,0.12);border-radius:14px;pointer-events:none}
@@ -757,6 +760,31 @@ img.tutorial-highlight{border-radius:50%!important}
 </div>
 
 <script src="game_core.js?v=20260410a"></script>
+<script>
+document.addEventListener('contextmenu',function(e){e.preventDefault()});
+(function(){
+  var ghost=null;
+  document.addEventListener('dragstart',function(e){
+    var card=e.target.closest('[draggable="true"]');
+    if(!card){e.preventDefault();return;}
+    var blank=new Image();blank.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    e.dataTransfer.setDragImage(blank,0,0);
+    ghost=card.cloneNode(true);
+    ghost.className=card.className;
+    ghost.style.cssText='position:fixed;pointer-events:none;z-index:9999;opacity:0.85;transform:scale(1.05) rotate(2deg);transition:none;width:'+card.offsetWidth+'px;height:'+card.offsetHeight+'px;left:'+(e.clientX-card.offsetWidth/2)+'px;top:'+(e.clientY-card.offsetHeight/2)+'px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.5));';
+    document.body.appendChild(ghost);
+  });
+  document.addEventListener('drag',function(e){
+    if(!ghost||!e.clientX)return;
+    ghost.style.left=(e.clientX-ghost.offsetWidth/2)+'px';
+    ghost.style.top=(e.clientY-ghost.offsetHeight/2)+'px';
+  });
+  function clearGhost(){if(ghost){ghost.remove();ghost=null;}}
+  document.addEventListener('dragend',clearGhost);
+  document.addEventListener('drop',clearGhost);
+  document.addEventListener('mouseup',clearGhost);
+})();
+</script>
 <script>
 
 var _endMusic=null;
