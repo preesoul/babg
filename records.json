@@ -3264,78 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-08T13:48:59",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아오이(인터뷰)",
-              "baseId": "aoi",
-              "atk": 151,
-              "hp": 149,
-              "tier": 4,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Aoi_(Interview).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "아유무(승무원)",
-              "baseId": "ayumu",
-              "atk": 91,
-              "hp": 85,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ayumu_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "아유무(승무원)",
-              "baseId": "ayumu",
-              "atk": 94,
-              "hp": 90,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ayumu_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 151,
-              "hp": 151,
-              "tier": 5,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 151,
-              "hp": 151,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-09T04:13:07",
           "placement": 1,
           "turn": 16,
@@ -4004,9 +3932,82 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T07:35:45",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 21,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 19,
+              "hp": 19,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하나코(수영복)",
+              "baseId": "hanako",
+              "atk": 15,
+              "hp": 21,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Hanako_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(세이아 호스트)",
+              "baseId": "trinity_seia",
+              "atk": 4,
+              "hp": 6,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_seia.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 66,
+      "points": 68,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4034,7 +4035,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             },
             {
@@ -4094,8 +4095,8 @@
       ],
       "rank": {
         "tier": 4,
-        "stars": 1,
-        "streak": 2,
+        "stars": 4,
+        "streak": 3,
         "legendPoints": 0
       }
     },
