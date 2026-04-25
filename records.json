@@ -3285,80 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T09:10:39",
-          "placement": 2,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "렌게",
-              "baseId": "renge",
-              "atk": 13,
-              "hp": 14,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Renge.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 17,
-              "hp": 17,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리",
-              "baseId": "yukari",
-              "atk": 17,
-              "hp": 16,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Yukari.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 49,
-              "hp": 49,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요",
-              "baseId": "tsukuyo",
-              "atk": 6,
-              "hp": 5,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsukuyo.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T09:22:18",
           "placement": 1,
           "turn": 16,
@@ -3948,9 +3874,77 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T15:40:22",
+          "placement": 3,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 18,
+              "hp": 24,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 10,
+              "hp": 11,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "리오(임전)",
+              "baseId": "rio",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Rio_(Battle).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 19,
+              "hp": 19,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 105,
+      "points": 112,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -3967,8 +3961,8 @@
             },
             {
               "id": "millennium10",
-              "progress": 3,
-              "completed": false
+              "progress": 11,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4048,8 +4042,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 6,
-        "legendPoints": 2
+        "streak": 0,
+        "legendPoints": 1
       }
     },
     "킹갓프리소울": {
