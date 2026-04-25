@@ -3264,79 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-07T12:40:52",
-          "placement": 1,
-          "turn": 14,
-          "tier": 5,
-          "board": [
-            {
-              "name": "미나(리코더)",
-              "baseId": "mina",
-              "atk": 19,
-              "hp": 23,
-              "tier": 2,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Mina_(Recorder).png",
-              "school": "산해경"
-            },
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 25,
-              "hp": 17,
-              "tier": 5,
-              "kw": [
-                "ranged"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "사야(사복)",
-              "baseId": "saya",
-              "atk": 39,
-              "hp": 41,
-              "tier": 4,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Saya_(Casual).png",
-              "school": "산해경"
-            },
-            {
-              "name": "레이죠(사복)",
-              "baseId": "reijo",
-              "atk": 23,
-              "hp": 19,
-              "tier": 3,
-              "kw": [
-                "windfury",
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Reijo_(Casual).png",
-              "school": "산해경"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 18,
-              "hp": 18,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T14:09:04",
           "placement": 1,
           "turn": 17,
@@ -3991,27 +3918,103 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T03:30:10",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 65,
+              "hp": 63,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 43,
+              "hp": 19,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 21,
+              "hp": 25,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "린(승무원)",
+              "baseId": "lin",
+              "atk": 21,
+              "hp": 21,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Lin_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "호시노",
+              "baseId": "hoshino",
+              "atk": 9,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Hoshino.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 15,
+      "points": 22,
       "questState": {
         "daily": {
           "date": "2026-04-25",
           "quests": [
             {
               "id": "skin3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 4,
+              "completed": true
             }
           ],
           "rerolled": true
@@ -4021,17 +4024,17 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
