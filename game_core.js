@@ -5435,7 +5435,8 @@ function startBattle() {
   document.getElementById('btn-continue').style.display='none';
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">선생님 <span style="color:#a78bfa">(Lv.'+p.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(Lv.'+opp.tier+')</span></div></div>';
+  var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div></div>';
 
   setTimeout(function(){
     intro.innerHTML='';
@@ -6058,7 +6059,8 @@ function showBattle(result,player,opp) {
   document.getElementById('btn-continue').style.display='none';
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">선생님 <span style="color:#a78bfa">(Lv.'+player.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(Lv.'+opp.tier+')</span></div></div>';
+  var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div></div>';
   setTimeout(function(){intro.innerHTML='';startBattleAnimation(result,opp);},1500);
 }
 
@@ -7195,7 +7197,7 @@ function _renderRecordCard(r,showPin,pinIdx){
   h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
   if(showPin) h+='<label style="cursor:pointer;display:flex;align-items:center;gap:4px"><input type="checkbox" class="pin-check" data-pin-idx="'+pinIdx+'" '+(r.pinned?'checked':'')+' style="cursor:pointer"><span style="font-size:10px;color:#6a8a9e">공개</span></label>';
   h+='<span style="color:'+placeColor+';font-weight:900;font-size:18px">'+r.placement+'등</span>';
-  h+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | Lv.'+r.tier+'</span>';
+  h+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | 스케쥴 '+r.tier+'</span>';
   h+='</div>';
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
   var board=r.board||[];
