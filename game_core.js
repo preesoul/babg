@@ -7343,13 +7343,12 @@ function saveRecords(data,sha,cb){
 // 5등급 이하(전설 포함)에서 비1등 = -1별 (또는 전설 -1점)
 
 function rankStarsRequired(tier){
-  if(tier===0) return 999; // 전설은 승급 없음
-  if(tier>=6) return 3;
-  return 5; // 5,4,3,2,1
+  if(tier===0) return 999; // 플래티넘 1 (구 전설)은 승급 없음 (점수 누적)
+  return 3; // 모든 등급 3별로 통일
 }
 function rankCanDemote(tier){
-  // 5등급 이하(숫자 작은 쪽, 전설 포함)에서만 강등
-  return tier===0 || tier<=5;
+  // 골드 3(tier 4) 이상에서만 강등 가능
+  return tier<=4;
 }
 function defaultRank(){
   return {tier:9, stars:0, streak:0, legendPoints:0};
@@ -7394,32 +7393,48 @@ function applyRankChange(rank, placement){
     }
   } else {
     rank.streak = 0;
-    if(rankCanDemote(rank.tier)){
-      if(rank.tier===0){
-        // 전설: -1점, 0 미만이면 1등급으로 강등 (별 starsRequired-1 = 4/5)
-        rank.legendPoints = (rank.legendPoints||0) - 1;
-        delta.legendPointsLost = 1;
-        if(rank.legendPoints < 0){
-          rank.legendPoints = 0;
-          rank.tier = 1;
-          rank.stars = Math.max(0, rankStarsRequired(1)-1); // 4/5
+    // 강등 규칙:
+    // - 실버 1 이하 (tier>=5): 강등 없음
+    // - 골드 3~1 (tier 4~2): 5위 이하만 -1별, 골드 3 이하로 안 떨어짐
+    // - 플래티넘 2 (tier 1): 비1등이면 -1별, 골드 1로 강등 가능
+    // - 플래티넘 1 (tier 0): 비1등이면 -1pt, 0pt 아래면 플래티넘 2로 강등
+    if(rank.tier===0){
+      // 플래티넘 1: 비1등이면 -1pt
+      rank.legendPoints = (rank.legendPoints||0) - 1;
+      delta.legendPointsLost = 1;
+      if(rank.legendPoints < 0){
+        rank.legendPoints = 0;
+        rank.tier = 1; // 플래티넘 2로 강등
+        rank.stars = Math.max(0, rankStarsRequired(1)-1); // 2/3
+        delta.demoted = true;
+      }
+    } else if(rank.tier===1){
+      // 플래티넘 2: 비1등이면 -1별, 별 음수면 골드 1로 강등
+      rank.stars -= 1;
+      delta.starsLost = 1;
+      if(rank.stars < 0){
+        rank.tier = 2; // 골드 1로 강등
+        rank.stars = Math.max(0, rankStarsRequired(2)-1); // 2/3
+        delta.demoted = true;
+      }
+    } else if(rank.tier<=4 && placement>=5){
+      // 골드 3~1: 5위 이하만 -1별
+      rank.stars -= 1;
+      delta.starsLost = 1;
+      if(rank.stars < 0){
+        if(rank.tier < 4){
+          // 골드 1, 골드 2 → 한 단계 아래로
+          rank.tier += 1;
+          rank.stars = Math.max(0, rankStarsRequired(rank.tier)-1); // 2/3
           delta.demoted = true;
-        }
-      } else {
-        rank.stars -= 1;
-        delta.starsLost = 1;
-        if(rank.stars < 0){
-          // 강등 (이전 티어로)
-          if(rank.tier < 9){
-            rank.tier += 1;
-            rank.stars = Math.max(0, rankStarsRequired(rank.tier)-1);
-            delta.demoted = true;
-          } else {
-            rank.stars = 0; // 9등급 미만 강등 없음 (안전장치)
-          }
+        } else {
+          // 골드 3 (tier 4): 골드 3 이하로 강등 안 함, 별 0 유지
+          rank.stars = 0;
+          delta.starsLost = 0;
         }
       }
     }
+    // 그 외 (실버 1 이하): 별 변동 없음
   }
 
   return {rank:rank, prev:prev, delta:delta, placement:placement};
