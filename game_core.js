@@ -2533,6 +2533,8 @@ function _calcAiDifficulty(rank){
   return Math.max(0.1, Math.min(1.0, 1.0 - rank.tier*0.1));
 }
 function getAiDifficulty(){
+  // 개별 AI 난이도 (테스트용 또는 미래 확장용) → G._currentAiDifficulty
+  if(typeof G!=='undefined' && G._currentAiDifficulty!=null) return G._currentAiDifficulty;
   if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
   return _calcAiDifficulty(window._babgPlayerRank);
 }
@@ -3222,6 +3224,8 @@ function aiTurns() {
   if(G._matchupsTurn!==G.turn){pairMatchups();G._matchupsTurn=G.turn;}
   for(var i=1;i<G.players.length;i++){
     var p=G.players[i];if(p.dead)continue;
+    // 개별 AI 난이도 override (있으면 적용)
+    G._currentAiDifficulty = (p.aiDifficulty!=null) ? p.aiDifficulty : null;
     // 매치업 상대 보드 (forecast용)
     var _oppBoard=_aiGetOppBoard(p);
     // Phase 1: 레벨업 판단 (스코어링)
@@ -3311,6 +3315,7 @@ function aiTurns() {
     // AI 7성 히든카드 체크 (정당한 조건 + 확률)
     aiCheckHidden(p);
   }
+  G._currentAiDifficulty=null; // 개별 난이도 override 해제
 }
 
 // 상점 기반 매각+교체: 보드에서 가장 약한 유닛 매각 후 상점에서 더 좋은 카드 영입 가능 시 실행
