@@ -5739,7 +5739,13 @@ function startBattle() {
   var _vsIconStyle='width:64px;height:64px;border-radius:50%;vertical-align:middle;margin-right:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.35);box-shadow:0 4px 12px rgba(0,0,0,0.5)';
   var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
+  // 적 NPC 티어 배지 (큰 사이즈)
+  var _vsTierBadge='';
+  if(opp&&opp.aiDifficulty!=null){
+    var _vsTierIcon=getNpcDifficultyIcon(opp.aiDifficulty);
+    if(_vsTierIcon) _vsTierBadge='<img src="'+_vsTierIcon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+  }
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
 
   setTimeout(function(){
     intro.innerHTML='';
@@ -6460,7 +6466,12 @@ function showBattle(result,player,opp) {
   var _vsIconStyle='width:64px;height:64px;border-radius:50%;vertical-align:middle;margin-right:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.35);box-shadow:0 4px 12px rgba(0,0,0,0.5)';
   var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
+  var _vsTierBadge='';
+  if(opp&&opp.aiDifficulty!=null){
+    var _vsTierIcon=getNpcDifficultyIcon(opp.aiDifficulty);
+    if(_vsTierIcon) _vsTierBadge='<img src="'+_vsTierIcon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+  }
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
   setTimeout(function(){intro.innerHTML='';startBattleAnimation(result,opp);},1500);
 }
 
@@ -6473,7 +6484,15 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   var _enIcon=getPlayerIconUrl(opp.name,false);
   var _myIcon=getPlayerIconUrl(_myName,true);
   var _iconStyle='width:40px;height:40px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.25);box-shadow:0 2px 6px rgba(0,0,0,0.4)';
-  document.getElementById('enemy-label').innerHTML='<img src="'+_enIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+opp.name+' (스케쥴 '+(opp.tier||1)+')';
+  // 적의 NPC 난이도 티어 배지
+  var _enTierBadge='';
+  if(opp&&opp.aiDifficulty!=null){
+    var _enTierIcon=getNpcDifficultyIcon(opp.aiDifficulty);
+    if(_enTierIcon){
+      _enTierBadge='<img src="'+_enTierIcon+'" style="width:24px;height:24px;vertical-align:middle;margin-right:6px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+    }
+  }
+  document.getElementById('enemy-label').innerHTML='<img src="'+_enIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_enTierBadge+opp.name+' (스케쥴 '+(opp.tier||1)+')';
   document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
