@@ -793,13 +793,16 @@ function newGame() {
   var playerName=window._babgLogin?window._babgLogin.name:'선생님';
   players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
+  // AI 난이도: 플레이어 등급에 비례
+  var _aiDiff=_calcAiDifficulty(window._babgPlayerRank);
   for(var i=0;i<aiCount;i++){
-    var pType=i<4?AI_PERSONALITY_KEYS[i]:AI_PERSONALITY_KEYS[Math.floor(Math.random()*4)];
+    var pType=_pickAiPersonality(i, _aiDiff);
     players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
-    nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0};
+    nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0,
+    aiDifficulty:_aiDiff};
   rollShop();
   aiTurns();
   renderAll();
@@ -2521,6 +2524,46 @@ var AI_PERSONALITIES={
 var AI_PERSONALITY_KEYS=['aggressive','standard','tempo','greedy'];
 var HKYK_ALL_IDS=['izuna','pina','yukari','tsukuyo','mimori','renge','shizuko','tsubaki','kikyou','chise','nagusa','wakamo','michiru'];
 
+// ===== AI 난이도 (플레이어 등급에 비례) =====
+// 0.0(9등급) ~ 1.0(전설). 기본 0.4 (4등급 수준)
+function _calcAiDifficulty(rank){
+  if(!rank) return 0.4;
+  if(rank.tier===0) return 1.0; // 전설
+  // tier 1=0.9, 2=0.8, ..., 9=0.1
+  return Math.max(0.1, Math.min(1.0, 1.0 - rank.tier*0.1));
+}
+function getAiDifficulty(){
+  if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
+  return _calcAiDifficulty(window._babgPlayerRank);
+}
+// AI 시뮬 깊이 (forecast N회): 9등급=2, 4등급=4, 1등급=7, 전설=8
+function _aiSimN(){
+  var d=getAiDifficulty();
+  return Math.max(2, Math.round(2 + d*6));
+}
+// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=4, 1등급=7, 전설=8
+function _aiOptK(){
+  var d=getAiDifficulty();
+  return Math.max(2, Math.round(2 + d*6));
+}
+// 휴리스틱 노이즈: 9등급=3.0, 전설=0.3 (높은 등급일수록 결정 정확)
+function _aiNoise(){
+  var d=getAiDifficulty();
+  return Math.max(0.3, 3.0 - d*2.7);
+}
+// 플레이어 등급에 따른 personality 분포 (낮음→소극적, 높음→공격적)
+function _pickAiPersonality(idx, difficulty){
+  // 약한 분포: tempo/greedy 비중 ↑
+  var weak=['tempo','greedy','tempo','standard','greedy','standard','aggressive'];
+  // 중립 분포: 균등
+  var mid=['aggressive','standard','tempo','greedy','aggressive','standard','greedy'];
+  // 강한 분포: aggressive 비중 ↑
+  var strong=['aggressive','aggressive','standard','aggressive','greedy','aggressive','standard'];
+  if(difficulty<0.35) return weak[idx]||'standard';
+  if(difficulty<0.7) return mid[idx]||'standard';
+  return strong[idx]||'aggressive';
+}
+
 // AI용 마법카드 효과 (G.players[0] 하드코딩 우회 — p: AI 플레이어)
 var AI_SPELL_EFFECTS={
   encourage: function(p){for(var i=0;i<p.board.length;i++){p.board[i].atk+=1;p.board[i].hp+=1;}},
@@ -2777,7 +2820,8 @@ function _aiGetOppBoard(p){
 function aiForecast(myBoard,oppBoard,n){
   if(!oppBoard||oppBoard.length===0) return (myBoard&&myBoard.length>0)?0.7:0.5;
   if(!myBoard||myBoard.length===0) return 0.0;
-  n=n||5;
+  // 난이도에 따라 시뮬 횟수 자동 조정 (호출 측 n 지정 시 무시 X — 호출자가 명시적이면 그대로 사용)
+  n=n||_aiSimN();
   var wins=0,draws=0;
   var simCtx={
     permanentAbilityBan:false,battleSchoolBuff:{},
@@ -2807,9 +2851,10 @@ function aiOptimizeOrder(p,oppBoard){
   var heuristic=p.board.slice();
   aiSortBoard(heuristic);
   var bestOrder=heuristic.slice();
-  var bestScore=aiForecast(heuristic,oppBoard,5);
-  // 후보 K개: 휴리스틱 기반 인접 swap 변형
-  var attempts=Math.min(5,p.board.length);
+  var _simN=_aiSimN();
+  var bestScore=aiForecast(heuristic,oppBoard,_simN);
+  // 후보 K개: 휴리스틱 기반 인접 swap 변형 (난이도 비례)
+  var attempts=Math.min(_aiOptK(),p.board.length);
   for(var k=0;k<attempts;k++){
     var candidate=heuristic.slice();
     var swapCount=(Math.random()<0.55)?1:2;
@@ -2817,12 +2862,12 @@ function aiOptimizeOrder(p,oppBoard){
       var idx=Math.floor(Math.random()*(candidate.length-1));
       var t=candidate[idx];candidate[idx]=candidate[idx+1];candidate[idx+1]=t;
     }
-    var sc=aiForecast(candidate,oppBoard,4);
+    var sc=aiForecast(candidate,oppBoard,_simN);
     if(sc>bestScore){bestScore=sc;bestOrder=candidate.slice();}
   }
   // 후보 1개 추가: 리버스 (광역 상대 카운터)
   var rev=heuristic.slice().reverse();
-  var revSc=aiForecast(rev,oppBoard,4);
+  var revSc=aiForecast(rev,oppBoard,_simN);
   if(revSc>bestScore){bestScore=revSc;bestOrder=rev;}
   p.board=bestOrder;
 }
@@ -3084,6 +3129,8 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
     if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
   }
   s+=simStatBonus(item.baseId);
+  // 난이도 기반 노이즈 (낮은 등급 AI는 가끔 잘못된 결정)
+  s+=Math.random()*_aiNoise();
   // 보드 가득 + 트리플 아니면 영입 불가
   if(p.board.length>=MAX_BOARD&&copyCount<2) return -1;
   // 휴리스틱 → 0~1 정규화 (대략)
@@ -6770,6 +6817,7 @@ function saveGame(){
       nonomiStoneSinceJoined:G.nonomiStoneSinceJoined||0,
       _shirokoTerrorAbsorbed:G._shirokoTerrorAbsorbed||[],
       matchups:G.matchups||{},lastMatchups:G.lastMatchups||{},_matchupsTurn:G._matchupsTurn||0,
+      aiDifficulty:G.aiDifficulty,
       savedAt:Date.now()
     };
     localStorage.setItem(SAVE_KEY,JSON.stringify(saveData));
@@ -6831,7 +6879,8 @@ function restoreGame(save){
     bunnyTossBonus:save.bunnyTossBonus||0,
     nonomiStoneSinceJoined:save.nonomiStoneSinceJoined||0,
     _shirokoTerrorAbsorbed:save._shirokoTerrorAbsorbed||[],
-    matchups:save.matchups||{},lastMatchups:save.lastMatchups||{},_matchupsTurn:save._matchupsTurn||0};
+    matchups:save.matchups||{},lastMatchups:save.lastMatchups||{},_matchupsTurn:save._matchupsTurn||0,
+    aiDifficulty:(save.aiDifficulty!=null?save.aiDifficulty:_calcAiDifficulty(window._babgPlayerRank))};
   rollShop();
 }
 

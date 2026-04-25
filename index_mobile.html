@@ -3156,29 +3156,51 @@ function goToMainMenu(name){
   document.getElementById('title-screen').classList.add('active');
   loadAndRenderTitleRank(name);
 }
+function _renderTitleRankBadge(el, rank){
+  var color=rankColor(rank);
+  var streak=(rank.streak>=2)?'<span style="color:#fb923c;font-size:13px;font-weight:700">🔥'+rank.streak+'연승</span>':'';
+  var starsViz='';
+  if(rank.tier!==0){
+    var req=rank.tier>=6?3:5;
+    starsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
+    for(var s=0;s<req;s++) starsViz+= s<rank.stars?'★':'☆';
+    starsViz+='</span>';
+  }
+  var tierText = rank.tier===0 ? '전설 '+rank.legendPoints+'pt' : rank.tier+'등급';
+  el.innerHTML='<span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';color:'+color+';font-weight:800;font-size:16px;box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+tierText+(rank.tier===0?'':' '+starsViz)+'</span>'+streak;
+  window._babgPlayerRank=rank;
+}
 function loadAndRenderTitleRank(name){
   var el=document.getElementById('title-rank');
   if(!el) return;
+  if(window._lastRankChange&&window._lastRankChange.rank){
+    _renderTitleRankBadge(el, window._lastRankChange.rank);
+    setTimeout(function(){ _fetchTitleRank(name, el, true); }, 1500);
+    return;
+  }
   el.innerHTML='<span style="color:#94a3b8;font-size:12px">등급 불러오는 중...</span>';
+  var attempts=0, MAX_ATTEMPTS=8;
+  var iv=setInterval(function(){
+    attempts++;
+    if(window._lastRankChange&&window._lastRankChange.rank){
+      clearInterval(iv);
+      _renderTitleRankBadge(el, window._lastRankChange.rank);
+      setTimeout(function(){ _fetchTitleRank(name, el, true); }, 1500);
+    } else if(attempts>=MAX_ATTEMPTS){
+      clearInterval(iv);
+      _fetchTitleRank(name, el, false);
+    }
+  }, 400);
+}
+function _fetchTitleRank(name, el, silent){
   fetchRecords(function(err,data,sha){
     if(err||!data||!data.players||!data.players[name]){
-      el.innerHTML='<span style="color:#94a3b8;font-size:12px">9등급 ★0/3</span>';
+      if(!silent) el.innerHTML='<span style="color:#94a3b8;font-size:12px">9등급 ★0/3</span>';
       return;
     }
     var pd=data.players[name];
     var rank=pd.rank||estimateRankFromRecords(pd.records||[]);
-    var label=rankLabel(rank);
-    var color=rankColor(rank);
-    var streak=(rank.streak>=2)?'<span style="color:#fb923c;font-size:13px;font-weight:700">🔥'+rank.streak+'연승</span>':'';
-    var starsViz='';
-    if(rank.tier!==0){
-      var req=rank.tier>=6?3:5;
-      starsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
-      for(var s=0;s<req;s++) starsViz+= s<rank.stars?'★':'☆';
-      starsViz+='</span>';
-    }
-    var tierText = rank.tier===0 ? '전설 '+rank.legendPoints+'pt' : rank.tier+'등급';
-    el.innerHTML='<span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';color:'+color+';font-weight:800;font-size:16px;box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+tierText+(rank.tier===0?'':' '+starsViz)+'</span>'+streak;
+    _renderTitleRankBadge(el, rank);
   });
 }
 document.getElementById('btn-login').addEventListener('click',function(){
