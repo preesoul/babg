@@ -2662,15 +2662,15 @@ function getAiDifficulty(){
   if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
   return _calcAiDifficulty(window._babgPlayerRank);
 }
-// AI 시뮬 깊이 (forecast N회): 9등급=2, 4등급=6, 1등급=11, 전설=12
+// AI 시뮬 깊이 (forecast N회): 9등급=4, 4등급=13, 1등급=18, 전설=20
 function _aiSimN(){
   var d=getAiDifficulty();
-  return Math.max(2, Math.round(2 + d*10));
+  return Math.max(2, Math.round(2 + d*18));
 }
-// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=5, 1등급=9, 전설=10
+// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=8, 1등급=12, 전설=14
 function _aiOptK(){
   var d=getAiDifficulty();
-  return Math.max(2, Math.round(2 + d*8));
+  return Math.max(2, Math.round(2 + d*12));
 }
 // 휴리스틱 노이즈: 9등급은 점수 평가 자체가 크게 왜곡됨 (±양방향)
 // 9등급=±11, 4등급=±5, 1등급=±0.7, 전설=±0.3
@@ -2828,7 +2828,22 @@ var DECK_PATTERNS=[
   {id:'bc_tsubaki',
    check:function(board){var hasTsubaki=false,bcCnt=0;for(var i=0;i<board.length;i++){if(board[i].baseId==='tsubaki')hasTsubaki=true;if(BC_IDS[board[i].baseId])bcCnt++;}return hasTsubaki&&bcCnt>=2;},
    buyBonus:function(c,board){if(c.id==='tsubaki')return 12;if(BC_IDS[c.id])return 5;return 0;},
-   sellProtect:function(u){if(u.baseId==='tsubaki')return 8;if(BC_IDS[u.baseId])return 3;return 0;}}
+   sellProtect:function(u){if(u.baseId==='tsubaki')return 8;if(BC_IDS[u.baseId])return 3;return 0;}},
+  // 만마전 흡수 콤보: 마코토+사츠키+이로하+이부키+치아키 (게헨나 흡수형)
+  {id:'gehenna_absorb',
+   check:function(board){var ids={makoto:0,satsuki:0,iroha:0,ibuki:0,chiaki:0};for(var i=0;i<board.length;i++)if(ids[board[i].baseId]!==undefined)ids[board[i].baseId]++;var c=0;for(var k in ids)if(ids[k]>0)c++;return c>=2;},
+   buyBonus:function(c,board){var combo={makoto:1,satsuki:1,iroha:1,ibuki:1,chiaki:1};if(combo[c.id])return 10;return 0;},
+   sellProtect:function(u){var combo={makoto:1,satsuki:1,iroha:1,ibuki:1,chiaki:1};if(combo[u.baseId])return 6;return 0;}},
+  // 백귀야행 통일덱 (쿠즈노하 노림): 4명 이상부터 적극 영입
+  {id:'hkyk_unity',
+   check:function(board){var c=0;for(var i=0;i<board.length;i++)if(board[i].school==='백귀야행')c++;return c>=4;},
+   buyBonus:function(c,board){if(c.school!=='백귀야행')return -3;var cnt=0;for(var i=0;i<board.length;i++)if(board[i].school==='백귀야행')cnt++;return 4+cnt;},
+   sellProtect:function(u){if(u.school==='백귀야행')return 5;return 0;}},
+  // 미사 트리오 (미카+사야 등 트리니티 7성 노림)
+  {id:'trinity_unity',
+   check:function(board){var c=0;for(var i=0;i<board.length;i++)if(board[i].school==='트리니티')c++;return c>=4;},
+   buyBonus:function(c,board){if(c.school!=='트리니티')return -3;var cnt=0;for(var i=0;i<board.length;i++)if(board[i].school==='트리니티')cnt++;return 3+cnt;},
+   sellProtect:function(u){if(u.school==='트리니티')return 4;return 0;}}
 ];
 
 function aiUnitScore(u){
@@ -3334,13 +3349,47 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
   if(aiStrat){
     if(aiStrat.dominantSchool&&item.school===aiStrat.dominantSchool){
       var unity=0;for(var u=0;u<p.board.length;u++){if(p.board[u].school===aiStrat.dominantSchool)unity++;}
-      s+=3+unity*2;
+      s+=5+unity*3; // 강화: 기본 5, 동일학교당 +3 (이전 3+2)
     }
-    if(aiStrat.targetUnits&&aiStrat.targetUnits.indexOf(item.baseId)!==-1)s+=12;
-    if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&item.school!==aiStrat.dominantSchool)s-=10;
+    if(aiStrat.targetUnits&&aiStrat.targetUnits.indexOf(item.baseId)!==-1)s+=15; // 강화: 12→15
+    if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&item.school!==aiStrat.dominantSchool)s-=15; // 강화: -10→-15
     if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
   }
   s+=simStatBonus(item.baseId);
+  // === 키워드/패턴 시너지 가산 ===
+  // 광역/관통 보드 시너지: 같은 키워드 가진 카드끼리 시너지
+  var itemHasAOE=hasKw(item,'cleave')||hasKw(item,'pierce');
+  if(itemHasAOE){
+    var aoeOnBoard=0;
+    for(var u=0;u<p.board.length;u++){
+      if(hasKw(p.board[u],'cleave')||hasKw(p.board[u],'pierce')) aoeOnBoard++;
+    }
+    s+=aoeOnBoard*2; // 광역 보드 시너지
+  }
+  // 게헨나 흡수 콤보 (마코토+사츠키+이로하+이부키+치아키 → 만마전)
+  var gehennaComboIds={makoto:1,satsuki:1,iroha:1,ibuki:1,chiaki:1};
+  if(gehennaComboIds[item.baseId]){
+    var gComboCount=0;
+    for(var u=0;u<p.board.length;u++) if(gehennaComboIds[p.board[u].baseId]) gComboCount++;
+    if(gComboCount>=2) s+=8;
+    else if(gComboCount>=1) s+=4;
+  }
+  // 트리니티 SOC 콤보 (츠루기+카야 + SOC 카드들)
+  if(SOC_IDS[item.baseId]){
+    var hasTsurugi=false,hasKaya=false,socCount=0;
+    for(var u=0;u<p.board.length;u++){
+      if(p.board[u].baseId==='tsurugi') hasTsurugi=true;
+      else if(p.board[u].baseId==='kaya') hasKaya=true;
+      if(SOC_IDS[p.board[u].baseId]) socCount++;
+    }
+    if(hasTsurugi||hasKaya) s+=socCount*2; // 츠루기/카야 있으면 SOC 늘릴수록 가치
+  }
+  // 백귀야행 통일 (쿠즈노하 발동 조건 진행도)
+  if(item.school==='백귀야행'){
+    var hkykCount=0;
+    for(var u=0;u<p.board.length;u++) if(p.board[u].school==='백귀야행') hkykCount++;
+    if(hkykCount>=4) s+=hkykCount*2; // 4명 이상부터 폭발적 가산
+  }
   // 양방향 노이즈: 낮은 등급은 점수 평가 자체가 왜곡 (좋은 카드를 나쁘게/나쁜 카드를 좋게)
   s+=(Math.random()-0.5)*_aiNoise()*2;
   // 보드 가득 + 트리플 아니면 영입 불가
