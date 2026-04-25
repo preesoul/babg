@@ -3285,90 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T03:41:53",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 22,
-              "hp": 18,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "ranged",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하스미(수영복)",
-              "baseId": "hasumi",
-              "atk": 37,
-              "hp": 31,
-              "tier": 5,
-              "kw": [
-                "ambush",
-                "windfury",
-                "cleave"
-              ],
-              "isSkin": true,
-              "img": "Hasumi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 26,
-              "hp": 24,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 17,
-              "hp": 15,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 23,
-              "hp": 21,
-              "tier": 1,
-              "kw": [
-                "windfury",
-                "selfdestruct",
-                "poison",
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T05:54:02",
           "placement": 8,
           "turn": 12,
@@ -4020,9 +3936,88 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T09:22:18",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 18,
+              "hp": 16,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키",
+              "baseId": "tsubaki",
+              "atk": 23,
+              "hp": 22,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Tsubaki.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 22,
+              "hp": 21,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 46,
+              "hp": 45,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 82,
+      "points": 84,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4112,8 +4107,8 @@
       ],
       "rank": {
         "tier": 3,
-        "stars": 1,
-        "streak": 0,
+        "stars": 2,
+        "streak": 1,
         "legendPoints": 0
       }
     },
