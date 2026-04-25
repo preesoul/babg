@@ -793,11 +793,17 @@ function newGame() {
   var playerName=window._babgLogin?window._babgLogin.name:'선생님';
   players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
-  // AI 난이도: 플레이어 등급에 비례
-  var _aiDiff=_calcAiDifficulty(window._babgPlayerRank);
+  // AI 난이도: 플레이어 등급에 따른 7명 분포 (셔플)
+  var _aiDiffArray=_getAiDifficultyDistribution(window._babgPlayerRank);
+  // 평균 난이도(폴백/G 전역용) — 호환성 유지
+  var _avgDiff=0;
+  for(var _ad=0;_ad<_aiDiffArray.length;_ad++) _avgDiff+=_aiDiffArray[_ad];
+  _avgDiff/=Math.max(1,_aiDiffArray.length);
+  var _aiDiff=_avgDiff;
   for(var i=0;i<aiCount;i++){
-    var pType=_pickAiPersonality(i, _aiDiff);
-    players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType});
+    var thisDiff=(i<_aiDiffArray.length)?_aiDiffArray[i]:_avgDiff;
+    var pType=_pickAiPersonality(i, thisDiff);
+    players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType,aiDifficulty:thisDiff});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
@@ -2617,6 +2623,36 @@ function _pickAiPersonality(idx, difficulty){
   if(difficulty<0.35) return weak[idx]||'standard';
   if(difficulty<0.7) return mid[idx]||'standard';
   return strong[idx]||'aggressive';
+}
+
+// ===== 등급별 NPC 7명 난이도 분포 =====
+// 9=0.1, 6=0.4, 4=0.6, 1=0.9, 전=1.0 (전설)
+// 키: rank.tier (0=전설, 1~9=일반 등급)
+var RANK_AI_DIFFICULTY_DISTRIBUTION={
+  9:[0.1,0.1,0.1,0.1,0.1,0.1,0.1],         // 9999999
+  8:[0.1,0.1,0.1,0.1,0.4,0.4,0.4],         // 9999666
+  7:[0.1,0.1,0.1,0.4,0.4,0.4,0.4],         // 9996666
+  6:[0.4,0.4,0.4,0.4,0.4,0.4,0.4],         // 6666666
+  5:[0.4,0.4,0.4,0.4,0.6,0.6,0.6],         // 6666444
+  4:[0.6,0.6,0.6,0.6,0.6,0.6,0.6],         // 4444444
+  3:[0.6,0.6,0.6,0.6,0.9,0.9,0.9],         // 4444111
+  2:[0.6,0.6,0.6,0.9,0.9,0.9,1.0],         // 444111전
+  1:[0.9,0.9,0.9,0.9,1.0,1.0,1.0],         // 1111전전전
+  0:[1.0,1.0,1.0,1.0,1.0,1.0,1.0]          // 전설: 전전전전전전전
+};
+// 등급에 맞는 NPC 난이도 배열 반환 (셔플된 사본)
+function _getAiDifficultyDistribution(rank){
+  var key;
+  if(!rank) key=4; // 미로그인/기본: 4등급 분포
+  else if(rank.tier===0) key=0; // 전설
+  else key=rank.tier;
+  var arr=(RANK_AI_DIFFICULTY_DISTRIBUTION[key]||RANK_AI_DIFFICULTY_DISTRIBUTION[4]).slice();
+  // Fisher-Yates 셔플
+  for(var i=arr.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=arr[i];arr[i]=arr[j];arr[j]=t;
+  }
+  return arr;
 }
 
 // AI용 마법카드 효과 (G.players[0] 하드코딩 우회 — p: AI 플레이어)
@@ -6877,6 +6913,7 @@ function saveGame(){
           purchasedSchools:p.purchasedSchools||{},totalDamageTaken:p.totalDamageTaken||0,
           panchanDeaths:p.panchanDeaths||0,
           personalityType:p.personalityType||'standard',
+          aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
           board:p.board.map(function(u){
             return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
               atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:(u.kw||[]).slice(),
@@ -6933,6 +6970,7 @@ function restoreGame(save){
       panchanDeaths:p.panchanDeaths||0,
       personality:AI_PERSONALITIES[p.personalityType||'standard'],
       personalityType:p.personalityType||'standard',
+      aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
       board:p.board.map(function(u){
         return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
           atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:u.kw||[],
