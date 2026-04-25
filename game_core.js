@@ -2760,11 +2760,21 @@ var RANK_AI_DIFFICULTY_DISTRIBUTION={
 };
 // 등급에 맞는 NPC 난이도 배열 반환 (셔플된 사본)
 function _getAiDifficultyDistribution(rank){
+  // rank 미캐시 시 localStorage에서 즉시 시도
+  if(!rank){
+    try{
+      var raw=localStorage.getItem('babg_player_rank');
+      if(raw){
+        rank=JSON.parse(raw);
+        if(typeof window!=='undefined') window._babgPlayerRank=rank;
+      }
+    }catch(e){}
+  }
   var key;
-  if(!rank) key=4; // 미로그인/기본: 4등급 분포
+  if(!rank) key=9; // 진짜로 등급 모름 → 가장 보수적(브론즈 2 분포, 모두 멍청 NPC)
   else if(rank.tier===0) key=0; // 전설
   else key=rank.tier;
-  var arr=(RANK_AI_DIFFICULTY_DISTRIBUTION[key]||RANK_AI_DIFFICULTY_DISTRIBUTION[4]).slice();
+  var arr=(RANK_AI_DIFFICULTY_DISTRIBUTION[key]||RANK_AI_DIFFICULTY_DISTRIBUTION[9]).slice();
   // Fisher-Yates 셔플
   for(var i=arr.length-1;i>0;i--){
     var j=Math.floor(Math.random()*(i+1));
@@ -3128,31 +3138,42 @@ function aiSortBoard(board){
   // 카야 예외처리: 보드에 카야 있을 때 1번 자리에 효과 없는/뒤끝 카드 강제
   _applyKayaException(board);
 }
-// 카야 보유 시 1번 자리에 효과 없는(바닐라) 또는 뒤끝(DR) 카드 우선
+// 카야 보유 시 1번 자리에 "이미 효과 발동 끝나서 변수 없는" 카드 우선
+// 후보 우선순위: 뒤끝(DR) → 첫인사/개전 (BC/SOC, 한 번 발동 후 끝) → 바닐라
+// 카야는 개전을 마지막에 쓰니, 다른 BC/SOC 발동 후 흡수해도 무관
 function _applyKayaException(board){
   var hasKaya=false;
   for(var i=0;i<board.length;i++){if(board[i].baseId==='kaya'){hasKaya=true;break;}}
   if(!hasKaya) return;
-  // 우선순위 1: DR 카드, 2: 효과 없는 바닐라
   var candidate=-1;
+  // 1순위: 뒤끝 (죽을 때 발동, 죽기까지 안전한 자리 가치 X)
   for(var i=0;i<board.length;i++){
-    var u=board[i];
-    if(u.baseId==='kaya') continue;
-    if(DR_IDS[u.baseId]){candidate=i;break;}
+    if(board[i].baseId==='kaya') continue;
+    if(DR_IDS[board[i].baseId]){candidate=i;break;}
   }
+  // 2순위: 첫인사/개전 (한 번 발동 후 자리 무관)
+  // 단, 지속 효과 보유(패시브/선빵/버티기)는 제외
   if(candidate<0){
     for(var i=0;i<board.length;i++){
-      var u=board[i];
-      if(u.baseId==='kaya') continue;
-      var bid=u.baseId;
-      var kw=u.kw||[];
+      if(board[i].baseId==='kaya') continue;
+      var bid=board[i].baseId;
+      var hasOngoing=PASSIVE_IDS[bid]||PRE_IDS[bid]||SURV_IDS[bid];
+      if(hasOngoing) continue;
+      if(BC_IDS[bid]||SOC_IDS[bid]){candidate=i;break;}
+    }
+  }
+  // 3순위: 효과 없는 바닐라
+  if(candidate<0){
+    for(var i=0;i<board.length;i++){
+      if(board[i].baseId==='kaya') continue;
+      var bid=board[i].baseId;
+      var kw=board[i].kw||[];
       var hasAbility=DR_IDS[bid]||SOC_IDS[bid]||BC_IDS[bid]||PRE_IDS[bid]||SURV_IDS[bid]||PASSIVE_IDS[bid];
       if(!hasAbility&&kw.length===0){candidate=i;break;}
     }
   }
-  if(candidate<0) return; // 적합한 카드 없음 — 일반 정렬 유지
-  if(candidate===0) return; // 이미 1번 자리
-  // 0번과 candidate 위치 swap
+  if(candidate<0) return;
+  if(candidate===0) return;
   var tmp=board[0];board[0]=board[candidate];board[candidate]=tmp;
 }
 

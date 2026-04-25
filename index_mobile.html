@@ -3202,6 +3202,7 @@ function _renderTitleRankBadge(el, rank){
   var numText='<span style="font-weight:900;font-size:18px;color:'+color+';margin-left:4px">'+info.num+'</span>';
   el.innerHTML='<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+iconImg+numText+' '+posStarsViz+progressText+'</span>'+streak;
   window._babgPlayerRank=rank;
+  try{ localStorage.setItem('babg_player_rank', JSON.stringify(rank)); }catch(e){}
 }
 function loadAndRenderTitleRank(name){
   var el=document.getElementById('title-rank');
