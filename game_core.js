@@ -3077,7 +3077,7 @@ var FRONT_LINE_CARDS={
   'gehenna_prefect':1,'gehenna_pandemonium':1,'gehenna_p68':1,
   'trinity_mika':1,'trinity_makeup':1,'trinity_justice':1,
   'millennium_nameless':1,'millennium_malkuth':1,'millennium_death_momoi':1,
-  'millennium_cc':1,'Arisu_Kei':1
+  'millennium_cc':1,'millennium_seminar':1,'Arisu_Kei':1
 };
 var BACK_LINE_CARDS={
   'mine':1,'mari':1,'momoi':1,'yuuka':1,'yuzu':1,'utaha':1,
