@@ -3231,25 +3231,45 @@ function aiOptimizeOrder(p,oppBoard){
   // 후보 0: 휴리스틱
   var heuristic=p.board.slice();
   aiSortBoard(heuristic);
+  // 사용자 명시 카드 인덱스를 lock — forecast가 절대 건드리지 못함
+  var lockedIndices={};
+  for(var i=0;i<heuristic.length;i++){
+    var bid=heuristic[i].baseId;
+    if(FRONT_LINE_CARDS[bid]||BACK_LINE_CARDS[bid]||bid==='toki'||KEISEISEN_CARDS[bid]||bid==='kaya'){
+      lockedIndices[i]=true;
+    }
+  }
+  var hasLocked=Object.keys(lockedIndices).length>0;
   var bestOrder=heuristic.slice();
   var _simN=_aiSimN();
   var bestScore=aiForecast(heuristic,oppBoard,_simN);
-  // 후보 K개: 휴리스틱 기반 인접 swap 변형 (난이도 비례)
+  // 후보 K개: 휴리스틱 기반 인접 swap 변형 (lock된 자리는 swap 후보 X)
   var attempts=Math.min(_aiOptK(),p.board.length);
   for(var k=0;k<attempts;k++){
     var candidate=heuristic.slice();
     var swapCount=(Math.random()<0.55)?1:2;
+    var didSwap=false;
     for(var s=0;s<swapCount;s++){
-      var idx=Math.floor(Math.random()*(candidate.length-1));
+      // lock 안 된 인접 쌍 후보 수집
+      var freeIdx=[];
+      for(var ii=0;ii<candidate.length-1;ii++){
+        if(!lockedIndices[ii]&&!lockedIndices[ii+1]) freeIdx.push(ii);
+      }
+      if(freeIdx.length===0) break;
+      var idx=freeIdx[Math.floor(Math.random()*freeIdx.length)];
       var t=candidate[idx];candidate[idx]=candidate[idx+1];candidate[idx+1]=t;
+      didSwap=true;
     }
+    if(!didSwap) continue;
     var sc=aiForecast(candidate,oppBoard,_simN);
     if(sc>bestScore){bestScore=sc;bestOrder=candidate.slice();}
   }
-  // 후보 1개 추가: 리버스 (광역 상대 카운터)
-  var rev=heuristic.slice().reverse();
-  var revSc=aiForecast(rev,oppBoard,_simN);
-  if(revSc>bestScore){bestScore=revSc;bestOrder=rev;}
+  // 리버스 후보: 명시 카드가 있으면 명시 위치 깨질 수 있어서 스킵
+  if(!hasLocked){
+    var rev=heuristic.slice().reverse();
+    var revSc=aiForecast(rev,oppBoard,_simN);
+    if(revSc>bestScore){bestScore=revSc;bestOrder=rev;}
+  }
   p.board=bestOrder;
 }
 
