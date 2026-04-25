@@ -4766,6 +4766,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       var mimTurns=dst.isSkin?99:1;
       if(!src._mimoriDebuff||src._mimoriDebuff<=0){
         src._mimoriOrigAtk=src.atk;src._mimoriDebuff=mimTurns;src.atk=0;
+        // 이번 공격 끝에서 즉시 감소되지 않도록 플래그 설정
+        src._mimoriJustSet=true;
         log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! ('+(mimTurns>=99?'전투 동안':mimTurns+'회')+')'});
       }
     }
@@ -5445,11 +5447,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
           attacker.atk=attacker._suzumiOrigAtk;delete attacker._suzumiOrigAtk;delete attacker._suzumiDebuff;
         }
       }
-      // 미모리 debuff 턴 감소
+      // 미모리 debuff 턴 감소 (이번 공격에 막 설정됐으면 1회 skip)
       if(attacker._mimoriDebuff>0&&attacker._mimoriDebuff<99){
-        attacker._mimoriDebuff--;
-        if(attacker._mimoriDebuff<=0&&attacker._mimoriOrigAtk!==undefined){
-          attacker.atk=attacker._mimoriOrigAtk;delete attacker._mimoriOrigAtk;delete attacker._mimoriDebuff;
+        if(attacker._mimoriJustSet){
+          delete attacker._mimoriJustSet;
+        } else {
+          attacker._mimoriDebuff--;
+          if(attacker._mimoriDebuff<=0&&attacker._mimoriOrigAtk!==undefined){
+            attacker.atk=attacker._mimoriOrigAtk;delete attacker._mimoriOrigAtk;delete attacker._mimoriDebuff;
+          }
         }
       }
       if(stepLog.length>0){
