@@ -3917,9 +3917,13 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   else if(id==='rio'){
     // 무작위 적 N인의 모든 능력 삭제 (일반 2명, 스킨 3명)
+    // 사야 면역(abilityImmune / _sayaImmune) 카드는 후보 X
     var rioCount=u.isSkin?3:2;
     var rioTargets=[];
-    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)rioTargets.push(otherSide[i]);}
+    for(var i=0;i<otherSide.length;i++){
+      if(otherSide[i].alive && !otherSide[i].abilityImmune && !otherSide[i]._sayaImmune)
+        rioTargets.push(otherSide[i]);
+    }
     // 셔플
     for(var i=rioTargets.length-1;i>0;i--){
       var j=Math.floor(Math.random()*(i+1));
@@ -3932,10 +3936,12 @@ function triggerSOC(u, mySide, otherSide, log) {
   else if(id==='shizuko'){
     // 무작위 적 N인의 버프(기본 stat 초과분) 완전 삭제 (일반 1명, 스킨 2명)
     // 버프 받은 적만 후보 — 안 받은 적은 절대 픽 X (불발 방지)
+    // 사야 면역(abilityImmune / _sayaImmune) 카드도 후보 X
     var shizCount = u.isSkin ? 2 : 1;
     var shizCandidates=[];
     for(var i=0;i<otherSide.length;i++){
       if(!otherSide[i].alive) continue;
+      if(otherSide[i].abilityImmune || otherSide[i]._sayaImmune) continue;
       var sztgt=otherSide[i];
       var sztmpl=findAnyChar(sztgt.baseId);
       if(!sztmpl) continue;
