@@ -3285,75 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T05:54:02",
-          "placement": 8,
-          "turn": 12,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아스나",
-              "baseId": "asuna",
-              "atk": 9,
-              "hp": 8,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Asuna.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카린",
-              "baseId": "karin",
-              "atk": 8,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Karin.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 16,
-              "hp": 18,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 11,
-              "hp": 13,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 33,
-              "hp": 41,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T06:19:38",
           "placement": 5,
           "turn": 15,
@@ -4015,9 +3946,78 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T09:34:45",
+          "placement": 3,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미나",
+              "baseId": "mina",
+              "atk": 5,
+              "hp": 9,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mina.png",
+              "school": "산해경"
+            },
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 3,
+              "hp": 6,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이오리",
+              "baseId": "iori",
+              "atk": 7,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Iori.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 84,
+      "points": 86,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4108,8 +4108,8 @@
       ],
       "rank": {
         "tier": 3,
-        "stars": 2,
-        "streak": 1,
+        "stars": 1,
+        "streak": 0,
         "legendPoints": 0
       }
     },
