@@ -8254,7 +8254,7 @@
           ]
         }
       ],
-      "points": 6,
+      "points": 1,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -8327,7 +8327,8 @@
         "ui",
         "chise",
         "kaya",
-        "nonomi"
+        "nonomi",
+        "serika"
       ]
     }
   }
