@@ -8181,37 +8181,108 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T15:00:01",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 31,
+              "hp": 35,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 72,
+              "hp": 68,
+              "tier": 1,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 68,
+              "hp": 68,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 61,
+              "hp": 61,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키(가이드)",
+              "baseId": "tsubaki",
+              "atk": 72,
+              "hp": 70,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Tsubaki_(Guide).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 16,
       "questState": {
         "daily": {
-          "date": "2026-04-25",
+          "date": "2026-04-26",
           "quests": [
             {
-              "id": "skin3",
+              "id": "play3",
               "progress": 1,
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 5,
-              "completed": false
+              "id": "win1",
+              "progress": 1,
+              "completed": true
             },
             {
-              "id": "play3",
-              "progress": 2,
-              "completed": false
+              "id": "skin3",
+              "progress": 4,
+              "completed": true
             }
           ],
-          "rerolled": true
+          "rerolled": false
         },
         "weekly": {
           "weekStart": "2026-04-20",
           "quests": [
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
@@ -8245,9 +8316,9 @@
         "millennium_cc"
       ],
       "rank": {
-        "tier": 8,
+        "tier": 7,
         "stars": 0,
-        "streak": 2,
+        "streak": 3,
         "legendPoints": 0
       },
       "unlockedAbydos": [
