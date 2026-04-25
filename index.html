@@ -1006,8 +1006,10 @@ function renderAll() {
     var clickAttr=clickable?' onclick="showOpponentPreview('+pl.id+')" title="클릭하여 보드 보기"':'';
     var schedTag=' <span style="color:#a78bfa;font-size:10px;font-weight:500">(스케쥴 '+pl.tier+')</span>';
     var iconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(pl.name,pl.isPlayer):'';
-    var iconImg=iconUrl?'<img src="'+iconUrl+'" style="width:18px;height:18px;border-radius:50%;vertical-align:middle;margin-right:4px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
-    pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+iconImg+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+    // 얼굴 이미지를 칩 왼쪽에 배경으로 깔기 (위아래 살짝 잘려도 OK, 반투명)
+    var bgImg=iconUrl?'<img src="'+iconUrl+'" style="position:absolute;left:-2px;top:50%;transform:translateY(-50%);height:170%;width:auto;opacity:0.6;pointer-events:none;z-index:0;mask-image:linear-gradient(90deg,black 60%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,black 60%,transparent 100%)" onerror="this.style.display=\'none\'">':'';
+    var chipExtra=iconUrl?';position:relative;overflow:hidden;padding-left:42px':'';
+    pHtml+='<div class="'+cls+'" style="'+nextStyle+chipExtra+'"'+clickAttr+'>'+bgImg+'<span style="position:relative;z-index:1">'+nextBadge+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span></span><div class="chip-hp-bar" style="position:relative;z-index:1"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
   }
   // 다음 상대 정보 박스 (영입 페이즈 동안 표시)
   var nextOppRef=null;

@@ -5639,7 +5639,7 @@ function startBattle() {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  var _vsIconStyle='width:36px;height:36px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.3)';
+  var _vsIconStyle='width:64px;height:64px;border-radius:50%;vertical-align:middle;margin-right:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.35);box-shadow:0 4px 12px rgba(0,0,0,0.5)';
   var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
@@ -6360,7 +6360,7 @@ function showBattle(result,player,opp) {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  var _vsIconStyle='width:36px;height:36px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.3)';
+  var _vsIconStyle='width:64px;height:64px;border-radius:50%;vertical-align:middle;margin-right:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.35);box-shadow:0 4px 12px rgba(0,0,0,0.5)';
   var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
   intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
@@ -6375,7 +6375,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   var _myTier=(G.players[0]&&G.players[0].tier)||1;
   var _enIcon=getPlayerIconUrl(opp.name,false);
   var _myIcon=getPlayerIconUrl(_myName,true);
-  var _iconStyle='width:24px;height:24px;border-radius:50%;vertical-align:middle;margin-right:6px;object-fit:cover';
+  var _iconStyle='width:40px;height:40px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.25);box-shadow:0 2px 6px rgba(0,0,0,0.4)';
   document.getElementById('enemy-label').innerHTML='<img src="'+_enIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+opp.name+' (스케쥴 '+(opp.tier||1)+')';
   document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
