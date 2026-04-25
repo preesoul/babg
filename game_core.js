@@ -7352,7 +7352,8 @@ function nextTurn() {
   if(SANDBOX){p.stone=20;p.turnStone=20;p.upgradeCost=0;G.bonusStone=0;}
   else{p.turnStone=Math.min(MAX_STONE,p.turnStone+1);
   p.stone=p.turnStone+(G.bonusStone||0)+getAoiBonusStone();G.bonusStone=0;}
-  G.freeRerolls=getMomokaFreeRerolls();
+  // 모모카 보너스로 보장하되 감시망 등으로 누적된 무료 리롤은 보존
+  G.freeRerolls=Math.max(G.freeRerolls||0, getMomokaFreeRerolls());
   if(p.upgradeCost>0)p.upgradeCost=Math.max(0,p.upgradeCost-1);
   for(var i=1;i<G.players.length;i++){
     var ai=G.players[i];if(ai.dead)continue;
