@@ -2959,6 +2959,150 @@ function pairMatchups(){
   for(var k in matchups) if(matchups[k].opponentId!=null) G.lastMatchups[k]=matchups[k].opponentId;
 }
 
+// ===== AI 상점 (플레이어와 동등한 메커니즘) =====
+// 플레이어 상점과 동일하게 SHOP_SIZE[tier] 학생 카드 + 마법 1장
+function aiGenerateShop(p){
+  // 기존 상점 카드는 풀로 반환
+  aiReturnShop(p);
+  var pool=getAvailableChars(p.tier);
+  var size=SHOP_SIZE[p.tier]||4;
+  var shop=[];
+  for(var i=0;i<size;i++){
+    var available=pool.filter(function(c){return G.pool[c.id]>0;});
+    if(available.length===0) break;
+    var totalWeight=0;
+    for(var j=0;j<available.length;j++) totalWeight+=G.pool[available[j].id];
+    var roll=Math.random()*totalWeight;
+    var cumul=0;var picked=available[0];
+    for(var j=0;j<available.length;j++){cumul+=G.pool[available[j].id];if(roll<cumul){picked=available[j];break;}}
+    takeFromPool(picked.id);
+    shop.push(makeMinion(picked,false));
+  }
+  // 마법 카드 1장
+  if(!G.usedOnceSpells) G.usedOnceSpells={};
+  var availSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&(!s.once||!G.usedOnceSpells[s.id]);});
+  if(availSpells.length>0){
+    var sp=availSpells[Math.floor(Math.random()*availSpells.length)];
+    shop.push({isSpell:true,spell:sp,name:sp.name,cost:sp.cost,desc:sp.desc,tier:sp.tier,target:sp.target});
+  }
+  p.aiShop=shop;
+}
+function aiReturnShop(p){
+  if(!p.aiShop) return;
+  for(var i=0;i<p.aiShop.length;i++){
+    if(p.aiShop[i]&&!p.aiShop[i].isSpell) returnToPool(p.aiShop[i].baseId);
+  }
+  p.aiShop=[];
+}
+function aiReroll(p){
+  if(p.stone<1) return false;
+  p.stone-=1;
+  aiGenerateShop(p);
+  return true;
+}
+// 상점 카드 영입 시도 (성공 시 true)
+function aiBuyFromShop(p, slotIdx, oppBoard){
+  var item=p.aiShop[slotIdx];
+  if(!item) return false;
+  if(item.isSpell){
+    if(p.stone<item.cost) return false;
+    // 마법 즉시 발동 (플레이어와 동일)
+    try{AI_SPELL_EFFECTS[item.spell.id](p);}catch(e){return false;}
+    p.stone-=item.cost;
+    if(item.spell.once) G.usedOnceSpells[item.spell.id]=true;
+    p.aiShop[slotIdx]=null;
+    return true;
+  } else {
+    if(p.stone<3) return false;
+    var tmpl=null;for(var j=0;j<CHARS.length;j++){if(CHARS[j].id===item.baseId){tmpl=CHARS[j];break;}}
+    if(!tmpl) return false;
+    // 트리플 체크
+    var baseCount=0;
+    for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tmpl.id&&!p.board[j].isSkin)baseCount++;}
+    if(baseCount>=2){
+      var newBoard=[];var removed=0;
+      for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tmpl.id&&!p.board[j].isSkin&&removed<2){removed++;}else{newBoard.push(p.board[j]);}}
+      p.board=newBoard;
+      var skinUnit=makeMinion(tmpl,true);p.board.push(skinUnit);p.stone-=3;
+      triggerBattlecry(skinUnit,p);
+      aiDiscover(p);
+    } else if(p.board.length<MAX_BOARD){
+      var newUnit=makeMinion(tmpl,false);p.board.push(newUnit);p.stone-=3;
+      triggerBattlecry(newUnit,p);
+    } else {
+      return false; // 보드 풀
+    }
+    p.aiShop[slotIdx]=null; // 상점에서 제거 (이미 보드로)
+    return true;
+  }
+}
+// 상점 슬롯 점수 평가 (forecast 우선, 폴백은 휴리스틱)
+function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
+  var item=p.aiShop[slotIdx];
+  if(!item) return -1;
+  if(item.isSpell){
+    if(p.stone<item.cost) return -1;
+    if(p.board.length===0) return -1;
+    if(oppBoard&&oppBoard.length>0){
+      var baseScore=aiForecast(p.board,oppBoard,3);
+      var testBoard=_aiCopyBoard(p.board);
+      var testP={board:testBoard,stone:p.stone};
+      try{AI_SPELL_EFFECTS[item.spell.id](testP);}catch(e){return -1;}
+      var sc=aiForecast(testP.board,oppBoard,3);
+      return (sc-baseScore)-item.cost*0.012;
+    }
+    // 폴백: 가성비
+    return (item.tier/Math.max(1,item.cost))*0.01;
+  }
+  // 학생 카드: 휴리스틱 점수 (forecast는 비싸므로 기본은 휴리스틱)
+  if(p.stone<3) return -1;
+  var c=findAnyChar(item.baseId)||item;
+  var s=item.atk+item.hp+(item.tier||1)*1.5;
+  for(var k=0;k<(item.kw||[]).length;k++){
+    var kw=item.kw[k];
+    if(kw==='poison')s+=4;else if(kw==='cleave')s+=3;else if(kw==='pierce')s+=2;
+    else if(kw==='shield')s+=2;else if(kw==='windfury')s+=3;else if(kw==='survive')s+=1;
+  }
+  if(DR_IDS[item.baseId])s+=5;
+  if(SOC_IDS[item.baseId])s+=4;
+  if(BC_IDS[item.baseId])s+=4;
+  if(PRE_IDS[item.baseId])s+=3;
+  if(SURV_IDS[item.baseId])s+=3;
+  if(PASSIVE_IDS[item.baseId])s+=3;
+  // 트리플/페어 보너스
+  var hasCopy=false;var copyCount=0;
+  for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===item.baseId&&!p.board[k].isSkin){hasCopy=true;copyCount++;}}
+  if(copyCount===1)s+=5;
+  else if(copyCount>=2)s+=20; // 트리플 직전 — 매우 가치 큼
+  if(aiStrat){
+    if(aiStrat.dominantSchool&&item.school===aiStrat.dominantSchool){
+      var unity=0;for(var u=0;u<p.board.length;u++){if(p.board[u].school===aiStrat.dominantSchool)unity++;}
+      s+=3+unity*2;
+    }
+    if(aiStrat.targetUnits&&aiStrat.targetUnits.indexOf(item.baseId)!==-1)s+=12;
+    if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&item.school!==aiStrat.dominantSchool)s-=10;
+    if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
+  }
+  s+=simStatBonus(item.baseId);
+  // 보드 가득 + 트리플 아니면 영입 불가
+  if(p.board.length>=MAX_BOARD&&copyCount<2) return -1;
+  // 휴리스틱 → 0~1 정규화 (대략)
+  return s/100;
+}
+// 리롤이 가치 있는지 판단 (현재 상점 최고치 < 임계 + 골드 여유)
+function aiShouldReroll(p, currentBest){
+  if(p.stone<5) return false; // 리롤 + 영입 가능해야
+  if(p.board.length>=MAX_BOARD){
+    // 보드 가득 — 트리플 외엔 무의미. 트리플 가능 카드 풀에 있으면 리롤 가치
+    var bc={};for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)bc[p.board[j].baseId]=(bc[p.board[j].baseId]||0)+1;}
+    var hasTripleNeed=false;
+    for(var bid in bc){if(bc[bid]>=2&&G.pool[bid]>0){hasTripleNeed=true;break;}}
+    return hasTripleNeed && currentBest < 0.20; // 상점에 트리플 카드 없으면 리롤
+  }
+  // 일반: 상점 최고가 너무 낮을 때
+  return currentBest < 0.12;
+}
+
 function aiTurns() {
   // 매치업 사전 결정 (이번 영입 페이즈 1회만)
   if(G._matchupsTurn!==G.turn){pairMatchups();G._matchupsTurn=G.turn;}
@@ -2971,173 +3115,61 @@ function aiTurns() {
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
-    // AI 마법카드 사용: 매치업 있으면 forecast 기반, 없으면 가성비 휴리스틱
-    if(p.board.length>0){
-      var aiSpellCasts=0;
-      while(aiSpellCasts<2){
-        var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
-        if(aiSpells.length===0) break;
-        var pickedSpell=null;
-        if(_oppBoard&&_oppBoard.length>0){
-          // Forecast 기반: 사용 전후 승률 비교, 비용 페널티 적용
-          var baseScore=aiForecast(p.board,_oppBoard,4);
-          var bestImp=0.005; // 최소 개선치
-          for(var sk=0;sk<aiSpells.length;sk++){
-            var spl=aiSpells[sk];
-            var testBoard=_aiCopyBoard(p.board);
-            var testP={board:testBoard,stone:p.stone};
-            try{AI_SPELL_EFFECTS[spl.id](testP);}catch(e){continue;}
-            var sc=aiForecast(testP.board,_oppBoard,3);
-            // 비용 페널티 (cost당 -0.012, 다른 곳에 쓸 가치 고려)
-            var imp=(sc-baseScore)-spl.cost*0.012;
-            if(imp>bestImp){bestImp=imp;pickedSpell=spl;}
-          }
-        } else {
-          // 폴백: 가성비
-          aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
-          pickedSpell=aiSpells[0];
-        }
-        if(!pickedSpell) break;
-        AI_SPELL_EFFECTS[pickedSpell.id](p);
-        p.stone-=pickedSpell.cost;
-        aiSpellCasts++;
-      }
-    }
+
+    // Phase 0: AI 상점 생성 (영입 페이즈 시작 시 매번 새로 생성)
+    aiGenerateShop(p);
 
     // Phase 3: 선빵적 매각 (보드 풀 + 골드 부족 시)
     aiProactiveSell(p,aiStrat);
 
-    // Phase 4: 구매 루프
-    var aiBuyLoop=0;
-    while(p.stone>=3&&aiBuyLoop<20){
-      aiBuyLoop++;
-      var tripleTarget=null;var boardCounts={};
-      for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)boardCounts[p.board[j].baseId]=(boardCounts[p.board[j].baseId]||0)+1;}
-      for(var bid in boardCounts){
-        if(boardCounts[bid]>=2){for(var j=0;j<CHARS.length;j++){if(CHARS[j].id===bid&&CHARS[j].tier<=p.tier){tripleTarget=CHARS[j];break;}}if(tripleTarget)break;}
+    // Phase 2+4 통합: 상점 기반 의사결정 루프
+    // 매 사이클마다 (a) 상점 슬롯 영입 (b) 리롤 중 최선 선택
+    var actLoop=0;
+    var rerollCount=0;
+    var MAX_REROLLS=Math.max(2, Math.floor(p.tier*1.5)); // 티어 비례 (1티어=3회, 6티어=9회 상한)
+    while(actLoop<25){
+      actLoop++;
+      // 모든 상점 슬롯 점수 평가
+      var bestSlot=-1, bestSlotScore=-Infinity;
+      for(var s=0;s<p.aiShop.length;s++){
+        if(!p.aiShop[s]) continue;
+        var sc=aiEvalShopSlot(p,s,_oppBoard,aiStrat);
+        if(sc>bestSlotScore){bestSlotScore=sc;bestSlot=s;}
       }
-      var tmpl;
-      if(tripleTarget&&G.pool[tripleTarget.id]>0){tmpl=tripleTarget;}
-      else{
-        var candidates=aiPool.filter(function(c){return c.tier>=Math.max(1,p.tier-1)&&G.pool[c.id]>0;});
-        if(candidates.length===0)candidates=aiPool.filter(function(c){return G.pool[c.id]>0;});
-        if(candidates.length===0)break;
-        // ε-greedy: 시뮬 탐색 모드에서 10% 확률로 완전 랜덤 구매
-        if(SIM_EXPLORE&&Math.random()<0.10){
-          tmpl=candidates[Math.floor(Math.random()*candidates.length)];
-        } else {
-        var scored=candidates.map(function(c){
-          var s=c.atk+c.hp+c.tier*1.5;
-          for(var k=0;k<(c.kw||[]).length;k++){if(c.kw[k]==='poison')s+=4;else if(c.kw[k]==='cleave')s+=3;else if(c.kw[k]==='pierce')s+=2;else if(c.kw[k]==='shield')s+=2;else if(c.kw[k]==='windfury')s+=3;else if(c.kw[k]==='survive')s+=1;}
-          // 특수능력 보너스 (뒤끝/개전/첫인사/선빵/버티기/패시브)
-          if(DR_IDS[c.id])s+=5;
-          if(SOC_IDS[c.id])s+=4;
-          if(BC_IDS[c.id])s+=4;
-          if(PRE_IDS[c.id])s+=3;
-          if(SURV_IDS[c.id])s+=3;
-          if(PASSIVE_IDS[c.id])s+=3;
-          var hasCopy=false;for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===c.id&&!p.board[k].isSkin){hasCopy=true;break;}}
-          if(hasCopy)s+=5;
-          if(!aiStrat.giveUp){
-            // 학교 시너지: 통일도가 높을수록 보너스 증가
-            if(aiStrat.dominantSchool&&c.school===aiStrat.dominantSchool){
-              var schoolUnity=0;for(var _su=0;_su<p.board.length;_su++){if(p.board[_su].school===aiStrat.dominantSchool)schoolUnity++;}
-              s+=3+schoolUnity*2; // 기본3 + 아군 동일학교당 +2 (최대 3+10=13)
-            }
-            if(aiStrat.targetUnits.indexOf(c.id)!==-1)s+=12;
-            if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&c.school!==aiStrat.dominantSchool)s-=10;
-            // 보드에 없는 학교 유닛은 소폭 감점 (학교 분산 방지)
-            if(p.board.length>=3&&aiStrat.dominantSchool&&c.school!==aiStrat.dominantSchool&&!aiStrat.avoidOtherSchools)s-=3;
-          }
-          // 덱 패턴 보너스
-          if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
-          // 미도리+모모이 한 장만 있어도 짝 우선도 사전 부스팅
-          if(!aiStrat.deckPattern||aiStrat.deckPattern.id!=='midori_momoi'){
-            var _hM=false,_hD=false;
-            for(var _bk=0;_bk<p.board.length;_bk++){if(p.board[_bk].baseId==='momoi')_hM=true;if(p.board[_bk].baseId==='midori')_hD=true;}
-            if((_hM&&c.id==='midori')||(_hD&&c.id==='momoi'))s+=8;
-          }
-          // 자가대전 시뮬 통계 기반 보정 (10판 이상 데이터 있는 카드만)
-          s+=simStatBonus(c.id);
-          // 카스미 HP 연동 구매 점수: HP 높으면 공격 픽 선호, 낮으면 방어적 픽, 2장 방지
-          if(c.id==='kasumi'){
-            if(p.hp>=20) s-=2;
-            else if(p.hp<=15) s+=1;
-            var _hasKasumi=false;for(var _kk=0;_kk<p.board.length;_kk++){if(p.board[_kk].baseId==='kasumi'){_hasKasumi=true;break;}}
-            if(_hasKasumi) s-=3;
-          }
-          return{tmpl:c,score:s+Math.random()*2};
-        });
-        scored.sort(function(a,b){return b.score-a.score;});
-        tmpl=scored[0].tmpl;
-        } // end ε-greedy else
+      // 리롤 결정 (현재 상점 가치가 너무 낮으면, 단 상한 적용)
+      var doReroll=(rerollCount<MAX_REROLLS) && aiShouldReroll(p, bestSlotScore);
+      if(doReroll){
+        if(!aiReroll(p)) break;
+        rerollCount++;
+        continue; // 새 상점으로 다시 평가
       }
-      if(!takeFromPool(tmpl.id))break;
-      if(p.purchasedSchools) p.purchasedSchools[tmpl.school]=true;
-      var baseCount=0;
-      for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tmpl.id&&!p.board[j].isSkin)baseCount++;}
-      if(baseCount>=2){
-        var newBoard=[];var removed=0;
-        for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tmpl.id&&!p.board[j].isSkin&&removed<2){removed++;}else{newBoard.push(p.board[j]);}}
-        p.board=newBoard;
-        var skinUnit=makeMinion(tmpl,true);p.board.push(skinUnit);p.stone-=3;
-        triggerBattlecry(skinUnit,p);
-        aiDiscover(p);
-      } else if(p.board.length<MAX_BOARD){
-        var newUnit=makeMinion(tmpl,false);p.board.push(newUnit);p.stone-=3;
-        triggerBattlecry(newUnit,p);
-      } else {returnToPool(tmpl.id);break;}
+      if(bestSlot<0||bestSlotScore<=0) break;
+      // 영입 시도
+      var bought=aiBuyFromShop(p,bestSlot,_oppBoard);
+      if(!bought) break;
     }
 
-    // Phase 4b: 트리플 리롤 (보드 풀 + 골드 남음 + 2장 있는 유닛)
-    if(p.board.length>=MAX_BOARD&&p.stone>=4){
-      var tripleNeed=null;
-      var bc2={};for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)bc2[p.board[j].baseId]=(bc2[p.board[j].baseId]||0)+1;}
-      for(var bid in bc2){if(bc2[bid]>=2&&G.pool[bid]>0){tripleNeed=bid;break;}}
-      if(tripleNeed&&p.stone>=4){ // 1 reroll + 3 buy
-        // 풀에 남아있으면 리롤해서 찾을 확률 존재 — 최대 2회 리롤 시도
-        var rerollAttempts=Math.min(2,Math.floor((p.stone-3)/1));
-        for(var ra=0;ra<rerollAttempts;ra++){
-          if(G.pool[tripleNeed]<=0) break;
-          p.stone-=1; // reroll cost
-          // 리롤로 찾았다고 가정 (확률 = pool수/전체pool * shop수)
-          var totalPool=0;for(var pid in G.pool)totalPool+=G.pool[pid];
-          var findChance=G.pool[tripleNeed]/Math.max(1,totalPool)*SHOP_SIZE[p.tier];
-          if(Math.random()<findChance&&takeFromPool(tripleNeed)){
-            // 트리플 완성!
-            var ttmpl=null;for(var j=0;j<CHARS.length;j++){if(CHARS[j].id===tripleNeed){ttmpl=CHARS[j];break;}}
-            if(ttmpl){
-              var nb=[];var rm=0;
-              for(var j=0;j<p.board.length;j++){if(p.board[j].baseId===tripleNeed&&!p.board[j].isSkin&&rm<2){rm++;}else{nb.push(p.board[j]);}}
-              p.board=nb;
-              var su=makeMinion(ttmpl,true);p.board.push(su);p.stone-=3;
-              triggerBattlecry(su,p);aiDiscover(p);
-            }
-            break;
-          }
-        }
+    // Phase 5: 매각+교체 — 보드 약체를 매각하고 상점/풀에서 더 좋은 걸 영입
+    // (상점 우선, 상점에 더 좋은 게 없으면 풀에서 영입하지 않음 — 공평성 유지)
+    aiSellReplaceShop(p,aiStrat,_oppBoard);
+
+    // Phase 6: 잔여 골드로 추가 액션 시도 (상점에서만)
+    var lateLoop=0;
+    while(lateLoop<5 && p.stone>=3){
+      lateLoop++;
+      var bs=-1, bsScore=-Infinity;
+      for(var s=0;s<p.aiShop.length;s++){
+        if(!p.aiShop[s]) continue;
+        var sc=aiEvalShopSlot(p,s,_oppBoard,aiStrat);
+        if(sc>bsScore){bsScore=sc;bs=s;}
       }
+      if(bs<0||bsScore<=0) break;
+      if(!aiBuyFromShop(p,bs,_oppBoard)) break;
     }
 
-    // Phase 5: 매각+교체 (개선된 버전)
-    aiSellReplace(p,aiStrat,aiPool);
+    // 상점 정리 (남은 카드 풀로 반환)
+    aiReturnShop(p);
 
-    // Phase 5b: 후반 카스미 정리 (턴 12+, HP 20+, 티어3 초과 카드 구매 가능 시)
-    if(G.turn>=12&&p.hp>=20){
-      var _kIdx=-1;for(var _kj=0;_kj<p.board.length;_kj++){if(p.board[_kj].baseId==='kasumi'&&!p.board[_kj].isSkin){_kIdx=_kj;break;}}
-      if(_kIdx>=0&&p.stone+1>=3){
-        var _upgPool=aiPool.filter(function(c){return c.tier>3&&G.pool[c.id]>0&&c.id!=='kasumi';});
-        var _bestUpg=null,_bestUpgSc=0;
-        for(var _uj=0;_uj<_upgPool.length;_uj++){var _us=_upgPool[_uj].atk+_upgPool[_uj].hp+_upgPool[_uj].tier*1.5;if(DR_IDS[_upgPool[_uj].id])_us+=5;if(SOC_IDS[_upgPool[_uj].id])_us+=4;if(_us>_bestUpgSc){_bestUpgSc=_us;_bestUpg=_upgPool[_uj];}}
-        if(_bestUpg&&_bestUpgSc>aiUnitScore(p.board[_kIdx])+2){
-          returnToPool(p.board[_kIdx].baseId);p.stone+=1;p.board.splice(_kIdx,1);
-          if(p.stone>=3&&takeFromPool(_bestUpg.id)){aiAddToBoardWithTriple(p,_bestUpg);p.stone-=3;}
-        }
-      }
-    }
-
-    // Phase 6: 잔여 골드 소비 (남은 골드로 주문)
-    aiSpendRemainder(p);
     p.board=p.board.filter(function(u){return !!u;});
     // Forecast 기반 배치 최적화 (매치업 보드 있을 때)
     var _oppB2=_aiGetOppBoard(p);
@@ -3150,6 +3182,40 @@ function aiTurns() {
     // AI 7성 히든카드 체크 (정당한 조건 + 확률)
     aiCheckHidden(p);
   }
+}
+
+// 상점 기반 매각+교체: 보드에서 가장 약한 유닛 매각 후 상점에서 더 좋은 카드 영입 가능 시 실행
+function aiSellReplaceShop(p, aiStrat, oppBoard){
+  if(!p.aiShop || p.board.length===0) return;
+  // 상점 최고 학생 카드 평가
+  var bestSlot=-1, bestSlotScore=-Infinity;
+  for(var s=0;s<p.aiShop.length;s++){
+    if(!p.aiShop[s] || p.aiShop[s].isSpell) continue;
+    var sc=aiEvalShopSlot(p,s,oppBoard,aiStrat);
+    if(sc>bestSlotScore){bestSlotScore=sc;bestSlot=s;}
+  }
+  if(bestSlot<0) return;
+  var shopCard=p.aiShop[bestSlot];
+  // 보드에서 가장 약한 유닛 선택 (영입 후보보다 명백히 약할 때만)
+  var weakIdx=-1, weakScore=Infinity;
+  for(var i=0;i<p.board.length;i++){
+    var u=p.board[i];
+    if(u.isSkin) continue; // 스킨 매각 안 함
+    var us=aiUnitScore(u);
+    if(us<weakScore){weakScore=us;weakIdx=i;}
+  }
+  if(weakIdx<0) return;
+  // 매각 가치는 영입 후보보다 분명히 낮아야 (마진 +2 이상)
+  var shopUnitScore=shopCard.atk+shopCard.hp+(shopCard.tier||1)*1.5;
+  if(shopUnitScore <= weakScore+2) return;
+  // 매각 후 영입 가능한지 (매각으로 1골드 회수 + 영입 3골드)
+  if(p.stone+1 < 3) return;
+  // 매각
+  returnToPool(p.board[weakIdx].baseId);
+  p.stone+=1;
+  p.board.splice(weakIdx,1);
+  // 영입
+  aiBuyFromShop(p,bestSlot,oppBoard);
 }
 
 function aiCheckHidden(p) {
