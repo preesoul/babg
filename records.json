@@ -3264,89 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-08T04:17:26",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아즈사(수영복)",
-              "baseId": "azusa",
-              "atk": 25,
-              "hp": 25,
-              "tier": 4,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Azusa_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 33,
-              "hp": 35,
-              "tier": 1,
-              "kw": [
-                "survive",
-                "windfury",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 33,
-              "hp": 35,
-              "tier": 1,
-              "kw": [
-                "survive",
-                "windfury",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 35,
-              "hp": 29,
-              "tier": 1,
-              "kw": [
-                "survive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네(아이돌)",
-              "baseId": "mine",
-              "atk": 31,
-              "hp": 31,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Mine_(Idol).png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-08T07:03:28",
           "placement": 1,
           "turn": 16,
@@ -4021,9 +3938,78 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T06:40:09",
+          "placement": 8,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아즈사(수영복)",
+              "baseId": "azusa",
+              "atk": 11,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Azusa_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 48,
+              "hp": 47,
+              "tier": 7,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 5,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 40,
+      "points": 42,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4051,7 +4037,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             },
             {
@@ -4110,7 +4096,7 @@
       ],
       "rank": {
         "tier": 5,
-        "stars": 4,
+        "stars": 3,
         "streak": 0,
         "legendPoints": 0
       }
