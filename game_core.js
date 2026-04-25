@@ -4094,6 +4094,21 @@ function triggerSOC_battlecry_inner(u, mySide, log){
   else if(id==='tsubaki'){var buff=u.isSkin?4:2;for(var i=0;i<mySide.length;i++){if(mySide[i].alive&&mySide[i].school==='백귀야행'){mySide[i].atk+=buff;mySide[i].hp+=buff;}}log.push({cls:'soc',text:'    → '+u.name+': 백귀야행 +'+buff+'/+'+buff+' (연쇄)'});}
 }
 
+// stripAbilities top-level 버전 (resolveStartOfCombat 등 runBattle 밖에서 호출하기 위함)
+// runBattle 안에는 같은 이름의 inner function이 별도로 있음 (그건 inner scope에서 우선)
+function stripAbilities(target,log2){
+  if(!target||!target.kw) return;
+  var removed=[];
+  var keepKw=[];
+  for(var i=0;i<target.kw.length;i++){
+    if(target.kw[i]==='preemptive') keepKw.push(target.kw[i]);
+    else removed.push((typeof KW_LABELS!=='undefined'&&KW_LABELS[target.kw[i]])||target.kw[i]);
+  }
+  target.kw=keepKw;
+  target._abilitiesStripped=true;
+  if(removed.length>0&&log2) log2.push({cls:'kill',text:'[선빵] '+target.name+'의 능력 삭제: '+removed.join(', ')});
+}
+
 function resolveStartOfCombat(a, b, log) {
   // 미노리 전투 시작 대사
   for(var _mn=0;_mn<a.length;_mn++){if(a[_mn].alive&&a[_mn].baseId==='red_winter_minori'){log.push({cls:'chat',text:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'});break;}}
