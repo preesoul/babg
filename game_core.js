@@ -781,13 +781,46 @@ var swapFirst = -1;
 // 플레이어/NPC 얼굴 아이콘 매핑 (이름→아이콘 경로)
 // 새 NPC 추가 시 여기에 한 줄씩 추가:  '이름':'img/UI/player/파일명.png',
 var PLAYER_ICONS={
+  // === 플래티넘 1 (전설) ===
   '나기사':'img/UI/player/nagisa.png',
   '마코토':'img/UI/player/makoto.png',
   '리오':'img/UI/player/rio.png',
   '호시노':'img/UI/player/hoshino.png',
   '니야':'img/UI/player/niya.png',
   '키사키':'img/UI/player/kisaki.png',
-  '체리노':'img/UI/player/cherino.png'
+  '체리노':'img/UI/player/cherino.png',
+  // === 브론즈 ===
+  '세리카':'img/UI/player/serika.png',
+  '하루카':'img/UI/player/haruka.png',
+  '모모이':'img/UI/player/momoi.png',
+  '마리':'img/UI/player/mari.png',
+  '이즈나':'img/UI/player/izuna.png',
+  '코코나':'img/UI/player/kokona.png',
+  '노도카':'img/UI/player/nodoka.png',
+  // === 실버 ===
+  '아야네':'img/UI/player/ayane.png',
+  '야쿠모':'img/UI/player/yakumo.png',
+  '사야':'img/UI/player/saya.png',
+  '미치루':'img/UI/player/michiru.png',
+  '히후미':'img/UI/player/hifumi.png',
+  '아리스':'img/UI/player/arisu.png',
+  '이로하':'img/UI/player/iroha.png',
+  // === 골드 ===
+  '노노미':'img/UI/player/nonomi.png',
+  '우타하':'img/UI/player/utaha.png',
+  '이치카':'img/UI/player/ichika.png',
+  '카스미':'img/UI/player/kasumi.png',
+  '시즈코':'img/UI/player/shizuko.png',
+  '슌':'img/UI/player/shun.png',
+  '토모에':'img/UI/player/tomoe.png',
+  // === 플래티넘 2 ===
+  '시로코':'img/UI/player/shiroko.png',
+  '카요코':'img/UI/player/kayoko.png',
+  '히마리':'img/UI/player/himari.png',
+  '사쿠라코':'img/UI/player/sakurako.png',
+  '와카모':'img/UI/player/wakamo.png',
+  '루미':'img/UI/player/rumi.png',
+  '미노리':'img/UI/player/minori.png'
 };
 var PLAYER_DEFAULT_ICON='img/UI/player/player.png';
 function getPlayerIconUrl(name, isPlayer){
@@ -800,11 +833,11 @@ function getPlayerIconUrl(name, isPlayer){
 // (한 게임 NPC 최대 7명이라 한 풀에서 최대 7명까지만 사용 — 7개면 충분)
 // 풀이 비어있거나 부족하면 NPC_NAME_FALLBACK에서 자동 보충
 var NPC_NAME_POOLS={
-  bronze:[],   // 난이도 0.1 (9등급 수준 — 멍청한 NPC)
-  silver:[],   // 난이도 0.4 (6등급 수준)
-  gold:[],     // 난이도 0.6 (4등급 수준)
-  plat2:[],    // 난이도 0.9 (1등급 수준 — 똑똑)
-  plat1:[]     // 난이도 1.0 (전설 — 천재)
+  bronze:['세리카','하루카','모모이','마리','이즈나','코코나','노도카'],         // 난이도 0.1
+  silver:['아야네','야쿠모','사야','미치루','히후미','아리스','이로하'],         // 난이도 0.4
+  gold:['노노미','우타하','이치카','카스미','시즈코','슌','토모에'],             // 난이도 0.6
+  plat2:['시로코','카요코','히마리','사쿠라코','와카모','루미','미노리'],        // 난이도 0.9
+  plat1:['호시노','마코토','리오','나기사','체리노','키사키','니야']             // 난이도 1.0
 };
 // 풀이 비었을 때 사용하는 기본 이름 (현재 NPC들)
 var NPC_NAME_FALLBACK=['나기사','마코토','리오','호시노','니야','키사키','체리노'];
