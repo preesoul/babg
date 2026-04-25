@@ -1,7 +1,6 @@
 {
   "players": {
     "preesoul": {
-      "pw": "aqula88",
       "records": [
         {
           "date": "2026-04-05T04:35:36",
@@ -788,7 +787,6 @@
       ]
     },
     "쿼츠": {
-      "pw": "0903",
       "records": [
         {
           "date": "2026-04-05T23:18:07",
@@ -1602,7 +1600,6 @@
       ]
     },
     "ㄱㄱ": {
-      "pw": "",
       "records": [
         {
           "date": "2026-04-06T15:57:35",
@@ -2425,12 +2422,10 @@
       ]
     },
     "도도새": {
-      "pw": "3778",
       "records": [],
       "points": 0
     },
     "Prenguin": {
-      "pw": "aqula88!",
       "records": [
         {
           "date": "2026-04-06T01:36:04",
@@ -3267,7 +3262,6 @@
       ]
     },
     "남민철": {
-      "pw": "5056",
       "records": [
         {
           "date": "2026-04-07T12:40:52",
@@ -4002,43 +3996,43 @@
       "points": 15,
       "questState": {
         "daily": {
-          "date": "2026-04-09",
+          "date": "2026-04-25",
           "quests": [
             {
-              "id": "win1",
-              "progress": 1,
-              "completed": true
-            },
-            {
-              "id": "millennium10",
-              "progress": 11,
-              "completed": true
-            },
-            {
               "id": "skin3",
-              "progress": 2,
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "gehenna10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover3",
+              "progress": 0,
               "completed": false
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-04-06",
+          "weekStart": "2026-04-20",
           "quests": [
             {
-              "id": "discover10",
-              "progress": 13,
-              "completed": true
-            },
-            {
-              "id": "hidden1",
-              "progress": 1,
-              "completed": true
+              "id": "play10",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "win3",
-              "progress": 3,
-              "completed": true
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin10",
+              "progress": 0,
+              "completed": false
             }
           ]
         },
@@ -4051,7 +4045,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-09"
+        "_lastLoginDate": "2026-04-25"
       },
       "recruitedTier7": [
         "trinity_mika",
@@ -4085,7 +4079,6 @@
       ]
     },
     "킹갓프리소울": {
-      "pw": "1111",
       "records": [],
       "points": 0,
       "questState": {
@@ -4143,7 +4136,6 @@
       }
     },
     "admin": {
-      "pw": "",
       "records": [],
       "points": 0,
       "questState": {
@@ -4201,12 +4193,10 @@
       }
     },
     "a": {
-      "pw": "",
       "records": [],
       "points": 0
     },
     "Laker": {
-      "pw": "47008543",
       "records": [],
       "points": 0,
       "questState": {
@@ -4264,12 +4254,10 @@
       }
     },
     "슈퍼그레이트조예빈쨩": {
-      "pw": "",
       "records": [],
       "points": 0
     },
     "dsefddg": {
-      "pw": "22123",
       "records": [
         {
           "date": "2026-04-05T20:12:48",
@@ -4401,7 +4389,6 @@
       }
     },
     "디트": {
-      "pw": "2853",
       "records": [],
       "points": 0,
       "questState": {
@@ -4459,7 +4446,6 @@
       }
     },
     "Test1": {
-      "pw": "2853",
       "records": [],
       "points": 0,
       "questState": {
@@ -4517,7 +4503,6 @@
       }
     },
     "파란파랑별": {
-      "pw": "2853",
       "records": [
         {
           "date": "2026-04-05T23:33:52",
@@ -5215,7 +5200,6 @@
       }
     },
     "sen": {
-      "pw": "88",
       "records": [
         {
           "date": "2026-04-07T15:19:42",
@@ -5975,7 +5959,6 @@
       ]
     },
     "마오비": {
-      "pw": "2089",
       "records": [
         {
           "date": "2026-04-06T00:47:28",
@@ -6337,7 +6320,6 @@
       ]
     },
     "닉네임": {
-      "pw": "qlqjs",
       "records": [
         {
           "date": "2026-04-06T01:59:15",
@@ -6452,7 +6434,6 @@
       }
     },
     "KUJIRH": {
-      "pw": "3361",
       "records": [],
       "points": 0
     },
