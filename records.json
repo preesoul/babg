@@ -3285,75 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T08:17:57",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "만마전",
-              "baseId": "gehenna_pandemonium",
-              "atk": 49,
-              "hp": 44,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "우이",
-              "baseId": "ui",
-              "atk": 25,
-              "hp": 14,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Ui.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "치아키(수영복)",
-              "baseId": "chiaki",
-              "atk": 22,
-              "hp": 16,
-              "tier": 3,
-              "kw": [
-                "ranged",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Chiaki_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "모모카",
-              "baseId": "momoka",
-              "atk": 4,
-              "hp": 3,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Momoka.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T09:10:39",
           "placement": 2,
           "turn": 17,
@@ -3946,26 +3877,97 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T15:27:26",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 106,
+              "hp": 99,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 106,
+              "hp": 99,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "아야네(수영복)",
+              "baseId": "ayane",
+              "atk": 5,
+              "hp": 9,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Ayane_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 98,
+      "points": 105,
       "questState": {
         "daily": {
           "date": "2026-04-26",
           "quests": [
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             }
           ],
@@ -4046,8 +4048,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 5,
-        "legendPoints": 1
+        "streak": 6,
+        "legendPoints": 2
       }
     },
     "킹갓프리소울": {
