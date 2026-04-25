@@ -3285,81 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T09:46:40",
-          "placement": 2,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "카린(버니걸)",
-              "baseId": "karin",
-              "atk": 21,
-              "hp": 11,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Karin_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 18,
-              "hp": 26,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 18,
-              "hp": 26,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 10,
-              "hp": 14,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미모리",
-              "baseId": "mimori",
-              "atk": 4,
-              "hp": 5,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mimori.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T10:19:25",
           "placement": 1,
           "turn": 15,
@@ -3944,9 +3869,84 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T23:24:43",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 27,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 31,
+              "hp": 11,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "리오(임전)",
+              "baseId": "rio",
+              "atk": 21,
+              "hp": 21,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Rio_(Battle).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노노미(수영복)",
+              "baseId": "nonomi",
+              "atk": 9,
+              "hp": 9,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Nonomi_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 121,
+      "points": 123,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4044,8 +4044,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 2,
-        "legendPoints": 3
+        "streak": 3,
+        "legendPoints": 4
       }
     },
     "킹갓프리소울": {
