@@ -81,7 +81,14 @@ export default {
           });
         }
         const jsonStr = JSON.stringify(body.content, null, 2);
-        const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(jsonStr)));
+        // 스프레드 연산자는 대용량(>64KB)에서 콜스택 오버플로우 발생 → 청크 루프로 안전 처리
+        const bytes = new TextEncoder().encode(jsonStr);
+        let binary = '';
+        const CHUNK = 8192;
+        for (let i = 0; i < bytes.length; i += CHUNK) {
+          binary += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+        }
+        const encoded = btoa(binary);
         const res = await fetch(API_BASE, {
           method: 'PUT',
           headers: { ...ghHeaders, 'Content-Type': 'application/json' },
