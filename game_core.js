@@ -12,7 +12,7 @@ var CHARS = [
   {id:'toki',   name:'토키',   school:'밀레니엄',tier:2,atk:1,hp:4,kw:['survive'],   skin:'토키(바니걸)',     img:'Toki.png',           imgGold:'Toki_(Bunny_Girl).png'},
   {id:'midori', name:'미도리', school:'밀레니엄',tier:1,atk:2,hp:2,kw:[],            skin:'미도리(메이드)',   img:'Midori.png',         imgGold:'Midori_(Maid).png'},
   // 트리니티 1학년
-  {id:'mari',   name:'마리',   school:'트리니티',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'마리(아이돌)',     img:'Mari.png',           imgGold:'Mari_(Idol).png'},
+  {id:'mari',   name:'마리',   school:'트리니티',tier:1,atk:1,hp:1,kw:['taunt'],     skin:'마리(아이돌)',     img:'Mari.png',           imgGold:'Mari_(Idol).png'},
   {id:'reisa',  name:'레이사', school:'트리니티',tier:1,atk:2,hp:3,kw:['survive'],   skin:'레이사(마법소녀)', img:'Reisa.png',          imgGold:'Reisa_(Magical).png'},
 
   // ===== Tier 2 (밸류7) =====
@@ -303,7 +303,7 @@ var ABILITY_DESCS = {
   kayoko:   {type:'개전',desc:'상대방의 1~5번째 학생 배치를 역순으로 뒤집습니다.',skinEffect:'드레스 카요코: 지켜줌 뒤집기',skinEffectDesc:'개전: 상대의 <span style="color:#ffd700;font-weight:700">지켜줌을 해제하고, 지켜줌 없던 학생에게 지켜줌을 부여</span>합니다.\n배치를 역순으로 뒤집습니다.'},
   midori:   {type:'개전',desc:'<모모이> 수만큼 +2/+2',skinEffect:'메이드 미도리: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +2/+2',skinEffect:'메이드 모모이: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
-  mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+2',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+2</span>'},
+  mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+3',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+3</span>'},
   aru:      {type:'선빵',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',skinEffect:'드레스 아루: 3배',skinEffectDesc:'선빵: 공격 시, 5~6티어 학생에게는 공격력이 <span style="color:#ffd700;font-weight:700">3배</span>가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.'},
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   iroha:    {type:'첫인사',desc:'<토라마루>로 교체됩니다. (토라마루: 5/1)\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffect:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffectDesc:'첫인사: <토라마루>로 교체됩니다. (토라마루: <span style="color:#ffd700;font-weight:700">10/2</span>)\n토라마루 파괴 시 이로하로 돌아옵니다.'},
@@ -3904,7 +3904,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
   }
   else if(id==='mari'){
-    var atkBuff=u.isSkin?3:2,hpBuff=u.isSkin?2:1;
+    var atkBuff=u.isSkin?3:2,hpBuff=u.isSkin?3:1;
     var mariBuffed=[];
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive){mySide[i].atk+=atkBuff;mySide[i].hp+=hpBuff;mariBuffed.push(mySide[i].name+'('+mySide[i].atk+'/'+mySide[i].hp+')');}}
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +'+atkBuff+'/+'+hpBuff});
