@@ -3285,79 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T06:24:04",
-          "placement": 8,
-          "turn": 8,
-          "tier": 4,
-          "board": [
-            {
-              "name": "치나츠",
-              "baseId": "chinatsu",
-              "atk": 2,
-              "hp": 5,
-              "tier": 2,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Chinatsu.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "무츠키",
-              "baseId": "mutsuki",
-              "atk": 15,
-              "hp": 8,
-              "tier": 2,
-              "kw": [
-                "pierce",
-                "windfury",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Mutsuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "치나츠",
-              "baseId": "chinatsu",
-              "atk": 1,
-              "hp": 4,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Chinatsu.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아야네",
-              "baseId": "ayane",
-              "atk": 3,
-              "hp": 5,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ayane.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "아야네",
-              "baseId": "ayane",
-              "atk": 2,
-              "hp": 4,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ayane.png",
-              "school": "아비도스"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T06:40:09",
           "placement": 8,
           "turn": 12,
@@ -4013,9 +3940,84 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T10:19:25",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "이름없는 신들의 왕녀",
+              "baseId": "millennium_nameless",
+              "atk": 27,
+              "hp": 25,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/millennium_Nameless_God.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "이름없는 신들의 왕녀",
+              "baseId": "millennium_nameless",
+              "atk": 27,
+              "hp": 25,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/millennium_Nameless_God.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 61,
+              "hp": 61,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 88,
+      "points": 90,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4108,8 +4110,8 @@
       ],
       "rank": {
         "tier": 3,
-        "stars": 0,
-        "streak": 0,
+        "stars": 1,
+        "streak": 1,
         "legendPoints": 0
       }
     },
