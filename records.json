@@ -8042,7 +8042,60 @@
     },
     "죠민철": {
       "records": [],
-      "points": 0
+      "points": 0,
+      "questState": {
+        "daily": {
+          "date": "2026-04-25",
+          "quests": [
+            {
+              "id": "gehenna10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play3",
+              "progress": 0,
+              "completed": false
+            }
+          ],
+          "rerolled": false
+        },
+        "weekly": {
+          "weekStart": "2026-04-20",
+          "quests": [
+            {
+              "id": "play10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hidden_win",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hidden1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "repeat": {
+          "quests": [
+            {
+              "id": "repeat_play1",
+              "progress": 0,
+              "completed": false
+            }
+          ]
+        },
+        "_lastLoginDate": "2026-04-25"
+      }
     }
   }
 }
