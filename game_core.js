@@ -7424,18 +7424,35 @@ function applyRankChange(rank, placement){
 
   return {rank:rank, prev:prev, delta:delta, placement:placement};
 }
+// 내부 tier(0~9) → 신규 티어/숫자 표기 매핑
+// 9=브론즈2, 8=브론즈1, 7=실버3, 6=실버2, 5=실버1, 4=골드3, 3=골드2, 2=골드1, 1=플래티넘2, 0=플래티넘1
+var RANK_TIER_MAP={
+  9:{tierName:'브론즈',num:2,icon:'img/UI/bronze.png',color:'#a97142'},
+  8:{tierName:'브론즈',num:1,icon:'img/UI/bronze.png',color:'#a97142'},
+  7:{tierName:'실버',  num:3,icon:'img/UI/silver.png', color:'#c0c0c0'},
+  6:{tierName:'실버',  num:2,icon:'img/UI/silver.png', color:'#c0c0c0'},
+  5:{tierName:'실버',  num:1,icon:'img/UI/silver.png', color:'#c0c0c0'},
+  4:{tierName:'골드',  num:3,icon:'img/UI/gold.png',   color:'#fbbf24'},
+  3:{tierName:'골드',  num:2,icon:'img/UI/gold.png',   color:'#fbbf24'},
+  2:{tierName:'골드',  num:1,icon:'img/UI/gold.png',   color:'#fbbf24'},
+  1:{tierName:'플래티넘',num:2,icon:'img/UI/platinum.png',color:'#22d3ee'},
+  0:{tierName:'플래티넘',num:1,icon:'img/UI/platinum.png',color:'#22d3ee'}
+};
+function rankTierInfo(rank){
+  if(!rank) return RANK_TIER_MAP[9];
+  return RANK_TIER_MAP[rank.tier]||RANK_TIER_MAP[9];
+}
 function rankLabel(rank){
-  if(!rank) return '9등급';
-  if(rank.tier===0) return '전설 '+(rank.legendPoints||0)+'pt';
-  return rank.tier+'등급 ★'+rank.stars+'/'+rankStarsRequired(rank.tier);
+  if(!rank) return '브론즈 2';
+  var info=rankTierInfo(rank);
+  if(rank.tier===0) return info.tierName+' '+info.num+(rank.legendPoints?' (+'+rank.legendPoints+'pt)':'');
+  return info.tierName+' '+info.num+' ★'+rank.stars+'/'+rankStarsRequired(rank.tier);
 }
 function rankColor(rank){
-  if(!rank) return '#94a3b8';
-  if(rank.tier===0) return '#ffd700';
-  if(rank.tier===1) return '#a78bfa';
-  if(rank.tier<=3) return '#60a5fa';
-  if(rank.tier<=5) return '#5eead4';
-  return '#94a3b8';
+  return rankTierInfo(rank).color;
+}
+function rankIconUrl(rank){
+  return rankTierInfo(rank).icon;
 }
 function estimateRankFromRecords(records){
   var rank = defaultRank();
@@ -7555,10 +7572,12 @@ function renderRecords(){
       var myRank = p.rank || estimateRankFromRecords(recs);
       var myRankColor = rankColor(myRank);
       var myRankLabel = rankLabel(myRank);
+      var myRankInfo = rankTierInfo(myRank);
       var streakText = (myRank.streak>=2)?(' <span style="color:#fb923c;font-size:11px">🔥'+myRank.streak+'연승</span>'):'';
+      var rankIconHtml='<img src="'+myRankInfo.icon+'" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;margin-right:4px" onerror="this.style.display=\'none\'">';
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
       html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
-      html+='<div style="margin-bottom:8px;display:inline-block;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'"><span style="color:'+myRankColor+';font-weight:800;font-size:13px">'+myRankLabel+'</span>'+streakText+'</div>';
+      html+='<div style="margin-bottom:8px;display:inline-flex;align-items:center;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'">'+rankIconHtml+'<span style="color:'+myRankColor+';font-weight:800;font-size:13px">'+myRankLabel+'</span>'+streakText+'</div>';
       html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{for(var i=recs.length-1;i>=0;i--) html+=_renderRecordCard(recs[i],true,i);}
