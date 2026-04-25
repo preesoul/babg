@@ -8254,7 +8254,7 @@
           ]
         }
       ],
-      "points": 16,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -8325,7 +8325,8 @@
         "wakamo",
         "ayane",
         "ui",
-        "chise"
+        "chise",
+        "kaya"
       ]
     }
   }
