@@ -3264,71 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-07T14:09:04",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미노리(성난 군중)",
-              "baseId": "red_winter_minori",
-              "atk": 10,
-              "hp": 12,
-              "tier": 7,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "unique/Revolution.png",
-              "school": "붉은겨울"
-            },
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 10,
-              "hp": 8,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 11,
-              "hp": 7,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 11,
-              "hp": 11,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T23:32:14",
           "placement": 2,
           "turn": 18,
@@ -3994,22 +3929,105 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T03:41:53",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 22,
+              "hp": 18,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "ranged",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미(수영복)",
+              "baseId": "hasumi",
+              "atk": 37,
+              "hp": 31,
+              "tier": 5,
+              "kw": [
+                "ambush",
+                "windfury",
+                "cleave"
+              ],
+              "isSkin": true,
+              "img": "Hasumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 26,
+              "hp": 24,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 17,
+              "hp": 15,
+              "tier": 1,
+              "kw": [
+                "shield",
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 23,
+              "hp": 21,
+              "tier": 1,
+              "kw": [
+                "windfury",
+                "selfdestruct",
+                "poison",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 22,
+      "points": 34,
       "questState": {
         "daily": {
           "date": "2026-04-25",
           "quests": [
             {
               "id": "skin3",
-              "progress": 1,
-              "completed": false
+              "progress": 4,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 3,
-              "completed": false
+              "progress": 12,
+              "completed": true
             },
             {
               "id": "discover3",
@@ -4024,17 +4042,17 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 1,
+              "progress": 4,
               "completed": false
             }
           ]
