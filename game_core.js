@@ -778,6 +778,22 @@ function returnToPool(charId,count) {
 var G = {};
 var swapFirst = -1;
 
+// 플레이어/NPC 얼굴 아이콘 매핑
+var PLAYER_ICONS={
+  '나기사':'img/UI/player/nagisa.png',
+  '마코토':'img/UI/player/makoto.png',
+  '리오':'img/UI/player/rio.png',
+  '호시노':'img/UI/player/hoshino.png',
+  '니야':'img/UI/player/niya.png',
+  '키사키':'img/UI/player/kisaki.png',
+  '체리노':'img/UI/player/cherino.png'
+};
+var PLAYER_DEFAULT_ICON='img/UI/player/player.png';
+function getPlayerIconUrl(name, isPlayer){
+  if(isPlayer) return PLAYER_DEFAULT_ICON;
+  return PLAYER_ICONS[name]||PLAYER_DEFAULT_ICON;
+}
+
 function newGame() {
   deleteSave(); // 새 게임 시 저장 데이터 삭제
   resetQuestTracker();
@@ -788,7 +804,12 @@ function newGame() {
   var _bl=document.getElementById('battle-log');if(_bl)_bl.style.display='';
   var players=[];
   var aiCount=SANDBOX?5:7;
-  var aiNames=['미카','사오리','와카모','코코나','미네','히요리','코타마'];
+  var aiNames=['나기사','마코토','리오','호시노','니야','키사키','체리노'];
+  // 매 게임 셔플 (어느 자리가 어떤 이름이 될지 랜덤)
+  for(var _ni=aiNames.length-1;_ni>0;_ni--){
+    var _nj=Math.floor(Math.random()*(_ni+1));
+    var _nt=aiNames[_ni];aiNames[_ni]=aiNames[_nj];aiNames[_nj]=_nt;
+  }
   var startStone=SANDBOX?20:3;
   var playerName=window._babgLogin?window._babgLogin.name:'선생님';
   players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
@@ -5612,7 +5633,10 @@ function startBattle() {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
+  var _vsIconStyle='width:36px;height:36px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.3)';
+  var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
+  var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
 
   setTimeout(function(){
     intro.innerHTML='';
@@ -6330,7 +6354,10 @@ function showBattle(result,player,opp) {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
+  var _vsIconStyle='width:36px;height:36px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.3)';
+  var _enIcon='<img src="'+getPlayerIconUrl(opp.name,false)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
+  var _myIcon='<img src="'+getPlayerIconUrl(_myName,true)+'" style="'+_vsIconStyle+'" onerror="this.style.display=\'none\'">';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
   setTimeout(function(){intro.innerHTML='';startBattleAnimation(result,opp);},1500);
 }
 
@@ -6340,8 +6367,11 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   document.getElementById('btn-skip').style.display='';
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
   var _myTier=(G.players[0]&&G.players[0].tier)||1;
-  document.getElementById('enemy-label').textContent=opp.name+' (스케쥴 '+(opp.tier||1)+')';
-  document.getElementById('ally-label').textContent=_myName+' (스케쥴 '+_myTier+')';
+  var _enIcon=getPlayerIconUrl(opp.name,false);
+  var _myIcon=getPlayerIconUrl(_myName,true);
+  var _iconStyle='width:24px;height:24px;border-radius:50%;vertical-align:middle;margin-right:6px;object-fit:cover';
+  document.getElementById('enemy-label').innerHTML='<img src="'+_enIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+opp.name+' (스케쥴 '+(opp.tier||1)+')';
+  document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
   var activeResult=result;

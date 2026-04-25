@@ -1123,18 +1123,24 @@ function renderAll() {
   var nextOppId=(G.matchups&&G.matchups[0])?G.matchups[0].opponentId:null;
   var isGhostOpp=(G.matchups&&G.matchups[0])?!!G.matchups[0].isGhost:false;
   var isBye=(G.matchups&&G.matchups[0])?!!G.matchups[0].bye:false;
+  // 5등급 이상은 보드 미리보기 비활성화
+  var _myRank=window._babgPlayerRank;
+  var _hidePreview=!!(_myRank&&(_myRank.tier===0||_myRank.tier<=5));
   for(var i=0;i<G.players.length;i++){
     var pl=G.players[i];
     var isNext=(pl.id===nextOppId);
     var cls='player-chip'+(pl.isPlayer?' you':'')+(pl.dead?' dead':'')+(isNext?' next-opp':'');
     var chipHpPct=Math.max(0,Math.min(100,pl.hp/40*100));
     var chipBarColor=pl.hp<=15?'#ef4444':'rgba(255,255,255,0.7)';
+    var clickable=(isNext&&!_hidePreview);
     var nextStyle=isNext?'border:2px solid #ffd700;box-shadow:0 0 6px rgba(255,215,0,0.5)':'';
     var ghostMark=(isNext&&isGhostOpp)?' <span style="color:#a78bfa">♢</span>':'';
     var nextBadge=isNext?'<span style="color:#ffd700;font-size:11px;margin-right:2px">⚔</span>':'';
-    var clickAttr=isNext?' onclick="showOpponentPreview('+pl.id+')"':'';
+    var clickAttr=clickable?' onclick="showOpponentPreview('+pl.id+')"':'';
     var schedTag=' <span style="color:#a78bfa;font-size:9px;font-weight:500">(스케쥴 '+pl.tier+')</span>';
-    pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+    var iconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(pl.name,pl.isPlayer):'';
+    var iconImg=iconUrl?'<img src="'+iconUrl+'" style="width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-right:3px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
+    pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+iconImg+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
   }
   // 다음 상대 정보 박스
   var nextOppRef=null;
@@ -1154,9 +1160,17 @@ function renderAll() {
       matchInfoEl.onclick=null;
     } else if(nextOppRef){
       var oppMark=isGhostOpp?'<span style="color:#a78bfa">♢</span> ':'';
-      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음:</span> '+oppMark+'<b>'+nextOppRef.name+'</b> <span style="color:#a78bfa">(스케쥴 '+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span> <span style="color:#6a8a9e;font-size:10px;float:right">📋 탭</span>';
+      var oppIconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(nextOppRef.name,nextOppRef.isPlayer):'';
+      var oppIconImg=oppIconUrl?'<img src="'+oppIconUrl+'" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin:0 4px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
+      var hintHtml=_hidePreview?'':' <span style="color:#6a8a9e;font-size:10px;float:right">📋 탭</span>';
+      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음:</span>'+oppIconImg+oppMark+'<b>'+nextOppRef.name+'</b> <span style="color:#a78bfa">(스케쥴 '+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span>'+hintHtml;
       matchInfoEl.style.display='block';
-      matchInfoEl.onclick=(function(oid){return function(){showOpponentPreview(oid);};})(nextOppRef.id);
+      matchInfoEl.style.cursor=_hidePreview?'default':'pointer';
+      if(_hidePreview){
+        matchInfoEl.onclick=null;
+      } else {
+        matchInfoEl.onclick=(function(oid){return function(){showOpponentPreview(oid);};})(nextOppRef.id);
+      }
     } else {
       matchInfoEl.style.display='none';
     }
