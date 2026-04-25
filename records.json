@@ -412,8 +412,8 @@
           "pinned": true,
           "_ownerName": "preesoul",
           "_ownerRank": {
-            "tier": 5,
-            "stars": 2,
+            "tier": 4,
+            "stars": 0,
             "streak": 0,
             "legendPoints": 0
           }
@@ -2815,7 +2815,7 @@
           "_ownerName": "Prenguin",
           "_ownerRank": {
             "tier": 5,
-            "stars": 0,
+            "stars": 1,
             "streak": 1,
             "legendPoints": 0
           }
@@ -4014,7 +4014,8 @@
               "img": "Mine.png",
               "school": "트리니티"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 90,
@@ -5384,7 +5385,7 @@
           "_ownerName": "sen",
           "_ownerRank": {
             "tier": 4,
-            "stars": 0,
+            "stars": 2,
             "streak": 0,
             "legendPoints": 0
           }
