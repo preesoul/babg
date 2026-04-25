@@ -8133,7 +8133,7 @@
           ]
         }
       ],
-      "points": 7,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -8200,7 +8200,8 @@
       "unlockedAbydos": [
         "wakamo",
         "ayane",
-        "ui"
+        "ui",
+        "chise"
       ]
     }
   }
