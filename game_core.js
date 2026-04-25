@@ -2546,10 +2546,54 @@ function _aiOptK(){
   var d=getAiDifficulty();
   return Math.max(2, Math.round(2 + d*6));
 }
-// 휴리스틱 노이즈: 9등급=3.0, 전설=0.3 (높은 등급일수록 결정 정확)
+// 휴리스틱 노이즈: 동률 처리용 작은 안정 노이즈 (난이도와 무관, 일관 0.5)
 function _aiNoise(){
+  return 0.5;
+}
+// 잘못된 결정 확률: 9등급=45%, 4등급=18%, 1등급=4%, 전설=1%
+function _aiMistakeRate(){
   var d=getAiDifficulty();
-  return Math.max(0.3, 3.0 - d*2.7);
+  return Math.max(0.01, 0.49 - d*0.48);
+}
+// 학생 카드 forecast 가중치: 매치업 1회 시뮬은 장기 가치 누락 → 보수적으로
+// d<0.7에서 0, d>=0.7에서 0~0.2 (전설만 살짝 보정)
+function _aiForecastWeight(){
+  var d=getAiDifficulty();
+  if(d<0.7) return 0;
+  return Math.min(0.2, (d-0.7)*0.6);
+}
+// 학생 카드를 영입했다고 가정한 보드의 승률 forecast
+function _aiStudentForecast(p, item, oppBoard){
+  if(!oppBoard||oppBoard.length===0) return null;
+  var tmpl=findAnyChar(item.baseId);
+  if(!tmpl) return null;
+  var testBoard=_aiCopyBoard(p.board);
+  // 트리플이면 스킨, 아니면 일반
+  var copyCount=0;
+  for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===item.baseId&&!p.board[k].isSkin)copyCount++;}
+  if(copyCount>=2){
+    // 시뮬에서는 단순화: 기존 2장 제거 후 골든 1장 추가
+    testBoard=testBoard.filter(function(u){return !(u.baseId===item.baseId&&!u.isSkin);});
+    testBoard=testBoard.slice(0,Math.max(0,testBoard.length-2)); // 안전용
+    var skinUnit={
+      id:'sim_'+Math.random().toString(36).substr(2,4),
+      baseId:tmpl.id,name:tmpl.skin||tmpl.name,school:tmpl.school,tier:tmpl.tier,
+      atk:tmpl.atk*2+1,hp:tmpl.hp*2+1,kw:(tmpl.kw||[]).slice(),img:tmpl.imgGold||tmpl.img,
+      isSkin:true,alive:true,maxHp:tmpl.hp*2+1
+    };
+    testBoard.push(skinUnit);
+  } else if(testBoard.length<MAX_BOARD){
+    var newUnit={
+      id:'sim_'+Math.random().toString(36).substr(2,4),
+      baseId:tmpl.id,name:tmpl.name,school:tmpl.school,tier:tmpl.tier,
+      atk:item.atk||tmpl.atk,hp:item.hp||tmpl.hp,kw:(item.kw||tmpl.kw||[]).slice(),
+      img:item.img||tmpl.img,isSkin:item.isSkin||false,alive:true,maxHp:item.hp||tmpl.hp
+    };
+    testBoard.push(newUnit);
+  } else {
+    return null; // 보드 가득 (트리플 아님)
+  }
+  return aiForecast(testBoard, oppBoard, _aiSimN());
 }
 // 플레이어 등급에 따른 personality 분포 (낮음→소극적, 높음→공격적)
 function _pickAiPersonality(idx, difficulty){
@@ -2668,7 +2712,10 @@ function aiShouldUpgrade(p){
   }
   // 무료/1골드 업그레이드는 무조건
   if(p.upgradeCost<=1) score+=20;
-  return score>0;
+  var decision=score>0;
+  // 난이도 비례 실수 (잘못된 결정 확률 / 2)
+  if(Math.random() < _aiMistakeRate()*0.5) decision=!decision;
+  return decision;
 }
 
 function aiProactiveSell(p,aiStrat){
@@ -3129,25 +3176,36 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
     if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
   }
   s+=simStatBonus(item.baseId);
-  // 난이도 기반 노이즈 (낮은 등급 AI는 가끔 잘못된 결정)
+  // 동률 처리용 작은 안정 노이즈
   s+=Math.random()*_aiNoise();
   // 보드 가득 + 트리플 아니면 영입 불가
   if(p.board.length>=MAX_BOARD&&copyCount<2) return -1;
   // 휴리스틱 → 0~1 정규화 (대략)
-  return s/100;
+  var heu=s/100;
+  // 난이도 비례 forecast 블렌딩 (d>=0.5에서 작동, 매치업 보드 있을 때만)
+  var fw=_aiForecastWeight();
+  if(fw>0&&oppBoard&&oppBoard.length>0){
+    var fc=_aiStudentForecast(p, item, oppBoard);
+    if(fc!=null) return heu*(1-fw) + fc*fw;
+  }
+  return heu;
 }
 // 리롤이 가치 있는지 판단 (현재 상점 최고치 < 임계 + 골드 여유)
 function aiShouldReroll(p, currentBest){
   if(p.stone<5) return false; // 리롤 + 영입 가능해야
+  var decision;
   if(p.board.length>=MAX_BOARD){
     // 보드 가득 — 트리플 외엔 무의미. 트리플 가능 카드 풀에 있으면 리롤 가치
     var bc={};for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)bc[p.board[j].baseId]=(bc[p.board[j].baseId]||0)+1;}
     var hasTripleNeed=false;
     for(var bid in bc){if(bc[bid]>=2&&G.pool[bid]>0){hasTripleNeed=true;break;}}
-    return hasTripleNeed && currentBest < 0.20; // 상점에 트리플 카드 없으면 리롤
+    decision = hasTripleNeed && currentBest < 0.20;
+  } else {
+    decision = currentBest < 0.12;
   }
-  // 일반: 상점 최고가 너무 낮을 때
-  return currentBest < 0.12;
+  // 난이도 비례 실수 (잘못된 결정 확률 / 2)
+  if(Math.random() < _aiMistakeRate()*0.5) decision = !decision;
+  return decision;
 }
 
 function aiTurns() {
@@ -3176,13 +3234,21 @@ function aiTurns() {
     var MAX_REROLLS=Math.max(2, Math.floor(p.tier*1.5)); // 티어 비례 (1티어=3회, 6티어=9회 상한)
     while(actLoop<25){
       actLoop++;
-      // 모든 상점 슬롯 점수 평가
-      var bestSlot=-1, bestSlotScore=-Infinity;
+      // 모든 상점 슬롯 점수 평가 (랭킹 후 mistake-rate로 top↔2nd 스왑)
+      var slotRanks=[];
       for(var s=0;s<p.aiShop.length;s++){
         if(!p.aiShop[s]) continue;
         var sc=aiEvalShopSlot(p,s,_oppBoard,aiStrat);
-        if(sc>bestSlotScore){bestSlotScore=sc;bestSlot=s;}
+        if(sc>0) slotRanks.push({slot:s, score:sc});
       }
+      slotRanks.sort(function(a,b){return b.score-a.score;});
+      // 난이도 비례 실수: 1위와 무작위 슬롯 스왑 (낮은 등급일수록 잘못된 슬롯 픽)
+      if(slotRanks.length>=2 && Math.random()<_aiMistakeRate()){
+        var swapIdx=1+Math.floor(Math.random()*(slotRanks.length-1));
+        var t=slotRanks[0]; slotRanks[0]=slotRanks[swapIdx]; slotRanks[swapIdx]=t;
+      }
+      var bestSlot=slotRanks.length>0?slotRanks[0].slot:-1;
+      var bestSlotScore=slotRanks.length>0?slotRanks[0].score:-Infinity;
       // 리롤 결정 (현재 상점 가치가 너무 낮으면, 단 상한 적용)
       var doReroll=(rerollCount<MAX_REROLLS) && aiShouldReroll(p, bestSlotScore);
       if(doReroll){
