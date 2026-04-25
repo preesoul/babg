@@ -3341,6 +3341,38 @@ function aiReturnShop(p){
   }
   p.aiShop=[];
 }
+// AI 상점 얼림 결정 (영입 종료 후, 상점 반환 전에 평가)
+// 조건:
+// 1) 트리플 직전 카드(보드 같은 baseId 2장+) 상점에 있음
+// 2) 빌드 코어 카드 상점에 있고 보드에 그게 아직 없음
+// 3) 강한 액션 카드(tier 4+)가 비싸서 못 산 상태
+function aiShouldFreezeShop(p){
+  if(!p.aiShop) return false;
+  for(var s=0;s<p.aiShop.length;s++){
+    var item=p.aiShop[s];
+    if(!item) continue;
+    if(!item.isSpell){
+      // 트리플 직전
+      var copyCount=0;
+      for(var b=0;b<p.board.length;b++){
+        if(p.board[b].baseId===item.baseId&&!p.board[b].isSkin) copyCount++;
+      }
+      if(copyCount>=2) return true;
+      // 빌드 코어 카드 + 보드에 그 카드 없음
+      if(p._buildPlan&&p._buildPlan.coreCards.indexOf(item.baseId)!==-1){
+        var hasCore=false;
+        for(var b=0;b<p.board.length;b++){
+          if(p.board[b].baseId===item.baseId) hasCore=true;
+        }
+        if(!hasCore) return true;
+      }
+    } else {
+      // 강한 액션 카드 (tier 4+) 못 산 경우
+      if(item.cost>p.stone&&item.tier>=4) return true;
+    }
+  }
+  return false;
+}
 // 난이도별 매 턴 무료 리롤 횟수
 function _aiFreeRerollsForTurn(){
   var d=getAiDifficulty();
@@ -3540,8 +3572,13 @@ function aiTurns() {
     // 빌드 청사진 결정 (7청휘석 이상에서 보드 진행도 평가)
     aiDecideBuildPlan(p);
 
-    // Phase 0: AI 상점 생성 (영입 페이즈 시작 시 매번 새로 생성)
-    aiGenerateShop(p);
+    // Phase 0: AI 상점 생성 (얼린 상태면 기존 상점 유지)
+    if(p._aiFrozen && p.aiShop && p.aiShop.length>0){
+      // 얼림 유효 — 기존 상점 그대로 사용
+      p._aiFrozen=false; // 한 턴 사용 후 자동 해제
+    } else {
+      aiGenerateShop(p);
+    }
 
     // Phase 3: 선빵적 매각 (보드 풀 + 골드 부족 시)
     aiProactiveSell(p,aiStrat);
@@ -3606,8 +3643,13 @@ function aiTurns() {
       if(!aiBuyFromShop(p,bs,_oppBoard)) break;
     }
 
-    // 상점 정리 (남은 카드 풀로 반환)
-    aiReturnShop(p);
+    // 얼림 결정: 좋은 카드 남았으면 얼리고 다음 턴 보존
+    if(aiShouldFreezeShop(p)){
+      p._aiFrozen=true;
+      // aiReturnShop 호출 안 함 — 상점 카드는 풀로 반환되지 않음 (다음 턴 사용)
+    } else {
+      aiReturnShop(p);
+    }
 
     p.board=p.board.filter(function(u){return !!u;});
     // Forecast 기반 배치 최적화 (매치업 보드 있을 때)
@@ -7257,6 +7299,7 @@ function saveGame(){
           personalityType:p.personalityType||'standard',
           aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
           buildPlanId:(p._buildPlan&&p._buildPlan.id)||null,
+          aiFrozen:p._aiFrozen||false,
           board:p.board.map(function(u){
             return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
               atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:(u.kw||[]).slice(),
@@ -7315,6 +7358,7 @@ function restoreGame(save){
       personalityType:p.personalityType||'standard',
       aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
       _buildPlan:(function(){if(!p.buildPlanId)return null;for(var _bp=0;_bp<BUILD_PLANS.length;_bp++)if(BUILD_PLANS[_bp].id===p.buildPlanId)return BUILD_PLANS[_bp];return null;})(),
+      _aiFrozen:p.aiFrozen||false,
       board:p.board.map(function(u){
         return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
           atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:u.kw||[],
