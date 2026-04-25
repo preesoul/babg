@@ -8107,16 +8107,90 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T14:38:36",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 52,
+              "hp": 44,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 2,
+              "hp": 6,
+              "tier": 4,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 1,
+              "hp": 1,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 4,
+              "hp": 4,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-25",
           "quests": [
             {
               "id": "skin3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -8126,7 +8200,7 @@
             },
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -8137,7 +8211,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -8171,9 +8245,9 @@
         "millennium_cc"
       ],
       "rank": {
-        "tier": 9,
-        "stars": 1,
-        "streak": 1,
+        "tier": 8,
+        "stars": 0,
+        "streak": 2,
         "legendPoints": 0
       },
       "unlockedAbydos": [
