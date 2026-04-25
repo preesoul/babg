@@ -3285,76 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T07:19:11",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 18,
-              "hp": 14,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 47,
-              "hp": 51,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 14,
-              "hp": 14,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 14,
-              "hp": 14,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T07:35:45",
           "placement": 1,
           "turn": 14,
@@ -3974,9 +3904,74 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T11:31:30",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 16,
+              "hp": 16,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 12,
+              "hp": 8,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 6,
+              "hp": 10,
+              "tier": 4,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 69,
+              "hp": 63,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 94,
+      "points": 96,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4072,9 +4067,9 @@
         "nonomi"
       ],
       "rank": {
-        "tier": 1,
+        "tier": 0,
         "stars": 0,
-        "streak": 3,
+        "streak": 4,
         "legendPoints": 0
       }
     },
