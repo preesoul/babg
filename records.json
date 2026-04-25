@@ -3264,77 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-08T02:27:09",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 37,
-              "hp": 33,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 25,
-              "hp": 21,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 42,
-              "hp": 42,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 44,
-              "hp": 42,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "린(승무원)",
-              "baseId": "lin",
-              "atk": 29,
-              "hp": 29,
-              "tier": 6,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Lin_(flight).png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-08T02:36:01",
           "placement": 5,
           "turn": 13,
@@ -4016,9 +3945,86 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T06:19:38",
+          "placement": 5,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 10,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "세나",
+              "baseId": "sena",
+              "atk": 10,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Sena.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 35,
+              "hp": 36,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 12,
+              "hp": 12,
+              "tier": 4,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 36,
+      "points": 38,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4046,7 +4052,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -4056,7 +4062,7 @@
             },
             {
               "id": "skin10",
-              "progress": 5,
+              "progress": 7,
               "completed": false
             }
           ]
@@ -4104,7 +4110,7 @@
       ],
       "rank": {
         "tier": 4,
-        "stars": 1,
+        "stars": 0,
         "streak": 0,
         "legendPoints": 0
       }
