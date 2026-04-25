@@ -1140,8 +1140,10 @@ function renderAll() {
     var clickAttr=clickable?' onclick="showOpponentPreview('+pl.id+')"':'';
     var schedTag=' <span style="color:#a78bfa;font-size:9px;font-weight:500">(스케쥴 '+pl.tier+')</span>';
     var iconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(pl.name,pl.isPlayer):'';
-    var iconImg=iconUrl?'<img src="'+iconUrl+'" style="width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-right:3px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
-    pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+iconImg+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+    // 얼굴 배경 (PC와 동일 패턴, 모바일은 살짝 작게)
+    var bgImg=iconUrl?'<img src="'+iconUrl+'" style="position:absolute;left:-2px;top:50%;transform:translateY(-50%);height:170%;width:auto;opacity:0.78;pointer-events:none;z-index:0;mask-image:linear-gradient(90deg,black 60%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,black 60%,transparent 100%)" onerror="this.style.display=\'none\'">':'';
+    var chipExtra=iconUrl?';position:relative;overflow:hidden;padding-left:36px':'';
+    pHtml+='<div class="'+cls+'" style="'+nextStyle+chipExtra+'"'+clickAttr+'>'+bgImg+'<span style="position:relative;z-index:1">'+nextBadge+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span></span><div class="chip-hp-bar" style="position:relative;z-index:1"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
   }
   // 다음 상대 (모바일: top-bar 인라인, 1턴 옆에 간소화 표시)
   var nextOppRef=null;
