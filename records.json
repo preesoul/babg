@@ -3944,7 +3944,8 @@
               "img": "Mina.png",
               "school": "산해경"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 98,
