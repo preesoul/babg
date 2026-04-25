@@ -291,7 +291,7 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1}; // 개전
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, shizuko:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1}; // 패시브 (영입 턴/상시)
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
@@ -308,12 +308,12 @@ var ABILITY_DESCS = {
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   iroha:    {type:'첫인사',desc:'<토라마루>로 교체됩니다. (토라마루: 5/1)\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffect:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffectDesc:'첫인사: <토라마루>로 교체됩니다. (토라마루: <span style="color:#ffd700;font-weight:700">10/2</span>)\n토라마루 파괴 시 이로하로 돌아옵니다.'},
   himari:   {type:'개전',desc:'아군 2인에게 무작위 기본능력 키워드를 추가합니다.',skinEffect:'임전 히마리: 아군 전원',skinEffectDesc:'개전: 아군 <span style="color:#ffd700;font-weight:700">전원</span>에게 무작위 기본능력 키워드를 추가합니다.'},
-  rio:      {type:'개전',desc:'아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.',skinEffect:'임전 리오: 적 학교 태그 삭제',skinEffectDesc:'개전: 아군 전체의 학교를 가장 왼쪽 아군의\n학교로 통일합니다.\n<span style="color:#ffd700;font-weight:700">적의 학교 태그를 삭제합니다.</span>\n이 효과는 가장 먼저 발동합니다.'},
+  rio:      {type:'개전',desc:'무작위 적 2인의 모든 능력을 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·세이아 제외) 발동합니다.',skinEffect:'임전 리오: 적 3인의 능력 삭제',skinEffectDesc:'개전: 무작위 적 <span style="color:#ffd700;font-weight:700">3인</span>의 모든 능력을 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·세이아 제외) 발동합니다.'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',skinEffect:'드레스 아코: +8/+8',skinEffectDesc:'뒤끝: 이번 전투에서 게헨나 학생들에게 <span style="color:#ffd700;font-weight:700">+8/+8</span>을 부여합니다.'},
   kazusa:   {type:'패시브',desc:'관통. 공격으로 적을 쓰러뜨렸을 시,\n레이사를 불러옵니다. (전투 중 1회)',skinEffect:'밴드 카즈사: 마법소녀 레이사 소환',skinEffectDesc:'관통. 패시브: 공격으로 적을 쓰러뜨렸을 시,\n마법소녀 레이사를 불러옵니다. (전투 중 1회)'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (3/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',skinEffect:'수영복 히후미: 페로로님 6/2',skinEffectDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">6/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',skinEffect:'수영복 아즈사: -4 데미지',skinEffectDesc:'뒤끝: 적 전체에게 <span style="color:#ffd700;font-weight:700">-4</span>의 데미지를 줍니다.'},
-  sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 한 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 두 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">두 번</span> 더 발동합니다.'},
+  sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 두 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 세 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">세 번</span> 더 발동합니다.'},
   tsurugi:  {type:'개전',desc:'공/체가 두 배가 됩니다.\n개전 마지막에 발동됩니다.',skinEffect:'수영복 츠루기: 세 배',skinEffectDesc:'개전: 공/체가 <span style="color:#ffd700;font-weight:700">세 배</span>가 됩니다.'},
   mine:     {type:'개전',desc:'아군의 모든 지켜줌을 제거합니다.',skinEffect:'아이돌 미네: 아군 적군 모든 지켜줌을 제거합니다.',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">아군 적군</span> 모든 지켜줌을 제거합니다.'},
   toki:     {type:'버티기',desc:'<아비 에슈흐>를 소환합니다.\n스케쥴 레벨만큼의 공/체를 가집니다.',skinEffect:'바니걸 토키: 스케쥴 레벨×2',skinEffectDesc:'버티기: <아비 에슈흐>를 소환합니다.\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>의 공/체를 가집니다.'},
@@ -350,10 +350,10 @@ var ABILITY_DESCS = {
   yukari:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 유카리: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   mimori:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'수영복 미모리: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
   renge:    {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 렌게: 부활 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
-  shizuko:  {type:'패시브',desc:'첫인사가 2회 발동합니다.',skinEffect:'수영복 시즈코: 4회 발동',skinEffectDesc:'패시브: 첫인사가 <span style="color:#ffd700;font-weight:700">4회</span> 발동합니다.'},
+  shizuko:  {type:'개전',desc:'무작위 적 2인의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.',skinEffect:'수영복 시즈코: 적 전원 대상',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">적 전원</span>의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
   kikyou:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
-  chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 1명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
+  chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 2명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
   michiru:  {type:'개전 / 첫인사',desc:'개전: 아군 백귀야행 학생 무작위 1명에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 기습 2명 부여 / 첫인사 두 번 발동',skinEffectDesc:'개전: 아군 백귀야행 학생 무작위 <span style="color:#ffd700;font-weight:700">2명</span>에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   nagusa:   {type:'선빵 / 뒤끝',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 7)\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선빵: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   wakamo:   {type:'선빵 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선빵: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)'},
@@ -377,7 +377,7 @@ var ABILITY_DESCS = {
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선빵',desc:'공격 시, 5% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 10%',skinEffectDesc:'선빵: 공격 시, <span style="color:#ffd700;font-weight:700">10%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
-  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n30% 내립니다.',skinEffect:'마법소녀 스즈미: 60% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">60%</span> 내립니다.'},
+  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n40% 내립니다.',skinEffect:'마법소녀 스즈미: 70% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">70%</span> 내립니다.'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
   haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
   // 총학생회
@@ -2267,10 +2267,9 @@ function triggerBattlecry(m, p) {
     _doBC(m,p);
   }
 }
+// 시즈코 영입 추가 발동 효과는 제거됨 (효과 변경)
 function getShizukoExtraRecruit(p){
-  var extra=0;
-  for(var i=0;i<p.board.length;i++){if(p.board[i]&&p.board[i].baseId==='shizuko')extra+=p.board[i].isSkin?2:1;}
-  return extra;
+  return 0;
 }
 function _doBC(m, p) {
   var id=m.baseId;
@@ -3917,16 +3916,46 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 공/체 '+mult+'배! ('+u.atk+'/'+u.hp+')'});
   }
   else if(id==='rio'){
-    // 아군 전체 학교를 가장 왼쪽 아군의 학교로 통일
-    var leftSchool=null;
-    for(var i=0;i<mySide.length;i++){if(mySide[i].alive){leftSchool=mySide[i].school;break;}}
-    if(leftSchool){
-      G.rioSchool=leftSchool;
-      for(var i=0;i<mySide.length;i++){if(mySide[i].alive)mySide[i].school=leftSchool;}
-      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 학교를 '+leftSchool+'(으)로 통일!'});
-      if(u.isSkin){
-        for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)otherSide[i].school='';}
-        log.push({cls:'soc',text:'[개전] '+u.name+': 적 학교 태그 삭제!'});
+    // 무작위 적 N인의 모든 능력 삭제 (일반 2명, 스킨 3명)
+    var rioCount=u.isSkin?3:2;
+    var rioTargets=[];
+    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)rioTargets.push(otherSide[i]);}
+    // 셔플
+    for(var i=rioTargets.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=rioTargets[i];rioTargets[i]=rioTargets[j];rioTargets[j]=t;
+    }
+    var rioPicked=rioTargets.slice(0,rioCount);
+    for(var i=0;i<rioPicked.length;i++) stripAbilities(rioPicked[i], log);
+    log.push({cls:'soc',text:'[개전] '+u.name+': 무작위 적 '+rioPicked.length+'명의 능력 삭제!'});
+  }
+  else if(id==='shizuko'){
+    // 무작위 적 N인(스킨: 전원)의 버프(기본 stat 초과분) 절반화
+    var shizTargets=[];
+    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)shizTargets.push(otherSide[i]);}
+    if(!u.isSkin){
+      // 셔플 후 2명
+      for(var i=shizTargets.length-1;i>0;i--){
+        var j=Math.floor(Math.random()*(i+1));
+        var t=shizTargets[i];shizTargets[i]=shizTargets[j];shizTargets[j]=t;
+      }
+      shizTargets=shizTargets.slice(0, Math.min(2, shizTargets.length));
+    }
+    for(var i=0;i<shizTargets.length;i++){
+      var sztgt=shizTargets[i];
+      var sztmpl=findAnyChar(sztgt.baseId);
+      if(!sztmpl) continue;
+      var sbAtk = sztgt.isSkin?(sztmpl.atk*2+1):sztmpl.atk;
+      var sbHp  = sztgt.isSkin?(sztmpl.hp*2+1):sztmpl.hp;
+      var bonusAtk = Math.max(0, sztgt.atk - sbAtk);
+      var bonusHp  = Math.max(0, sztgt.hp - sbHp);
+      if(bonusAtk>0 || bonusHp>0){
+        var halfAtk = Math.floor(bonusAtk/2);
+        var halfHp = Math.floor(bonusHp/2);
+        sztgt.atk -= halfAtk;
+        sztgt.hp  -= halfHp;
+        if(sztgt.maxHp) sztgt.maxHp = Math.max(sztgt.hp, sztgt.maxHp - halfHp);
+        log.push({cls:'soc',text:'[개전] '+u.name+': '+sztgt.name+'의 버프 절반! (-'+halfAtk+'/-'+halfHp+')'});
       }
     }
   }
@@ -4322,10 +4351,9 @@ function triggerSOC(u, mySide, otherSide, log) {
 
 // 리오 개전용: 전투 시 첫인사 효과 (임시 버프, 전투 후 원복)
 // 린 패시브: BC가 추가로 발동
+// 시즈코 BC 추가 발동 효과는 제거됨 (효과 변경: 적 버프 절반화 SOC로 교체)
 function getShizukoExtra(side){
-  var extra=0;
-  for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='shizuko')extra+=side[i].isSkin?2:1;}
-  return extra;
+  return 0;
 }
 function triggerSOC_battlecry(u, mySide, log) {
   var id=u.baseId;
@@ -4418,11 +4446,11 @@ function resolveStartOfCombat(a, b, log) {
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='rio') triggerSOC(side[i],side,other,log);
     }
-    // 사쿠라코: 트리니티 개전 추가 횟수 합산 (일반 +1, 황금 +2, 중첩 가능)
+    // 사쿠라코: 트리니티 개전 추가 횟수 합산 (일반 +2, 황금 +3, 중첩 가능)
     var trinityRepeat=1;
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='sakurako'){
-        var extra=side[i].isSkin?2:1;
+        var extra=side[i].isSkin?3:2;
         trinityRepeat+=extra;
         log.push({cls:'soc',text:'[개전] '+side[i].name+': 트리니티 개전 +'+extra+'회!'});
       }
@@ -4839,7 +4867,7 @@ function _doDR(unit, mySide, otherSide, log) {
     }
   }
   else if(id==='chise'){
-    // 치세 뒤끝: 아군 백귀야행 무작위 1명의 첫인사 발동 (황금: 전원)
+    // 치세 뒤끝: 아군 백귀야행 무작위 2명의 첫인사 발동 (황금: 전원)
     var hkykBC=[];
     for(var i=0;i<mySide.length;i++){
       if(mySide[i].alive&&mySide[i].school==='백귀야행'&&mySide[i]!==unit&&BC_IDS[mySide[i].baseId])
@@ -4852,9 +4880,16 @@ function _doDR(unit, mySide, otherSide, log) {
         }
         log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 백귀야행 전원 첫인사 발동!'});
       } else {
-        var pick=hkykBC[Math.floor(Math.random()*hkykBC.length)];
-        triggerSOC_battlecry_inner(pick,mySide,log);
-        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+pick.name+'의 첫인사 발동!'});
+        // 셔플 후 최대 2명 선택
+        for(var _ci=hkykBC.length-1;_ci>0;_ci--){
+          var _cj=Math.floor(Math.random()*(_ci+1));
+          var _ct=hkykBC[_ci];hkykBC[_ci]=hkykBC[_cj];hkykBC[_cj]=_ct;
+        }
+        var picks=hkykBC.slice(0,Math.min(2,hkykBC.length));
+        for(var i=0;i<picks.length;i++){
+          triggerSOC_battlecry_inner(picks[i],mySide,log);
+          log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+picks[i].name+'의 첫인사 발동!'});
+        }
       }
     }
   }
@@ -6598,8 +6633,8 @@ function runBattleCoinPhase(snap,callback){
 
   // 스즈미 패시브: 상대 코인 성공률 감소 (-20%, 황금: -40%)
   var _suzumiPenaltyForEnemy=0,_suzumiPenaltyForAlly=0;
-  for(var j=0;j<aliveSnapA.length;j++){if(aliveSnapA[j].baseId==='suzumi')_suzumiPenaltyForEnemy+=aliveSnapA[j].isSkin?0.6:0.3;}
-  for(var j=0;j<aliveSnapB.length;j++){if(aliveSnapB[j].baseId==='suzumi')_suzumiPenaltyForAlly+=aliveSnapB[j].isSkin?0.6:0.3;}
+  for(var j=0;j<aliveSnapA.length;j++){if(aliveSnapA[j].baseId==='suzumi')_suzumiPenaltyForEnemy+=aliveSnapA[j].isSkin?0.7:0.4;}
+  for(var j=0;j<aliveSnapB.length;j++){if(aliveSnapB[j].baseId==='suzumi')_suzumiPenaltyForAlly+=aliveSnapB[j].isSkin?0.7:0.4;}
 
   var coinsInjected=false;
   function injectCoin(ci,isEnemy){
