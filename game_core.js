@@ -4326,7 +4326,7 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   else if(id==='Shiroko_Terror'){
     // 시로코 테러 개전: 적 가장 체력 높은 1인 + 자신을 제외한 모든 학생 쓰러뜨림
-    // 1. 적에서 최고 체력 1인 선정
+    // 사야 면역(abilityImmune / _sayaImmune) 카드는 처치 대상에서 제외
     var maxEnemyHp=-1;
     for(var _sti=0;_sti<otherSide.length;_sti++){
       if(otherSide[_sti].alive&&otherSide[_sti].hp>maxEnemyHp) maxEnemyHp=otherSide[_sti].hp;
@@ -4337,8 +4337,10 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
     var spared=topEnemies.length>0?topEnemies[Math.floor(Math.random()*topEnemies.length)]:null;
     // 발동 시점 유닛 스냅샷 (DR로 추가되는 유닛은 대상에서 제외)
-    var allyTargets=mySide.filter(function(m){return m.alive&&m!==u;});
-    var enemyTargets=otherSide.filter(function(m){return m.alive&&m!==spared;});
+    // 자기편: 일반 사야(abilityImmune)만 면역. 스킨 사야는 자기편 효과는 받음.
+    var allyTargets=mySide.filter(function(m){return m.alive&&m!==u&&!m.abilityImmune;});
+    // 적: 일반/스킨 사야 모두 면역 (적이 가하는 효과)
+    var enemyTargets=otherSide.filter(function(m){return m.alive&&m!==spared&&!m.abilityImmune&&!m._sayaImmune;});
     // 2. 아군 자신 제외 전체 처치 (먼저 — DR로 귀환할 학생들이 다시 죽지 않도록)
     for(var _sti=0;_sti<allyTargets.length;_sti++){
       allyTargets[_sti].hp=0;allyTargets[_sti].alive=false;allyTargets[_sti]._killedBy=u;
