@@ -3285,83 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T06:19:38",
-          "placement": 5,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "우이",
-              "baseId": "ui",
-              "atk": 10,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Ui.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "세나",
-              "baseId": "sena",
-              "atk": 10,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Sena.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 35,
-              "hp": 36,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노노미",
-              "baseId": "nonomi",
-              "atk": 12,
-              "hp": 12,
-              "tier": 4,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Nonomi.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T06:24:04",
           "placement": 8,
           "turn": 8,
@@ -4015,9 +3938,84 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T09:46:40",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카린(버니걸)",
+              "baseId": "karin",
+              "atk": 21,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Karin_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 18,
+              "hp": 26,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 18,
+              "hp": 26,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 10,
+              "hp": 14,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미모리",
+              "baseId": "mimori",
+              "atk": 4,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mimori.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 86,
+      "points": 88,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4108,7 +4106,7 @@
       ],
       "rank": {
         "tier": 3,
-        "stars": 1,
+        "stars": 0,
         "streak": 0,
         "legendPoints": 0
       }
