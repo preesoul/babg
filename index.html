@@ -528,6 +528,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <div id="title-screen" class="screen">
     <img src="img/UI/bluearchive2.png" class="title-logo" style="height:200px">
     <p class="sub" style="font-size:28px">Battle Grounds</p>
+    <div id="title-rank" style="margin-top:4px;margin-bottom:14px;min-height:38px;display:flex;justify-content:center;align-items:center;gap:10px"></div>
     <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
     <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">게임 시작</span></button>
     <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">이어하기</span></button>
@@ -1772,6 +1773,8 @@ document.getElementById('btn-restart').addEventListener('click',function(){
   document.getElementById('battle-overlay').classList.remove('active');
   var sf2=document.getElementById('schale-frame');sf2.style.backgroundImage="url('img/UI/wallpaper01.jpg')";sf2.style.backgroundSize='cover';sf2.style.backgroundPosition='center';
   fadeSwitch(document.getElementById('game-screen'),document.getElementById('title-screen'));
+  // 등급이 갱신되었을 수 있으니 리프레시
+  try{ if(window._babgLogin&&window._babgLogin.name) loadAndRenderTitleRank(window._babgLogin.name); }catch(e){}
 });
 
 // ========== 튜토리얼 시스템 ==========
@@ -2813,6 +2816,33 @@ function goToMainMenu(name){
   document.getElementById('welcome-msg').textContent='환영합니다, '+name+' 선생님!';
   document.getElementById('login-screen').classList.remove('active');
   document.getElementById('title-screen').classList.add('active');
+  loadAndRenderTitleRank(name);
+}
+function loadAndRenderTitleRank(name){
+  var el=document.getElementById('title-rank');
+  if(!el) return;
+  el.innerHTML='<span style="color:#94a3b8;font-size:12px">등급 불러오는 중...</span>';
+  fetchRecords(function(err,data,sha){
+    if(err||!data||!data.players||!data.players[name]){
+      el.innerHTML='<span style="color:#94a3b8;font-size:12px">9등급 ★0/3</span>';
+      return;
+    }
+    var pd=data.players[name];
+    var rank=pd.rank||estimateRankFromRecords(pd.records||[]);
+    var label=rankLabel(rank);
+    var color=rankColor(rank);
+    var streak=(rank.streak>=2)?'<span style="color:#fb923c;font-size:13px;font-weight:700">🔥'+rank.streak+'연승</span>':'';
+    // 별 시각화 (전설 제외)
+    var starsViz='';
+    if(rank.tier!==0){
+      var req=rank.tier>=6?3:5;
+      starsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
+      for(var s=0;s<req;s++) starsViz+= s<rank.stars?'★':'☆';
+      starsViz+='</span>';
+    }
+    var tierText = rank.tier===0 ? '전설 '+rank.legendPoints+'pt' : rank.tier+'등급';
+    el.innerHTML='<span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';color:'+color+';font-weight:800;font-size:16px;box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+tierText+(rank.tier===0?'':' '+starsViz)+'</span>'+streak;
+  });
 }
 document.getElementById('btn-login').addEventListener('click',function(){
   var name=document.getElementById('login-name').value.trim();
