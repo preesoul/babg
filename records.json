@@ -8041,8 +8041,99 @@
       "points": 0
     },
     "죠민철": {
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-25T12:05:07",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 24,
+              "hp": 24,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 20,
+              "hp": 22,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 19,
+              "hp": 20,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 22,
+              "hp": 20,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 45,
+              "hp": 45,
+              "tier": 7,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
+        }
+      ],
+      "points": 22,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -8054,12 +8145,12 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 5,
               "completed": false
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -8070,18 +8161,18 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ]
         },
@@ -8099,7 +8190,13 @@
       "recruitedTier7": [
         "hkyk_saikyo",
         "millennium_malkuth"
-      ]
+      ],
+      "rank": {
+        "tier": 9,
+        "stars": 1,
+        "streak": 1,
+        "legendPoints": 0
+      }
     }
   }
 }
