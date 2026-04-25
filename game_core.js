@@ -350,7 +350,7 @@ var ABILITY_DESCS = {
   yukari:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 유카리: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   mimori:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'수영복 미모리: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
   renge:    {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 렌게: 부활 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
-  shizuko:  {type:'개전',desc:'무작위 적 2인의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.',skinEffect:'수영복 시즈코: 적 전원 대상',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">적 전원</span>의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.'},
+  shizuko:  {type:'개전',desc:'버프 받은 적 1명의 추가된 공격력과 체력을\n완전히 삭제합니다. (버프 받은 적 우선)\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.',skinEffect:'수영복 시즈코: 적 2명 대상',skinEffectDesc:'개전: 버프 받은 적 <span style="color:#ffd700;font-weight:700">2명</span>의 추가된 공격력과 체력을\n완전히 삭제합니다. (버프 받은 적 우선)\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
   kikyou:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 2명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
@@ -3930,32 +3930,43 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 무작위 적 '+rioPicked.length+'명의 능력 삭제!'});
   }
   else if(id==='shizuko'){
-    // 무작위 적 N인(스킨: 전원)의 버프(기본 stat 초과분) 절반화
-    var shizTargets=[];
-    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive)shizTargets.push(otherSide[i]);}
-    if(!u.isSkin){
-      // 셔플 후 2명
-      for(var i=shizTargets.length-1;i>0;i--){
-        var j=Math.floor(Math.random()*(i+1));
-        var t=shizTargets[i];shizTargets[i]=shizTargets[j];shizTargets[j]=t;
-      }
-      shizTargets=shizTargets.slice(0, Math.min(2, shizTargets.length));
-    }
-    for(var i=0;i<shizTargets.length;i++){
-      var sztgt=shizTargets[i];
+    // 무작위 적 N인의 버프(기본 stat 초과분) 완전 삭제 (일반 1명, 스킨 2명)
+    // 버프 받은 적만 후보 — 안 받은 적은 절대 픽 X (불발 방지)
+    var shizCount = u.isSkin ? 2 : 1;
+    var shizCandidates=[];
+    for(var i=0;i<otherSide.length;i++){
+      if(!otherSide[i].alive) continue;
+      var sztgt=otherSide[i];
       var sztmpl=findAnyChar(sztgt.baseId);
       if(!sztmpl) continue;
       var sbAtk = sztgt.isSkin?(sztmpl.atk*2+1):sztmpl.atk;
       var sbHp  = sztgt.isSkin?(sztmpl.hp*2+1):sztmpl.hp;
-      var bonusAtk = Math.max(0, sztgt.atk - sbAtk);
-      var bonusHp  = Math.max(0, sztgt.hp - sbHp);
-      if(bonusAtk>0 || bonusHp>0){
-        var halfAtk = Math.floor(bonusAtk/2);
-        var halfHp = Math.floor(bonusHp/2);
-        sztgt.atk -= halfAtk;
-        sztgt.hp  -= halfHp;
-        if(sztgt.maxHp) sztgt.maxHp = Math.max(sztgt.hp, sztgt.maxHp - halfHp);
-        log.push({cls:'soc',text:'[개전] '+u.name+': '+sztgt.name+'의 버프 절반! (-'+halfAtk+'/-'+halfHp+')'});
+      // maxHp 기준으로 hp 버프 측정 (현재 hp는 데미지 받았을 수도)
+      var refHp = sztgt.maxHp || sztgt.hp;
+      if(sztgt.atk > sbAtk || refHp > sbHp){
+        shizCandidates.push({unit:sztgt, baseAtk:sbAtk, baseHp:sbHp});
+      }
+    }
+    if(shizCandidates.length===0){
+      log.push({cls:'soc',text:'[개전] '+u.name+': 버프 받은 적이 없습니다.'});
+    } else {
+      // 셔플 후 N명 픽
+      for(var i=shizCandidates.length-1;i>0;i--){
+        var j=Math.floor(Math.random()*(i+1));
+        var t=shizCandidates[i];shizCandidates[i]=shizCandidates[j];shizCandidates[j]=t;
+      }
+      var shizPicked=shizCandidates.slice(0, Math.min(shizCount, shizCandidates.length));
+      for(var i=0;i<shizPicked.length;i++){
+        var sc=shizPicked[i];
+        var lostAtk=Math.max(0, sc.unit.atk - sc.baseAtk);
+        var refHp2=sc.unit.maxHp || sc.unit.hp;
+        var lostHp=Math.max(0, refHp2 - sc.baseHp);
+        if(lostAtk>0) sc.unit.atk -= lostAtk;
+        if(lostHp>0){
+          sc.unit.hp = Math.max(0, sc.unit.hp - lostHp);
+          if(sc.unit.maxHp) sc.unit.maxHp -= lostHp;
+        }
+        log.push({cls:'soc',text:'[개전] '+u.name+': '+sc.unit.name+'의 버프 삭제! (-'+lostAtk+'/-'+lostHp+')'});
       }
     }
   }
