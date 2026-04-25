@@ -350,7 +350,7 @@ var ABILITY_DESCS = {
   yukari:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 유카리: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   mimori:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'수영복 미모리: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
   renge:    {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 렌게: 부활 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
-  shizuko:  {type:'개전',desc:'무작위 적 2인의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.',skinEffect:'수영복 시즈코: 적 전원 대상',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">적 전원</span>의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.'},
+  shizuko:  {type:'개전',desc:'무작위 적 2인의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.',skinEffect:'수영복 시즈코: 적 전원 대상',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">적 전원</span>의 버프(기본 능력치 초과분)로 추가된\n공격력과 체력을 절반으로 만듭니다.\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
   kikyou:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 2명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
@@ -4456,7 +4456,7 @@ function resolveStartOfCombat(a, b, log) {
       }
     }
     for(var i=0;i<side.length;i++){
-      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha') continue;
+      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha'||side[i].baseId==='shizuko') continue;
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
     }
@@ -4467,6 +4467,10 @@ function resolveStartOfCombat(a, b, log) {
     // 카야는 개전 중 가장 마지막에 발동
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='kaya') triggerSOC(side[i],side,other,log);
+    }
+    // 시즈코는 모든 개전이 끝난 후 마지막에 발동 (다른 SOC가 다시 적 버프할 수 없도록)
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&side[i].baseId==='shizuko') triggerSOC(side[i],side,other,log);
     }
   }
   if(aFirst){processSide(a,b);processSide(b,a);}
