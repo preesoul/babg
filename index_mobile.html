@@ -796,6 +796,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
     <div class="side-panel">
       <div class="top-bar">
         <span class="turn" id="ui-turn"><span class="turn-circle" id="ui-turn-num">1</span> 턴</span>
+        <span id="ui-next-opp-inline" style="display:none;font-size:11px;padding:3px 8px;margin-left:8px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:6px;color:#ffd700;white-space:nowrap;align-items:center;vertical-align:middle"></span>
         <span class="tier" id="ui-tier" style="display:none">스케쥴 Lv.1</span>
         <span class="hp" id="ui-hp" style="display:none">HP: 40</span>
       </div>
@@ -1142,29 +1143,22 @@ function renderAll() {
     var iconImg=iconUrl?'<img src="'+iconUrl+'" style="width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-right:3px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
     pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+iconImg+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
   }
-  // 다음 상대 정보 박스
+  // 다음 상대 (모바일: top-bar 인라인, 1턴 옆에 간소화 표시)
   var nextOppRef=null;
   if(nextOppId!=null){for(var _ni=0;_ni<G.players.length;_ni++) if(G.players[_ni].id===nextOppId){nextOppRef=G.players[_ni];break;}}
-  var matchInfoEl=document.getElementById('ui-next-opp');
-  var playersEl=document.getElementById('ui-players');
-  if(!matchInfoEl&&playersEl){
-    matchInfoEl=document.createElement('div');
-    matchInfoEl.id='ui-next-opp';
-    matchInfoEl.style.cssText='font-size:12px;padding:6px 8px;margin-bottom:5px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.25);border-radius:6px;cursor:pointer';
-    playersEl.parentNode.insertBefore(matchInfoEl,playersEl);
-  }
+  var matchInfoEl=document.getElementById('ui-next-opp-inline');
   if(matchInfoEl){
     if(isBye){
       matchInfoEl.innerHTML='<span style="color:#a78bfa">★ 부전승</span>';
-      matchInfoEl.style.display='block';
+      matchInfoEl.style.display='inline-flex';
       matchInfoEl.onclick=null;
     } else if(nextOppRef){
-      var oppMark=isGhostOpp?'<span style="color:#a78bfa">♢</span> ':'';
+      var oppMark=isGhostOpp?'<span style="color:#a78bfa">♢</span>':'';
       var oppIconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(nextOppRef.name,nextOppRef.isPlayer):'';
-      var oppIconImg=oppIconUrl?'<img src="'+oppIconUrl+'" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin:0 4px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
-      var hintHtml=_hidePreview?'':' <span style="color:#6a8a9e;font-size:10px;float:right">📋 탭</span>';
-      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음:</span>'+oppIconImg+oppMark+'<b>'+nextOppRef.name+'</b> <span style="color:#a78bfa">(스케쥴 '+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span>'+hintHtml;
-      matchInfoEl.style.display='block';
+      var oppIconImg=oppIconUrl?'<img src="'+oppIconUrl+'" style="width:18px;height:18px;border-radius:50%;vertical-align:middle;margin:0 3px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
+      // 간소: 다음:🟦호시노.1
+      matchInfoEl.innerHTML='다음:'+oppIconImg+oppMark+'<b>'+nextOppRef.name+'</b>.<span style="color:#a78bfa">'+nextOppRef.tier+'</span>';
+      matchInfoEl.style.display='inline-flex';
       matchInfoEl.style.cursor=_hidePreview?'default':'pointer';
       if(_hidePreview){
         matchInfoEl.onclick=null;
@@ -1175,6 +1169,9 @@ function renderAll() {
       matchInfoEl.style.display='none';
     }
   }
+  // 기존 ui-next-opp 박스가 만들어진 적 있으면 숨김
+  var oldBox=document.getElementById('ui-next-opp');
+  if(oldBox) oldBox.style.display='none';
   document.getElementById('ui-players').innerHTML=pHtml;
 
   var boardEl=document.getElementById('ui-board');
