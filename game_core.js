@@ -4887,7 +4887,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
         _enemy.hp-=_akDmg;
         akLog.push({cls:'hit',text:attacker.name+'가 '+_enemy.name+'에게 '+_akDmg+' 피해! (HP:'+Math.max(0,_enemy.hp)+')'});
         checkSurvive(_enemy,defArr,akLog,attacker);
-        resolveDeath(_enemy,defArr,atkArr,akLog,attacker);
+        // 아리스&케이 선빵 광역도 전투 데미지로 인정 (사츠키 빼앗기 발동)
+        resolveDeath(_enemy,defArr,atkArr,akLog,attacker,true);
       }
       for(var _akl=0;_akl<akLog.length;_akl++)log.push(akLog[_akl]);
       steps.push({atkSide:_akSide,atkIdx:_akAtkI,atkId:attacker.id,defSide:_akDefSide,defIdx:0,defId:(defArr[0]||{}).id,log:akLog,snap:snapshot()});
