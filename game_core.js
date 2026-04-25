@@ -6215,8 +6215,10 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   document.getElementById('battle-arena').style.display='block';
   document.getElementById('battle-log').style.display='block';
   document.getElementById('btn-skip').style.display='';
-  document.getElementById('enemy-label').textContent=opp.name;
-  document.getElementById('ally-label').textContent='선생님';
+  var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
+  var _myTier=(G.players[0]&&G.players[0].tier)||1;
+  document.getElementById('enemy-label').textContent=opp.name+' (스케쥴 '+(opp.tier||1)+')';
+  document.getElementById('ally-label').textContent=_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
   var activeResult=result;
