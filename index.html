@@ -790,7 +790,8 @@ document.addEventListener('contextmenu',function(e){e.preventDefault()});
 var _endMusic=null;
 function showGameOver() {
   deleteSave();
-  // 전적 기록 저장
+  // 전적 기록 저장 (등급 변동은 비동기로 _lastRankChange에 저장됨)
+  window._lastRankChange = null;
   try{submitGameRecord();}catch(e){}
   // 전투 중 잔여 SFX 정지
   for(var k in SFX_CACHE){try{SFX_CACHE[k].pause();SFX_CACHE[k].currentTime=0;}catch(e){}}
@@ -803,6 +804,37 @@ function showGameOver() {
   document.getElementById('go-title').textContent=isWin?'1등!':'게임 오버';
   document.getElementById('go-title').style.color=isWin?'#ffd700':'#ef4444';
   document.getElementById('go-placement').textContent=G.placement+'등 / 8명 (턴 '+G.turn+')';
+  // 등급 변동 폴링 (submitGameRecord 비동기 완료 대기)
+  _showRankChangePoll(0);
+}
+function _showRankChangePoll(tries){
+  if(tries>30) return; // 최대 ~30초
+  var rc = window._lastRankChange;
+  if(!rc){ setTimeout(function(){_showRankChangePoll(tries+1);},1000); return; }
+  var box = document.getElementById('go-rank-change');
+  if(!box){
+    box = document.createElement('div');
+    box.id='go-rank-change';
+    box.style.cssText='margin-top:14px;padding:10px 14px;background:rgba(0,0,0,0.35);border-radius:8px;border:1px solid #3a5a6e;font-size:14px;line-height:1.6;text-align:center';
+    var ph = document.getElementById('go-placement');
+    if(ph && ph.parentNode) ph.parentNode.insertBefore(box, ph.nextSibling);
+  }
+  var prev = rc.prev, cur = rc.rank, d = rc.delta;
+  var prevLabel = (prev.tier===0?'전설 '+prev.legendPoints+'pt':prev.tier+'등급 ★'+prev.stars+'/'+(prev.tier>=6?3:5));
+  var curLabel = rankLabel(cur);
+  var color = rankColor(cur);
+  var arrow = '';
+  if(d.promoted) arrow = '<span style="color:#fbbf24;font-weight:800;margin:0 8px">▲ 승급!</span>';
+  else if(d.demoted) arrow = '<span style="color:#ef4444;font-weight:800;margin:0 8px">▼ 강등</span>';
+  else arrow = '<span style="color:#94a3b8;margin:0 8px">→</span>';
+  var change = '';
+  if(d.starsGained>0) change = '<div style="color:#fbbf24;font-size:12px;margin-top:4px">+'+d.starsGained+'★'+(d.gain>=2?' ('+rc.rank.streak+'연승!)':'')+'</div>';
+  else if(d.starsLost>0) change = '<div style="color:#ef4444;font-size:12px;margin-top:4px">-'+d.starsLost+'★</div>';
+  else if(d.legendPointsGained>0) change = '<div style="color:#fbbf24;font-size:12px;margin-top:4px">전설 +'+d.legendPointsGained+'pt</div>';
+  else if(d.legendPointsLost>0) change = '<div style="color:#ef4444;font-size:12px;margin-top:4px">전설 -'+d.legendPointsLost+'pt</div>';
+  else change = '<div style="color:#94a3b8;font-size:12px;margin-top:4px">변동 없음</div>';
+  box.innerHTML = '<div style="color:#94a3b8;font-size:12px;margin-bottom:4px">등급</div>'+
+    '<span style="color:#94a3b8">'+prevLabel+'</span>'+arrow+'<span style="color:'+color+';font-weight:800">'+curLabel+'</span>'+change;
 }
 var _celebInterval=null;
 function startCelebration(){
@@ -896,6 +928,39 @@ function showAbilityPopup(baseId, e, isSkin) {
   document.getElementById('ability-popup-overlay').classList.add('active');
 }
 
+// ===== 다음 상대 보드 미리보기 =====
+function showOpponentPreview(oppId){
+  var ref=null;for(var i=0;i<G.players.length;i++) if(G.players[i].id===oppId){ref=G.players[i];break;}
+  if(!ref) return;
+  // 살아있으면 현재 board (영입 끝났으니 전투용 보드와 동일), 죽었으면 ghostBoard
+  var board = ref.dead ? (ref._ghostBoard||[]) : (ref.board||[]);
+  var isGhost = !!(G.matchups&&G.matchups[0]&&G.matchups[0].isGhost);
+  var modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  var title=isGhost?(ref.name+' (♢ 고스트 - 직전 라운드 보드)'):(ref.name+' (Lv.'+ref.tier+', HP '+ref.hp+') 현재 보드');
+  var inner='<div style="background:#1a2538;border:2px solid #3a5a6e;border-radius:10px;padding:24px;max-width:90vw;max-height:90vh;overflow:auto;box-shadow:0 8px 32px rgba(0,0,0,0.5)">';
+  inner+='<h3 style="color:#ffd700;margin:0 0 16px;font-size:18px">⚔ '+title+'</h3>';
+  if(board.length===0){
+    inner+='<p style="color:#9aa;text-align:center;padding:30px 20px">보드가 비어있습니다.</p>';
+  } else {
+    inner+='<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:760px">';
+    for(var i=0;i<board.length;i++){
+      var u=board[i];if(!u)continue;
+      var tierCls='tier'+Math.min(u.tier||1,7);
+      var skinCls=u.isSkin?' skin':'';
+      var fakeUnit={id:(u.baseId||'unk')+'_prev',baseId:u.baseId,name:u.name,school:u.school||'',tier:u.tier||1,atk:u.atk||0,hp:u.hp||0,kw:(u.kw||[]).slice(),isSkin:u.isSkin||false,img:u.img||'',coinOff:false};
+      inner+='<div style="transform:scale(0.85);transform-origin:top center;margin:0 -12px -20px 0;pointer-events:none">'+cardHtml(fakeUnit,i,true)+'</div>';
+    }
+    inner+='</div>';
+  }
+  inner+='<button onclick="this.parentNode.parentNode.remove()" style="margin-top:18px;padding:8px 24px;background:#3a5a6e;color:white;border:none;border-radius:6px;cursor:pointer;display:block;margin-left:auto;margin-right:auto;font-size:14px">닫기</button>';
+  inner+='</div>';
+  modal.innerHTML=inner;
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.remove();});
+  document.body.appendChild(modal);
+}
+window.showOpponentPreview=showOpponentPreview;
+
 function renderAll() {
   var p=G.players[0];
   // 보드 정리: undefined/null 제거
@@ -921,12 +986,48 @@ function renderAll() {
   // upgradeCost는 renderShop에서 버튼 innerHTML로 처리
 
   var pHtml='';
+  var nextOppId=(G.matchups&&G.matchups[0])?G.matchups[0].opponentId:null;
+  var isGhostOpp=(G.matchups&&G.matchups[0])?!!G.matchups[0].isGhost:false;
+  var isBye=(G.matchups&&G.matchups[0])?!!G.matchups[0].bye:false;
   for(var i=0;i<G.players.length;i++){
     var pl=G.players[i];
-    var cls='player-chip'+(pl.isPlayer?' you':'')+(pl.dead?' dead':'');
+    var isNext=(pl.id===nextOppId);
+    var cls='player-chip'+(pl.isPlayer?' you':'')+(pl.dead?' dead':'')+(isNext?' next-opp':'');
     var chipHpPct=Math.max(0,Math.min(100,pl.hp/40*100));
     var chipBarColor=pl.hp<=15?'#ef4444':'rgba(255,255,255,0.7)';
-    pHtml+='<div class="'+cls+'">'+pl.name+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+    var nextStyle=isNext?'border:2px solid #ffd700;box-shadow:0 0 8px rgba(255,215,0,0.5);cursor:pointer':'';
+    var ghostMark=(isNext&&isGhostOpp)?' <span style="color:#a78bfa" title="고스트 매치">♢</span>':'';
+    var nextBadge=isNext?'<span style="color:#ffd700;font-size:11px;margin-right:3px" title="다음 상대">⚔</span>':'';
+    var clickAttr=isNext?' onclick="showOpponentPreview('+pl.id+')" title="클릭하여 보드 보기"':'';
+    pHtml+='<div class="'+cls+'" style="'+nextStyle+'"'+clickAttr+'>'+nextBadge+pl.name+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span><div class="chip-hp-bar"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+  }
+  // 다음 상대 정보 박스 (영입 페이즈 동안 표시)
+  var nextOppRef=null;
+  if(nextOppId!=null){for(var _ni=0;_ni<G.players.length;_ni++) if(G.players[_ni].id===nextOppId){nextOppRef=G.players[_ni];break;}}
+  var matchInfoEl=document.getElementById('ui-next-opp');
+  var playersEl=document.getElementById('ui-players');
+  if(!matchInfoEl&&playersEl){
+    matchInfoEl=document.createElement('div');
+    matchInfoEl.id='ui-next-opp';
+    matchInfoEl.style.cssText='font-size:13px;padding:6px 10px;margin-bottom:6px;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.25);border-radius:6px;cursor:pointer;transition:background 0.15s';
+    matchInfoEl.addEventListener('mouseenter',function(){this.style.background='rgba(255,215,0,0.12)';});
+    matchInfoEl.addEventListener('mouseleave',function(){this.style.background='rgba(255,215,0,0.05)';});
+    playersEl.parentNode.insertBefore(matchInfoEl,playersEl);
+  }
+  if(matchInfoEl){
+    if(isBye){
+      matchInfoEl.innerHTML='<span style="color:#a78bfa">★ 부전승</span> — 이번 라운드는 휴식';
+      matchInfoEl.style.display='block';
+      matchInfoEl.onclick=null;
+    } else if(nextOppRef){
+      var oppMark=isGhostOpp?'<span style="color:#a78bfa" title="고스트(직전 사망자) 매치">♢</span> ':'';
+      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음 상대:</span> '+oppMark+'<b>'+nextOppRef.name+'</b> <span style="color:#a78bfa">(Lv.'+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span>'+
+        ' <span style="color:#6a8a9e;font-size:11px;float:right">📋 클릭하여 보드 보기</span>';
+      matchInfoEl.style.display='block';
+      matchInfoEl.onclick=(function(oid){return function(){showOpponentPreview(oid);};})(nextOppRef.id);
+    } else {
+      matchInfoEl.style.display='none';
+    }
   }
   document.getElementById('ui-players').innerHTML=pHtml;
 

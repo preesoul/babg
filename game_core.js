@@ -2752,6 +2752,81 @@ function aiSortBoard(board){
   });
 }
 
+// ===== AI Forecast (가상 전투 시뮬 기반 의사결정) =====
+function _aiCopyBoard(board){
+  if(!board) return [];
+  return board.map(function(u){
+    var c={};for(var k in u){
+      if(k==='kw') c.kw=(u.kw||[]).slice();
+      else c[k]=u[k];
+    }
+    return c;
+  });
+}
+function _aiGetOppBoard(p){
+  if(!G.matchups||!G.matchups[p.id]) return null;
+  var info=G.matchups[p.id];
+  if(info.opponentId==null) return null;
+  var oppRef=null;
+  for(var i=0;i<G.players.length;i++) if(G.players[i].id===info.opponentId){oppRef=G.players[i];break;}
+  if(!oppRef) return null;
+  if(info.isGhost) return oppRef._ghostBoard||null;
+  return oppRef.board||null;
+}
+// 가상 전투 N판 시뮬레이션해서 승률(0~1) 반환
+function aiForecast(myBoard,oppBoard,n){
+  if(!oppBoard||oppBoard.length===0) return (myBoard&&myBoard.length>0)?0.7:0.5;
+  if(!myBoard||myBoard.length===0) return 0.0;
+  n=n||5;
+  var wins=0,draws=0;
+  var simCtx={
+    permanentAbilityBan:false,battleSchoolBuff:{},
+    kuzunohaActive:false,millenniumTokenSummons:0,
+    arisuDeathCount:0,keiseisenCounters:{},
+    players:G.players
+  };
+  for(var i=0;i<n;i++){
+    var aBoard=_aiCopyBoard(myBoard);
+    var bBoard=_aiCopyBoard(oppBoard);
+    var startWithA=Math.random()<0.5;
+    try{
+      var res=runBattle(aBoard,bBoard,startWithA,{simCtx:simCtx,skipSOC:false,panchanDeathsA:0,panchanDeathsB:0});
+      if(res&&res.result==='win') wins++;
+      else if(res&&res.result==='draw') draws++;
+    }catch(e){draws++;}
+  }
+  return (wins+draws*0.4)/n;
+}
+// 배치 후보 K개 시뮬해서 승률 최선 채택
+function aiOptimizeOrder(p,oppBoard){
+  if(!oppBoard||oppBoard.length===0||p.board.length<=1){
+    aiSortBoard(p.board);
+    return;
+  }
+  // 후보 0: 휴리스틱
+  var heuristic=p.board.slice();
+  aiSortBoard(heuristic);
+  var bestOrder=heuristic.slice();
+  var bestScore=aiForecast(heuristic,oppBoard,5);
+  // 후보 K개: 휴리스틱 기반 인접 swap 변형
+  var attempts=Math.min(5,p.board.length);
+  for(var k=0;k<attempts;k++){
+    var candidate=heuristic.slice();
+    var swapCount=(Math.random()<0.55)?1:2;
+    for(var s=0;s<swapCount;s++){
+      var idx=Math.floor(Math.random()*(candidate.length-1));
+      var t=candidate[idx];candidate[idx]=candidate[idx+1];candidate[idx+1]=t;
+    }
+    var sc=aiForecast(candidate,oppBoard,4);
+    if(sc>bestScore){bestScore=sc;bestOrder=candidate.slice();}
+  }
+  // 후보 1개 추가: 리버스 (광역 상대 카운터)
+  var rev=heuristic.slice().reverse();
+  var revSc=aiForecast(rev,oppBoard,4);
+  if(revSc>bestScore){bestScore=revSc;bestOrder=rev;}
+  p.board=bestOrder;
+}
+
 function aiGetStrategy(p) {
   var strat={dominantSchool:null,schoolBonus:3,targetUnits:[],avoidOtherSchools:false,giveUp:false};
   if(p.hp<=12){strat.giveUp=true;return strat;}
@@ -2819,23 +2894,112 @@ function aiGetStrategy(p) {
   return strat;
 }
 
+// ===== 매치업 사전 결정 (영입 페이즈 시작 시 호출) =====
+// 사망 직전 보드를 ghost 매치용으로 보존
+function _snapshotForGhost(p){
+  if(!p||!p.board) return [];
+  return p.board.map(function(u){
+    var c={};for(var k in u) c[k]=u[k];
+    if(u.kw) c.kw=u.kw.slice();
+    return c;
+  });
+}
+function pairMatchups(){
+  var alive=[];
+  for(var i=0;i<G.players.length;i++) if(!G.players[i].dead) alive.push(G.players[i]);
+  G.matchups={};
+  if(alive.length<2) return;
+  var lastM=G.lastMatchups||{};
+  var matchups={};
+  // player 0(=선생님)는 부전승 받지 않도록 우선 매칭
+  var pool=alive.filter(function(pp){return pp.id!==0;});
+  var hasPlayer0=alive.some(function(pp){return pp.id===0;});
+  // 셔플
+  for(var i=pool.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=pool[i];pool[i]=pool[j];pool[j]=t;
+  }
+  if(hasPlayer0&&pool.length>0){
+    var pickIdx=0;
+    for(var k=0;k<pool.length;k++){if(lastM[0]!==pool[k].id){pickIdx=k;break;}}
+    var opp0=pool.splice(pickIdx,1)[0];
+    matchups[0]={opponentId:opp0.id,isGhost:false};
+    matchups[opp0.id]={opponentId:0,isGhost:false};
+  }
+  // 홀수면 고스트(직전 사망자) 또는 부전승
+  if(pool.length%2===1){
+    var ghostCand=null,bestT=-1;
+    for(var i=0;i<G.players.length;i++){
+      var pp=G.players[i];
+      if(pp.dead && pp._ghostBoard && pp._ghostBoard.length>0 && (pp._deathTurn||0)>bestT){
+        bestT=pp._deathTurn||0;ghostCand=pp;
+      }
+    }
+    if(ghostCand){
+      var pickIdx=0;
+      for(var k=0;k<pool.length;k++){if(lastM[pool[k].id]!==ghostCand.id){pickIdx=k;break;}}
+      var matcher=pool.splice(pickIdx,1)[0];
+      matchups[matcher.id]={opponentId:ghostCand.id,isGhost:true};
+    } else {
+      var bye=pool.pop();
+      if(bye) matchups[bye.id]={opponentId:null,bye:true};
+    }
+  }
+  // 나머지 짝짓기 — 직전 매치 회피
+  while(pool.length>=2){
+    var a=pool.shift();
+    var pickIdx=0;
+    for(var k=0;k<pool.length;k++){if(lastM[a.id]!==pool[k].id){pickIdx=k;break;}}
+    var b=pool.splice(pickIdx,1)[0];
+    matchups[a.id]={opponentId:b.id,isGhost:false};
+    matchups[b.id]={opponentId:a.id,isGhost:false};
+  }
+  G.matchups=matchups;
+  G.lastMatchups={};
+  for(var k in matchups) if(matchups[k].opponentId!=null) G.lastMatchups[k]=matchups[k].opponentId;
+}
+
 function aiTurns() {
+  // 매치업 사전 결정 (이번 영입 페이즈 1회만)
+  if(G._matchupsTurn!==G.turn){pairMatchups();G._matchupsTurn=G.turn;}
   for(var i=1;i<G.players.length;i++){
     var p=G.players[i];if(p.dead)continue;
+    // 매치업 상대 보드 (forecast용)
+    var _oppBoard=_aiGetOppBoard(p);
     // Phase 1: 레벨업 판단 (스코어링)
     if(aiShouldUpgrade(p)){p.stone-=p.upgradeCost;p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;}
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
-    // AI 마법카드 사용: 가성비 높은 순으로 최대 2회
+    // AI 마법카드 사용: 매치업 있으면 forecast 기반, 없으면 가성비 휴리스틱
     if(p.board.length>0){
       var aiSpellCasts=0;
       while(aiSpellCasts<2){
         var aiSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&s.cost<=p.stone;});
         if(aiSpells.length===0) break;
-        aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
-        AI_SPELL_EFFECTS[aiSpells[0].id](p);
-        p.stone-=aiSpells[0].cost;
+        var pickedSpell=null;
+        if(_oppBoard&&_oppBoard.length>0){
+          // Forecast 기반: 사용 전후 승률 비교, 비용 페널티 적용
+          var baseScore=aiForecast(p.board,_oppBoard,4);
+          var bestImp=0.005; // 최소 개선치
+          for(var sk=0;sk<aiSpells.length;sk++){
+            var spl=aiSpells[sk];
+            var testBoard=_aiCopyBoard(p.board);
+            var testP={board:testBoard,stone:p.stone};
+            try{AI_SPELL_EFFECTS[spl.id](testP);}catch(e){continue;}
+            var sc=aiForecast(testP.board,_oppBoard,3);
+            // 비용 페널티 (cost당 -0.012, 다른 곳에 쓸 가치 고려)
+            var imp=(sc-baseScore)-spl.cost*0.012;
+            if(imp>bestImp){bestImp=imp;pickedSpell=spl;}
+          }
+        } else {
+          // 폴백: 가성비
+          aiSpells.sort(function(a,b){return (b.tier/b.cost)-(a.tier/a.cost);});
+          pickedSpell=aiSpells[0];
+        }
+        if(!pickedSpell) break;
+        AI_SPELL_EFFECTS[pickedSpell.id](p);
+        p.stone-=pickedSpell.cost;
         aiSpellCasts++;
       }
     }
@@ -2975,7 +3139,13 @@ function aiTurns() {
     // Phase 6: 잔여 골드 소비 (남은 골드로 주문)
     aiSpendRemainder(p);
     p.board=p.board.filter(function(u){return !!u;});
-    aiSortBoard(p.board);
+    // Forecast 기반 배치 최적화 (매치업 보드 있을 때)
+    var _oppB2=_aiGetOppBoard(p);
+    if(_oppB2&&_oppB2.length>0&&p.board.length>1){
+      aiOptimizeOrder(p,_oppB2);
+    } else {
+      aiSortBoard(p.board);
+    }
 
     // AI 7성 히든카드 체크 (정당한 조건 + 확률)
     aiCheckHidden(p);
@@ -5147,7 +5317,25 @@ function startBattle() {
   }
   var alive=[];for(var i=1;i<G.players.length;i++)if(!G.players[i].dead)alive.push(G.players[i]);
   if(alive.length===0)return;
-  var opp=alive[Math.floor(Math.random()*alive.length)];
+  // 사전 결정된 매치업 사용 (없으면 랜덤 폴백)
+  var opp=null;
+  var matchInfo=G.matchups&&G.matchups[0];
+  if(matchInfo&&matchInfo.opponentId!=null){
+    var oppRef=null;
+    for(var _mi=0;_mi<G.players.length;_mi++) if(G.players[_mi].id===matchInfo.opponentId){oppRef=G.players[_mi];break;}
+    if(oppRef){
+      if(matchInfo.isGhost){
+        // 고스트(직전 사망자) — 별도 임시 객체로 본체 보호
+        var gb=oppRef._ghostBoard||[];
+        opp={id:oppRef.id,name:oppRef.name+' (♢)',hp:999,tier:oppRef.tier,
+             board:gb.map(function(u){var c={};for(var k in u)c[k]=u[k];if(u.kw)c.kw=u.kw.slice();return c;}),
+             dead:false,_isGhost:true,panchanDeaths:oppRef.panchanDeaths||0,personality:oppRef.personality};
+      } else {
+        opp=oppRef;
+      }
+    }
+  }
+  if(!opp) opp=alive[Math.floor(Math.random()*alive.length)];
   _playBattleHiddenSfx(p,opp);
   // 적 7성/히든 카드 마주치면 자동 해금 (학생명부 노출용)
   if(opp&&opp.board){
@@ -5239,11 +5427,11 @@ function startBattle() {
           dmg+=p.tier;if(dmg>dmgCap)dmg=dmgCap;opp.hp-=dmg;
           chosen.damageText='승리! '+opp.name+'에게 '+dmg+' 피해';
         }
-        if(opp.hp<=0){opp.dead=true;G.aliveCount--;for(var k=0;k<opp.board.length;k++)returnToPool(opp.board[k].baseId,opp.board[k].isSkin?3:1);opp.board=[];chosen._eliminated=true;}
+        if(opp.hp<=0&&!opp._isGhost){opp._ghostBoard=_snapshotForGhost(opp);opp._deathTurn=G.turn;opp.dead=true;G.aliveCount--;for(var k=0;k<opp.board.length;k++)returnToPool(opp.board[k].baseId,opp.board[k].isSkin?3:1);opp.board=[];chosen._eliminated=true;}
       } else {
         chosen.damageText='무승부!';
       }
-      if(p.hp<=0){p.dead=true;G.placement=G.aliveCount;G.aliveCount--;chosen._eliminated=true;}
+      if(p.hp<=0){p._ghostBoard=_snapshotForGhost(p);p._deathTurn=G.turn;p.dead=true;G.placement=G.aliveCount;G.aliveCount--;chosen._eliminated=true;}
       var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia','gehenna_prefect'];
       if(chosen.steps.length>0){
         var finalSnap=chosen.steps[chosen.steps.length-1].snap;
@@ -5385,21 +5573,54 @@ function restoreBoardFromSnapshot(player, snapshot) {
 }
 
 function aiAutoBattles() {
-  var alive=[];for(var i=1;i<G.players.length;i++)if(!G.players[i].dead)alive.push(G.players[i]);
-  var shuffled=alive.slice().sort(function(){return Math.random()-0.5;});
-  for(var i=0;i+1<shuffled.length;i+=2){
-    var a2=shuffled[i],b2=shuffled[i+1];
+  // 매치업 사전 결정 결과 활용 (player 0 매치는 startBattle에서 처리됨)
+  var pairs=[];
+  var ghostMatches=[]; // {a, ghostBoard, ghostTier}
+  var processed={};processed[0]=true;
+  if(G.matchups){
+    var p0Opp=(G.matchups[0]&&G.matchups[0].opponentId);
+    if(p0Opp!=null) processed[p0Opp]=true;
+    for(var pid in G.matchups){
+      var ipid=parseInt(pid,10);
+      if(processed[ipid]) continue;
+      var info=G.matchups[ipid];
+      if(!info||info.bye||info.opponentId==null){processed[ipid]=true;continue;}
+      var a2=null,b2=null;
+      for(var i=0;i<G.players.length;i++){
+        if(G.players[i].id===ipid)a2=G.players[i];
+        if(G.players[i].id===info.opponentId)b2=G.players[i];
+      }
+      if(!a2){processed[ipid]=true;continue;}
+      processed[ipid]=true;
+      if(info.isGhost){
+        if(!b2||!b2._ghostBoard){continue;}
+        ghostMatches.push({a:a2,ghostBoard:b2._ghostBoard,ghostTier:b2.tier});
+      } else {
+        if(!b2||processed[b2.id])continue;
+        processed[b2.id]=true;
+        pairs.push([a2,b2]);
+      }
+    }
+  }
+  // 폴백: matchups 없으면 기존 셔플 로직
+  if(pairs.length===0&&ghostMatches.length===0&&(!G.matchups||Object.keys(G.matchups).length===0)){
+    var alive=[];for(var i=1;i<G.players.length;i++)if(!G.players[i].dead)alive.push(G.players[i]);
+    var shuffled=alive.slice().sort(function(){return Math.random()-0.5;});
+    for(var i=0;i+1<shuffled.length;i+=2)pairs.push([shuffled[i],shuffled[i+1]]);
+  }
+  function _aiCap(){var c=9999;if(G.turn<=5)c=10;else if(G.aliveCount>4)c=15;return c;}
+  // 일반 페어
+  for(var pi=0;pi<pairs.length;pi++){
+    var a2=pairs[pi][0],b2=pairs[pi][1];
     var strA=0,strB=0;
     for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
     for(var j=0;j<b2.board.length;j++)strB+=b2.board[j].atk+b2.board[j].hp;
     var total=strA+strB+1;
-    var aiCap=9999;if(G.turn<=5)aiCap=10;else if(G.aliveCount>4)aiCap=15;
-    // AI 팬짱 카운터 추정: 주리 보유 시 전투당 팬짱 사망 추정 (스킨=2, 일반=1)
+    var aiCap=_aiCap();
     for(var j=0;j<a2.board.length;j++){if(a2.board[j].baseId==='juri'){a2.panchanDeaths=(a2.panchanDeaths||0)+(a2.board[j].isSkin?2:1);break;}}
     for(var j=0;j<b2.board.length;j++){if(b2.board[j].baseId==='juri'){b2.panchanDeaths=(b2.panchanDeaths||0)+(b2.board[j].isSkin?2:1);break;}}
-    if(Math.random()<strA/total){var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0){b2.dead=true;G.aliveCount--;for(var k=0;k<b2.board.length;k++)returnToPool(b2.board[k].baseId,b2.board[k].isSkin?3:1);b2.board=[];}}
-    else{var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0){a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}}
-    // AI 전투 후 영구 소멸 카드 제거 + 열차포 생존 카운트 (50% 확률로 파괴)
+    if(Math.random()<strA/total){var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0){b2._ghostBoard=_snapshotForGhost(b2);b2._deathTurn=G.turn;b2.dead=true;G.aliveCount--;for(var k=0;k<b2.board.length;k++)returnToPool(b2.board[k].baseId,b2.board[k].isSkin?3:1);b2.board=[];}}
+    else{var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0){a2._ghostBoard=_snapshotForGhost(a2);a2._deathTurn=G.turn;a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}}
     [a2,b2].forEach(function(ai){
       if(ai.dead)return;
       ai.board=ai.board.filter(function(u){
@@ -5407,6 +5628,29 @@ function aiAutoBattles() {
         return true;
       });
     });
+  }
+  // 고스트 매치: 살아있는 a만 데미지 받을 수 있음
+  for(var gi=0;gi<ghostMatches.length;gi++){
+    var gm=ghostMatches[gi];var a2=gm.a;
+    if(a2.dead)continue;
+    var strA=0,strB=0;
+    for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
+    for(var j=0;j<gm.ghostBoard.length;j++)strB+=(gm.ghostBoard[j].atk||0)+(gm.ghostBoard[j].hp||0);
+    var total=strA+strB+1;var aiCap=_aiCap();
+    for(var j=0;j<a2.board.length;j++){if(a2.board[j].baseId==='juri'){a2.panchanDeaths=(a2.panchanDeaths||0)+(a2.board[j].isSkin?2:1);break;}}
+    if(Math.random()<strA/total){
+      // a2 승: 고스트는 영향 X
+    } else {
+      var dmg=gm.ghostTier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;
+      a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;
+      if(a2.hp<=0){a2._ghostBoard=_snapshotForGhost(a2);a2._deathTurn=G.turn;a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}
+    }
+    if(!a2.dead){
+      a2.board=a2.board.filter(function(u){
+        if(u.baseId==='gehenna_traingun'&&Math.random()<0.5){returnToPool(u.baseId,u.isSkin?3:1);return false;}
+        return true;
+      });
+    }
   }
 }
 
@@ -6357,6 +6601,7 @@ function saveGame(){
       bunnyTossBonus:G.bunnyTossBonus||0,
       nonomiStoneSinceJoined:G.nonomiStoneSinceJoined||0,
       _shirokoTerrorAbsorbed:G._shirokoTerrorAbsorbed||[],
+      matchups:G.matchups||{},lastMatchups:G.lastMatchups||{},_matchupsTurn:G._matchupsTurn||0,
       savedAt:Date.now()
     };
     localStorage.setItem(SAVE_KEY,JSON.stringify(saveData));
@@ -6417,7 +6662,8 @@ function restoreGame(save){
     usedOnceSpells:save.usedOnceSpells||{},
     bunnyTossBonus:save.bunnyTossBonus||0,
     nonomiStoneSinceJoined:save.nonomiStoneSinceJoined||0,
-    _shirokoTerrorAbsorbed:save._shirokoTerrorAbsorbed||[]};
+    _shirokoTerrorAbsorbed:save._shirokoTerrorAbsorbed||[],
+    matchups:save.matchups||{},lastMatchups:save.lastMatchups||{},_matchupsTurn:save._matchupsTurn||0};
   rollShop();
 }
 
@@ -6710,6 +6956,123 @@ function saveRecords(data,sha,cb){
   }).catch(function(e){if(cb)cb(e);});
 }
 
+// ===== 티어/등급 시스템 (하스스톤 전장 스타일) =====
+// rank = {tier:9~1 또는 0(전설), stars:현재 별, streak:연승, legendPoints:전설 점수}
+// 9~6등급: 3별마다 승급, 5~1등급: 5별마다 승급
+// 1등=승리, 1연승=+1, 2연승=+2, 3연승+=+3
+// 5등급 이하(전설 포함)에서 비1등 = -1별 (또는 전설 -1점)
+
+function rankStarsRequired(tier){
+  if(tier===0) return 999; // 전설은 승급 없음
+  if(tier>=6) return 3;
+  return 5; // 5,4,3,2,1
+}
+function rankCanDemote(tier){
+  // 5등급 이하(숫자 작은 쪽, 전설 포함)에서만 강등
+  return tier===0 || tier<=5;
+}
+function defaultRank(){
+  return {tier:9, stars:0, streak:0, legendPoints:0};
+}
+function applyRankChange(rank, placement){
+  if(!rank) rank = defaultRank();
+  if(typeof rank.tier!=='number') rank.tier=9;
+  if(typeof rank.stars!=='number') rank.stars=0;
+  if(typeof rank.streak!=='number') rank.streak=0;
+  if(typeof rank.legendPoints!=='number') rank.legendPoints=0;
+  var prev={tier:rank.tier, stars:rank.stars, streak:rank.streak, legendPoints:rank.legendPoints};
+  var isWin = (placement === 1);
+  var delta = {promoted:false, demoted:false, starsGained:0, starsLost:0, legendPointsGained:0, legendPointsLost:0, gain:0};
+
+  if(isWin){
+    var newStreak = (rank.streak||0) + 1;
+    var gain;
+    if(rank.tier===0) gain = 1; // 전설은 연승 보너스 없음
+    else if(newStreak===1) gain = 1;
+    else if(newStreak===2) gain = 2;
+    else gain = 3;
+    rank.streak = newStreak;
+    delta.gain = gain;
+
+    if(rank.tier===0){
+      rank.legendPoints = (rank.legendPoints||0) + gain;
+      delta.legendPointsGained = gain;
+    } else {
+      rank.stars += gain;
+      delta.starsGained = gain;
+      // 승급 처리 (한 번에 여러 단계 가능)
+      while(rank.tier>0 && rank.stars >= rankStarsRequired(rank.tier)){
+        rank.stars -= rankStarsRequired(rank.tier);
+        rank.tier -= 1;
+        delta.promoted = true;
+        if(rank.tier===0){
+          // 전설 진입
+          rank.stars = 0;
+          break;
+        }
+      }
+    }
+  } else {
+    rank.streak = 0;
+    if(rankCanDemote(rank.tier)){
+      if(rank.tier===0){
+        // 전설: -1점, 0 미만이면 1등급으로 강등 (별 starsRequired-1 = 4/5)
+        rank.legendPoints = (rank.legendPoints||0) - 1;
+        delta.legendPointsLost = 1;
+        if(rank.legendPoints < 0){
+          rank.legendPoints = 0;
+          rank.tier = 1;
+          rank.stars = Math.max(0, rankStarsRequired(1)-1); // 4/5
+          delta.demoted = true;
+        }
+      } else {
+        rank.stars -= 1;
+        delta.starsLost = 1;
+        if(rank.stars < 0){
+          // 강등 (이전 티어로)
+          if(rank.tier < 9){
+            rank.tier += 1;
+            rank.stars = Math.max(0, rankStarsRequired(rank.tier)-1);
+            delta.demoted = true;
+          } else {
+            rank.stars = 0; // 9등급 미만 강등 없음 (안전장치)
+          }
+        }
+      }
+    }
+  }
+
+  return {rank:rank, prev:prev, delta:delta, placement:placement};
+}
+function rankLabel(rank){
+  if(!rank) return '9등급';
+  if(rank.tier===0) return '전설 '+(rank.legendPoints||0)+'pt';
+  return rank.tier+'등급 ★'+rank.stars+'/'+rankStarsRequired(rank.tier);
+}
+function rankColor(rank){
+  if(!rank) return '#94a3b8';
+  if(rank.tier===0) return '#ffd700';
+  if(rank.tier===1) return '#a78bfa';
+  if(rank.tier<=3) return '#60a5fa';
+  if(rank.tier<=5) return '#5eead4';
+  return '#94a3b8';
+}
+function estimateRankFromRecords(records){
+  var rank = defaultRank();
+  if(!records || !records.length) return rank;
+  // 기록은 chronological 순서 (records.push) — 날짜 정렬로 안전 보장
+  var sorted = records.slice().sort(function(a,b){
+    var ad=a.date||'', bd=b.date||'';
+    if(ad<bd) return -1; if(ad>bd) return 1; return 0;
+  });
+  for(var i=0;i<sorted.length;i++){
+    var r = sorted[i];
+    if(!r.placement) continue;
+    applyRankChange(rank, r.placement);
+  }
+  return rank;
+}
+
 function submitGameRecord(){
   var login=window._babgLogin;
   if(!login||!login.name)return;
@@ -6726,6 +7089,8 @@ function submitGameRecord(){
   };
   var tracker = window._questTracker || {recruits:{'트리니티':0,'게헨나':0,'백귀야행':0,'밀레니엄':0},kills:0,discovers:0,skins:0,hiddenCompleted:false,hiddenSurvived:false};
   var placement = G.placement;
+  // 등급 변동 결과는 _lastRankChange에 저장 (showGameOver에서 폴링)
+  window._lastRankChange = null;
   var _retried=false;
   function _doSubmit(){
     fetchRecords(function(err,data,sha){
@@ -6735,15 +7100,23 @@ function submitGameRecord(){
       if(!data.players[name]){
         data.players[name]={records:[],points:0,questState:null};
       }
+      // 등급 초기화/추정 (rank 없으면 기존 기록으로 추정)
+      if(!data.players[name].rank){
+        data.players[name].rank = estimateRankFromRecords(data.players[name].records||[]);
+      }
       data.players[name].records.push(record);
       // 최근 10전만 유지
       if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
+      // 등급 변동 적용
+      var changeResult = applyRankChange(data.players[name].rank, placement);
+      data.players[name].rank = changeResult.rank;
+      window._lastRankChange = changeResult;
       // 퀘스트 진행도 업데이트
       data.players[name] = initQuestState(data.players[name]);
       data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
       saveRecords(data,sha,function(e){
         if(e){console.log('기록 저장 실패:',e);if(!_retried){_retried=true;setTimeout(_doSubmit,2000);}}
-        else console.log('기록 저장 완료 (퀘스트 포함)');
+        else console.log('기록 저장 완료 (퀘스트+등급 포함)');
       });
     });
   }
@@ -6798,20 +7171,32 @@ function renderRecords(){
       // 4등 이상을 '승'으로 집계, 1등 횟수 별도 표기
       var wins=recs.filter(function(r){return r.placement&&r.placement<=4;}).length;
       var firsts=recs.filter(function(r){return r.placement===1;}).length;
+      // 등급 (없으면 추정)
+      var myRank = p.rank || estimateRankFromRecords(recs);
+      var myRankColor = rankColor(myRank);
+      var myRankLabel = rankLabel(myRank);
+      var streakText = (myRank.streak>=2)?(' <span style="color:#fb923c;font-size:11px">🔥'+myRank.streak+'연승</span>'):'';
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
       html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
+      html+='<div style="margin-bottom:8px;display:inline-block;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'"><span style="color:'+myRankColor+';font-weight:800;font-size:13px">'+myRankLabel+'</span>'+streakText+'</div>';
       html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{for(var i=recs.length-1;i>=0;i--) html+=_renderRecordCard(recs[i],true,i);}
       html+='</div>';
     }
-    // 다른 선생님들의 공개 기록
+    // 다른 선생님들의 공개 기록 (작성자 등급 포함)
     var otherPinned=[];
     for(var name in data.players){
       if(name===myName) continue;
       var recs2=data.players[name].records||[];
+      var theirRank = data.players[name].rank || estimateRankFromRecords(recs2);
       for(var i=0;i<recs2.length;i++){
-        if(recs2[i].pinned) otherPinned.push(recs2[i]);
+        if(recs2[i].pinned){
+          var entry=recs2[i];
+          entry._ownerName=name;
+          entry._ownerRank=theirRank;
+          otherPinned.push(entry);
+        }
       }
     }
     if(otherPinned.length>0){
