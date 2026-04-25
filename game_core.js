@@ -5442,7 +5442,7 @@ function startBattle() {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div></div>';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
 
   setTimeout(function(){
     intro.innerHTML='';
@@ -6066,7 +6066,7 @@ function showBattle(result,player,opp) {
   document.getElementById('btn-skip').style.display='none';
   var intro=document.getElementById('battle-intro-area');
   var _myName=(window._babgLogin&&window._babgLogin.name)?window._babgLogin.name:'선생님';
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div></div>';
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
   setTimeout(function(){intro.innerHTML='';startBattleAnimation(result,opp);},1500);
 }
 
