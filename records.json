@@ -3285,75 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T09:34:45",
-          "placement": 3,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미나",
-              "baseId": "mina",
-              "atk": 5,
-              "hp": 9,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mina.png",
-              "school": "산해경"
-            },
-            {
-              "name": "치나츠",
-              "baseId": "chinatsu",
-              "atk": 3,
-              "hp": 6,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Chinatsu.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이오리",
-              "baseId": "iori",
-              "atk": 7,
-              "hp": 3,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Iori.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 11,
-              "hp": 11,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T09:46:40",
           "placement": 2,
           "turn": 17,
@@ -3937,9 +3868,84 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T16:25:48",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "리오(임전)",
+              "baseId": "rio",
+              "atk": 52,
+              "hp": 52,
+              "tier": 6,
+              "kw": [
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Rio_(Battle).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 18,
+              "hp": 16,
+              "tier": 1,
+              "kw": [
+                "shield",
+                "taunt",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코(수영복)",
+              "baseId": "shizuko",
+              "atk": 23,
+              "hp": 21,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Shizuko_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 18,
+              "hp": 22,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 119,
+      "points": 121,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4037,8 +4043,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 2
+        "streak": 2,
+        "legendPoints": 3
       }
     },
     "킹갓프리소울": {
