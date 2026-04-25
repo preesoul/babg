@@ -1142,8 +1142,14 @@ function renderAll() {
     var iconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(pl.name,pl.isPlayer):'';
     // 얼굴 배경 (PC와 동일 패턴, 모바일은 살짝 작게)
     var bgImg=iconUrl?'<img src="'+iconUrl+'" style="position:absolute;left:-2px;top:50%;transform:translateY(-50%);height:170%;width:auto;opacity:0.78;pointer-events:none;z-index:0;mask-image:linear-gradient(90deg,black 60%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,black 60%,transparent 100%)" onerror="this.style.display=\'none\'">':'';
+    // NPC 난이도 티어 배지 (얼굴 좌하단 오버레이)
+    var npcDiffIcon='';
+    if(!pl.isPlayer&&pl.aiDifficulty!=null&&typeof getNpcDifficultyIcon==='function'){
+      var diffIconUrl=getNpcDifficultyIcon(pl.aiDifficulty);
+      if(diffIconUrl) npcDiffIcon='<img src="'+diffIconUrl+'" style="position:absolute;left:3px;bottom:1px;width:14px;height:14px;z-index:2;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.7))" onerror="this.style.display=\'none\'">';
+    }
     var chipExtra=iconUrl?';position:relative;overflow:hidden;padding-left:36px':'';
-    pHtml+='<div class="'+cls+'" style="'+nextStyle+chipExtra+'"'+clickAttr+'>'+bgImg+'<span style="position:relative;z-index:1">'+nextBadge+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span></span><div class="chip-hp-bar" style="position:relative;z-index:1"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
+    pHtml+='<div class="'+cls+'" style="'+nextStyle+chipExtra+'"'+clickAttr+'>'+bgImg+npcDiffIcon+'<span style="position:relative;z-index:1">'+nextBadge+pl.name+schedTag+ghostMark+'<span class="chip-hp'+(pl.hp<=15?' low':'')+'"> '+pl.hp+'</span></span><div class="chip-hp-bar" style="position:relative;z-index:1"><div class="chip-hp-fill" style="width:'+chipHpPct+'%;background:'+chipBarColor+'"></div></div></div>';
   }
   // 다음 상대 (모바일: top-bar 인라인, 1턴 옆에 간소화 표시)
   var nextOppRef=null;

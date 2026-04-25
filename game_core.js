@@ -793,6 +793,15 @@ function getPlayerIconUrl(name, isPlayer){
   if(isPlayer) return PLAYER_DEFAULT_ICON;
   return PLAYER_ICONS[name]||PLAYER_DEFAULT_ICON;
 }
+// AI 난이도 → 티어 배지 아이콘 (영입 페이즈 NPC 칩에 표시)
+// 9(d=0.1)=브론즈, 6(d=0.4)=실버, 4(d=0.6)=골드, 1(d=0.9)/전(1.0)=플래티넘
+function getNpcDifficultyIcon(d){
+  if(typeof d!=='number') return '';
+  if(d<=0.15) return 'img/UI/bronze.png';
+  if(d<=0.45) return 'img/UI/silver.png';
+  if(d<=0.65) return 'img/UI/gold.png';
+  return 'img/UI/platinum.png';
+}
 
 function newGame() {
   deleteSave(); // 새 게임 시 저장 데이터 삭제
