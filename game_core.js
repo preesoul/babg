@@ -3095,24 +3095,15 @@ function aiSortBoard(board){
     // === 사용자 정의 우선 ===
     if(FRONT_LINE_CARDS[bid]) s=18;             // 명시 선봉
     if(BACK_LINE_CARDS[bid]) s=85;              // 명시 후방
-    // 토키: HP>=10이면 (체력 버프 받음) 선봉
-    if(bid==='toki'&&u.hp>=10) s=18;
+    // 토키: 자체 1/4도 선봉 OK (사용자 정의)
+    if(bid==='toki') s=18;
     // 계승전 카운터 카드: 7스택 미만이면 선봉, 이후 후방
     if(KEISEISEN_CARDS[bid]){
       var ksCnt=u._keiseisenCounter||0;
       s = ksCnt<7 ? 22 : 75;
     }
-    // 카야: 선봉 카드 또는 뒤끝 카드 있으면 선봉, 아니면 후방 (스왑 후보)
-    if(bid==='kaya'){
-      var hasFrontHelper=false;
-      for(var bi=0;bi<board.length;bi++){
-        var bb=board[bi]; if(bb===u) continue;
-        if(FRONT_LINE_CARDS[bb.baseId]||DR_IDS[bb.baseId]||hasKw(bb,'taunt')){hasFrontHelper=true;break;}
-      }
-      s = hasFrontHelper ? 30 : 80;
-    }
     // === 키워드 기반 ===
-    // 저격/관통/광역: 선봉 (사용자 의도)
+    // 저격/관통/광역: 선봉 (사용자 의도 — 먼저 때려야 효과)
     if(kw.indexOf('ranged')!==-1||kw.indexOf('pierce')!==-1||kw.indexOf('cleave')!==-1){
       if(s>=40) s=22;
     }
@@ -3121,13 +3112,11 @@ function aiSortBoard(board){
     if(kw.indexOf('selfdestruct')!==-1) s=Math.min(s,15); // 자폭 앞쪽
     if(DR_IDS[bid]) s=Math.min(s,20); // 뒤끝 앞쪽
     if(kw.indexOf('reborn')!==-1) s=Math.min(s,25); // 부활 앞쪽
-    // 뒤배치 (사용자 명시 후방 X일 때만)
     if(s<70){
       if(kw.indexOf('survive')!==-1) s=Math.max(s,70);
       if(SURV_IDS[bid]) s=Math.max(s,70);
       if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75);
     }
-    // 보호막은 앞쪽
     if(kw.indexOf('shield')!==-1&&s>30&&s<70) s=Math.min(s,30);
     return s;
   }
@@ -3136,6 +3125,35 @@ function aiSortBoard(board){
     if(pa!==pb) return pa-pb;
     return b.hp-a.hp;
   });
+  // 카야 예외처리: 보드에 카야 있을 때 1번 자리에 효과 없는/뒤끝 카드 강제
+  _applyKayaException(board);
+}
+// 카야 보유 시 1번 자리에 효과 없는(바닐라) 또는 뒤끝(DR) 카드 우선
+function _applyKayaException(board){
+  var hasKaya=false;
+  for(var i=0;i<board.length;i++){if(board[i].baseId==='kaya'){hasKaya=true;break;}}
+  if(!hasKaya) return;
+  // 우선순위 1: DR 카드, 2: 효과 없는 바닐라
+  var candidate=-1;
+  for(var i=0;i<board.length;i++){
+    var u=board[i];
+    if(u.baseId==='kaya') continue;
+    if(DR_IDS[u.baseId]){candidate=i;break;}
+  }
+  if(candidate<0){
+    for(var i=0;i<board.length;i++){
+      var u=board[i];
+      if(u.baseId==='kaya') continue;
+      var bid=u.baseId;
+      var kw=u.kw||[];
+      var hasAbility=DR_IDS[bid]||SOC_IDS[bid]||BC_IDS[bid]||PRE_IDS[bid]||SURV_IDS[bid]||PASSIVE_IDS[bid];
+      if(!hasAbility&&kw.length===0){candidate=i;break;}
+    }
+  }
+  if(candidate<0) return; // 적합한 카드 없음 — 일반 정렬 유지
+  if(candidate===0) return; // 이미 1번 자리
+  // 0번과 candidate 위치 swap
+  var tmp=board[0];board[0]=board[candidate];board[candidate]=tmp;
 }
 
 // ===== AI Forecast (가상 전투 시뮬 기반 의사결정) =====
