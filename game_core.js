@@ -3101,31 +3101,31 @@ function aiSortBoard(board){
     var s=50;
     var bid=u.baseId||'';
     var kw=u.kw||[];
-    // === 사용자 정의 우선 ===
-    if(FRONT_LINE_CARDS[bid]) s=18;             // 명시 선봉
-    if(BACK_LINE_CARDS[bid]) s=85;              // 명시 후방
+    // === 사용자 정의 우선 (명시되면 키워드 처리로 덮어쓰지 않음) ===
+    var explicitFront=false, explicitBack=false;
+    if(FRONT_LINE_CARDS[bid]){ s=18; explicitFront=true; }
+    if(BACK_LINE_CARDS[bid]){ s=85; explicitBack=true; }
     // 토키: 자체 1/4도 선봉 OK (사용자 정의)
-    if(bid==='toki') s=18;
+    if(bid==='toki'){ s=18; explicitFront=true; }
     // 계승전 카운터 카드: 7스택 미만이면 선봉, 이후 후방
     if(KEISEISEN_CARDS[bid]){
       var ksCnt=u._keiseisenCounter||0;
-      s = ksCnt<7 ? 22 : 75;
+      if(ksCnt<7){ s=22; explicitFront=true; }
+      else { s=75; explicitBack=true; }
     }
+    // === 명시 분류된 카드는 키워드 처리 스킵 (사용자 의도 보호) ===
+    if(explicitFront||explicitBack) return s;
     // === 키워드 기반 ===
-    // 저격/관통/광역: 선봉 (사용자 의도 — 먼저 때려야 효과)
     if(kw.indexOf('ranged')!==-1||kw.indexOf('pierce')!==-1||kw.indexOf('cleave')!==-1){
       if(s>=40) s=22;
     }
-    // === 기존 키워드 처리 ===
-    if(kw.indexOf('taunt')!==-1) s=Math.min(s,10); // 지켜줌 맨앞
-    if(kw.indexOf('selfdestruct')!==-1) s=Math.min(s,15); // 자폭 앞쪽
-    if(DR_IDS[bid]) s=Math.min(s,20); // 뒤끝 앞쪽
-    if(kw.indexOf('reborn')!==-1) s=Math.min(s,25); // 부활 앞쪽
-    if(s<70){
-      if(kw.indexOf('survive')!==-1) s=Math.max(s,70);
-      if(SURV_IDS[bid]) s=Math.max(s,70);
-      if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75);
-    }
+    if(kw.indexOf('taunt')!==-1) s=Math.min(s,10);
+    if(kw.indexOf('selfdestruct')!==-1) s=Math.min(s,15);
+    if(DR_IDS[bid]) s=Math.min(s,20);
+    if(kw.indexOf('reborn')!==-1) s=Math.min(s,25);
+    if(kw.indexOf('survive')!==-1) s=Math.max(s,70);
+    if(SURV_IDS[bid]) s=Math.max(s,70);
+    if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75);
     if(kw.indexOf('shield')!==-1&&s>30&&s<70) s=Math.min(s,30);
     return s;
   }
