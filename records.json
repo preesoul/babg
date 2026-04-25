@@ -8133,7 +8133,7 @@
           ]
         }
       ],
-      "points": 22,
+      "points": 17,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -8196,7 +8196,10 @@
         "stars": 1,
         "streak": 1,
         "legendPoints": 0
-      }
+      },
+      "unlockedAbydos": [
+        "wakamo"
+      ]
     }
   }
 }
