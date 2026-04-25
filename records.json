@@ -3285,80 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T07:35:45",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 21,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네(아이돌)",
-              "baseId": "mine",
-              "atk": 19,
-              "hp": 19,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Mine_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하나코(수영복)",
-              "baseId": "hanako",
-              "atk": 15,
-              "hp": 21,
-              "tier": 4,
-              "kw": [
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Hanako_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(세이아 호스트)",
-              "baseId": "trinity_seia",
-              "atk": 4,
-              "hp": 6,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_seia.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T08:17:57",
           "placement": 1,
           "turn": 17,
@@ -3970,9 +3896,58 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T14:20:17",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 34,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 54,
+              "hp": 52,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미나",
+              "baseId": "mina",
+              "atk": 2,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mina.png",
+              "school": "산해경"
+            }
+          ]
         }
       ],
-      "points": 96,
+      "points": 98,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4070,8 +4045,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 0
+        "streak": 5,
+        "legendPoints": 1
       }
     },
     "킹갓프리소울": {
