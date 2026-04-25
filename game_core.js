@@ -5745,7 +5745,15 @@ function startBattle() {
     var _vsTierIcon=getNpcDifficultyIcon(opp.aiDifficulty);
     if(_vsTierIcon) _vsTierBadge='<img src="'+_vsTierIcon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
   }
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
+  // 플레이어 본인 티어 배지 (큰 사이즈)
+  var _vsMyTierBadge='';
+  if(window._babgPlayerRank){
+    var _vsMyTierInfo=rankTierInfo(window._babgPlayerRank);
+    if(_vsMyTierInfo&&_vsMyTierInfo.icon){
+      _vsMyTierBadge='<img src="'+_vsMyTierInfo.icon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+    }
+  }
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_vsMyTierBadge+_myName+' <span style="color:#a78bfa">(스케쥴 '+p.tier+')</span></div></div>';
 
   setTimeout(function(){
     intro.innerHTML='';
@@ -6471,7 +6479,14 @@ function showBattle(result,player,opp) {
     var _vsTierIcon=getNpcDifficultyIcon(opp.aiDifficulty);
     if(_vsTierIcon) _vsTierBadge='<img src="'+_vsTierIcon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
   }
-  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
+  var _vsMyTierBadge='';
+  if(window._babgPlayerRank){
+    var _vsMyTierInfo=rankTierInfo(window._babgPlayerRank);
+    if(_vsMyTierInfo&&_vsMyTierInfo.icon){
+      _vsMyTierBadge='<img src="'+_vsMyTierInfo.icon+'" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+    }
+  }
+  intro.innerHTML='<div class="battle-intro"><div class="vs-name">'+_enIcon+_vsTierBadge+opp.name+' <span style="color:#a78bfa">(스케쥴 '+opp.tier+')</span></div><div class="vs-text">VS</div><div class="vs-name">'+_myIcon+_vsMyTierBadge+_myName+' <span style="color:#a78bfa">(스케쥴 '+player.tier+')</span></div></div>';
   setTimeout(function(){intro.innerHTML='';startBattleAnimation(result,opp);},1500);
 }
 
@@ -6492,8 +6507,16 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
       _enTierBadge='<img src="'+_enTierIcon+'" style="width:24px;height:24px;vertical-align:middle;margin-right:6px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
     }
   }
+  // 플레이어 본인 티어 배지 (window._babgPlayerRank 기반)
+  var _myTierBadge='';
+  if(window._babgPlayerRank){
+    var _myTierInfo=rankTierInfo(window._babgPlayerRank);
+    if(_myTierInfo&&_myTierInfo.icon){
+      _myTierBadge='<img src="'+_myTierInfo.icon+'" style="width:24px;height:24px;vertical-align:middle;margin-right:6px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6))" onerror="this.style.display=\'none\'">';
+    }
+  }
   document.getElementById('enemy-label').innerHTML='<img src="'+_enIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_enTierBadge+opp.name+' (스케쥴 '+(opp.tier||1)+')';
-  document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myName+' (스케쥴 '+_myTier+')';
+  document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myTierBadge+_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
   var activeResult=result;
