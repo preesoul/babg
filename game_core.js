@@ -323,7 +323,7 @@ var ABILITY_DESCS = {
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.'},
-  satsuki:  {type:'뒤끝',desc:'자신을 쓰러뜨린 상대를 1턴간 빼앗습니다.',skinEffect:'수영복 사츠키: 2턴간 빼앗기',skinEffectDesc:'뒤끝: 자신을 쓰러뜨린 상대를 <span style="color:#ffd700;font-weight:700">2턴</span>간 빼앗습니다.'},
+  satsuki:  {type:'뒤끝',desc:'자신을 <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러뜨린 상대를 1턴간 빼앗습니다.\n(능력/효과로 사망 시엔 발동하지 않음)',skinEffect:'수영복 사츠키: 2턴간 빼앗기',skinEffectDesc:'뒤끝: 자신을 <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러뜨린 상대를 <span style="color:#ffd700;font-weight:700">2턴</span>간 빼앗습니다.\n(능력/효과로 사망 시엔 발동하지 않음)'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
@@ -4097,8 +4097,9 @@ function _doDR(unit, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 당고 '+count+'개 소환! (각 1/1)'});
   }
   else if(id==='satsuki'){
-    // 뒤끝: 자신을 죽인 상대를 빼앗기 (1턴, 스킨: 2턴)
-    if(unit._killedBy&&unit._killedBy.alive){
+    // 뒤끝: 자신을 전투(공격 교환)로 쓰러뜨린 상대를 빼앗기 (1턴, 스킨: 2턴)
+    // 능력/효과로 사망한 경우엔 발동하지 않음
+    if(unit._killedByCombat&&unit._killedBy&&unit._killedBy.alive){
       var stolen=unit._killedBy;
       var stolenIdx=otherSide.indexOf(stolen);
       if(stolenIdx!==-1){
@@ -4109,6 +4110,8 @@ function _doDR(unit, mySide, otherSide, log) {
         mySide.push(stolen);
         log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+stolen.name+'을(를) '+turns+'턴간 빼앗았다!'});
       }
+    } else if(unit._killedBy&&!unit._killedByCombat){
+      log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 전투가 아닌 능력에 쓰러져 빼앗기에 실패!'});
     }
   }
   else if(id==='yuzu'){
@@ -4465,7 +4468,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
     return alive[Math.floor(Math.random()*alive.length)];
   }
 
-  function killUnit(unit,myArr,oppArr,log2,killedBy){
+  function killUnit(unit,myArr,oppArr,log2,killedBy,isCombat){
     // 미카: 능력/효과에 의한 사망 면역 (killedBy가 없거나 능력 사망인 경우)
     if(unit.abilityImmune&&killedBy&&killedBy._isAbilityKill){
       log2.push({cls:'shield',text:unit.name+': 면역!'});
@@ -4484,6 +4487,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
     } else {
       unit.alive=false;
       if(killedBy) unit._killedBy=killedBy;
+      // 전투(공격 교환)로 사망 시에만 표시 — 사츠키 뒤끝 등 일부 능력에서 사용
+      if(isCombat) unit._killedByCombat=true;
       // 하스미 패시브: 첫 처치 공/체 흡수
       var hasumiMax=killedBy&&killedBy.isSkin?2:1;
       if(killedBy&&killedBy.baseId==='hasumi'&&killedBy.hp>0&&!killedBy._poisonKilled&&(killedBy._hasumiAbsorbed||0)<hasumiMax){
@@ -4602,8 +4607,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
   }
 
-  function resolveDeath(unit,myArr,oppArr,log2,killedBy){
-    if(unit.hp<=0&&unit.alive)killUnit(unit,myArr,oppArr,log2,killedBy);
+  function resolveDeath(unit,myArr,oppArr,log2,killedBy,isCombat){
+    if(unit.hp<=0&&unit.alive)killUnit(unit,myArr,oppArr,log2,killedBy,isCombat);
   }
 
   function peroCheck(attacker,defender,atkArr,log2){
@@ -4986,8 +4991,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       var _atkOrigBoard=(!opts||!opts.simCtx)?(atkArr===a?boardA:boardB):null;
       if(defender.alive) checkChisePassive(defender,attacker,_atkOrigBoard,log2);
     }
-    resolveDeath(defender,defArr,atkArr,log2,attacker);
-    if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct'))resolveDeath(attacker,atkArr,defArr,log2,defender);
+    resolveDeath(defender,defArr,atkArr,log2,attacker,true);
+    if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct'))resolveDeath(attacker,atkArr,defArr,log2,defender,true);
     peroCheck(attacker,defender,atkArr,log2);
     return hitResult;
   }
@@ -5150,8 +5155,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
             var msCounter=dealHit(target,attacker,stepLog);
             checkSurvive(attacker,atkArr2,stepLog,target);
           }
-          resolveDeath(target,defArr2,atkArr2,stepLog,attacker);
-          resolveDeath(attacker,atkArr2,defArr2,stepLog,target);
+          resolveDeath(target,defArr2,atkArr2,stepLog,attacker,true);
+          resolveDeath(attacker,atkArr2,defArr2,stepLog,target,true);
           peroCheck(attacker,target,atkArr2,stepLog);
         }
         // 자폭: 공+체 합산 공격 후 쓰러짐
