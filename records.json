@@ -3285,84 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T06:53:05",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 57,
-              "hp": 47,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마시로(수영복)",
-              "baseId": "mashiro",
-              "atk": 36,
-              "hp": 30,
-              "tier": 2,
-              "kw": [
-                "ranged",
-                "windfury",
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하스미(수영복)",
-              "baseId": "hasumi",
-              "atk": 31,
-              "hp": 27,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Hasumi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 27,
-              "hp": 29,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T07:19:11",
           "placement": 1,
           "turn": 16,
@@ -3983,9 +3905,78 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T11:17:16",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "정의실현부",
+              "baseId": "trinity_justice",
+              "atk": 73,
+              "hp": 59,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Justice_Task_Force.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "정의실현부",
+              "baseId": "trinity_justice",
+              "atk": 73,
+              "hp": 59,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Justice_Task_Force.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아스나(버니걸)",
+              "baseId": "asuna",
+              "atk": 15,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Asuna_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 17,
+              "hp": 17,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히마리",
+              "baseId": "himari",
+              "atk": 6,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Himari.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 92,
+      "points": 94,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4079,9 +4070,9 @@
         "nonomi"
       ],
       "rank": {
-        "tier": 2,
+        "tier": 1,
         "stars": 0,
-        "streak": 2,
+        "streak": 3,
         "legendPoints": 0
       }
     },
