@@ -113,8 +113,8 @@ var CHARS = [
 
   // ===== 백귀야행 =====
   // 백귀야행 1학년
-  {id:'izuna',   name:'이즈나', school:'백귀야행',tier:1,atk:2,hp:2,kw:[],            skin:'이즈나(수영복)',   img:'Izuna.png',          imgGold:'Izuna_(Swimsuit).png'},
-  {id:'pina',    name:'피나',   school:'백귀야행',tier:1,atk:2,hp:1,kw:['shield','taunt'],skin:'피나(가이드)',  img:'Pina.png',           imgGold:'Pina_(Guide).png'},
+  {id:'izuna',   name:'이즈나', school:'백귀야행',tier:1,atk:1,hp:1,kw:[],            skin:'이즈나(수영복)',   img:'Izuna.png',          imgGold:'Izuna_(Swimsuit).png'},
+  {id:'pina',    name:'피나',   school:'백귀야행',tier:1,atk:1,hp:2,kw:['shield','taunt'],skin:'피나(가이드)',  img:'Pina.png',           imgGold:'Pina_(Guide).png'},
   {id:'yukari',  name:'유카리', school:'백귀야행',tier:2,atk:2,hp:1,kw:['reborn','preemptive'],skin:'유카리(수영복)',img:'Yukari.png',     imgGold:'Yukari_(Swimsuit).png'},
   {id:'tsukuyo', name:'츠쿠요', school:'백귀야행',tier:2,atk:3,hp:2,kw:[],            skin:'츠쿠요(드레스)',   img:'Tsukuyo.png',        imgGold:'Tsukuyo_(Dress).png'},
   // 백귀야행 2학년
@@ -137,7 +137,7 @@ var CHARS = [
   {id:'hoshino', name:'호시노', school:'아비도스', tier:6, atk:5, hp:7, kw:['taunt','shield'], locked:true, skin:'호시노(수영복)',   img:'Hoshino.png',        imgGold:'Hoshino_(Swimsuit).png'},
 
   // ===== 산해경 (잠금 해제 필요) =====
-  {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:2, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
+  {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
   {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
