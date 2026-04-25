@@ -3070,30 +3070,71 @@ function aiSpendRemainder(p){
   AI_SPELL_EFFECTS[sp.id](p);p.stone-=sp.cost;
 }
 
+// 사용자 정의 자리 배치 카탈로그 (우선순위 높음, 키워드보다 강함)
+var FRONT_LINE_CARDS={
+  'ui':1,'iori':1,'ichika':1,
+  'wakamo':1,'shiroko':1,'hoshino':1,'shun':1,'mina':1,'ako':1,'azusa':1,
+  'gehenna_prefect':1,'gehenna_pandemonium':1,'gehenna_p68':1,
+  'trinity_mika':1,'trinity_makeup':1,'trinity_justice':1,
+  'millennium_nameless':1,'millennium_malkuth':1,'millennium_death_momoi':1,
+  'millennium_cc':1,'Arisu_Kei':1
+};
+var BACK_LINE_CARDS={
+  'mine':1,'mari':1,'momoi':1,'yuuka':1,'yuzu':1,'utaha':1,
+  'tsubaki':1,'mimori':1,'pina':1,'ayane':1,'rin':1,
+  'gehenna_traingun':1,'trinity_seia':1,'Kei_usb':1,'red_winter_minori':1
+};
+var KEISEISEN_CARDS={'yukari':1,'renge':1,'kikyou':1,'nagusa':1};
+
 function aiSortBoard(board){
-  // 배치 우선순위: 지켜줌 맨앞 → 뒤끝/자폭 앞쪽 → 일반 중간 → 선빵/저격/버티기 뒤쪽
+  // 배치 우선순위: 사용자 정의 → 키워드 휴리스틱 → 기본
   function posScore(u){
     var s=50;
     var bid=u.baseId||'';
     var kw=u.kw||[];
-    // 앞배치 (낮을수록 앞)
-    if(kw.indexOf('taunt')!==-1) s=10; // 지켜줌 맨앞
+    // === 사용자 정의 우선 ===
+    if(FRONT_LINE_CARDS[bid]) s=18;             // 명시 선봉
+    if(BACK_LINE_CARDS[bid]) s=85;              // 명시 후방
+    // 토키: HP>=10이면 (체력 버프 받음) 선봉
+    if(bid==='toki'&&u.hp>=10) s=18;
+    // 계승전 카운터 카드: 7스택 미만이면 선봉, 이후 후방
+    if(KEISEISEN_CARDS[bid]){
+      var ksCnt=u._keiseisenCounter||0;
+      s = ksCnt<7 ? 22 : 75;
+    }
+    // 카야: 선봉 카드 또는 뒤끝 카드 있으면 선봉, 아니면 후방 (스왑 후보)
+    if(bid==='kaya'){
+      var hasFrontHelper=false;
+      for(var bi=0;bi<board.length;bi++){
+        var bb=board[bi]; if(bb===u) continue;
+        if(FRONT_LINE_CARDS[bb.baseId]||DR_IDS[bb.baseId]||hasKw(bb,'taunt')){hasFrontHelper=true;break;}
+      }
+      s = hasFrontHelper ? 30 : 80;
+    }
+    // === 키워드 기반 ===
+    // 저격/관통/광역: 선봉 (사용자 의도)
+    if(kw.indexOf('ranged')!==-1||kw.indexOf('pierce')!==-1||kw.indexOf('cleave')!==-1){
+      if(s>=40) s=22;
+    }
+    // === 기존 키워드 처리 ===
+    if(kw.indexOf('taunt')!==-1) s=Math.min(s,10); // 지켜줌 맨앞
     if(kw.indexOf('selfdestruct')!==-1) s=Math.min(s,15); // 자폭 앞쪽
-    if(DR_IDS[bid]) s=Math.min(s,20); // 뒤끝 유닛 앞쪽
+    if(DR_IDS[bid]) s=Math.min(s,20); // 뒤끝 앞쪽
     if(kw.indexOf('reborn')!==-1) s=Math.min(s,25); // 부활 앞쪽
-    // 뒤배치 (높을수록 뒤)
-    if(kw.indexOf('survive')!==-1) s=Math.max(s,70); // 버티기 뒤쪽
-    if(SURV_IDS[bid]) s=Math.max(s,70);
-    if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75); // 선빵 뒤쪽
-    if(kw.indexOf('ranged')!==-1) s=Math.max(s,80); // 저격 맨뒤
-    // 보호막은 앞쪽에 두면 1히트 흡수 가치 높음
-    if(kw.indexOf('shield')!==-1&&s>30) s=Math.min(s,30);
+    // 뒤배치 (사용자 명시 후방 X일 때만)
+    if(s<70){
+      if(kw.indexOf('survive')!==-1) s=Math.max(s,70);
+      if(SURV_IDS[bid]) s=Math.max(s,70);
+      if(kw.indexOf('preemptive')!==-1&&kw.indexOf('taunt')===-1) s=Math.max(s,75);
+    }
+    // 보호막은 앞쪽
+    if(kw.indexOf('shield')!==-1&&s>30&&s<70) s=Math.min(s,30);
     return s;
   }
   board.sort(function(a,b){
     var pa=posScore(a),pb=posScore(b);
     if(pa!==pb) return pa-pb;
-    return b.hp-a.hp; // 같은 우선순위면 체력 높은 유닛 앞
+    return b.hp-a.hp;
   });
 }
 
