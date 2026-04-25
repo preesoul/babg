@@ -3285,85 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T09:22:18",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 18,
-              "hp": 16,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠바키",
-              "baseId": "tsubaki",
-              "atk": 23,
-              "hp": 22,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Tsubaki.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게",
-              "baseId": "renge",
-              "atk": 22,
-              "hp": 21,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Renge.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리",
-              "baseId": "yukari",
-              "atk": 46,
-              "hp": 45,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Yukari.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "마코토",
-              "baseId": "makoto",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Makoto.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T09:34:45",
           "placement": 3,
           "turn": 15,
@@ -3942,9 +3863,83 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T16:14:08",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코(드레스)",
+              "baseId": "ako",
+              "atk": 11,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Ako_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나(드레스)",
+              "baseId": "hina",
+              "atk": 44,
+              "hp": 18,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Hina_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "하루카(새해)",
+              "baseId": "haruka",
+              "atk": 12,
+              "hp": 16,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Haruka_(New_Year).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 112,
+      "points": 119,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -3956,8 +3951,8 @@
             },
             {
               "id": "gehenna10",
-              "progress": 2,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "millennium10",
@@ -4042,8 +4037,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 1
+        "streak": 1,
+        "legendPoints": 2
       }
     },
     "킹갓프리소울": {
