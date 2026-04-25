@@ -2846,6 +2846,81 @@ var DECK_PATTERNS=[
    sellProtect:function(u){if(u.school==='트리니티')return 4;return 0;}}
 ];
 
+// ===== AI 빌드 청사진 (사용자 키 카드 매핑 기반) =====
+// 5턴(=7청휘석) 시점에 보드 진행도 평가 → 가장 가까운 빌드 선택 → p._buildPlan 저장
+// 이후 영입 점수에 큰 보너스 가산하여 빌드 추구
+var BUILD_PLANS = [
+  // === 게헨나 7성 3종 ===
+  {id:'gehenna_p68', target7:'gehenna_p68', school:'게헨나',
+   coreCards:['kayoko','mutsuki','haruka','aru'],
+   schoolValue:['chiaki','chinatsu','iori','satsuki','kasumi','hina']},
+  {id:'gehenna_prefect', target7:'gehenna_prefect', school:'게헨나',
+   coreCards:['hina','iori','ako','chinatsu'],
+   schoolValue:['chiaki','satsuki','kasumi','kayoko','mutsuki']},
+  {id:'gehenna_pandemonium', target7:'gehenna_pandemonium', school:'게헨나',
+   coreCards:['makoto','satsuki','iroha','ibuki','chiaki'],
+   schoolValue:['chinatsu','iori','kasumi','hina','kayoko']},
+  // === 트리니티 7성 3종 ===
+  {id:'trinity_justice', target7:'trinity_justice', school:'트리니티',
+   coreCards:['hasumi','tsurugi','mashiro','ichika'],
+   schoolValue:['mari','azusa','hanako','hifumi','koharu','hina']},
+  {id:'trinity_makeup', target7:'trinity_makeup', school:'트리니티',
+   coreCards:['hifumi','koharu','hanako','azusa'],
+   schoolValue:['mari','hasumi','tsurugi','mashiro','ichika']},
+  {id:'trinity_nagisa', target7:'trinity_nagisa', school:'트리니티',
+   coreCards:['mari','sakurako','mine'],
+   schoolValue:['hasumi','tsurugi','hifumi','koharu','hanako','azusa','mashiro','ichika']},
+  // === 밀레니엄 7성 3종 ===
+  {id:'millennium_death_momoi', target7:'millennium_death_momoi', school:'밀레니엄',
+   coreCards:['momoi','midori','yuzu','arisu'],
+   schoolValue:['yuuka','noa','koyuki','toki']},
+  {id:'millennium_seminar', target7:'millennium_seminar', school:'밀레니엄',
+   coreCards:['yuuka','noa','koyuki','rio'],
+   schoolValue:['momoi','midori','yuzu','arisu','toki']},
+  {id:'millennium_cc', target7:'millennium_cc', school:'밀레니엄',
+   coreCards:['neru','asuna','akane','karin','toki'],
+   schoolValue:['yuuka','noa','koyuki','rio','momoi','midori','yuzu','utaha']},
+  // === 백귀야행 통일 (쿠즈노하) ===
+  {id:'hkyk_unity', target7:'hkyk_kuzunoha', school:'백귀야행',
+   coreCards:['michiru','izuna','tsukuyo','shizuko'],
+   schoolValue:HKYK_ALL_IDS.slice()},
+  // === 시로코 테러 (아비도스) ===
+  {id:'shiroko_terror', target7:'Shiroko_Terror', school:'아비도스',
+   coreCards:['hoshino','shiroko','nonomi','ayane','serika'],
+   schoolValue:['aoi','momoka','kaya']}
+];
+
+// 빌드 진행도 평가
+function evaluateBuildPlan(p, plan){
+  var coreCount=0, valueCount=0, schoolBonus=0;
+  for(var i=0;i<p.board.length;i++){
+    var bid=p.board[i].baseId;
+    if(plan.coreCards.indexOf(bid)!==-1) coreCount++;
+    else if(plan.schoolValue.indexOf(bid)!==-1) valueCount++;
+    if(p.board[i].school===plan.school) schoolBonus+=0.4;
+  }
+  return coreCount*3 + valueCount*1.2 + schoolBonus;
+}
+
+// 빌드 결정: 7청휘석 시점에 평가
+function aiDecideBuildPlan(p){
+  if(p._buildPlan) return; // 이미 결정됨
+  if(p.stone < 7) return;  // 7청휘석 미만이면 아직 결정 X
+  var bestPlan=null, bestScore=0;
+  for(var i=0;i<BUILD_PLANS.length;i++){
+    var pl=BUILD_PLANS[i];
+    var sc=evaluateBuildPlan(p, pl);
+    if(sc > bestScore){
+      bestScore=sc;
+      bestPlan=pl;
+    }
+  }
+  // 진행도 너무 낮으면 빌드 결정 X (기존 휴리스틱 그대로)
+  if(bestPlan && bestScore >= 2.5){
+    p._buildPlan = bestPlan;
+  }
+}
+
 function aiUnitScore(u){
   var s=u.atk+u.hp;if(u.isSkin)s+=8;
   for(var k=0;k<(u.kw||[]).length;k++){
@@ -3266,7 +3341,21 @@ function aiReturnShop(p){
   }
   p.aiShop=[];
 }
+// 난이도별 매 턴 무료 리롤 횟수
+function _aiFreeRerollsForTurn(){
+  var d=getAiDifficulty();
+  if(d>=1.0) return 3;     // 전설(플래티넘 1)
+  if(d>=0.85) return 2;    // 1등급(플래티넘 2)
+  if(d>=0.55) return 1;    // 4등급(골드)
+  return 0;                // 실버 이하
+}
 function aiReroll(p){
+  // 무료 리롤 우선 사용
+  if((p._aiFreeRerolls||0)>0){
+    p._aiFreeRerolls--;
+    aiGenerateShop(p);
+    return true;
+  }
   if(p.stone<1) return false;
   p.stone-=1;
   aiGenerateShop(p);
@@ -3355,6 +3444,14 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
     if(aiStrat.avoidOtherSchools&&aiStrat.dominantSchool&&item.school!==aiStrat.dominantSchool)s-=15; // 강화: -10→-15
     if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
   }
+  // === 빌드 청사진 보너스 (5턴 이후 결정된 빌드 추구) ===
+  if(p._buildPlan){
+    var bp=p._buildPlan;
+    if(bp.coreCards.indexOf(item.baseId)!==-1) s+=30;        // 코어 카드 (흡수 대상)
+    else if(bp.schoolValue.indexOf(item.baseId)!==-1) s+=15; // 학교 밸류 카드
+    else if(item.school===bp.school) s+=8;                   // 같은 학교
+    else s-=5;                                                // 빌드 외 카드
+  }
   s+=simStatBonus(item.baseId);
   // === 키워드/패턴 시너지 가산 ===
   // 광역/관통 보드 시너지: 같은 키워드 가진 카드끼리 시너지
@@ -3406,19 +3503,20 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
 }
 // 리롤이 가치 있는지 판단 (현재 상점 최고치 < 임계 + 골드 여유)
 function aiShouldReroll(p, currentBest){
-  if(p.stone<5) return false; // 리롤 + 영입 가능해야
+  // 무료 리롤이 남아있으면 골드 체크 생략 + 임계 더 관대
+  var hasFree=(p._aiFreeRerolls||0)>0;
+  if(!hasFree && p.stone<5) return false; // 일반 리롤은 골드 5+ 필요
   var decision;
   if(p.board.length>=MAX_BOARD){
-    // 보드 가득 — 트리플 외엔 무의미. 트리플 가능 카드 풀에 있으면 리롤 가치
     var bc={};for(var j=0;j<p.board.length;j++){if(!p.board[j].isSkin)bc[p.board[j].baseId]=(bc[p.board[j].baseId]||0)+1;}
     var hasTripleNeed=false;
     for(var bid in bc){if(bc[bid]>=2&&G.pool[bid]>0){hasTripleNeed=true;break;}}
-    decision = hasTripleNeed && currentBest < 0.20;
+    decision = hasTripleNeed && currentBest < (hasFree?0.30:0.20); // 무료면 더 관대
   } else {
-    decision = currentBest < 0.12;
+    decision = currentBest < (hasFree?0.20:0.12); // 무료면 더 적극
   }
-  // 난이도 비례 실수 (잘못된 결정 확률 적용)
-  if(Math.random() < _aiMistakeRate()) decision = !decision;
+  // 난이도 비례 실수 — 무료 리롤은 mistake 영향 거의 안 받음 (강력함 유지)
+  if(!hasFree && Math.random() < _aiMistakeRate()) decision = !decision;
   return decision;
 }
 
@@ -3429,6 +3527,8 @@ function aiTurns() {
     var p=G.players[i];if(p.dead)continue;
     // 개별 AI 난이도 override (있으면 적용)
     G._currentAiDifficulty = (p.aiDifficulty!=null) ? p.aiDifficulty : null;
+    // 난이도별 매 턴 무료 리롤 부여 (4등급=1, 1등급=2, 전설=3)
+    p._aiFreeRerolls = _aiFreeRerollsForTurn();
     // 매치업 상대 보드 (forecast용)
     var _oppBoard=_aiGetOppBoard(p);
     // Phase 1: 레벨업 판단 (스코어링)
@@ -3436,6 +3536,9 @@ function aiTurns() {
 
     var aiStrat=aiGetStrategy(p);
     var aiPool=getAvailableChars(p.tier);
+
+    // 빌드 청사진 결정 (7청휘석 이상에서 보드 진행도 평가)
+    aiDecideBuildPlan(p);
 
     // Phase 0: AI 상점 생성 (영입 페이즈 시작 시 매번 새로 생성)
     aiGenerateShop(p);
@@ -7153,6 +7256,7 @@ function saveGame(){
           panchanDeaths:p.panchanDeaths||0,
           personalityType:p.personalityType||'standard',
           aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
+          buildPlanId:(p._buildPlan&&p._buildPlan.id)||null,
           board:p.board.map(function(u){
             return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
               atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:(u.kw||[]).slice(),
@@ -7210,6 +7314,7 @@ function restoreGame(save){
       personality:AI_PERSONALITIES[p.personalityType||'standard'],
       personalityType:p.personalityType||'standard',
       aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
+      _buildPlan:(function(){if(!p.buildPlanId)return null;for(var _bp=0;_bp<BUILD_PLANS.length;_bp++)if(BUILD_PLANS[_bp].id===p.buildPlanId)return BUILD_PLANS[_bp];return null;})(),
       board:p.board.map(function(u){
         return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
           atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:u.kw||[],
