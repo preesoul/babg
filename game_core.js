@@ -7442,11 +7442,25 @@ function rankTierInfo(rank){
   if(!rank) return RANK_TIER_MAP[9];
   return RANK_TIER_MAP[rank.tier]||RANK_TIER_MAP[9];
 }
+// 등급 위치 별 [채움, 최대] — 그 등급 안에서의 단계 시각화 (낮은 숫자 = 위 단계 = 별 많음)
+function rankPositionStars(tier){
+  if(tier===9) return [1,2];   // 브론즈 2 (낮음)
+  if(tier===8) return [2,2];   // 브론즈 1 (위)
+  if(tier===7) return [1,3];   // 실버 3 (낮음)
+  if(tier===6) return [2,3];   // 실버 2
+  if(tier===5) return [3,3];   // 실버 1 (위)
+  if(tier===4) return [1,3];   // 골드 3 (낮음)
+  if(tier===3) return [2,3];   // 골드 2
+  if(tier===2) return [3,3];   // 골드 1 (위)
+  if(tier===1) return [1,2];   // 플래티넘 2 (낮음)
+  if(tier===0) return [2,2];   // 플래티넘 1 (위)
+  return [0,3];
+}
 function rankLabel(rank){
   if(!rank) return '브론즈 2';
   var info=rankTierInfo(rank);
-  if(rank.tier===0) return info.tierName+' '+info.num+(rank.legendPoints?' (+'+rank.legendPoints+'pt)':'');
-  return info.tierName+' '+info.num+' ★'+rank.stars+'/'+rankStarsRequired(rank.tier);
+  if(rank.tier===0&&rank.legendPoints) return info.tierName+' '+info.num+' (+'+rank.legendPoints+'pt)';
+  return info.tierName+' '+info.num;
 }
 function rankColor(rank){
   return rankTierInfo(rank).color;
@@ -7571,13 +7585,24 @@ function renderRecords(){
       // 등급 (없으면 추정)
       var myRank = p.rank || estimateRankFromRecords(recs);
       var myRankColor = rankColor(myRank);
-      var myRankLabel = rankLabel(myRank);
       var myRankInfo = rankTierInfo(myRank);
       var streakText = (myRank.streak>=2)?(' <span style="color:#fb923c;font-size:11px">🔥'+myRank.streak+'연승</span>'):'';
       var rankIconHtml='<img src="'+myRankInfo.icon+'" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;margin-right:4px" onerror="this.style.display=\'none\'">';
+      // 등급 위치 별 (★★☆)
+      var posStars=rankPositionStars(myRank.tier);
+      var posStarsViz='<span style="font-size:13px;letter-spacing:1.5px;color:'+myRankColor+';margin-left:6px">';
+      for(var _ps=0;_ps<posStars[1];_ps++) posStarsViz+= _ps<posStars[0]?'★':'☆';
+      posStarsViz+='</span>';
+      // 진행도 (다음 등급까지)
+      var progressText='';
+      if(myRank.tier===0){
+        if(myRank.legendPoints) progressText='<span style="font-size:11px;color:'+myRankColor+';margin-left:6px;opacity:0.85">+'+myRank.legendPoints+'pt</span>';
+      } else {
+        progressText='<span style="font-size:11px;color:#94a3b8;margin-left:6px">('+myRank.stars+'/'+rankStarsRequired(myRank.tier)+' 다음까지)</span>';
+      }
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
       html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
-      html+='<div style="margin-bottom:8px;display:inline-flex;align-items:center;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'">'+rankIconHtml+'<span style="color:'+myRankColor+';font-weight:800;font-size:13px">'+myRankLabel+'</span>'+streakText+'</div>';
+      html+='<div style="margin-bottom:8px;display:inline-flex;align-items:center;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'">'+rankIconHtml+'<span style="color:'+myRankColor+';font-weight:800;font-size:14px">'+myRankInfo.tierName+' '+myRankInfo.num+'</span>'+posStarsViz+progressText+streakText+'</div>';
       html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{for(var i=recs.length-1;i>=0;i--) html+=_renderRecordCard(recs[i],true,i);}

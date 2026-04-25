@@ -3173,18 +3173,19 @@ function _renderTitleRankBadge(el, rank){
   var color=rankColor(rank);
   var info=rankTierInfo(rank);
   var streak=(rank.streak>=2)?'<span style="color:#fb923c;font-size:13px;font-weight:700">🔥'+rank.streak+'연승</span>':'';
-  var starsViz='';
-  if(rank.tier!==0){
-    var req=rank.tier>=6?3:5;
-    starsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
-    for(var s=0;s<req;s++) starsViz+= s<rank.stars?'★':'☆';
-    starsViz+='</span>';
-  } else if(rank.legendPoints){
-    starsViz='<span style="font-size:13px;color:'+color+';font-weight:700">+'+rank.legendPoints+'pt</span>';
+  var posStars=rankPositionStars(rank.tier);
+  var posStarsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
+  for(var s=0;s<posStars[1];s++) posStarsViz+= s<posStars[0]?'★':'☆';
+  posStarsViz+='</span>';
+  var progressText='';
+  if(rank.tier===0){
+    if(rank.legendPoints) progressText='<span style="font-size:11px;color:'+color+';margin-left:6px;opacity:0.85">+'+rank.legendPoints+'pt</span>';
+  } else {
+    progressText='<span style="font-size:11px;color:#94a3b8;margin-left:6px">('+rank.stars+'/'+rankStarsRequired(rank.tier)+')</span>';
   }
   var iconImg='<img src="'+info.icon+'" style="width:32px;height:32px;vertical-align:middle;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.3))" onerror="this.style.display=\'none\'">';
   var numText='<span style="font-weight:900;font-size:18px;color:'+color+';margin-left:4px">'+info.num+'</span>';
-  el.innerHTML='<span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+iconImg+numText+(starsViz?' '+starsViz:'')+'</span>'+streak;
+  el.innerHTML='<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+iconImg+numText+' '+posStarsViz+progressText+'</span>'+streak;
   window._babgPlayerRank=rank;
 }
 function loadAndRenderTitleRank(name){
