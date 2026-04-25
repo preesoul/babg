@@ -2536,31 +2536,40 @@ function getAiDifficulty(){
   if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
   return _calcAiDifficulty(window._babgPlayerRank);
 }
-// AI 시뮬 깊이 (forecast N회): 9등급=2, 4등급=4, 1등급=7, 전설=8
+// AI 시뮬 깊이 (forecast N회): 9등급=2, 4등급=6, 1등급=11, 전설=12
 function _aiSimN(){
   var d=getAiDifficulty();
-  return Math.max(2, Math.round(2 + d*6));
+  return Math.max(2, Math.round(2 + d*10));
 }
-// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=4, 1등급=7, 전설=8
+// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=5, 1등급=9, 전설=10
 function _aiOptK(){
   var d=getAiDifficulty();
-  return Math.max(2, Math.round(2 + d*6));
+  return Math.max(2, Math.round(2 + d*8));
 }
-// 휴리스틱 노이즈: 동률 처리용 작은 안정 노이즈 (난이도와 무관, 일관 0.5)
+// 휴리스틱 노이즈: 9등급은 점수 평가 자체가 크게 왜곡됨 (±양방향)
+// 9등급=±11, 4등급=±5, 1등급=±0.7, 전설=±0.3
 function _aiNoise(){
-  return 0.5;
+  var d=getAiDifficulty();
+  return Math.max(0.3, 11.5 - d*11.2);
 }
-// 잘못된 결정 확률: 9등급=45%, 4등급=18%, 1등급=4%, 전설=1%
+// 잘못된 결정 확률: 9등급=85%, 4등급=35%, 1등급=4%, 전설=1%
 function _aiMistakeRate(){
   var d=getAiDifficulty();
-  return Math.max(0.01, 0.49 - d*0.48);
+  return Math.max(0.01, 0.94 - d*0.93);
 }
-// 학생 카드 forecast 가중치: 매치업 1회 시뮬은 장기 가치 누락 → 보수적으로
-// d<0.7에서 0, d>=0.7에서 0~0.2 (전설만 살짝 보정)
+// 학생 카드 forecast 가중치: 약한 보너스만 (단기 매치업 매몰 방지)
+// 1등급=0.05, 전설=0.10 — 휴리스틱 위주 + 약간의 매치업 적응
 function _aiForecastWeight(){
   var d=getAiDifficulty();
-  if(d<0.7) return 0;
-  return Math.min(0.2, (d-0.7)*0.6);
+  if(d<0.8) return 0;
+  return Math.min(0.10, (d-0.8)*0.5);
+}
+// mistake 발생 시 동작: random non-top swap 비율
+// 9등급: 80% 완전 random, 20% top↔2nd swap
+// 전설: 0% random, 100% 미발동 (mistake rate 1% 자체가 매우 낮음)
+function _aiMistakeRandomness(){
+  var d=getAiDifficulty();
+  return Math.max(0, 0.85 - d*0.85); // 0~0.85
 }
 // 학생 카드를 영입했다고 가정한 보드의 승률 forecast
 function _aiStudentForecast(p, item, oppBoard){
@@ -2713,8 +2722,8 @@ function aiShouldUpgrade(p){
   // 무료/1골드 업그레이드는 무조건
   if(p.upgradeCost<=1) score+=20;
   var decision=score>0;
-  // 난이도 비례 실수 (잘못된 결정 확률 / 2)
-  if(Math.random() < _aiMistakeRate()*0.5) decision=!decision;
+  // 난이도 비례 실수 (잘못된 결정 확률 적용)
+  if(Math.random() < _aiMistakeRate()) decision=!decision;
   return decision;
 }
 
@@ -3176,13 +3185,13 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
     if(aiStrat.deckPattern)s+=aiStrat.deckPattern.buyBonus(c,p.board);
   }
   s+=simStatBonus(item.baseId);
-  // 동률 처리용 작은 안정 노이즈
-  s+=Math.random()*_aiNoise();
+  // 양방향 노이즈: 낮은 등급은 점수 평가 자체가 왜곡 (좋은 카드를 나쁘게/나쁜 카드를 좋게)
+  s+=(Math.random()-0.5)*_aiNoise()*2;
   // 보드 가득 + 트리플 아니면 영입 불가
   if(p.board.length>=MAX_BOARD&&copyCount<2) return -1;
   // 휴리스틱 → 0~1 정규화 (대략)
   var heu=s/100;
-  // 난이도 비례 forecast 블렌딩 (d>=0.5에서 작동, 매치업 보드 있을 때만)
+  // 난이도 비례 forecast 블렌딩 (d>=0.4에서 작동, 매치업 보드 있을 때만)
   var fw=_aiForecastWeight();
   if(fw>0&&oppBoard&&oppBoard.length>0){
     var fc=_aiStudentForecast(p, item, oppBoard);
@@ -3203,8 +3212,8 @@ function aiShouldReroll(p, currentBest){
   } else {
     decision = currentBest < 0.12;
   }
-  // 난이도 비례 실수 (잘못된 결정 확률 / 2)
-  if(Math.random() < _aiMistakeRate()*0.5) decision = !decision;
+  // 난이도 비례 실수 (잘못된 결정 확률 적용)
+  if(Math.random() < _aiMistakeRate()) decision = !decision;
   return decision;
 }
 
@@ -3242,10 +3251,17 @@ function aiTurns() {
         if(sc>0) slotRanks.push({slot:s, score:sc});
       }
       slotRanks.sort(function(a,b){return b.score-a.score;});
-      // 난이도 비례 실수: 1위와 무작위 슬롯 스왑 (낮은 등급일수록 잘못된 슬롯 픽)
+      // 난이도 비례 실수: 낮은 등급은 완전 무작위 픽, 중간 등급은 top↔non-top swap
       if(slotRanks.length>=2 && Math.random()<_aiMistakeRate()){
-        var swapIdx=1+Math.floor(Math.random()*(slotRanks.length-1));
-        var t=slotRanks[0]; slotRanks[0]=slotRanks[swapIdx]; slotRanks[swapIdx]=t;
+        if(Math.random()<_aiMistakeRandomness()){
+          // 완전 무작위 픽 (점수 무시)
+          var randIdx=Math.floor(Math.random()*slotRanks.length);
+          var t=slotRanks[0]; slotRanks[0]=slotRanks[randIdx]; slotRanks[randIdx]=t;
+        } else {
+          // top↔무작위 비1위 swap (가벼운 실수)
+          var swapIdx=1+Math.floor(Math.random()*(slotRanks.length-1));
+          var t=slotRanks[0]; slotRanks[0]=slotRanks[swapIdx]; slotRanks[swapIdx]=t;
+        }
       }
       var bestSlot=slotRanks.length>0?slotRanks[0].slot:-1;
       var bestSlotScore=slotRanks.length>0?slotRanks[0].score:-Infinity;
