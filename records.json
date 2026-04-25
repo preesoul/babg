@@ -3264,85 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-08T07:03:28",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 22,
-              "hp": 32,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "시미코(악의 간부)",
-              "baseId": "shimiko",
-              "atk": 44,
-              "hp": 42,
-              "tier": 2,
-              "kw": [
-                "cleave",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 48,
-              "hp": 56,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "windfury",
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "시로코(수영복)",
-              "baseId": "shiroko",
-              "atk": 49,
-              "hp": 39,
-              "tier": 5,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Shiroko_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 15,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-08T07:24:56",
           "placement": 1,
           "turn": 15,
@@ -4007,9 +3928,87 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-25T06:53:05",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 57,
+              "hp": 47,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마시로(수영복)",
+              "baseId": "mashiro",
+              "atk": 36,
+              "hp": 30,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "windfury",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Mashiro_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하스미(수영복)",
+              "baseId": "hasumi",
+              "atk": 31,
+              "hp": 27,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Hasumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 27,
+              "hp": 29,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 42,
+      "points": 54,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4037,17 +4036,17 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 7,
+              "progress": 9,
               "completed": false
             }
           ]
@@ -4096,8 +4095,8 @@
       ],
       "rank": {
         "tier": 5,
-        "stars": 3,
-        "streak": 0,
+        "stars": 4,
+        "streak": 1,
         "legendPoints": 0
       }
     },
