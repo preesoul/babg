@@ -4162,9 +4162,9 @@ function triggerSOC(u, mySide, otherSide, log) {
     if(poisonGranted.length>0) log.push({cls:'soc',text:'  → 독사굴 부여: '+poisonGranted.join(', ')});
   }
   else if(id==='millennium_death_momoi'){
-    // 데스 모모이 개전: 적 전체 지켜줌 삭제
+    // 데스 모모이 개전: 적 전체 지켜줌 삭제 (사야 면역)
     for(var i=0;i<otherSide.length;i++){
-      if(otherSide[i].alive&&hasKw(otherSide[i],'taunt')){
+      if(otherSide[i].alive&&hasKw(otherSide[i],'taunt')&&!otherSide[i].abilityImmune&&!otherSide[i]._sayaImmune){
         otherSide[i].kw.splice(otherSide[i].kw.indexOf('taunt'),1);
       }
     }
@@ -5532,15 +5532,19 @@ function runBattle(boardA, boardB, startWithA, opts) {
       return true;
     }
     else if(attacker.baseId==='millennium_death_momoi'){
-      // 데스 모모이 선빵: 적 부여 수치 초기화
-      var baseTmpl=findAnyChar(target.baseId);
-      if(baseTmpl){
-        var baseAtk=target.isSkin?(baseTmpl.atk*2+1):baseTmpl.atk;
-        var baseHp=target.isSkin?(baseTmpl.hp*2+1):baseTmpl.hp;
-        if(target.atk>baseAtk||target.hp>baseHp){
-          var oldAtk=target.atk,oldHp=target.hp;
-          target.atk=baseAtk;target.hp=Math.min(target.hp,baseHp);
-          log2.push({cls:'kill',text:'[선빵] '+attacker.name+': '+target.name+' 부여 수치 제거! ('+oldAtk+'/'+oldHp+' → '+target.atk+'/'+target.hp+')'});
+      // 데스 모모이 선빵: 적 부여 수치 초기화 (사야 면역)
+      if(target.abilityImmune||target._sayaImmune){
+        log2.push({cls:'shield',text:'[선빵] '+attacker.name+': '+target.name+' 면역!'});
+      } else {
+        var baseTmpl=findAnyChar(target.baseId);
+        if(baseTmpl){
+          var baseAtk=target.isSkin?(baseTmpl.atk*2+1):baseTmpl.atk;
+          var baseHp=target.isSkin?(baseTmpl.hp*2+1):baseTmpl.hp;
+          if(target.atk>baseAtk||target.hp>baseHp){
+            var oldAtk=target.atk,oldHp=target.hp;
+            target.atk=baseAtk;target.hp=Math.min(target.hp,baseHp);
+            log2.push({cls:'kill',text:'[선빵] '+attacker.name+': '+target.name+' 부여 수치 제거! ('+oldAtk+'/'+oldHp+' → '+target.atk+'/'+target.hp+')'});
+          }
         }
       }
     }
