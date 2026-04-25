@@ -3285,80 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-09T04:13:07",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 26,
-              "hp": 34,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "windfury",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 33,
-              "hp": 39,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 24,
-              "hp": 26,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키",
-              "baseId": "toki",
-              "atk": 11,
-              "hp": 14,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Toki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하",
-              "baseId": "utaha",
-              "atk": 27,
-              "hp": 27,
-              "tier": 5,
-              "kw": [
-                "ambush",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Utaha.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T03:30:10",
           "placement": 1,
           "turn": 17,
@@ -4027,9 +3953,78 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T08:17:57",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 49,
+              "hp": 44,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 25,
+              "hp": 14,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 22,
+              "hp": 16,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "모모카",
+              "baseId": "momoka",
+              "atk": 4,
+              "hp": 3,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Momoka.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 68,
+      "points": 80,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4057,8 +4052,8 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 9,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win3",
@@ -4117,9 +4112,9 @@
         "nonomi"
       ],
       "rank": {
-        "tier": 4,
-        "stars": 4,
-        "streak": 3,
+        "tier": 3,
+        "stars": 2,
+        "streak": 4,
         "legendPoints": 0
       }
     },
