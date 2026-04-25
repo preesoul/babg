@@ -1049,7 +1049,7 @@ function renderAll() {
       var oppIconUrl=(typeof getPlayerIconUrl==='function')?getPlayerIconUrl(nextOppRef.name,nextOppRef.isPlayer):'';
       var oppIconImg=oppIconUrl?'<img src="'+oppIconUrl+'" style="width:22px;height:22px;border-radius:50%;vertical-align:middle;margin:0 6px;object-fit:cover" onerror="this.style.display=\'none\'">':'';
       var hintHtml=_hidePreview?'':' <span style="color:#6a8a9e;font-size:11px;float:right">📋 클릭하여 보드 보기</span>';
-      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음 상대:</span>'+oppIconImg+oppMark+'<b>'+nextOppRef.name+'</b> <span style="color:#a78bfa">(스케쥴 '+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span>'+hintHtml;
+      matchInfoEl.innerHTML='<span style="color:#ffd700">⚔ 다음 상대:</span>'+oppIconImg+oppMark+'<b style="color:#fff">'+nextOppRef.name+'</b> <span style="color:#a78bfa">(스케쥴 '+nextOppRef.tier+')</span> <span style="color:#9aa">HP '+(isGhostOpp?'?':nextOppRef.hp)+'</span>'+hintHtml;
       matchInfoEl.style.display='block';
       matchInfoEl.style.cursor=_hidePreview?'default':'pointer';
       if(_hidePreview){
