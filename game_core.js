@@ -7950,10 +7950,17 @@ function submitGameRecord(){
   var placement = G.placement;
   // 등급 변동 결과는 _lastRankChange에 저장 (showGameOver에서 폴링)
   window._lastRankChange = null;
-  var _retried=false;
+  // race condition 대비: 빠르게 여러 게임 돌릴 때 sha 충돌 시 충분히 retry
+  var _retryCount=0;
+  var MAX_RETRIES=8;
+  var _alreadyApplied=false;
   function _doSubmit(){
     fetchRecords(function(err,data,sha){
-      if(err||!data){console.log('기록 저장 실패:',err);if(!_retried){_retried=true;setTimeout(_doSubmit,2000);}return;}
+      if(err||!data){
+        console.log('[submit] fetch 실패:',err,'재시도',_retryCount+1,'/',MAX_RETRIES);
+        if(_retryCount<MAX_RETRIES){_retryCount++;setTimeout(_doSubmit,1500+_retryCount*500);}
+        return;
+      }
       if(!data.players)data.players={};
       var name=login.name;
       if(!data.players[name]){
@@ -7966,16 +7973,23 @@ function submitGameRecord(){
       data.players[name].records.push(record);
       // 최근 10전만 유지
       if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
-      // 등급 변동 적용
-      var changeResult = applyRankChange(data.players[name].rank, placement);
-      data.players[name].rank = changeResult.rank;
-      window._lastRankChange = changeResult;
+      // 등급 변동 적용 (이미 적용됐으면 다시 적용 X — 같은 게임 두 번 카운트 방지)
+      if(!_alreadyApplied){
+        var changeResult = applyRankChange(data.players[name].rank, placement);
+        data.players[name].rank = changeResult.rank;
+        window._lastRankChange = changeResult;
+        _alreadyApplied=true;
+      }
       // 퀘스트 진행도 업데이트
       data.players[name] = initQuestState(data.players[name]);
       data.players[name] = updateQuestProgress(data.players[name], tracker, placement);
       saveRecords(data,sha,function(e){
-        if(e){console.log('기록 저장 실패:',e);if(!_retried){_retried=true;setTimeout(_doSubmit,2000);}}
-        else console.log('기록 저장 완료 (퀘스트+등급 포함)');
+        if(e){
+          console.log('[submit] save 실패 (sha 충돌 가능):',e,'재시도',_retryCount+1,'/',MAX_RETRIES);
+          if(_retryCount<MAX_RETRIES){_retryCount++;setTimeout(_doSubmit,1500+_retryCount*500);}
+          else console.log('[submit] 최대 재시도 횟수 초과 — 이번 게임 기록 누락');
+        }
+        else console.log('[submit] 기록 저장 완료 (퀘스트+등급 포함)');
       });
     });
   }
