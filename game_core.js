@@ -778,7 +778,8 @@ function returnToPool(charId,count) {
 var G = {};
 var swapFirst = -1;
 
-// 플레이어/NPC 얼굴 아이콘 매핑
+// 플레이어/NPC 얼굴 아이콘 매핑 (이름→아이콘 경로)
+// 새 NPC 추가 시 여기에 한 줄씩 추가:  '이름':'img/UI/player/파일명.png',
 var PLAYER_ICONS={
   '나기사':'img/UI/player/nagisa.png',
   '마코토':'img/UI/player/makoto.png',
@@ -792,6 +793,62 @@ var PLAYER_DEFAULT_ICON='img/UI/player/player.png';
 function getPlayerIconUrl(name, isPlayer){
   if(isPlayer) return PLAYER_DEFAULT_ICON;
   return PLAYER_ICONS[name]||PLAYER_DEFAULT_ICON;
+}
+
+// ===== 티어별 NPC 이름 풀 =====
+// 사용자가 추가할 곳: 각 풀에 8개씩 이름 채우면 매 게임 그 풀에서 랜덤으로 뽑힘
+// 풀이 비어있거나 부족하면 NPC_NAME_FALLBACK에서 자동 보충
+var NPC_NAME_POOLS={
+  bronze:[],   // 난이도 0.1 (9등급 수준 — 멍청한 NPC)
+  silver:[],   // 난이도 0.4 (6등급 수준)
+  gold:[],     // 난이도 0.6 (4등급 수준)
+  plat2:[],    // 난이도 0.9 (1등급 수준 — 똑똑)
+  plat1:[]     // 난이도 1.0 (전설 — 천재)
+};
+// 풀이 비었을 때 사용하는 기본 이름 (현재 NPC들)
+var NPC_NAME_FALLBACK=['나기사','마코토','리오','호시노','니야','키사키','체리노'];
+
+// 난이도 → 풀 키 매핑
+function _difficultyToPoolKey(d){
+  if(typeof d!=='number') return 'silver';
+  if(d<=0.15) return 'bronze';
+  if(d<=0.45) return 'silver';
+  if(d<=0.65) return 'gold';
+  if(d<=0.95) return 'plat2';
+  return 'plat1';
+}
+// diffArray: NPC별 난이도 배열. 각 난이도에 맞는 이름을 풀에서 랜덤 뽑되 게임 내 중복 회피.
+// 풀이 비었거나 다 쓰였으면 fallback 큐에서 보충.
+function pickNpcNamesForDifficulties(diffArray){
+  var used={};
+  var result=[];
+  // 셔플된 fallback 큐 (풀 부족 시 순서대로 소비)
+  var fbShuffled=NPC_NAME_FALLBACK.slice();
+  for(var fi=fbShuffled.length-1;fi>0;fi--){
+    var fj=Math.floor(Math.random()*(fi+1));
+    var ft=fbShuffled[fi];fbShuffled[fi]=fbShuffled[fj];fbShuffled[fj]=ft;
+  }
+  var fbIdx=0;
+  for(var i=0;i<diffArray.length;i++){
+    var poolKey=_difficultyToPoolKey(diffArray[i]);
+    var pool=NPC_NAME_POOLS[poolKey]||[];
+    var avail=pool.filter(function(n){return !used[n];});
+    var pick=null;
+    if(avail.length>0){
+      pick=avail[Math.floor(Math.random()*avail.length)];
+    } else {
+      // 풀 비었거나 모두 사용 → fallback 큐
+      while(fbIdx<fbShuffled.length && used[fbShuffled[fbIdx]]) fbIdx++;
+      if(fbIdx<fbShuffled.length){
+        pick=fbShuffled[fbIdx]; fbIdx++;
+      } else {
+        pick='NPC'+(i+1); // 마지막 안전망
+      }
+    }
+    used[pick]=true;
+    result.push(pick);
+  }
+  return result;
 }
 // AI 난이도 → 티어 배지 아이콘 (영입 페이즈 NPC 칩에 표시)
 // 9(d=0.1)=브론즈, 6(d=0.4)=실버, 4(d=0.6)=골드, 1(d=0.9)/전(1.0)=플래티넘
@@ -813,12 +870,6 @@ function newGame() {
   var _bl=document.getElementById('battle-log');if(_bl)_bl.style.display='';
   var players=[];
   var aiCount=SANDBOX?5:7;
-  var aiNames=['나기사','마코토','리오','호시노','니야','키사키','체리노'];
-  // 매 게임 셔플 (어느 자리가 어떤 이름이 될지 랜덤)
-  for(var _ni=aiNames.length-1;_ni>0;_ni--){
-    var _nj=Math.floor(Math.random()*(_ni+1));
-    var _nt=aiNames[_ni];aiNames[_ni]=aiNames[_nj];aiNames[_nj]=_nt;
-  }
   var startStone=SANDBOX?20:3;
   var playerName=window._babgLogin?window._babgLogin.name:'선생님';
   players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
@@ -830,10 +881,13 @@ function newGame() {
   for(var _ad=0;_ad<_aiDiffArray.length;_ad++) _avgDiff+=_aiDiffArray[_ad];
   _avgDiff/=Math.max(1,_aiDiffArray.length);
   var _aiDiff=_avgDiff;
+  // NPC 이름은 각자의 난이도에 맞는 이름 풀에서 뽑힘
+  var _npcNames=pickNpcNamesForDifficulties(_aiDiffArray.slice(0,aiCount));
   for(var i=0;i<aiCount;i++){
     var thisDiff=(i<_aiDiffArray.length)?_aiDiffArray[i]:_avgDiff;
     var pType=_pickAiPersonality(i, thisDiff);
-    players.push({id:i+1,name:aiNames[i%aiNames.length],hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType,aiDifficulty:thisDiff});
+    var thisName=(i<_npcNames.length)?_npcNames[i]:('NPC'+(i+1));
+    players.push({id:i+1,name:thisName,hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType,aiDifficulty:thisDiff});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
