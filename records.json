@@ -3264,72 +3264,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-07T23:32:14",
-          "placement": 2,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "히비키(치어리더)",
-              "baseId": "hibiki",
-              "atk": 13,
-              "hp": 11,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "사츠키(수영복)",
-              "baseId": "satsuki",
-              "atk": 11,
-              "hp": 13,
-              "tier": 5,
-              "kw": [
-                "pierce",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 11,
-              "hp": 11,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "히비키(치어리더)",
-              "baseId": "hibiki",
-              "atk": 9,
-              "hp": 7,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-08T02:27:09",
           "placement": 1,
           "turn": 16,
@@ -4013,9 +3947,78 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-25T05:54:02",
+          "placement": 8,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아스나",
+              "baseId": "asuna",
+              "atk": 9,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Asuna.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 8,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 16,
+              "hp": 18,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 11,
+              "hp": 13,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 33,
+              "hp": 41,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 34,
+      "points": 36,
       "questState": {
         "daily": {
           "date": "2026-04-25",
@@ -4043,7 +4046,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
@@ -4053,7 +4056,7 @@
             },
             {
               "id": "skin10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             }
           ]
@@ -4098,7 +4101,13 @@
         "sena",
         "chise",
         "nonomi"
-      ]
+      ],
+      "rank": {
+        "tier": 4,
+        "stars": 1,
+        "streak": 0,
+        "legendPoints": 0
+      }
     },
     "킹갓프리소울": {
       "records": [],
