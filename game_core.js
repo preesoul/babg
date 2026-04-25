@@ -5682,47 +5682,141 @@ function aiAutoBattles() {
     for(var i=0;i+1<shuffled.length;i+=2)pairs.push([shuffled[i],shuffled[i+1]]);
   }
   function _aiCap(){var c=9999;if(G.turn<=5)c=10;else if(G.aliveCount>4)c=15;return c;}
+
+  // 실제 runBattle을 사용한 AI vs AI 전투 (플레이어 vs AI와 동일한 시뮬)
+  // simCtx로 격리하여 플레이어 게임 상태(시로코 킬 카운트 등)에 영향 X
+  function _runAiPair(a2, b2) {
+    var aBoard=_aiCopyBoard(a2.board), bBoard=_aiCopyBoard(b2.board);
+    var pdA=a2.panchanDeaths||0, pdB=b2.panchanDeaths||0;
+    var simCtx={
+      permanentAbilityBan:false, battleSchoolBuff:{},
+      kuzunohaActive:!!G.kuzunohaActive, millenniumTokenSummons:0,
+      arisuDeathCount:0, keiseisenCounters:{},
+      players:G.players,
+      _shirokoKillsThisBattle:0, _ayaneDeathsThisBattle:0
+    };
+    var startWithA=Math.random()<0.5;
+    try{
+      return runBattle(aBoard, bBoard, startWithA, {simCtx:simCtx, panchanDeathsA:pdA, panchanDeathsB:pdB});
+    }catch(e){
+      console.log('AI vs AI 전투 시뮬 실패:', e);
+      return null;
+    }
+  }
+  // 데미지 계산: 플레이어 vs AI 공식과 동일 — 생존자 티어 합 + 패자 티어
+  function _calcDmg(survivors, loserTier, aiCap) {
+    var dmg=loserTier;
+    if(survivors){for(var i=0;i<survivors.length;i++) dmg+=(survivors[i].tier||1);}
+    if(dmg>aiCap) dmg=aiCap;
+    return dmg;
+  }
+  // 사망 처리
+  function _killAi(p) {
+    p._ghostBoard=_snapshotForGhost(p);
+    p._deathTurn=G.turn;
+    p.dead=true;
+    G.aliveCount--;
+    for(var k=0;k<p.board.length;k++) returnToPool(p.board[k].baseId, p.board[k].isSkin?3:1);
+    p.board=[];
+  }
+  // 트레인건 영구 소멸 (전투 결과 기준)
+  function _checkPermaDestroy(p, snapSide) {
+    if(p.dead||!snapSide) return;
+    var PERMA=['gehenna_traingun','trinity_seia','gehenna_prefect'];
+    for(var i=0;i<snapSide.length;i++){
+      if(!snapSide[i].alive && PERMA.indexOf(snapSide[i].baseId)!==-1){
+        for(var j=p.board.length-1;j>=0;j--){
+          if(p.board[j].baseId===snapSide[i].baseId){
+            returnToPool(p.board[j].baseId, p.board[j].isSkin?3:1);
+            p.board.splice(j,1);
+            break;
+          }
+        }
+      }
+    }
+  }
   // 일반 페어
   for(var pi=0;pi<pairs.length;pi++){
-    var a2=pairs[pi][0],b2=pairs[pi][1];
-    var strA=0,strB=0;
-    for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
-    for(var j=0;j<b2.board.length;j++)strB+=b2.board[j].atk+b2.board[j].hp;
-    var total=strA+strB+1;
+    var a2=pairs[pi][0], b2=pairs[pi][1];
     var aiCap=_aiCap();
-    for(var j=0;j<a2.board.length;j++){if(a2.board[j].baseId==='juri'){a2.panchanDeaths=(a2.panchanDeaths||0)+(a2.board[j].isSkin?2:1);break;}}
-    for(var j=0;j<b2.board.length;j++){if(b2.board[j].baseId==='juri'){b2.panchanDeaths=(b2.panchanDeaths||0)+(b2.board[j].isSkin?2:1);break;}}
-    if(Math.random()<strA/total){var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0){b2._ghostBoard=_snapshotForGhost(b2);b2._deathTurn=G.turn;b2.dead=true;G.aliveCount--;for(var k=0;k<b2.board.length;k++)returnToPool(b2.board[k].baseId,b2.board[k].isSkin?3:1);b2.board=[];}}
-    else{var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0){a2._ghostBoard=_snapshotForGhost(a2);a2._deathTurn=G.turn;a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}}
+    var result=_runAiPair(a2,b2);
+    if(!result){
+      // 폴백: 휴리스틱
+      var strA=0,strB=0;
+      for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
+      for(var j=0;j<b2.board.length;j++)strB+=b2.board[j].atk+b2.board[j].hp;
+      var total=strA+strB+1;
+      if(Math.random()<strA/total){var dmg=b2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;b2.hp-=dmg;b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;if(b2.hp<=0)_killAi(b2);}
+      else{var dmg=a2.tier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;if(a2.hp<=0)_killAi(a2);}
+      continue;
+    }
+    // 결과 적용 (a2 관점: result.result === 'win'이면 a2 승, 'lose'면 b2 승)
+    if(result.result==='win'){
+      var dmg=_calcDmg(result.survivorsA, b2.tier, aiCap);
+      b2.hp-=dmg; b2.totalDamageTaken=(b2.totalDamageTaken||0)+dmg;
+      if(b2.hp<=0) _killAi(b2);
+    } else if(result.result==='lose'){
+      var dmg=_calcDmg(result.survivorsB, a2.tier, aiCap);
+      a2.hp-=dmg; a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;
+      if(a2.hp<=0) _killAi(a2);
+    }
+    // 주리 사망 카운터 갱신
+    a2.panchanDeaths=result.panchanDeathsA||a2.panchanDeaths||0;
+    b2.panchanDeaths=result.panchanDeathsB||b2.panchanDeaths||0;
+    // 영구 소멸 처리
+    if(result.steps&&result.steps.length>0){
+      var finalSnap=result.steps[result.steps.length-1].snap;
+      if(finalSnap){_checkPermaDestroy(a2, finalSnap.a); _checkPermaDestroy(b2, finalSnap.b);}
+    }
+    // 트레인건 생존 카운터 (원래 50% 랜덤은 의도치 않은 강제 제거였음 — 이제 영구 소멸은 위에서 처리)
     [a2,b2].forEach(function(ai){
-      if(ai.dead)return;
-      ai.board=ai.board.filter(function(u){
-        if(u.baseId==='gehenna_traingun'&&Math.random()<0.5){returnToPool(u.baseId,u.isSkin?3:1);return false;}
-        return true;
-      });
+      if(ai.dead) return;
+      for(var j=0;j<ai.board.length;j++){
+        if(ai.board[j].baseId==='gehenna_traingun'){
+          ai.board[j]._battlesSurvived=(ai.board[j]._battlesSurvived||0)+1;
+        }
+      }
     });
   }
-  // 고스트 매치: 살아있는 a만 데미지 받을 수 있음
+  // 고스트 매치: 살아있는 a만 데미지 받을 수 있음 (고스트는 이미 사망해서 데미지 영향 X)
   for(var gi=0;gi<ghostMatches.length;gi++){
-    var gm=ghostMatches[gi];var a2=gm.a;
-    if(a2.dead)continue;
-    var strA=0,strB=0;
-    for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
-    for(var j=0;j<gm.ghostBoard.length;j++)strB+=(gm.ghostBoard[j].atk||0)+(gm.ghostBoard[j].hp||0);
-    var total=strA+strB+1;var aiCap=_aiCap();
-    for(var j=0;j<a2.board.length;j++){if(a2.board[j].baseId==='juri'){a2.panchanDeaths=(a2.panchanDeaths||0)+(a2.board[j].isSkin?2:1);break;}}
-    if(Math.random()<strA/total){
-      // a2 승: 고스트는 영향 X
-    } else {
-      var dmg=gm.ghostTier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;
-      a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;
-      if(a2.hp<=0){a2._ghostBoard=_snapshotForGhost(a2);a2._deathTurn=G.turn;a2.dead=true;G.aliveCount--;for(var k=0;k<a2.board.length;k++)returnToPool(a2.board[k].baseId,a2.board[k].isSkin?3:1);a2.board=[];}
+    var gm=ghostMatches[gi]; var a2=gm.a;
+    if(a2.dead) continue;
+    var aiCap=_aiCap();
+    // 고스트 보드를 일회성 dummy player로 만들어 _runAiPair 재사용
+    var ghostDummy={board:gm.ghostBoard,tier:gm.ghostTier,panchanDeaths:0,dead:false,hp:9999,id:-1};
+    var result=_runAiPair(a2, ghostDummy);
+    if(!result){
+      // 폴백: 휴리스틱
+      var strA=0,strB=0;
+      for(var j=0;j<a2.board.length;j++)strA+=a2.board[j].atk+a2.board[j].hp;
+      for(var j=0;j<gm.ghostBoard.length;j++)strB+=(gm.ghostBoard[j].atk||0)+(gm.ghostBoard[j].hp||0);
+      var total=strA+strB+1;
+      if(Math.random()>=strA/total){
+        var dmg=gm.ghostTier+Math.floor(Math.random()*4)+1;if(dmg>aiCap)dmg=aiCap;
+        a2.hp-=dmg;a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;
+        if(a2.hp<=0) _killAi(a2);
+      }
+      continue;
+    }
+    if(result.result==='lose'){
+      var dmg=_calcDmg(result.survivorsB, a2.tier, aiCap);
+      a2.hp-=dmg; a2.totalDamageTaken=(a2.totalDamageTaken||0)+dmg;
+      if(a2.hp<=0) _killAi(a2);
+    }
+    // a2 승/무승부면 a2는 데미지 X (고스트는 죽어있는 상태라 영향 X)
+    a2.panchanDeaths=result.panchanDeathsA||a2.panchanDeaths||0;
+    // 영구 소멸 (a2만)
+    if(!a2.dead && result.steps && result.steps.length>0){
+      var finalSnap=result.steps[result.steps.length-1].snap;
+      if(finalSnap) _checkPermaDestroy(a2, finalSnap.a);
     }
     if(!a2.dead){
-      a2.board=a2.board.filter(function(u){
-        if(u.baseId==='gehenna_traingun'&&Math.random()<0.5){returnToPool(u.baseId,u.isSkin?3:1);return false;}
-        return true;
-      });
+      for(var j=0;j<a2.board.length;j++){
+        if(a2.board[j].baseId==='gehenna_traingun'){
+          a2.board[j]._battlesSurvived=(a2.board[j]._battlesSurvived||0)+1;
+        }
+      }
     }
   }
 }
