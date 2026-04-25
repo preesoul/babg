@@ -3968,7 +3968,8 @@
               "img": "unique/Arisu_Kei.png",
               "school": "밀레니엄"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 96,
