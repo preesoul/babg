@@ -796,7 +796,8 @@ function getPlayerIconUrl(name, isPlayer){
 }
 
 // ===== 티어별 NPC 이름 풀 =====
-// 사용자가 추가할 곳: 각 풀에 8개씩 이름 채우면 매 게임 그 풀에서 랜덤으로 뽑힘
+// 각 풀에 7개씩 이름 채우면 매 게임 그 풀에서 랜덤으로 뽑힘
+// (한 게임 NPC 최대 7명이라 한 풀에서 최대 7명까지만 사용 — 7개면 충분)
 // 풀이 비어있거나 부족하면 NPC_NAME_FALLBACK에서 자동 보충
 var NPC_NAME_POOLS={
   bronze:[],   // 난이도 0.1 (9등급 수준 — 멍청한 NPC)
