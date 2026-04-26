@@ -4032,6 +4032,8 @@ function aiCheckHidden(p) {
 
 // 개전 트리거 (전투 시작 전)
 function triggerSOC(u, mySide, otherSide, log) {
+  // 능력 무력화된 카드는 SOC 발동 X (안전망: 일반 SOC 루프 외 호출 경로 보호)
+  if(u._socStripped||u._abilitiesStripped) return;
   var id=u.baseId;
   if(id==='kayoko'){
     // 스킨: 지켜줌 뒤집기
@@ -4156,9 +4158,10 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   // ===== 아리우스 7성 =====
   else if(id==='arius_squad'){
-    // base atk 20만큼 아군 적군 전체 데미지 후 자신 파괴
+    // base atk 20만큼 아군 적군 전체 데미지 후 자신 파괴 → 뒤끝(흡수 학생 재소환) 발동
     var ariusBase=20;
     log.push({cls:'soc',text:'[개전] '+u.name+': 자폭! 아군 적군 전체 '+ariusBase+' 데미지!'});
+    var ariusKilledEnemies=[];
     // 적군 (사야 면역)
     for(var i=0;i<otherSide.length;i++){
       var et=otherSide[i];
@@ -4169,7 +4172,7 @@ function triggerSOC(u, mySide, otherSide, log) {
       }
       et.hp-=ariusBase;
       log.push({cls:'hit',text:'  → 적 '+et.name+'에게 '+ariusBase+' 피해 (HP:'+Math.max(0,et.hp)+')'});
-      if(et.hp<=0){et.hp=0;et.alive=false;et._killedBy=u;}
+      if(et.hp<=0){et.hp=0;et.alive=false;et._killedBy=u;ariusKilledEnemies.push(et);}
     }
     // 아군 (자기 제외, 사야 일반은 면역)
     for(var i=0;i<mySide.length;i++){
@@ -4186,9 +4189,14 @@ function triggerSOC(u, mySide, otherSide, log) {
         triggerDeathrattle(at,mySide,otherSide,log);
       }
     }
-    // 자기 파괴
+    // 적군 사망분 DR 발동
+    for(var _ke=0;_ke<ariusKilledEnemies.length;_ke++){
+      triggerDeathrattle(ariusKilledEnemies[_ke],otherSide,mySide,log);
+    }
+    // 자기 파괴 + 자신 DR 발동 (흡수했던 학생 재소환)
     u.hp=0;u.alive=false;
     log.push({cls:'kill',text:'  → '+u.name+': 자신 파괴!'});
+    triggerDeathrattle(u,mySide,otherSide,log);
   }
   // ===== 발키리/SRT 개전 =====
   else if(id==='saki'){
@@ -5669,10 +5677,11 @@ function runBattle(boardA, boardB, startWithA, opts) {
     }
   }
   // 버티기 트리거: 맞았는데 안 죽었을 때 (피격당할 때마다 체크)
+  // 게이트: SURV_IDS 또는 survive 키워드 (둘 중 하나만 있어도 통과 — 키리노 스킨 등 일부 카드 path 대비)
   function checkSurvive(unit,side,log2,hitBy){
     if(!unit.alive||unit.hp<=0) return;
     var hasCopiedSurv=unit._copiedAbilities&&unit._copiedAbilities.some(function(c){return c.type==='surv';});
-    if((!hasKw(unit,'survive')||!SURV_IDS[unit.baseId])&&!hasCopiedSurv) return;
+    if(!SURV_IDS[unit.baseId]&&!hasKw(unit,'survive')&&!hasCopiedSurv) return;
     if(unit._abilitiesStripped) return;
     if(_G.permanentAbilityBan) return;
     // === 니코 패시브: 첫 호출일 때만, 추가 발동 횟수를 결정 ===
