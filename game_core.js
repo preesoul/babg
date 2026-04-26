@@ -416,7 +416,7 @@ var ABILITY_DESCS = {
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선빵',desc:'공격 시, 5% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 10%',skinEffectDesc:'선빵: 공격 시, <span style="color:#ffd700;font-weight:700">10%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
-  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 확률을\n40% 내립니다.',skinEffect:'마법소녀 스즈미: 70% 내림',skinEffectDesc:'패시브: 상대 전원의 코인토스 확률을\n<span style="color:#ffd700;font-weight:700">70%</span> 내립니다.'},
+  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 성공률이\n50%가 아닌 34%가 됩니다.\n(중복 시 한 번만 적용)',skinEffect:'마법소녀 스즈미: 25%로',skinEffectDesc:'패시브: 상대 전원의 코인토스 성공률이\n50%가 아닌 <span style="color:#ffd700;font-weight:700">25%</span>가 됩니다.\n(중복 시 한 번만 적용. 스킨이 우선)'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
   haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
   // 총학생회
@@ -6499,19 +6499,29 @@ function runBattle(boardA, boardB, startWithA, opts) {
   // 실제 코인 애니메이션은 이 결과를 그대로 표시 (random 다시 X)
   (function decideCoinResults(){
     var btBonus = _G.bunnyTossBonus || 0;
-    // suzumi 페널티: a의 suzumi → b 페널티, b의 suzumi → a 페널티
-    var suzPenA = 0, suzPenB = 0;
-    for(var i=0;i<b.length;i++){if(b[i].alive&&b[i].baseId==='suzumi'&&!b[i]._abilitiesStripped) suzPenA += b[i].isSkin?0.7:0.4;}
-    for(var i=0;i<a.length;i++){if(a[i].alive&&a[i].baseId==='suzumi'&&!a[i]._abilitiesStripped) suzPenB += a[i].isSkin?0.7:0.4;}
+    // suzumi 패시브: 상대 코인 성공률을 set (누적 X). 일반 0.34 / 스킨 0.25. 스킨이 한 명이라도 있으면 0.25 우선.
+    function _suzumiBase(enemySide){
+      var hasNormal=false, hasSkin=false;
+      for(var i=0;i<enemySide.length;i++){
+        if(enemySide[i].alive && enemySide[i].baseId==='suzumi' && !enemySide[i]._abilitiesStripped){
+          if(enemySide[i].isSkin) hasSkin=true; else hasNormal=true;
+        }
+      }
+      if(hasSkin) return 0.25;
+      if(hasNormal) return 0.34;
+      return 0.5;
+    }
+    var suzBaseA = _suzumiBase(b); // a 사이드의 코인 base — b의 스즈미 영향
+    var suzBaseB = _suzumiBase(a); // b 사이드의 코인 base — a의 스즈미 영향
     var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
     var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
-    function _setCoin(side, hasCC, suzPen, withBunnyBonus){
+    function _setCoin(side, hasCC, baseProb, withBunnyBonus){
       for(var i=0;i<side.length;i++){
         var u=side[i];
         if(!u.alive){ u._coinResult=undefined; continue; }
         if(u.coinOff){ u._coinResult=false; continue; }
         if(hasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
-        var p = withBunnyBonus ? Math.max(0, 0.5+btBonus-suzPen) : Math.max(0, 0.5-suzPen);
+        var p = withBunnyBonus ? Math.max(0, baseProb+btBonus) : Math.max(0, baseProb);
         u._coinResult = Math.random() < p;
       }
       // 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인 성공
@@ -6525,8 +6535,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     // a는 아군 측이라 bunny toss 보너스 적용 (기존 동작 유지)
-    _setCoin(a, aHasCC, suzPenA, true);
-    _setCoin(b, bHasCC, suzPenB, false);
+    _setCoin(a, aHasCC, suzBaseA, true);
+    _setCoin(b, bHasCC, suzBaseB, false);
   })();
 
   // 초기 스냅샷 (개전 전 상태)
