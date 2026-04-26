@@ -9238,6 +9238,17 @@ function submitGameRecord(){
       data.players[name].records.push(record);
       // 최근 10전만 유지
       if(data.players[name].records.length>10) data.players[name].records=data.players[name].records.slice(-10);
+      // 누적 카운터 (records 외 영구 누적 — 10전 손실 방지). 이미 적용됐으면 두 번 카운트 X
+      if(!_alreadyApplied){
+        // 최초 도입 시: 이전 records 수를 기점으로 시작 (이전 게임은 정확 복구 불가)
+        if(data.players[name].totalGames==null) data.players[name].totalGames = (data.players[name].records||[]).length;
+        if(data.players[name].totalWins==null) data.players[name].totalWins = (data.players[name].records||[]).filter(function(r){return r.placement&&r.placement<=4;}).length;
+        if(data.players[name].totalFirsts==null) data.players[name].totalFirsts = (data.players[name].records||[]).filter(function(r){return r.placement===1;}).length;
+        // 신규 게임 카운트
+        data.players[name].totalGames++;
+        if(placement<=4) data.players[name].totalWins++;
+        if(placement===1) data.players[name].totalFirsts++;
+      }
       // 등급 변동 적용 (이미 적용됐으면 다시 적용 X — 같은 게임 두 번 카운트 방지)
       if(!_alreadyApplied){
         var changeResult = applyRankChange(data.players[name].rank, placement);
@@ -9306,9 +9317,10 @@ function renderRecords(){
     if(myName&&data.players[myName]){
       var p=data.players[myName];
       var recs=p.records||[];
-      // 4등 이상을 '승'으로 집계, 1등 횟수 별도 표기
-      var wins=recs.filter(function(r){return r.placement&&r.placement<=4;}).length;
-      var firsts=recs.filter(function(r){return r.placement===1;}).length;
+      // 4등 이상을 '승'으로 집계, 1등 횟수 별도 표기 — 누적 카운터 우선 (없으면 records 폴백)
+      var totalGames = (p.totalGames!=null) ? p.totalGames : recs.length;
+      var wins = (p.totalWins!=null) ? p.totalWins : recs.filter(function(r){return r.placement&&r.placement<=4;}).length;
+      var firsts = (p.totalFirsts!=null) ? p.totalFirsts : recs.filter(function(r){return r.placement===1;}).length;
       // 등급 (없으면 추정)
       var myRank = p.rank || estimateRankFromRecords(recs);
       var myRankColor = rankColor(myRank);
@@ -9329,7 +9341,7 @@ function renderRecords(){
       }
       // === 내 티어 박스 ===
       html+='<div style="margin-bottom:12px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
-      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+recs.length+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
+      html+='<div style="font-size:16px;font-weight:700;color:#ffd700;margin-bottom:4px">'+myName+' <span style="font-size:12px;color:#6a8a9e">('+totalGames+'전 '+wins+'승 · 1등 '+firsts+'회)</span></div>';
       html+='<div style="display:inline-flex;align-items:center;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'">'+rankIconHtml+'<span style="color:'+myRankColor+';font-weight:800;font-size:14px">'+myRankInfo.tierName+' '+myRankInfo.num+'</span>'+posStarsViz+progressText+streakText+'</div>';
       html+='</div>';
 
@@ -9351,8 +9363,9 @@ function renderRecords(){
         var _pp=data.players[_nm];
         var _prRank = _pp.rank || estimateRankFromRecords(_pp.records||[]);
         var _prRecs = _pp.records||[];
-        var _prGames = _prRecs.length;
-        var _prWins = _prRecs.filter(function(r){return r.placement&&r.placement<=4;}).length;
+        // 누적 카운터 우선 (없으면 records 폴백)
+        var _prGames = (_pp.totalGames!=null) ? _pp.totalGames : _prRecs.length;
+        var _prWins = (_pp.totalWins!=null) ? _pp.totalWins : _prRecs.filter(function(r){return r.placement&&r.placement<=4;}).length;
         _rkAll.push({masked:_maskTeacherName(_nm),rank:_prRank,games:_prGames,wins:_prWins,score:_rankSortScore(_prRank)});
       }
       _rkAll.sort(function(a,b){return b.score-a.score || b.wins-a.wins || b.games-a.games;});
