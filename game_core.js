@@ -22,7 +22,7 @@ var CHARS = [
   // 밀레니엄 1학년
   {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
   // 밀레니엄 2학년
-  {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:3,atk:4,hp:4,kw:['taunt','shield'],skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
+  {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:3,atk:4,hp:4,kw:[],            skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
   // 트리니티 1학년
   {id:'kazusa',  name:'카즈사', school:'트리니티',tier:2,atk:3,hp:2,kw:['pierce'],    skin:'카즈사(밴드)',     img:'Kazusa.png',         imgGold:'Kazusa_(Band).png'},
   {id:'mashiro', name:'마시로', school:'트리니티',tier:2,atk:4,hp:2,kw:['ranged'],    skin:'마시로(수영복)',   img:'Mashiro.png',        imgGold:'Mashiro_(Swimsuit).png'},
@@ -49,7 +49,7 @@ var CHARS = [
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:3,hp:4,kw:['shield'],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
   // 밀레니엄 2학년
-  {id:'noa',     name:'노아',   school:'밀레니엄',tier:4,atk:2,hp:6,kw:['survive'],   skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
+  {id:'noa',     name:'노아',   school:'밀레니엄',tier:4,atk:2,hp:6,kw:[],            skin:'노아(파자마)',     img:'Noa.png',            imgGold:'Noa_(Pajama).png'},
   // 트리니티 2학년
   {id:'azusa',   name:'아즈사', school:'트리니티',tier:4,atk:5,hp:5,kw:['ambush'],            skin:'아즈사(수영복)',   img:'Azusa.png',          imgGold:'Azusa_(Swimsuit).png'},
   // 트리니티 3학년
@@ -329,8 +329,8 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1, kaho:1, niya:1, kaede:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1, moe:1, konoka:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1, misuzu:1}; // 개전
-var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1, kirino:1, kurumi:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
+var SURV_IDS = {toki:1, neru:1, reisa:1, kirino:1, kurumi:1}; // 버티기
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1, yuuka:1, noa:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -364,7 +364,7 @@ var ABILITY_DESCS = {
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
-  noa:      {type:'버티기',desc:'상대의 능력(키워드)을 복사합니다.\n아군 유우카에게도 부여합니다.',skinEffect:'파자마 노아: 아군 모든 밀레니엄 학생들에게도 부여',skinEffectDesc:'버티기: 상대의 능력(키워드)을 복사합니다.\n<span style="color:#ffd700;font-weight:700">아군 모든 밀레니엄 학생들에게도</span> 부여합니다.'},
+  noa:      {type:'패시브',desc:'4T 이상의 모든 아군 밀레니엄 학생은\n<개전>이 두 번 발동합니다.\n(중첩되지 않습니다)',skinEffect:'',skinEffectDesc:'패시브: 4T 이상의 모든 아군 밀레니엄 학생은 <개전>이 두 번 발동합니다. (중첩되지 않습니다)'},
   utaha:    {type:'패시브',desc:'밀레니엄의 모든 토큰 소환 시\n스케쥴 레벨만큼의 공/체를 추가합니다.',skinEffect:'치어리더 우타하: 스케쥴 레벨×2',skinEffectDesc:'패시브: 밀레니엄의 모든 토큰 소환 시,\n스케쥴 레벨<span style="color:#ffd700;font-weight:700">×2</span>만큼의 공/체를 추가합니다.'},
   mashiro:  {type:'저격',desc:'저격 공격. 반격을 받지 않습니다.',skinEffect:'수영복 마시로: 관통 추가',skinEffectDesc:'저격+관통: 저격 공격 + 관통 공격.\n반격 없이 모든 적을 관통합니다.'},
   hinata:   {type:'개전',desc:'아군 트리니티 학생 전체에게 +3/+3 부여.',skinEffect:'수영복 히나타: +6/+6',skinEffectDesc:'개전: 아군 트리니티 학생 전체에게 <span style="color:#ffd700;font-weight:700">+6/+6</span> 부여.'},
@@ -476,7 +476,7 @@ var ABILITY_DESCS = {
   iori:     {type:'',desc:'',skinEffect:'수영복 이오리: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
   // ===== 스킨 전용 효과 (기본 능력 없이 스킨만 추가) =====
   shimiko:  {type:'',desc:'',skinEffect:'악의 간부 시미코: 보호막, 광역'},
-  yuuka:    {type:'',desc:'',skinEffect:'체육복 유우카: 개전 자신에게 +2/+2'},
+  yuuka:    {type:'패시브',desc:'3T 이하의 모든 아군 밀레니엄 학생은\n<개전>이 두 번 발동합니다.\n(중첩되지 않습니다)',skinEffect:'',skinEffectDesc:'패시브: 3T 이하의 모든 아군 밀레니엄 학생은 <개전>이 두 번 발동합니다. (중첩되지 않습니다)'},
   arisu:    {type:'',desc:'',skinEffect:'메이드 아리스: 관통 → 광역으로 변경'},
   hina:     {type:'',desc:'',skinEffect:'드레스 히나: 보호막, 연사 추가',skinEffectDesc:'광역+<span style="color:#ffd700;font-weight:700">보호막+연사</span>: 광역에 보호막과 연사가 추가됩니다.'},
 };
@@ -5206,10 +5206,30 @@ function resolveStartOfCombat(a, b, log) {
         log.push({cls:'soc',text:'[개전] '+side[i].name+': 트리니티 개전 +'+extra+'회!'});
       }
     }
+    // 유우카(3T 이하 밀레니엄) / 노아(4T 이상 밀레니엄): 두 번 발동 (중첩 X, fix 2회)
+    var milRepeatLow=1, milRepeatHigh=1;
+    var milYuukaLogged=false, milNoaLogged=false;
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&!side[i]._socStripped&&!side[i]._abilitiesStripped){
+        if(side[i].baseId==='yuuka' && milRepeatLow<2){
+          milRepeatLow=2;
+          if(!milYuukaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 3T 이하 밀레니엄 개전 두 번 발동!'});milYuukaLogged=true;}
+        }
+        if(side[i].baseId==='noa' && milRepeatHigh<2){
+          milRepeatHigh=2;
+          if(!milNoaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 4T 이상 밀레니엄 개전 두 번 발동!'});milNoaLogged=true;}
+        }
+      }
+    }
     for(var i=0;i<side.length;i++){
       if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha'||side[i].baseId==='shizuko'||side[i].baseId==='atsuko') continue;
       if(side[i]._socStripped) continue; // 아츠코로 무력화된 카드 제외
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
+      // 밀레니엄 학교: 유우카(저티어)/노아(고티어) 패시브로 추가 발동
+      if(side[i].school==='밀레니엄'){
+        if(side[i].tier<=3) repeat *= milRepeatLow;
+        else repeat *= milRepeatHigh;
+      }
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
     }
     // 츠루기: 다른 개전 효과를 모두 받은 후 마지막에 발동 (카야 제외)
@@ -6198,33 +6218,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       log2.push({cls:'soc',text:'[버티기] '+unit.name+': 상대 전체 공격력 -'+debuff});
       surviveEffects.push({type:'debuff',baseId:'mimori',amount:debuff});
     }
-    else if(unit.baseId==='noa'&&hitBy){
-      // 상대의 키워드를 복사
-      var copied=[];
-      for(var i=0;i<hitBy.kw.length;i++){
-        var kk=hitBy.kw[i];
-        if(!hasKw(unit,kk)){addKw(unit,kk);copied.push(KW_LABELS[kk]||kk);}
-      }
-      if(copied.length>0){
-        log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+hitBy.name+'의 능력 복사! ('+copied.join(', ')+')'});
-        // 유우카가 있으면 유우카에게도 부여 (황금: 밀레니엄 전체)
-        var targets=[];
-        if(unit.isSkin){
-          for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].school==='밀레니엄'&&side[i]!==unit)targets.push(side[i]);}
-        } else {
-          for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='yuuka')targets.push(side[i]);}
-        }
-        for(var t=0;t<targets.length;t++){
-          var tc=[];
-          for(var j=0;j<hitBy.kw.length;j++){
-            var kk2=hitBy.kw[j];
-            if(!hasKw(targets[t],kk2)){addKw(targets[t],kk2);tc.push(KW_LABELS[kk2]||kk2);}
-          }
-          if(tc.length>0) log2.push({cls:'soc',text:'  → '+targets[t].name+'에게도 부여: '+tc.join(', ')});
-        }
-        surviveEffects.push({type:'keyword',baseId:'noa',kw:copied.join(',')});
-      }
-    }
+    // 노아 SURV 효과 삭제 — PASSIVE로 변경됨 (4T+ 밀레니엄 SOC 두 번 발동)
     // ===== 발키리/SRT 버티기 =====
     else if(unit.baseId==='kirino'&&unit.isSkin){
       // 스킨 키리노: 본인 +2/+2
