@@ -3986,7 +3986,8 @@
               "img": "Yuzu_(Maid).png",
               "school": "밀레니엄"
             }
-          ]
+          ],
+          "pinned": true
         }
       ],
       "points": 65,
