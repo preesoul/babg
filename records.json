@@ -3285,82 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T16:25:48",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "리오(임전)",
-              "baseId": "rio",
-              "atk": 52,
-              "hp": 52,
-              "tier": 6,
-              "kw": [
-                "windfury",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Rio_(Battle).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 18,
-              "hp": 16,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt",
-                "poison",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "시즈코(수영복)",
-              "baseId": "shizuko",
-              "atk": 23,
-              "hp": 21,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Shizuko_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "스즈미",
-              "baseId": "suzumi",
-              "atk": 18,
-              "hp": 22,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Suzumi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T23:24:43",
           "placement": 1,
           "turn": 18,
@@ -3988,26 +3912,89 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T15:46:29",
+          "placement": 6,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "노노미(수영복)",
+              "baseId": "nonomi",
+              "atk": 11,
+              "hp": 11,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Nonomi_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "사쿠라코(아이돌)",
+              "baseId": "sakurako",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sakurako_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 39,
+      "points": 46,
       "questState": {
         "daily": {
           "date": "2026-04-27",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 4,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 4,
+              "completed": true
             },
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 6,
               "completed": false
             }
           ],
@@ -4023,12 +4010,12 @@
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 4,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             }
           ]
@@ -4109,8 +4096,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 11,
-        "legendPoints": 12
+        "streak": 0,
+        "legendPoints": 11
       }
     },
     "킹갓프리소울": {
