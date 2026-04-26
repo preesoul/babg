@@ -128,6 +128,10 @@ var CHARS = [
   {id:'nagusa',  name:'나구사', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],skin:'나구사(수영복)',img:'Nagusa.png',imgGold:'Nagusa_(Swimsuit).png'},
   {id:'wakamo',  name:'와카모', school:'백귀야행',tier:6,atk:5,hp:7,kw:['preemptive'],locked:true, skin:'와카모(수영복)',img:'Wakamo.png',imgGold:'Wakamo_(Swimsuit).png'},
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
+  // 백귀야행 신규 (3종)
+  {id:'kaede',   name:'카에데', school:'백귀야행',tier:1,atk:2,hp:2,kw:[],            skin:'카에데(가이드)',   img:'Kaede.png',          imgGold:'Kaede_(Guide).png'},
+  {id:'kaho',    name:'카호',   school:'백귀야행',tier:5,atk:3,hp:3,kw:[],            skin:'',                 img:'Kaho.png',           imgGold:''},
+  {id:'niya',    name:'니야',   school:'백귀야행',tier:6,atk:2,hp:1,kw:[],            skin:'니야(임전)',       img:'Niya.png',           imgGold:'Niya_(Battle).png'},
 
   // ===== 아비도스 (잠금 해제 필요) =====
   {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
@@ -273,9 +277,9 @@ var CHAR_GRADES = {
   koyuki:1, akane:2, karin:2, asuna:3,
   koharu:1, shimiko:1, suzumi:2, hasumi:3,
   haine:1, momoka:1, ayumu:2, aoi:2, kaya:3, lin:3,
-  izuna:1, pina:1, yukari:1, tsukuyo:1,
+  izuna:1, pina:1, yukari:1, tsukuyo:1, kaede:2,
   mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
-  nagusa:3, wakamo:3, michiru:3,
+  nagusa:3, wakamo:3, michiru:3, kaho:3, niya:3,
   ayane:1, serika:2, nonomi:2, shiroko:3, hoshino:3,
   kokona:1, mina:1, reijo:2, saya:2, rumi:3, shun:3, kisaki:3
 };
@@ -320,7 +324,7 @@ var START_HP = 40;
 var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
-var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1};                               // 첫인사
+var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1, kaho:1, niya:1, kaede:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1, moe:1, konoka:1}; // 뒤끝
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1, kirino:1, kurumi:1}; // 버티기
@@ -386,6 +390,10 @@ var ABILITY_DESCS = {
   kikyou:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 키쿄: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   chise:    {type:'뒤끝',desc:'아군 백귀야행 학생 2명의\n첫인사를 발동합니다.',skinEffect:'수영복 치세: 전원의 첫인사를 발동',skinEffectDesc:'뒤끝: 아군 백귀야행 <span style="color:#ffd700;font-weight:700">전원</span>의\n첫인사를 발동합니다.'},
   michiru:  {type:'개전 / 첫인사',desc:'개전: 아군 백귀야행 학생 무작위 1명에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 기습 2명 부여 / 첫인사 두 번 발동',skinEffectDesc:'개전: 아군 백귀야행 학생 무작위 <span style="color:#ffd700;font-weight:700">2명</span>에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
+  // 백귀야행 신규 (3종)
+  kaede:    {type:'첫인사',desc:'이번 게임 동안, 스케쥴(상점)의\n백귀야행 학생들에게 +1/+1 부여.',skinEffect:'가이드 카에데: +2/+2',skinEffectDesc:'첫인사: 이번 게임 동안, 스케쥴의\n백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+2/+2</span> 부여.'},
+  kaho:     {type:'첫인사',desc:'샬레의 백귀야행 학생 카드 중\n하나를 선택해 그 카드로 교체됩니다.\n교체된 카드와 같은 학생이 보드에\n이미 있다면 즉시 스킨으로 합체합니다.\n(버프·액션카드 적용은 제외, 기본 형태)',skinEffect:'',skinEffectDesc:'첫인사: 백귀야행 카드 1장을 선택해 그 카드로 교체.\n같은 학생이 1장 더 있으면 즉시 스킨 합체 (기본 형태).'},
+  niya:     {type:'첫인사',desc:'스케쥴(상점)을 샬레의 백귀야행\n학생들과 같은 카드들로 교체합니다.',skinEffect:'임전 니야: 그 학생들의 공격력과 체력 두 배',skinEffectDesc:'첫인사: 스케쥴(상점)을 샬레의 백귀야행 학생들과 같은 카드들로 교체합니다.\n그 학생들의 공격력과 체력이 <span style="color:#ffd700;font-weight:700">두 배</span>가 됩니다.'},
   nagusa:   {type:'선빵 / 뒤끝',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 7)\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선빵: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   wakamo:   {type:'선빵 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선빵: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)'},
   hovercraft:{type:'뒤끝',desc:'아군 와카모가 모두 쓰러진 상태라면\n와카모를 소환합니다.\n(황금 호버크래프트: 와카모(수영복) 소환)',skinEffect:'스킨 호버크래프트: 20/20\n와카모(수영복) 소환'},
@@ -644,6 +652,16 @@ function applyShopBuff(shop) {
   if(G.shopBuff && G.shopBuff>0){
     for(var i=0;i<shop.length;i++){if(shop[i]&&!shop[i].isSpell){shop[i].atk+=G.shopBuff;shop[i].hp+=G.shopBuff;}}
     // shopBuff는 리셋하지 않음 — 게임 내내 유지
+  }
+  // 학교별 shop buff (카에데 효과 등) — 게임 내내 누적
+  if(G.shopSchoolBuff){
+    for(var i=0;i<shop.length;i++){
+      var s=shop[i];
+      if(s&&!s.isSpell){
+        var sb=G.shopSchoolBuff[s.school];
+        if(sb&&sb>0){s.atk+=sb;s.hp+=sb;}
+      }
+    }
   }
 }
 
@@ -982,6 +1000,7 @@ function newGame() {
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
     nonomiStoneSinceJoined:0,_shirokoTerrorAbsorbed:[],_shirokoKillsThisBattle:0,_ayaneDeathsThisBattle:0,
     valkyrieKills:0,valkyrieDeaths:0,
+    shopSchoolBuff:{},
     aiDifficulty:_aiDiff};
   rollShop();
   aiTurns();
@@ -2538,6 +2557,128 @@ function _doBC(m, p) {
       t.atk+=ga;t.hp+=gh;t.maxHp=(t.maxHp||t.hp);t.maxHp+=gh;
       logBuff(t,m.name,ga,gh);
       if(fbIsSkin) _fubukiSelfDestroy(p);
+    }
+  }
+  // ===== 백귀야행 신규 첫인사 =====
+  else if(id==='kaede'){
+    // 카에데: 이번 게임 동안 스케쥴(상점) 백귀야행 학생들에게 +1/+1 (스킨: +2/+2)
+    var kdBuff = m.isSkin ? 2 : 1;
+    if(!G.shopSchoolBuff) G.shopSchoolBuff = {};
+    G.shopSchoolBuff['백귀야행'] = (G.shopSchoolBuff['백귀야행']||0) + kdBuff;
+    // 현재 상점에도 즉시 적용
+    var shopRef = p.isPlayer ? G.shop : p.aiShop;
+    if(shopRef){
+      for(var i=0;i<shopRef.length;i++){
+        var s=shopRef[i];
+        if(s&&!s.isSpell&&s.school==='백귀야행'){
+          s.atk+=kdBuff;s.hp+=kdBuff;
+          if(s.maxHp) s.maxHp+=kdBuff;
+        }
+      }
+    }
+  }
+  else if(id==='kaho'){
+    // 카호: 보드 백귀야행 1명 선택 → 그 카드(기본 형태)로 교체. 같은 baseId 보드+벤치 합 ≥1이면 즉시 스킨 합체
+    var kahoTargets=[];
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i]!==m && p.board[i].school==='백귀야행' && !p.board[i].isSkin){
+        kahoTargets.push(i);
+      }
+    }
+    if(kahoTargets.length===0) return;
+    function _kahoTransform(p2, idx){
+      var t=p2.board[idx];
+      if(!t||t===m) return false;
+      var targetTmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===t.baseId){targetTmpl=CHARS[j];break;}
+      if(!targetTmpl) return false;
+      var kahoIdx = p2.board.indexOf(m);
+      if(kahoIdx === -1) return false;
+      // 카호 위치에 새 학생을 base 형태로 배치
+      var newU = makeMinion(targetTmpl, false);
+      p2.board[kahoIdx] = newU;
+      returnToPool(m.baseId, m.isSkin?3:1);
+      // 카호 효과: 같은 baseId 비스킨 카드가 보드(이 새 카드 포함)에 2장 이상이면 즉시 스킨 합체 (기본 형태)
+      var sameSrcs=[];
+      for(var i=0;i<p2.board.length;i++){
+        if(p2.board[i].baseId===targetTmpl.id&&!p2.board[i].isSkin) sameSrcs.push(p2.board[i]);
+      }
+      if(p2.bench&&p2.bench.baseId===targetTmpl.id&&!p2.bench.isSkin) sameSrcs.push(p2.bench);
+      if(sameSrcs.length>=2){
+        // 보드/벤치 같은 baseId 비스킨 모두 제거 + 풀 반환
+        var newBoard=[];
+        for(var i=0;i<p2.board.length;i++){
+          var u2=p2.board[i];
+          if(u2.baseId===targetTmpl.id&&!u2.isSkin){
+            returnToPool(u2.baseId, 1);
+          } else { newBoard.push(u2); }
+        }
+        if(p2.bench&&p2.bench.baseId===targetTmpl.id&&!p2.bench.isSkin){
+          returnToPool(p2.bench.baseId, 1);
+          p2.bench=null;
+        }
+        p2.board=newBoard;
+        // 기본 형태 스킨 (buff/액션카드 효과 X)
+        var gld=makeMinion(targetTmpl,true);
+        applySkinKwTransform(targetTmpl,gld);
+        p2.board.push(gld);
+        triggerBattlecry(gld,p2);
+      } else {
+        // 합체 없이 그대로. 새 카드의 BC 발동
+        triggerBattlecry(newU,p2);
+      }
+      return true;
+    }
+    if(p.isPlayer){
+      G.pendingSpell={id:'kaho_bc', name:'카호 첫인사', target:'select_ally',
+        effect: function(G2, idx){
+          var p2=G2.players[0];
+          // 백귀야행 비스킨만 허용 (카호 자신 제외)
+          if(idx===undefined||!p2.board[idx]||p2.board[idx]===m||p2.board[idx].school!=='백귀야행'||p2.board[idx].isSkin) return false;
+          return _kahoTransform(p2, idx);
+        }
+      };
+      renderAll();
+    } else {
+      // AI: 무작위 백귀야행 학생 선택
+      var aiPickIdx = kahoTargets[Math.floor(Math.random()*kahoTargets.length)];
+      _kahoTransform(p, aiPickIdx);
+    }
+  }
+  else if(id==='niya'){
+    // 니야: 보드 백귀야행 학생들의 baseId로 상점(스케쥴) 교체. 스킨이면 그 카드들 atk/hp 두 배
+    var hkykIds = [];
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i].school==='백귀야행' && p.board[i]!==m){
+        hkykIds.push(p.board[i].baseId);
+      }
+    }
+    if(hkykIds.length===0) return;
+    var size = SHOP_SIZE[p.tier]||3;
+    // 기존 shop 풀 반환 (스펠 제외)
+    var shopRef = p.isPlayer ? G.shop : p.aiShop;
+    if(shopRef){
+      for(var i=0;i<shopRef.length;i++){
+        if(shopRef[i]&&!shopRef[i].isSpell) returnToPool(shopRef[i].baseId);
+      }
+    }
+    var newShop = [];
+    for(var i=0;i<size;i++){
+      var bid = hkykIds[i % hkykIds.length];
+      var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===bid){tmpl=CHARS[j];break;}
+      if(!tmpl) continue;
+      var newCard = makeMinion(tmpl, false);
+      if(m.isSkin){
+        newCard.atk *= 2; newCard.hp *= 2; newCard.maxHp = newCard.hp;
+      }
+      newShop.push(newCard);
+    }
+    if(p.isPlayer){
+      G.shop = newShop;
+      addSpellToShop();
+      // 학교별 buff (카에데 효과 등) 즉시 적용
+      applyShopBuff(G.shop);
+    } else {
+      p.aiShop = newShop;
     }
   }
   // 히마리: 첫인사 제거 → 개전(SOC)으로 이동
@@ -8220,7 +8361,7 @@ function saveGame(){
       turn:G.turn,phase:G.phase,aliveCount:G.aliveCount,placement:G.placement,
       shop:G.shop.map(function(s){if(!s)return null;if(s.isSpell)return{isSpell:true,spell:s.spell,name:s.name,cost:s.cost,desc:s.desc,tier:s.tier,target:s.target,img:s.img||null};if(s.isHidden)return{isHidden:true,baseId:s.baseId,name:s.name,school:s.school,tier:s.tier,atk:s.atk,hp:s.hp,kw:(s.kw||[]).slice(),img:s.img};return{id:s.id,baseId:s.baseId,name:s.name,school:s.school,tier:s.tier,atk:s.atk,hp:s.hp,kw:(s.kw||[]).slice(),img:s.img,isSkin:s.isSkin||false,cost:s.cost||3};}),
       frozen:G.frozen||false,
-      bonusStone:G.bonusStone||0,shopBuff:G.shopBuff||0,freeRerolls:G.freeRerolls||0,
+      bonusStone:G.bonusStone||0,shopBuff:G.shopBuff||0,shopSchoolBuff:G.shopSchoolBuff||{},freeRerolls:G.freeRerolls||0,
       pool:G.pool,hiddenCardsOwned:G.hiddenCardsOwned,hiddenCardsEverOwned:G.hiddenCardsEverOwned,
       permanentAbilityBan:G.permanentAbilityBan,shopExclusions:G.shopExclusions,
       keiseisenCounters:G.keiseisenCounters,millenniumTokenSummons:G.millenniumTokenSummons,
@@ -8278,7 +8419,7 @@ function restoreGame(save){
   });
   G={players:players,turn:save.turn,phase:save.phase||'recruit',
     shop:save.shop||[],aliveCount:save.aliveCount,placement:save.placement||0,
-    frozen:save.frozen||false,bonusStone:save.bonusStone||0,shopBuff:save.shopBuff||0,
+    frozen:save.frozen||false,bonusStone:save.bonusStone||0,shopBuff:save.shopBuff||0,shopSchoolBuff:save.shopSchoolBuff||{},
     pendingSpell:null,pool:save.pool,rioSchool:null,freeRerolls:save.freeRerolls||0,
     purchasedSchools:players[0].purchasedSchools||{},
     totalDamageTaken:save.totalDamageTaken||0,
