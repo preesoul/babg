@@ -130,7 +130,7 @@ var CHARS = [
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
   // 백귀야행 신규 (3종)
   {id:'kaede',   name:'카에데', school:'백귀야행',tier:1,atk:2,hp:2,kw:[],            skin:'카에데(가이드)',   img:'Kaede.png',          imgGold:'Kaede_(Guide).png'},
-  {id:'kaho',    name:'카호',   school:'백귀야행',tier:5,atk:3,hp:3,kw:[],            skin:'',                 img:'Kaho.png',           imgGold:''},
+  {id:'kaho',    name:'카호',   school:'백귀야행',tier:5,atk:3,hp:3,kw:[],            skin:'카호(슴가)',       img:'Kaho.png',           imgGold:'Kaho_(boobs).png'},
   {id:'niya',    name:'니야',   school:'백귀야행',tier:6,atk:2,hp:1,kw:[],            skin:'니야(임전)',       img:'Niya.png',           imgGold:'Niya_(Battle).png'},
 
   // ===== 아비도스 (잠금 해제 필요) =====
@@ -392,7 +392,7 @@ var ABILITY_DESCS = {
   michiru:  {type:'개전 / 첫인사',desc:'개전: 아군 백귀야행 학생 무작위 1명에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 발동합니다.',skinEffect:'드레스 미치루: 기습 2명 부여 / 첫인사 두 번 발동',skinEffectDesc:'개전: 아군 백귀야행 학생 무작위 <span style="color:#ffd700;font-weight:700">2명</span>에게\n기습을 부여합니다.\n첫인사: 다른 모든 백귀야행 학생들의\n첫인사를 추가로 <span style="color:#ffd700;font-weight:700">두 번</span> 발동합니다.'},
   // 백귀야행 신규 (3종)
   kaede:    {type:'첫인사',desc:'이번 게임 동안, 스케쥴(상점)의\n백귀야행 학생들에게 +1/+1 부여.',skinEffect:'가이드 카에데: +2/+2',skinEffectDesc:'첫인사: 이번 게임 동안, 스케쥴의\n백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+2/+2</span> 부여.'},
-  kaho:     {type:'첫인사',desc:'샬레의 백귀야행 학생 카드 중\n하나를 선택해 그 카드(기본 형태)로 교체됩니다.\n교체된 카드와 같은 학생이 보드에\n이미 있다면 즉시 스킨으로 합체합니다.\n(버프·액션카드 적용은 제외, 기본 형태)\n스킨 카드를 선택해도 그 카드의 기본\n형태로 변신합니다.',skinEffect:'',skinEffectDesc:'첫인사: 백귀야행 카드 1장을 선택해 그 카드(기본 형태)로 교체.\n같은 학생이 1장 더 있으면 즉시 스킨 합체.\n스킨 카드 선택 시에도 base 형태로 변신.'},
+  kaho:     {type:'첫인사',desc:'샬레의 백귀야행 학생 카드 중\n하나를 선택해 그 카드(기본 형태)로 교체됩니다.\n교체된 카드와 같은 학생이 보드에\n이미 2장 있다면(총 3장) 즉시 스킨으로 합체합니다.\n(버프·액션카드 적용은 제외, 기본 형태)\n스킨 카드를 선택해도 그 카드의 기본\n형태로 변신합니다.',skinEffect:'슴가 카호: 추가 효과 없음 (이스터에그)',skinEffectDesc:'스킨 카호: 추가 효과 없음 (단순 스킨)\n첫인사: 백귀야행 카드 1장을 선택해 그 카드(기본 형태)로 교체.\n같은 학생이 2장 더 있으면 즉시 스킨 합체.'},
   niya:     {type:'첫인사',desc:'스케쥴(상점)을 샬레의 백귀야행\n학생들과 같은 카드들로 교체합니다.',skinEffect:'임전 니야: 그 학생들의 공격력과 체력 두 배',skinEffectDesc:'첫인사: 스케쥴(상점)을 샬레의 백귀야행 학생들과 같은 카드들로 교체합니다.\n그 학생들의 공격력과 체력이 <span style="color:#ffd700;font-weight:700">두 배</span>가 됩니다.'},
   nagusa:   {type:'선빵 / 뒤끝',desc:'2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다. (최대 7)\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 나구사: 부활 추가',skinEffectDesc:'선빵: 2~5회 공격합니다.\n타격 1회당 <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   wakamo:   {type:'선빵 / 패시브',desc:'2~5회 공격합니다.\n타격 횟수만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 10/10, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)',skinEffect:'수영복 와카모: 4~10회, 카운터 2배',skinEffectDesc:'선빵: <span style="color:#ffd700;font-weight:700">4~10회</span> 공격합니다.\n타격 횟수<span style="color:#ffd700;font-weight:700">×2</span>만큼 <호버크래프트> 카운터를 쌓습니다.\n패시브: 카운터 4개가 쌓이면 0으로 되돌리며 <호버크래프트>를 소환합니다.\n(호버크래프트: 20/20, 뒤끝: 아군 필드에 와카모가 없다면 와카모를 불러옵니다.)'},
@@ -2598,13 +2598,14 @@ function _doBC(m, p) {
       var newU = makeMinion(targetTmpl, false);
       p2.board[kahoIdx] = newU;
       returnToPool(m.baseId, m.isSkin?3:1);
-      // 카호 효과: 같은 baseId 비스킨 카드가 보드(이 새 카드 포함)에 2장 이상이면 즉시 스킨 합체 (기본 형태)
+      // 카호 효과: 변신 후 같은 baseId 비스킨 카드가 보드+벤치 합 ≥3이면 (즉, 변신 전에 2장 더 있었으면) 즉시 스킨 합체
+      // 일반 트리플 룰과 동일하게 3장이어야 합체. 1장만 있는데 합쳐지는 버그 방지.
       var sameSrcs=[];
       for(var i=0;i<p2.board.length;i++){
         if(p2.board[i].baseId===targetTmpl.id&&!p2.board[i].isSkin) sameSrcs.push(p2.board[i]);
       }
       if(p2.bench&&p2.bench.baseId===targetTmpl.id&&!p2.bench.isSkin) sameSrcs.push(p2.bench);
-      if(sameSrcs.length>=2){
+      if(sameSrcs.length>=3){
         // 보드/벤치 같은 baseId 비스킨 모두 제거 + 풀 반환
         var newBoard=[];
         for(var i=0;i<p2.board.length;i++){
