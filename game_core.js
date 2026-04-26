@@ -1217,8 +1217,18 @@ function injectHiddenToShop() {
     hkyk_kuzunoha:0.60,
     red_winter_minori:0.60
   };
+  // 안전망: push 직전 강한 조건 재확인 (eligible 누수 방지)
+  function _hardCheck(hid){
+    if(hid==='millennium_malkuth') return (G.millenniumTokenSummons||0) >= 10;
+    if(hid==='trinity_seia') return (G.totalDamageTaken||0) === 0;
+    if(hid==='gehenna_traingun') return Object.keys(G.purchasedSchools||{}).length===1 && G.purchasedSchools['게헨나'];
+    if(hid==='trinity_mika') return Object.keys(G.purchasedSchools||{}).length===1 && G.purchasedSchools['트리니티'];
+    if(hid==='millennium_nameless') return Object.keys(G.purchasedSchools||{}).length===1 && G.purchasedSchools['밀레니엄'];
+    return true;
+  }
   for(var h=0;h<eligible.length;h++){
     var hid=eligible[h];
+    if(!_hardCheck(hid)) continue;
     var rate=(_singleSchoolRates[hid]!==undefined)?_singleSchoolRates[hid]:_baseRate;
     if(Math.random()<rate){
       var htmpl=findHiddenChar(hid);
@@ -1370,7 +1380,7 @@ function applyPendingSpell(idx) {
 
 function showSchoolSelect() {
   var overlay=document.getElementById('battle-overlay');
-  var schools=['게헨나','밀레니엄','트리니티','백귀야행','아비도스','산해경','총학생회'];
+  var schools=['게헨나','밀레니엄','트리니티','백귀야행','아비도스','산해경','총학생회','아리우스 분교','발키리/SRT'];
   var html='<div class="battle-intro"><h3 style="margin-bottom:16px">학교를 선택하세요</h3>';
   for(var i=0;i<schools.length;i++) html+='<button class="btn btn-blue school-pick" data-school="'+schools[i]+'" style="margin:4px 8px;padding:10px 24px;font-size:16px">'+schools[i]+'</button>';
   html+='</div>';
