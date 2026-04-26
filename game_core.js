@@ -3767,6 +3767,7 @@ function aiGetStrategy(p) {
     strat.dominantSchool = p._forcedSchool;
     strat.schoolBonus = 7;
     strat.avoidOtherSchools = false;
+    if(p._forcedTargetUnits) strat.targetUnits = p._forcedTargetUnits.slice();
   }
   // Count schools on board
   var schoolCount={},total=p.board.length;
@@ -9347,6 +9348,17 @@ function runSimGameSchoolMatch(schools){
     for(var ci=0;ci<CHARS.length;ci++) simPool[CHARS[ci].id]=6;
     G.pool=simPool;
 
+    // 학교별 핵심 카드 (AI 영입 우선도 강화)
+    var SCHOOL_PRIORITY_CARDS = {
+      '게헨나': ['kasumi','sena','satsuki','ako','hina','makoto','iroha','iori','aru','mutsuki','kayoko','haruka','chiaki','ibuki','chinatsu'],
+      '트리니티': ['sakurako','hinata','mari','mine','tsurugi','hifumi','azusa','hanako','ichika','mashiro','kazusa','reisa','ui','suzumi','hasumi'],
+      '밀레니엄': ['yuuka','noa','rio','himari','asuna','momoi','midori','akane','karin','toki','utaha','eimi','arisu','yuzu','hibiki','koyuki','neru'],
+      '백귀야행': ['michiru','shizuko','wakamo','tsubaki','tsukuyo','izuna','nagusa','chise','kikyou','renge','mimori','pina','yukari','kaede'],
+      '발키리/SRT': ['konoka','kanna','niko','miyako','kurumi','kirino','fubuki','miyu','moe','saki','otogi','yukino'],
+      '아비도스': ['shiroko','hoshino','nonomi','ayane','serika'],
+      '아리우스 분교': ['saori','misaki','atsuko','hiyori','subaru'],
+      '산해경': ['kisaki','rumi','shun','saya','reijo','mina','kokona']
+    };
     // 더미 + 8명 NPC
     var simPlayers=[{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
     for(var si=0;si<8;si++){
@@ -9354,6 +9366,7 @@ function runSimGameSchoolMatch(schools){
       simPlayers.push({
         id:'sim_'+si, name:'NPC_'+schools[si],
         _forcedSchool:schools[si], // 학교 강제 (우선도)
+        _forcedTargetUnits:SCHOOL_PRIORITY_CARDS[schools[si]]||[], // 학교 핵심 카드 우선
         hp:40, stone:3, turnStone:2,
         tier:1, upgradeCost:UPGRADE_COSTS[1],
         board:[], dead:false, isPlayer:false,
