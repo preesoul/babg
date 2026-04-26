@@ -8454,9 +8454,76 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T23:50:11",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 61,
+              "hp": 62,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "모모카(승무원)",
+              "baseId": "momoka",
+              "atk": 13,
+              "hp": 11,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Momoka_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "토라마루",
+              "baseId": "iroha",
+              "atk": 5,
+              "hp": 1,
+              "tier": 0,
+              "kw": [],
+              "isSkin": false,
+              "img": "token/toramaru.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 5,
+              "hp": 3,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 17,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8468,8 +8535,8 @@
             },
             {
               "id": "gehenna10",
-              "progress": 2,
-              "completed": false
+              "progress": 17,
+              "completed": true
             },
             {
               "id": "trinity10",
@@ -8484,13 +8551,13 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "hidden1",
@@ -8522,9 +8589,9 @@
         "gehenna_p68"
       ],
       "rank": {
-        "tier": 5,
+        "tier": 4,
         "stars": 0,
-        "streak": 5,
+        "streak": 6,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -8541,9 +8608,9 @@
         "sena",
         "niya"
       ],
-      "totalGames": 6,
-      "totalWins": 6,
-      "totalFirsts": 6
+      "totalGames": 7,
+      "totalWins": 7,
+      "totalFirsts": 7
     },
     "박민철": {
       "records": [
