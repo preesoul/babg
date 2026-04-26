@@ -20,7 +20,7 @@ var CHARS = [
   {id:'juri',    name:'주리',   school:'게헨나',  tier:1,atk:2,hp:2,kw:[],             skin:'주리(웨이트리스)',img:'Juri.png',           imgGold:'Juri_(maid).png'},
   {id:'chinatsu',name:'치나츠', school:'게헨나',  tier:2,atk:1,hp:4,kw:[],            skin:'치나츠(온천)',     img:'Chinatsu.png',       imgGold:'Chinatsu_(Hot_Spring).png'},
   // 밀레니엄 1학년
-  {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:2,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
+  {id:'momoi',   name:'모모이', school:'밀레니엄',tier:1,atk:1,hp:2,kw:['taunt'],     skin:'모모이(메이드)',   img:'Momoi.png',          imgGold:'Momoi_(Maid).png'},
   // 밀레니엄 2학년
   {id:'yuuka',   name:'유우카', school:'밀레니엄',tier:3,atk:4,hp:4,kw:['taunt','shield'],skin:'유우카(체육복)',   img:'Yuuka.png',          imgGold:'Yuuka_(Sportswear).png'},
   // 트리니티 1학년
@@ -38,13 +38,13 @@ var CHARS = [
   {id:'hibiki',  name:'히비키', school:'밀레니엄',tier:3,atk:4,hp:3,kw:[],             skin:'히비키(치어리더)',img:'Hibiki.png',          imgGold:'Hibiki_(Cheerleader).png'},
   {id:'yuzu',    name:'유즈',   school:'밀레니엄',tier:2,atk:2,hp:3,kw:[],            skin:'유즈(메이드)',     img:'Yuzu.png',           imgGold:'Yuzu_(Maid).png'},
   // 트리니티 2학년
-  {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:5,hp:1,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
+  {id:'ichika',  name:'이치카', school:'트리니티',tier:3,atk:6,hp:2,kw:['shield','windfury'],skin:'이치카(수영복)',img:'Ichika.png',     imgGold:'Ichika_(Swimsuit).png'},
   {id:'hanako',  name:'하나코', school:'트리니티',tier:4,atk:3,hp:6,kw:['poison'],    skin:'하나코(수영복)',   img:'Hanako.png',         imgGold:'Hanako_(Swimsuit).png'},
-  {id:'hifumi',  name:'히후미', school:'트리니티',tier:3,atk:2,hp:3,kw:[],    skin:'히후미(수영복)',   img:'Hifumi.png',         imgGold:'Hifumi_(Swimsuit).png'},
+  {id:'hifumi',  name:'히후미', school:'트리니티',tier:3,atk:3,hp:4,kw:[],    skin:'히후미(수영복)',   img:'Hifumi.png',         imgGold:'Hifumi_(Swimsuit).png'},
 
   // ===== Tier 4 (밸류12) =====
   // 게헨나 2학년
-  {id:'iori',    name:'이오리', school:'게헨나',  tier:3,atk:5,hp:1,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
+  {id:'iori',    name:'이오리', school:'게헨나',  tier:3,atk:5,hp:2,kw:['shield','windfury'],skin:'이오리(수영복)',img:'Iori.png',     imgGold:'Iori_(Swimsuit).png'},
   {id:'iroha',   name:'이로하', school:'게헨나',  tier:3,atk:3,hp:3,kw:[],            skin:'이로하(수영복)',   img:'Iroha.png',          imgGold:'Iroha_(Swimsuit).png'},
   // 밀레니엄 1학년
   {id:'eimi',    name:'에이미', school:'밀레니엄',tier:3,atk:3,hp:4,kw:['shield'],             skin:'에이미(수영복)',   img:'Eimi.png',           imgGold:'Eimi_(Swimsuit).png'},
@@ -86,7 +86,7 @@ var CHARS = [
   {id:'chiaki',  name:'치아키', school:'게헨나',  tier:3,atk:5,hp:3,kw:['ranged'],        skin:'치아키(수영복)',   img:'Chiaki.png',         imgGold:'Chiaki_(Swimsuit).png'},
   // ===== 밀레니엄 신규 =====
   // 밀레니엄 1학년
-  {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:2,atk:1,hp:1,kw:['preemptive'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
+  {id:'koyuki',  name:'코유키', school:'밀레니엄',tier:2,atk:1,hp:2,kw:['preemptive'],   skin:'코유키(파자마)',   img:'Koyuki.png',         imgGold:'Koyuki_(Pajama).png'},
   // 밀레니엄 2학년
   {id:'akane',   name:'아카네', school:'밀레니엄',tier:3,atk:2,hp:4,kw:[],               skin:'아카네(버니걸)',   img:'Akane.png',          imgGold:'Akane_(Bunny_Girl).png'},
   {id:'karin',   name:'카린',   school:'밀레니엄',tier:4,atk:6,hp:3,kw:['ranged','pierce'],skin:'카린(버니걸)',   img:'Karin.png',          imgGold:'Karin_(Bunny_Girl).png'},
@@ -95,7 +95,7 @@ var CHARS = [
   // ===== 트리니티 신규 =====
   // 트리니티 1학년
   {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
-  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:4,hp:4,kw:[],                skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
+  {id:'shimiko', name:'시미코', school:'트리니티',tier:1,atk:4,hp:3,kw:[],                skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
   // 트리니티 2학년
   {id:'suzumi',  name:'스즈미', school:'트리니티',tier:3,atk:2,hp:4,kw:[],                skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   // 트리니티 3학년
@@ -118,7 +118,7 @@ var CHARS = [
   {id:'yukari',  name:'유카리', school:'백귀야행',tier:2,atk:2,hp:1,kw:['reborn','preemptive'],skin:'유카리(수영복)',img:'Yukari.png',     imgGold:'Yukari_(Swimsuit).png'},
   {id:'tsukuyo', name:'츠쿠요', school:'백귀야행',tier:2,atk:3,hp:2,kw:[],            skin:'츠쿠요(드레스)',   img:'Tsukuyo.png',        imgGold:'Tsukuyo_(Dress).png'},
   // 백귀야행 2학년
-  {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:3,kw:['taunt'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
+  {id:'mimori',  name:'미모리', school:'백귀야행',tier:3,atk:2,hp:5,kw:['taunt'],skin:'미모리(수영복)',img:'Mimori.png',       imgGold:'Mimori_(Swimsuit).png'},
   {id:'renge',   name:'렌게',   school:'백귀야행',tier:3,atk:3,hp:2,kw:['shield','preemptive'],skin:'렌게(수영복)',img:'Renge.png',       imgGold:'Renge_(Swimsuit).png'},
   {id:'shizuko', name:'시즈코', school:'백귀야행',tier:5,atk:5,hp:6,kw:[],             skin:'시즈코(수영복)',   img:'Shizuko.png',        imgGold:'Shizuko_(Swimsuit).png'},
   {id:'tsubaki', name:'츠바키', school:'백귀야행',tier:4,atk:4,hp:3,kw:['taunt','shield'],skin:'츠바키(가이드)',img:'Tsubaki.png',      imgGold:'Tsubaki_(Guide).png'},
@@ -139,16 +139,16 @@ var CHARS = [
   // ===== 산해경 (잠금 해제 필요) =====
   {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
   // ===== 아리우스 분교 (추가 카드군, 신비해방 대상) =====
-  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          locked:true, skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
-  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  locked:true, skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
-  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  locked:true, skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
-  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
-  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          locked:true, skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
+  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:5,  hp:5,  kw:[],          locked:true, skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
+  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:8,  hp:2,  kw:['ranged'],  locked:true, skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
+  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:9,  hp:2,  kw:['cleave'],  locked:true, skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
+  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:2,  hp:12, kw:['shield','poison'], locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
+  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:6,  hp:6,  kw:[],          locked:true, skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
   {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
-  {id:'rumi',    name:'루미',   school:'산해경', tier:6, atk:7, hp:7, kw:[],                 locked:true, skin:'루미(어린이)',       img:'Rumi.png',           imgGold:'Rumi_(Kid).png'},
-  {id:'shun',    name:'슌',     school:'산해경', tier:5, atk:7, hp:3, kw:['ranged'],         locked:true, skin:'슌(어린이)',         img:'Shun.png',           imgGold:'Shun_(Kid).png'},
+  {id:'rumi',    name:'루미',   school:'산해경', tier:5, atk:5, hp:6, kw:[],                 locked:true, skin:'루미(어린이)',       img:'Rumi.png',           imgGold:'Rumi_(Kid).png'},
+  {id:'shun',    name:'슌',     school:'산해경', tier:6, atk:8, hp:5, kw:['ranged'],         locked:true, skin:'슌(어린이)',         img:'Shun.png',           imgGold:'Shun_(Kid).png'},
   {id:'kisaki',  name:'키사키', school:'산해경', tier:6, atk:5, hp:7, kw:[],                 locked:true, skin:'키사키(사복)',       img:'Kisaki.png',         imgGold:'Kisaki_(Casual).png'},
   // ===== 발키리/SRT (추가 카드군) =====
   // sub: 'valkyrie' = 발키리 경찰학원, 'srt' = SRT 특수학원
@@ -159,7 +159,7 @@ var CHARS = [
   {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           locked:true, skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
   {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   locked:true, skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
   {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  locked:true, skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
-  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:4,  hp:1, kw:['ranged','reborn'], locked:true, skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
+  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:6,  hp:5, kw:['ranged','reborn'], locked:true, skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
   {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   locked:true, skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
   {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            locked:true, skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
   {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           locked:true, skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
@@ -433,7 +433,7 @@ var ABILITY_DESCS = {
   arius_squad: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 사오리, 미사키, 아츠코, 히요리가 모두 있을 때 등장.',desc:'패시브: 샬레의 사오리, 미사키, 아츠코, 히요리를 흡수하며 등장합니다.\n개전: base 공격력만큼 아군 적군 전체에게 데미지를 준 후 자신을 파괴합니다.\n뒤끝: 흡수했던 학생들을 흡수 시점 상태로 다시 소환합니다.',skinEffect:'',quote:'아리우스: 우리는 너희와 다른 곳에서 왔어.'},
   // ===== 발키리/SRT =====
   kirino:  {type:'',desc:'',skinEffect:'수영복 키리노: 버티기 시 +2/+2',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">버티기</span> 추가: 버틸 때마다 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>.'},
-  fubuki:  {type:'첫인사',desc:'아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 부여합니다.',skinEffect:'수영복 후부키: 두 번 부여',skinEffectDesc:'첫인사: 아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 <span style="color:#ffd700;font-weight:700">두 번</span> 부여합니다.'},
+  fubuki:  {type:'첫인사',desc:'아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 부여합니다.',skinEffect:'수영복 후부키: 두 번 부여 후 자신 삭제',skinEffectDesc:'첫인사: 아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 <span style="color:#ffd700;font-weight:700">두 번</span> 부여한 뒤,\n<span style="color:#ffd700;font-weight:700">자신은 보드에서 삭제</span>됩니다.'},
   miyu:    {type:'패시브',desc:'공격 시 공격력 대신\n자신의 체력으로 데미지를 계산합니다.',skinEffect:'수영복 미유: 연사 추가',skinEffectDesc:'패시브: 공격 시 공격력 대신 체력으로 계산.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
   moe:     {type:'뒤끝',desc:'자신을 공격한 대상에게\n자신의 공격력만큼 피해를 줍니다.\n(보호막에 막힙니다)',skinEffect:'수영복 모에: 뒤끝 관통',skinEffectDesc:'뒤끝: 자신을 공격한 대상에게 자신의 공격력만큼 피해.\n뒤끝 데미지에 <span style="color:#ffd700;font-weight:700">관통</span> 추가.'},
   saki:    {type:'개전',desc:'상대의 지켜줌 무작위 1인을 해제합니다.',skinEffect:'수영복 사키: 전원 해제',skinEffectDesc:'개전: 상대의 지켜줌을 <span style="color:#ffd700;font-weight:700">전원</span> 해제합니다.'},
@@ -442,7 +442,7 @@ var ABILITY_DESCS = {
   niko:    {type:'패시브',desc:'아군의 버티기가 두 번 발동합니다.\n(니코가 여러 명이어도 2회만 적용)',skinEffect:'사복 니코: 세 번 발동',skinEffectDesc:'패시브: 아군의 버티기가 <span style="color:#ffd700;font-weight:700">세 번</span> 발동합니다.'},
   konoka:  {type:'뒤끝',desc:'이번 전투 동안, 아군 발키리/SRT 전체 +4/+4.',skinEffect:'수영복 코노카: +8/+8',skinEffectDesc:'뒤끝: 이번 전투 동안, 아군 발키리/SRT 전체 <span style="color:#ffd700;font-weight:700">+8/+8</span>.'},
   miyako:  {type:'패시브',desc:'미야코 외에 발키리/SRT 학생이 살아있는 한,\n부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화됩니다.',skinEffect:'수영복 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미야코 외에 발키리/SRT 학생이 살아있는 한, 부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화 + <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
-  yukino:  {type:'패시브',desc:'전투 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(공격·방어 모두 적용. 효과 피해는 받습니다.)',skinEffect:'수영복 유키노: +5/+5',skinEffectDesc:'패시브: 전투 시 상대를 쓰러뜨리는 경우, 전투 피해 X (공격·방어 모두).\n<span style="color:#ffd700;font-weight:700">+5/+5</span>.'},
+  yukino:  {type:'패시브',desc:'전투 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(공격·방어 모두 적용. 효과 피해는 받습니다.)',skinEffect:'수영복 유키노: 공격력 +5',skinEffectDesc:'패시브: 전투 시 상대를 쓰러뜨리는 경우, 전투 피해 X (공격·방어 모두).\n자신에게 <span style="color:#ffd700;font-weight:700">+5/+0</span>.'},
   kanna:   {type:'개전',desc:'이번 게임에서 발키리/SRT 학생이 직접\n쓰러뜨린 적의 수의 절반(올림)을 공격력에,\n직접 쓰러진 발키리/SRT 학생 수의 절반(올림)을\n체력에 추가합니다. (전투 개전 시점 갱신)',skinEffect:'수영복 칸나: 절반이 아닌 전체',skinEffectDesc:'개전: 이번 게임에서 발키리/SRT 학생이 직접 쓰러뜨린 적의 수 <span style="color:#ffd700;font-weight:700">전체</span>를 공격력에, 직접 쓰러진 발키리/SRT 학생 수 <span style="color:#ffd700;font-weight:700">전체</span>를 체력에 추가합니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
@@ -2484,12 +2484,21 @@ function _doBC(m, p) {
   }
   // ===== 발키리/SRT 첫인사 =====
   else if(id==='fubuki'){
-    // 후부키: 아군 1인에게 자신의 현재 공격력/체력만큼 부여 (스킨: 같은 1인에게 두 번)
+    // 후부키: 아군 1인에게 자신의 현재 공격력/체력만큼 부여 (스킨: 같은 1인에게 두 번 + 자기 삭제)
     var fbTargets=[];
     for(var i=0;i<p.board.length;i++){if(p.board[i]!==m)fbTargets.push(i);}
     if(fbTargets.length===0) return;
     var fbAtk=m.atk, fbHp=m.hp;
     var fbMult = m.isSkin ? 2 : 1;
+    var fbIsSkin = m.isSkin;
+    function _fubukiSelfDestroy(p2){
+      // 스킨 후부키 자기 보드에서 제거 + 풀 반환
+      var fbi = p2.board.indexOf(m);
+      if(fbi !== -1){
+        p2.board.splice(fbi, 1);
+        returnToPool(m.baseId, m.isSkin?3:1);
+      }
+    }
     if(p.isPlayer){
       // 플레이어: 대상 선택 UI
       G.pendingSpell={id:'fubuki_bc',name:'후부키 첫인사',target:'select_ally',
@@ -2498,6 +2507,7 @@ function _doBC(m, p) {
           var ga=fbAtk*fbMult, gh=fbHp*fbMult;
           t.atk+=ga;t.hp+=gh;t.maxHp=(t.maxHp||t.hp);t.maxHp+=gh;
           logBuff(t,m.name,ga,gh);
+          if(fbIsSkin) _fubukiSelfDestroy(p2);
           return true;
         }};
       renderAll();
@@ -2514,6 +2524,7 @@ function _doBC(m, p) {
       var ga=fbAtk*fbMult, gh=fbHp*fbMult;
       t.atk+=ga;t.hp+=gh;t.maxHp=(t.maxHp||t.hp);t.maxHp+=gh;
       logBuff(t,m.name,ga,gh);
+      if(fbIsSkin) _fubukiSelfDestroy(p);
     }
   }
   // 히마리: 첫인사 제거 → 개전(SOC)으로 이동
