@@ -2985,6 +2985,154 @@ var AI_SPELL_EFFECTS={
   revive_standby: function(p){var best=p.board[0];for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp>best.atk+best.hp)best=p.board[i];if(best&&best.kw.indexOf('reborn')===-1)best.kw.push('reborn');},
   get_set_go: function(p){var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];p.board[pick].atk+=8;p.board[pick].hp+=8;}},
   on_your_mark: function(p){var basicPool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct'];var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}var used={};for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];var u=p.board[pick];var avail=basicPool.filter(function(k){return u.kw.indexOf(k)===-1&&!used[k];});if(avail.length>0){var kw=avail[Math.floor(Math.random()*avail.length)];u.kw.push(kw);used[kw]=true;}}},
+  // === 트리플/스킨화/리롤형 (AI 신규 추가) ===
+  mirror: function(p){
+    // 거울의 세계: 비스킨 학생 중 같은 baseId 2장+(보드+벤치) → 트리플 합체. 없으면 stat 합 가장 높은 비스킨 복제 (보드 여유 시)
+    if(p.board.length===0) return;
+    var counts={};
+    for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin)counts[p.board[i].baseId]=(counts[p.board[i].baseId]||0)+1;}
+    if(p.bench&&!p.bench.isSkin) counts[p.bench.baseId]=(counts[p.bench.baseId]||0)+1;
+    var tripleBid=null;
+    for(var bid in counts){if(counts[bid]>=2){tripleBid=bid;break;}}
+    if(tripleBid){
+      // 트리플 합체 진행
+      var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===tripleBid){tmpl=CHARS[j];break;}
+      if(!tmpl) return;
+      var mKw=[],bAtk=0,bHp=0;
+      // 복제 대상: 보드 비스킨 같은 baseId 중 stat 합 가장 높은 1장
+      var orig=null;
+      for(var j=0;j<p.board.length;j++){
+        if(p.board[j].baseId===tripleBid&&!p.board[j].isSkin){
+          if(!orig||p.board[j].atk+p.board[j].hp>orig.atk+orig.hp) orig=p.board[j];
+        }
+      }
+      if(!orig&&p.bench&&p.bench.baseId===tripleBid&&!p.bench.isSkin) orig=p.bench;
+      if(!orig) return;
+      // 보드/벤치 같은 baseId 비스킨 모두 합산 + 복제분(orig 한 번 더)
+      for(var j=0;j<p.board.length;j++){
+        if(p.board[j].baseId===tripleBid&&!p.board[j].isSkin){
+          var u=p.board[j];
+          for(var k=0;k<(u.kw||[]).length;k++){if(mKw.indexOf(u.kw[k])===-1)mKw.push(u.kw[k]);}
+          bAtk+=u.atk-tmpl.atk;bHp+=u.hp-tmpl.hp;
+        }
+      }
+      if(p.bench&&p.bench.baseId===tripleBid&&!p.bench.isSkin){
+        var bu=p.bench;
+        for(var k=0;k<(bu.kw||[]).length;k++){if(mKw.indexOf(bu.kw[k])===-1)mKw.push(bu.kw[k]);}
+        bAtk+=bu.atk-tmpl.atk;bHp+=bu.hp-tmpl.hp;
+      }
+      bAtk+=orig.atk-tmpl.atk;bHp+=orig.hp-tmpl.hp; // 복제본
+      var newBoard=[];var removed=0;
+      for(var j=0;j<p.board.length;j++){
+        if(p.board[j].baseId===tripleBid&&!p.board[j].isSkin&&removed<2){removed++;}
+        else{newBoard.push(p.board[j]);}
+      }
+      if(p.bench&&p.bench.baseId===tripleBid&&!p.bench.isSkin){p.bench=null;}
+      p.board=newBoard;
+      var gld=makeMinion(tmpl,true);
+      gld.kw=mKw;gld.atk+=bAtk;gld.hp+=bHp;gld.maxHp=gld.hp;
+      applySkinKwTransform(tmpl,gld);
+      p.board.push(gld);
+    } else {
+      // 단순 복제 (보드 여유 있을 때만)
+      if(p.board.length>=MAX_BOARD) return;
+      var best=null;
+      for(var i=0;i<p.board.length;i++){
+        if(!p.board[i].isSkin){
+          if(!best||p.board[i].atk+p.board[i].hp>best.atk+best.hp) best=p.board[i];
+        }
+      }
+      if(!best){
+        best=p.board[0];
+        for(var i=1;i<p.board.length;i++)if(p.board[i].atk+p.board[i].hp>best.atk+best.hp)best=p.board[i];
+      }
+      var copy={id:best.id+'_c'+Math.random().toString(36).substr(2,3),baseId:best.baseId,name:best.name,school:best.school,sub:best.sub||null,tier:best.tier,atk:best.atk,hp:best.hp,maxHp:best.hp,kw:(best.kw||[]).slice(),isSkin:best.isSkin,img:best.img,copies:1};
+      p.board.push(copy);
+    }
+  },
+  dressing: function(p){
+    // 탈의실: 비스킨 중 stat 합 가장 높은 학생 → 스킨 변환
+    var best=null;
+    for(var i=0;i<p.board.length;i++){
+      if(!p.board[i].isSkin){
+        if(!best||p.board[i].atk+p.board[i].hp>best.atk+best.hp) best=p.board[i];
+      }
+    }
+    if(!best) return;
+    var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===best.baseId){tmpl=CHARS[j];break;}
+    if(!tmpl||!tmpl.skin) return;
+    var bonusAtk=best.atk-tmpl.atk,bonusHp=best.hp-tmpl.hp;
+    best.name=tmpl.skin;
+    if(tmpl.id==='yukino'){best.atk=tmpl.atk+5+bonusAtk;best.hp=tmpl.hp+bonusHp;}
+    else{best.atk=tmpl.atk*2+1+bonusAtk;best.hp=tmpl.hp*2+1+bonusHp;}
+    best.maxHp=best.hp;best.isSkin=true;best.img=tmpl.imgGold;
+    applySkinKwTransform(tmpl,best);
+  },
+  twins: function(p){
+    // 우린 서로 닮았어요: 같은 baseId 비스킨 2장 합체
+    var counts={};
+    for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin)counts[p.board[i].baseId]=(counts[p.board[i].baseId]||0)+1;}
+    var target=null;
+    for(var bid in counts){if(counts[bid]>=2){target=bid;break;}}
+    if(!target) return;
+    var tmpl=null;for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===target){tmpl=CHARS[i];break;}
+    if(!tmpl) return;
+    var mKw=[],bAtk=0,bHp=0,newBoard=[],removed=0;
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i].baseId===target&&!p.board[i].isSkin&&removed<2){
+        var u=p.board[i];
+        for(var k=0;k<(u.kw||[]).length;k++){if(mKw.indexOf(u.kw[k])===-1)mKw.push(u.kw[k]);}
+        bAtk+=u.atk-tmpl.atk;bHp+=u.hp-tmpl.hp;removed++;
+      } else { newBoard.push(p.board[i]); }
+    }
+    p.board=newBoard;
+    var gld=makeMinion(tmpl,true);
+    gld.kw=mKw;gld.atk+=bAtk;gld.hp+=bHp;gld.maxHp=gld.hp;
+    applySkinKwTransform(tmpl,gld);
+    p.board.push(gld);
+  },
+  school_visit: function(p){
+    // 학교 방문: 가장 많은 학교 선택 → AI shop 그 학교 학생들로 리롤
+    var sc={};
+    for(var i=0;i<p.board.length;i++)sc[p.board[i].school]=(sc[p.board[i].school]||0)+1;
+    var dom=null,dc=0;
+    for(var s in sc) if(sc[s]>dc){dc=sc[s];dom=s;}
+    if(!dom) return;
+    var pool=getAvailableChars(p.tier).filter(function(c){return c.school===dom;});
+    if(pool.length===0) return;
+    var size=SHOP_SIZE[p.tier]||3;
+    // 기존 AI shop 풀로 반환 (스펠 제외)
+    if(p.aiShop){
+      for(var i=0;i<p.aiShop.length;i++){if(p.aiShop[i]&&!p.aiShop[i].isSpell)returnToPool(p.aiShop[i].baseId);}
+    }
+    var newShop=[];
+    for(var i=0;i<size;i++){
+      var tmpl=pool[Math.floor(Math.random()*pool.length)];
+      newShop.push(makeMinion(tmpl,false));
+    }
+    p.aiShop=newShop;
+  },
+  poison_grail: function(p){
+    // 독이 든 성배: 보드 2장 이상 + stat 합 가장 낮은 비스킨 학생 돌려보내기 → stat 합 가장 높은 학생에게 부여
+    if(p.board.length<=1) return;
+    // 가장 약한 비스킨 학생 선정 (스킨이면 X — 스킨은 잃기 아까움)
+    var weakIdx=-1,weakScore=Infinity;
+    for(var i=0;i<p.board.length;i++){
+      if(p.board[i].isSkin) continue;
+      var s=p.board[i].atk+p.board[i].hp;
+      if(s<weakScore){weakScore=s;weakIdx=i;}
+    }
+    if(weakIdx===-1) return; // 비스킨 없으면 스킵
+    var removed=p.board.splice(weakIdx,1)[0];
+    returnToPool(removed.baseId,removed.isSkin?3:1);
+    // 나머지 중 stat 합 가장 높은 학생
+    if(p.board.length===0){p.board.push(removed);return;}
+    var best=p.board[0];
+    for(var i=1;i<p.board.length;i++){
+      if(p.board[i].atk+p.board[i].hp>best.atk+best.hp) best=p.board[i];
+    }
+    best.atk+=removed.atk;best.hp+=removed.hp;best.maxHp=(best.maxHp||best.hp)+removed.hp;
+  },
 };
 var KW_SORT_ORDER={cleave:0,pierce:0,poison:1,windfury:2,ambush:2.5,shield:3,survive:4,reborn:5,taunt:99};
 
