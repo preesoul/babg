@@ -166,9 +166,10 @@ var CHARS = [
   {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:6,  hp:5, kw:['ranged','reborn'], locked:true, skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
   {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   locked:true, skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
   {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            locked:true, skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
-  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           locked:true, skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
+  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:4, kw:['reborn'],           locked:true, skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
   {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   locked:true, skin:'유키노(수영복)', img:'Yukino.png',  imgGold:'Yukino_(Swimsuit).png'},
   {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   locked:true, skin:'칸나(수영복)',   img:'Kanna.png',   imgGold:'Kanna_(Swimsuit).png'},
+  {id:'misuzu',  name:'미스즈',  school:'발키리/SRT', sub:'valkyrie', tier:6, atk:4,  hp:6, kw:[],                   locked:true, skin:'미스즈(바니걸)', img:'Misuzu.png',  imgGold:'Misuzu_(Bunny_Girl).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -281,7 +282,8 @@ var CHAR_GRADES = {
   mimori:2, renge:2, shizuko:2, tsubaki:2, kikyou:2, chise:2,
   nagusa:3, wakamo:3, michiru:3, kaho:3, niya:3,
   ayane:1, serika:2, nonomi:2, shiroko:3, hoshino:3,
-  kokona:1, mina:1, reijo:2, saya:2, rumi:3, shun:3, kisaki:3
+  kokona:1, mina:1, reijo:2, saya:2, rumi:3, shun:3, kisaki:3,
+  misuzu:3
 };
 var SANDBOX = (typeof window!=='undefined' && (window.location.search.indexOf('sandbox=1')!==-1 || localStorage.getItem('babg_sandbox')==='1'));
 if(typeof window!=='undefined') localStorage.removeItem('babg_sandbox');
@@ -326,7 +328,7 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1, kaho:1, niya:1, kaede:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1, moe:1, konoka:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1}; // 개전
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1, misuzu:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1, kirino:1, kurumi:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
@@ -455,9 +457,10 @@ var ABILITY_DESCS = {
   otogi:   {type:'',desc:'',skinEffect:'수영복 오토기: 연사 추가',skinEffectDesc:'저격+부활+<span style="color:#ffd700;font-weight:700">연사</span>.'},
   niko:    {type:'패시브',desc:'아군의 버티기가 두 번 발동합니다.\n(니코가 여러 명이어도 2회만 적용)',skinEffect:'사복 니코: 세 번 발동',skinEffectDesc:'패시브: 아군의 버티기가 <span style="color:#ffd700;font-weight:700">세 번</span> 발동합니다.'},
   konoka:  {type:'뒤끝',desc:'이번 전투 동안, 아군 발키리/SRT 전체 +4/+4.',skinEffect:'수영복 코노카: +8/+8',skinEffectDesc:'뒤끝: 이번 전투 동안, 아군 발키리/SRT 전체 <span style="color:#ffd700;font-weight:700">+8/+8</span>.'},
-  miyako:  {type:'패시브',desc:'미야코 외에 발키리/SRT 학생이 살아있는 한,\n부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화됩니다.',skinEffect:'수영복 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미야코 외에 발키리/SRT 학생이 살아있는 한, 부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화 + <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
+  miyako:  {type:'패시브',desc:'미유, 모에, 사키가 필드에 존재하는 한,\n부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화됩니다.',skinEffect:'수영복 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미유, 모에, 사키가 필드에 존재하는 한, 부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화 + <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
   yukino:  {type:'패시브',desc:'전투 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(공격·방어 모두 적용. 효과 피해는 받습니다.)',skinEffect:'수영복 유키노: 공격력 +5',skinEffectDesc:'패시브: 전투 시 상대를 쓰러뜨리는 경우, 전투 피해 X (공격·방어 모두).\n자신에게 <span style="color:#ffd700;font-weight:700">+5/+0</span>.'},
   kanna:   {type:'개전',desc:'이번 게임에서 발키리/SRT 학생이 직접\n쓰러뜨린 적의 수의 절반(올림)을 공격력에,\n직접 쓰러진 발키리/SRT 학생 수의 절반(올림)을\n체력에 추가합니다. (전투 개전 시점 갱신)',skinEffect:'수영복 칸나: 절반이 아닌 전체',skinEffectDesc:'개전: 이번 게임에서 발키리/SRT 학생이 직접 쓰러뜨린 적의 수 <span style="color:#ffd700;font-weight:700">전체</span>를 공격력에, 직접 쓰러진 발키리/SRT 학생 수 <span style="color:#ffd700;font-weight:700">전체</span>를 체력에 추가합니다.'},
+  misuzu:  {type:'개전',desc:'아군 <지켜줌> 학생들 전원에게\n+5/+5를 부여합니다.',skinEffect:'바니걸 미스즈: +10/+10',skinEffectDesc:'개전: 아군 <지켜줌> 학생들 전원에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
@@ -699,7 +702,7 @@ var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona',
   // 아리우스 분교 (5종)
   'subaru','hiyori','misaki','saori','atsuko',
   // 발키리/SRT (12종)
-  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna',
+  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna','misuzu',
   // 백귀야행 신규 (kaho, niya — kaede는 기본)
   'kaho','niya'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
@@ -4446,6 +4449,24 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 트리니티 +'+hnBuff+'/+'+hnBuff});
     if(hnBuffed.length>0) log.push({cls:'soc',text:'  → '+hnBuffed.join(', ')});
   }
+  else if(id==='misuzu'){
+    // 미스즈: 아군 지켜줌 학생 전원 +5/+5 (스킨 +10/+10)
+    var mzBuff = u.isSkin ? 10 : 5;
+    var mzBuffed=[];
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive && hasKw(mySide[i],'taunt')){
+        mySide[i].atk+=mzBuff; mySide[i].hp+=mzBuff;
+        if(mySide[i].maxHp) mySide[i].maxHp+=mzBuff;
+        mzBuffed.push(mySide[i].name+'('+mySide[i].atk+'/'+mySide[i].hp+')');
+      }
+    }
+    if(mzBuffed.length===0){
+      log.push({cls:'soc',text:'[개전] '+u.name+': 지켜줌을 가진 아군이 없습니다.'});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 지켜줌 아군 '+mzBuffed.length+'명에게 +'+mzBuff+'/+'+mzBuff});
+      log.push({cls:'soc',text:'  → '+mzBuffed.join(', ')});
+    }
+  }
   else if(id==='sena'){
     // 세나: 뒤끝 가진 아군 게헨나 학생 무작위 2명에게 부활 부여 (스킨: 전체)
     var senaCands=[];
@@ -5923,13 +5944,14 @@ function runBattle(boardA, boardB, startWithA, opts) {
       } else {unit.hp=1;}
       log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:'+unit.hp+')'});
       // 미야코 패시브: 부활 발동 시 base 상태로 초기화 + reborn 재부여 (액션 키워드 누적 방지)
-      // 다른 발키리/SRT가 살아있어야 함 / 스킨이면 base + 3 atk
+      // 조건: 미유, 모에, 사키 중 하나라도 필드에 살아있어야 함 / 스킨이면 base + 3 atk
       if(unit.baseId==='miyako'&&!unit._abilitiesStripped&&!_G.permanentAbilityBan){
-        var hasOtherVk=false;
+        var hasMiyakoTrigger=false;
         for(var _vi=0;_vi<myArr.length;_vi++){
-          if(myArr[_vi].alive&&myArr[_vi]!==unit&&myArr[_vi].school==='발키리/SRT'){hasOtherVk=true;break;}
+          var _mb=myArr[_vi];
+          if(_mb.alive && _mb!==unit && (_mb.baseId==='miyu'||_mb.baseId==='moe'||_mb.baseId==='saki')){hasMiyakoTrigger=true;break;}
         }
-        if(hasOtherVk){
+        if(hasMiyakoTrigger){
           // base 템플릿으로 stat/kw 초기화 (액션 카드로 부여된 지켜줌·보호막 등 모두 제거)
           var miyakoTmpl=null;for(var _mt=0;_mt<CHARS.length;_mt++)if(CHARS[_mt].id==='miyako'){miyakoTmpl=CHARS[_mt];break;}
           if(miyakoTmpl){
