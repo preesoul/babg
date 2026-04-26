@@ -2991,33 +2991,39 @@ function getAiDifficulty(){
   if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
   return _calcAiDifficulty(window._babgPlayerRank);
 }
-// AI 시뮬 깊이 (forecast N회): 9등급=4, 4등급=13, 1등급=18, 전설=20
+// AI 시뮬 깊이 (forecast N회): 9등급=4, 4등급=13, 1등급=18, 전설=20, 신화=30, 신=40
 function _aiSimN(){
   var d=getAiDifficulty();
+  if(d>=1.5) return 40;
+  if(d>=1.2) return 30;
   return Math.max(2, Math.round(2 + d*18));
 }
-// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=8, 1등급=12, 전설=14
+// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=8, 1등급=12, 전설=14, 신화=20, 신=28
 function _aiOptK(){
   var d=getAiDifficulty();
+  if(d>=1.5) return 28;
+  if(d>=1.2) return 20;
   return Math.max(2, Math.round(2 + d*12));
 }
 // 휴리스틱 노이즈: 9등급은 점수 평가 자체가 크게 왜곡됨 (±양방향)
-// 9등급=±11, 4등급=±5, 1등급=±0.7, 전설=±0.3
+// 9등급=±11, 4등급=±5, 1등급=±0.7, 전설=±0.3, 신화/신=0 (cap 해제)
 function _aiNoise(){
   var d=getAiDifficulty();
-  return Math.max(0.3, 11.5 - d*11.2);
+  return Math.max(0, 11.5 - d*11.2);
 }
-// 잘못된 결정 확률: 9등급=85%, 4등급=35%, 1등급=4%, 전설=1%
+// 잘못된 결정 확률: 9등급=85%, 4등급=35%, 1등급=4%, 전설=1%, 신화/신=0% (cap 해제)
 function _aiMistakeRate(){
   var d=getAiDifficulty();
-  return Math.max(0.01, 0.94 - d*0.93);
+  return Math.max(0, 0.94 - d*0.93);
 }
 // 학생 카드 forecast 가중치: 약한 보너스만 (단기 매치업 매몰 방지)
-// 1등급=0.05, 전설=0.10 — 휴리스틱 위주 + 약간의 매치업 적응
+// 1등급=0.05, 전설=0.10, 신화=0.40, 신=0.70 (매치업 적응 압도적)
 function _aiForecastWeight(){
   var d=getAiDifficulty();
   if(d<0.8) return 0;
-  return Math.min(0.10, (d-0.8)*0.5);
+  if(d>=1.5) return 0.70;
+  if(d>=1.2) return 0.40;
+  return (d-0.8)*0.5;
 }
 // mistake 발생 시 동작: random non-top swap 비율
 // 9등급: 80% 완전 random, 20% top↔2nd swap
@@ -3421,7 +3427,11 @@ function aiDecideBuildPlan(p){
     }
     // 위 조건 없으면 일반 흐름으로 fallthrough
   }
-  if(p.stone < 7) return;  // 7청휘석 미만이면 아직 결정 X
+  // 신화(1.2)/신(1.5)은 빌드 결정 더 빨리 + 임계값 더 낮춤 (조기 빌드 핑)
+  var _bpDiff = (p.aiDifficulty!=null)?p.aiDifficulty:0.4;
+  var minStone = (_bpDiff>=1.5) ? 4 : (_bpDiff>=1.2 ? 5 : 7);
+  var minScore = (_bpDiff>=1.5) ? 1.5 : (_bpDiff>=1.2 ? 2.0 : 2.5);
+  if(p.stone < minStone) return;
   var bestPlan=null, bestScore=0;
   for(var i=0;i<BUILD_PLANS.length;i++){
     var pl=BUILD_PLANS[i];
@@ -3431,8 +3441,7 @@ function aiDecideBuildPlan(p){
       bestPlan=pl;
     }
   }
-  // 진행도 너무 낮으면 빌드 결정 X (기존 휴리스틱 그대로)
-  if(bestPlan && bestScore >= 2.5){
+  if(bestPlan && bestScore >= minScore){
     p._buildPlan = bestPlan;
   }
 }
@@ -3786,12 +3795,15 @@ function aiOptimizeOrder(p,oppBoard){
 }
 
 function aiGetStrategy(p) {
-  var strat={dominantSchool:null,schoolBonus:3,targetUnits:[],avoidOtherSchools:false,giveUp:false};
+  // 신화(1.2)/신(1.5)은 학교 시너지 가중치 ↑ — 단일 학교 빌드를 더 강하게 추구 (시뮬에서 단일학교가 가장 강함)
+  var _stratDiff = (p.aiDifficulty!=null)?p.aiDifficulty:0.4;
+  var _baseSchoolBonus = (_stratDiff>=1.5) ? 12 : (_stratDiff>=1.2 ? 8 : 3);
+  var strat={dominantSchool:null,schoolBonus:_baseSchoolBonus,targetUnits:[],avoidOtherSchools:false,giveUp:false};
   if(p.hp<=12){strat.giveUp=true;return strat;}
   // 시뮬용: NPC에 _forcedSchool 지정 시 그 학교를 dominantSchool로 강제 (우선도 강화, 100% 강제는 아님)
   if(p._forcedSchool){
     strat.dominantSchool = p._forcedSchool;
-    strat.schoolBonus = 7;
+    strat.schoolBonus = Math.max(7, _baseSchoolBonus);
     strat.avoidOtherSchools = false;
     if(p._forcedTargetUnits) strat.targetUnits = p._forcedTargetUnits.slice();
   }
@@ -3800,7 +3812,9 @@ function aiGetStrategy(p) {
   for(var i=0;i<p.board.length;i++){var sc=p.board[i].school;schoolCount[sc]=(schoolCount[sc]||0)+1;}
   var bestSchool=null,bestCount=0;
   for(var sc in schoolCount){if(schoolCount[sc]>bestCount){bestCount=schoolCount[sc];bestSchool=sc;}}
-  if(bestSchool&&total>0&&bestCount/total>=0.5) strat.dominantSchool=bestSchool;
+  // 신화/신은 dominant school 임계값 낮춤 (절반 → 1/3) — 학교 시너지 더 적극
+  var _domThreshold = (_stratDiff>=1.2) ? 0.34 : 0.5;
+  if(bestSchool&&total>0&&bestCount/total>=_domThreshold) strat.dominantSchool=bestSchool;
 
   var pSchools=p.purchasedSchools||{};
   var schoolKeys=Object.keys(pSchools);
@@ -4180,6 +4194,24 @@ function aiShouldReroll(p, currentBest){
   return decision;
 }
 
+// 신화/신 NPC 핸디캡: 보드 카드에 stat 보너스 (영입 시 1회 적용)
+// 신화(d>=1.2): +2/+2, 신(d>=1.5): +3/+3
+// 신화/신만 압도적으로 강하게 만드는 보강 — 휴리스틱만으론 한계
+function _applyDifficultyBoardBonus(p){
+  if(!p || p.aiDifficulty==null || p.dead) return;
+  var d = p.aiDifficulty;
+  if(d<1.2) return;
+  var bonus = (d>=1.5) ? 3 : 2;
+  for(var i=0;i<p.board.length;i++){
+    var u=p.board[i];
+    if(u._diffBonusApplied) continue;
+    u.atk += bonus;
+    u.hp += bonus;
+    if(u.maxHp) u.maxHp += bonus;
+    u._diffBonusApplied = true;
+  }
+}
+
 function aiTurns() {
   // 매치업 사전 결정 (이번 영입 페이즈 1회만)
   if(G._matchupsTurn!==G.turn){pairMatchups();G._matchupsTurn=G.turn;}
@@ -4280,6 +4312,8 @@ function aiTurns() {
     }
 
     p.board=p.board.filter(function(u){return !!u;});
+    // 신화/신 NPC 핸디캡 — 영입 후 보드에 stat 보너스 적용
+    _applyDifficultyBoardBonus(p);
     // Forecast 기반 배치 최적화 (매치업 보드 있을 때)
     var _oppB2=_aiGetOppBoard(p);
     if(_oppB2&&_oppB2.length>0&&p.board.length>1){
@@ -9692,6 +9726,94 @@ function runSimGameStrategyMatch(strategies){
     }
   }catch(e){
     if(typeof console!=='undefined') console.warn('[SIM] 전략매치 오류:', e.message);
+  }finally{
+    G.players=saved.players; G.pool=saved.pool; G.turn=saved.turn;
+    G.aliveCount=saved.aliveCount; G.hiddenCardsEverOwned=saved.hiddenCardsEverOwned;
+    G.kuzunohaActive=saved.kuzunohaActive; G.permanentAbilityBan=saved.permanentAbilityBan;
+    G.battleSchoolBuff=saved.battleSchoolBuff; G.millenniumTokenSummons=saved.millenniumTokenSummons;
+    G.arisuDeathCount=saved.arisuDeathCount; G.keiseisenCounters=saved.keiseisenCounters;
+    G.bonusStone=saved.bonusStone; G.freeRerolls=saved.freeRerolls;
+    G.phase=saved.phase; G.shop=saved.shop;
+    G.shopSchoolBuff=saved.shopSchoolBuff;
+    G.valkyrieKills=saved.valkyrieKills; G.valkyrieDeaths=saved.valkyrieDeaths;
+  }
+}
+
+// 시뮬 변형: 8명 NPC를 difficulty 값으로 분배하여 강도 비교
+// difficulties: [d1,d2,...] 길이 8 배열 (예: [1.0,1.0,1.0,1.0,1.2,1.2,1.5,1.5])
+// 통계: SIM_DIFFICULTY_STATS[d] = {ranks:[8],games:N,totalRank:N}
+function runSimGameDifficultyMatch(difficulties){
+  var saved={
+    players:G.players, pool:G.pool, turn:G.turn, aliveCount:G.aliveCount,
+    hiddenCardsEverOwned:G.hiddenCardsEverOwned, kuzunohaActive:G.kuzunohaActive,
+    permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
+    millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
+    keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
+    phase:G.phase, shop:G.shop, shopSchoolBuff:G.shopSchoolBuff,
+    valkyrieKills:G.valkyrieKills, valkyrieDeaths:G.valkyrieDeaths
+  };
+  try{
+    var simPool={};
+    for(var ci=0;ci<CHARS.length;ci++) simPool[CHARS[ci].id]=6;
+    G.pool=simPool;
+    var simPlayers=[{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
+    for(var si=0;si<8;si++){
+      var d = difficulties[si]!=null ? difficulties[si] : 1.0;
+      simPlayers.push({
+        id:'sim_'+si, name:'NPC_'+si+'_d'+d.toFixed(2),
+        hp:40, stone:3, turnStone:2,
+        tier:1, upgradeCost:UPGRADE_COSTS[1],
+        board:[], dead:false, isPlayer:false,
+        purchasedSchools:{}, totalDamageTaken:0,
+        personality:AI_PERSONALITIES['aggressive'], personalityType:'aggressive',
+        aiDifficulty:d,
+        millenniumTokenSummons:0, shopSchoolBuff:{}
+      });
+    }
+    G.players=simPlayers;
+    G.turn=1; G.aliveCount=8;
+    G.hiddenCardsEverOwned={};
+    G.kuzunohaActive=false; G.permanentAbilityBan=false;
+    G.battleSchoolBuff={}; G.millenniumTokenSummons=0;
+    G.arisuDeathCount=0; G.keiseisenCounters={};
+    G.bonusStone=0; G.freeRerolls=0;
+    G.phase='recruit'; G.shop=[]; G.shopSchoolBuff={};
+    G.valkyrieKills=0; G.valkyrieDeaths=0;
+
+    for(var t=0;t<25 && G.aliveCount>1;t++){
+      G.turn=t+1;
+      for(var pi=1;pi<G.players.length;pi++){
+        var sp=G.players[pi];
+        if(sp.dead) continue;
+        sp.turnStone=Math.min(MAX_STONE, sp.turnStone+1);
+        sp.stone=sp.turnStone;
+        if(sp.upgradeCost>0) sp.upgradeCost=Math.max(0, sp.upgradeCost-1);
+      }
+      aiTurns();
+      simBattlePhase();
+    }
+    var alive=[],dead=[];
+    for(var pi=1;pi<G.players.length;pi++){
+      var p=G.players[pi];
+      if(p.dead) dead.push(p);
+      else alive.push(p);
+    }
+    alive.sort(function(a,b){return b.hp-a.hp;});
+    dead.sort(function(a,b){return (b._deathTurn||0)-(a._deathTurn||0);});
+    var ranked=alive.concat(dead);
+    if(!SIM_DIFFICULTY_STATS) SIM_DIFFICULTY_STATS={};
+    for(var ri=0;ri<ranked.length;ri++){
+      var rp=ranked[ri];
+      var key=rp.aiDifficulty.toFixed(2);
+      if(!SIM_DIFFICULTY_STATS[key]) SIM_DIFFICULTY_STATS[key]={ranks:[0,0,0,0,0,0,0,0],games:0,totalRank:0,survivors:0,finalHpSum:0};
+      var rank=ri+1;
+      SIM_DIFFICULTY_STATS[key].ranks[ri]++;
+      SIM_DIFFICULTY_STATS[key].games++;
+      SIM_DIFFICULTY_STATS[key].totalRank+=rank;
+      if(!rp.dead){SIM_DIFFICULTY_STATS[key].survivors++; SIM_DIFFICULTY_STATS[key].finalHpSum+=rp.hp;}
+    }
+  }catch(e){
+    if(typeof console!=='undefined') console.warn('[SIM] 난이도매치 오류:', e.message);
   }finally{
     G.players=saved.players; G.pool=saved.pool; G.turn=saved.turn;
     G.aliveCount=saved.aliveCount; G.hiddenCardsEverOwned=saved.hiddenCardsEverOwned;
