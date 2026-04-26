@@ -7411,6 +7411,8 @@ function startBattle() {
               kw:akTmpl.kw.slice(),img:akTmpl.img,isSkin:false,alive:true};
             p.board.push(akUnit);
             G.hiddenCardsOwned['Arisu_Kei']=true;G.hiddenCardsEverOwned['Arisu_Kei']=true;
+            // 7성 영입 이력 기록 (계정별 학생명부 동기화) — 변환형도 영입으로 카운트
+            if(typeof recordRecruitTier7==='function') recordRecruitTier7('Arisu_Kei');
             // 연출은 continueBattle → 영입 페이즈 진입 시 재생
             G._pendingArisuKeiEntrance=true;
           }
