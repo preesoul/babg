@@ -8320,43 +8320,43 @@
       "points": 1,
       "questState": {
         "daily": {
-          "date": "2026-04-26",
+          "date": "2026-04-27",
           "quests": [
             {
-              "id": "play3",
-              "progress": 1,
+              "id": "skin3",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "win1",
-              "progress": 1,
-              "completed": true
+              "id": "gehenna10",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "skin3",
-              "progress": 4,
-              "completed": true
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-04-20",
+          "weekStart": "2026-04-27",
           "quests": [
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "hidden_win",
-              "progress": 1,
-              "completed": true
+              "id": "win3",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 1,
-              "completed": true
+              "progress": 0,
+              "completed": false
             }
           ]
         },
@@ -8369,7 +8369,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-26"
+        "_lastLoginDate": "2026-04-27"
       },
       "recruitedTier7": [
         "hkyk_saikyo",
