@@ -984,7 +984,7 @@ function newGame() {
   var aiCount=SANDBOX?5:7;
   var startStone=SANDBOX?20:3;
   var playerName=window._babgLogin?window._babgLogin.name:'선생님';
-  players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone});
+  players.push({id:0,name:playerName,hp:START_HP,tier:1,stone:startStone,board:[],bench:null,frozen:false,dead:false,isPlayer:true,upgradeCost:SANDBOX?0:UPGRADE_COSTS[1],turnStone:startStone,millenniumTokenSummons:0,shopSchoolBuff:{}});
   var aiStone=SANDBOX?20:3;var aiUpCost=SANDBOX?0:UPGRADE_COSTS[1];
   // AI 난이도: 플레이어 등급에 따른 7명 분포 (셔플)
   var _aiDiffArray=_getAiDifficultyDistribution(window._babgPlayerRank);
@@ -999,7 +999,7 @@ function newGame() {
     var thisDiff=(i<_aiDiffArray.length)?_aiDiffArray[i]:_avgDiff;
     var pType=_pickAiPersonality(i, thisDiff);
     var thisName=(i<_npcNames.length)?_npcNames[i]:('NPC'+(i+1));
-    players.push({id:i+1,name:thisName,hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType,aiDifficulty:thisDiff});
+    players.push({id:i+1,name:thisName,hp:START_HP,tier:1,stone:aiStone,board:[],frozen:false,dead:false,isPlayer:false,upgradeCost:aiUpCost,turnStone:aiStone,purchasedSchools:{},totalDamageTaken:0,personality:AI_PERSONALITIES[pType],personalityType:pType,aiDifficulty:thisDiff,millenniumTokenSummons:0,shopSchoolBuff:{}});
   }
   G={players:players,turn:1,phase:'recruit',shop:[],aliveCount:SANDBOX?6:8,placement:0,frozen:false,bonusStone:0,shopBuff:0,pendingSpell:null,pool:initPool(),rioSchool:null,freeRerolls:0,
     purchasedSchools:{},totalDamageTaken:0,arisuDeathCount:0,arisuPurchased:false,maxPurchasedTier:0,millenniumTokenSummons:0,hiddenCardsOwned:{},hiddenCardsEverOwned:{},permanentAbilityBan:false,shopExclusions:[],keiseisenCounters:{},hovercraftCounter:0,soldHkyk:{},
@@ -1178,8 +1178,8 @@ function checkHiddenConditionsFor(p) {
   // 왕녀: 밀레니엄 온리 + Lv.6 + 아리스 미구매 + 케이를 산 적 없음 (분기 배타)
   if(notOwned('millennium_nameless')&&inPool('millennium_nameless')&&!G.hiddenCardsEverOwned['Kei_usb']&&!G.hiddenCardsEverOwned['Arisu_Kei']&&onlySchool('밀레니엄')&&p.tier>=6&&!G.arisuPurchased)
     eligible.push('millennium_nameless');
-  // 말쿠트: 밀레니엄 토큰 소환 10회+
-  if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&G.millenniumTokenSummons>=10)
+  // 말쿠트: 밀레니엄 토큰 소환 10회+ (per-player 카운트)
+  if(notOwned('millennium_malkuth')&&inPool('millennium_malkuth')&&p.tier>=6&&(p.millenniumTokenSummons||0)>=10)
     eligible.push('millennium_malkuth');
   // 미노리: 10턴까지 스케쥴 1레벨 유지
   if(notOwned('red_winter_minori')&&inPool('red_winter_minori')&&G.turn>=10&&p.tier===1)
@@ -1258,7 +1258,7 @@ function injectHiddenToShop() {
   };
   // 안전망: push 직전 강한 조건 재확인 (eligible 누수 방지)
   function _hardCheck(hid){
-    if(hid==='millennium_malkuth') return (G.millenniumTokenSummons||0) >= 10;
+    if(hid==='millennium_malkuth') return ((G.players[0]&&G.players[0].millenniumTokenSummons)||0) >= 10;
     if(hid==='trinity_seia') return (G.totalDamageTaken||0) === 0;
     if(hid==='gehenna_traingun') return Object.keys(G.purchasedSchools||{}).length===1 && G.purchasedSchools['게헨나'];
     if(hid==='trinity_mika') return Object.keys(G.purchasedSchools||{}).length===1 && G.purchasedSchools['트리니티'];
@@ -2569,9 +2569,15 @@ function _doBC(m, p) {
   // ===== 백귀야행 신규 첫인사 =====
   else if(id==='kaede'){
     // 카에데: 이번 게임 동안 스케쥴(상점) 백귀야행 학생들에게 +1/+1 (스킨: +2/+2)
+    // 플레이어/NPC 별 누적 (전역 G.shopSchoolBuff에 NPC가 누적되어 다음 게임으로 누수되는 문제 해결)
     var kdBuff = m.isSkin ? 2 : 1;
-    if(!G.shopSchoolBuff) G.shopSchoolBuff = {};
-    G.shopSchoolBuff['백귀야행'] = (G.shopSchoolBuff['백귀야행']||0) + kdBuff;
+    if(p.isPlayer){
+      if(!G.shopSchoolBuff) G.shopSchoolBuff = {};
+      G.shopSchoolBuff['백귀야행'] = (G.shopSchoolBuff['백귀야행']||0) + kdBuff;
+    } else {
+      if(!p.shopSchoolBuff) p.shopSchoolBuff = {};
+      p.shopSchoolBuff['백귀야행'] = (p.shopSchoolBuff['백귀야행']||0) + kdBuff;
+    }
     // 현재 상점에도 즉시 적용
     var shopRef = p.isPlayer ? G.shop : p.aiShop;
     if(shopRef){
@@ -3916,6 +3922,16 @@ function aiGenerateShop(p){
     takeFromPool(picked.id);
     shop.push(makeMinion(picked,false));
   }
+  // NPC 학교별 shop 버프 (카에데 등) — per-player 누적
+  if(p.shopSchoolBuff){
+    for(var i=0;i<shop.length;i++){
+      var s=shop[i];
+      if(s&&!s.isSpell){
+        var sb=p.shopSchoolBuff[s.school];
+        if(sb&&sb>0){s.atk+=sb;s.hp+=sb;if(s.maxHp)s.maxHp+=sb;}
+      }
+    }
+  }
   // 마법 카드 1장
   if(!G.usedOnceSpells) G.usedOnceSpells={};
   var availSpells=getAvailableSpells(p.tier).filter(function(s){return AI_SPELL_EFFECTS[s.id]&&(!s.once||!G.usedOnceSpells[s.id]);});
@@ -5019,13 +5035,20 @@ function triggerSOC(u, mySide, otherSide, log) {
   }
   else if(id==='nonomi'){
     // 노노미 개전: 샬레에 존재한 이후 소비된 청휘석 / 2 (내림)를 맨 왼쪽 학생 공/체에 추가
+    // 효과 면역(사야 비스킨/미카/검은 군주 등)은 건너뜀
     var nonomiStone=u.isSkin?(G.nonomiStoneSinceJoined||0):Math.floor((G.nonomiStoneSinceJoined||0)/2);
     if(nonomiStone>0&&mySide.length>0){
       var leftmost=null;
-      for(var _nli=0;_nli<mySide.length;_nli++){if(mySide[_nli].alive){leftmost=mySide[_nli];break;}}
+      for(var _nli=0;_nli<mySide.length;_nli++){
+        if(!mySide[_nli].alive) continue;
+        if(mySide[_nli].abilityImmune||mySide[_nli]._sayaImmune||mySide[_nli]._effectImmune) continue;
+        leftmost=mySide[_nli];break;
+      }
       if(leftmost){
         leftmost.atk+=nonomiStone;leftmost.hp+=nonomiStone;
         log.push({cls:'soc',text:'[개전] '+u.name+': '+leftmost.name+'에게 +'+nonomiStone+'/+'+nonomiStone+' (소비 청휘석 '+(G.nonomiStoneSinceJoined||0)+(u.isSkin?'':' 의 절반')+')'});
+      } else {
+        log.push({cls:'soc',text:'[개전] '+u.name+': 효과를 받을 수 있는 아군이 없음'});
       }
     } else {
       log.push({cls:'soc',text:'[개전] '+u.name+': 소비 청휘석 없음 (0)'});
@@ -5531,6 +5554,7 @@ function _doDR(unit, mySide, otherSide, log) {
       applyEimiBonus(ag,mySide);
       mySide.push(ag);
       G.millenniumTokenSummons=(G.millenniumTokenSummons||0)+1;
+      if(mySide._owner) mySide._owner.millenniumTokenSummons=(mySide._owner.millenniumTokenSummons||0)+1;
       log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+ag.name+' 소환! ('+ag.atk+'/'+ag.hp+')'});
       if(ag.atk>eimiPre) log.push({cls:'soc',text:'  → [패시브] 에이미: 밀레니엄 소환 보너스 +'+( ag.atk-eimiPre)+'/+'+(ag.hp-agHp)});
     }
@@ -5880,6 +5904,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   _G.permanentAbilityBan=false;
   _G.battleSchoolBuff={};
+  // 소유자 정보 (밀레니엄 토큰 카운트 등에 사용) — 사이드별 player 참조
+  _G._ownerA=(opts&&opts.ownerA)||null;
+  _G._ownerB=(opts&&opts.ownerB)||null;
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
@@ -5906,6 +5933,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var b=boardB.map(copyUnit);
   a._panchanDeaths=(opts&&opts.panchanDeathsA)||0;
   b._panchanDeaths=(opts&&opts.panchanDeathsB)||0;
+  // 사이드 소유자 (밀레니엄 토큰 카운트용)
+  a._owner=(opts&&opts.ownerA)||null;
+  b._owner=(opts&&opts.ownerB)||null;
   // 사이드 참조 설정 (세이아 무적 등에 필요)
   for(var _si=0;_si<a.length;_si++) a[_si]._mySide=a;
   for(var _si=0;_si<b.length;_si++) b[_si]._mySide=b;
@@ -6175,6 +6205,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       applyEimiBonus(ae,side);
       side.push(ae);
       _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
+      if(side._owner) side._owner.millenniumTokenSummons=(side._owner.millenniumTokenSummons||0)+1;
       log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+ae.name+' 소환! ('+ae.atk+'/'+ae.hp+')'});
       if(ae.atk>eimiPreToki) log2.push({cls:'soc',text:'  → [패시브] 에이미: 밀레니엄 소환 보너스 +'+(ae.atk-eimiPreToki)+'/+'+(ae.atk-eimiPreToki)});
       surviveEffects.push({type:'summon',token:ae.baseId,isSkin:unit.isSkin});
@@ -6387,6 +6418,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         var swp=makeSweeper(atkArr);swp._mySide=atkArr;swp.alive=true;
         atkArr.push(swp);
         _G.millenniumTokenSummons=(_G.millenniumTokenSummons||0)+1;
+        if(atkArr._owner) atkArr._owner.millenniumTokenSummons=(atkArr._owner.millenniumTokenSummons||0)+1;
         summonLog.push({cls:'soc',text:'[선빵] '+attacker.name+': 스위퍼 소환! ('+swp.atk+'/'+swp.hp+')'});
         sweepers.push(swp);
       }
@@ -7065,9 +7097,9 @@ function startBattle() {
   // 선/후공 두 경우 미리 계산 (코인 결과에 따라 선택) — 글로벌 카운터는 resultC만 반영
   _gBattleCounterSave=saveGBattleCounters();
   var pdA=p.panchanDeaths||0, pdB=opp.panchanDeaths||0;
-  var resultA=runBattle(p.board,opp.board,true,{panchanDeathsA:pdA,panchanDeathsB:pdB});
+  var resultA=runBattle(p.board,opp.board,true,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp});
   restoreGBattleCounters(_gBattleCounterSave);
-  var resultB=runBattle(p.board,opp.board,false,{panchanDeathsA:pdA,panchanDeathsB:pdB});
+  var resultB=runBattle(p.board,opp.board,false,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp});
   restoreGBattleCounters(_gBattleCounterSave);
   resultA._initPdA=pdA;resultA._initPdB=pdB;
 
@@ -7353,7 +7385,8 @@ function aiAutoBattles() {
     };
     var startWithA=Math.random()<0.5;
     try{
-      return runBattle(aBoard, bBoard, startWithA, {simCtx:simCtx, panchanDeathsA:pdA, panchanDeathsB:pdB});
+      // NPC vs NPC 실전: per-player 카운트 (NPC도 말쿠트 등장 가능)
+      return runBattle(aBoard, bBoard, startWithA, {simCtx:simCtx, panchanDeathsA:pdA, panchanDeathsB:pdB, ownerA:a2, ownerB:b2});
     }catch(e){
       console.log('AI vs AI 전투 시뮬 실패:', e);
       return null;
@@ -7934,7 +7967,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 카운터에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0});
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0,ownerA:G.players[0],ownerB:opp});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);
@@ -8444,6 +8477,8 @@ function saveGame(){
           aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
           buildPlanId:(p._buildPlan&&p._buildPlan.id)||null,
           aiFrozen:p._aiFrozen||false,
+          millenniumTokenSummons:p.millenniumTokenSummons||0,
+          shopSchoolBuff:p.shopSchoolBuff||{},
           board:p.board.map(function(u){
             return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
               atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:(u.kw||[]).slice(),
@@ -8503,6 +8538,8 @@ function restoreGame(save){
       aiDifficulty:(p.aiDifficulty!=null?p.aiDifficulty:null),
       _buildPlan:(function(){if(!p.buildPlanId)return null;for(var _bp=0;_bp<BUILD_PLANS.length;_bp++)if(BUILD_PLANS[_bp].id===p.buildPlanId)return BUILD_PLANS[_bp];return null;})(),
       _aiFrozen:p.aiFrozen||false,
+      millenniumTokenSummons:p.millenniumTokenSummons||0,
+      shopSchoolBuff:p.shopSchoolBuff||{},
       board:p.board.map(function(u){
         return{id:u.id,baseId:u.baseId,name:u.name,school:u.school,tier:u.tier,
           atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,kw:u.kw||[],
@@ -9234,7 +9271,7 @@ function simBattlePhase() {
   for(var i = 0; i+1 < shuffled.length; i += 2) {
     var pa = shuffled[i], pb = shuffled[i+1];
     if(!pa.board.length && !pb.board.length) continue;
-    var res = runBattle(pa.board, pb.board, true, {simCtx:simCtx, skipSOC:false});
+    var res = runBattle(pa.board, pb.board, true, {simCtx:simCtx, skipSOC:false, ownerA:pa, ownerB:pb});
     if(res.result === 'win') {
       var dmg = pa.tier + Math.min(res.damage, 8);
       pb.hp -= dmg;
