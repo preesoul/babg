@@ -1355,8 +1355,10 @@ function renderAll() {
   var upgradeBtn=document.getElementById('btn-upgrade');
   upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
   upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
-  // 매 렌더 시 자동 저장 (게임 종료 상태가 아닐 때만)
-  if(typeof saveGame==='function'&&G.players&&G.players[0]&&!G.players[0].dead&&G.aliveCount>1)saveGame();
+  // 매 렌더 시 자동 저장 (게임 종료 상태가 아닐 때만) — throw 방어
+  try{
+    if(typeof saveGame==='function'&&G.players&&G.players[0]&&!G.players[0].dead&&G.aliveCount>1)saveGame();
+  }catch(e){if(typeof console!=='undefined') console.error('[renderAll:saveGame]',e);}
 }
 
 function spellCardHtml(item,idx){
@@ -1503,6 +1505,11 @@ function clearMobileMoveUI(){
 }
 function dismissTapMenu(){
   document.querySelectorAll('.m-tap-menu').forEach(function(m){m.remove();});
+  // 리스너 leak 방지: 활성 _dismiss 리스너도 함께 제거
+  if(window._activeDismissHandler){
+    document.removeEventListener('click',window._activeDismissHandler);
+    window._activeDismissHandler=null;
+  }
 }
 function showSellConfirm(onConfirm){
   var overlay=document.createElement('div');
@@ -1610,9 +1617,11 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
   menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
   menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
   setTimeout(function(){
-    document.addEventListener('click',function _dismiss(ev){
-      if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
-    });
+    var _dismiss=function(ev){
+      if(!menu.contains(ev.target)){dismissTapMenu();}
+    };
+    document.addEventListener('click',_dismiss);
+    window._activeDismissHandler=_dismiss; // dismissTapMenu가 후속 cleanup
   },10);
 }
 // 스펠 카드 상세 팝업 (학생 카드 툴팁과 동일 스타일)
@@ -1689,9 +1698,11 @@ function showShopTapMenu(cardEl,shopIdx){
   menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
   menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
   setTimeout(function(){
-    document.addEventListener('click',function _dismiss(ev){
-      if(!menu.contains(ev.target)){dismissTapMenu();document.removeEventListener('click',_dismiss);}
-    });
+    var _dismiss=function(ev){
+      if(!menu.contains(ev.target)){dismissTapMenu();}
+    };
+    document.addEventListener('click',_dismiss);
+    window._activeDismissHandler=_dismiss; // dismissTapMenu가 후속 cleanup
   },10);
 }
 

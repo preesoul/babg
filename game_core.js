@@ -2932,17 +2932,28 @@ function sellBench() {
 }
 
 function doReroll() {
-  var p=G.players[0];
-  lastSold=null;
-  if(SANDBOX){playSfx('reroll',0.3);rollShop(true);renderAll();return;}
-  if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;playSfx('reroll',0.3);rollShop(true);renderAll();return;}
-  if(p.stone<1)return;p.stone-=1;trackNonomiStone(1);playSfx('reroll',0.3);rollShop(true);renderAll();
+  try {
+    var p=G.players[0];
+    lastSold=null;
+    if(SANDBOX){playSfx('reroll',0.3);rollShop(true);renderAll();return;}
+    if(G.freeRerolls&&G.freeRerolls>0){G.freeRerolls--;playSfx('reroll',0.3);rollShop(true);renderAll();return;}
+    if(p.stone<1)return;p.stone-=1;trackNonomiStone(1);playSfx('reroll',0.3);rollShop(true);renderAll();
+  } catch(e){
+    if(typeof console!=='undefined') console.error('[doReroll]',e);
+    try{renderAll();}catch(e2){} // 최소한 UI는 갱신 시도
+  }
 }
 function doUpgrade() {
+  try {
   var p=G.players[0];if(p.tier>=6)return;
   if(SANDBOX){p.tier++;p.upgradeCost=p.tier<6?0:99;playSfx('levelup');renderAll();}
   else{if(p.stone<p.upgradeCost)return;
   var _upCost=p.upgradeCost;p.stone-=_upCost;trackNonomiStone(_upCost);p.tier++;p.upgradeCost=p.tier<6?UPGRADE_COSTS[p.tier]:99;playSfx('levelup');renderAll();}
+  } catch(e){
+    if(typeof console!=='undefined') console.error('[doUpgrade]',e);
+    try{renderAll();}catch(e2){}
+    return;
+  }
   if(TUT.active){
     var s=TUTORIAL_STEPS[TUT.step];
     if(s&&s.action==='waitUpgrade') setTimeout(function(){tutNext();},300);
@@ -2991,18 +3002,19 @@ function getAiDifficulty(){
   if(typeof G!=='undefined' && G.aiDifficulty!=null) return G.aiDifficulty;
   return _calcAiDifficulty(window._babgPlayerRank);
 }
-// AI 시뮬 깊이 (forecast N회): 9등급=4, 4등급=13, 1등급=18, 전설=20, 신화=30, 신=40
+// AI 시뮬 깊이 (forecast N회): 9등급=4, 4등급=13, 1등급=18, 전설=20, 신화=24, 신=28
+// 모바일 안정성 위해 신/신화도 적정선 (이전 30/40 → 24/28). 핸디캡 +2/+3이 강도 보강.
 function _aiSimN(){
   var d=getAiDifficulty();
-  if(d>=1.5) return 40;
-  if(d>=1.2) return 30;
+  if(d>=1.5) return 28;
+  if(d>=1.2) return 24;
   return Math.max(2, Math.round(2 + d*18));
 }
-// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=8, 1등급=12, 전설=14, 신화=20, 신=28
+// 배치 후보 K개 (aiOptimizeOrder): 9등급=2, 4등급=8, 1등급=12, 전설=14, 신화=16, 신=18
 function _aiOptK(){
   var d=getAiDifficulty();
-  if(d>=1.5) return 28;
-  if(d>=1.2) return 20;
+  if(d>=1.5) return 18;
+  if(d>=1.2) return 16;
   return Math.max(2, Math.round(2 + d*12));
 }
 // 휴리스틱 노이즈: 9등급은 점수 평가 자체가 크게 왜곡됨 (±양방향)
@@ -8624,8 +8636,11 @@ function nextTurn() {
     ai.stone=ai.turnStone+aiAoiBonus;
     if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);}
   }
-  aiTurns();rollShop();renderAll();
-  saveGame(); // 매 턴 자동 저장
+  // 한 함수에서 throw해도 후속 함수 (rollShop/renderAll)는 계속 — 모바일 먹통 방지
+  try{aiTurns();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:aiTurns]',e);}
+  try{rollShop();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:rollShop]',e);}
+  try{renderAll();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:renderAll]',e);}
+  try{saveGame();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:saveGame]',e);}
 }
 
 // ===== 진행도 저장/복원 =====
