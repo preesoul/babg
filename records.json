@@ -3285,75 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T11:17:16",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "정의실현부",
-              "baseId": "trinity_justice",
-              "atk": 73,
-              "hp": 59,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Justice_Task_Force.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "정의실현부",
-              "baseId": "trinity_justice",
-              "atk": 73,
-              "hp": 59,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Justice_Task_Force.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "아스나(버니걸)",
-              "baseId": "asuna",
-              "atk": 15,
-              "hp": 13,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Asuna_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 17,
-              "hp": 17,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히마리",
-              "baseId": "himari",
-              "atk": 6,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Himari.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T11:31:30",
           "placement": 1,
           "turn": 14,
@@ -3966,9 +3897,86 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T08:48:41",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 24,
+              "hp": 34,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 24,
+              "hp": 34,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 18,
+              "hp": 32,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 18,
+              "hp": 20,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코(사복)",
+              "baseId": "niko",
+              "atk": 23,
+              "hp": 23,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Niko_(Private).png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 42,
+      "points": 44,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4084,8 +4092,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 5,
-        "legendPoints": 6
+        "streak": 6,
+        "legendPoints": 7
       }
     },
     "킹갓프리소울": {
