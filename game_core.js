@@ -418,7 +418,7 @@ var ABILITY_DESCS = {
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선빵',desc:'공격 시, 5% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 10%',skinEffectDesc:'선빵: 공격 시, <span style="color:#ffd700;font-weight:700">10%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
-  suzumi:   {type:'패시브',desc:'상대 전원의 코인토스 성공률이\n50%가 아닌 34%가 됩니다.\n(중복 시 한 번만 적용)',skinEffect:'마법소녀 스즈미: 25%로',skinEffectDesc:'패시브: 상대 전원의 코인토스 성공률이\n50%가 아닌 <span style="color:#ffd700;font-weight:700">25%</span>가 됩니다.\n(중복 시 한 번만 적용. 스킨이 우선)'},
+  suzumi:   {type:'패시브',desc:'적 코인 -16%, 아군 코인 +16%\n(zero-sum. 양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 스즈미: ±25%',skinEffectDesc:'패시브: 적 코인 <span style="color:#ffd700;font-weight:700">-25%</span>,\n아군 코인 <span style="color:#ffd700;font-weight:700">+25%</span>\n(zero-sum. 양쪽 모두 가지면 상쇄)'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
   haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
   // 총학생회
@@ -462,16 +462,16 @@ var ABILITY_DESCS = {
   kanna:   {type:'개전',desc:'이번 게임에서 발키리/SRT 학생이 직접\n쓰러뜨린 적의 수의 절반(올림)을 공격력에,\n직접 쓰러진 발키리/SRT 학생 수의 절반(올림)을\n체력에 추가합니다. (전투 개전 시점 갱신)',skinEffect:'수영복 칸나: 절반이 아닌 전체',skinEffectDesc:'개전: 이번 게임에서 발키리/SRT 학생이 직접 쓰러뜨린 적의 수 <span style="color:#ffd700;font-weight:700">전체</span>를 공격력에, 직접 쓰러진 발키리/SRT 학생 수 <span style="color:#ffd700;font-weight:700">전체</span>를 체력에 추가합니다.'},
   misuzu:  {type:'개전',desc:'아군 <지켜줌> 학생들 전원에게\n+5/+5를 부여합니다.',skinEffect:'바니걸 미스즈: +10/+10',skinEffectDesc:'개전: 아군 <지켜줌> 학생들 전원에게\n<span style="color:#ffd700;font-weight:700">+10/+10</span>을 부여합니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
-  shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
+  shun:     {type:'패시브',desc:'공격 시 전투 데미지에 의해 적이 쓰러지면,\n다음 무작위 대상을 공격합니다. 가능하면 반복합니다.\n(독사굴 즉사로 처치 시엔 발동 X)',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격 시 전투 데미지에 의해 적이 쓰러지면,\n다음 무작위 대상을 공격합니다. 가능하면 반복합니다.\n(독사굴 즉사로 처치 시엔 발동 X)\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
   shanhai_kiki: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 샬레에 키사키가 있고 산해경 학생 5명 이상이 있을 때 등장.',desc:'패시브: 샬레의 키사키를 흡수하며 등장합니다. 공격력과 체력을 더합니다.\n쓰러지면 <현룡문의 검은 군주>(30/30)를 소환합니다.',skinEffect:'',quote:'키키: 와아-! 높-이, 높-이!! 키키는 선생님이 너무 좋아!!'},
   red_winter_minori: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'10턴 이상, 스케쥴 Lv.1 유지 시 리롤 60% 등장.',desc:'패시브: 이 카드는 공격하지 않습니다. 아군 필드에 이 카드가 마지막으로 남아 있을 경우, 패배합니다.\n개전: 이 카드에 걸린 모든 기본 능력을 해제합니다. 이후 기본 능력을 얻어도 효과가 없습니다.\n뒤끝: <성난 군중> 토큰을 소환합니다. 파괴될 경우 다음 토큰을 소환합니다. 13번까지 반복됩니다.',skinEffect:'',quote:'미노리: 아무거나 규탄한다! 이것저것 보장하라!!'},
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
-  reisa:    {type:'패시브',desc:'아군 전원의 코인토스 성공률이\n50%가 아닌 65%가 됩니다.\n(중복 시 한 번만 적용. 스즈미와 같은 맥락)',skinEffect:'마법소녀 레이사: 75%로',skinEffectDesc:'패시브: 아군 전원의 코인토스 성공률이\n50%가 아닌 <span style="color:#ffd700;font-weight:700">75%</span>가 됩니다.\n(중복 시 한 번만 적용. 스킨이 우선)'},
+  reisa:    {type:'패시브',desc:'아군 코인 +15%, 적 코인 -15%\n(zero-sum. 양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 레이사: ±25%',skinEffectDesc:'패시브: 아군 코인 <span style="color:#ffd700;font-weight:700">+25%</span>,\n적 코인 <span style="color:#ffd700;font-weight:700">-25%</span>\n(zero-sum. 양쪽 모두 가지면 상쇄)'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
-  hanako:   {type:'독사',desc:'독사 공격으로 적을 처치합니다.',skinEffect:'수영복 하나코: 패시브 추가',skinEffectDesc:'독사. 패시브: 자신의 공격으로 쓰러뜨린 적의\n<span style="color:#ffd700;font-weight:700">모든 능력을 삭제</span>합니다.'},
+  hanako:   {type:'',desc:'',skinEffect:'수영복 하나코: 자신의 공격으로 쓰러뜨린 적의 모든 능력을 삭제',skinEffectDesc:'패시브: 자신의 공격으로 쓰러뜨린 적의\n<span style="color:#ffd700;font-weight:700">모든 능력을 삭제</span>합니다.'},
   ichika:   {type:'',desc:'',skinEffect:'수영복 이치카: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
   iori:     {type:'',desc:'',skinEffect:'수영복 이오리: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
   // ===== 스킨 전용 효과 (기본 능력 없이 스킨만 추가) =====
@@ -6615,37 +6615,42 @@ function runBattle(boardA, boardB, startWithA, opts) {
   // 실제 코인 애니메이션은 이 결과를 그대로 표시 (random 다시 X)
   (function decideCoinResults(){
     var btBonus = _G.bunnyTossBonus || 0;
-    // suzumi 패시브: 상대 코인 성공률을 set (누적 X). 일반 0.34 / 스킨 0.25. 스킨이 한 명이라도 있으면 0.25 우선.
-    function _suzumiBase(enemySide){
+    // ===== 코인 prob 산출 (zero-sum 모델) =====
+    // 기본 50%, 효과는 50%로부터의 편차(delta)로 환산.
+    // 한 쪽이 +X% 하면 zero-sum으로 상대는 -X%. 양쪽 동시 효과면 cancel.
+    // suzumi: 상대 -16%(일반) / -25%(스킨) → 자기 +16%/+25%
+    // reisa : 자기 +15%(일반) / +25%(스킨) → 상대 -15%/-25%
+    // 양쪽 다 가지면 ±값들이 zero-sum으로 cancel되어 50:50으로 수렴.
+    function _suzumiDelta(side){
+      // side에 스즈미가 있으면 상대를 깎음 — 즉 자기 +값
       var hasNormal=false, hasSkin=false;
-      for(var i=0;i<enemySide.length;i++){
-        if(enemySide[i].alive && enemySide[i].baseId==='suzumi' && !enemySide[i]._abilitiesStripped){
-          if(enemySide[i].isSkin) hasSkin=true; else hasNormal=true;
+      for(var i=0;i<side.length;i++){
+        if(side[i].alive && side[i].baseId==='suzumi' && !side[i]._abilitiesStripped){
+          if(side[i].isSkin) hasSkin=true; else hasNormal=true;
         }
       }
-      if(hasSkin) return 0.25;
-      if(hasNormal) return 0.34;
-      return 0.5;
-    }
-    // reisa 패시브: 아군 코인 성공률을 set (누적 X). 일반 0.65 / 스킨 0.75. 스킨이 한 명이라도 있으면 0.75 우선.
-    function _reisaBoost(allySide){
-      var hasNormal=false, hasSkin=false;
-      for(var i=0;i<allySide.length;i++){
-        if(allySide[i].alive && allySide[i].baseId==='reisa' && !allySide[i]._abilitiesStripped){
-          if(allySide[i].isSkin) hasSkin=true; else hasNormal=true;
-        }
-      }
-      if(hasSkin) return 0.75;
-      if(hasNormal) return 0.65;
+      if(hasSkin) return 0.25;   // 상대를 25% (50→25)로 → 자기 +25%
+      if(hasNormal) return 0.16;  // 상대를 34% (50→34)로 → 자기 +16%
       return 0;
     }
-    var suzBaseA = _suzumiBase(b); // a 사이드의 코인 base — b의 스즈미 영향
-    var suzBaseB = _suzumiBase(a); // b 사이드의 코인 base — a의 스즈미 영향
-    var reisaBoostA = _reisaBoost(a); // a 사이드의 코인 base — a의 레이사 부스트
-    var reisaBoostB = _reisaBoost(b); // b 사이드의 코인 base — b의 레이사 부스트
-    // 최종 base = max(suzumi 감소, reisa 부스트). 레이사가 우선 (트리니티 보강 의도)
-    var finalBaseA = Math.max(suzBaseA, reisaBoostA);
-    var finalBaseB = Math.max(suzBaseB, reisaBoostB);
+    function _reisaDelta(side){
+      // side에 레이사가 있으면 자기를 올림
+      var hasNormal=false, hasSkin=false;
+      for(var i=0;i<side.length;i++){
+        if(side[i].alive && side[i].baseId==='reisa' && !side[i]._abilitiesStripped){
+          if(side[i].isSkin) hasSkin=true; else hasNormal=true;
+        }
+      }
+      if(hasSkin) return 0.25;   // 자기 +25% (50→75)
+      if(hasNormal) return 0.15;  // 자기 +15% (50→65)
+      return 0;
+    }
+    // a side delta = a의 자기-부스트 + a의 스즈미(상대 깎음→자기 +) − b의 자기-부스트 − b의 스즈미(자기 a를 깎음→a -)
+    var aDelta = _reisaDelta(a) + _suzumiDelta(a) - _reisaDelta(b) - _suzumiDelta(b);
+    // b는 zero-sum으로 정확히 반대
+    var bDelta = -aDelta;
+    var finalBaseA = Math.max(0, Math.min(1, 0.5 + aDelta));
+    var finalBaseB = Math.max(0, Math.min(1, 0.5 + bDelta));
     var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
     var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
     function _setCoin(side, hasCC, baseProb, withBunnyBonus){
@@ -6855,9 +6860,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
             if(tIdx>0&&aliveD[tIdx-1])dealDamage(attacker,atkArr2,aliveD[tIdx-1],defArr2,stepLog,true,hitResult.overflow);
             if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
           }
-          // 슌 패시브: 킬 시 다음 무작위 대상 추가 공격 연쇄 (기본/스킨 동일)
+          // 슌 패시브: 전투 데미지로 적 처치 시 다음 무작위 대상 추가 공격 연쇄 (기본/스킨 동일)
           // 스킨(어린이)은 보호막 추가만 다름. 추가 공격 로직은 동일.
-          if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
+          // 독사굴(poison) 즉사로 처치한 경우는 발동 X (전투 데미지가 아님)
+          if(attacker.baseId==='shun'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked&&!target._poisonKilled){
             if(!_G._shunPendingSteps)_G._shunPendingSteps=[];
             var _shunChain=0;
             while(_shunChain<20&&attacker.alive){
@@ -6868,7 +6874,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
               shunLog.push({cls:'hit',text:'[패시브] '+attacker.name+': '+shunNext.name+'을(를) 추가 공격!'});
               dealDamage(attacker,atkArr2,shunNext,defArr2,shunLog,true);
               _G._shunPendingSteps.push({atkSide:atkSide,atkIdx:atkI,defSide:defSide,defIdx:shunDefI2,atkId:attacker.id,defId:shunNext.id,log:shunLog,snap:snapshot()});
-              if(!shunNext.alive){_shunChain++;continue;}
+              // 독사굴로 즉사한 경우는 추가 공격 연쇄 중단 (전투 데미지로만 연쇄)
+              if(!shunNext.alive&&!shunNext._poisonKilled){_shunChain++;continue;}
               break;
             }
           }
