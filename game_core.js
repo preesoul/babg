@@ -1008,7 +1008,8 @@ function newGame() {
   aiTurns();
   renderAll();
   // 백그라운드 자가대전 시뮬 (20판) — UI 비블로킹
-  if(!SANDBOX) setTimeout(function(){ runSimBatch(20); }, 500);
+  // 백그라운드 자가대전 시뮬 — 1턴 영입 시간(약 10초) 후 시작 + 판수 축소 (UI 반응성 보장)
+  if(!SANDBOX) setTimeout(function(){ runSimBatch(10); }, 10000);
 }
 
 // 스킨(황금) 키워드 변환: 각 캐릭터 스킨 효과 (원본 능력은 유지됨)
@@ -9524,7 +9525,9 @@ function runSimBatch(N, onDone) {
     }
     runSimGame();
     count++;
-    setTimeout(step, 0);
+    // UI 반응성 보장: 판 사이에 100ms 간격 (사용자 입력 우선)
+    setTimeout(step, 100);
   }
-  setTimeout(step, 0);
+  // 첫 시작도 약간 지연
+  setTimeout(step, 100);
 }
