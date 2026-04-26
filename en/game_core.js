@@ -5656,6 +5656,17 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   document.getElementById('ally-label').textContent='Sensei';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
+  // 시각 흐름 순서: 초기 스냅 → 코인 애니 → 개전 → 공격
+  // altResult가 있으면 코인 페이즈 진입 가능. result.steps에서 SOC 단계를 제외하여
+  // 초기 스냅 직후 곧바로 코인 페이즈가 트리거되도록 한다. SOC는 코인 후 resultC에서 재생됨.
+  if(altResult&&steps&&steps.length>0){
+    var _filtered=[steps[0]];
+    for(var _fi=1;_fi<steps.length;_fi++){
+      if(steps[_fi].atkSide===null) continue;
+      _filtered.push(steps[_fi]);
+    }
+    steps=_filtered;
+  }
   var activeResult=result;
   if(!steps||steps.length===0){
     if(onCoinResult)onCoinResult(activeResult);
@@ -5705,10 +5716,9 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
           finishBattle(drawResult);
           return;
         }
-        // Battle Start 후 최신 스냅샷 (coin 직games 상태) 추출
-        var postSOCsnap=steps[0].snap;
-        for(var _si=0;_si<stepIdx;_si++){if(steps[_si].atkSide===null)postSOCsnap=steps[_si].snap;}
-        var boardA=postSOCsnap.a;var boardB=postSOCsnap.b;
+        // 코인 직전 보드 상태 = 초기 스냅 (SOC는 이제 resultC에서 코인 후 재생됨)
+        var preSOCsnap=steps[0].snap;
+        var boardA=preSOCsnap.a;var boardB=preSOCsnap.b;
         // coin 결과를 board 포지션 인덱스로 매핑
         var aliveIdxA=[],aliveIdxB=[];
         for(var _ai=0;_ai<boardA.length;_ai++)if(boardA[_ai].alive)aliveIdxA.push(_ai);
@@ -5719,7 +5729,8 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 counter에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0});
+        // 시각 흐름: resultC가 SOC를 실행 (코인 후)
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:false,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);

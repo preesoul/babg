@@ -5895,6 +5895,86 @@ function makeSweeper(side){
   return sw;
 }
 
+// ===== 코인 prob 산출 (zero-sum 모델) — runBattle/runBattleCoinPhase 공용 =====
+// 기본 50%, 효과는 50%로부터의 편차(delta)로 환산.
+// 한 쪽이 +X% 하면 zero-sum으로 상대는 -X%. 양쪽 동시 효과면 cancel.
+// suzumi: 상대 -16%(일반) / -25%(스킨) → 자기 +16%/+25%
+// reisa : 자기 +15%(일반) / +25%(스킨) → 상대 -15%/-25%
+function _computeCoinProbs(a, b, _G){
+  function _stripped(u){return u._abilitiesStripped||u.stripped;}
+  function _suzumiDelta(side){
+    var hasNormal=false, hasSkin=false;
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive && side[i].baseId==='suzumi' && !_stripped(side[i])){
+        if(side[i].isSkin) hasSkin=true; else hasNormal=true;
+      }
+    }
+    if(hasSkin) return 0.25;
+    if(hasNormal) return 0.16;
+    return 0;
+  }
+  function _reisaDelta(side){
+    var hasNormal=false, hasSkin=false;
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive && side[i].baseId==='reisa' && !_stripped(side[i])){
+        if(side[i].isSkin) hasSkin=true; else hasNormal=true;
+      }
+    }
+    if(hasSkin) return 0.25;
+    if(hasNormal) return 0.15;
+    return 0;
+  }
+  var aDelta = _reisaDelta(a) + _suzumiDelta(a) - _reisaDelta(b) - _suzumiDelta(b);
+  var bDelta = -aDelta;
+  var finalBaseA = Math.max(0, Math.min(1, 0.5 + aDelta));
+  var finalBaseB = Math.max(0, Math.min(1, 0.5 + bDelta));
+  var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+  var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+  var btBonus = (_G && _G.bunnyTossBonus) || 0;
+  return {finalBaseA:finalBaseA, finalBaseB:finalBaseB, aHasCC:aHasCC, bHasCC:bHasCC, btBonus:btBonus};
+}
+// 한 사이드 코인 굴림 — Math.random()을 호출해 _coinResult 갱신
+function _rollCoinSide(side, hasCC, baseProb, withBunnyBonus, btBonus){
+  btBonus = btBonus || 0;
+  for(var i=0;i<side.length;i++){
+    var u=side[i];
+    if(!u.alive){ u._coinResult=undefined; continue; }
+    if(u.coinOff){ u._coinResult=false; continue; }
+    if(hasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
+    var p = withBunnyBonus ? Math.max(0, baseProb+btBonus) : Math.max(0, baseProb);
+    u._coinResult = Math.random() < p;
+  }
+}
+// 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인 성공
+function _applyAsunaSkinOverride(side){
+  var hasAsunaGold = side.some(function(u){return u.alive&&(u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
+  if(!hasAsunaGold) return;
+  for(var i=0;i<side.length;i++){
+    if(side[i].alive&&side[i].baseId!=='asuna'&&side[i].baseId!=='millennium_cc'&&!side[i].coinOff){
+      side[i]._coinResult=true; break;
+    }
+  }
+}
+// 외부에서 결정된 코인 결과 맵을 보드에 적용 (시각 코인 → SOC 입력)
+// coinResults = {a:{posIdx:bool, ...}, b:{posIdx:bool, ...}}
+function _applyCoinResultsToBoards(a, b, coinResults){
+  function _apply(side, map, sideHasCC){
+    for(var i=0;i<side.length;i++){
+      var u=side[i];
+      if(!u.alive){ u._coinResult=undefined; continue; }
+      if(u.coinOff){ u._coinResult=false; continue; }
+      if(sideHasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
+      var v = map ? map[i] : undefined;
+      u._coinResult = (v===true||v===false) ? v : (Math.random()<0.5);
+    }
+    _applyAsunaSkinOverride(side);
+  }
+  var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+  var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+  _apply(a, coinResults&&coinResults.a, aHasCC);
+  _apply(b, coinResults&&coinResults.b, bHasCC);
+}
+
 function runBattle(boardA, boardB, startWithA, opts) {
   var _G=(opts&&opts.simCtx)||G;
   // 전투 중 획득 키워드가 보드에 잔존하지 않도록 _baseKw 스냅샷 (시뮬 제외)
@@ -5908,6 +5988,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
   _G._ownerA=(opts&&opts.ownerA)||null;
   _G._ownerB=(opts&&opts.ownerB)||null;
   var skipSOC=!!(opts&&opts.skipSOC);
+  var skipCoin=!!(opts&&opts.skipCoin);
+  var coinResultsOpt=(opts&&opts.coinResults)||null;
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
   var coinSeqKeys={};
@@ -6612,70 +6694,21 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   // ===== 코인 결과 사전 결정 (개전 전) =====
   // 각 카드에 _coinResult 부여 → 개전이 참조 가능
-  // 실제 코인 애니메이션은 이 결과를 그대로 표시 (random 다시 X)
-  (function decideCoinResults(){
-    var btBonus = _G.bunnyTossBonus || 0;
-    // ===== 코인 prob 산출 (zero-sum 모델) =====
-    // 기본 50%, 효과는 50%로부터의 편차(delta)로 환산.
-    // 한 쪽이 +X% 하면 zero-sum으로 상대는 -X%. 양쪽 동시 효과면 cancel.
-    // suzumi: 상대 -16%(일반) / -25%(스킨) → 자기 +16%/+25%
-    // reisa : 자기 +15%(일반) / +25%(스킨) → 상대 -15%/-25%
-    // 양쪽 다 가지면 ±값들이 zero-sum으로 cancel되어 50:50으로 수렴.
-    function _suzumiDelta(side){
-      // side에 스즈미가 있으면 상대를 깎음 — 즉 자기 +값
-      var hasNormal=false, hasSkin=false;
-      for(var i=0;i<side.length;i++){
-        if(side[i].alive && side[i].baseId==='suzumi' && !side[i]._abilitiesStripped){
-          if(side[i].isSkin) hasSkin=true; else hasNormal=true;
-        }
-      }
-      if(hasSkin) return 0.25;   // 상대를 25% (50→25)로 → 자기 +25%
-      if(hasNormal) return 0.16;  // 상대를 34% (50→34)로 → 자기 +16%
-      return 0;
+  // skipCoin:true 시 _coinResult 미정의 (시각 흐름이 직접 결정)
+  // coinResults 제공 시 prob 모델 우회하고 해당 값 적용
+  if(!skipCoin){
+    if(coinResultsOpt){
+      // 외부에서 결정된 코인 결과를 적용 (시각 코인 애니메이션 결과)
+      _applyCoinResultsToBoards(a, b, coinResultsOpt);
+    } else {
+      // 기존 동작: prob 모델로 사전 결정
+      var _probs = _computeCoinProbs(a, b, _G);
+      _rollCoinSide(a, _probs.aHasCC, _probs.finalBaseA, true, _probs.btBonus);
+      _rollCoinSide(b, _probs.bHasCC, _probs.finalBaseB, false, _probs.btBonus);
+      _applyAsunaSkinOverride(a);
+      _applyAsunaSkinOverride(b);
     }
-    function _reisaDelta(side){
-      // side에 레이사가 있으면 자기를 올림
-      var hasNormal=false, hasSkin=false;
-      for(var i=0;i<side.length;i++){
-        if(side[i].alive && side[i].baseId==='reisa' && !side[i]._abilitiesStripped){
-          if(side[i].isSkin) hasSkin=true; else hasNormal=true;
-        }
-      }
-      if(hasSkin) return 0.25;   // 자기 +25% (50→75)
-      if(hasNormal) return 0.15;  // 자기 +15% (50→65)
-      return 0;
-    }
-    // a side delta = a의 자기-부스트 + a의 스즈미(상대 깎음→자기 +) − b의 자기-부스트 − b의 스즈미(자기 a를 깎음→a -)
-    var aDelta = _reisaDelta(a) + _suzumiDelta(a) - _reisaDelta(b) - _suzumiDelta(b);
-    // b는 zero-sum으로 정확히 반대
-    var bDelta = -aDelta;
-    var finalBaseA = Math.max(0, Math.min(1, 0.5 + aDelta));
-    var finalBaseB = Math.max(0, Math.min(1, 0.5 + bDelta));
-    var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
-    var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
-    function _setCoin(side, hasCC, baseProb, withBunnyBonus){
-      for(var i=0;i<side.length;i++){
-        var u=side[i];
-        if(!u.alive){ u._coinResult=undefined; continue; }
-        if(u.coinOff){ u._coinResult=false; continue; }
-        if(hasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
-        var p = withBunnyBonus ? Math.max(0, baseProb+btBonus) : Math.max(0, baseProb);
-        u._coinResult = Math.random() < p;
-      }
-      // 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인 성공
-      var hasAsunaGold = side.some(function(u){return u.alive&&(u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
-      if(hasAsunaGold){
-        for(var i=0;i<side.length;i++){
-          if(side[i].alive&&side[i].baseId!=='asuna'&&side[i].baseId!=='millennium_cc'&&!side[i].coinOff){
-            side[i]._coinResult=true; break;
-          }
-        }
-      }
-    }
-    // a는 아군 측이라 bunny toss 보너스 적용 (기존 동작 유지)
-    _setCoin(a, aHasCC, finalBaseA, true);
-    _setCoin(b, bHasCC, finalBaseB, false);
-  })();
+  }
 
   // 초기 스냅샷 (개전 전 상태)
   steps.push({atkSide:null,atkIdx:-1,defSide:null,defIdx:-1,log:[],snap:snapshot()});
@@ -7692,10 +7725,13 @@ function runBattleCoinPhase(snap,callback){
   var coinOffMap={};
   for(var j=0;j<aliveSnapA.length;j++)if(aliveSnapA[j].coinOff)coinOffMap['a'+j]=true;
 
-  // 스즈미 패시브: 상대 코인 성공률 감소 (-20%, 황금: -40%)
+  // 스즈미 패시브: 상대 코인 성공률 감소 (-20%, 황금: -40%) — 레거시(미사용, 호환용으로 남김)
   var _suzumiPenaltyForEnemy=0,_suzumiPenaltyForAlly=0;
   for(var j=0;j<aliveSnapA.length;j++){if(aliveSnapA[j].baseId==='suzumi')_suzumiPenaltyForEnemy+=aliveSnapA[j].isSkin?0.7:0.4;}
   for(var j=0;j<aliveSnapB.length;j++){if(aliveSnapB[j].baseId==='suzumi')_suzumiPenaltyForAlly+=aliveSnapB[j].isSkin?0.7:0.4;}
+
+  // 코인 prob 모델: snap 기준으로 한 번 계산 (재토스마다 동일 prob에서 fresh random)
+  var _coinProbs = _computeCoinProbs(aliveSnapA, aliveSnapB, G);
 
   var coinsInjected=false;
   function injectCoin(ci,isEnemy){
@@ -7749,9 +7785,20 @@ function runBattleCoinPhase(snap,callback){
 
     setTimeout(function(){
       var cr={};
-      // 코인 결과는 runBattle 시작 시점에 decideCoinResults로 미리 결정되어 snap의 _coinResult에 저장됨
-      // 여기서는 그 값을 그대로 사용 (random 다시 던지지 X). 미정의 시 fallback random.
-      // ※ aliveEnemy/aliveAlly는 DOM 객체라 _coinResult가 없음 → snap에서 가져와야 함
+      // 매 시도마다 prob 모델로 fresh random 굴림 (snap units에 _coinResult 갱신).
+      // 시도 1: snap에 미리 결정된 값이 있으면 그대로 사용 (skipCoin=false runBattle이 이미 굴렸음).
+      // 시도 2+ (재토스): 미리값 무시하고 helper로 다시 굴림 → 동률 무한루프 방지.
+      var _useExisting = (attempt===1);
+      var _hasExistingA = _useExisting && aliveSnapA.length>0 && (aliveSnapA[0]._coinResult===true||aliveSnapA[0]._coinResult===false);
+      var _hasExistingB = _useExisting && aliveSnapB.length>0 && (aliveSnapB[0]._coinResult===true||aliveSnapB[0]._coinResult===false);
+      if(!_hasExistingA){
+        _rollCoinSide(aliveSnapA, _coinProbs.aHasCC, _coinProbs.finalBaseA, true, _coinProbs.btBonus);
+        _applyAsunaSkinOverride(aliveSnapA);
+      }
+      if(!_hasExistingB){
+        _rollCoinSide(aliveSnapB, _coinProbs.bHasCC, _coinProbs.finalBaseB, false, _coinProbs.btBonus);
+        _applyAsunaSkinOverride(aliveSnapB);
+      }
       for(var j=0;j<aliveEnemy.length;j++){
         var _eu=aliveEnemy[j];
         var _esnap=aliveSnapB[j];
@@ -7911,6 +7958,17 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
   document.getElementById('ally-label').innerHTML='<img src="'+_myIcon+'" style="'+_iconStyle+'" onerror="this.style.display=\'none\'">'+_myTierBadge+_myName+' (스케쥴 '+_myTier+')';
   var logEl=document.getElementById('battle-log');logEl.innerHTML='';
   var steps=result.steps;
+  // 시각 흐름 순서: 초기 스냅 → 코인 애니 → 개전 → 공격
+  // altResult가 있으면 코인 페이즈 진입 가능. result.steps에서 개전(SOC) 단계를 제외하여
+  // 초기 스냅 직후 곧바로 코인 페이즈가 트리거되도록 한다. 개전은 코인 후 resultC에서 재생됨.
+  if(altResult&&steps&&steps.length>0){
+    var _filtered=[steps[0]];
+    for(var _fi=1;_fi<steps.length;_fi++){
+      if(steps[_fi].atkSide===null) continue; // SOC step 제거
+      _filtered.push(steps[_fi]);
+    }
+    steps=_filtered;
+  }
   var activeResult=result;
   if(!steps||steps.length===0){
     if(onCoinResult)onCoinResult(activeResult);
@@ -7960,10 +8018,10 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
           finishBattle(drawResult);
           return;
         }
-        // 개전 후 최신 스냅샷 (코인 직전 상태) 추출
-        var postSOCsnap=steps[0].snap;
-        for(var _si=0;_si<stepIdx;_si++){if(steps[_si].atkSide===null)postSOCsnap=steps[_si].snap;}
-        var boardA=postSOCsnap.a;var boardB=postSOCsnap.b;
+        // 코인 직전 보드 상태 = 초기 스냅 (개전은 이제 resultC에서 코인 후 재생됨)
+        // steps[0]은 result.steps의 초기 스냅(원본 보드, 모두 alive). resultC가 SOC를 새로 적용.
+        var preSOCsnap=steps[0].snap;
+        var boardA=preSOCsnap.a;var boardB=preSOCsnap.b;
         // 코인 결과를 보드 포지션 인덱스로 매핑
         var aliveIdxA=[],aliveIdxB=[];
         for(var _ai=0;_ai<boardA.length;_ai++)if(boardA[_ai].alive)aliveIdxA.push(_ai);
@@ -7974,7 +8032,9 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         var coinSeq=buildCoinSeqForBattle(boardA,boardB,coinA,coinB,coinInfo.eFirst);
         // resultC만 글로벌 카운터에 실제 반영
         if(_gBattleCounterSave)restoreGBattleCounters(_gBattleCounterSave);
-        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:true,coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0,ownerA:G.players[0],ownerB:opp});
+        // 시각 흐름: resultC가 SOC를 실행 (코인 결과는 visual coin 결과로 주입).
+        // skipSOC:false → SOC 재생 / coinResults → 사전 결정한 prob 모델 우회 (visual coin 그대로)
+        var resultC=runBattle(boardA,boardB,allyFirst,{skipSOC:false,coinResults:{a:coinA,b:coinB},coinSeq:coinSeq,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0,ownerA:G.players[0],ownerB:opp});
         _gBattleCounterSave=null;
         activeResult=resultC;
         if(onCoinResult)onCoinResult(resultC);
