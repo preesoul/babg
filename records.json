@@ -3285,81 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T07:53:27",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미나(리코더)",
-              "baseId": "mina",
-              "atk": 20,
-              "hp": 24,
-              "tier": 2,
-              "kw": [
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Mina_(Recorder).png",
-              "school": "산해경"
-            },
-            {
-              "name": "시미코(악의 간부)",
-              "baseId": "shimiko",
-              "atk": 49,
-              "hp": 51,
-              "tier": 2,
-              "kw": [
-                "shield",
-                "cleave",
-                "windfury",
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "아스나(버니걸)",
-              "baseId": "asuna",
-              "atk": 27,
-              "hp": 25,
-              "tier": 5,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Asuna_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 9,
-              "hp": 9,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T08:48:41",
           "placement": 1,
           "turn": 16,
@@ -3988,9 +3913,84 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-26T17:04:04",
+          "placement": 1,
+          "turn": 16,
+          "tier": 5,
+          "board": [
+            {
+              "name": "이치카(수영복)",
+              "baseId": "ichika",
+              "atk": 36,
+              "hp": 18,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Ichika_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "코하루(수영복)",
+              "baseId": "koharu",
+              "atk": 15,
+              "hp": 17,
+              "tier": 1,
+              "kw": [
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Koharu_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 5,
+              "hp": 8,
+              "tier": 4,
+              "kw": [
+                "poison",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 11,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 7,
+              "hp": 9,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 65,
+      "points": 82,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -4007,8 +4007,8 @@
             },
             {
               "id": "trinity10",
-              "progress": 8,
-              "completed": false
+              "progress": 16,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4023,12 +4023,12 @@
             },
             {
               "id": "discover10",
-              "progress": 9,
-              "completed": false
+              "progress": 12,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             }
           ]
@@ -4110,9 +4110,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 2,
-        "legendPoints": 13
-      }
+        "streak": 3,
+        "legendPoints": 14
+      },
+      "totalGames": 11,
+      "totalWins": 10,
+      "totalFirsts": 10
     },
     "킹갓프리소울": {
       "records": [],
