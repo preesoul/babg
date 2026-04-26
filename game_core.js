@@ -95,7 +95,7 @@ var CHARS = [
   // ===== 트리니티 신규 =====
   // 트리니티 1학년
   {id:'koharu',  name:'코하루', school:'트리니티',tier:1,atk:1,hp:2,kw:['preemptive'],   skin:'코하루(수영복)',   img:'Koharu.png',         imgGold:'Koharu_(Swimsuit).png'},
-  {id:'shimiko', name:'시미코', school:'트리니티',tier:1,atk:4,hp:3,kw:[],                skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
+  {id:'shimiko', name:'시미코', school:'트리니티',tier:2,atk:4,hp:3,kw:[],                skin:'시미코(악의 간부)',img:'Shimiko.png',         imgGold:'Shimiko_Evil_boss.png'},
   // 트리니티 2학년
   {id:'suzumi',  name:'스즈미', school:'트리니티',tier:3,atk:2,hp:4,kw:[],                skin:'스즈미(마법소녀)', img:'Suzumi.png',          imgGold:'Suzumi_(Magical).png'},
   // 트리니티 3학년
@@ -210,7 +210,13 @@ function findAnyChar(id){for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===id)retu
 // 스탯 색상 (기본보다 높으면 초록, 낮으면 빨강)
 function statColor(baseId,isSkin,type,current){
   var tmpl=findAnyChar(baseId);if(!tmpl)return'';
-  var base=isSkin?(type==='atk'?tmpl.atk*2+1:tmpl.hp*2+1):(type==='atk'?tmpl.atk:tmpl.hp);
+  // 수영복 유키노 스킨: base + 공격력 +5 (체력 변화 X) — 일반 base*2+1 룰 예외
+  var base;
+  if(isSkin && baseId==='yukino'){
+    base = (type==='atk') ? (tmpl.atk+5) : tmpl.hp;
+  } else {
+    base = isSkin?(type==='atk'?tmpl.atk*2+1:tmpl.hp*2+1):(type==='atk'?tmpl.atk:tmpl.hp);
+  }
   var _ol='text-shadow:-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000,1.5px 1.5px 0 #000';
   if(current>base)return'color:#00ff00;font-weight:900;'+_ol;if(current<base)return'color:#ff0000;font-weight:900;'+_ol;return _ol;
 }
@@ -587,7 +593,7 @@ var SPELLS = [
   {id:'venom',name:'독사 무브',cost:3,tier:5,desc:'선택 학생에게 독사굴 부여',target:'select_ally',img:'img/spell/venom.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;addKw(p.board[idx],'poison');return true;}},
   {id:'dressing',name:'탈의실',cost:7,tier:6,desc:'선택 학생을 황금으로 변경 (게임당 1회)',target:'select_ally',once:true,img:'img/spell/dressing.png',
-    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;var bonusAtk=m.atk-tmpl.atk;var bonusHp=m.hp-tmpl.hp;m.name=tmpl.skin;m.atk=tmpl.atk*2+1+bonusAtk;m.hp=tmpl.hp*2+1+bonusHp;m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;applySkinKwTransform(tmpl,m);return true;}},
+    effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;var m=p.board[idx];if(m.isSkin)return false;var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];if(!tmpl)return false;var bonusAtk=m.atk-tmpl.atk;var bonusHp=m.hp-tmpl.hp;m.name=tmpl.skin;if(tmpl.id==='yukino'){m.atk=tmpl.atk+5+bonusAtk;m.hp=tmpl.hp+bonusHp;}else{m.atk=tmpl.atk*2+1+bonusAtk;m.hp=tmpl.hp*2+1+bonusHp;}m.maxHp=m.hp;m.isSkin=true;m.img=tmpl.imgGold;applySkinKwTransform(tmpl,m);return true;}},
   {id:'school_visit',name:'학교 방문',cost:2,tier:5,desc:'선택 학교 학생만 리롤',target:'select_school',img:'img/spell/school_visit.png',
     effect:function(G,school){var p=G.players[0];var pool=getAvailableChars(p.tier).filter(function(c){return c.school===school;});if(pool.length===0)return false;var size=SHOP_SIZE[p.tier];var shop=[];for(var i=0;i<size;i++){var tmpl=pool[Math.floor(Math.random()*pool.length)];shop.push(makeMinion(tmpl,false));}applyShopBuff(shop);G.shop=shop;addSpellToShop();return true;}},
   {id:'sensei',name:'선생님의 지휘',cost:7,tier:5,desc:'아군 전체 +5/+5 (2회 발동)',target:'auto',img:'img/spell/sensei.png',
@@ -1039,6 +1045,13 @@ function makeMinion(template, skinUnit) {
     _buffLog: []
   };
   if(skinUnit) applySkinKwTransform(template, unit);
+  // === 스킨 별 stat 특수 처리 ===
+  // 수영복 유키노: base + 공격력 +5 (체력 변화 X) — 일반 base*2+1 대신
+  if(skinUnit && template.id==='yukino'){
+    unit.atk = template.atk + 5;
+    unit.hp = template.hp;
+    unit.maxHp = template.hp;
+  }
   return unit;
 }
 
@@ -2533,7 +2546,13 @@ function _applySkinUpgrade(u){
   var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===u.baseId){tmpl=CHARS[j];break;}
   if(!tmpl||!tmpl.skin)return;
   var bonusAtk=u.atk-tmpl.atk,bonusHp=u.hp-tmpl.hp;
-  u.name=tmpl.skin;u.atk=tmpl.atk*2+1+bonusAtk;u.hp=tmpl.hp*2+1+bonusHp;u.maxHp=u.hp;
+  u.name=tmpl.skin;
+  // 수영복 유키노: base + 공격력 +5 (체력 변화 X)
+  if(tmpl.id==='yukino'){
+    u.atk=tmpl.atk+5+bonusAtk;u.hp=tmpl.hp+bonusHp;u.maxHp=u.hp;
+  } else {
+    u.atk=tmpl.atk*2+1+bonusAtk;u.hp=tmpl.hp*2+1+bonusHp;u.maxHp=u.hp;
+  }
   u.isSkin=true;u.img=tmpl.imgGold;
   applySkinKwTransform(tmpl,u);
 }
