@@ -8466,7 +8466,7 @@
           ]
         }
       ],
-      "points": 7,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -8525,7 +8525,10 @@
         "stars": 1,
         "streak": 1,
         "legendPoints": 0
-      }
+      },
+      "unlockedAbydos": [
+        "hoshino"
+      ]
     }
   }
 }
