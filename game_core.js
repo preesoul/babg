@@ -139,11 +139,11 @@ var CHARS = [
   // ===== 산해경 (잠금 해제 필요) =====
   {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
   // ===== 아리우스 분교 (추가 카드군) =====
-  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          skin:'스바루(?)',          img:'Subaru.png',         imgGold:'Subaru_skin.png'},
-  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  skin:'히요리(?)',          img:'Hiyori.png',         imgGold:'Hiyori_skin.png'},
-  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  skin:'미사키(?)',          img:'Misaki.png',         imgGold:'Misaki_skin.png'},
-  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], skin:'사오리(?)',  img:'Saori.png',          imgGold:'Saori_skin.png'},
-  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          skin:'아츠코(?)',          img:'Atsuko.png',         imgGold:'Atsuko_skin.png'},
+  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
+  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
+  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
+  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
+  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
   {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
@@ -152,18 +152,18 @@ var CHARS = [
   {id:'kisaki',  name:'키사키', school:'산해경', tier:6, atk:5, hp:7, kw:[],                 locked:true, skin:'키사키(사복)',       img:'Kisaki.png',         imgGold:'Kisaki_(Casual).png'},
   // ===== 발키리/SRT (추가 카드군) =====
   // sub: 'valkyrie' = 발키리 경찰학원, 'srt' = SRT 특수학원
-  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            skin:'키리노(?)',  img:'Kirino.png',  imgGold:'Kirino_skin.png'},
-  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   skin:'후부키(?)',  img:'Fubuki.png',  imgGold:'Fubuki_skin.png'},
-  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           skin:'미유(?)',    img:'Miyu.png',    imgGold:'Miyu_skin.png'},
-  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           skin:'모에(?)',    img:'Moe.png',     imgGold:'Moe_skin.png'},
-  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   skin:'사키(?)',    img:'Saki.png',    imgGold:'Saki_skin.png'},
-  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  skin:'쿠루미(?)',  img:'Kurumi.png',  imgGold:'Kurumi_skin.png'},
-  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:4,  hp:1, kw:['ranged','reborn'], skin:'오토기(?)',  img:'Otogi.png',   imgGold:'Otogi_skin.png'},
-  {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   skin:'니코(?)',    img:'Niko.png',    imgGold:'Niko_skin.png'},
-  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            skin:'코노카(?)',  img:'Konoka.png',  imgGold:'Konoka_skin.png'},
-  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           skin:'미야코(?)',  img:'Miyako.png',  imgGold:'Miyako_skin.png'},
-  {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   skin:'유키노(?)',  img:'Yukino.png',  imgGold:'Yukino_skin.png'},
-  {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   skin:'칸나(?)',    img:'Kanna.png',   imgGold:'Kanna_skin.png'},
+  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            skin:'키리노(수영복)', img:'Kirino.png',  imgGold:'Kirino_(Swimsuit).png'},
+  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   skin:'후부키(수영복)', img:'Fubuki.png',  imgGold:'Fubuki_(Swimsuit).png'},
+  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           skin:'미유(수영복)',   img:'Miyu.png',    imgGold:'Miyu_(Swimsuit).png'},
+  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
+  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
+  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
+  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:4,  hp:1, kw:['ranged','reborn'], skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
+  {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
+  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
+  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
+  {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   skin:'유키노(수영복)', img:'Yukino.png',  imgGold:'Yukino_(Swimsuit).png'},
+  {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   skin:'칸나(수영복)',   img:'Kanna.png',   imgGold:'Kanna_(Swimsuit).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -1020,6 +1020,7 @@ function makeMinion(template, skinUnit) {
     baseId: template.id,
     name: skinUnit ? template.skin : template.name,
     school: template.school,
+    sub: template.sub||null,
     tier: template.tier,
     atk: skinUnit ? template.atk*2+1 : template.atk,
     hp: skinUnit ? template.hp*2+1 : template.hp,
@@ -1032,6 +1033,32 @@ function makeMinion(template, skinUnit) {
   };
   if(skinUnit) applySkinKwTransform(template, unit);
   return unit;
+}
+
+// ===== 학교 아이콘 헬퍼 =====
+// 카드 단위 표시: sub 메타가 있으면 학원 아이콘(Valkyrie/SRT) 사용, 없으면 학교 아이콘
+function getCardSchoolIcon(unit){
+  if(!unit) return '';
+  if(unit.sub){
+    if(SUB_SCHOOL_ICONS[unit.sub]) return SUB_SCHOOL_ICONS[unit.sub];
+  }
+  return SCHOOL_ICONS[unit.school]||'';
+}
+// 학교 헤더 표시: '발키리/SRT'면 Valkyrie + SRT 아이콘 둘 다 병기, 아니면 단일
+function getSchoolHeaderIconHtml(school, cls){
+  cls=cls||'school-logo';
+  if(school==='발키리/SRT'){
+    return '<img class="'+cls+'" src="'+SUB_SCHOOL_ICONS['valkyrie']+'">'+
+           '<img class="'+cls+'" src="'+SUB_SCHOOL_ICONS['srt']+'">';
+  }
+  var ico=SCHOOL_ICONS[school];
+  return ico?'<img class="'+cls+'" src="'+ico+'">':'';
+}
+// 카드용 한 줄 헬퍼 (img 태그 직접 반환)
+function getCardSchoolIconHtml(unit, cls){
+  cls=cls||'school-logo';
+  var ico=getCardSchoolIcon(unit);
+  return ico?'<img class="'+cls+'" src="'+ico+'">':'';
 }
 
 // ========== HIDDEN CONDITION CHECK ==========
@@ -2028,7 +2055,7 @@ function showDiscover(p) {
     html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
     if(c.img) html += '<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html += '<div class="card-inner">';
-    var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
+    html += getCardSchoolIconHtml(c);
     html += '<div class="tier-stars">'+starStr(c.tier)+'</div>';
     html += '<div class="card-spacer"></div>';
     html += '<div class="name-banner">'+c.name+'</div>';
@@ -2160,7 +2187,7 @@ function showDiscoverCustom(choices) {
     html+='<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
     if(c.img)html+='<div class="card-bg"><img src="img/'+c.img+'" onerror="this.parentElement.style.display=\'none\'"></div>';
     html+='<div class="card-inner">';
-    var dIcon=SCHOOL_ICONS[c.school];if(dIcon)html+='<img class="school-logo" src="'+dIcon+'">';
+    html+=getCardSchoolIconHtml(c);
     html+='<div class="tier-stars">'+starStr(c.tier)+'</div><div class="card-spacer"></div>';
     html+='<div class="name-banner">'+c.name+'</div><div class="keywords">'+(kwt||'&nbsp;')+'</div>';
     if(aTag)html+='<div style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
@@ -7793,7 +7820,7 @@ function miniCardHtml(m){
   } else if(kwText(m)){
     kwHtml='<div class="keywords">'+kwText(m)+'</div>';
   }
-  var sIcon=SCHOOL_ICONS[m.school];var sLogoTag=sIcon?'<img class="school-logo" src="'+sIcon+'">':'';
+  var sLogoTag=getCardSchoolIconHtml(m);
   // 미니카드 능력 태그
   var miniAbilTag='';
   var bid=m.baseId||'';

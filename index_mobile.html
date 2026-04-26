@@ -1263,8 +1263,7 @@ function renderAll() {
     if(bm.img) benchHtml+='<img src="img/'+bm.img+'" onerror="this.parentElement.style.display=\'none\'">';
     benchHtml+='</div>';
     benchHtml+='<div class="card-inner" style="padding:4px">';
-    var sIcon=SCHOOL_ICONS[bm.school];
-    if(sIcon) benchHtml+='<img class="school-logo" src="'+sIcon+'">';
+    benchHtml+=getCardSchoolIconHtml(bm);
     benchHtml+=starStr(bm.tier||1);
     benchHtml+='<div class="card-spacer"></div>';
     benchHtml+='<div class="name-banner" style="font-size:11px;padding:2px 4px">'+bm.name+'</div>';
@@ -1424,7 +1423,7 @@ function cardHtml(m,idx,isBoard){
   if(hasKw(m,'invincible')) iconBar+='<span class="abi">'+_CI.invincible+'</span>';
   if(iconBar) html+='<div class="ability-icons">'+iconBar+'</div>';
   html+='<div class="card-inner">';
-  var sIcon=SCHOOL_ICONS[m.school];if(sIcon)html+='<img class="school-logo" src="'+sIcon+'">';
+  html+=getCardSchoolIconHtml(m);
   html+='<div class="tier-stars">'+starStr(m.tier)+'</div>';
   html+='<div class="card-spacer"></div>';
   // 모바일: 능력 한줄 요약
@@ -1903,7 +1902,12 @@ function showTooltip(baseId,rect,cardEl){
   if(displayImg) html+='<img src="img/'+displayImg+'" onerror="this.style.display=\'none\'">';
   html+='</div>';
   // 헤더: 이름, 학교, 스탯
+  // 발키리/SRT면 카드의 sub 메타에 따라 학원 아이콘 우선 사용
   var ttIcon=SCHOOL_ICONS[displaySchool];
+  if(displaySchool==='발키리/SRT'&&baseId){
+    var _ttCh=null;for(var _ti=0;_ti<CHARS.length;_ti++)if(CHARS[_ti].id===baseId){_ttCh=CHARS[_ti];break;}
+    if(_ttCh&&_ttCh.sub&&SUB_SCHOOL_ICONS[_ttCh.sub]) ttIcon=SUB_SCHOOL_ICONS[_ttCh.sub];
+  }
   html+='<div class="tt-header" style="position:relative;overflow:hidden">';
   if(ttIcon) html+='<img src="'+ttIcon+'" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);width:50px;height:50px;opacity:0.12;filter:invert(1);pointer-events:none">';
   html+='<div class="tt-name">'+displayName+'</div>';
@@ -2919,9 +2923,8 @@ function renderRoster(){
   SCHOOL_ORDER.forEach(function(school){
     var chars=bySchool[school];
     if(!chars||!chars.length)return;
-    var icon=SCHOOL_ICONS[school]||'';
     html+='<div class="roster-school-hdr">';
-    if(icon)html+='<img src="'+icon+'" class="roster-school-icon">';
+    html+=getSchoolHeaderIconHtml(school,'roster-school-icon');
     html+='<span class="roster-school-name">'+school+'</span></div>';
     var byTier={};
     chars.forEach(function(c){if(!byTier[c.tier])byTier[c.tier]=[];byTier[c.tier].push(c);});
