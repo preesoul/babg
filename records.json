@@ -3285,42 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T11:06:37",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "쿠즈노하",
-              "baseId": "hkyk_kuzunoha",
-              "atk": 23,
-              "hp": 22,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Kuzunoha.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미나",
-              "baseId": "mina",
-              "atk": 10,
-              "hp": 12,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mina.png",
-              "school": "산해경"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T11:17:16",
           "placement": 1,
           "turn": 14,
@@ -3927,9 +3891,84 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T07:53:27",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 20,
+              "hp": 24,
+              "tier": 2,
+              "kw": [
+                "taunt",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            },
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 49,
+              "hp": 51,
+              "tier": 2,
+              "kw": [
+                "shield",
+                "cleave",
+                "windfury",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아스나(버니걸)",
+              "baseId": "asuna",
+              "atk": 27,
+              "hp": 25,
+              "tier": 5,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Asuna_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카야",
+              "baseId": "kaya",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Kaya.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 40,
+      "points": 42,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4045,8 +4084,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 5
+        "streak": 5,
+        "legendPoints": 6
       }
     },
     "킹갓프리소울": {
