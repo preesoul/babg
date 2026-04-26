@@ -441,7 +441,7 @@ var ABILITY_DESCS = {
   otogi:   {type:'',desc:'',skinEffect:'수영복 오토기: 연사 추가',skinEffectDesc:'저격+부활+<span style="color:#ffd700;font-weight:700">연사</span>.'},
   niko:    {type:'패시브',desc:'아군의 버티기가 두 번 발동합니다.\n(니코가 여러 명이어도 2회만 적용)',skinEffect:'사복 니코: 세 번 발동',skinEffectDesc:'패시브: 아군의 버티기가 <span style="color:#ffd700;font-weight:700">세 번</span> 발동합니다.'},
   konoka:  {type:'뒤끝',desc:'이번 전투 동안, 아군 발키리/SRT 전체 +4/+4.',skinEffect:'수영복 코노카: +8/+8',skinEffectDesc:'뒤끝: 이번 전투 동안, 아군 발키리/SRT 전체 <span style="color:#ffd700;font-weight:700">+8/+8</span>.'},
-  miyako:  {type:'패시브',desc:'미야코 외에 발키리/SRT 학생이 살아있는 한,\n부활이 항상 유지됩니다.',skinEffect:'수영복 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미야코 외에 발키리/SRT 학생이 살아있는 한, 부활이 항상 유지됩니다.\n부활이 발동할 때마다 <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
+  miyako:  {type:'패시브',desc:'미야코 외에 발키리/SRT 학생이 살아있는 한,\n부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화됩니다.',skinEffect:'수영복 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미야코 외에 발키리/SRT 학생이 살아있는 한, 부활이 항상 유지됩니다.\n부활 시 base 상태로 초기화 + <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
   yukino:  {type:'패시브',desc:'전투 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(공격·방어 모두 적용. 효과 피해는 받습니다.)',skinEffect:'수영복 유키노: +5/+5',skinEffectDesc:'패시브: 전투 시 상대를 쓰러뜨리는 경우, 전투 피해 X (공격·방어 모두).\n<span style="color:#ffd700;font-weight:700">+5/+5</span>.'},
   kanna:   {type:'개전',desc:'이번 게임에서 발키리/SRT 학생이 직접\n쓰러뜨린 적의 수의 절반(올림)을 공격력에,\n직접 쓰러진 발키리/SRT 학생 수의 절반(올림)을\n체력에 추가합니다. (전투 개전 시점 갱신)',skinEffect:'수영복 칸나: 절반이 아닌 전체',skinEffectDesc:'개전: 이번 게임에서 발키리/SRT 학생이 직접 쓰러뜨린 적의 수 <span style="color:#ffd700;font-weight:700">전체</span>를 공격력에, 직접 쓰러진 발키리/SRT 학생 수 <span style="color:#ffd700;font-weight:700">전체</span>를 체력에 추가합니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
@@ -5521,16 +5521,33 @@ function runBattle(boardA, boardB, startWithA, opts) {
       } else {unit.hp=1;}
       // 부활 시 보호막 등 기본 키워드 유지 (reborn만 제거)
       log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:'+unit.hp+')'});
-      // 미야코 패시브: 부활 발동 즉시 — 다른 발키리/SRT가 살아있으면 reborn 재부여 + 스킨 +3 atk
+      // 미야코 패시브: 부활 발동 시 base 상태로 초기화 + reborn 재부여 (액션 키워드 누적 방지)
+      // 다른 발키리/SRT가 살아있어야 함 / 스킨이면 base + 3 atk
       if(unit.baseId==='miyako'&&!unit._abilitiesStripped&&!_G.permanentAbilityBan){
         var hasOtherVk=false;
         for(var _vi=0;_vi<myArr.length;_vi++){
           if(myArr[_vi].alive&&myArr[_vi]!==unit&&myArr[_vi].school==='발키리/SRT'){hasOtherVk=true;break;}
         }
         if(hasOtherVk){
-          if(unit.kw.indexOf('reborn')===-1) unit.kw.push('reborn');
-          if(unit.isSkin){unit.atk+=3;log2.push({cls:'soc',text:'[패시브] '+unit.name+': 부활 유지 + 공격력 +3 ('+unit.atk+'/'+unit.hp+')'});}
-          else log2.push({cls:'soc',text:'[패시브] '+unit.name+': 부활 유지 (다른 발키리/SRT 생존)'});
+          // base 템플릿으로 stat/kw 초기화 (액션 카드로 부여된 지켜줌·보호막 등 모두 제거)
+          var miyakoTmpl=null;for(var _mt=0;_mt<CHARS.length;_mt++)if(CHARS[_mt].id==='miyako'){miyakoTmpl=CHARS[_mt];break;}
+          if(miyakoTmpl){
+            unit.atk = unit.isSkin ? (miyakoTmpl.atk*2+1) : miyakoTmpl.atk;
+            unit.hp  = 1; // 부활은 hp=1
+            unit.maxHp = unit.isSkin ? (miyakoTmpl.hp*2+1) : miyakoTmpl.hp;
+            unit.kw  = (miyakoTmpl.kw||[]).slice(); // base kw (= ['reborn']) 만 유지
+            // reborn이 base에 있으면 그대로, 없으면 push
+            if(unit.kw.indexOf('reborn')===-1) unit.kw.push('reborn');
+          } else {
+            // fallback: reborn 만 재부여
+            if(unit.kw.indexOf('reborn')===-1) unit.kw.push('reborn');
+          }
+          if(unit.isSkin){
+            unit.atk += 3;
+            log2.push({cls:'soc',text:'[패시브] '+unit.name+': 부활 유지 (초기화) + 공격력 +3 ('+unit.atk+'/'+unit.hp+')'});
+          } else {
+            log2.push({cls:'soc',text:'[패시브] '+unit.name+': 부활 유지 (초기화, '+unit.atk+'/'+unit.hp+')'});
+          }
         }
       }
       // 미야코 외 다른 카드들도 동일 패턴 (현재는 미야코만)
