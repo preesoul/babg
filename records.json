@@ -8395,16 +8395,86 @@
       ]
     },
     "박민철": {
-      "records": [],
-      "points": 0,
+      "records": [
+        {
+          "date": "2026-04-26T14:53:29",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 21,
+              "hp": 15,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 19,
+              "hp": 23,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 17,
+              "hp": 19,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
+        }
+      ],
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-26",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "gehenna10",
@@ -8413,7 +8483,7 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -8429,12 +8499,12 @@
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
@@ -8449,6 +8519,12 @@
           ]
         },
         "_lastLoginDate": "2026-04-26"
+      },
+      "rank": {
+        "tier": 9,
+        "stars": 1,
+        "streak": 1,
+        "legendPoints": 0
       }
     }
   }
