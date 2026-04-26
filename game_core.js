@@ -9272,11 +9272,12 @@ function submitGameRecord(){
   _doSubmit();
 }
 
-function _renderRecordCard(r,showPin,pinIdx){
+function _renderRecordCard(r,showPin,pinIdx,ownerLabel){
   var placeColor=r.placement===1?'#ffd700':r.placement<=3?'#60a5fa':'#c0d0e0';
   var h='<div style="margin-bottom:12px;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;border-left:3px solid '+placeColor+'">';
-  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-  if(showPin) h+='<label style="cursor:pointer;display:flex;align-items:center;gap:4px"><input type="checkbox" class="pin-check" data-pin-idx="'+pinIdx+'" '+(r.pinned?'checked':'')+' style="cursor:pointer"><span style="font-size:10px;color:#6a8a9e">공개</span></label>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px">';
+  // 체크박스 제거됨 (모든 게임 자동 공개) — showPin 무시
+  if(ownerLabel) h+='<span style="font-size:11px;color:#a78bfa;font-weight:600">'+ownerLabel+'</span>';
   h+='<span style="color:'+placeColor+';font-weight:900;font-size:18px">'+r.placement+'등</span>';
   h+='<span style="color:#6a8a9e;font-size:11px">'+r.date.slice(0,16).replace('T',' ')+' | 턴 '+r.turn+' | 스케쥴 '+r.tier+'</span>';
   h+='</div>';
@@ -9313,6 +9314,13 @@ function renderRecords(){
     if(!data.players||Object.keys(data.players).length===0){el.innerHTML='아직 기록이 없습니다.';return;}
     var html='';
     var myName=window._babgLogin?window._babgLogin.name:null;
+    // 익명 이름 변환 (내 계정은 실명+선생님, 다른 선생님은 해시 4자리)
+    function _maskTeacherName(nm){
+      if(nm===myName) return nm+' 선생님';
+      var hh=2166136261;
+      for(var ci=0;ci<nm.length;ci++){hh^=nm.charCodeAt(ci);hh=(hh*16777619)|0;}
+      return '선생님 '+String(((hh>>>0)%9000)+1000); // 1000~9999
+    }
     // 내 기록
     if(myName&&data.players[myName]){
       var p=data.players[myName];
@@ -9346,13 +9354,6 @@ function renderRecords(){
       html+='</div>';
 
       // === 플레이 중인 선생님들 티어 (Top 10) ===
-      // 내 계정은 실제 이름 + ' 선생님'으로 표시. 다른 선생님들은 익명화 (해시 4자리).
-      function _maskTeacherName(nm){
-        if(nm===myName) return nm+' 선생님';
-        var hh=2166136261;
-        for(var ci=0;ci<nm.length;ci++){hh^=nm.charCodeAt(ci);hh=(hh*16777619)|0;}
-        return '선생님 '+String(((hh>>>0)%9000)+1000); // 1000~9999
-      }
       function _rankSortScore(rk){
         if(!rk) rk={tier:9,stars:0,legendPoints:0};
         var s=(10-rk.tier)*10000;
@@ -9408,55 +9409,46 @@ function renderRecords(){
       }
       html+='</table></div>';
 
-      // === 내 전적 (최근 5개만) ===
+      // === 내 전적 (최근 5개만, 체크박스 X) ===
       html+='<div style="margin-bottom:20px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid #3a5a6e">';
-      html+='<div style="font-size:14px;font-weight:700;color:#ffd700;margin-bottom:6px">내 전적 (최근 5경기)</div>';
-      html+='<div style="font-size:10px;color:#6a8a9e;margin-bottom:12px">체크하면 다른 선생님들에게 공개됩니다</div>';
+      html+='<div style="font-size:14px;font-weight:700;color:#ffd700;margin-bottom:12px">내 전적 (최근 5경기)</div>';
       if(recs.length===0){html+='<div style="color:#6a8a9e">기록 없음</div>';}
       else{
         var _shown=0;
-        for(var i=recs.length-1;i>=0 && _shown<5;i--,_shown++) html+=_renderRecordCard(recs[i],true,i);
+        for(var i=recs.length-1;i>=0 && _shown<5;i--,_shown++) html+=_renderRecordCard(recs[i],false,-1);
       }
       html+='</div>';
     }
-    // 다른 선생님들의 공개 기록 (작성자 등급 포함, 최신순)
-    var otherPinned=[];
+    // === 모든 선생님들의 최근 기록 (자신 포함, 최신순 5개) ===
+    var allRecs=[];
     for(var name in data.players){
-      if(name===myName) continue;
       var recs2=data.players[name].records||[];
       var theirRank = data.players[name].rank || estimateRankFromRecords(recs2);
       for(var i=0;i<recs2.length;i++){
-        if(recs2[i].pinned){
-          var entry=recs2[i];
-          entry._ownerName=name;
-          entry._ownerRank=theirRank;
-          otherPinned.push(entry);
-        }
+        var entry=recs2[i];
+        entry._ownerName=name;
+        entry._ownerRank=theirRank;
+        allRecs.push(entry);
       }
     }
-    if(otherPinned.length>0){
-      // 최신순 (date 내림차순) — 최대 10개
-      otherPinned.sort(function(a,b){
+    if(allRecs.length>0){
+      // 최신순 (date 내림차순) — 최대 5개
+      allRecs.sort(function(a,b){
         var da=(a.date||''), db=(b.date||'');
         return db.localeCompare(da);
       });
-      otherPinned=otherPinned.slice(0,10);
+      allRecs=allRecs.slice(0,5);
       html+='<div style="margin-top:24px;border-top:2px solid rgba(255,255,255,0.1);padding-top:16px">';
-      html+='<div style="font-size:15px;font-weight:700;color:#a78bfa;margin-bottom:12px">다른 선생님들의 기록 (최신순)</div>';
-      for(var i=0;i<otherPinned.length;i++) html+=_renderRecordCard(otherPinned[i],false,-1);
+      html+='<div style="font-size:15px;font-weight:700;color:#a78bfa;margin-bottom:12px">모든 선생님들의 최근 기록 (최신 5경기)</div>';
+      for(var i=0;i<allRecs.length;i++){
+        var _entry = allRecs[i];
+        var _ownerLabel = (_entry._ownerName===myName) ? (myName+' 선생님') : _maskTeacherName(_entry._ownerName);
+        html+=_renderRecordCard(_entry,false,-1,_ownerLabel);
+      }
       html+='</div>';
     }
     el.innerHTML=html;
-    // 핀 체크박스 이벤트
-    el.querySelectorAll('.pin-check').forEach(function(cb){
-      cb.addEventListener('change',function(){
-        var idx=parseInt(this.getAttribute('data-pin-idx'));
-        if(!myName||!_recData||!_recData.players[myName])return;
-        var recs=_recData.players[myName].records;
-        if(recs[idx]) recs[idx].pinned=this.checked;
-        saveRecords(_recData,_recSha,function(){});
-      });
-    });
+    // 체크박스 시스템 제거됨 (모든 게임 자동 공개)
   });
 }
 
