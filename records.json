@@ -3285,82 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T10:19:25",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "이름없는 신들의 왕녀",
-              "baseId": "millennium_nameless",
-              "atk": 27,
-              "hp": 25,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/millennium_Nameless_God.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "이름없는 신들의 왕녀",
-              "baseId": "millennium_nameless",
-              "atk": 27,
-              "hp": 25,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/millennium_Nameless_God.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "Cleaning&Clearing",
-              "baseId": "millennium_cc",
-              "atk": 61,
-              "hp": 61,
-              "tier": 7,
-              "kw": [
-                "ranged",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Cleaning_Clearing.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "네루",
-              "baseId": "neru",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Neru.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T11:06:37",
           "placement": 1,
           "turn": 18,
@@ -3944,9 +3868,68 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T07:03:08",
+          "placement": 1,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "키리노(수영복)",
+              "baseId": "kirino",
+              "atk": 28,
+              "hp": 30,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Kirino_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 10,
+              "hp": 10,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 40,
+              "hp": 46,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 19,
+              "hp": 19,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 38,
+      "points": 40,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4062,8 +4045,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 3,
-        "legendPoints": 4
+        "streak": 4,
+        "legendPoints": 5
       }
     },
     "킹갓프리소울": {
