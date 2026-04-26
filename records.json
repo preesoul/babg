@@ -3285,77 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T15:27:26",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "시로코 테러",
-              "baseId": "Shiroko_Terror",
-              "atk": 106,
-              "hp": 99,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Shiroko_Terror.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "시로코 테러",
-              "baseId": "Shiroko_Terror",
-              "atk": 106,
-              "hp": 99,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Shiroko_Terror.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "아야네(수영복)",
-              "baseId": "ayane",
-              "atk": 5,
-              "hp": 9,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ayane_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "토라마루",
-              "baseId": "iroha",
-              "atk": 5,
-              "hp": 1,
-              "tier": 0,
-              "kw": [],
-              "isSkin": false,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "토라마루",
-              "baseId": "iroha",
-              "atk": 5,
-              "hp": 1,
-              "tier": 0,
-              "kw": [],
-              "isSkin": false,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T15:40:22",
           "placement": 3,
           "turn": 17,
@@ -3989,9 +3918,80 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T12:26:16",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "호시노(수영복)",
+              "baseId": "hoshino",
+              "atk": 38,
+              "hp": 46,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Hoshino_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 16,
+              "hp": 8,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 50,
+              "hp": 45,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "poison",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 4,
+              "hp": 6,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "칸나",
+              "baseId": "kanna",
+              "atk": 1,
+              "hp": 1,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kanna.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 33,
+      "points": 35,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4110,8 +4110,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 8,
-        "legendPoints": 9
+        "streak": 9,
+        "legendPoints": 10
       }
     },
     "킹갓프리소울": {
