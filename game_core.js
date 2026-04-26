@@ -911,23 +911,24 @@ function getPlayerIconUrl(name, isPlayer){
 // (한 게임 NPC 최대 7명이라 한 풀에서 최대 7명까지만 사용 — 7개면 충분)
 // 풀이 비어있거나 부족하면 NPC_NAME_FALLBACK에서 자동 보충
 var NPC_NAME_POOLS={
-  bronze:['세리카','하루카','모모이','마리','이즈나','코코나','노도카'],         // 난이도 0.1
-  silver:['아야네','야쿠모','사야','미치루','히후미','아리스','이로하'],         // 난이도 0.4
-  gold:['노노미','우타하','이치카','카스미','시즈코','슌','토모에'],             // 난이도 0.6
-  plat2:['시로코','카요코','히마리','사쿠라코','와카모','루미','미노리'],        // 난이도 0.9
-  plat1:['호시노','마코토','리오','나기사','체리노','키사키','니야']             // 난이도 1.0
+  bronze:['세리카','하루카','모모이','마리','이즈나','코코나','노도카'],         // 난이도 0.6 (브론즈 플레이어 매칭)
+  silver:['아야네','야쿠모','사야','미치루','히후미','아리스','이로하'],         // 난이도 0.9 (실버 플레이어 매칭)
+  gold:['노노미','우타하','이치카','카스미','시즈코','슌','토모에'],             // 난이도 1.0 (골드 플레이어 매칭)
+  plat2:['시로코','카요코','히마리','사쿠라코','와카모','루미','미노리'],        // 난이도 1.2 (플래티넘 하단)
+  plat1:['호시노','마코토','리오','나기사','체리노','키사키','니야']             // 난이도 1.5 (플래티넘 상단)
 };
 // 풀이 비었을 때 사용하는 기본 이름 (현재 NPC들)
 var NPC_NAME_FALLBACK=['나기사','마코토','리오','호시노','니야','키사키','체리노'];
 
-// 난이도 → 풀 키 매핑
+// 난이도 → 풀 키 매핑 (현재 분포: 0.6 / 0.9 / 1.0 / 1.2 / 1.5)
+// 플레이어 등급별로 받는 NPC가 자연스러운 티어 표기를 갖도록 보정
 function _difficultyToPoolKey(d){
   if(typeof d!=='number') return 'silver';
-  if(d<=0.15) return 'bronze';
-  if(d<=0.45) return 'silver';
-  if(d<=0.65) return 'gold';
-  if(d<=0.95) return 'plat2';
-  return 'plat1';
+  if(d<=0.7) return 'bronze';   // d=0.6 → 브론즈 (9~7등급 매칭)
+  if(d<=0.95) return 'silver';  // d=0.9 → 실버   (8~5등급 매칭)
+  if(d<=1.05) return 'gold';    // d=1.0 → 골드   (5~2등급 매칭)
+  if(d<=1.3) return 'plat2';    // d=1.2 → 플래티넘 하단 (3~1등급 매칭)
+  return 'plat1';                // d=1.5 → 플래티넘 상단 (2~0등급 매칭)
 }
 // diffArray: NPC별 난이도 배열. 각 난이도에 맞는 이름을 풀에서 랜덤 뽑되 게임 내 중복 회피.
 // 풀이 비었거나 다 쓰였으면 fallback 큐에서 보충.
@@ -963,12 +964,16 @@ function pickNpcNamesForDifficulties(diffArray){
   return result;
 }
 // AI 난이도 → 티어 배지 아이콘 (영입 페이즈 NPC 칩에 표시)
-// 9(d=0.1)=브론즈, 6(d=0.4)=실버, 4(d=0.6)=골드, 1(d=0.9)/전(1.0)=플래티넘
+// 현재 분포(2단계 상향됨): d=0.6 / 0.9 / 1.0 / 1.2 / 1.5
+//   d=0.6 → 브론즈 (9~7등급 플레이어 매칭)
+//   d=0.9 → 실버   (8~5등급 플레이어 매칭)
+//   d=1.0 → 골드   (5~2등급 플레이어 매칭)
+//   d=1.2/1.5 → 플래티넘 (3~0등급 플레이어 매칭)
 function getNpcDifficultyIcon(d){
   if(typeof d!=='number') return '';
-  if(d<=0.15) return 'img/UI/bronze.png';
-  if(d<=0.45) return 'img/UI/silver.png';
-  if(d<=0.65) return 'img/UI/gold.png';
+  if(d<=0.7) return 'img/UI/bronze.png';
+  if(d<=0.95) return 'img/UI/silver.png';
+  if(d<=1.05) return 'img/UI/gold.png';
   return 'img/UI/platinum.png';
 }
 
