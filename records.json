@@ -3285,74 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T15:40:22",
-          "placement": 3,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 18,
-              "hp": 24,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "시즈코",
-              "baseId": "shizuko",
-              "atk": 10,
-              "hp": 11,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Shizuko.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "리오(임전)",
-              "baseId": "rio",
-              "atk": 15,
-              "hp": 15,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Rio_(Battle).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 19,
-              "hp": 19,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T16:14:08",
           "placement": 1,
           "turn": 16,
@@ -3989,9 +3921,77 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T12:57:23",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미사키(수영복)",
+              "baseId": "misaki",
+              "atk": 33,
+              "hp": 19,
+              "tier": 4,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": true,
+              "img": "Misaki_(Swimsuit).png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 7,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사오리(수영복)",
+              "baseId": "saori",
+              "atk": 11,
+              "hp": 31,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Saori_(Swimsuit).png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 38,
+              "hp": 38,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 35,
+      "points": 37,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4110,8 +4110,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 9,
-        "legendPoints": 10
+        "streak": 10,
+        "legendPoints": 11
       }
     },
     "킹갓프리소울": {
