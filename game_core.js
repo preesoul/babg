@@ -432,7 +432,7 @@ var ABILITY_DESCS = {
   subaru:   {type:'개전',desc:'코인토스에 실패했다면, 공격력과 체력을 절반(내림)으로 합니다.',skinEffect:'스킨 스바루: 환생(부활) 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 공격력과 체력을 절반(내림)으로 합니다.\n<span style="color:#ffd700;font-weight:700">부활</span> 추가.'},
   arius_squad: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 사오리, 미사키, 아츠코, 히요리가 모두 있을 때 등장.',desc:'패시브: 샬레의 사오리, 미사키, 아츠코, 히요리를 흡수하며 등장합니다.\n개전: base 공격력만큼 아군 적군 전체에게 데미지를 준 후 자신을 파괴합니다.\n뒤끝: 흡수했던 학생들을 흡수 시점 상태로 다시 소환합니다.',skinEffect:'',quote:'아리우스: 우리는 너희와 다른 곳에서 왔어.'},
   // ===== 발키리/SRT =====
-  kirino:  {type:'',desc:'',skinEffect:'스킨 키리노: 버티기 자체버프',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">버티기</span> 추가: 버틸 때마다 자신에게 +2/+2.'},
+  kirino:  {type:'',desc:'',skinEffect:'스킨 키리노: 버티기 시 +2/+2',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">버티기</span> 추가: 버틸 때마다 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>.'},
   fubuki:  {type:'첫인사',desc:'아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 부여합니다.',skinEffect:'스킨 후부키: 두 번 부여',skinEffectDesc:'첫인사: 아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 <span style="color:#ffd700;font-weight:700">두 번</span> 부여합니다.'},
   miyu:    {type:'패시브',desc:'공격 시 공격력 대신\n자신의 체력으로 데미지를 계산합니다.',skinEffect:'스킨 미유: 연사 추가',skinEffectDesc:'패시브: 공격 시 공격력 대신 체력으로 계산.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
   moe:     {type:'뒤끝',desc:'자신을 공격한 대상에게\n자신의 공격력만큼 피해를 줍니다.\n(보호막에 막힙니다)',skinEffect:'스킨 모에: 뒤끝 관통',skinEffectDesc:'뒤끝: 자신을 공격한 대상에게 자신의 공격력만큼 피해.\n뒤끝 데미지에 <span style="color:#ffd700;font-weight:700">관통</span> 추가.'},
@@ -987,6 +987,8 @@ function newGame() {
 // 스킨(황금) 키워드 변환: 각 캐릭터 스킨 효과 (원본 능력은 유지됨)
 function applySkinKwTransform(tmpl, unit){
   if(tmpl.id==='shimiko'){if(unit.kw.indexOf('cleave')===-1)unit.kw.push('cleave');if(unit.kw.indexOf('shield')===-1)unit.kw.push('shield');}
+  // 스킨 키리노: 버티기 추가 (일반 키리노에는 survive 없음)
+  if(tmpl.id==='kirino'){if(unit.kw.indexOf('survive')===-1)unit.kw.push('survive');}
   // 치나츠 온천: 부활 추가
   if(tmpl.id==='chinatsu'){if(unit.kw.indexOf('reborn')===-1)unit.kw.push('reborn');}
   // 아리스 메이드: 관통→광역 (변경)
@@ -2054,7 +2056,7 @@ function showDiscover(p) {
     if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
     if(SOC_IDS[c.id]&&!({iori:1,hanako:1,pina:1,kasumi:1})[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
-    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
+    if((SURV_IDS[c.id]&&c.id!=='kirino')||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선빵</span>';
     html += '<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
@@ -2186,7 +2188,7 @@ function showDiscoverCustom(choices) {
     if(BC_IDS[c.id])aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id])aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
     if(SOC_IDS[c.id])aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
-    if(SURV_IDS[c.id]||(c.kw&&c.kw.indexOf('survive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
+    if((SURV_IDS[c.id]&&c.id!=='kirino')||(c.kw&&c.kw.indexOf('survive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id])aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1))aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선빵</span>';
     html+='<div class="card tier'+c.tier+' discover-pick" data-discover="'+i+'" data-base-id="'+c.id+'" style="cursor:pointer;position:relative">';
@@ -7861,7 +7863,7 @@ function miniCardHtml(m){
   if(DR_IDS[bid]) miniAbilTag+='<span class="ability-tag dr" style="font-size:8px;padding:0 3px">뒤끝</span>';
   var SKIN_ONLY_SOC={iori:1,hanako:1,pina:1,kasumi:1};
   if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC[bid]&&!m.isSkin)) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
-  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">버티기</span>';
+  if((SURV_IDS[bid]&&!(bid==='kirino'&&!m.isSkin))||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">버티기</span>';
   if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
   if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.4)">선빵</span>';
   var miniAbilHtml=miniAbilTag?'<div style="text-align:center;background:rgba(0,0,0,0.4);padding:0 2px">'+miniAbilTag+'</div>':'';
@@ -7899,7 +7901,7 @@ function miniCardHtml(m){
   if(DR_IDS[bid]) mIconBar+='<span class="abi">'+SVG_ICONS.DR+'</span>';
   if(PASSIVE_IDS[bid]) mIconBar+='<span class="abi">'+SVG_ICONS.PASSIVE+'</span>';
   if(PRE_IDS[bid]||(m.kw&&m.kw.indexOf('preemptive')!==-1)) mIconBar+='<span class="abi">'+SVG_ICONS.PRE+'</span>';
-  if(SURV_IDS[bid]||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='<span class="abi">'+SVG_ICONS.SURV+'</span>';
+  if((SURV_IDS[bid]&&!(bid==='kirino'&&!m.isSkin))||(m.kw&&m.kw.indexOf('survive')!==-1)) mIconBar+='<span class="abi">'+SVG_ICONS.SURV+'</span>';
   if(hasKw(m,'reborn')) mIconBar+='<span class="abi">'+SVG_ICONS.reborn+'</span>';
   if(hasKw(m,'poison')) mIconBar+='<span class="abi">'+SVG_ICONS.poison+'</span>';
   if(hasKw(m,'selfdestruct')) mIconBar+='<span class="abi">'+SVG_ICONS.selfdestruct+'</span>';

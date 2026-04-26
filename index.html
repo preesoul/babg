@@ -873,7 +873,7 @@ function abilityTag(baseId,isSkin) {
   if(BC_IDS[baseId])   tags+='<span class="ability-tag bc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">첫인사</span>';
   if(DR_IDS[baseId])   tags+='<span class="ability-tag dr" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">뒤끝</span>';
   if(SOC_IDS[baseId]&&!(SKIN_ONLY_SOC[baseId]&&!isSkin))  tags+='<span class="ability-tag soc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">개전</span>';
-  if(SURV_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">버티기</span>';
+  if(SURV_IDS[baseId]&&!(baseId==='kirino'&&!isSkin)) tags+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">버티기</span>';
   if(PASSIVE_IDS[baseId]) tags+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">패시브</span>';
   var _c=findAnyChar(baseId);
   var _hasKw=_c&&_c.kw?_c.kw:[];
@@ -1265,7 +1265,7 @@ function cardHtml(m,idx,isBoard){
   if(DR_IDS[m.baseId||'']) iconBar+='<span class="abi">'+_CI.DR+'</span>';
   if(PASSIVE_IDS[m.baseId||'']) iconBar+='<span class="abi">'+_CI.PASSIVE+'</span>';
   if(PRE_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('preemptive')!==-1)) iconBar+='<span class="abi">'+_CI.PRE+'</span>';
-  if(SURV_IDS[m.baseId||'']||(m.kw&&m.kw.indexOf('survive')!==-1)) iconBar+='<span class="abi">'+_CI.SURV+'</span>';
+  if((SURV_IDS[m.baseId||'']&&!((m.baseId||'')==='kirino'&&!m.isSkin))||(m.kw&&m.kw.indexOf('survive')!==-1)) iconBar+='<span class="abi">'+_CI.SURV+'</span>';
   if(hasKw(m,'reborn')) iconBar+='<span class="abi">'+_CI.reborn+'</span>';
   if(hasKw(m,'poison')) iconBar+='<span class="abi">'+_CI.poison+'</span>';
   if(hasKw(m,'selfdestruct')) iconBar+='<span class="abi">'+_CI.selfdestruct+'</span>';
