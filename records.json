@@ -3946,7 +3946,7 @@
           ]
         }
       ],
-      "points": 108,
+      "points": 103,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4042,7 +4042,8 @@
         "nonomi",
         "miyako",
         "fubuki",
-        "moe"
+        "moe",
+        "otogi"
       ],
       "rank": {
         "tier": 0,
