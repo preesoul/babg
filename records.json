@@ -3285,65 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T07:03:08",
-          "placement": 1,
-          "turn": 12,
-          "tier": 6,
-          "board": [
-            {
-              "name": "키리노(수영복)",
-              "baseId": "kirino",
-              "atk": 28,
-              "hp": 30,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Kirino_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "유키노",
-              "baseId": "yukino",
-              "atk": 10,
-              "hp": 10,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yukino.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미",
-              "baseId": "kurumi",
-              "atk": 40,
-              "hp": 46,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Kurumi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "니코",
-              "baseId": "niko",
-              "atk": 19,
-              "hp": 19,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Niko.png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T07:53:27",
           "placement": 1,
           "turn": 15,
@@ -3970,9 +3911,85 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T16:21:50",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 51,
+              "hp": 51,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 20,
+              "hp": 30,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 19,
+              "hp": 19,
+              "tier": 6,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 25,
+              "hp": 25,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 22,
+              "hp": 26,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 53,
+      "points": 65,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -3989,7 +4006,7 @@
             },
             {
               "id": "trinity10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             }
           ],
@@ -4000,17 +4017,17 @@
           "quests": [
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "discover10",
-              "progress": 7,
+              "progress": 9,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             }
           ]
@@ -4091,8 +4108,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 12
+        "streak": 2,
+        "legendPoints": 13
       }
     },
     "킹갓프리소울": {
