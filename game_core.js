@@ -7137,11 +7137,29 @@ function startBattle() {
   // 선/후공 두 경우 미리 계산 (코인 결과에 따라 선택) — 글로벌 카운터는 resultC만 반영
   _gBattleCounterSave=saveGBattleCounters();
   var pdA=p.panchanDeaths||0, pdB=opp.panchanDeaths||0;
-  var resultA=runBattle(p.board,opp.board,true,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp});
+  // ===== 코인 결과를 전투 시뮬보다 먼저 한 번에 결정 =====
+  // 카즈사/아리우스 SOC가 코인 결과를 참조하므로, resultA/B/C가 모두 같은 코인을 사용해야 일관됨
+  // 또한 사용자 시각: 코인 → 개전 → 공격
+  var _preCoinSnap = {
+    a: p.board.map(function(u){return {alive:true, baseId:u.baseId||'', isSkin:u.isSkin||false, coinOff:u.coinOff||false, _abilitiesStripped:false};}),
+    b: opp.board.map(function(u){return {alive:true, baseId:u.baseId||'', isSkin:u.isSkin||false, coinOff:u.coinOff||false, _abilitiesStripped:false};})
+  };
+  var _preProbs = _computeCoinProbs(_preCoinSnap.a, _preCoinSnap.b, G);
+  _rollCoinSide(_preCoinSnap.a, _preProbs.aHasCC, _preProbs.finalBaseA, true, _preProbs.btBonus);
+  _rollCoinSide(_preCoinSnap.b, _preProbs.bHasCC, _preProbs.finalBaseB, false, _preProbs.btBonus);
+  _applyAsunaSkinOverride(_preCoinSnap.a);
+  _applyAsunaSkinOverride(_preCoinSnap.b);
+  var _preCoinResults = {a:{}, b:{}};
+  for(var _ci=0;_ci<_preCoinSnap.a.length;_ci++){if(_preCoinSnap.a[_ci]._coinResult!==undefined)_preCoinResults.a[_ci]=_preCoinSnap.a[_ci]._coinResult;}
+  for(var _ci=0;_ci<_preCoinSnap.b.length;_ci++){if(_preCoinSnap.b[_ci]._coinResult!==undefined)_preCoinResults.b[_ci]=_preCoinSnap.b[_ci]._coinResult;}
+
+  var resultA=runBattle(p.board,opp.board,true,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp,coinResults:_preCoinResults});
   restoreGBattleCounters(_gBattleCounterSave);
-  var resultB=runBattle(p.board,opp.board,false,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp});
+  var resultB=runBattle(p.board,opp.board,false,{panchanDeathsA:pdA,panchanDeathsB:pdB,ownerA:p,ownerB:opp,coinResults:_preCoinResults});
   restoreGBattleCounters(_gBattleCounterSave);
   resultA._initPdA=pdA;resultA._initPdB=pdB;
+  // 미리 결정한 코인을 startBattleAnimation까지 전달 (UI 코인 + resultC 모두 동일 사용)
+  resultA._preCoinResults=_preCoinResults;
 
   battleState.skip=false;
   var overlay=document.getElementById('battle-overlay');
