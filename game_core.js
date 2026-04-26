@@ -5514,12 +5514,24 @@ function runBattle(boardA, boardB, startWithA, opts) {
       unit.hp=1;return;
     }
     if(hasKw(unit,'reborn')){
-      unit.kw.splice(unit.kw.indexOf('reborn'),1);
+      // 부활 시 kw를 base + 스킨 변환 키워드로 초기화 (액션카드 등으로 부여된 키워드 누적 방지)
+      // atk/maxHp는 보존 (영구 stat 버프 — 마리/아코 등은 살아남음)
+      var rebornTmpl=null;for(var _rt=0;_rt<CHARS.length;_rt++)if(CHARS[_rt].id===unit.baseId){rebornTmpl=CHARS[_rt];break;}
+      if(rebornTmpl){
+        unit.kw=(rebornTmpl.kw||[]).slice();
+        if(unit.isSkin) applySkinKwTransform(rebornTmpl,unit);
+        // reborn 키워드 제거 (1회용)
+        var _rIdx=unit.kw.indexOf('reborn');
+        if(_rIdx!==-1) unit.kw.splice(_rIdx,1);
+      } else {
+        // 토큰 등 CHARS에 없는 카드: 기존 동작 (reborn만 제거)
+        var _rIdx2=unit.kw.indexOf('reborn');
+        if(_rIdx2!==-1) unit.kw.splice(_rIdx2,1);
+      }
       // 레이사 마법소녀: 최대 체력으로 부활
       if(unit.isSkin&&unit.baseId==='reisa'){
         unit.hp=unit._reisaFullHp||unit.maxHp||1;
       } else {unit.hp=1;}
-      // 부활 시 보호막 등 기본 키워드 유지 (reborn만 제거)
       log2.push({cls:'shield',text:unit.name+'이(가) 부활했다! (HP:'+unit.hp+')'});
       // 미야코 패시브: 부활 발동 시 base 상태로 초기화 + reborn 재부여 (액션 키워드 누적 방지)
       // 다른 발키리/SRT가 살아있어야 함 / 스킨이면 base + 3 atk
