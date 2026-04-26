@@ -5473,7 +5473,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
   var maxRounds=200;
 
   function snapshot(){
-    function snapUnit(u){var bid=u.baseId||'';return{id:u.id,name:u.name,baseId:bid,atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,_peakHp:u._peakHp||u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:(_G.keiseisenCounters&&_G.keiseisenCounters[bid])||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0,_hasAttacked:u._hasAttacked||false};}
+    function snapUnit(u){var bid=u.baseId||'';return{id:u.id,name:u.name,baseId:bid,atk:u.atk,hp:u.hp,maxHp:u.maxHp||u.hp,_peakHp:u._peakHp||u.hp,kw:u.kw.slice(),img:u.img,isSkin:u.isSkin,tier:u.tier,school:u.school||'',alive:u.alive,stripped:!!u._abilitiesStripped,coinOff:u.coinOff||false,_akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,irohaRef:u.irohaRef||null,_copiedAbilities:u._copiedAbilities||null,_keiseisenCounter:(_G.keiseisenCounters&&_G.keiseisenCounters[bid])||0,_hovercraftCounter:u._hovercraftCounter||0,isHidden:u.isHidden||false,noAttack:u.noAttack||false,abilityImmune:u.abilityImmune||false,_battlesSurvived:u._battlesSurvived||0,_hasAttacked:u._hasAttacked||false,_coinResult:u._coinResult};}
     return{a:a.map(snapUnit),b:b.map(snapUnit)};
   }
   function getAlive(side){return side.filter(function(m){return m.alive;});}
@@ -7238,15 +7238,20 @@ function runBattleCoinPhase(snap,callback){
 
     setTimeout(function(){
       var cr={};
-      // 코인 결과는 runBattle 시작 시점에 미리 결정되어 unit._coinResult에 부여됨
-      // 여기서는 그 값을 그대로 사용 (random 다시 던지지 X). 새로 등장한 토큰 등 미정의 시 fallback random.
+      // 코인 결과는 runBattle 시작 시점에 decideCoinResults로 미리 결정되어 snap의 _coinResult에 저장됨
+      // 여기서는 그 값을 그대로 사용 (random 다시 던지지 X). 미정의 시 fallback random.
+      // ※ aliveEnemy/aliveAlly는 DOM 객체라 _coinResult가 없음 → snap에서 가져와야 함
       for(var j=0;j<aliveEnemy.length;j++){
         var _eu=aliveEnemy[j];
-        cr[_eu.sid] = (_eu._coinResult===true||_eu._coinResult===false) ? _eu._coinResult : (Math.random()<0.5);
+        var _esnap=aliveSnapB[j];
+        var _ecr=_esnap?_esnap._coinResult:undefined;
+        cr[_eu.sid] = (_ecr===true||_ecr===false) ? _ecr : (Math.random()<0.5);
       }
       for(var j=0;j<aliveAlly.length;j++){
         var _au=aliveAlly[j];
-        cr[_au.sid] = (_au._coinResult===true||_au._coinResult===false) ? _au._coinResult : (coinOffMap[_au.sid]?false:(Math.random()<0.5));
+        var _asnap=aliveSnapA[j];
+        var _acr=_asnap?_asnap._coinResult:undefined;
+        cr[_au.sid] = (_acr===true||_acr===false) ? _acr : (coinOffMap[_au.sid]?false:(Math.random()<0.5));
       }
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       var _asunaCoinMsg=false;
