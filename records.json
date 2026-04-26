@@ -8319,27 +8319,92 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T23:03:44",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 30,
+              "hp": 30,
+              "tier": 7,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 32,
+              "hp": 30,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코(아이돌)",
+              "baseId": "sakurako",
+              "atk": 19,
+              "hp": 19,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sakurako_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 23,
       "questState": {
         "daily": {
           "date": "2026-04-27",
           "quests": [
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "trinity10",
-              "progress": 0,
-              "completed": false
+              "progress": 18,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -8349,18 +8414,18 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ]
         },
@@ -8385,9 +8450,9 @@
         "trinity_mika"
       ],
       "rank": {
-        "tier": 7,
+        "tier": 6,
         "stars": 0,
-        "streak": 3,
+        "streak": 4,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -8398,7 +8463,10 @@
         "kaya",
         "nonomi",
         "serika"
-      ]
+      ],
+      "totalGames": 5,
+      "totalWins": 5,
+      "totalFirsts": 5
     },
     "박민철": {
       "records": [
