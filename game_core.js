@@ -29,10 +29,10 @@ var CHARS = [
 
   // ===== Tier 3 (밸류9) =====
   // 게헨나 2학년
-  {id:'aru',     name:'아루',   school:'게헨나',  tier:5,atk:6,hp:5,kw:['preemptive','ambush'], skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
+  {id:'aru',     name:'아루',   school:'게헨나',  tier:5,atk:6,hp:5,kw:['preemptive'], skin:'아루(드레스)',     img:'Aru.png',            imgGold:'Aru_(Dress).png'},
   {id:'kasumi',  name:'카스미', school:'게헨나',  tier:4,atk:4,hp:6,kw:['ambush'],             skin:'카스미(수영복)',   img:'Kasumi.png',         imgGold:'Kasumi_(Swimsuit).png'},  // +개전(SOC)
   // 게헨나 3학년
-  {id:'sena',    name:'세나',   school:'게헨나',  tier:5,atk:7,hp:4,kw:['pierce'],    locked:true, skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
+  {id:'sena',    name:'세나',   school:'게헨나',  tier:5,atk:7,hp:4,kw:[],            locked:true, skin:'세나(사복)',       img:'Sena.png',           imgGold:'Sena_(Casual).png'},
   // 밀레니엄 1학년
   {id:'arisu',   name:'아리스', school:'밀레니엄',tier:4,atk:7,hp:3,kw:['pierce'],    skin:'아리스(메이드)',   img:'Arisu.png',          imgGold:'Arisu_(Maid).png'},
   {id:'hibiki',  name:'히비키', school:'밀레니엄',tier:3,atk:4,hp:3,kw:[],             skin:'히비키(치어리더)',img:'Hibiki.png',          imgGold:'Hibiki_(Cheerleader).png'},
@@ -326,9 +326,9 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1, kaho:1, niya:1, kaede:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1, moe:1, konoka:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1}; // 개전
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1, kirino:1, kurumi:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -339,7 +339,7 @@ var ABILITY_DESCS = {
   midori:   {type:'개전',desc:'<모모이> 수만큼 +2/+2',skinEffect:'메이드 미도리: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <모모이> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
   momoi:    {type:'개전',desc:'<미도리> 수만큼 +2/+2',skinEffect:'메이드 모모이: 수×+4/+4\n둘 다 메이드: 수×+8/+8',skinEffectDesc:'개전: <미도리> 수만큼 <span style="color:#ffd700;font-weight:700">+4/+4</span>'},
   mari:     {type:'개전',desc:'아군 전체 +2/+1',skinEffect:'아이돌 마리: +3/+3',skinEffectDesc:'개전: 아군 전체 <span style="color:#ffd700;font-weight:700">+3/+3</span>'},
-  aru:      {type:'선빵',desc:'공격 시, 5~6티어 학생에게는 공격력이 2배가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.',skinEffect:'드레스 아루: 3배',skinEffectDesc:'선빵: 공격 시, 5~6티어 학생에게는 공격력이 <span style="color:#ffd700;font-weight:700">3배</span>가 됩니다.\n1~2티어 학생에게는 공격력이 절반(내림)이 됩니다.'},
+  aru:      {type:'선빵',desc:'공격 시, 상대가 게헨나 학생이 아니라면\n능력을 삭제합니다.',skinEffect:'드레스 아루: 공/체 버프도 삭제',skinEffectDesc:'선빵: 공격 시, 상대가 게헨나 학생이 아니라면\n능력을 삭제합니다.\n또한 <span style="color:#ffd700;font-weight:700">공/체 버프(기본 능력치 초과분)도 삭제</span>합니다.'},
   kasumi:   {type:'뒤끝',desc:'뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.',skinEffect:'수영복 카스미: 개전 추가 (가장 체력 높은 적을 공격 대상으로 지정)',skinEffectDesc:'개전: 가장 체력이 높은 적을 공격 대상으로 지정합니다.\n뒤끝: 자신을 쓰러뜨린 상대를 쓰러뜨립니다.'},
   iroha:    {type:'첫인사',desc:'<토라마루>로 교체됩니다. (토라마루: 5/1)\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffect:'수영복 이로하: 토라마루 10/2\n토라마루 파괴 시 이로하로 돌아옵니다.',skinEffectDesc:'첫인사: <토라마루>로 교체됩니다. (토라마루: <span style="color:#ffd700;font-weight:700">10/2</span>)\n토라마루 파괴 시 이로하로 돌아옵니다.'},
   himari:   {type:'개전',desc:'아군 2인에게 무작위 기본능력 키워드를 추가합니다.',skinEffect:'임전 히마리: 아군 전원',skinEffectDesc:'개전: 아군 <span style="color:#ffd700;font-weight:700">전원</span>에게 무작위 기본능력 키워드를 추가합니다.'},
@@ -357,7 +357,7 @@ var ABILITY_DESCS = {
   ui:       {type:'선빵',desc:'상대의 모든 능력을 삭제합니다.',skinEffect:'수영복 우이: 상대 바로 옆 한 명도 함께 삭제',skinEffectDesc:'선빵: <span style="color:#ffd700;font-weight:700">상대와 상대 바로 옆</span> 한 명의 모든 능력을 삭제합니다.'},
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
-  sena:     {type:'패시브',desc:'관통의 초과 데미지만큼 아군 전체 HP를 회복합니다.',skinEffect:'사복 세나: 초과 데미지 x2 회복',skinEffectDesc:'패시브: 관통의 초과 데미지 <span style="color:#ffd700;font-weight:700">x2</span>만큼 아군 전체 HP를 회복합니다.'},
+  sena:     {type:'개전',desc:'<뒤끝>을 가진 아군 게헨나 학생\n무작위 2명에게 <부활>을 부여합니다.',skinEffect:'사복 세나: 뒤끝 가진 아군 게헨나 전체',skinEffectDesc:'개전: <뒤끝>을 가진 아군 게헨나 학생\n<span style="color:#ffd700;font-weight:700">전체</span>에게 <부활>을 부여합니다.'},
   satsuki:  {type:'뒤끝',desc:'<span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인을\n잠시 가져와 무작위 적을 공격합니다.\n이후 돌려줍니다.\n(능력/효과 사망 시엔 발동하지 않음)',skinEffect:'수영복 사츠키: 2번 공격',skinEffectDesc:'뒤끝: <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인을 잠시 가져와 무작위 적을 <span style="color:#ffd700;font-weight:700">2번</span> 공격합니다.\n이후 돌려줍니다.\n(능력/효과 사망 시엔 발동하지 않음)'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
@@ -4439,6 +4439,33 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 트리니티 +'+hnBuff+'/+'+hnBuff});
     if(hnBuffed.length>0) log.push({cls:'soc',text:'  → '+hnBuffed.join(', ')});
   }
+  else if(id==='sena'){
+    // 세나: 뒤끝 가진 아군 게헨나 학생 무작위 2명에게 부활 부여 (스킨: 전체)
+    var senaCands=[];
+    for(var i=0;i<mySide.length;i++){
+      var u2=mySide[i];
+      if(u2.alive && u2!==u && u2.school==='게헨나' && DR_IDS[u2.baseId] && !hasKw(u2,'reborn')){
+        senaCands.push(u2);
+      }
+    }
+    if(senaCands.length===0){
+      log.push({cls:'soc',text:'[개전] '+u.name+': 부활을 부여할 게헨나(뒤끝 보유) 학생이 없습니다.'});
+    } else {
+      // 셔플
+      for(var i=senaCands.length-1;i>0;i--){
+        var j=Math.floor(Math.random()*(i+1));
+        var t=senaCands[i];senaCands[i]=senaCands[j];senaCands[j]=t;
+      }
+      var senaCount = u.isSkin ? senaCands.length : Math.min(2, senaCands.length);
+      var senaPicked = senaCands.slice(0, senaCount);
+      var senaNames=[];
+      for(var i=0;i<senaPicked.length;i++){
+        addKw(senaPicked[i],'reborn');
+        senaNames.push(senaPicked[i].name);
+      }
+      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 게헨나(뒤끝) '+senaNames.length+'명에게 부활 부여! ('+senaNames.join(', ')+')'});
+    }
+  }
   // ===== 아리우스 분교 (코인 의존) =====
   else if(id==='saori'){
     if(u._coinResult===false){
@@ -6249,13 +6276,31 @@ function runBattle(boardA, boardB, startWithA, opts) {
     if(_G.permanentAbilityBan) return false;
     // ===== 선빵 능력 (PRE_IDS) =====
     if(attacker.baseId==='aru'){
-      var tTier=target.tier||0;
-      var origAtk=attacker.atk;var newAtk=origAtk;
-      if(tTier>=5) newAtk=origAtk*2;
-      else if(tTier>=1&&tTier<=2) newAtk=Math.max(1,Math.floor(origAtk/2));
-      if(newAtk!==origAtk){
-        attacker._aruOrigAtk=origAtk;attacker.atk=newAtk;
-        log2.push({cls:'soc',text:'[선빵] '+attacker.name+': T'+tTier+' 대상 → 공격력 '+origAtk+'→'+newAtk});
+      // 아루 신규: 적이 게헨나가 아니면 능력 삭제 (드레스 아루: 공/체 버프도 삭제)
+      if(target.school!=='게헨나'){
+        if(target.abilityImmune||target._sayaImmune){
+          log2.push({cls:'shield',text:'[선빵] '+target.name+': 면역!'});
+        } else {
+          stripAbilities(target,log2);
+          // 드레스 아루: base stat 초과 buff 제거
+          if(attacker.isSkin){
+            var atTmpl=findAnyChar(target.baseId);
+            if(atTmpl){
+              var baseAtk, baseHp;
+              if(target.isSkin){
+                if(target.baseId==='yukino'){baseAtk=atTmpl.atk+5;baseHp=atTmpl.hp;}
+                else {baseAtk=atTmpl.atk*2+1;baseHp=atTmpl.hp*2+1;}
+              } else {baseAtk=atTmpl.atk;baseHp=atTmpl.hp;}
+              var oldA=target.atk,oldH=target.hp;
+              if(target.atk>baseAtk) target.atk=baseAtk;
+              if(target.hp>baseHp) target.hp=baseHp;
+              if(target.maxHp&&target.maxHp>baseHp) target.maxHp=baseHp;
+              if(target.atk!==oldA||target.hp!==oldH){
+                log2.push({cls:'kill',text:'[선빵] '+attacker.name+': '+target.name+' 버프 제거 ('+oldA+'/'+oldH+' → '+target.atk+'/'+target.hp+')'});
+              }
+            }
+          }
+        }
       }
       return false;
     }
@@ -6758,19 +6803,12 @@ function runBattle(boardA, boardB, startWithA, opts) {
           }
           // 관통
           else if(hasKw(attacker,'pierce')&&!hitResult.blocked&&hitResult.overflow>0){
-            // 세나: 초과 데미지로 아군 전체 회복
-            if(attacker.baseId==='sena'){
-              var healAmt=attacker.isSkin?hitResult.overflow*2:hitResult.overflow;
-              stepLog.push({cls:'shield',text:attacker.name+'의 관통! 아군 전체 HP +'+healAmt+' 회복!'});
-              for(var h=0;h<atkArr2.length;h++){if(atkArr2[h].alive)atkArr2[h].hp+=healAmt;}
-            } else {
-              // 아리스: 초과 데미지 양옆 전달
-              var aliveD=getAlive(defArr2);var tIdx=-1;
-              for(var k=0;k<aliveD.length;k++)if(aliveD[k]===target)tIdx=k;
-              stepLog.push({cls:'hit',text:attacker.name+'의 관통! 초과 데미지 '+hitResult.overflow+'!'});
-              if(tIdx>0&&aliveD[tIdx-1])dealDamage(attacker,atkArr2,aliveD[tIdx-1],defArr2,stepLog,true,hitResult.overflow);
-              if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
-            }
+            // 아리스: 초과 데미지 양옆 전달 (세나 효과는 SOC로 변경되어 제거)
+            var aliveD=getAlive(defArr2);var tIdx=-1;
+            for(var k=0;k<aliveD.length;k++)if(aliveD[k]===target)tIdx=k;
+            stepLog.push({cls:'hit',text:attacker.name+'의 관통! 초과 데미지 '+hitResult.overflow+'!'});
+            if(tIdx>0&&aliveD[tIdx-1])dealDamage(attacker,atkArr2,aliveD[tIdx-1],defArr2,stepLog,true,hitResult.overflow);
+            if(tIdx<aliveD.length-1&&aliveD[tIdx+1])dealDamage(attacker,atkArr2,aliveD[tIdx+1],defArr2,stepLog,true,hitResult.overflow);
           }
           // 슌 패시브: 킬 시 다음 무작위 대상 추가 공격 연쇄 (기본/스킨 동일)
           // 스킨(어린이)은 보호막 추가만 다름. 추가 공격 로직은 동일.
