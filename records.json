@@ -3285,56 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T14:20:17",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "히나(드레스)",
-              "baseId": "hina",
-              "atk": 34,
-              "hp": 8,
-              "tier": 6,
-              "kw": [
-                "cleave",
-                "shield",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hina_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 54,
-              "hp": 52,
-              "tier": 7,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "미나",
-              "baseId": "mina",
-              "atk": 2,
-              "hp": 4,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mina.png",
-              "school": "산해경"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T15:27:26",
           "placement": 1,
           "turn": 18,
@@ -3963,9 +3913,85 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-26T12:14:48",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "호시노(수영복)",
+              "baseId": "hoshino",
+              "atk": 11,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Hoshino_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 25,
+              "hp": 23,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이치카(수영복)",
+              "baseId": "ichika",
+              "atk": 43,
+              "hp": 35,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "reborn",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Ichika_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "노노미(수영복)",
+              "baseId": "nonomi",
+              "atk": 29,
+              "hp": 29,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Nonomi_(Swimsuit).png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 31,
+      "points": 33,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4084,8 +4110,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 7,
-        "legendPoints": 8
+        "streak": 8,
+        "legendPoints": 9
       }
     },
     "킹갓프리소울": {
