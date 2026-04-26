@@ -3758,6 +3758,12 @@ function aiOptimizeOrder(p,oppBoard){
 function aiGetStrategy(p) {
   var strat={dominantSchool:null,schoolBonus:3,targetUnits:[],avoidOtherSchools:false,giveUp:false};
   if(p.hp<=12){strat.giveUp=true;return strat;}
+  // 시뮬용: NPC에 _forcedSchool 지정 시 그 학교를 dominantSchool로 강제 (우선도 강화, 100% 강제는 아님)
+  if(p._forcedSchool){
+    strat.dominantSchool = p._forcedSchool;
+    strat.schoolBonus = 7;
+    strat.avoidOtherSchools = false;
+  }
   // Count schools on board
   var schoolCount={},total=p.board.length;
   for(var i=0;i<p.board.length;i++){var sc=p.board[i].school;schoolCount[sc]=(schoolCount[sc]||0)+1;}
@@ -9219,12 +9225,12 @@ function simBattlePhase() {
       var dmg = pa.tier + Math.min(res.damage, 8);
       pb.hp -= dmg;
       pb.totalDamageTaken = (pb.totalDamageTaken||0) + dmg;
-      if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.finalBoard=pb.board.slice();pb.board=[];}
+      if(pb.hp <= 0){pb.dead=true;G.aliveCount--;pb.finalBoard=pb.board.slice();pb.board=[];pb._deathTurn=G.turn;}
     } else if(res.result === 'lose') {
       var dmg2 = pb.tier + Math.min(res.damage, 8);
       pa.hp -= dmg2;
       pa.totalDamageTaken = (pa.totalDamageTaken||0) + dmg2;
-      if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.finalBoard=pa.board.slice();pa.board=[];}
+      if(pa.hp <= 0){pa.dead=true;G.aliveCount--;pa.finalBoard=pa.board.slice();pa.board=[];pa._deathTurn=G.turn;}
     }
   }
 }
@@ -9237,7 +9243,10 @@ function runSimGame() {
     permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
     millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
     keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
-    phase:G.phase, shop:G.shop
+    phase:G.phase, shop:G.shop,
+    shopSchoolBuff:G.shopSchoolBuff,
+    valkyrieKills:G.valkyrieKills, valkyrieDeaths:G.valkyrieDeaths,
+    shopBuff:G.shopBuff, shopExclusions:G.shopExclusions
   };
   try {
     // 시뮬 풀: 모든 카드 각 6장
@@ -9266,6 +9275,10 @@ function runSimGame() {
     G.arisuDeathCount = 0; G.keiseisenCounters = {};
     G.bonusStone = 0; G.freeRerolls = 0;
     G.phase = 'recruit'; G.shop = [];
+    // 시뮬 시작 시 누수 방지용 초기화
+    G.shopSchoolBuff = {};
+    G.valkyrieKills = 0; G.valkyrieDeaths = 0;
+    G.shopBuff = 0; G.shopExclusions = [];
 
     // 최대 25턴 시뮬
     for(var t = 0; t < 25 && G.aliveCount > 1; t++) {
@@ -9291,6 +9304,106 @@ function runSimGame() {
     G.arisuDeathCount = saved.arisuDeathCount; G.keiseisenCounters = saved.keiseisenCounters;
     G.bonusStone = saved.bonusStone; G.freeRerolls = saved.freeRerolls;
     G.phase = saved.phase; G.shop = saved.shop;
+    // 누수 방지: 새 G 상태 복원
+    G.shopSchoolBuff = saved.shopSchoolBuff;
+    G.valkyrieKills = saved.valkyrieKills; G.valkyrieDeaths = saved.valkyrieDeaths;
+    G.shopBuff = saved.shopBuff; G.shopExclusions = saved.shopExclusions;
+  }
+}
+
+// 시뮬 변형: 8명 NPC에 학교 강제 지정 + 순위 통계
+// schools: ['게헨나','트리니티',...] 8개 배열
+// 통계: SIM_SCHOOL_STATS[학교] = {1:N,2:N,...8:N,games:N}
+function runSimGameSchoolMatch(schools){
+  var saved={
+    players:G.players, pool:G.pool, turn:G.turn, aliveCount:G.aliveCount,
+    hiddenCardsEverOwned:G.hiddenCardsEverOwned, kuzunohaActive:G.kuzunohaActive,
+    permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
+    millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
+    keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
+    phase:G.phase, shop:G.shop, shopSchoolBuff:G.shopSchoolBuff,
+    valkyrieKills:G.valkyrieKills, valkyrieDeaths:G.valkyrieDeaths
+  };
+  try{
+    // 풀: 모든 카드 6장씩, locked 무관 (사용자 요구: 모든 카드 열려있다는 전제)
+    var simPool={};
+    for(var ci=0;ci<CHARS.length;ci++) simPool[CHARS[ci].id]=6;
+    G.pool=simPool;
+
+    // 더미 + 8명 NPC
+    var simPlayers=[{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
+    for(var si=0;si<8;si++){
+      var simPType='aggressive'; // 모두 일관된 personality
+      simPlayers.push({
+        id:'sim_'+si, name:'NPC_'+schools[si],
+        _forcedSchool:schools[si], // 학교 강제 (우선도)
+        hp:40, stone:3, turnStone:2,
+        tier:1, upgradeCost:UPGRADE_COSTS[1],
+        board:[], dead:false, isPlayer:false,
+        purchasedSchools:{}, totalDamageTaken:0,
+        personality:AI_PERSONALITIES[simPType], personalityType:simPType,
+        aiDifficulty:5 // 전설
+      });
+    }
+    G.players=simPlayers;
+    G.turn=1; G.aliveCount=8;
+    G.hiddenCardsEverOwned={};
+    G.kuzunohaActive=false; G.permanentAbilityBan=false;
+    G.battleSchoolBuff={}; G.millenniumTokenSummons=0;
+    G.arisuDeathCount=0; G.keiseisenCounters={};
+    G.bonusStone=0; G.freeRerolls=0;
+    G.phase='recruit'; G.shop=[]; G.shopSchoolBuff={};
+    G.valkyrieKills=0; G.valkyrieDeaths=0;
+
+    // 25턴 시뮬
+    for(var t=0;t<25 && G.aliveCount>1;t++){
+      G.turn=t+1;
+      for(var pi=1;pi<G.players.length;pi++){
+        var sp=G.players[pi];
+        if(sp.dead) continue;
+        sp.turnStone=Math.min(MAX_STONE, sp.turnStone+1);
+        sp.stone=sp.turnStone;
+        if(sp.upgradeCost>0) sp.upgradeCost=Math.max(0, sp.upgradeCost-1);
+      }
+      aiTurns();
+      simBattlePhase();
+    }
+    // 순위 산정: 사망 순서 역순 + 생존자 처리
+    // 죽은 NPC들은 사망 시점 turn 역순으로 8등→7등→...
+    // 살아남은 NPC들은 hp 순으로 정렬 → 1등→...
+    var alive=[],dead=[];
+    for(var pi=1;pi<G.players.length;pi++){
+      var p=G.players[pi];
+      if(p.dead) dead.push(p);
+      else alive.push(p);
+    }
+    // 살아남은 NPC: hp 내림차순 (높을수록 우승)
+    alive.sort(function(a,b){return b.hp-a.hp;});
+    // 죽은 NPC: 사망 turn 내림차순 (늦게 죽을수록 좋음)
+    dead.sort(function(a,b){return (b._deathTurn||0)-(a._deathTurn||0);});
+    var ranked=alive.concat(dead); // 순위 1~8
+    if(!SIM_SCHOOL_STATS) SIM_SCHOOL_STATS={};
+    for(var ri=0;ri<ranked.length;ri++){
+      var rp=ranked[ri];
+      var sch=rp._forcedSchool;
+      if(!SIM_SCHOOL_STATS[sch]) SIM_SCHOOL_STATS[sch]={ranks:[0,0,0,0,0,0,0,0],games:0,totalRank:0};
+      var rank=ri+1;
+      SIM_SCHOOL_STATS[sch].ranks[ri]++;
+      SIM_SCHOOL_STATS[sch].games++;
+      SIM_SCHOOL_STATS[sch].totalRank+=rank;
+    }
+  }catch(e){
+    if(typeof console!=='undefined') console.warn('[SIM] 학교매치 오류:', e.message);
+  }finally{
+    G.players=saved.players; G.pool=saved.pool; G.turn=saved.turn;
+    G.aliveCount=saved.aliveCount; G.hiddenCardsEverOwned=saved.hiddenCardsEverOwned;
+    G.kuzunohaActive=saved.kuzunohaActive; G.permanentAbilityBan=saved.permanentAbilityBan;
+    G.battleSchoolBuff=saved.battleSchoolBuff; G.millenniumTokenSummons=saved.millenniumTokenSummons;
+    G.arisuDeathCount=saved.arisuDeathCount; G.keiseisenCounters=saved.keiseisenCounters;
+    G.bonusStone=saved.bonusStone; G.freeRerolls=saved.freeRerolls;
+    G.phase=saved.phase; G.shop=saved.shop;
+    G.shopSchoolBuff=saved.shopSchoolBuff;
+    G.valkyrieKills=saved.valkyrieKills; G.valkyrieDeaths=saved.valkyrieDeaths;
   }
 }
 
