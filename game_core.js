@@ -9345,8 +9345,10 @@ function renderRecords(){
       html+='<div style="display:inline-flex;align-items:center;padding:4px 10px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid '+myRankColor+'">'+rankIconHtml+'<span style="color:'+myRankColor+';font-weight:800;font-size:14px">'+myRankInfo.tierName+' '+myRankInfo.num+'</span>'+posStarsViz+progressText+streakText+'</div>';
       html+='</div>';
 
-      // === 플레이 중인 선생님들 랭킹 (Top 10, 익명) ===
+      // === 플레이 중인 선생님들 티어 (Top 10) ===
+      // 내 계정은 실제 이름 + ' 선생님'으로 표시. 다른 선생님들은 익명화 (해시 4자리).
       function _maskTeacherName(nm){
+        if(nm===myName) return nm+' 선생님';
         var hh=2166136261;
         for(var ci=0;ci<nm.length;ci++){hh^=nm.charCodeAt(ci);hh=(hh*16777619)|0;}
         return '선생님 '+String(((hh>>>0)%9000)+1000); // 1000~9999
@@ -9366,23 +9368,29 @@ function renderRecords(){
         // 누적 카운터 우선 (없으면 records 폴백)
         var _prGames = (_pp.totalGames!=null) ? _pp.totalGames : _prRecs.length;
         var _prWins = (_pp.totalWins!=null) ? _pp.totalWins : _prRecs.filter(function(r){return r.placement&&r.placement<=4;}).length;
-        _rkAll.push({masked:_maskTeacherName(_nm),rank:_prRank,games:_prGames,wins:_prWins,score:_rankSortScore(_prRank)});
+        _rkAll.push({masked:_maskTeacherName(_nm),isMe:(_nm===myName),rank:_prRank,games:_prGames,wins:_prWins,score:_rankSortScore(_prRank)});
       }
       _rkAll.sort(function(a,b){return b.score-a.score || b.wins-a.wins || b.games-a.games;});
       _rkAll = _rkAll.slice(0,10);
       html+='<div style="margin-bottom:20px;padding:10px;background:rgba(167,139,250,0.05);border-radius:8px;border:1px solid #4a3a6e">';
-      html+='<div style="font-size:14px;font-weight:700;color:#a78bfa;margin-bottom:8px">🏆 플레이 중인 선생님들 랭킹 (Top 10)</div>';
+      html+='<div style="font-size:14px;font-weight:700;color:#a78bfa;margin-bottom:8px">🏆 플레이 중인 선생님들 티어 (Top 10)</div>';
       html+='<table style="width:100%;border-collapse:collapse;font-size:11px">';
-      html+='<tr style="color:#94a3b8;border-bottom:1px solid rgba(255,255,255,0.1)"><th style="text-align:left;padding:4px">#</th><th style="text-align:left;padding:4px">선생님</th><th style="text-align:left;padding:4px">티어</th><th style="text-align:right;padding:4px">게임</th><th style="text-align:right;padding:4px">승</th></tr>';
+      html+='<tr style="color:#94a3b8;border-bottom:1px solid rgba(255,255,255,0.1)"><th style="text-align:left;padding:4px">#</th><th style="text-align:left;padding:4px">선생님 이름</th><th style="text-align:left;padding:4px">선생님 티어</th><th style="text-align:right;padding:4px">게임</th><th style="text-align:right;padding:4px">승</th></tr>';
       for(var _ri=0;_ri<_rkAll.length;_ri++){
         var _rr=_rkAll[_ri];
         var _rrInfo = rankTierInfo(_rr.rank);
         var _rrColor = rankColor(_rr.rank);
         var _rrIcon = '<img src="'+_rrInfo.icon+'" style="width:14px;height:14px;vertical-align:middle;object-fit:contain;margin-right:3px" onerror="this.style.display=\'none\'">';
         var _rankNumColor = _ri===0?'#ffd700':_ri<3?'#fbbf24':'#94a3b8';
-        html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.05)">';
+        // 내 row 시각 강조 (배경 + 노란 테두리)
+        var _rowStyle = _rr.isMe
+          ? 'border-bottom:1px solid rgba(255,215,0,0.3);background:rgba(255,215,0,0.08)'
+          : 'border-bottom:1px solid rgba(255,255,255,0.05)';
+        var _nameColor = _rr.isMe ? '#ffd700' : '#c0d0e0';
+        var _nameWeight = _rr.isMe ? '700' : '400';
+        html+='<tr style="'+_rowStyle+'">';
         html+='<td style="padding:4px;color:'+_rankNumColor+';font-weight:700">'+(_ri+1)+'</td>';
-        html+='<td style="padding:4px;color:#c0d0e0">'+_rr.masked+'</td>';
+        html+='<td style="padding:4px;color:'+_nameColor+';font-weight:'+_nameWeight+'">'+_rr.masked+'</td>';
         html+='<td style="padding:4px;color:'+_rrColor+';font-weight:600">'+_rrIcon+_rrInfo.tierName+' '+_rrInfo.num+'</td>';
         html+='<td style="padding:4px;text-align:right;color:#94a3b8">'+_rr.games+'</td>';
         html+='<td style="padding:4px;text-align:right;color:#60a5fa">'+_rr.wins+'</td>';
