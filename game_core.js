@@ -138,6 +138,12 @@ var CHARS = [
 
   // ===== 산해경 (잠금 해제 필요) =====
   {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
+  // ===== 아리우스 분교 (추가 카드군) =====
+  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          skin:'스바루(?)',          img:'Subaru.png',         imgGold:'Subaru_skin.png'},
+  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  skin:'히요리(?)',          img:'Hiyori.png',         imgGold:'Hiyori_skin.png'},
+  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  skin:'미사키(?)',          img:'Misaki.png',         imgGold:'Misaki_skin.png'},
+  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], skin:'사오리(?)',  img:'Saori.png',          imgGold:'Saori_skin.png'},
+  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          skin:'아츠코(?)',          img:'Atsuko.png',         imgGold:'Atsuko_skin.png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
   {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
@@ -163,6 +169,8 @@ var HIDDEN_CHARS = [
   // 백귀야행
   {id:'hkyk_saikyo',            name:'최강일각라이온',       school:'백귀야행', tier:7, atk:40, hp:40, kw:[],                                     img:'unique/HKYK_Saikyo_ikaku_raion.png'},
   {id:'hkyk_kuzunoha',          name:'쿠즈노하',            school:'백귀야행', tier:7, atk:1, hp:1, kw:['shield','poison'],                    img:'unique/HKYK_Kuzunoha.png'},
+  // 아리우스 분교
+  {id:'arius_squad',            name:'아리우스 스쿼드',     school:'아리우스 분교', tier:7, atk:20, hp:20, kw:[],                                img:'unique/Arius_squad.png'},
   // 신규 7성
   {id:'gehenna_p68',             name:'흥신소 68',            school:'게헨나',   tier:7, atk:15, hp:15, kw:['pierce'],                               img:'unique/Problem_solver_68.png'},
   {id:'millennium_seminar',      name:'밀레니엄 세미나',      school:'밀레니엄', tier:7, atk:15, hp:15, kw:[],                                     img:'unique/Seminar.png'},
@@ -229,7 +237,7 @@ var KW_DESCS = {
   ambush:'첫 공격 전까지 대상 지정 불가.'
 };
 var TIER_COLORS = {1:'t1',2:'t2',3:'t3',4:'t4',5:'t5',6:'t6',7:'t7'};
-var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png','산해경':'img/Icon/Shanhaijing.png','붉은겨울':'img/icon/Red_Winter.png'};
+var SCHOOL_ICONS = {'게헨나':'img/Icon/Gehenna.png','밀레니엄':'img/Icon/Millennium.png','트리니티':'img/Icon/Trinity.png','총학생회':'img/Icon/Council.png','백귀야행':'img/Icon/Hyakkiyako.png','아비도스':'img/Icon/Abydos.png','산해경':'img/Icon/Shanhaijing.png','붉은겨울':'img/icon/Red_Winter.png','아리우스 분교':'img/Icon/Arius.png'};
 var CHAR_GRADES = {
   kayoko:3, junko:1, toki:1, midori:1, mari:1, reisa:1,
   juri:1, chinatsu:1, momoi:1, yuuka:2, kazusa:1, mashiro:1,
@@ -290,10 +298,10 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1};                               // 첫인사
-var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1}; // 개전
+var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1}; // 뒤끝
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, iori:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, noa:1, reisa:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, sena:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -399,6 +407,13 @@ var ABILITY_DESCS = {
   mina:     {type:'개전 / 뒤끝',desc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 +3/+3을 부여합니다.',skinEffect:'리코더 미나: 뒤끝 +6/+6',skinEffectDesc:'개전: 아군 전체 -1/-1을 부여합니다.\n뒤끝: 아군 전체 <span style="color:#ffd700;font-weight:700">+6/+6</span>을 부여합니다.'},
   reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
   saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
+  // ===== 아리우스 분교 =====
+  saori:    {type:'개전',desc:'코인토스에 실패했다면, 기본 능력이 모두 삭제됩니다.',skinEffect:'',skinEffectDesc:'개전: 코인토스에 실패했다면, 기본 능력이 모두 삭제됩니다.'},
+  misaki:   {type:'개전',desc:'코인토스에 실패했다면, 파괴됩니다.',skinEffect:'스킨 미사키: 저격 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 파괴됩니다.\n<span style="color:#ffd700;font-weight:700">저격</span> 추가.'},
+  atsuko:   {type:'개전',desc:'무작위 아군 3인의 개전 효과를 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·리오 다음) 발동합니다.',skinEffect:'스킨 아츠코: 아군 전체',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">아군 전체</span>의 개전 효과를 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·리오 다음) 발동합니다.'},
+  hiyori:   {type:'개전',desc:'코인토스에 실패했다면, 공격할 수 없습니다.',skinEffect:'스킨 히요리: 질풍(연사) 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 공격할 수 없습니다.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
+  subaru:   {type:'개전',desc:'코인토스에 실패했다면, 공격력과 체력을 절반(내림)으로 합니다.',skinEffect:'스킨 스바루: 환생(부활) 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 공격력과 체력을 절반(내림)으로 합니다.\n<span style="color:#ffd700;font-weight:700">부활</span> 추가.'},
+  arius_squad: {type:'패시브 / 개전 / 뒤끝',hiddenCond:'샬레에 사오리, 미사키, 아츠코, 히요리가 모두 있을 때 등장.',desc:'패시브: 샬레의 사오리, 미사키, 아츠코, 히요리를 흡수하며 등장합니다.\n개전: base 공격력만큼 아군 적군 전체에게 데미지를 준 후 자신을 파괴합니다.\n뒤끝: 흡수했던 학생들을 흡수 시점 상태로 다시 소환합니다.',skinEffect:'',quote:'아리우스: 우리는 너희와 다른 곳에서 왔어.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
   kisaki:   {type:'첫인사',desc:'아군 학생 1인을 선택하여\n스킨으로 교체합니다.',skinEffect:'사복 키사키: 전원 교체',skinEffectDesc:'첫인사: 아군 학생 <span style="color:#ffd700;font-weight:700">전원</span>을\n스킨으로 교체합니다.'},
@@ -1032,6 +1047,9 @@ function checkHiddenConditionsFor(p) {
   // 시로코 테러: 호시노(5)+시로코(5)+노노미+아야네+세리카
   if(notOwned('Shiroko_Terror')&&inPool('Shiroko_Terror')&&boardHas('hoshino')&&boardHas('shiroko')&&boardHas('nonomi')&&boardHas('ayane')&&boardHas('serika'))
     eligible.push('Shiroko_Terror');
+  // 아리우스 스쿼드: 사오리(5)+미사키(4)+아츠코(6)+히요리(3)
+  if(notOwned('arius_squad')&&inPool('arius_squad')&&boardHas('saori')&&boardHas('misaki')&&boardHas('atsuko')&&boardHas('hiyori'))
+    eligible.push('arius_squad');
   // 키키: 키사키(6) + 산해경 5명 이상
   if(notOwned('shanhai_kiki')&&inPool('shanhai_kiki')&&boardHas('kisaki')){
     var shCount=0;for(var _sh=0;_sh<p.board.length;_sh++){if(p.board[_sh].school==='산해경')shCount++;}
@@ -1319,7 +1337,7 @@ function buyHiddenCard(idx) {
   // 보드 풀 체크
   if(p.board.length>=MAX_BOARD){
     // 흡수형은 보드 카드를 제거하므로 OK
-    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror','shanhai_kiki','Kei_usb'];
+    var absorb=['gehenna_prefect','gehenna_pandemonium','millennium_death_momoi','gehenna_p68','millennium_seminar','millennium_cc','trinity_makeup','trinity_justice','hkyk_kuzunoha','Shiroko_Terror','shanhai_kiki','Kei_usb','arius_squad'];
     if(absorb.indexOf(bid)===-1) return;
   }
   p.stone-=3;
@@ -1467,6 +1485,22 @@ function buyHiddenCard(idx) {
       } else { newBoard.push(p.board[i]); }
     }
     p.board=newBoard;
+  }
+  else if(bid==='arius_squad'){
+    // 사오리/미사키/아츠코/히요리 흡수 + 스냅샷 저장 (DR 재소환용)
+    var ariusAbsorb=['saori','misaki','atsuko','hiyori'];
+    var ariusBA=0,ariusBH=0;var nbAr=[];var arSnap=[];
+    for(var i=0;i<p.board.length;i++){
+      if(ariusAbsorb.indexOf(p.board[i].baseId)!==-1){
+        ariusBA+=p.board[i].atk;ariusBH+=p.board[i].hp;
+        arSnap.push({id:p.board[i].id,baseId:p.board[i].baseId,name:p.board[i].name,school:p.board[i].school,tier:p.board[i].tier,atk:p.board[i].atk,hp:p.board[i].hp,maxHp:p.board[i].hp,kw:(p.board[i].kw||[]).slice(),img:p.board[i].img,isSkin:p.board[i].isSkin||false});
+        returnToPool(p.board[i].baseId,p.board[i].isSkin?3:1);
+      } else { nbAr.push(p.board[i]); }
+    }
+    p.board=nbAr;
+    m.atk+=ariusBA;m.hp+=ariusBH;m.maxHp=m.hp;
+    m._ariusAbsorbed=arSnap;
+    G._ariusAbsorbed=arSnap; // 전역 폴백 (시로코 테러/p68과 동일 패턴)
   }
 
   // 케이(USB): 아리스는 흡수하지 않음 — 보드에 같이 존재
@@ -2896,7 +2930,11 @@ var BUILD_PLANS = [
   // === 시로코 테러 (아비도스) ===
   {id:'shiroko_terror', target7:'Shiroko_Terror', school:'아비도스',
    coreCards:['hoshino','shiroko','nonomi','ayane','serika'],
-   schoolValue:['aoi','momoka','kaya']}
+   schoolValue:['aoi','momoka','kaya']},
+  // === 아리우스 스쿼드 (아리우스 분교) ===
+  {id:'arius_squad', target7:'arius_squad', school:'아리우스 분교',
+   coreCards:['saori','misaki','atsuko','hiyori'],
+   schoolValue:['subaru']}
 ];
 
 // 빌드 진행도 평가
@@ -3086,7 +3124,8 @@ var FRONT_LINE_CARDS={
   'gehenna_prefect':1,'gehenna_pandemonium':1,'gehenna_p68':1,
   'trinity_mika':1,'trinity_makeup':1,'trinity_justice':1,
   'millennium_nameless':1,'millennium_malkuth':1,'millennium_death_momoi':1,
-  'millennium_cc':1,'millennium_seminar':1,'Arisu_Kei':1
+  'millennium_cc':1,'millennium_seminar':1,'Arisu_Kei':1,
+  'arius_squad':1,'subaru':1
 };
 var BACK_LINE_CARDS={
   'mine':1,'mari':1,'momoi':1,'yuuka':1,'yuzu':1,'utaha':1,
@@ -3866,6 +3905,17 @@ function aiCheckHidden(p) {
         var bAtk=0,bHp=0,nb=[];
         for(var j=0;j<p.board.length;j++){if(absorb.indexOf(p.board[j].baseId)!==-1){bAtk+=p.board[j].atk;bHp+=p.board[j].hp;returnToPool(p.board[j].baseId,p.board[j].isSkin?3:1);}else nb.push(p.board[j]);}
         p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;
+      } else if(hid==='arius_squad'){
+        var absorb=['saori','misaki','atsuko','hiyori'];
+        var bAtk=0,bHp=0,nb=[];var arA=[];
+        for(var j=0;j<p.board.length;j++){
+          if(absorb.indexOf(p.board[j].baseId)!==-1){
+            bAtk+=p.board[j].atk;bHp+=p.board[j].hp;
+            arA.push({id:p.board[j].id,baseId:p.board[j].baseId,name:p.board[j].name,school:p.board[j].school,tier:p.board[j].tier,atk:p.board[j].atk,hp:p.board[j].hp,maxHp:p.board[j].hp,kw:(p.board[j].kw||[]).slice(),img:p.board[j].img,isSkin:p.board[j].isSkin||false});
+            returnToPool(p.board[j].baseId,p.board[j].isSkin?3:1);
+          }else nb.push(p.board[j]);
+        }
+        p.board=nb;unit.atk+=bAtk;unit.hp+=bHp;unit.maxHp=unit.hp;unit._ariusAbsorbed=arA;G._ariusAbsorbed=arA;
       }
       if(p.board.length<MAX_BOARD) p.board.push(unit);
     }
@@ -3929,6 +3979,110 @@ function triggerSOC(u, mySide, otherSide, log) {
     for(var i=0;i<mySide.length;i++){if(mySide[i].alive){mySide[i].atk+=atkBuff;mySide[i].hp+=hpBuff;mariBuffed.push(mySide[i].name+'('+mySide[i].atk+'/'+mySide[i].hp+')');}}
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +'+atkBuff+'/+'+hpBuff});
     if(mariBuffed.length>0) log.push({cls:'soc',text:'  → '+mariBuffed.join(', ')});
+  }
+  // ===== 아리우스 분교 (코인 의존) =====
+  else if(id==='saori'){
+    if(u._coinResult===false){
+      var basicKws=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct','invincible','ambush'];
+      var removed=[];var newKw=[];
+      for(var i=0;i<u.kw.length;i++){
+        if(basicKws.indexOf(u.kw[i])!==-1) removed.push(KW_LABELS[u.kw[i]]||u.kw[i]);
+        else newKw.push(u.kw[i]);
+      }
+      u.kw=newKw;
+      log.push({cls:'kill',text:'[개전] '+u.name+': 코인 실패! 기본 능력 삭제'+(removed.length>0?' ('+removed.join(', ')+')':'')});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 코인 성공!'});
+    }
+  }
+  else if(id==='misaki'){
+    // 스킨: 저격 추가
+    if(u.isSkin&&u.kw.indexOf('ranged')===-1) u.kw.push('ranged');
+    if(u._coinResult===false){
+      u.hp=0;u.alive=false;
+      log.push({cls:'kill',text:'[개전] '+u.name+': 코인 실패! 자폭!'});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 코인 성공!'});
+    }
+  }
+  else if(id==='hiyori'){
+    // 스킨: 연사 추가
+    if(u.isSkin&&u.kw.indexOf('windfury')===-1) u.kw.push('windfury');
+    if(u._coinResult===false){
+      u.noAttack=true;
+      log.push({cls:'kill',text:'[개전] '+u.name+': 코인 실패! 공격 불가!'});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 코인 성공!'});
+    }
+  }
+  else if(id==='subaru'){
+    // 스킨: 부활 추가
+    if(u.isSkin&&u.kw.indexOf('reborn')===-1) u.kw.push('reborn');
+    if(u._coinResult===false){
+      var oldA=u.atk,oldH=u.hp;
+      u.atk=Math.floor(u.atk/2);
+      u.hp=Math.floor(u.hp/2);
+      if(u.maxHp) u.maxHp=Math.floor(u.maxHp/2);
+      log.push({cls:'kill',text:'[개전] '+u.name+': 코인 실패! 절반! ('+oldA+'/'+oldH+' → '+u.atk+'/'+u.hp+')'});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 코인 성공!'});
+    }
+  }
+  else if(id==='atsuko'){
+    // 무작위 아군 N인의 개전 효과 무력화 (일반 3, 스킨 전원)
+    var atsukoTargets=[];
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive&&mySide[i]!==u&&SOC_IDS[mySide[i].baseId]&&!mySide[i]._socStripped){
+        atsukoTargets.push(mySide[i]);
+      }
+    }
+    for(var i=atsukoTargets.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=atsukoTargets[i];atsukoTargets[i]=atsukoTargets[j];atsukoTargets[j]=t;
+    }
+    var atsukoCount = u.isSkin ? atsukoTargets.length : Math.min(3, atsukoTargets.length);
+    var atsukoPicked = atsukoTargets.slice(0, atsukoCount);
+    for(var i=0;i<atsukoPicked.length;i++){
+      atsukoPicked[i]._socStripped=true;
+      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 '+atsukoPicked[i].name+'의 개전 삭제!'});
+    }
+    if(atsukoPicked.length===0) log.push({cls:'soc',text:'[개전] '+u.name+': 삭제할 개전 효과가 없습니다.'});
+  }
+  // ===== 아리우스 7성 =====
+  else if(id==='arius_squad'){
+    // base atk 20만큼 아군 적군 전체 데미지 후 자신 파괴
+    var ariusBase=20;
+    log.push({cls:'soc',text:'[개전] '+u.name+': 자폭! 아군 적군 전체 '+ariusBase+' 데미지!'});
+    // 적군 (사야 면역)
+    for(var i=0;i<otherSide.length;i++){
+      var et=otherSide[i];
+      if(!et.alive) continue;
+      if(et.abilityImmune||et._sayaImmune){
+        log.push({cls:'shield',text:'  → 적 '+et.name+': 면역!'});
+        continue;
+      }
+      et.hp-=ariusBase;
+      log.push({cls:'hit',text:'  → 적 '+et.name+'에게 '+ariusBase+' 피해 (HP:'+Math.max(0,et.hp)+')'});
+      if(et.hp<=0){et.hp=0;et.alive=false;et._killedBy=u;}
+    }
+    // 아군 (자기 제외, 사야 일반은 면역)
+    for(var i=0;i<mySide.length;i++){
+      var at=mySide[i];
+      if(!at.alive||at===u) continue;
+      if(at.abilityImmune){
+        log.push({cls:'shield',text:'  → 아군 '+at.name+': 면역!'});
+        continue;
+      }
+      at.hp-=ariusBase;
+      log.push({cls:'hit',text:'  → 아군 '+at.name+'에게 '+ariusBase+' 피해 (HP:'+Math.max(0,at.hp)+')'});
+      if(at.hp<=0){
+        at.hp=0;at.alive=false;at._killedBy=u;
+        triggerDeathrattle(at,mySide,otherSide,log);
+      }
+    }
+    // 자기 파괴
+    u.hp=0;u.alive=false;
+    log.push({cls:'kill',text:'  → '+u.name+': 자신 파괴!'});
   }
   else if(id==='tsurugi'){
     var mult=u.isSkin?3:2;
@@ -4485,17 +4639,23 @@ function resolveStartOfCombat(a, b, log) {
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='rio') triggerSOC(side[i],side,other,log);
     }
+    // 아츠코: 리오 다음, 사쿠라코 전 발동 (아군 SOC 무력화)
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&side[i].baseId==='atsuko') triggerSOC(side[i],side,other,log);
+    }
     // 사쿠라코: 트리니티 개전 추가 횟수 합산 (일반 +2, 황금 +3, 중첩 가능)
+    // 단, 아츠코로 SOC 무력화된 사쿠라코는 카운트 X
     var trinityRepeat=1;
     for(var i=0;i<side.length;i++){
-      if(side[i].alive&&side[i].baseId==='sakurako'){
+      if(side[i].alive&&side[i].baseId==='sakurako'&&!side[i]._socStripped){
         var extra=side[i].isSkin?3:2;
         trinityRepeat+=extra;
         log.push({cls:'soc',text:'[개전] '+side[i].name+': 트리니티 개전 +'+extra+'회!'});
       }
     }
     for(var i=0;i<side.length;i++){
-      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha'||side[i].baseId==='shizuko') continue;
+      if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha'||side[i].baseId==='shizuko'||side[i].baseId==='atsuko') continue;
+      if(side[i]._socStripped) continue; // 아츠코로 무력화된 카드 제외
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
     }
@@ -4996,6 +5156,26 @@ function _doDR(unit, mySide, otherSide, log) {
     }
     unit._shirokoTerrorDRFired=true;
   }
+  else if(id==='arius_squad'){
+    // 아리우스 스쿼드 뒤끝: 흡수한 사오리/미사키/아츠코/히요리를 흡수 당시 상태로 귀환
+    var arAbsorbed=unit._ariusAbsorbed||(G._ariusAbsorbed||[]);
+    if(arAbsorbed.length>0){
+      for(var _ari=0;_ari<arAbsorbed.length;_ari++){
+        if(countAlive(mySide)>=BATTLE_MAX) break;
+        var arAb=arAbsorbed[_ari];
+        var arRev={
+          id:arAb.id,baseId:arAb.baseId,name:arAb.name,school:arAb.school||'아리우스 분교',
+          tier:arAb.tier,atk:arAb.atk,hp:arAb.hp,maxHp:arAb.hp,kw:(arAb.kw||[]).slice(),
+          img:arAb.img,isSkin:arAb.isSkin||false,isToken:false,
+          alive:true,poisonImmune:false,_mySide:mySide,_ariusSpawned:true,
+          // 부활한 아리우스는 SOC 재발동을 막는다 (스쿼드가 흡수한 본체이므로)
+          _abilitiesStripped:true
+        };
+        mySide.push(arRev);
+        log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+arRev.name+' 귀환! ('+arRev.atk+'/'+arRev.hp+')'});
+      }
+    }
+  }
   else if(id==='gehenna_p68'){
     // 흥신소 68 뒤끝: 흡수한 아루·카요코·무츠키·하루카를 흡수 당시 상태로 귀환
     // 시로코 테러와 동일하게 전역 폴백(G._p68Absorbed) 사용 — copyUnit 누락/save-load 경유 상황 대응
@@ -5083,9 +5263,10 @@ function runBattle(boardA, boardB, startWithA, opts) {
       _battlesSurvived:m._battlesSurvived||0,
       _keiseisenCounter:m._keiseisenCounter||0,
       _hovercraftCounter:m._hovercraftCounter||0,
-      // 뒤끝 흡수 복원용 스냅샷 (흥신소68, 시로코 테러 등)
+      // 뒤끝 흡수 복원용 스냅샷 (흥신소68, 시로코 테러, 아리우스 스쿼드 등)
       _p68Absorbed:(m._p68Absorbed||null),
       _shirokoAbsorbed:(m._shirokoAbsorbed||null),
+      _ariusAbsorbed:(m._ariusAbsorbed||null),
       isHidden:m.isHidden||false,coinOff:m.coinOff||false};
   }
   var a=boardA.map(copyUnit);
