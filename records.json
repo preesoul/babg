@@ -8386,7 +8386,7 @@
           ]
         }
       ],
-      "points": 13,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8464,7 +8464,8 @@
         "nonomi",
         "serika",
         "otogi",
-        "mina"
+        "mina",
+        "lin"
       ],
       "totalGames": 5,
       "totalWins": 5,
