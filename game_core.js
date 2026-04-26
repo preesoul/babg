@@ -13,7 +13,7 @@ var CHARS = [
   {id:'midori', name:'미도리', school:'밀레니엄',tier:1,atk:2,hp:2,kw:[],            skin:'미도리(메이드)',   img:'Midori.png',         imgGold:'Midori_(Maid).png'},
   // 트리니티 1학년
   {id:'mari',   name:'마리',   school:'트리니티',tier:1,atk:1,hp:1,kw:['taunt'],     skin:'마리(아이돌)',     img:'Mari.png',           imgGold:'Mari_(Idol).png'},
-  {id:'reisa',  name:'레이사', school:'트리니티',tier:1,atk:2,hp:3,kw:['survive'],   skin:'레이사(마법소녀)', img:'Reisa.png',          imgGold:'Reisa_(Magical).png'},
+  {id:'reisa',  name:'레이사', school:'트리니티',tier:1,atk:2,hp:3,kw:[],            skin:'레이사(마법소녀)', img:'Reisa.png',          imgGold:'Reisa_(Magical).png'},
 
   // ===== Tier 2 (밸류7) =====
   // 게헨나 1학년
@@ -328,9 +328,9 @@ var MAX_STONE = SANDBOX ? 20 : 10;
 // 능력 종류 분류
 var BC_IDS  = {iroha:1, izuna:1, tsukuyo:1, tsubaki:1, michiru:1, kokona:1, kisaki:1, fubuki:1, kaho:1, niya:1, kaede:1};                               // 첫인사
 var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1, toramaru:1, junko:1, satsuki:1, yuzu:1, chise:1, airship:1, gehenna_prefect:1, gehenna_pandemonium:1, gehenna_traingun:1, trinity_seia:1, trinity_justice:1, gehenna_p68:1, hovercraft:1, millennium_cc:1, ayane:1, hoshino:1, Shiroko_Terror:1, mina:1, shanhai_kiki:1, red_winter_minori:1, citizen_wave:1, arius_squad:1, moe:1, konoka:1}; // 뒤끝
-var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, hanako:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1, misuzu:1}; // 개전
-var SURV_IDS = {toki:1, neru:1, reisa:1, kirino:1, kurumi:1}; // 버티기
-var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, kazusa:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1, yuuka:1, noa:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨
+var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1, misuzu:1, kazusa:1}; // 개전
+var SURV_IDS = {toki:1, neru:1, kirino:1, kurumi:1}; // 버티기
+var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1, yuuka:1, noa:1, reisa:1, hanako:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨 / kazusa는 개전(SOC)으로 변경됨 / hanako는 패시브로 변경됨
 var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
@@ -347,7 +347,7 @@ var ABILITY_DESCS = {
   himari:   {type:'개전',desc:'아군 2인에게 무작위 기본능력 키워드를 추가합니다.',skinEffect:'임전 히마리: 아군 전원',skinEffectDesc:'개전: 아군 <span style="color:#ffd700;font-weight:700">전원</span>에게 무작위 기본능력 키워드를 추가합니다.'},
   rio:      {type:'개전',desc:'무작위 적 2인의 모든 능력을 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·세이아 제외) 발동합니다.',skinEffect:'임전 리오: 적 3인의 능력 삭제',skinEffectDesc:'개전: 무작위 적 <span style="color:#ffd700;font-weight:700">3인</span>의 모든 능력을 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·세이아 제외) 발동합니다.'},
   ako:      {type:'뒤끝',desc:'이번 전투에서 게헨나 학생들 +4/+4',skinEffect:'드레스 아코: +8/+8',skinEffectDesc:'뒤끝: 이번 전투에서 게헨나 학생들에게 <span style="color:#ffd700;font-weight:700">+8/+8</span>을 부여합니다.'},
-  kazusa:   {type:'패시브',desc:'관통. 공격으로 적을 쓰러뜨렸을 시,\n레이사를 불러옵니다. (전투 중 1회)',skinEffect:'밴드 카즈사: 마법소녀 레이사 소환',skinEffectDesc:'관통. 패시브: 공격으로 적을 쓰러뜨렸을 시,\n마법소녀 레이사를 불러옵니다. (전투 중 1회)'},
+  kazusa:   {type:'개전',desc:'관통. 개전: 아군 코인토스 성공한 수만큼\n공격력과 체력이 오릅니다.',skinEffect:'밴드 카즈사: ×2만큼 오릅니다',skinEffectDesc:'관통. 개전: 아군 코인토스 성공한 수<span style="color:#ffd700;font-weight:700">×2</span>만큼\n공격력과 체력이 오릅니다.'},
   hifumi:   {type:'뒤끝',desc:'<페로로님>을 소환합니다. (3/1)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.',skinEffect:'수영복 히후미: 페로로님 6/2',skinEffectDesc:'뒤끝: <페로로님>을 소환합니다. (페로로님: <span style="color:#ffd700;font-weight:700">6/2</span>)\n페로로님이 적을 쓰러뜨리면 히후미로 교체됩니다.'},
   azusa:    {type:'뒤끝',desc:'적 전체에게 -2의 데미지를 줍니다.',skinEffect:'수영복 아즈사: -4 데미지',skinEffectDesc:'뒤끝: 적 전체에게 <span style="color:#ffd700;font-weight:700">-4</span>의 데미지를 줍니다.'},
   sakurako: {type:'개전',desc:'아군 트리니티 학생들의 개전을 두 번 더 발동합니다.',skinEffect:'아이돌 사쿠라코: 세 번 더 발동',skinEffectDesc:'개전: 아군 트리니티 학생들의 개전을 <span style="color:#ffd700;font-weight:700">세 번</span> 더 발동합니다.'},
@@ -469,9 +469,9 @@ var ABILITY_DESCS = {
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
-  reisa:    {type:'버티기',desc:'카즈사를 불러옵니다. (전투 중 1회)',skinEffect:'마법소녀 레이사: 밴드 카즈사 소환',skinEffectDesc:'버티기: 밴드 카즈사를 불러옵니다. (전투 중 1회)'},
+  reisa:    {type:'패시브',desc:'아군 전원의 코인토스 성공률이\n50%가 아닌 65%가 됩니다.\n(중복 시 한 번만 적용. 스즈미와 같은 맥락)',skinEffect:'마법소녀 레이사: 75%로',skinEffectDesc:'패시브: 아군 전원의 코인토스 성공률이\n50%가 아닌 <span style="color:#ffd700;font-weight:700">75%</span>가 됩니다.\n(중복 시 한 번만 적용. 스킨이 우선)'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
-  hanako:   {type:'',desc:'',skinEffect:'수영복 하나코: 개전 체력+5',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+0/+5</span>를 부여합니다.'},
+  hanako:   {type:'독사',desc:'독사 공격으로 적을 처치합니다.',skinEffect:'수영복 하나코: 패시브 추가',skinEffectDesc:'독사. 패시브: 자신의 공격으로 쓰러뜨린 적의\n<span style="color:#ffd700;font-weight:700">모든 능력을 삭제</span>합니다.'},
   ichika:   {type:'',desc:'',skinEffect:'수영복 이치카: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
   iori:     {type:'',desc:'',skinEffect:'수영복 이오리: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
   // ===== 스킨 전용 효과 (기본 능력 없이 스킨만 추가) =====
@@ -1032,8 +1032,7 @@ function applySkinKwTransform(tmpl, unit){
   if(tmpl.id==='mashiro'){if(unit.kw.indexOf('pierce')===-1)unit.kw.push('pierce');}
   // 치아키 수영복: 연사 추가
   if(tmpl.id==='chiaki'){if(unit.kw.indexOf('windfury')===-1)unit.kw.push('windfury');}
-  // 카즈사 밴드: 부활 추가
-  if(tmpl.id==='kazusa'){if(unit.kw.indexOf('reborn')===-1)unit.kw.push('reborn');}
+  // 카즈사 밴드: 스킨 효과는 SOC에서 ×2 처리 (kw 추가 없음)
   // 카린 버니걸: 연사 추가
   if(tmpl.id==='karin'){if(unit.kw.indexOf('windfury')===-1)unit.kw.push('windfury');}
   // 키쿄 수영복: 보호막 추가
@@ -2105,7 +2104,7 @@ function showDiscover(p) {
     var aTag = '';
     if(BC_IDS[c.id]) aTag+='<span class="ability-tag bc" style="cursor:default">첫인사</span>';
     if(DR_IDS[c.id]) aTag+='<span class="ability-tag dr" style="cursor:default">뒤끝</span>';
-    if(SOC_IDS[c.id]&&!({iori:1,hanako:1,pina:1,kasumi:1})[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
+    if(SOC_IDS[c.id]&&!({iori:1,pina:1,kasumi:1})[c.id]) aTag+='<span class="ability-tag soc" style="cursor:default">개전</span>';
     if((SURV_IDS[c.id]&&c.id!=='kirino')||(c.kw&&c.kw.indexOf('survive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(16,185,129,0.2);color:#6ee7b7;cursor:default">버티기</span>';
     if(PASSIVE_IDS[c.id]) aTag+='<span class="ability-tag" style="background:rgba(168,85,247,0.2);color:#c084fc;cursor:default">패시브</span>';
     if(PRE_IDS[c.id]||(c.kw&&c.kw.indexOf('preemptive')!==-1)) aTag+='<span class="ability-tag" style="background:rgba(251,191,36,0.2);color:#fbbf24;cursor:default">선빵</span>';
@@ -4436,6 +4435,21 @@ function triggerSOC(u, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[개전] '+u.name+': 아군 전체 +'+atkBuff+'/+'+hpBuff});
     if(mariBuffed.length>0) log.push({cls:'soc',text:'  → '+mariBuffed.join(', ')});
   }
+  else if(id==='kazusa'){
+    // 카즈사: 아군 코인토스 성공한 수만큼 +N/+N (밴드 카즈사: ×2)
+    var kzCount=0;
+    for(var i=0;i<mySide.length;i++){
+      if(mySide[i].alive && mySide[i]._coinResult===true) kzCount++;
+    }
+    if(kzCount>0){
+      var kzBuff = u.isSkin ? kzCount*2 : kzCount;
+      u.atk+=kzBuff; u.hp+=kzBuff;
+      if(u.maxHp) u.maxHp+=kzBuff;
+      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 코인 성공 '+kzCount+'명 → +'+kzBuff+'/+'+kzBuff+' ('+u.atk+'/'+u.hp+')'});
+    } else {
+      log.push({cls:'soc',text:'[개전] '+u.name+': 아군 코인 성공 없음'});
+    }
+  }
   else if(id==='hinata'){
     // 히나타: 아군 트리니티 학생 전체 +3/+3 (수영복 +6/+6)
     var hnBuff = u.isSkin ? 6 : 3;
@@ -4789,12 +4803,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     else log.push({cls:'soc',text:'[개전] '+u.name+': 대상 없음'});
   }
   // 이오리 개전 효과 삭제 — 수영복 이오리는 저격 추가로 변경됨 (applySkinKwTransform)
-  else if(id==='hanako'){
-    // 하나코 개전: 스킨 전용. 체력 +5
-    if(!u.isSkin) return;
-    u.hp+=5;u.maxHp=(u.maxHp||u.hp)+5;
-    log.push({cls:'soc',text:'[개전] '+u.name+': 체력 +5! ('+u.hp+')'});
-  }
+  // 하나코 개전 효과 삭제 — 수영복 하나코는 PASSIVE로 변경됨 (kill 시 적 능력 삭제)
   else if(id==='pina'){
     // 피나 개전: 스킨 전용. 자신에게 +2/+2
     if(!u.isSkin) return;
@@ -5407,14 +5416,6 @@ function _doDR(unit, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 아군 게헨나 +'+buff+'/+'+buff});
     if(akoBuffed.length>0) log.push({cls:'soc',text:'  → '+akoBuffed.join(', ')});
   }
-  else if(id==='kazusa'){
-    if(countAlive(mySide)>=BATTLE_MAX) return;
-    var atk=unit.isSkin?6:4,hp2=unit.isSkin?4:3;
-    var cp={id:'cp_'+Math.random().toString(36).substr(2,4),baseId:'cathpalug',isToken:true,
-      name:'카스팔루스',school:G.rioSchool||'트리니티',tier:6,atk:atk,hp:hp2,kw:[],img:'token/CathPalug.png',isSkin:false,alive:true,poisonImmune:false};
-    mySide.push(cp);
-    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 카스팔루스 소환! ('+atk+'/'+hp2+')'});
-  }
   else if(id==='hifumi'){
     if(countAlive(mySide)>=BATTLE_MAX) return;
     var pAtk=unit.isSkin?4:2,pHp=unit.isSkin?2:1;
@@ -5879,8 +5880,6 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
   _G.permanentAbilityBan=false;
   _G.battleSchoolBuff={};
-  _G._reisaSummonedKazusa=false;
-  _G._kazusaSummonedReisa=false;
   var skipSOC=!!(opts&&opts.skipSOC);
   var coinSeq=(opts&&opts.coinSeq)||null;
   var coinQueuePtr=0;
@@ -6194,21 +6193,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
         surviveEffects.push({type:'keyword',baseId:'neru',kw:pick});
       }
     }
-    else if(unit.baseId==='reisa'){
-      // 레이사 버티기: 카즈사 소환 (전투 중 1회)
-      if(!_G._reisaSummonedKazusa&&countAlive(side)<BATTLE_MAX){
-        var kazTmpl=findAnyChar('kazusa');
-        if(kazTmpl){
-          _G._reisaSummonedKazusa=true;
-          var kaz={id:'kaz_'+Math.random().toString(36).substr(2,4),baseId:'kazusa',isToken:true,
-            name:kazTmpl.name,school:kazTmpl.school,tier:kazTmpl.tier,
-            atk:unit.isSkin?(kazTmpl.atk*2+1):kazTmpl.atk,hp:unit.isSkin?(kazTmpl.hp*2+1):kazTmpl.hp,
-            kw:kazTmpl.kw.slice(),img:unit.isSkin?kazTmpl.imgGold:kazTmpl.img,isSkin:unit.isSkin,alive:true,poisonImmune:false,_mySide:side};
-          side.push(kaz);
-          log2.push({cls:'soc',text:'[버티기] '+unit.name+': '+kaz.name+' 소환! ('+kaz.atk+'/'+kaz.hp+')'});
-        }
-      }
-    }
+    // 레이사 SURV 효과 삭제 — PASSIVE로 변경됨 (아군 코인 base 부스트, decideCoinResults에서 처리)
     else if(unit.baseId==='mimori'){
       // 미모리 버티기: 상대 전체 공격력 -1 (황금 -2)
       var debuff=unit.isSkin?2:1;
@@ -6610,8 +6595,25 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(hasNormal) return 0.34;
       return 0.5;
     }
+    // reisa 패시브: 아군 코인 성공률을 set (누적 X). 일반 0.65 / 스킨 0.75. 스킨이 한 명이라도 있으면 0.75 우선.
+    function _reisaBoost(allySide){
+      var hasNormal=false, hasSkin=false;
+      for(var i=0;i<allySide.length;i++){
+        if(allySide[i].alive && allySide[i].baseId==='reisa' && !allySide[i]._abilitiesStripped){
+          if(allySide[i].isSkin) hasSkin=true; else hasNormal=true;
+        }
+      }
+      if(hasSkin) return 0.75;
+      if(hasNormal) return 0.65;
+      return 0;
+    }
     var suzBaseA = _suzumiBase(b); // a 사이드의 코인 base — b의 스즈미 영향
     var suzBaseB = _suzumiBase(a); // b 사이드의 코인 base — a의 스즈미 영향
+    var reisaBoostA = _reisaBoost(a); // a 사이드의 코인 base — a의 레이사 부스트
+    var reisaBoostB = _reisaBoost(b); // b 사이드의 코인 base — b의 레이사 부스트
+    // 최종 base = max(suzumi 감소, reisa 부스트). 레이사가 우선 (트리니티 보강 의도)
+    var finalBaseA = Math.max(suzBaseA, reisaBoostA);
+    var finalBaseB = Math.max(suzBaseB, reisaBoostB);
     var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
     var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
     function _setCoin(side, hasCC, baseProb, withBunnyBonus){
@@ -6634,8 +6636,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     // a는 아군 측이라 bunny toss 보너스 적용 (기존 동작 유지)
-    _setCoin(a, aHasCC, suzBaseA, true);
-    _setCoin(b, bHasCC, suzBaseB, false);
+    _setCoin(a, aHasCC, finalBaseA, true);
+    _setCoin(b, bHasCC, finalBaseB, false);
   })();
 
   // 초기 스냅샷 (개전 전 상태)
@@ -6841,21 +6843,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
 
-          // 카즈사 패시브: 킬 시 레이사 소환 (전투 중 1회)
-          if(attacker.baseId==='kazusa'&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked&&!_G._kazusaSummonedReisa){
-            if(countAlive(atkArr2)<BATTLE_MAX){
-              var reiTmpl=findAnyChar('reisa');
-              if(reiTmpl){
-                _G._kazusaSummonedReisa=true;
-                var rei={id:'rei_'+Math.random().toString(36).substr(2,4),baseId:'reisa',isToken:true,
-                  name:reiTmpl.name,school:reiTmpl.school,tier:reiTmpl.tier,
-                  atk:attacker.isSkin?(reiTmpl.atk*2+1):reiTmpl.atk,hp:attacker.isSkin?(reiTmpl.hp*2+1):reiTmpl.hp,
-                  kw:['survive'],img:attacker.isSkin?reiTmpl.imgGold:reiTmpl.img,isSkin:attacker.isSkin,alive:true,poisonImmune:false,_mySide:atkArr2};
-                atkArr2.push(rei);
-                stepLog.push({cls:'soc',text:'[패시브] '+attacker.name+': '+rei.name+' 소환! ('+rei.atk+'/'+rei.hp+')'});
-              }
-            }
-          }
+      // 하나코 패시브 (스킨 한정): 공격으로 적 처치 시 모든 능력 삭제
+      if(attacker.baseId==='hanako'&&attacker.isSkin&&!attacker._abilitiesStripped&&!target.alive&&hitResult&&!hitResult.blocked){
+        if(target.abilityImmune||target._sayaImmune||target._effectImmune){
+          // 면역: 강제 처치는 일어났으나 능력 삭제는 적용 안 함 (이미 죽었으므로 별도 표시 X)
+        } else if(!target._abilitiesStripped){
+          stripAbilities(target,stepLog);
+          stepLog.push({cls:'kill',text:'[패시브] '+attacker.name+': '+target.name+' 능력 삭제!'});
+        }
+      }
       // 빼앗기 턴 카운트 (사츠키 DR로 빼앗긴 유닛)
       if(attacker._stolenTurns){
         attacker._stolenTurns--;
@@ -8334,7 +8330,7 @@ function miniCardHtml(m){
   var bid=m.baseId||'';
   if(BC_IDS[bid]) miniAbilTag+='<span class="ability-tag bc" style="font-size:8px;padding:0 3px">첫인사</span>';
   if(DR_IDS[bid]) miniAbilTag+='<span class="ability-tag dr" style="font-size:8px;padding:0 3px">뒤끝</span>';
-  var SKIN_ONLY_SOC={iori:1,hanako:1,pina:1,kasumi:1};
+  var SKIN_ONLY_SOC={iori:1,pina:1,kasumi:1};
   if(SOC_IDS[bid]&&!(SKIN_ONLY_SOC[bid]&&!m.isSkin)) miniAbilTag+='<span class="ability-tag soc" style="font-size:8px;padding:0 3px">개전</span>';
   if((SURV_IDS[bid]&&!(bid==='kirino'&&!m.isSkin))||(m.kw&&m.kw.indexOf('survive')!==-1)) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">버티기</span>';
   if(PASSIVE_IDS[bid]) miniAbilTag+='<span class="ability-tag" style="font-size:8px;padding:0 3px;background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">패시브</span>';
@@ -8348,7 +8344,7 @@ function miniCardHtml(m){
   if((bid==='nagusa'||bid==='yukari'||bid==='renge'||bid==='kikyou')&&m._keiseisenCounter>0){
     counterHtml='<div class="battle-counter" style="background:rgba(251,191,36,0.3);border:1px solid rgba(251,191,36,0.6);color:#fde68a">⚔ '+m._keiseisenCounter+'</div>';
   }
-  var SKIN_ONLY_SOC_M={iori:1,hanako:1,pina:1,kasumi:1};
+  var SKIN_ONLY_SOC_M={iori:1,pina:1,kasumi:1};
   var SVG_ICONS={
     SOC:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M3 9v6h3l7 5V4L6 9H3z' fill='#FFAA00' stroke='#CC7700' stroke-width='1.5' stroke-linejoin='round'/><path d='M16 8.5a5 5 0 0 1 0 7' stroke='#FFD700' stroke-width='2.5' stroke-linecap='round'/></svg>",
     BC:"<svg width='16' height='16' viewBox='-1 -1 26 26' fill='none'><path d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z' fill='#FFD700' stroke='#CC8800' stroke-width='1.5'/><path d='M14 21a2.5 2.5 0 0 1-4 0' stroke='#CC8800' stroke-width='2' stroke-linecap='round'/></svg>",
