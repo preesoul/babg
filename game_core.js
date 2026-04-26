@@ -358,7 +358,7 @@ var ABILITY_DESCS = {
   junko:    {type:'자폭 / 뒤끝',desc:'자폭: 공격력과 체력을 합쳐 공격 후 쓰러집니다.\n뒤끝: <당고>를 소환합니다. (1/1)',skinEffect:'새해 준코: 당고 2개 소환',skinEffectDesc:'뒤끝: <당고>를 <span style="color:#ffd700;font-weight:700">2개</span> 소환합니다. (당고 1/1)'},
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'개전',desc:'<뒤끝>을 가진 아군 게헨나 학생\n무작위 2명에게 <부활>을 부여합니다.',skinEffect:'사복 세나: 뒤끝 가진 아군 게헨나 전체',skinEffectDesc:'개전: <뒤끝>을 가진 아군 게헨나 학생\n<span style="color:#ffd700;font-weight:700">전체</span>에게 <부활>을 부여합니다.'},
-  satsuki:  {type:'뒤끝',desc:'<span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인을\n잠시 가져와 무작위 적을 공격합니다.\n이후 돌려줍니다.\n(능력/효과 사망 시엔 발동하지 않음)',skinEffect:'수영복 사츠키: 2번 공격',skinEffectDesc:'뒤끝: <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인을 잠시 가져와 무작위 적을 <span style="color:#ffd700;font-weight:700">2번</span> 공격합니다.\n이후 돌려줍니다.\n(능력/효과 사망 시엔 발동하지 않음)'},
+  satsuki:  {type:'뒤끝',desc:'<span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인이\n같은 편을 공격합니다.\n(능력/효과 사망 시엔 발동하지 않음)',skinEffect:'수영복 사츠키: 2번 공격',skinEffectDesc:'뒤끝: <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인이\n같은 편을 <span style="color:#ffd700;font-weight:700">2번</span> 공격합니다.\n(능력/효과 사망 시엔 발동하지 않음)'},
   makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
@@ -5430,53 +5430,40 @@ function _doDR(unit, mySide, otherSide, log) {
     log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 당고 '+count+'개 소환! (각 1/1)'});
   }
   else if(id==='satsuki'){
-    // 뒤끝: 전투로 쓰러진 경우, 무작위 상대 1인을 잠시 가져와 무작위 적을 공격 (스킨: 2번)
+    // 뒤끝: 전투로 쓰러지면 무작위 상대 1인이 같은 편(적군)을 공격 (스킨: 2번)
     // 능력/효과 사망 시 발동 X
     if(!unit._killedByCombat){
       if(unit._killedBy) log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 전투가 아닌 능력에 쓰러져 발동 실패!'});
       return;
     }
     // 살아있는 적 무작위 1인 선택
-    var aliveEnemies=[];
-    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive) aliveEnemies.push(otherSide[i]);}
-    if(aliveEnemies.length===0){log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 가져올 적이 없습니다.'});return;}
-    var borrowed=aliveEnemies[Math.floor(Math.random()*aliveEnemies.length)];
-    var borrowIdx=otherSide.indexOf(borrowed);
-    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+borrowed.name+'을(를) 잠시 가져왔다!'});
-    // 잠시 사이드 변경
-    otherSide.splice(borrowIdx,1);
-    var origMySide = borrowed._mySide;
-    borrowed._mySide = mySide;
-    var attackCount = unit.isSkin ? 2 : 1;
-    for(var ac=0; ac<attackCount; ac++){
-      // 무작위 적(원래 borrowed의 사이드 = otherSide) 1인 선택
-      var nextEnemies=[];
-      for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive) nextEnemies.push(otherSide[i]);}
-      if(nextEnemies.length===0||!borrowed.alive||borrowed.hp<=0) break;
-      var tgt=nextEnemies[Math.floor(Math.random()*nextEnemies.length)];
-      var dmgGiven = borrowed.atk;
-      var tgtHpBefore = tgt.hp;
-      // 단순 데미지: 보호막 1회 막음, 외엔 hp 감소
-      if(hasKw(tgt,'shield')){
-        tgt.kw.splice(tgt.kw.indexOf('shield'),1);
-        log.push({cls:'shield',text:'  → '+tgt.name+'의 보호막이 깨졌다! ('+borrowed.name+'의 공격)'});
+    var saAliveEnemies=[];
+    for(var i=0;i<otherSide.length;i++){if(otherSide[i].alive) saAliveEnemies.push(otherSide[i]);}
+    if(saAliveEnemies.length===0){log.push({cls:'soc',text:'[뒤끝] '+unit.name+': 공격할 적이 없습니다.'});return;}
+    var saAttacker=saAliveEnemies[Math.floor(Math.random()*saAliveEnemies.length)];
+    log.push({cls:'soc',text:'[뒤끝] '+unit.name+': '+saAttacker.name+'을(를) 조종해 같은 편을 공격!'});
+    var saAtkCount = unit.isSkin ? 2 : 1;
+    for(var sac=0; sac<saAtkCount; sac++){
+      if(!saAttacker.alive||saAttacker.hp<=0) break;
+      // 같은 사이드(otherSide)에서 attacker 제외 무작위 살아있는 1인
+      var saAllyTargets=[];
+      for(var i=0;i<otherSide.length;i++){
+        if(otherSide[i].alive&&otherSide[i]!==saAttacker) saAllyTargets.push(otherSide[i]);
+      }
+      if(saAllyTargets.length===0) break;
+      var saTgt=saAllyTargets[Math.floor(Math.random()*saAllyTargets.length)];
+      var saDmg = saAttacker.atk;
+      if(hasKw(saTgt,'shield')){
+        saTgt.kw.splice(saTgt.kw.indexOf('shield'),1);
+        log.push({cls:'shield',text:'  → '+saTgt.name+'의 보호막이 깨졌다! ('+saAttacker.name+'의 공격)'});
       } else {
-        tgt.hp -= dmgGiven;
-        log.push({cls:'hit',text:'  → '+borrowed.name+'(차용)이 '+tgt.name+'에게 '+dmgGiven+' 피해 (HP:'+Math.max(0,tgt.hp)+')'});
-        if(tgt.hp<=0){
-          tgt.hp=0;tgt.alive=false;tgt._killedBy=borrowed;
-          // 죽음 처리 (DR 발동 등)
-          triggerDeathrattle(tgt, otherSide, mySide, log);
+        saTgt.hp -= saDmg;
+        log.push({cls:'hit',text:'  → '+saAttacker.name+'이(가) 같은 편 '+saTgt.name+'에게 '+saDmg+' 피해 (HP:'+Math.max(0,saTgt.hp)+')'});
+        if(saTgt.hp<=0){
+          saTgt.hp=0;saTgt.alive=false;saTgt._killedBy=saAttacker;
+          triggerDeathrattle(saTgt, otherSide, mySide, log);
         }
       }
-    }
-    // 빌려온 카드 원래 사이드(otherSide)로 돌려줌
-    borrowed._mySide = origMySide;
-    if(borrowed.alive){
-      otherSide.push(borrowed);
-      log.push({cls:'soc',text:'  → '+borrowed.name+'을(를) 돌려주었다.'});
-    } else {
-      log.push({cls:'soc',text:'  → '+borrowed.name+'은(는) 차용 중 쓰러졌다.'});
     }
   }
   else if(id==='yuzu'){
