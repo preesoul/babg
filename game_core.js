@@ -2350,29 +2350,34 @@ function addToBoard(p, m) {
   if(p.isPlayer && m.school && window._questTracker && window._questTracker.recruits[m.school] !== undefined) {
     window._questTracker.recruits[m.school]++;
   }
-  // 트리플 체크
+  // 트리플 체크 (보드 + 벤치 둘 다 카운트)
   var count=0;
   for(var i=0;i<p.board.length;i++){
     if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin) count++;
   }
+  var benchMatch = (p.bench && p.bench.baseId===m.baseId && !p.bench.isSkin);
+  if(benchMatch) count++;
   if(count>=2){
     // 퀘스트 트래킹: 스킨 갈아입히기 (플레이어만)
     if(p.isPlayer && window._questTracker) window._questTracker.skins++;
     var tmpl=null;for(var j=0;j<CHARS.length;j++)if(CHARS[j].id===m.baseId)tmpl=CHARS[j];
     var mergedKw=[],bonusAtk=0,bonusHp=0;
     var sources=[];for(var i=0;i<p.board.length;i++)if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin)sources.push(p.board[i]);
+    if(benchMatch) sources.push(p.bench);
     sources.push(m);
     for(var i=0;i<sources.length;i++){
       var u=sources[i];
       for(var k=0;k<(u.kw||[]).length;k++)if(mergedKw.indexOf(u.kw[k])===-1)mergedKw.push(u.kw[k]);
       bonusAtk+=u.atk-tmpl.atk;bonusHp+=u.hp-tmpl.hp;
     }
+    // 보드에서 카드 제거 (최대 2개), 벤치도 매치하면 비우기
     var newBoard=[];var removed=0;
     for(var i=0;i<p.board.length;i++){
       if(p.board[i].baseId===m.baseId&&!p.board[i].isSkin&&removed<2){removed++;}
       else{newBoard.push(p.board[i]);}
     }
     p.board=newBoard;
+    if(benchMatch) p.bench=null;
     var skinUnit=makeMinion(tmpl,true);skinUnit.kw=mergedKw;skinUnit.atk+=bonusAtk;skinUnit.hp+=bonusHp;skinUnit.maxHp=skinUnit.hp;
     applySkinKwTransform(tmpl,skinUnit);
     p.board.push(skinUnit);
