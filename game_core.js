@@ -418,7 +418,7 @@ var ABILITY_DESCS = {
   asuna:    {type:'패시브',desc:'우선권 코인토스에서, 아스나는 무조건 성공합니다.',skinEffect:'버니걸 아스나: 맨 왼쪽 아군도 성공 추가',skinEffectDesc:'패시브: 우선권 코인토스에서, 아스나는 무조건 성공합니다.\n추가로 <span style="color:#ffd700;font-weight:700">자신 제외 맨 왼쪽 아군</span>도 코인토스에 성공합니다.'},
   koharu:   {type:'선빵',desc:'공격 시, 5% 확률로 대상의 능력을 제거하고\n즉사시킵니다.',skinEffect:'수영복 코하루: 확률 10%',skinEffectDesc:'선빵: 공격 시, <span style="color:#ffd700;font-weight:700">10%</span> 확률로 대상의 능력을 제거하고\n즉사시킵니다.'},
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
-  suzumi:   {type:'패시브',desc:'아군 코인이 적보다 더 잘 뜹니다.\n(양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 스즈미: 훨씬 더 잘 뜹니다',skinEffectDesc:'패시브: 아군 코인이 적보다\n<span style="color:#ffd700;font-weight:700">훨씬</span> 더 잘 뜹니다.\n(양쪽 모두 가지면 상쇄)'},
+  suzumi:   {type:'패시브',desc:'아군 코인이 적보다 더 잘 뜹니다.\n(스즈미끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 스즈미: 훨씬 더 잘 뜹니다',skinEffectDesc:'패시브: 아군 코인이 적보다\n<span style="color:#ffd700;font-weight:700">훨씬</span> 더 잘 뜹니다.\n(스즈미끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
   haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
   // 총학생회
@@ -469,7 +469,7 @@ var ABILITY_DESCS = {
   Kei_usb: {type:'패시브',hiddenCond:'스케쥴 Lv.6 이상, 밀레니엄 학생만 영입, 샬레에 아리스가 있고 왕녀를 영입한 적이 없을 때 등장.',desc:'공격하지 않습니다.\n전투 데미지를 받으면 아리스가 대신 받습니다.\n전투 종료 시 생존하면 아리스&케이로 변화합니다.',skinEffect:''},
   Arisu_Kei: {type:'선빵',desc:'보드의 아리스와 케이를 흡수하며 등장합니다.\n선빵: 상대 전원을 왼쪽부터 1회씩 공격합니다.\n이 공격은 보호막을 무시합니다.',skinEffect:''},
   // ===== 스킨 동일 (변화 없음) =====
-  reisa:    {type:'패시브',desc:'아군 코인이 적보다 더 잘 뜹니다.\n(양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 레이사: 훨씬 더 잘 뜹니다',skinEffectDesc:'패시브: 아군 코인이 적보다\n<span style="color:#ffd700;font-weight:700">훨씬</span> 더 잘 뜹니다.\n(양쪽 모두 가지면 상쇄)'},
+  reisa:    {type:'패시브',desc:'아군 코인이 적보다 더 잘 뜹니다.\n(레이사끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 레이사: 훨씬 더 잘 뜹니다',skinEffectDesc:'패시브: 아군 코인이 적보다\n<span style="color:#ffd700;font-weight:700">훨씬</span> 더 잘 뜹니다.\n(레이사끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)'},
   pina:     {type:'',desc:'',skinEffect:'가이드 피나: 개전 +2/+2',skinEffectDesc:'개전: 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>를 부여합니다.'},
   hanako:   {type:'',desc:'',skinEffect:'수영복 하나코: 자신의 공격으로 쓰러뜨린 적의 모든 능력을 삭제',skinEffectDesc:'패시브: 자신의 공격으로 쓰러뜨린 적의\n<span style="color:#ffd700;font-weight:700">모든 능력을 삭제</span>합니다.'},
   ichika:   {type:'',desc:'',skinEffect:'수영복 이치카: 저격 추가',skinEffectDesc:'보호막+연사+<span style="color:#ffd700;font-weight:700">저격</span>'},
