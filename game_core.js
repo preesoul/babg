@@ -9388,10 +9388,20 @@ function renderRecords(){
           : 'border-bottom:1px solid rgba(255,255,255,0.05)';
         var _nameColor = _rr.isMe ? '#ffd700' : '#c0d0e0';
         var _nameWeight = _rr.isMe ? '700' : '400';
+        // 등급 위치 별 (★★☆) + 진행도 (전설이면 +Npt, 아니면 별 자체로 표시)
+        var _posStars = rankPositionStars(_rr.rank.tier);
+        var _starsViz = '<span style="font-size:10px;letter-spacing:1px;color:'+_rrColor+';margin-left:4px;opacity:0.85">';
+        for(var _ps=0;_ps<_posStars[1];_ps++) _starsViz += _ps<_posStars[0]?'★':'☆';
+        _starsViz += '</span>';
+        // 플래티넘 1 (tier 0): legendPoints 표시
+        var _ptText = '';
+        if(_rr.rank.tier===0 && _rr.rank.legendPoints){
+          _ptText = '<span style="font-size:10px;color:'+_rrColor+';margin-left:4px;opacity:0.9">+'+_rr.rank.legendPoints+'pt</span>';
+        }
         html+='<tr style="'+_rowStyle+'">';
         html+='<td style="padding:4px;color:'+_rankNumColor+';font-weight:700">'+(_ri+1)+'</td>';
         html+='<td style="padding:4px;color:'+_nameColor+';font-weight:'+_nameWeight+'">'+_rr.masked+'</td>';
-        html+='<td style="padding:4px;color:'+_rrColor+';font-weight:600">'+_rrIcon+_rrInfo.tierName+' '+_rrInfo.num+'</td>';
+        html+='<td style="padding:4px;color:'+_rrColor+';font-weight:600;white-space:nowrap">'+_rrIcon+_rrInfo.tierName+' '+_rrInfo.num+_starsViz+_ptText+'</td>';
         html+='<td style="padding:4px;text-align:right;color:#94a3b8">'+_rr.games+'</td>';
         html+='<td style="padding:4px;text-align:right;color:#60a5fa">'+_rr.wins+'</td>';
         html+='</tr>';
