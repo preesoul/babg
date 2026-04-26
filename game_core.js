@@ -4764,9 +4764,9 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='yuzu'){
     // 이번 전투 쓰러진 아군 수 x2(스킨x4)의 아방가르드군 소환
+    // (유즈 자신도 alive=false 상태라 자동으로 카운트에 포함됨)
     var deadCount=0;
     for(var i=0;i<mySide.length;i++)if(!mySide[i].alive)deadCount++;
-    deadCount++; // 유즈 자신도 포함
     var mult=unit.isSkin?4:2;
     var agAtk=deadCount*mult,agHp=deadCount*mult;
     if(countAlive(mySide)<BATTLE_MAX){
