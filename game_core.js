@@ -130,8 +130,8 @@ var CHARS = [
   {id:'michiru', name:'미치루', school:'백귀야행',tier:5,atk:5,hp:5,kw:[],            skin:'미치루(드레스)',   img:'Michiru.png',        imgGold:'Michiru_(Dress).png'},
   // 백귀야행 신규 (3종)
   {id:'kaede',   name:'카에데', school:'백귀야행',tier:1,atk:2,hp:2,kw:[],            skin:'카에데(가이드)',   img:'Kaede.png',          imgGold:'Kaede_(Guide).png'},
-  {id:'kaho',    name:'카호',   school:'백귀야행',tier:5,atk:3,hp:3,kw:[],            skin:'카호(슴가)',       img:'Kaho.png',           imgGold:'Kaho_(boobs).png'},
-  {id:'niya',    name:'니야',   school:'백귀야행',tier:6,atk:2,hp:1,kw:[],            skin:'니야(임전)',       img:'Niya.png',           imgGold:'Niya_(Battle).png'},
+  {id:'kaho',    name:'카호',   school:'백귀야행',tier:5,atk:3,hp:3,kw:[],            locked:true, skin:'카호(슴가)',       img:'Kaho.png',           imgGold:'Kaho_(boobs).png'},
+  {id:'niya',    name:'니야',   school:'백귀야행',tier:6,atk:2,hp:1,kw:[],            locked:true, skin:'니야(임전)',       img:'Niya.png',           imgGold:'Niya_(Battle).png'},
 
   // ===== 아비도스 (잠금 해제 필요) =====
   {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
@@ -699,7 +699,9 @@ var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona',
   // 아리우스 분교 (5종)
   'subaru','hiyori','misaki','saori','atsuko',
   // 발키리/SRT (12종)
-  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna'];
+  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna',
+  // 백귀야행 신규 (kaho, niya — kaede는 기본)
+  'kaho','niya'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
