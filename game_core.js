@@ -630,8 +630,8 @@ var SPELLS = [
     effect:function(G){var p=G.players[0];var counts={};for(var i=0;i<p.board.length;i++){if(!p.board[i].isSkin){var bid=p.board[i].baseId;counts[bid]=(counts[bid]||0)+1;}}var target=null;for(var bid in counts){if(counts[bid]>=2){target=bid;break;}}if(!target)return false;var tmpl=null;for(var i=0;i<CHARS.length;i++)if(CHARS[i].id===target){tmpl=CHARS[i];break;}if(!tmpl)return false;var mKw=[],bAtk=0,bHp=0,newBoard=[],removed=0;for(var i=0;i<p.board.length;i++){if(p.board[i].baseId===target&&!p.board[i].isSkin&&removed<2){var u=p.board[i];for(var k=0;k<(u.kw||[]).length;k++){if(mKw.indexOf(u.kw[k])===-1)mKw.push(u.kw[k]);}bAtk+=u.atk-tmpl.atk;bHp+=u.hp-tmpl.hp;removed++;}else{newBoard.push(p.board[i]);}}p.board=newBoard;var gld=makeMinion(tmpl,true);gld.kw=mKw;gld.atk+=bAtk;gld.hp+=bHp;gld.maxHp=gld.hp;applySkinKwTransform(tmpl,gld);p.board.push(gld);triggerBattlecry(gld,p);showDiscover(p);return true;}},
   {id:'on_your_mark',name:'온 유어 마크',cost:3,tier:5,desc:'학교당 1명에게 무작위 기본 능력 부여\n(중복 없음)',target:'auto',img:'img/spell/On_your_mark.png',
     effect:function(G){var p=G.players[0];var basicPool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct'];var schools={};for(var i=0;i<p.board.length;i++){var s=p.board[i].school;if(!schools[s])schools[s]=[];schools[s].push(i);}var usedKw={};for(var s in schools){var arr=schools[s];var pick=arr[Math.floor(Math.random()*arr.length)];var u=p.board[pick];var avail=basicPool.filter(function(k){return !hasKw(u,k)&&!usedKw[k];});if(avail.length===0)continue;var kw=avail[Math.floor(Math.random()*avail.length)];addKw(u,kw);usedKw[kw]=true;}return true;}},
-  {id:'bunny_toss',name:'바니 토스',cost:3,tier:6,desc:'다음 전투 코인토스 성공률 +30%',target:'auto',img:'img/spell/bunny_toss.png',
-    effect:function(G){G.bunnyTossBonus=(G.bunnyTossBonus||0)+0.30;}},
+  {id:'bunny_toss',name:'바니 토스',cost:3,tier:6,desc:'이번 전투에서, 아군 코인이 적보다 훨씬 더 잘 뜹니다.',target:'auto',img:'img/spell/bunny_toss.png',
+    effect:function(G){G.bunnyTossBonus=(G.bunnyTossBonus||0)+0.10;}},
   {id:'poison_grail',name:'독이 든 성배',cost:4,tier:6,desc:'아군 학생 1명을 돌려보내고,\n그 공격력과 체력을 무작위 아군 1명에게 부여합니다.',target:'select_ally',img:'img/spell/consume.png',
     effect:function(G,idx){var p=G.players[0];if(idx===undefined||!p.board[idx])return false;if(p.board.length<=1)return false;var removed=p.board.splice(idx,1)[0];returnToPool(removed.baseId,removed.isSkin?3:1);var targets=[];for(var i=0;i<p.board.length;i++)targets.push(i);if(targets.length===0)return false;var pick=targets[Math.floor(Math.random()*targets.length)];var ab=getAyumuBonus();p.board[pick].atk+=removed.atk+ab;p.board[pick].hp+=removed.hp+ab;p.board[pick].maxHp=(p.board[pick].maxHp||p.board[pick].hp)+removed.hp+ab;logBuff(p.board[pick],'독이 든 성배',removed.atk+ab,removed.hp+ab);return true;}},
 ];
@@ -3400,6 +3400,27 @@ function evaluateBuildPlan(p, plan){
 // 빌드 결정: 7청휘석 시점에 평가
 function aiDecideBuildPlan(p){
   if(p._buildPlan) return; // 이미 결정됨
+  // ===== 전략 시뮬용 강제 분기 =====
+  // _forceStrategy='value' → 빌드 사용 안 함 (순수 휴리스틱)
+  // _forceStrategy='single_school' → 빌드 사용 안 함 (학교만 따라감, _forcedSchool로 학교 고정)
+  // _forceStrategy='seven_star' → _forcedBuildPlanId 강제 또는 학교 일치 plan 강제
+  if(p._forceStrategy==='value') return;
+  if(p._forceStrategy==='single_school') return;
+  if(p._forceStrategy==='seven_star'){
+    if(p._forcedBuildPlanId){
+      for(var bi=0;bi<BUILD_PLANS.length;bi++){
+        if(BUILD_PLANS[bi].id===p._forcedBuildPlanId){ p._buildPlan=BUILD_PLANS[bi]; return; }
+      }
+    }
+    if(p._forcedSchool){
+      // 학교 일치 + target7 있는 plan 우선
+      for(var bi=0;bi<BUILD_PLANS.length;bi++){
+        var pl=BUILD_PLANS[bi];
+        if(pl.school===p._forcedSchool && pl.target7){ p._buildPlan=pl; return; }
+      }
+    }
+    // 위 조건 없으면 일반 흐름으로 fallthrough
+  }
   if(p.stone < 7) return;  // 7청휘석 미만이면 아직 결정 X
   var bestPlan=null, bestScore=0;
   for(var i=0;i<BUILD_PLANS.length;i++){
@@ -5924,25 +5945,25 @@ function _computeCoinProbs(a, b, _G){
     if(hasNormal) return 0.05;
     return 0;
   }
-  var aDelta = _reisaDelta(a) + _suzumiDelta(a) - _reisaDelta(b) - _suzumiDelta(b);
+  // 바니 토스: player(a) 전용 spell. zero-sum: a +btBonus, b -btBonus
+  var btBonus = (_G && _G.bunnyTossBonus) || 0;
+  var aDelta = _reisaDelta(a) + _suzumiDelta(a) - _reisaDelta(b) - _suzumiDelta(b) + btBonus;
   var bDelta = -aDelta;
   var finalBaseA = Math.max(0, Math.min(1, 0.5 + aDelta));
   var finalBaseB = Math.max(0, Math.min(1, 0.5 + bDelta));
   var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
   var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
-  var btBonus = (_G && _G.bunnyTossBonus) || 0;
-  return {finalBaseA:finalBaseA, finalBaseB:finalBaseB, aHasCC:aHasCC, bHasCC:bHasCC, btBonus:btBonus};
+  return {finalBaseA:finalBaseA, finalBaseB:finalBaseB, aHasCC:aHasCC, bHasCC:bHasCC, btBonus:0};
 }
 // 한 사이드 코인 굴림 — Math.random()을 호출해 _coinResult 갱신
+// withBunnyBonus/btBonus는 zero-sum 통합 후 무의미 (호출자 호환용으로 시그너처 유지)
 function _rollCoinSide(side, hasCC, baseProb, withBunnyBonus, btBonus){
-  btBonus = btBonus || 0;
   for(var i=0;i<side.length;i++){
     var u=side[i];
     if(!u.alive){ u._coinResult=undefined; continue; }
     if(u.coinOff){ u._coinResult=false; continue; }
     if(hasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
-    var p = withBunnyBonus ? Math.max(0, baseProb+btBonus) : Math.max(0, baseProb);
-    u._coinResult = Math.random() < p;
+    u._coinResult = Math.random() < Math.max(0, baseProb);
   }
 }
 // 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인 성공
@@ -9542,6 +9563,135 @@ function runSimGameSchoolMatch(schools){
     }
   }catch(e){
     if(typeof console!=='undefined') console.warn('[SIM] 학교매치 오류:', e.message);
+  }finally{
+    G.players=saved.players; G.pool=saved.pool; G.turn=saved.turn;
+    G.aliveCount=saved.aliveCount; G.hiddenCardsEverOwned=saved.hiddenCardsEverOwned;
+    G.kuzunohaActive=saved.kuzunohaActive; G.permanentAbilityBan=saved.permanentAbilityBan;
+    G.battleSchoolBuff=saved.battleSchoolBuff; G.millenniumTokenSummons=saved.millenniumTokenSummons;
+    G.arisuDeathCount=saved.arisuDeathCount; G.keiseisenCounters=saved.keiseisenCounters;
+    G.bonusStone=saved.bonusStone; G.freeRerolls=saved.freeRerolls;
+    G.phase=saved.phase; G.shop=saved.shop;
+    G.shopSchoolBuff=saved.shopSchoolBuff;
+    G.valkyrieKills=saved.valkyrieKills; G.valkyrieDeaths=saved.valkyrieDeaths;
+  }
+}
+
+// 시뮬 변형: 8명 NPC를 3가지 전략으로 분배하여 승률 비교
+// strategies: ['seven_star','seven_star','seven_star','value','value','value','single_school','single_school']
+// 각 NPC에 _forceStrategy 부여. seven_star는 학교+plan, single_school은 학교만 부여.
+// 통계: SIM_STRATEGY_STATS[전략] = {ranks:[8],games:N,totalRank:N}
+function runSimGameStrategyMatch(strategies){
+  var saved={
+    players:G.players, pool:G.pool, turn:G.turn, aliveCount:G.aliveCount,
+    hiddenCardsEverOwned:G.hiddenCardsEverOwned, kuzunohaActive:G.kuzunohaActive,
+    permanentAbilityBan:G.permanentAbilityBan, battleSchoolBuff:G.battleSchoolBuff,
+    millenniumTokenSummons:G.millenniumTokenSummons, arisuDeathCount:G.arisuDeathCount,
+    keiseisenCounters:G.keiseisenCounters, bonusStone:G.bonusStone, freeRerolls:G.freeRerolls,
+    phase:G.phase, shop:G.shop, shopSchoolBuff:G.shopSchoolBuff,
+    valkyrieKills:G.valkyrieKills, valkyrieDeaths:G.valkyrieDeaths
+  };
+  try{
+    var simPool={};
+    for(var ci=0;ci<CHARS.length;ci++) simPool[CHARS[ci].id]=6;
+    G.pool=simPool;
+
+    // 학교별 핵심 카드 (seven_star/single_school용)
+    var SCHOOL_PRIORITY_CARDS = {
+      '게헨나': ['kasumi','sena','satsuki','ako','hina','makoto','iroha','iori','aru','mutsuki','kayoko','haruka','chiaki','ibuki','chinatsu'],
+      '트리니티': ['sakurako','hinata','mari','mine','tsurugi','hifumi','azusa','hanako','ichika','mashiro','kazusa','reisa','ui','suzumi','hasumi'],
+      '밀레니엄': ['yuuka','noa','rio','himari','asuna','momoi','midori','akane','karin','toki','utaha','eimi','arisu','yuzu','hibiki','koyuki','neru'],
+      '백귀야행': ['michiru','shizuko','wakamo','tsubaki','tsukuyo','izuna','nagusa','chise','kikyou','renge','mimori','pina','yukari','kaede'],
+      '발키리/SRT': ['konoka','kanna','niko','miyako','kurumi','kirino','fubuki','miyu','moe','saki','otogi','yukino'],
+      '아비도스': ['shiroko','hoshino','nonomi','ayane','serika'],
+      '아리우스 분교': ['saori','misaki','atsuko','hiyori','subaru'],
+      '산해경': ['kisaki','rumi','shun','saya','reijo','mina','kokona']
+    };
+    // 7성 plan 후보 (seven_star용 학교/plan 조합)
+    var SEVEN_STAR_PLANS = ['gehenna_p68','gehenna_prefect','gehenna_pandemonium',
+      'trinity_justice','trinity_makeup','trinity_nagisa',
+      'millennium_death_momoi','millennium_seminar','millennium_cc',
+      'hkyk_unity','shiroko_terror','arius_squad'];
+    function _planById(id){for(var i=0;i<BUILD_PLANS.length;i++)if(BUILD_PLANS[i].id===id)return BUILD_PLANS[i];return null;}
+    var ALL_SCHOOLS=['게헨나','트리니티','밀레니엄','백귀야행','발키리/SRT','아비도스','아리우스 분교','산해경'];
+
+    // 더미 + 8명 NPC
+    var simPlayers=[{id:'sim_dummy',hp:0,dead:true,board:[],isPlayer:false,purchasedSchools:{},stone:0,turnStone:0,tier:1,upgradeCost:99}];
+    for(var si=0;si<8;si++){
+      var stratKey=strategies[si]||'value';
+      var npcCfg={
+        id:'sim_'+si, name:'NPC_'+si+'_'+stratKey,
+        _forceStrategy: stratKey,
+        hp:40, stone:3, turnStone:2,
+        tier:1, upgradeCost:UPGRADE_COSTS[1],
+        board:[], dead:false, isPlayer:false,
+        purchasedSchools:{}, totalDamageTaken:0,
+        personality:AI_PERSONALITIES['aggressive'], personalityType:'aggressive',
+        aiDifficulty:5
+      };
+      // 전략별 학교/플랜 부여
+      if(stratKey==='seven_star'){
+        // 무작위 7성 plan 1개 선택 → 학교/핵심 카드도 자동
+        var planId = SEVEN_STAR_PLANS[Math.floor(Math.random()*SEVEN_STAR_PLANS.length)];
+        var plan = _planById(planId);
+        if(plan){
+          npcCfg._forcedSchool = plan.school;
+          npcCfg._forcedTargetUnits = plan.coreCards.concat(plan.schoolValue||[]);
+          npcCfg._forcedBuildPlanId = planId;
+        }
+      } else if(stratKey==='single_school'){
+        // 무작위 학교 1개 선택, 핵심 카드 우선도
+        var sch = ALL_SCHOOLS[Math.floor(Math.random()*ALL_SCHOOLS.length)];
+        npcCfg._forcedSchool = sch;
+        npcCfg._forcedTargetUnits = SCHOOL_PRIORITY_CARDS[sch]||[];
+      }
+      // 'value'는 _forcedSchool/_forcedBuildPlanId 부여 X (순수 휴리스틱)
+      simPlayers.push(npcCfg);
+    }
+    G.players=simPlayers;
+    G.turn=1; G.aliveCount=8;
+    G.hiddenCardsEverOwned={};
+    G.kuzunohaActive=false; G.permanentAbilityBan=false;
+    G.battleSchoolBuff={}; G.millenniumTokenSummons=0;
+    G.arisuDeathCount=0; G.keiseisenCounters={};
+    G.bonusStone=0; G.freeRerolls=0;
+    G.phase='recruit'; G.shop=[]; G.shopSchoolBuff={};
+    G.valkyrieKills=0; G.valkyrieDeaths=0;
+
+    // 25턴 시뮬
+    for(var t=0;t<25 && G.aliveCount>1;t++){
+      G.turn=t+1;
+      for(var pi=1;pi<G.players.length;pi++){
+        var sp=G.players[pi];
+        if(sp.dead) continue;
+        sp.turnStone=Math.min(MAX_STONE, sp.turnStone+1);
+        sp.stone=sp.turnStone;
+        if(sp.upgradeCost>0) sp.upgradeCost=Math.max(0, sp.upgradeCost-1);
+      }
+      aiTurns();
+      simBattlePhase();
+    }
+    // 순위 산정
+    var alive=[],dead=[];
+    for(var pi=1;pi<G.players.length;pi++){
+      var p=G.players[pi];
+      if(p.dead) dead.push(p);
+      else alive.push(p);
+    }
+    alive.sort(function(a,b){return b.hp-a.hp;});
+    dead.sort(function(a,b){return (b._deathTurn||0)-(a._deathTurn||0);});
+    var ranked=alive.concat(dead);
+    if(!SIM_STRATEGY_STATS) SIM_STRATEGY_STATS={};
+    for(var ri=0;ri<ranked.length;ri++){
+      var rp=ranked[ri];
+      var key=rp._forceStrategy||'value';
+      if(!SIM_STRATEGY_STATS[key]) SIM_STRATEGY_STATS[key]={ranks:[0,0,0,0,0,0,0,0],games:0,totalRank:0};
+      var rank=ri+1;
+      SIM_STRATEGY_STATS[key].ranks[ri]++;
+      SIM_STRATEGY_STATS[key].games++;
+      SIM_STRATEGY_STATS[key].totalRank+=rank;
+    }
+  }catch(e){
+    if(typeof console!=='undefined') console.warn('[SIM] 전략매치 오류:', e.message);
   }finally{
     G.players=saved.players; G.pool=saved.pool; G.turn=saved.turn;
     G.aliveCount=saved.aliveCount; G.hiddenCardsEverOwned=saved.hiddenCardsEverOwned;
