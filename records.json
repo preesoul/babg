@@ -3285,72 +3285,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-25T11:31:30",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "데스 모모이",
-              "baseId": "millennium_death_momoi",
-              "atk": 16,
-              "hp": 16,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 12,
-              "hp": 8,
-              "tier": 3,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 6,
-              "hp": 10,
-              "tier": 4,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아리스&케이",
-              "baseId": "Arisu_Kei",
-              "atk": 69,
-              "hp": 63,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "ranged",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-25T14:20:17",
           "placement": 1,
           "turn": 14,
@@ -3975,9 +3909,63 @@
             }
           ],
           "pinned": true
+        },
+        {
+          "date": "2026-04-26T10:22:01",
+          "placement": 1,
+          "turn": 11,
+          "tier": 6,
+          "board": [
+            {
+              "name": "사츠키(수영복)",
+              "baseId": "satsuki",
+              "atk": 17,
+              "hp": 19,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Satsuki_(Swinsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나(사복)",
+              "baseId": "sena",
+              "atk": 27,
+              "hp": 21,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sena_(Casual).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "잊힌 열차포",
+              "baseId": "gehenna_traingun",
+              "atk": 22,
+              "hp": 22,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_traingun.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "잊힌 열차포",
+              "baseId": "gehenna_traingun",
+              "atk": 14,
+              "hp": 14,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_traingun.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 44,
+      "points": 46,
       "questState": {
         "daily": {
           "date": "2026-04-26",
@@ -4093,8 +4081,8 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 6,
-        "legendPoints": 7
+        "streak": 7,
+        "legendPoints": 8
       }
     },
     "킹갓프리소울": {
