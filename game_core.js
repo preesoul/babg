@@ -5666,6 +5666,41 @@ function runBattle(boardA, boardB, startWithA, opts) {
   for(var _sy=0;_sy<a.length;_sy++){if(a[_sy].baseId==='saya'&&a[_sy].alive&&!a[_sy]._abilitiesStripped){a[_sy]._sayaImmune=true;if(!a[_sy].isSkin)a[_sy].abilityImmune=true;}}
   for(var _sy=0;_sy<b.length;_sy++){if(b[_sy].baseId==='saya'&&b[_sy].alive&&!b[_sy]._abilitiesStripped){b[_sy]._sayaImmune=true;if(!b[_sy].isSkin)b[_sy].abilityImmune=true;}}
 
+  // ===== 코인 결과 사전 결정 (개전 전) =====
+  // 각 카드에 _coinResult 부여 → 개전이 참조 가능
+  // 실제 코인 애니메이션은 이 결과를 그대로 표시 (random 다시 X)
+  (function decideCoinResults(){
+    var btBonus = _G.bunnyTossBonus || 0;
+    // suzumi 페널티: a의 suzumi → b 페널티, b의 suzumi → a 페널티
+    var suzPenA = 0, suzPenB = 0;
+    for(var i=0;i<b.length;i++){if(b[i].alive&&b[i].baseId==='suzumi'&&!b[i]._abilitiesStripped) suzPenA += b[i].isSkin?0.7:0.4;}
+    for(var i=0;i<a.length;i++){if(a[i].alive&&a[i].baseId==='suzumi'&&!a[i]._abilitiesStripped) suzPenB += a[i].isSkin?0.7:0.4;}
+    var aHasCC = a.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+    var bHasCC = b.some(function(u){return u.alive&&u.baseId==='millennium_cc';});
+    function _setCoin(side, hasCC, suzPen, withBunnyBonus){
+      for(var i=0;i<side.length;i++){
+        var u=side[i];
+        if(!u.alive){ u._coinResult=undefined; continue; }
+        if(u.coinOff){ u._coinResult=false; continue; }
+        if(hasCC||u.baseId==='asuna'){ u._coinResult=true; continue; }
+        var p = withBunnyBonus ? Math.max(0, 0.5+btBonus-suzPen) : Math.max(0, 0.5-suzPen);
+        u._coinResult = Math.random() < p;
+      }
+      // 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인 성공
+      var hasAsunaGold = side.some(function(u){return u.alive&&(u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
+      if(hasAsunaGold){
+        for(var i=0;i<side.length;i++){
+          if(side[i].alive&&side[i].baseId!=='asuna'&&side[i].baseId!=='millennium_cc'&&!side[i].coinOff){
+            side[i]._coinResult=true; break;
+          }
+        }
+      }
+    }
+    // a는 아군 측이라 bunny toss 보너스 적용 (기존 동작 유지)
+    _setCoin(a, aHasCC, suzPenA, true);
+    _setCoin(b, bHasCC, suzPenB, false);
+  })();
+
   // 초기 스냅샷 (개전 전 상태)
   steps.push({atkSide:null,atkIdx:-1,defSide:null,defIdx:-1,log:[],snap:snapshot()});
 
@@ -6735,14 +6770,16 @@ function runBattleCoinPhase(snap,callback){
 
     setTimeout(function(){
       var cr={};
-      var _btBonus=G.bunnyTossBonus||0;
-      for(var j=0;j<aliveEnemy.length;j++)cr[aliveEnemy[j].sid]=Math.random()<Math.max(0,0.5-_suzumiPenaltyForEnemy);
-      // C&C 패시브: 아군 전체 코인토스 항상 성공
-      var _hasCC=aliveAlly.some(function(u){return u.baseId==='millennium_cc';});
-      for(var j=0;j<aliveAlly.length;j++){var _u=aliveAlly[j];var _isAsuna=(_u.baseId==='asuna');var _forceSuccess=_isAsuna||_hasCC;cr[_u.sid]=coinOffMap[_u.sid]?false:(_forceSuccess?true:Math.random()<Math.max(0,0.5+_btBonus-_suzumiPenaltyForAlly));}
-      // 버니걸 아스나 스킨: 자신 제외 맨 왼쪽 아군도 코인토스 성공
-      var _asunaGold=aliveAlly.some(function(u){return (u.baseId==='asuna'||u.baseId==='millennium_cc')&&u.isSkin;});
-      if(_asunaGold){for(var _aj=0;_aj<aliveAlly.length;_aj++){var _lu=aliveAlly[_aj];if(_lu.baseId!=='asuna'&&_lu.baseId!=='millennium_cc'&&!coinOffMap[_lu.sid]){cr[_lu.sid]=true;break;}}}
+      // 코인 결과는 runBattle 시작 시점에 미리 결정되어 unit._coinResult에 부여됨
+      // 여기서는 그 값을 그대로 사용 (random 다시 던지지 X). 새로 등장한 토큰 등 미정의 시 fallback random.
+      for(var j=0;j<aliveEnemy.length;j++){
+        var _eu=aliveEnemy[j];
+        cr[_eu.sid] = (_eu._coinResult===true||_eu._coinResult===false) ? _eu._coinResult : (Math.random()<0.5);
+      }
+      for(var j=0;j<aliveAlly.length;j++){
+        var _au=aliveAlly[j];
+        cr[_au.sid] = (_au._coinResult===true||_au._coinResult===false) ? _au._coinResult : (coinOffMap[_au.sid]?false:(Math.random()<0.5));
+      }
       for(var j=0;j<aliveEnemy.length;j++)bSettleCoin(aliveEnemy[j].sid,cr[aliveEnemy[j].sid]);
       var _asunaCoinMsg=false;
       for(var j=0;j<aliveAlly.length;j++){
