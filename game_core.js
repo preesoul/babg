@@ -138,12 +138,12 @@ var CHARS = [
 
   // ===== 산해경 (잠금 해제 필요) =====
   {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
-  // ===== 아리우스 분교 (추가 카드군) =====
-  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
-  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
-  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
-  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
-  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
+  // ===== 아리우스 분교 (추가 카드군, 신비해방 대상) =====
+  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:6,  hp:6,  kw:[],          locked:true, skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
+  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:9,  hp:4,  kw:['ranged'],  locked:true, skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
+  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:12, hp:3,  kw:['cleave'],  locked:true, skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
+  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:13, hp:13, kw:['shield','poison'], locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
+  {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:5,  hp:5,  kw:[],          locked:true, skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
   {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
@@ -152,18 +152,19 @@ var CHARS = [
   {id:'kisaki',  name:'키사키', school:'산해경', tier:6, atk:5, hp:7, kw:[],                 locked:true, skin:'키사키(사복)',       img:'Kisaki.png',         imgGold:'Kisaki_(Casual).png'},
   // ===== 발키리/SRT (추가 카드군) =====
   // sub: 'valkyrie' = 발키리 경찰학원, 'srt' = SRT 특수학원
-  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            skin:'키리노(수영복)', img:'Kirino.png',  imgGold:'Kirino_(Swimsuit).png'},
-  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   skin:'후부키(수영복)', img:'Fubuki.png',  imgGold:'Fubuki_(Swimsuit).png'},
-  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           skin:'미유(수영복)',   img:'Miyu.png',    imgGold:'Miyu_(Swimsuit).png'},
-  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
-  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
-  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
-  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:4,  hp:1, kw:['ranged','reborn'], skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
-  {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
-  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
-  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
-  {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   skin:'유키노(수영복)', img:'Yukino.png',  imgGold:'Yukino_(Swimsuit).png'},
-  {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   skin:'칸나(수영복)',   img:'Kanna.png',   imgGold:'Kanna_(Swimsuit).png'},
+  // ===== 발키리/SRT (추가 카드군, 신비해방 대상) =====
+  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            locked:true, skin:'키리노(수영복)', img:'Kirino.png',  imgGold:'Kirino_(Swimsuit).png'},
+  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   locked:true, skin:'후부키(수영복)', img:'Fubuki.png',  imgGold:'Fubuki_(Swimsuit).png'},
+  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           locked:true, skin:'미유(수영복)',   img:'Miyu.png',    imgGold:'Miyu_(Swimsuit).png'},
+  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           locked:true, skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
+  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   locked:true, skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
+  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  locked:true, skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
+  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:4,  hp:1, kw:['ranged','reborn'], locked:true, skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
+  {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   locked:true, skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
+  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            locked:true, skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
+  {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:6, atk:5,  hp:4, kw:['reborn'],           locked:true, skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
+  {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   locked:true, skin:'유키노(수영복)', img:'Yukino.png',  imgGold:'Yukino_(Swimsuit).png'},
+  {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   locked:true, skin:'칸나(수영복)',   img:'Kanna.png',   imgGold:'Kanna_(Swimsuit).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -441,7 +442,7 @@ var ABILITY_DESCS = {
   niko:    {type:'패시브',desc:'아군의 버티기가 두 번 발동합니다.\n(니코가 여러 명이어도 2회만 적용)',skinEffect:'스킨 니코: 세 번 발동',skinEffectDesc:'패시브: 아군의 버티기가 <span style="color:#ffd700;font-weight:700">세 번</span> 발동합니다.'},
   konoka:  {type:'뒤끝',desc:'이번 전투 동안, 아군 발키리/SRT 전체 +4/+4.',skinEffect:'스킨 코노카: +8/+8',skinEffectDesc:'뒤끝: 이번 전투 동안, 아군 발키리/SRT 전체 <span style="color:#ffd700;font-weight:700">+8/+8</span>.'},
   miyako:  {type:'패시브',desc:'미야코 외에 발키리/SRT 학생이 살아있는 한,\n부활이 항상 유지됩니다.',skinEffect:'스킨 미야코: 부활 시 +3 공격력',skinEffectDesc:'패시브: 미야코 외에 발키리/SRT 학생이 살아있는 한, 부활이 항상 유지됩니다.\n부활이 발동할 때마다 <span style="color:#ffd700;font-weight:700">+3 공격력</span>.'},
-  yukino:  {type:'패시브',desc:'공격 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(효과는 모두 받습니다.)',skinEffect:'스킨 유키노: +5/+5',skinEffectDesc:'패시브: 공격 시 상대를 쓰러뜨리는 경우, 전투 피해 X.\n<span style="color:#ffd700;font-weight:700">+5/+5</span>.'},
+  yukino:  {type:'패시브',desc:'전투 시 상대를 쓰러뜨리는 경우,\n유키노는 전투 피해를 받지 않습니다.\n(공격·방어 모두 적용. 효과 피해는 받습니다.)',skinEffect:'스킨 유키노: +5/+5',skinEffectDesc:'패시브: 전투 시 상대를 쓰러뜨리는 경우, 전투 피해 X (공격·방어 모두).\n<span style="color:#ffd700;font-weight:700">+5/+5</span>.'},
   kanna:   {type:'개전',desc:'이번 게임에서 발키리/SRT 학생이 직접\n쓰러뜨린 적의 수의 절반(올림)을 공격력에,\n직접 쓰러진 발키리/SRT 학생 수의 절반(올림)을\n체력에 추가합니다. (전투 개전 시점 갱신)',skinEffect:'스킨 칸나: 절반이 아닌 전체',skinEffectDesc:'개전: 이번 게임에서 발키리/SRT 학생이 직접 쓰러뜨린 적의 수 <span style="color:#ffd700;font-weight:700">전체</span>를 공격력에, 직접 쓰러진 발키리/SRT 학생 수 <span style="color:#ffd700;font-weight:700">전체</span>를 체력에 추가합니다.'},
   rumi:     {type:'개전',desc:'자신에게 걸려 있는 모든 기본능력을\n무작위 아군 1인에게 부여합니다.',skinEffect:'어린이 루미: 2인에게',skinEffectDesc:'개전: 자신에게 걸려 있는 모든 기본능력을\n무작위 아군 <span style="color:#ffd700;font-weight:700">2인</span>에게 부여합니다.'},
   shun:     {type:'패시브',desc:'공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.',skinEffect:'어린이 슌: 보호막 추가',skinEffectDesc:'패시브: 공격에 적이 쓰러지면, 다음 무작위 대상을 공격합니다. 가능하다면 반복합니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
@@ -670,7 +671,11 @@ function initPool() {
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
 var ENIGMA_UNLOCK_COST = 5; // 신비해방 1회당 비용
 // 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
-var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki','sena','ui','himari','chise','wakamo','kaya','lin'];
+var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki','sena','ui','himari','chise','wakamo','kaya','lin',
+  // 아리우스 분교 (5종)
+  'subaru','hiyori','misaki','saori','atsuko',
+  // 발키리/SRT (12종)
+  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
 var ABYDOS_UNLOCK_KEY = 'babg_abydos_unlocked';
 
@@ -6049,13 +6054,36 @@ function runBattle(boardA, boardB, startWithA, opts) {
   }
 
   function dealDamage(attacker,atkArr,defender,defArr,log2,isCleave,dmgOverride){
+    // === 유키노 패시브 (방어 시): 반격으로 상대를 쓰러뜨릴 수 있다면 전투 피해 면역 ===
+    // attacker가 ranged/selfdestruct/cleave면 반격 자체가 없으므로 무관
+    // 사전 예측: 보호막 미보유 + (poison 있고 atk≥1, 또는 atk≥hp) 면 반격 처치 가능
+    if(defender.baseId==='yukino' && defender.alive && !defender._abilitiesStripped && !_G.permanentAbilityBan
+       && !isCleave && !hasKw(attacker,'ranged') && !hasKw(attacker,'selfdestruct')){
+      var _atkHasShield = hasKw(attacker,'shield');
+      var _yukinoWillKill = false;
+      if(!_atkHasShield){
+        if(hasKw(defender,'poison') && defender.atk >= 1) _yukinoWillKill = true;
+        else if(defender.atk >= attacker.hp) _yukinoWillKill = true;
+      }
+      if(_yukinoWillKill){
+        log2.push({cls:'shield',text:'[패시브] '+defender.name+': '+attacker.name+' 반격 처치 → 전투 피해 면역.'});
+        // attacker → defender 데미지 스킵, defender → attacker 반격만 진행
+        var _yCounter = dealHit(defender, attacker, log2);
+        checkSurvive(attacker, atkArr, log2, defender);
+        var _atkOrigBoardY = (!opts||!opts.simCtx) ? (atkArr===a?boardA:boardB) : null;
+        if(defender.alive) checkChisePassive(defender, attacker, _atkOrigBoardY, log2);
+        resolveDeath(attacker, atkArr, defArr, log2, defender, true);
+        peroCheck(attacker, defender, atkArr, log2);
+        return {blocked:true, overflow:0, _yukinoDefense:true};
+      }
+    }
     var hitResult=dealHit(attacker,defender,log2,dmgOverride,true);
     // 방어자가 맞고 살아남았으면 버티기 체크
     checkSurvive(defender,defArr,log2,attacker);
     // 레이죠 패시브: 데미지를 주지 못하면 반격도 받지 않음
     var _reijoBlock=(attacker.baseId==='reijo'&&!attacker._abilitiesStripped&&hitResult&&hitResult.blocked);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')&&!_reijoBlock){
-      // 유키노 패시브: 공격으로 상대를 쓰러뜨렸다면 반격을 받지 않음
+      // 유키노 패시브 (공격 시): 공격으로 상대를 쓰러뜨렸다면 반격을 받지 않음
       var _yukinoNoCounter=(attacker.baseId==='yukino'&&!attacker._abilitiesStripped&&!_G.permanentAbilityBan&&(defender.hp<=0||!defender.alive));
       if(_yukinoNoCounter){
         log2.push({cls:'shield',text:'[패시브] '+attacker.name+': '+defender.name+' 처치! 전투 피해 면역.'});
