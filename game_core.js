@@ -4024,6 +4024,8 @@ function aiShouldFreezeShop(p){
 // 난이도별 매 턴 무료 리롤 횟수
 function _aiFreeRerollsForTurn(){
   var d=getAiDifficulty();
+  if(d>=1.5) return 6;     // 신: 더 많은 카드 탐색
+  if(d>=1.2) return 5;     // 신화
   if(d>=1.0) return 3;     // 전설(플래티넘 1)
   if(d>=0.85) return 2;    // 1등급(플래티넘 2)
   if(d>=0.55) return 1;    // 4등급(골드)
@@ -4084,16 +4086,21 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
   if(item.isSpell){
     if(p.stone<item.cost) return -1;
     if(p.board.length===0) return -1;
+    // 신화/신은 마법카드 점수 ×1.5 (적극 활용)
+    var _spellMult = 1.0;
+    var _spellD = (p.aiDifficulty!=null) ? p.aiDifficulty : 0.4;
+    if(_spellD>=1.5) _spellMult = 1.6;
+    else if(_spellD>=1.2) _spellMult = 1.3;
     if(oppBoard&&oppBoard.length>0){
       var baseScore=aiForecast(p.board,oppBoard,3);
       var testBoard=_aiCopyBoard(p.board);
       var testP={board:testBoard,stone:p.stone};
       try{AI_SPELL_EFFECTS[item.spell.id](testP);}catch(e){return -1;}
       var sc=aiForecast(testP.board,oppBoard,3);
-      return (sc-baseScore)-item.cost*0.012;
+      return ((sc-baseScore)-item.cost*0.012)*_spellMult;
     }
     // 폴백: 가성비
-    return (item.tier/Math.max(1,item.cost))*0.01;
+    return (item.tier/Math.max(1,item.cost))*0.01*_spellMult;
   }
   // 학생 카드: 휴리스틱 점수 (forecast는 비싸므로 기본은 휴리스틱)
   if(p.stone<3) return -1;
@@ -4113,8 +4120,13 @@ function aiEvalShopSlot(p, slotIdx, oppBoard, aiStrat){
   // 트리플/페어 보너스
   var hasCopy=false;var copyCount=0;
   for(var k=0;k<p.board.length;k++){if(p.board[k].baseId===item.baseId&&!p.board[k].isSkin){hasCopy=true;copyCount++;}}
-  if(copyCount===1)s+=5;
-  else if(copyCount>=2)s+=20; // 트리플 직전 — 매우 가치 큼
+  // 신화/신은 트리플 우선도 더 강하게 (스킨이 강력한 카드 빨리 만듦)
+  var _diffBoost = 1.0;
+  var _curD = (p.aiDifficulty!=null) ? p.aiDifficulty : 0.4;
+  if(_curD>=1.5) _diffBoost = 1.6;
+  else if(_curD>=1.2) _diffBoost = 1.3;
+  if(copyCount===1)s+=5*_diffBoost;
+  else if(copyCount>=2)s+=20*_diffBoost; // 트리플 직전 — 매우 가치 큼
   if(aiStrat){
     if(aiStrat.dominantSchool&&item.school===aiStrat.dominantSchool){
       var unity=0;for(var u=0;u<p.board.length;u++){if(p.board[u].school===aiStrat.dominantSchool)unity++;}
@@ -4200,17 +4212,22 @@ function aiShouldReroll(p, currentBest){
   return decision;
 }
 
-// 신화/신 NPC 핸디캡: 보드 카드에 stat 보너스 (영입 시 1회 적용)
-// 신화(d>=1.2): +2/+2, 신(d>=1.5): +3/+3
-// 신화/신만 압도적으로 강하게 만드는 보강 — 휴리스틱만으론 한계
+// 신화/신 NPC 핸디캡: tier 비례 (1턴부터 stat 깡패 X, 후반에 점진 강화)
+// 신화(d>=1.2):  tier 1·2: +0, tier 3·4: +1, tier 5·6: +2, tier 7: +3
+// 신(d>=1.5):   tier 1: +0, tier 2: +1, tier 3·4: +2, tier 5: +3, tier 6: +4, tier 7: +5
+// → 1턴 카드(주리, tier 1) +0/+0, 후반 카드(마코토, tier 6) 신화 +2 / 신 +4
 function _applyDifficultyBoardBonus(p){
   if(!p || p.aiDifficulty==null || p.dead) return;
   var d = p.aiDifficulty;
   if(d<1.2) return;
-  var bonus = (d>=1.5) ? 3 : 2;
+  var BONUS_TABLE_SHIN    = {1:0, 2:1, 3:2, 4:2, 5:3, 6:4, 7:5};
+  var BONUS_TABLE_SINHWA  = {1:0, 2:0, 3:1, 4:1, 5:2, 6:2, 7:3};
+  var table = (d>=1.5) ? BONUS_TABLE_SHIN : BONUS_TABLE_SINHWA;
   for(var i=0;i<p.board.length;i++){
     var u=p.board[i];
     if(u._diffBonusApplied) continue;
+    var bonus = table[u.tier] || 0;
+    if(bonus<=0) {u._diffBonusApplied=true; continue;}
     u.atk += bonus;
     u.hp += bonus;
     if(u.maxHp) u.maxHp += bonus;
