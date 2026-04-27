@@ -9013,22 +9013,22 @@
       "points": 3,
       "questState": {
         "daily": {
-          "date": "2026-04-27",
+          "date": "2026-04-28",
           "quests": [
             {
-              "id": "skin3",
-              "progress": 3,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "gehenna10",
-              "progress": 17,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "trinity10",
-              "progress": 18,
-              "completed": true
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -9062,7 +9062,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-27"
+        "_lastLoginDate": "2026-04-28"
       },
       "recruitedTier7": [
         "hkyk_saikyo",
