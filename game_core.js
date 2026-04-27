@@ -420,7 +420,7 @@ var ABILITY_DESCS = {
   hasumi:   {type:'패시브',desc:'전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 흡수합니다.',skinEffect:'수영복 하스미: 두 배로 흡수',skinEffectDesc:'패시브: 전투당 한 번, 처음으로 쓰러뜨린 적의\n공격력과 체력을 <span style="color:#ffd700;font-weight:700">두 배로</span> 흡수합니다.'},
   suzumi:   {type:'패시브',desc:'아군 코인이 적보다 더 잘 뜹니다.\n(스즈미끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)',skinEffect:'마법소녀 스즈미: 훨씬 더 잘 뜹니다',skinEffectDesc:'패시브: 아군 코인이 적보다\n<span style="color:#ffd700;font-weight:700">훨씬</span> 더 잘 뜹니다.\n(스즈미끼리는 중복되지 않습니다.\n양쪽 모두 가지면 상쇄)'},
   mutsuki:  {type:'관통',desc:'관통 공격으로 적을 통과해 뒤의 적도 공격합니다.',skinEffect:'새해 무츠키: 개전 공격력+5',skinEffectDesc:'관통: 관통 공격으로 적을 통과해 뒤의 적도 공격합니다.\n<span style="color:#ffd700;font-weight:700">개전: 공격력 +5</span>'},
-  haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.'},
+  haruka:   {type:'패시브',desc:'아루, 무츠키, 카요코가 공격받으면\n공격자에게 5회 반격합니다.\n(전투 후 발동)',skinEffect:'새해 하루카: 10회 반격',skinEffectDesc:'패시브: 아루, 무츠키, 카요코가 공격받으면\n공격자에게 <span style="color:#ffd700;font-weight:700">10회</span> 반격합니다.\n(전투 후 발동)'},
   // 총학생회
   haine:    {type:'패시브',desc:'팔면 아군 전체 +2/+2',skinEffect:'인터뷰 하이네: +4/+4',skinEffectDesc:'패시브: 팔면 아군 전체에 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다.'},
   momoka:   {type:'패시브',desc:'매 턴 추가 리롤이 1회 무료입니다.',skinEffect:'승무원 모모카: 2회 무료',skinEffectDesc:'패시브: 매 턴 추가 리롤이 <span style="color:#ffd700;font-weight:700">2회</span> 무료입니다.'},
@@ -779,13 +779,13 @@ function showMysteryLoadingPopup(){
   if(!document.getElementById('mystery-loading-style')){
     var st=document.createElement('style');
     st.id='mystery-loading-style';
-    st.textContent='@keyframes mysteryLoadingSpin{to{transform:rotate(360deg)}}';
+    st.textContent='@keyframes mysteryLoadingSpin{to{transform:rotate(360deg)}}@keyframes mysteryAronaFade{0%,100%{opacity:0.30}50%{opacity:0.45}}';
     document.head.appendChild(st);
   }
   var ov=document.createElement('div');
   ov.id='mystery-loading-popup';
   ov.style.cssText='position:fixed;inset:0;z-index:950;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center';
-  ov.innerHTML='<div style="background:#1a2a3a;border:2px solid #ffd700;border-radius:12px;padding:32px 44px;text-align:center;box-shadow:0 0 24px rgba(255,215,0,0.3);max-width:80%"><div style="width:48px;height:48px;border:4px solid rgba(255,215,0,0.25);border-top-color:#ffd700;border-radius:50%;margin:0 auto 16px;animation:mysteryLoadingSpin 0.9s linear infinite"></div><div style="color:#ffd700;font-size:18px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5);line-height:1.5">학생을 호출하는 중...</div></div>';
+  ov.innerHTML='<div style="position:relative;background:#1a2a3a;border:2px solid #ffd700;border-radius:12px;padding:32px 44px;text-align:center;box-shadow:0 0 24px rgba(255,215,0,0.3);width:340px;max-width:80%;overflow:hidden"><img src="img/UI/arona_gasha.png" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;opacity:0.30;animation:mysteryAronaFade 3.5s ease-in-out infinite;pointer-events:none;z-index:1"><div style="position:relative;z-index:2"><div style="width:48px;height:48px;border:4px solid rgba(255,215,0,0.25);border-top-color:#ffd700;border-radius:50%;margin:0 auto 16px;animation:mysteryLoadingSpin 0.9s linear infinite"></div><div style="color:#ffd700;font-size:18px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5),0 0 4px #000,0 0 4px #000;line-height:1.5">학생을 호출하는 중...</div></div></div>';
   document.body.appendChild(ov);
 }
 function hideMysteryLoadingPopup(){
@@ -6341,7 +6341,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       if(dst.hp<=0&&dst._hpBeforeKill===undefined) dst._hpBeforeKill=Math.max(0,hpBefore);
       log2.push({cls:'hit',text:src.name+'가 '+dst.name+'에게 '+dmg+' 피해! (HP:'+Math.max(0,dst.hp)+')'});
       // 하루카 패시브: 아루/무츠키/카요코가 피해받으면 반격 대기
-      if(['aru','mutsuki','kayoko'].indexOf(dst.baseId)!==-1&&dst._mySide&&src._mySide&&!_G.permanentAbilityBan){
+      // 단, 해당 유닛(아루/무츠키/카요코)이 이번 전투 내에 먼저 전투했어야 함 (_hasAttacked)
+      if(['aru','mutsuki','kayoko'].indexOf(dst.baseId)!==-1&&dst._mySide&&src._mySide&&!_G.permanentAbilityBan&&dst._hasAttacked){
         for(var _hk=0;_hk<dst._mySide.length;_hk++){
           var _hku=dst._mySide[_hk];
           if(_hku.baseId==='haruka'&&_hku.alive&&!_hku._abilitiesStripped){
@@ -9276,7 +9277,10 @@ function submitGameRecord(){
       if(!data.players)data.players={};
       var name=login.name;
       if(!data.players[name]){
-        data.players[name]={records:[],points:0,questState:null};
+        data.players[name]={records:[],points:5,questState:null,starterEnigmaGranted:true};
+      }else if(!data.players[name].starterEnigmaGranted){
+        data.players[name].points=(data.players[name].points||0)+5;
+        data.players[name].starterEnigmaGranted=true;
       }
       // 등급 초기화/추정 (rank 없으면 기존 기록으로 추정)
       if(!data.players[name].rank){

@@ -2833,11 +2833,18 @@ function doLogin(name,auto){
       return;
     }
     if(!data.players)data.players={};
+    var _needSave=false;
     if(!data.players[name]){
-      // 신규 유저: 자동 가입
-      data.players[name]={records:[],points:0};
-      saveRecords(data,sha);
+      // 신규 유저: 자동 가입 (시작 엘리그마 5P 지급)
+      data.players[name]={records:[],points:5,starterEnigmaGranted:true};
+      _needSave=true;
+    }else if(!data.players[name].starterEnigmaGranted){
+      // 기존 유저: 시작 엘리그마 5P 일회성 지급 (마이그레이션)
+      data.players[name].points=(data.players[name].points||0)+5;
+      data.players[name].starterEnigmaGranted=true;
+      _needSave=true;
     }
+    if(_needSave) saveRecords(data,sha);
     window._babgLogin={name:name};
     localStorage.setItem('babg_login',JSON.stringify(window._babgLogin));
     // 서버에서 7성 영입 이력 병합 (크로스 디바이스 동기화)
@@ -2949,7 +2956,7 @@ document.getElementById('btn-reset-account').addEventListener('click',function()
     fetchRecords(function(err,data,sha){
       if(err||!data){alert('서버 연결 실패');overlay.remove();return;}
       if(data.players&&data.players[name]){
-        data.players[name]={records:[],points:0,questState:null,unlockedAbydos:[]};
+        data.players[name]={records:[],points:5,questState:null,unlockedAbydos:[],starterEnigmaGranted:true};
       }
       saveRecords(data,sha,function(e){
         if(e){alert('서버 저장 실패. 초기화가 반영되지 않았습니다.');overlay.remove();return;}
