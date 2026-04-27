@@ -528,7 +528,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <div id="title-screen" class="screen">
     <img src="img/UI/bluearchive2.png" class="title-logo" style="height:200px">
     <p class="sub" style="font-size:28px">Battle Grounds</p>
-    <div id="title-rank" style="margin-top:4px;margin-bottom:14px;min-height:38px;display:flex;justify-content:center;align-items:center;gap:10px"></div>
+    <div id="title-rank" style="margin-top:4px;margin-bottom:14px;min-height:96px;display:flex;justify-content:center;align-items:center;gap:10px"></div>
     <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
     <div style="display:flex;gap:12px;justify-content:center;margin:0 auto;width:440px;max-width:90%">
       <button class="btn btn-blue btn-big" id="btn-play" style="flex:1;min-width:0"><span class="btn-inner">게임 시작</span></button>
@@ -767,7 +767,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427h"></script>
+<script src="game_core.js?v=20260427i"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -2869,22 +2869,27 @@ function goToMainMenu(name){
 function _renderTitleRankBadge(el, rank){
   var color=rankColor(rank);
   var info=rankTierInfo(rank);
-  var streak=(rank.streak>=2)?'<span style="color:#fb923c;font-size:13px;font-weight:700">🔥'+rank.streak+'연승</span>':'';
-  // 등급 위치 별 (★★☆)
+  // 위치 별 (★★☆)
   var posStars=rankPositionStars(rank.tier);
-  var posStarsViz='<span style="font-size:14px;letter-spacing:2px;color:'+color+'">';
-  for(var s=0;s<posStars[1];s++) posStarsViz+= s<posStars[0]?'★':'☆';
-  posStarsViz+='</span>';
+  var starsHtml='';
+  for(var s=0;s<posStars[1];s++) starsHtml+= s<posStars[0]?'★':'☆';
   // 진행도 (다음 등급까지)
   var progressText='';
   if(rank.tier===0){
-    if(rank.legendPoints) progressText='<span style="font-size:11px;color:'+color+';margin-left:6px;opacity:0.85">+'+rank.legendPoints+'pt</span>';
+    if(rank.legendPoints) progressText='+'+rank.legendPoints+'pt';
   } else {
-    progressText='<span style="font-size:11px;color:#94a3b8;margin-left:6px">('+rank.stars+'/'+rankStarsRequired(rank.tier)+')</span>';
+    progressText=rank.stars+' / '+rankStarsRequired(rank.tier);
   }
-  var iconImg='<img src="'+info.icon+'" style="width:32px;height:32px;vertical-align:middle;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.3))" onerror="this.style.display=\'none\'">';
-  var numText='<span style="font-weight:900;font-size:18px;color:'+color+';margin-left:4px">'+info.num+'</span>';
-  el.innerHTML='<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,0.85);border-radius:10px;border:2px solid '+color+';box-shadow:0 2px 6px rgba(0,0,0,0.1)">'+iconImg+numText+' '+posStarsViz+progressText+'</span>'+streak;
+  // 연승 (🔥3 인라인, 텍스트만)
+  var streakText=(rank.streak>=2)?' <span style="color:#fb923c;font-weight:800">🔥'+rank.streak+'</span>':'';
+  // 카드: 96×96, 아이콘 위 75% / 텍스트 아래 25%
+  var html='<div style="position:relative;width:96px;height:96px;display:inline-block;line-height:1">';
+  html+='<img src="'+info.icon+'" style="display:block;width:100%;height:75%;object-fit:contain;object-position:top;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))" onerror="this.style.display=\'none\'">';
+  html+='<div style="position:absolute;left:0;right:0;bottom:0;text-align:center;height:25%;display:flex;flex-direction:column;justify-content:flex-end">';
+  html+='<div style="line-height:1"><span style="font-weight:900;font-size:18px;color:'+color+';text-shadow:0 1px 0 rgba(0,0,0,0.25)">'+info.num+'</span><span style="font-size:13px;letter-spacing:2px;margin-left:5px;color:'+color+';text-shadow:0 1px 0 rgba(0,0,0,0.25)">'+starsHtml+'</span></div>';
+  html+='<div style="font-size:10px;color:#475569;margin-top:2px;font-weight:700;line-height:1">'+progressText+streakText+'</div>';
+  html+='</div></div>';
+  el.innerHTML=html;
   window._babgPlayerRank=rank;
   // localStorage 캐시 (다음 게임 시작 시 즉시 로드 가능)
   try{ localStorage.setItem('babg_player_rank', JSON.stringify(rank)); }catch(e){}
