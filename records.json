@@ -3287,84 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T08:48:41",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "쿠루미(사복)",
-              "baseId": "kurumi",
-              "atk": 24,
-              "hp": 34,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Kurumi_(Private).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미(사복)",
-              "baseId": "kurumi",
-              "atk": 24,
-              "hp": 34,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Kurumi_(Private).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미(사복)",
-              "baseId": "kurumi",
-              "atk": 18,
-              "hp": 32,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Kurumi_(Private).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미",
-              "baseId": "kurumi",
-              "atk": 18,
-              "hp": 20,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Kurumi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "니코(사복)",
-              "baseId": "niko",
-              "atk": 23,
-              "hp": 23,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Niko_(Private).png",
-              "school": "발키리/SRT"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-26T10:22:01",
           "placement": 1,
           "turn": 11,
@@ -3990,9 +3912,77 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T03:52:31",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 34,
+              "hp": 34,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 14,
+              "hp": 14,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "보충수업부",
+              "baseId": "trinity_makeup",
+              "atk": 23,
+              "hp": 27,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Make_Up_Work_Club.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 67,
+      "points": 69,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -4117,12 +4107,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 3,
-        "legendPoints": 14
+        "streak": 4,
+        "legendPoints": 15
       },
-      "totalGames": 11,
-      "totalWins": 10,
-      "totalFirsts": 10,
+      "totalGames": 12,
+      "totalWins": 11,
+      "totalFirsts": 11,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
