@@ -6306,47 +6306,121 @@
               "school": "밀레니엄"
             }
           ]
-        }
-      ],
-      "points": 48,
-      "questState": {
-        "daily": {
-          "date": "2026-04-09",
-          "quests": [
+        },
+        {
+          "date": "2026-04-27T01:40:03",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
             {
-              "id": "play3",
-              "progress": 1,
-              "completed": false
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 14,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
             },
             {
-              "id": "skin3",
-              "progress": 3,
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 5,
+              "hp": 6,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치나츠(온천)",
+              "baseId": "chinatsu",
+              "atk": 9,
+              "hp": 15,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Chinatsu_(Hot_Spring).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 54,
+              "hp": 43,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            }
+          ]
+        }
+      ],
+      "points": 80,
+      "questState": {
+        "daily": {
+          "date": "2026-04-27",
+          "quests": [
+            {
+              "id": "gehenna10",
+              "progress": 11,
               "completed": true
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 1,
+              "id": "discover3",
+              "progress": 2,
               "completed": false
+            },
+            {
+              "id": "win1",
+              "progress": 1,
+              "completed": true
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-04-06",
+          "weekStart": "2026-04-27",
           "quests": [
             {
-              "id": "discover10",
-              "progress": 11,
-              "completed": true
-            },
-            {
-              "id": "win3",
-              "progress": 3,
-              "completed": true
-            },
-            {
               "id": "hidden_win",
-              "progress": 0,
+              "progress": 1,
+              "completed": true
+            },
+            {
+              "id": "hidden1",
+              "progress": 1,
+              "completed": true
+            },
+            {
+              "id": "play10",
+              "progress": 1,
               "completed": false
             }
           ]
@@ -6368,7 +6442,16 @@
       "starterEnigmaGranted": true,
       "recruitedTier7": [
         "gehenna_p68"
-      ]
+      ],
+      "rank": {
+        "tier": 7,
+        "stars": 1,
+        "streak": 3,
+        "legendPoints": 0
+      },
+      "totalGames": 6,
+      "totalWins": 5,
+      "totalFirsts": 5
     },
     "닉네임": {
       "records": [
