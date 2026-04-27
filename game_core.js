@@ -361,7 +361,7 @@ var ABILITY_DESCS = {
   eimi:     {type:'개전',desc:'아군 밀레니엄 학생 수만큼 +1/+1',skinEffect:'수영복 에이미: 수×+2/+2',skinEffectDesc:'개전: 아군 밀레니엄 학생 수만큼 <span style="color:#ffd700;font-weight:700">+2/+2</span>'},
   sena:     {type:'개전',desc:'<뒤끝>을 가진 아군 게헨나 학생\n무작위 2명에게 <부활>을 부여합니다.',skinEffect:'사복 세나: 뒤끝 가진 아군 게헨나 전체',skinEffectDesc:'개전: <뒤끝>을 가진 아군 게헨나 학생\n<span style="color:#ffd700;font-weight:700">전체</span>에게 <부활>을 부여합니다.'},
   satsuki:  {type:'뒤끝',desc:'<span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인이\n같은 편을 공격합니다.\n(능력/효과 사망 시엔 발동하지 않음)',skinEffect:'수영복 사츠키: 2번 공격',skinEffectDesc:'뒤끝: <span style="color:#ffd700;font-weight:700">전투로</span> 쓰러지면, 무작위 상대 1인이\n같은 편을 <span style="color:#ffd700;font-weight:700">2번</span> 공격합니다.\n(능력/효과 사망 시엔 발동하지 않음)'},
-  makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭',skinEffect:'수영복 마코토: 비행선 자폭 후 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n(비행선: 마코토의 공/체 ×2, 자폭)\n비행선 자폭 후 <파마머리 마코토> 소환.'},
+  makoto:   {type:'개전',desc:'<비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭.\n이 자폭은 관통 효과를 가집니다.',skinEffect:'수영복 마코토: 자폭 관통→광역, 파마머리 마코토 소환',skinEffectDesc:'개전: <비행선>으로 교체됩니다.\n비행선: 마코토의 공/체 ×2, 자폭.\n<span style="color:#ffd700;font-weight:700">비행선의 자폭이 관통 대신 광역 효과를 가집니다.</span>\n비행선 자폭 후 <파마머리 마코토> 소환.'},
   hibiki:   {type:'개전',desc:'적 전체 -1/-1',skinEffect:'치어리더 히비키: -2/-2',skinEffectDesc:'개전: 적 전체에게 <span style="color:#ffd700;font-weight:700">-2/-2</span>을 부여합니다.'},
   yuzu:     {type:'뒤끝',desc:'이번 전투에서 쓰러진 아군 수×2 공/체의\n<아방가르드군>을 소환합니다.',skinEffect:'메이드 유즈: 쓰러진 아군 수×4',skinEffectDesc:'뒤끝: 이번 전투에서 쓰러진 아군 수<span style="color:#ffd700;font-weight:700">×4</span> 공/체의\n<아방가르드군>을 소환합니다.'},
   noa:      {type:'패시브',desc:'4T 이상의 모든 아군 밀레니엄 학생은\n<개전>이 두 번 발동합니다.\n(중첩되지 않습니다)',skinEffect:'',skinEffectDesc:'패시브: 4T 이상의 모든 아군 밀레니엄 학생은 <개전>이 두 번 발동합니다. (중첩되지 않습니다)'},
@@ -4915,7 +4915,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     as.makotoGolden=u.isSkin; // 비행선 DR에서 파마머리 마코토 소환 시 참조
     var idx=-1;for(var i=0;i<mySide.length;i++)if(mySide[i]===u){idx=i;break;}
     if(idx!==-1)mySide[idx]=as;
-    log.push({cls:'soc',text:'[개전] '+u.name+': 비행선으로 교체! ('+as.atk+'/'+as.hp+', 자폭)'});
+    log.push({cls:'soc',text:'[개전] '+u.name+': 비행선으로 교체! ('+as.atk+'/'+as.hp+', 자폭+'+(u.isSkin?'광역':'관통')+')'});
   }
   else if(id==='kasumi'){
     // 카스미 개전: 스킨 전용. 가장 체력이 높은 적을 이번 턴 공격 대상으로 예정
@@ -6991,6 +6991,25 @@ function runBattle(boardA, boardB, startWithA, opts) {
           var sdDmg=attacker.atk+attacker.hp;
           stepLog.push({cls:'hit',text:attacker.name+'의 자폭! ('+attacker.atk+'+'+attacker.hp+'='+sdDmg+' 데미지)'});
           var hitResult=dealDamage(attacker,atkArr2,target,defArr2,stepLog,false,sdDmg);
+          // 비행선(마코토 변신체) 자폭 추가 효과: 일반=관통, 스킨=광역
+          if(attacker.baseId==='airship'){
+            var aliveD3=getAlive(defArr2);var tIdx3=-1;
+            for(var k3=0;k3<aliveD3.length;k3++)if(aliveD3[k3]===target)tIdx3=k3;
+            if(attacker.isSkin){
+              // 광역: 양옆에 동일한 sdDmg 데미지
+              var sdCleaveHit=false;
+              if(tIdx3>0&&aliveD3[tIdx3-1]){dealDamage(attacker,atkArr2,aliveD3[tIdx3-1],defArr2,stepLog,true,sdDmg);sdCleaveHit=true;}
+              if(tIdx3<aliveD3.length-1&&aliveD3[tIdx3+1]){dealDamage(attacker,atkArr2,aliveD3[tIdx3+1],defArr2,stepLog,true,sdDmg);sdCleaveHit=true;}
+              if(sdCleaveHit) stepLog.push({cls:'hit',text:'  → [광역] '+attacker.name+': 양옆 폭발!'});
+            } else {
+              // 관통: 초과 데미지 양옆에 전달
+              if(hitResult&&!hitResult.blocked&&hitResult.overflow>0){
+                stepLog.push({cls:'hit',text:'  → [관통] '+attacker.name+': 초과 데미지 '+hitResult.overflow+'!'});
+                if(tIdx3>0&&aliveD3[tIdx3-1])dealDamage(attacker,atkArr2,aliveD3[tIdx3-1],defArr2,stepLog,true,hitResult.overflow);
+                if(tIdx3<aliveD3.length-1&&aliveD3[tIdx3+1])dealDamage(attacker,atkArr2,aliveD3[tIdx3+1],defArr2,stepLog,true,hitResult.overflow);
+              }
+            }
+          }
           // 자폭 유닛 강제 사망
           if(attacker.alive){
             killUnit(attacker,atkArr2,defArr2,stepLog,null);
