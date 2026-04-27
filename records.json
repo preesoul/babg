@@ -5919,7 +5919,7 @@
           ]
         }
       ],
-      "points": 41,
+      "points": 36,
       "questState": {
         "daily": {
           "date": "2026-04-09",
@@ -5992,7 +5992,8 @@
         "saya",
         "mina",
         "rumi",
-        "chise"
+        "chise",
+        "niya"
       ],
       "recruitedTier7": [
         "millennium_death_momoi",
