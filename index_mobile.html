@@ -1106,6 +1106,8 @@ function renderAll() {
   var p=G.players[0];
   // 보드 정리: undefined/null 제거
   p.board=p.board.filter(function(u){return !!u;});
+  // 본문 throw 시에도 버튼 상태/핸들러는 갱신되도록 try/catch 격리
+  try{
   var turnNumEl=document.getElementById('ui-turn-num');if(turnNumEl)turnNumEl.textContent=G.turn;
   document.getElementById('ui-tier').textContent='스케쥴 Lv.'+p.tier;
   var tier2El=document.getElementById('ui-tier2');if(tier2El)tier2El.textContent='Lv.'+p.tier;
@@ -1126,6 +1128,8 @@ function renderAll() {
   if(aronaFace)aronaFace.src=p.hp<=15?'img/Icon/arona_bad.png':'img/Icon/arona.jpg';
   // upgradeCost는 renderShop에서 버튼 innerHTML로 처리
 
+  // 플레이어 칩 (격리)
+  try{
   var pHtml='';
   var nextOppId=(G.matchups&&G.matchups[0])?G.matchups[0].opponentId:null;
   var isGhostOpp=(G.matchups&&G.matchups[0])?!!G.matchups[0].isGhost:false;
@@ -1191,7 +1195,10 @@ function renderAll() {
   var oldBox=document.getElementById('ui-next-opp');
   if(oldBox) oldBox.style.display='none';
   document.getElementById('ui-players').innerHTML=pHtml;
+  }catch(_chipErr){if(typeof console!=='undefined')console.error('[renderAll:chips]',_chipErr);}
 
+  // 보드 렌더 (격리)
+  try{
   var boardEl=document.getElementById('ui-board');
   // 풀필드 안내
   var fullHint=document.getElementById('fullboard-hint');
@@ -1251,8 +1258,10 @@ function renderAll() {
       });
     }
   }
+  }catch(_boardErr){if(typeof console!=='undefined')console.error('[renderAll:board]',_boardErr);}
 
-  // 벤치 렌더
+  // 벤치 렌더 (격리)
+  try{
   var benchEl=document.getElementById('ui-bench');
   if(p.bench){
     var bm=p.bench;
@@ -1297,7 +1306,10 @@ function renderAll() {
     benchEl.innerHTML='<div class="bench-empty-slot"><span>샬레에서 \'벤치로\'를 눌러<br>여기로 보관</span></div>';
   }
   if(!_benchDragBound){_benchDragBound=true;initBenchDrag();}
+  }catch(_benchErr){if(typeof console!=='undefined')console.error('[renderAll:bench]',_benchErr);}
 
+  // 상점 렌더 (격리) — 가장 중요. 본 영역이 throw하면 빈 슬롯 새 카드가 안 보이는 버그 발생
+  try{
   var shopEl=document.getElementById('ui-shop');
   var sHtml='';var prevWasSpell=false;
   for(var i=0;i<G.shop.length;i++){
@@ -1334,7 +1346,10 @@ function renderAll() {
   if(!boardEl3._shopDropBound){
     boardEl3._shopDropBound=true;
   }
+  }catch(_shopErr){if(typeof console!=='undefined')console.error('[renderAll:shop]',_shopErr);}
 
+  // 펜딩 스펠 힌트 (격리)
+  try{
   var boardEl2=document.getElementById('ui-board');
   var existingHint=document.querySelector('.spell-hint-overlay');if(existingHint)existingHint.remove();
   if(G.pendingSpell){
@@ -1344,18 +1359,37 @@ function renderAll() {
     var boardCards=boardEl2.querySelectorAll('.card');
     for(var ci=0;ci<boardCards.length;ci++){boardCards[ci].style.border='3px solid #fbbf24';boardCards[ci].style.boxShadow='0 0 12px rgba(251,191,36,0.5)';}
   }
+  }catch(_spellHintErr){if(typeof console!=='undefined')console.error('[renderAll:spellHint]',_spellHintErr);}
 
   // undo 제거됨
+  }catch(_renderAllErr){if(typeof console!=='undefined')console.error('[renderAll:body]',_renderAllErr);}
 
-  var freezeBtn=document.getElementById('btn-freeze');
-  if(G.frozen){freezeBtn.innerHTML='<span class="btn-inner">고정 해제</span>';freezeBtn.style.background='#c0d0e0';shopEl.style.border='2px solid #60a5fa';}
-  else{freezeBtn.innerHTML='<span class="btn-inner">스케쥴 고정</span>';freezeBtn.style.background='';shopEl.style.border='';}
-  var rerollBtn=document.getElementById('btn-reroll');
-  if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">리롤 (무료 '+G.freeRerolls+'회)</span>';rerollBtn.disabled=false;}
-  else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}
-  var upgradeBtn=document.getElementById('btn-upgrade');
-  upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
-  upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
+  // 버튼 상태/핸들러는 본문 throw 여부와 무관하게 항상 갱신 (먹통 방지)
+  // onclick 재바인딩으로 만일 DOM이 어떤 이유로든 교체돼도 핸들러 유실되지 않게
+  try{
+    var _shopElBtn=document.getElementById('ui-shop');
+    var freezeBtn=document.getElementById('btn-freeze');
+    if(freezeBtn){
+      freezeBtn.onclick=doFreeze;
+      if(G.frozen){freezeBtn.innerHTML='<span class="btn-inner">고정 해제</span>';freezeBtn.style.background='#c0d0e0';if(_shopElBtn)_shopElBtn.style.border='2px solid #60a5fa';}
+      else{freezeBtn.innerHTML='<span class="btn-inner">스케쥴 고정</span>';freezeBtn.style.background='';if(_shopElBtn)_shopElBtn.style.border='';}
+    }
+    var rerollBtn=document.getElementById('btn-reroll');
+    if(rerollBtn){
+      rerollBtn.onclick=doReroll;
+      if(G.freeRerolls&&G.freeRerolls>0){rerollBtn.innerHTML='<span class="btn-inner">리롤 (무료 '+G.freeRerolls+'회)</span>';rerollBtn.disabled=false;}
+      else{rerollBtn.innerHTML='<span class="btn-inner">리롤 <img src="img/UI/stone.png" class="stone-icon">1</span>';rerollBtn.disabled=p.stone<1;}
+    }
+    var upgradeBtn=document.getElementById('btn-upgrade');
+    if(upgradeBtn){
+      upgradeBtn.onclick=doUpgrade;
+      upgradeBtn.innerHTML=p.tier>=6?'<span class="btn-inner">MAX</span>':'<span class="btn-inner">업그레이드 <img src="img/UI/stone.png" class="stone-icon">'+p.upgradeCost+'</span>';
+      upgradeBtn.disabled=p.tier>=6||p.stone<p.upgradeCost;
+    }
+    var fightBtn=document.getElementById('btn-fight');if(fightBtn) fightBtn.onclick=startBattle;
+    var continueBtn=document.getElementById('btn-continue');if(continueBtn) continueBtn.onclick=continueBattle;
+  }catch(e){if(typeof console!=='undefined')console.error('[renderAll:buttons]',e);}
+
   // 매 렌더 시 자동 저장 (게임 종료 상태가 아닐 때만) — throw 방어
   try{
     if(typeof saveGame==='function'&&G.players&&G.players[0]&&!G.players[0].dead&&G.aliveCount>1)saveGame();
