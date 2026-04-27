@@ -3217,7 +3217,7 @@
               "completed": false
             },
             {
-              "id": "gehenna10",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
@@ -3227,7 +3227,7 @@
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-04-27",
