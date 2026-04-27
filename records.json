@@ -8929,7 +8929,7 @@
     },
     "김민철": {
       "records": [],
-      "points": 5,
+      "points": 0,
       "starterEnigmaGranted": true,
       "questState": {
         "daily": {
@@ -8983,7 +8983,10 @@
           ]
         },
         "_lastLoginDate": "2026-04-27"
-      }
+      },
+      "unlockedAbydos": [
+        "miyu"
+      ]
     }
   }
 }
