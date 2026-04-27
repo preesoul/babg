@@ -6308,7 +6308,7 @@
           ]
         }
       ],
-      "points": 43,
+      "points": 48,
       "questState": {
         "daily": {
           "date": "2026-04-09",
@@ -6364,7 +6364,8 @@
       },
       "unlockedAbydos": [
         "kokona"
-      ]
+      ],
+      "starterEnigmaGranted": true
     },
     "닉네임": {
       "records": [
