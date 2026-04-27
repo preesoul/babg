@@ -704,18 +704,12 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
     <p class="sub" style="font-size:28px">Battle Grounds</p>
     <div id="title-rank" style="margin-top:4px;margin-bottom:14px;min-height:38px;display:flex;justify-content:center;align-items:center;gap:10px"></div>
     <div id="welcome-msg" style="font-size:20px;color:#2a5a8a;font-weight:700;margin-bottom:24px"></div>
-    <div style="display:flex;gap:12px;justify-content:center;margin:0 auto;width:440px;max-width:90%">
-      <button class="btn btn-blue btn-big" id="btn-play" style="flex:1;min-width:0"><span class="btn-inner">게임 시작</span></button>
-      <button class="btn btn-green btn-big" id="btn-continue-game" style="flex:1;min-width:0;display:none"><span class="btn-inner">이어하기</span></button>
-    </div>
-    <div style="display:flex;gap:12px;justify-content:center;margin:14px auto 0;width:440px;max-width:90%">
-      <button class="btn btn-teal btn-big" id="btn-quests" style="flex:1;min-width:0"><span class="btn-inner" style="color:#ffd700">퀘스트/해방</span></button>
-      <button class="btn btn-teal btn-big" id="btn-roster" style="flex:1;min-width:0"><span class="btn-inner">학생명부</span></button>
-    </div>
-    <div style="display:flex;gap:12px;justify-content:center;margin:14px auto 0;width:440px;max-width:90%">
-      <button class="btn btn-stone btn-big" id="btn-records" style="flex:1;min-width:0"><span class="btn-inner">전적 기록</span></button>
-      <button class="btn btn-purple btn-big" id="btn-tutorial" style="flex:1;min-width:0"><span class="btn-inner">튜토리얼</span></button>
-    </div>
+    <button class="btn btn-blue btn-big" id="btn-play" style="min-width:200px"><span class="btn-inner">게임 시작</span></button>
+    <button class="btn btn-green btn-big" id="btn-continue-game" style="margin-top:16px;display:none;min-width:200px"><span class="btn-inner">이어하기</span></button>
+    <button class="btn btn-teal btn-big" id="btn-quests" style="margin-top:16px;min-width:200px"><span class="btn-inner" style="color:#ffd700">퀘스트/해방</span></button>
+    <button class="btn btn-teal btn-big" id="btn-roster" style="margin-top:16px;min-width:200px"><span class="btn-inner">학생명부</span></button>
+    <button class="btn btn-stone btn-big" id="btn-records" style="margin-top:16px;min-width:200px"><span class="btn-inner">전적 기록</span></button>
+    <button class="btn btn-purple btn-big" id="btn-tutorial" style="margin-top:16px;min-width:200px"><span class="btn-inner">튜토리얼</span></button>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">
       <button class="btn btn-stone" id="btn-logout" style="min-width:100px;opacity:0.6"><span class="btn-inner">로그아웃</span></button>
       <button class="btn" id="btn-reset-account" style="min-width:100px;opacity:0.4;font-size:11px;padding:4px 8px;background:#1a1a2e;border:1px solid #ef4444;color:#ef4444"><span class="btn-inner">계정 초기화</span></button>
@@ -932,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427f"></script>
+<script src="game_core.js?v=20260427g"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
