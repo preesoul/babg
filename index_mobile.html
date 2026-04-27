@@ -337,7 +337,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 #title-screen.active,#login-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
 #title-screen.fading,#login-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
 #title-screen .title-logo,#login-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
-#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:80px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
+#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:40px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
 
 /* 능력 팝업 — BA TCG 다크 블루 */
 .ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:300;justify-content:center;align-items:center}
@@ -926,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427i"></script>
+<script src="game_core.js?v=20260427j"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -3224,7 +3224,7 @@ function _renderTitleRankBadge(el, rank){
   html+='<img src="'+info.icon+'" style="display:block;width:100%;height:75%;object-fit:contain;object-position:top;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))" onerror="this.style.display=\'none\'">';
   html+='<div style="position:absolute;left:0;right:0;bottom:0;text-align:center;height:25%;display:flex;flex-direction:column;justify-content:flex-end">';
   html+='<div style="line-height:1"><span style="font-weight:900;font-size:18px;color:'+color+';text-shadow:0 1px 0 rgba(0,0,0,0.25)">'+info.num+'</span><span style="font-size:13px;letter-spacing:2px;margin-left:5px;color:'+color+';text-shadow:0 1px 0 rgba(0,0,0,0.25)">'+starsHtml+'</span></div>';
-  html+='<div style="font-size:10px;color:#475569;margin-top:2px;font-weight:700;line-height:1">'+progressText+streakText+'</div>';
+  html+='<div style="font-size:10px;color:#475569;margin-top:5px;font-weight:700;line-height:1">'+progressText+streakText+'</div>';
   html+='</div></div>';
   el.innerHTML=html;
   window._babgPlayerRank=rank;
