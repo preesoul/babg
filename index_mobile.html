@@ -751,6 +751,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <style>
   @keyframes unlockSpin{0%{transform:scale(0.3) rotate(0deg);opacity:0}60%{transform:scale(1.1) rotate(720deg);opacity:1}100%{transform:scale(1) rotate(720deg);opacity:1}}
   @keyframes particleRise{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-600px) scale(0.5);opacity:0}}
+  @keyframes unlockCardPop{0%{transform:scale(0.5) rotateY(-30deg);opacity:0}60%{transform:scale(1.05) rotateY(8deg);opacity:1}100%{transform:scale(1) rotateY(0);opacity:1}}
   </style>
 
   <!-- 전적 기록 오버레이 -->
@@ -931,7 +932,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427e"></script>
+<script src="game_core.js?v=20260427f"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -3333,14 +3334,20 @@ document.getElementById('btn-quests').addEventListener('click',function(){
 document.getElementById('btn-quest-close').addEventListener('click',function(){
   document.getElementById('quest-overlay').style.display='none';
 });
-function showUnlockPopup(name,img,school){
+function showUnlockPopup(name,img,school,baseId){
   var overlay=document.getElementById('unlock-popup-overlay');
   var inner=document.getElementById('unlock-popup-inner');
-  document.getElementById('unlock-popup-img').src='img/'+img;
+  var imgEl=document.getElementById('unlock-popup-img');
+  imgEl.src='img/'+img;
+  imgEl.style.cursor=baseId?'pointer':'default';
+  imgEl.onclick=function(e){
+    e.stopPropagation();
+    if(baseId&&typeof showUnlockDetailCard==='function') showUnlockDetailCard(baseId);
+  };
   var particle='이';
   if(name){var last=name.charCodeAt(name.length-1);if(last>=0xAC00&&last<=0xD7A3){particle=((last-0xAC00)%28===0)?'가':'이';}}
   var hl='<span style="color:#ffd700;font-weight:700">';
-  document.getElementById('unlock-popup-text').innerHTML=hl+(school||'')+'</span>의 '+hl+name+'</span>'+particle+' 신비 해방되었습니다!<br><span style="font-size:14px;color:#c4b5fd">학생명부에서 확인해 보세요!</span>';
+  document.getElementById('unlock-popup-text').innerHTML=hl+(school||'')+'</span>의 '+hl+name+'</span>'+particle+' 신비 해방되었습니다!<br><span style="font-size:14px;color:#c4b5fd">학생명부에서 확인해 보세요!</span>'+(baseId?'<br><span style="font-size:12px;color:#fbbf24;margin-top:6px;display:inline-block">💡 이미지 터치 시 상세 정보</span>':'');
   inner.style.animation='none';inner.offsetHeight;inner.style.animation='unlockSpin 0.7s ease-out forwards';
   overlay.style.display='flex';
   try{var snd=new Audio('sfx/victory_screen_start.ogg');snd.volume=0.5;snd.play();}catch(e){}
@@ -3352,6 +3359,30 @@ function showUnlockPopup(name,img,school){
     span.style.cssText='position:absolute;font-size:'+(20+Math.random()*16)+'px;bottom:-40px;left:'+(Math.random()*100)+'%;animation:particleRise '+(1.2+Math.random()*1.5)+'s ease-out '+(Math.random()*0.5)+'s forwards;';
     pc.appendChild(span);
   }
+}
+
+// 신비해방 팝업 이미지 클릭 시 상세 카드 띄우기 (showTooltip HTML 재사용)
+function showUnlockDetailCard(baseId){
+  var prev=document.getElementById('unlock-detail-overlay');
+  if(prev) prev.remove();
+  if(typeof showTooltip!=='function') return;
+  var fakeRect={left:0,right:0,top:0,bottom:0,width:0,height:0};
+  showTooltip(baseId,fakeRect,null);
+  var tt=getTooltipEl();
+  if(!tt||!tt.innerHTML) return;
+  var clone=tt.cloneNode(true);
+  clone.id='unlock-detail-tooltip';
+  clone.removeAttribute('style');
+  clone.classList.add('visible');
+  clone.style.cssText='position:relative;pointer-events:auto;opacity:1;transform:none;animation:unlockCardPop 0.3s ease-out;max-height:92vh';
+  hideTooltip();
+  var ov=document.createElement('div');
+  ov.id='unlock-detail-overlay';
+  ov.style.cssText='position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,0.75);display:flex;justify-content:center;align-items:center;padding:20px';
+  ov.onclick=function(){ov.remove();};
+  clone.onclick=function(e){e.stopPropagation();};
+  ov.appendChild(clone);
+  document.body.appendChild(ov);
 }
 function renderQuestUI(){
   var el=document.getElementById('quest-content');

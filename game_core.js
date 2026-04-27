@@ -839,7 +839,7 @@ function doMysteryUnlock() {
         window._enigmaPointsCache=pd.points;
         var pickedName=pick,pickedImg='',pickedSchool='';
         for(var i=0;i<CHARS.length;i++){if(CHARS[i].id===pick){pickedName=CHARS[i].name;pickedImg=CHARS[i].img;pickedSchool=CHARS[i].school||'';break;}}
-        if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool);
+        if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool,pick);
         else alert('[신비해방] '+pickedName+' 해방!');
         if(typeof renderQuestUI==='function') renderQuestUI();
         // 게임이 진행중일 때만 renderAll 호출 (타이틀/퀘스트 화면에서 오류 방지)
