@@ -9008,27 +9008,96 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T22:50:34",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 90,
+              "hp": 90,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마시로",
+              "baseId": "mashiro",
+              "atk": 31,
+              "hp": 29,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mashiro.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 51,
+              "hp": 43,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 22,
+              "hp": 26,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 14,
+              "hp": 16,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 15,
       "questState": {
         "daily": {
           "date": "2026-04-28",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
-              "completed": false
+              "progress": 12,
+              "completed": true
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 67,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -9038,7 +9107,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             },
             {
@@ -9076,9 +9145,9 @@
         "gehenna_p68"
       ],
       "rank": {
-        "tier": 3,
+        "tier": 2,
         "stars": 0,
-        "streak": 2,
+        "streak": 3,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9100,9 +9169,9 @@
         "saori",
         "niko"
       ],
-      "totalGames": 10,
-      "totalWins": 9,
-      "totalFirsts": 9,
+      "totalGames": 11,
+      "totalWins": 10,
+      "totalFirsts": 10,
       "starterEnigmaGranted": true
     },
     "박민철": {
