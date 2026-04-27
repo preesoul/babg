@@ -7377,9 +7377,9 @@ function startBattle() {
 
     function _battleChosenCallback(chosen){
       var _questEnemyBoardLen = opp.board.length; // 퀘스트용 적 보드 크기 캡처
-      // 주리 사망 카운터 플레이어에 반영
-      p.panchanDeaths=chosen.panchanDeathsA||0;
-      opp.panchanDeaths=chosen.panchanDeathsB||0;
+      // 주리 사망 카운터 플레이어에 반영 — chosen이 drawResult면 필드가 없을 수 있어 기존 값 보존
+      if(chosen.panchanDeathsA!=null) p.panchanDeaths=chosen.panchanDeathsA;
+      if(chosen.panchanDeathsB!=null) opp.panchanDeaths=chosen.panchanDeathsB;
       // 코인 무승부: 데미지 없이 넘어가기
       if(chosen.coinDraw){
         chosen.damageText='코인 무승부! 전투 없이 넘어갑니다.';
@@ -8194,7 +8194,7 @@ function startBattleAnimation(result,opp,altResult,onCoinResult) {
         document.getElementById('btn-skip').style.display='';
         // 코인 무승부: 전투 스킵
         if(allyFirst==='draw'&&coinInfo.coinDraw){
-          var drawResult={result:'draw',damage:0,damageText:'코인 무승부! 전투 없이 넘어갑니다.',steps:steps,survivorsA:[],survivorsB:[],coinDraw:true};
+          var drawResult={result:'draw',damage:0,damageText:'코인 무승부! 전투 없이 넘어갑니다.',steps:steps,survivorsA:[],survivorsB:[],coinDraw:true,panchanDeathsA:result._initPdA||0,panchanDeathsB:result._initPdB||0};
           _gBattleCounterSave=null;_activeCoinOverlay=null;
           activeResult=drawResult;
           if(onCoinResult)onCoinResult(drawResult);
