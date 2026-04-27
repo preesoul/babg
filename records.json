@@ -3206,7 +3206,7 @@
           ]
         }
       ],
-      "points": 7,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -3279,7 +3279,8 @@
         "serika",
         "kisaki",
         "kaya",
-        "rumi"
+        "rumi",
+        "saori"
       ],
       "starterEnigmaGranted": true
     },
