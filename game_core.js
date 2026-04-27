@@ -134,42 +134,42 @@ var CHARS = [
   {id:'niya',    name:'니야',   school:'백귀야행',tier:6,atk:2,hp:1,kw:[],            locked:true, skin:'니야(임전)',       img:'Niya.png',           imgGold:'Niya_(Battle).png'},
 
   // ===== 아비도스 (잠금 해제 필요) =====
-  {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
-  {id:'serika',  name:'세리카', school:'아비도스', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'세리카(수영복)',   img:'Serika.png',         imgGold:'Serika_(Swimsuit).png'},
+  {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
+  {id:'serika',  name:'세리카', school:'아비도스', tier:3, atk:4, hp:2, kw:['windfury'],       skin:'세리카(수영복)',   img:'Serika.png',         imgGold:'Serika_(Swimsuit).png'},
   {id:'nonomi',  name:'노노미', school:'아비도스', tier:4, atk:4, hp:4, kw:[],                 locked:true, skin:'노노미(수영복)',   img:'Nonomi.png',         imgGold:'Nonomi_(Swimsuit).png'},
   {id:'shiroko', name:'시로코', school:'아비도스', tier:5, atk:7, hp:4, kw:['reborn'],         locked:true, skin:'시로코(수영복)',   img:'Shiroko.png',        imgGold:'Shiroko_(Swimsuit).png'},
   {id:'hoshino', name:'호시노', school:'아비도스', tier:6, atk:5, hp:7, kw:['taunt','shield'], locked:true, skin:'호시노(수영복)',   img:'Hoshino.png',        imgGold:'Hoshino_(Swimsuit).png'},
 
   // ===== 산해경 (잠금 해제 필요) =====
-  {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                locked:true, skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
+  {id:'kokona',  name:'코코나', school:'산해경', tier:1, atk:1, hp:1, kw:[],                skin:'코코나(아르바이트)', img:'Kokona.png',         imgGold:'Kokona_(Work).png'},
   // ===== 아리우스 분교 (추가 카드군, 신비해방 대상) =====
-  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:5,  hp:5,  kw:[],          locked:true, skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
-  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:8,  hp:2,  kw:['ranged'],  locked:true, skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
-  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:9,  hp:2,  kw:['cleave'],  locked:true, skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
+  {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:5,  hp:5,  kw:[],          skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
+  {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:8,  hp:2,  kw:['ranged'],  skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
+  {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:9,  hp:2,  kw:['cleave'],  skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
   {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:2,  hp:12, kw:['shield','poison'], locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
   {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:6,  hp:6,  kw:[],          locked:true, skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
-  {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          locked:true, skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
-  {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       locked:true, skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
-  {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 locked:true, skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
+  {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
+  {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
+  {id:'saya',    name:'사야',   school:'산해경', tier:4, atk:4, hp:5, kw:[],                 skin:'사야(사복)',         img:'Saya.png',           imgGold:'Saya_(Casual).png'},
   {id:'rumi',    name:'루미',   school:'산해경', tier:5, atk:5, hp:6, kw:[],                 locked:true, skin:'루미(어린이)',       img:'Rumi.png',           imgGold:'Rumi_(Kid).png'},
   {id:'shun',    name:'슌',     school:'산해경', tier:6, atk:8, hp:5, kw:['ranged'],         locked:true, skin:'슌(어린이)',         img:'Shun.png',           imgGold:'Shun_(Kid).png'},
   {id:'kisaki',  name:'키사키', school:'산해경', tier:6, atk:5, hp:7, kw:[],                 locked:true, skin:'키사키(사복)',       img:'Kisaki.png',         imgGold:'Kisaki_(Casual).png'},
   // ===== 발키리/SRT (추가 카드군) =====
   // sub: 'valkyrie' = 발키리 경찰학원, 'srt' = SRT 특수학원
   // ===== 발키리/SRT (추가 카드군, 신비해방 대상) =====
-  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            locked:true, skin:'키리노(수영복)', img:'Kirino.png',  imgGold:'Kirino_(Swimsuit).png'},
-  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   locked:true, skin:'후부키(수영복)', img:'Fubuki.png',  imgGold:'Fubuki_(Swimsuit).png'},
-  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           locked:true, skin:'미유(수영복)',   img:'Miyu.png',    imgGold:'Miyu_(Swimsuit).png'},
-  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           locked:true, skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
-  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   locked:true, skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
-  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  locked:true, skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
-  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:6,  hp:5, kw:['ranged','reborn'], locked:true, skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
+  {id:'kirino',  name:'키리노',  school:'발키리/SRT', sub:'valkyrie', tier:1, atk:2,  hp:2, kw:['taunt'],            skin:'키리노(수영복)', img:'Kirino.png',  imgGold:'Kirino_(Swimsuit).png'},
+  {id:'fubuki',  name:'후부키',  school:'발키리/SRT', sub:'valkyrie', tier:2, atk:2,  hp:2, kw:[],                   skin:'후부키(수영복)', img:'Fubuki.png',  imgGold:'Fubuki_(Swimsuit).png'},
+  {id:'miyu',    name:'미유',    school:'발키리/SRT', sub:'srt',      tier:2, atk:1,  hp:5, kw:['ranged'],           skin:'미유(수영복)',   img:'Miyu.png',    imgGold:'Miyu_(Swimsuit).png'},
+  {id:'moe',     name:'모에',    school:'발키리/SRT', sub:'srt',      tier:3, atk:4,  hp:1, kw:['pierce'],           skin:'모에(수영복)',   img:'Moe.png',     imgGold:'Moe_(Swimsuit).png'},
+  {id:'saki',    name:'사키',    school:'발키리/SRT', sub:'srt',      tier:3, atk:3,  hp:3, kw:[],                   skin:'사키(수영복)',   img:'Saki.png',    imgGold:'Saki_(Swimsuit).png'},
+  {id:'kurumi',  name:'쿠루미',  school:'발키리/SRT', sub:'srt',      tier:4, atk:2,  hp:8, kw:['taunt','survive'],  skin:'쿠루미(사복)',   img:'Kurumi.png',  imgGold:'Kurumi_(Private).png'},
+  {id:'otogi',   name:'오토기',  school:'발키리/SRT', sub:'srt',      tier:4, atk:6,  hp:5, kw:['ranged','reborn'], skin:'오토기(수영복)', img:'Otogi.png',   imgGold:'Otogi_(Swimsuit).png'},
   {id:'niko',    name:'니코',    school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:5, kw:[],                   locked:true, skin:'니코(사복)',     img:'Niko.png',    imgGold:'Niko_(Private).png'},
-  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            locked:true, skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
+  {id:'konoka',  name:'코노카',  school:'발키리/SRT', sub:'valkyrie', tier:5, atk:5,  hp:5, kw:['taunt'],            skin:'코노카(수영복)', img:'Konoka.png',  imgGold:'Konoka_(Swimsuit).png'},
   {id:'miyako',  name:'미야코',  school:'발키리/SRT', sub:'srt',      tier:5, atk:5,  hp:4, kw:['reborn'],           locked:true, skin:'미야코(수영복)', img:'Miyako.png',  imgGold:'Miyako_(Swimsuit).png'},
   {id:'yukino',  name:'유키노',  school:'발키리/SRT', sub:'srt',      tier:6, atk:6,  hp:6, kw:[],                   locked:true, skin:'유키노(수영복)', img:'Yukino.png',  imgGold:'Yukino_(Swimsuit).png'},
   {id:'kanna',   name:'칸나',    school:'발키리/SRT', sub:'valkyrie', tier:6, atk:1,  hp:1, kw:[],                   locked:true, skin:'칸나(수영복)',   img:'Kanna.png',   imgGold:'Kanna_(Swimsuit).png'},
-  {id:'misuzu',  name:'미스즈',  school:'발키리/SRT', sub:'valkyrie', tier:6, atk:4,  hp:6, kw:[],                   locked:true, skin:'미스즈(바니걸)', img:'Misuzu.png',  imgGold:'Misuzu_(Bunny_Girl).png'},
+  {id:'misuzu',  name:'미스즈',  school:'발키리/SRT', sub:'valkyrie', tier:6, atk:4,  hp:6, kw:[],                   skin:'미스즈(바니걸)', img:'Misuzu.png',  imgGold:'Misuzu_(Bunny_Girl).png'},
 ];
 
 // ========== HIDDEN (7성) ==========
@@ -698,11 +698,11 @@ function initPool() {
 // ========== 엘리그마 (아비도스 해금) 시스템 ==========
 var ENIGMA_UNLOCK_COST = 5; // 신비해방 1회당 비용
 // 신비해방 카드 풀 — 엘리그마를 소비해 순차적으로 해방. 계속 확장 예정.
-var MYSTERY_CARD_POOL = ['ayane','serika','nonomi','shiroko','hoshino','kokona','mina','reijo','saya','rumi','shun','kisaki','sena','ui','himari','chise','wakamo','kaya','lin',
-  // 아리우스 분교 (5종)
-  'subaru','hiyori','misaki','saori','atsuko',
-  // 발키리/SRT (12종)
-  'kirino','fubuki','miyu','moe','saki','kurumi','otogi','niko','konoka','miyako','yukino','kanna','misuzu',
+var MYSTERY_CARD_POOL = ['nonomi','shiroko','hoshino','rumi','shun','kisaki','sena','ui','himari','chise','wakamo','kaya','lin',
+  // 아리우스 분교 (2종 — 스바루/히요리/미사키는 기본 카드로 이동)
+  'saori','atsuko',
+  // 발키리/SRT (4종 — 키리노/후부키/미유/모에/사키/쿠루미/오토기/코노카/미스즈는 기본 카드로 이동)
+  'niko','miyako','yukino','kanna',
   // 백귀야행 신규 (kaho, niya — kaede는 기본)
   'kaho','niya'];
 var ABYDOS_LOCKED_IDS = MYSTERY_CARD_POOL; // 하위 호환 별칭
