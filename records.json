@@ -8849,7 +8849,7 @@
           ]
         }
       ],
-      "points": 9,
+      "points": 4,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8914,7 +8914,8 @@
         "atsuko",
         "saki",
         "konoka",
-        "miyu"
+        "miyu",
+        "kaya"
       ],
       "recruitedTier7": [
         "hkyk_saikyo"
