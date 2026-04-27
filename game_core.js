@@ -6772,14 +6772,14 @@ function runBattle(boardA, boardB, startWithA, opts) {
   function dealDamage(attacker,atkArr,defender,defArr,log2,isCleave,dmgOverride){
     // === 유키노 패시브 (방어 시): 반격으로 상대를 쓰러뜨릴 수 있다면 전투 피해 면역 ===
     // attacker가 ranged/selfdestruct/cleave면 반격 자체가 없으므로 무관
-    // 사전 예측: 보호막 미보유 + (poison 있고 atk≥1, 또는 atk≥hp) 면 반격 처치 가능
+    // 사전 예측: 보호막 미보유 + 전투 데미지(atk≥hp)로 처치 가능 시
+    // (독사굴은 전투 데미지가 아니므로 무피해 효과 미발동 — 사용자 의도)
     if(defender.baseId==='yukino' && defender.alive && !defender._abilitiesStripped && !_G.permanentAbilityBan
        && !isCleave && !hasKw(attacker,'ranged') && !hasKw(attacker,'selfdestruct')){
       var _atkHasShield = hasKw(attacker,'shield');
       var _yukinoWillKill = false;
       if(!_atkHasShield){
-        if(hasKw(defender,'poison') && defender.atk >= 1) _yukinoWillKill = true;
-        else if(defender.atk >= attacker.hp) _yukinoWillKill = true;
+        if(defender.atk >= attacker.hp) _yukinoWillKill = true;
       }
       if(_yukinoWillKill){
         log2.push({cls:'shield',text:'[패시브] '+defender.name+': '+attacker.name+' 반격 처치 → 전투 피해 면역.'});
@@ -6800,7 +6800,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
     var _reijoBlock=(attacker.baseId==='reijo'&&!attacker._abilitiesStripped&&hitResult&&hitResult.blocked);
     if(!isCleave&&!hasKw(attacker,'ranged')&&!hasKw(attacker,'selfdestruct')&&!_reijoBlock){
       // 유키노 패시브 (공격 시): 공격으로 상대를 쓰러뜨렸다면 반격을 받지 않음
-      var _yukinoNoCounter=(attacker.baseId==='yukino'&&!attacker._abilitiesStripped&&!_G.permanentAbilityBan&&(defender.hp<=0||!defender.alive));
+      // 단, 독사굴로만 죽인 경우는 미발동 (사용자 의도: 전투 데미지로 처치할 때만)
+      var _yukinoNoCounter=(attacker.baseId==='yukino'&&!attacker._abilitiesStripped&&!_G.permanentAbilityBan&&(defender.hp<=0||!defender.alive)&&!defender._poisonKilled);
       if(_yukinoNoCounter){
         log2.push({cls:'shield',text:'[패시브] '+attacker.name+': '+defender.name+' 처치! 전투 피해 면역.'});
       }
