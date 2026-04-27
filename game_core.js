@@ -136,8 +136,8 @@ var CHARS = [
   // ===== 아비도스 (잠금 해제 필요) =====
   {id:'ayane',   name:'아야네', school:'아비도스', tier:2, atk:2, hp:4, kw:['taunt'],          skin:'아야네(수영복)',   img:'Ayane.png',          imgGold:'Ayane_(Swimsuit).png'},
   {id:'serika',  name:'세리카', school:'아비도스', tier:3, atk:4, hp:2, kw:['windfury'],       skin:'세리카(수영복)',   img:'Serika.png',         imgGold:'Serika_(Swimsuit).png'},
-  {id:'nonomi',  name:'노노미', school:'아비도스', tier:4, atk:4, hp:4, kw:[],                 skin:'노노미(수영복)',   img:'Nonomi.png',         imgGold:'Nonomi_(Swimsuit).png'},
-  {id:'shiroko', name:'시로코', school:'아비도스', tier:5, atk:7, hp:4, kw:['reborn'],         skin:'시로코(수영복)',   img:'Shiroko.png',        imgGold:'Shiroko_(Swimsuit).png'},
+  {id:'nonomi',  name:'노노미', school:'아비도스', tier:5, atk:4, hp:4, kw:[],                 skin:'노노미(수영복)',   img:'Nonomi.png',         imgGold:'Nonomi_(Swimsuit).png'},
+  {id:'shiroko', name:'시로코', school:'아비도스', tier:4, atk:7, hp:4, kw:['reborn'],         skin:'시로코(수영복)',   img:'Shiroko.png',        imgGold:'Shiroko_(Swimsuit).png'},
   {id:'hoshino', name:'호시노', school:'아비도스', tier:6, atk:5, hp:7, kw:['taunt','shield'], locked:true, skin:'호시노(수영복)',   img:'Hoshino.png',        imgGold:'Hoshino_(Swimsuit).png'},
 
   // ===== 산해경 (잠금 해제 필요) =====
