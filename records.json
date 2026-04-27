@@ -8849,7 +8849,7 @@
           ]
         }
       ],
-      "points": 24,
+      "points": 19,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8910,7 +8910,8 @@
         "legendPoints": 0
       },
       "unlockedAbydos": [
-        "hoshino"
+        "hoshino",
+        "atsuko"
       ],
       "recruitedTier7": [
         "hkyk_saikyo"
