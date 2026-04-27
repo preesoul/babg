@@ -8361,96 +8361,6 @@
     "죠민철": {
       "records": [
         {
-          "date": "2026-04-25T12:05:07",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 24,
-              "hp": 24,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "나구사",
-              "baseId": "nagusa",
-              "atk": 20,
-              "hp": 22,
-              "tier": 6,
-              "kw": [
-                "preemptive",
-                "shield",
-                "windfury",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Nagusa.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리",
-              "baseId": "yukari",
-              "atk": 19,
-              "hp": 20,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive",
-                "shield",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Yukari.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게(수영복)",
-              "baseId": "renge",
-              "atk": 22,
-              "hp": 20,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 45,
-              "hp": 45,
-              "tier": 7,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T14:38:36",
           "placement": 1,
           "turn": 14,
@@ -9077,9 +8987,76 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T23:05:26",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 42,
+              "hp": 38,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "사츠키",
+              "baseId": "satsuki",
+              "atk": 13,
+              "hp": 14,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Satsuki.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 19,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 13,
+              "hp": 19,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-28",
@@ -9091,7 +9068,7 @@
             },
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -9107,7 +9084,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 7,
+              "progress": 8,
               "completed": false
             },
             {
@@ -9146,9 +9123,9 @@
         "gehenna_pandemonium"
       ],
       "rank": {
-        "tier": 2,
+        "tier": 1,
         "stars": 0,
-        "streak": 3,
+        "streak": 4,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9173,9 +9150,9 @@
         "sakurako",
         "kaho"
       ],
-      "totalGames": 11,
-      "totalWins": 10,
-      "totalFirsts": 10,
+      "totalGames": 12,
+      "totalWins": 11,
+      "totalFirsts": 11,
       "starterEnigmaGranted": true
     },
     "박민철": {
