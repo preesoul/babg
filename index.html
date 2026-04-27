@@ -767,7 +767,7 @@ img.tutorial-highlight{border-radius:50%!important}
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427q"></script>
+<script src="game_core.js?v=20260428a"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -2929,7 +2929,15 @@ function _fetchTitleRank(name, el, silent){
       return;
     }
     var pd=data.players[name];
-    var rank=pd.rank||estimateRankFromRecords(pd.records||[]);
+    // 방금 끝낸 게임의 결과(_lastRankChange)가 있으면 그걸 우선.
+    // 서버에 pd.rank가 안 박혀있는 계정은 estimateRankFromRecords로 폴백되는데,
+    // records 캡(10전)과 새 record push 영향으로 팝업이 보여준 cur랭크와 다른 값이 나와 표시 점프 발생.
+    var rank;
+    if(window._lastRankChange&&window._lastRankChange.rank){
+      rank=window._lastRankChange.rank;
+    } else {
+      rank=pd.rank||estimateRankFromRecords(pd.records||[]);
+    }
     _renderTitleRankBadge(el, rank);
   });
 }

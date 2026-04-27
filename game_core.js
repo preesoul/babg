@@ -9370,6 +9370,10 @@ function submitGameRecord(){
         data.players[name].rank = changeResult.rank;
         window._lastRankChange = changeResult;
         _alreadyApplied=true;
+      } else if(window._lastRankChange&&window._lastRankChange.rank){
+        // 재시도 경로: 신선한 서버 데이터로 fetch했으므로 data.players[name].rank가 이전 상태일 수 있음.
+        // 이미 1회 적용 완료한 post-game rank를 다시 박아 넣는다 (저장 누락 방지).
+        data.players[name].rank = window._lastRankChange.rank;
       }
       // 퀘스트 진행도 업데이트
       data.players[name] = initQuestState(data.players[name]);
