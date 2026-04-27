@@ -6529,7 +6529,7 @@
           ]
         }
       ],
-      "points": 2,
+      "points": 7,
       "questState": {
         "daily": {
           "date": "2026-04-06",
@@ -6581,7 +6581,8 @@
             }
           ]
         }
-      }
+      },
+      "starterEnigmaGranted": true
     },
     "KUJIRH": {
       "records": [],
