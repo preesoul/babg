@@ -6531,9 +6531,86 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T02:50:15",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "네루",
+              "baseId": "neru",
+              "atk": 17,
+              "hp": 17,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Neru.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네",
+              "baseId": "akane",
+              "atk": 14,
+              "hp": 16,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Akane.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 25,
+              "hp": 16,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "카린",
+              "baseId": "karin",
+              "atk": 8,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Karin.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 27,
+              "hp": 32,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 7,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -6550,7 +6627,7 @@
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -6587,7 +6664,16 @@
         },
         "_lastLoginDate": "2026-04-27"
       },
-      "starterEnigmaGranted": true
+      "starterEnigmaGranted": true,
+      "rank": {
+        "tier": 8,
+        "stars": 0,
+        "streak": 1,
+        "legendPoints": 0
+      },
+      "totalGames": 3,
+      "totalWins": 3,
+      "totalFirsts": 2
     },
     "KUJIRH": {
       "records": [],
