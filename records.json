@@ -8941,9 +8941,76 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T14:45:40",
+          "placement": 1,
+          "turn": 19,
+          "tier": 6,
+          "board": [
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 27,
+              "hp": 27,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 31,
+              "hp": 27,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 19,
+              "hp": 19,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 31,
+              "hp": 31,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나",
+              "baseId": "sena",
+              "atk": 35,
+              "hp": 32,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sena.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 6,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8971,7 +9038,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             },
             {
@@ -9009,9 +9076,9 @@
         "gehenna_p68"
       ],
       "rank": {
-        "tier": 4,
-        "stars": 1,
-        "streak": 1,
+        "tier": 3,
+        "stars": 0,
+        "streak": 2,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9032,9 +9099,9 @@
         "yukino",
         "saori"
       ],
-      "totalGames": 9,
-      "totalWins": 8,
-      "totalFirsts": 8,
+      "totalGames": 10,
+      "totalWins": 9,
+      "totalFirsts": 9,
       "starterEnigmaGranted": true
     },
     "박민철": {
