@@ -8849,7 +8849,7 @@
           ]
         }
       ],
-      "points": 4,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8921,7 +8921,8 @@
       ],
       "totalGames": 3,
       "totalWins": 3,
-      "totalFirsts": 3
+      "totalFirsts": 3,
+      "starterEnigmaGranted": true
     }
   }
 }
