@@ -5242,78 +5242,6 @@
     "sen": {
       "records": [
         {
-          "date": "2026-04-07T15:19:42",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 17,
-              "hp": 17,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "세리카(수영복)",
-              "baseId": "serika",
-              "atk": 87,
-              "hp": 83,
-              "tier": 3,
-              "kw": [
-                "windfury",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Serika_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "아야네(수영복)",
-              "baseId": "ayane",
-              "atk": 37,
-              "hp": 41,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ayane_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "호시노",
-              "baseId": "hoshino",
-              "atk": 23,
-              "hp": 25,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Hoshino.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "노노미",
-              "baseId": "nonomi",
-              "atk": 28,
-              "hp": 24,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Nonomi.png",
-              "school": "아비도스"
-            }
-          ]
-        },
-        {
           "date": "2026-04-07T15:43:56",
           "placement": 1,
           "turn": 18,
@@ -5917,27 +5845,97 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T02:15:21",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카즈사(밴드)",
+              "baseId": "kazusa",
+              "atk": 29,
+              "hp": 27,
+              "tier": 2,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Kazusa_(Band).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 24,
+              "hp": 30,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "사키(수영복)",
+              "baseId": "saki",
+              "atk": 31,
+              "hp": 31,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Saki_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 32,
+              "hp": 32,
+              "tier": 6,
+              "kw": [
+                "poison",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 11,
+              "hp": 12,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 8,
       "questState": {
         "daily": {
           "date": "2026-04-27",
           "quests": [
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 53,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -5947,12 +5945,12 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
@@ -6012,7 +6010,16 @@
         "red_winter_minori",
         "Kei_usb"
       ],
-      "starterEnigmaGranted": true
+      "starterEnigmaGranted": true,
+      "rank": {
+        "tier": 3,
+        "stars": 0,
+        "streak": 1,
+        "legendPoints": 0
+      },
+      "totalGames": 11,
+      "totalWins": 10,
+      "totalFirsts": 9
     },
     "마오비": {
       "records": [
