@@ -337,7 +337,7 @@ body{font-family:'Malgun Gothic',sans-serif;background:#0a0a0a;color:#2b4570;min
 #title-screen.active,#login-screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center;padding-bottom:80px}
 #title-screen.fading,#login-screen.fading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 40px);text-align:center}
 #title-screen .title-logo,#login-screen .title-logo{height:320px;width:auto;margin-bottom:-16px}
-#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:40px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
+#title-screen .sub,#login-screen .sub{color:#1a1a1a;margin-top:-40px;margin-bottom:24px;font-size:39px;font-weight:900;letter-spacing:3px;font-style:italic}
 
 /* 능력 팝업 — BA TCG 다크 블루 */
 .ability-popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,20,34,0.6);backdrop-filter:blur(4px);z-index:300;justify-content:center;align-items:center}
@@ -600,8 +600,8 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
 
 /* 타이틀 화면: 원본 비율 유지, 좌우 잘림 허용 */
 #title-screen.active,#title-screen.fading,#login-screen.active,#login-screen.fading{overflow:hidden!important;min-height:100vh!important;padding-bottom:40px!important}
-.title-logo{height:154px!important;width:auto!important;max-width:none!important}
-.sub{font-size:24px!important;margin-bottom:40px!important}
+.title-logo{height:154px!important;width:auto!important;max-width:none!important;margin-top:-16px!important}
+.sub{font-size:24px!important;margin-bottom:24px!important}
 
 /* 능력 팝업 */
 .ability-popup{max-width:90%!important;padding:14px!important}
@@ -926,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427j"></script>
+<script src="game_core.js?v=20260427k"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
