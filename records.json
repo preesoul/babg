@@ -8764,42 +8764,42 @@
       "points": 2,
       "questState": {
         "daily": {
-          "date": "2026-04-26",
+          "date": "2026-04-27",
           "quests": [
             {
-              "id": "win1",
-              "progress": 1,
-              "completed": true
-            },
-            {
-              "id": "gehenna10",
+              "id": "trinity10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 1,
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin3",
+              "progress": 0,
               "completed": false
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-04-20",
+          "weekStart": "2026-04-27",
           "quests": [
             {
-              "id": "hidden_win",
+              "id": "play10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "discover10",
-              "progress": 3,
+              "id": "win3",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "play10",
-              "progress": 1,
+              "id": "hidden1",
+              "progress": 0,
               "completed": false
             }
           ]
@@ -8813,7 +8813,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-26"
+        "_lastLoginDate": "2026-04-27"
       },
       "rank": {
         "tier": 9,
