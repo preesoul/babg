@@ -9010,7 +9010,7 @@
           ]
         }
       ],
-      "points": 8,
+      "points": 3,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -9097,7 +9097,8 @@
         "hiyori",
         "rumi",
         "yukino",
-        "saori"
+        "saori",
+        "niko"
       ],
       "totalGames": 10,
       "totalWins": 9,
