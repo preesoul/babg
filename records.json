@@ -3287,60 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T10:22:01",
-          "placement": 1,
-          "turn": 11,
-          "tier": 6,
-          "board": [
-            {
-              "name": "사츠키(수영복)",
-              "baseId": "satsuki",
-              "atk": 17,
-              "hp": 19,
-              "tier": 5,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Satsuki_(Swinsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "세나(사복)",
-              "baseId": "sena",
-              "atk": 27,
-              "hp": 21,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Sena_(Casual).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "잊힌 열차포",
-              "baseId": "gehenna_traingun",
-              "atk": 22,
-              "hp": 22,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Gehenna_traingun.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "잊힌 열차포",
-              "baseId": "gehenna_traingun",
-              "atk": 14,
-              "hp": 14,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Gehenna_traingun.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T12:14:48",
           "placement": 1,
           "turn": 16,
@@ -3980,9 +3926,79 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T04:09:16",
+          "placement": 2,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 10,
+              "hp": 20,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 11,
+              "hp": 9,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 23,
+              "hp": 29,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 10,
+              "hp": 10,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 15,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 69,
+      "points": 71,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -4020,7 +4036,7 @@
             },
             {
               "id": "skin10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             }
           ]
@@ -4107,11 +4123,11 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 15
+        "streak": 0,
+        "legendPoints": 14
       },
-      "totalGames": 12,
-      "totalWins": 11,
+      "totalGames": 13,
+      "totalWins": 12,
       "totalFirsts": 11,
       "starterEnigmaGranted": true
     },
