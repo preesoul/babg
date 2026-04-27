@@ -926,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427o"></script>
+<script src="game_core.js?v=20260427p"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -2175,8 +2175,8 @@ document.addEventListener('click',function(e){
 
 // undo 제거됨
 // btn-reroll, btn-fight, btn-continue는 래핑 후 바인딩 (아래 튜토리얼 섹션에서)
-document.getElementById('btn-freeze').addEventListener('click',doFreeze);
-document.getElementById('btn-upgrade').addEventListener('click',doUpgrade);
+// btn-freeze, btn-upgrade는 renderAll에서 onclick 재바인딩됨 → 중복 방지 위해 addEventListener 제거
+// (이전: 두 핸들러가 동시 발동해서 doFreeze 토글이 두 번 실행 → 고정 안 되는 버그)
 document.getElementById('btn-skip').addEventListener('click',function(){battleState.skip=true;});
 document.getElementById('btn-restart').addEventListener('click',function(){
   if(_endMusic){_endMusic.pause();_endMusic=null;}
@@ -2927,7 +2927,7 @@ startBattle=function(){
   }
   _origStartBattle();
 };
-document.getElementById('btn-fight').addEventListener('click',startBattle);
+// btn-fight: renderAll에서 onclick 재바인딩됨 → addEventListener 제거 (중복 방지)
 
 // 리롤 클릭 감지
 var _origDoReroll=doReroll;
@@ -2944,9 +2944,8 @@ doReroll=function(){
   }
 };
 
-// 래핑 후 이벤트 바인딩
-document.getElementById('btn-reroll').addEventListener('click',doReroll);
-document.getElementById('btn-continue').addEventListener('click',continueBattle);
+// btn-reroll, btn-continue: renderAll에서 onclick 재바인딩됨 → addEventListener 제거 (중복 방지)
+// (래핑된 함수 참조는 전역 변수로 유지되므로 onclick 재바인딩이 래핑 버전 사용함)
 
 function renderRoster(){
   var kwFilter=document.getElementById('filter-kw').value;
