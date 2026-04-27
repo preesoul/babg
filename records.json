@@ -3990,7 +3990,7 @@
           ]
         }
       ],
-      "points": 82,
+      "points": 87,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -4115,7 +4115,8 @@
       },
       "totalGames": 11,
       "totalWins": 10,
-      "totalFirsts": 10
+      "totalFirsts": 10,
+      "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
       "records": [],
