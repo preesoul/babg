@@ -926,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427n"></script>
+<script src="game_core.js?v=20260427o"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -1504,13 +1504,16 @@ function clearMobileMoveUI(){
   boardEl.querySelectorAll('.card').forEach(function(c){c.classList.remove('move-selected');});
   boardEl.querySelectorAll('.m-insert-line').forEach(function(l){l.remove();});
 }
+// 등록된 모든 _dismiss 리스너를 추적해 dismissTapMenu에서 한번에 정리.
+// (단일 _activeDismissHandler 방식은 setTimeout 경합 시 leak 발생: 빠른 연속 탭 → 첫 setTimeout이 두번째 setTimeout보다 먼저 fire되면 첫 리스너가 _activeDismissHandler에서 덮어써져 영구 leak)
+window._tapMenuDismissHandlers=window._tapMenuDismissHandlers||[];
 function dismissTapMenu(){
   document.querySelectorAll('.m-tap-menu').forEach(function(m){m.remove();});
-  // 리스너 leak 방지: 활성 _dismiss 리스너도 함께 제거
-  if(window._activeDismissHandler){
-    document.removeEventListener('click',window._activeDismissHandler);
-    window._activeDismissHandler=null;
-  }
+  // 리스너 leak 방지: 등록된 모든 _dismiss 리스너 정리
+  var hs=window._tapMenuDismissHandlers||[];
+  for(var i=0;i<hs.length;i++){try{document.removeEventListener('click',hs[i]);}catch(e){}}
+  window._tapMenuDismissHandlers=[];
+  window._activeDismissHandler=null; // 하위 호환
 }
 function showSellConfirm(onConfirm){
   var overlay=document.createElement('div');
@@ -1617,13 +1620,14 @@ function showCardTapMenu(cardEl,cardIdx,boardEl){
   var menuH=menu.offsetHeight;
   menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
   menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
-  setTimeout(function(){
-    var _dismiss=function(ev){
-      if(!menu.contains(ev.target)){dismissTapMenu();}
-    };
-    document.addEventListener('click',_dismiss);
-    window._activeDismissHandler=_dismiss; // dismissTapMenu가 후속 cleanup
-  },10);
+  // 즉시 등록 (호출 측에서 e.stopPropagation 사용 → 현재 click 이벤트는 이 리스너에 안 닿음)
+  // setTimeout 경합으로 인한 leak 방지
+  var _dismiss=function(ev){
+    if(!menu.contains(ev.target)){dismissTapMenu();}
+  };
+  document.addEventListener('click',_dismiss);
+  window._tapMenuDismissHandlers.push(_dismiss);
+  window._activeDismissHandler=_dismiss; // 하위 호환
 }
 // 스펠 카드 상세 팝업 (학생 카드 툴팁과 동일 스타일)
 function showSpellDetail(item,cardEl){
@@ -1698,13 +1702,13 @@ function showShopTapMenu(cardEl,shopIdx){
   var menuH=menu.offsetHeight;
   menu.style.left=Math.max(4,rect.left+rect.width/2-menu.offsetWidth/2)+'px';
   menu.style.top=Math.max(4,rect.top-menuH-4)+'px';
-  setTimeout(function(){
-    var _dismiss=function(ev){
-      if(!menu.contains(ev.target)){dismissTapMenu();}
-    };
-    document.addEventListener('click',_dismiss);
-    window._activeDismissHandler=_dismiss; // dismissTapMenu가 후속 cleanup
-  },10);
+  // 즉시 등록 (호출 측 e.stopPropagation 덕에 현재 click 안 잡힘) — setTimeout 경합으로 인한 leak 방지
+  var _dismiss=function(ev){
+    if(!menu.contains(ev.target)){dismissTapMenu();}
+  };
+  document.addEventListener('click',_dismiss);
+  window._tapMenuDismissHandlers.push(_dismiss);
+  window._activeDismissHandler=_dismiss; // 하위 호환
 }
 
 function onDragStart(e){

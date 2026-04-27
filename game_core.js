@@ -1358,23 +1358,27 @@ function getAvailableChars(tier) {
 function rollShop(force) {
   if(G.frozen && !force){
     // 얼린 상점: 빈 칸(null)만 새 카드로 채움
+    // 한 슬롯 채우다 throw해도 나머지는 계속 처리, G.frozen 리셋도 보장
     var p=G.players[0];
-    var pool=getAvailableChars(p.tier);
-    var filled=false;
+    var pool;
+    try{ pool=getAvailableChars(p.tier); }catch(e){ pool=[]; if(typeof console!=='undefined') console.error('[rollShop:frozen getAvailableChars]',e); }
     for(var i=0;i<G.shop.length;i++){
       if(G.shop[i]===null){
-        var available=pool.filter(function(c){return G.pool[c.id]>0;});
-        if(available.length===0)continue;
-        var totalWeight=0;
-        for(var j=0;j<available.length;j++)totalWeight+=G.pool[available[j].id];
-        var roll=Math.random()*totalWeight;
-        var cumul=0;var picked=available[0];
-        for(var j=0;j<available.length;j++){cumul+=G.pool[available[j].id];if(roll<cumul){picked=available[j];break;}}
-        takeFromPool(picked.id);
-        var newUnit=makeMinion(picked,false);
-        if(G.shopBuff>0){newUnit.atk+=G.shopBuff;newUnit.hp+=G.shopBuff;}
-        G.shop[i]=newUnit;
-        filled=true;
+        try{
+          var available=pool.filter(function(c){return G.pool[c.id]>0;});
+          if(available.length===0)continue;
+          var totalWeight=0;
+          for(var j=0;j<available.length;j++)totalWeight+=G.pool[available[j].id];
+          var roll=Math.random()*totalWeight;
+          var cumul=0;var picked=available[0];
+          for(var j=0;j<available.length;j++){cumul+=G.pool[available[j].id];if(roll<cumul){picked=available[j];break;}}
+          takeFromPool(picked.id);
+          var newUnit=makeMinion(picked,false);
+          if(G.shopBuff>0){newUnit.atk+=G.shopBuff;newUnit.hp+=G.shopBuff;}
+          G.shop[i]=newUnit;
+        }catch(e){
+          if(typeof console!=='undefined') console.error('[rollShop:frozen-fill slot '+i+']',e);
+        }
       }
     }
     G.frozen=false;
@@ -8689,24 +8693,40 @@ function continueBattle() {
 }
 
 function nextTurn() {
-  G.turn++;var p=G.players[0];
-  if(SANDBOX){p.stone=20;p.turnStone=20;p.upgradeCost=0;G.bonusStone=0;}
-  else{p.turnStone=Math.min(MAX_STONE,p.turnStone+1);
-  p.stone=p.turnStone+(G.bonusStone||0)+getAoiBonusStone();G.bonusStone=0;}
-  // 모모카 보너스로 보장하되 감시망 등으로 누적된 무료 리롤은 보존
-  G.freeRerolls=Math.max(G.freeRerolls||0, getMomokaFreeRerolls());
-  if(p.upgradeCost>0)p.upgradeCost=Math.max(0,p.upgradeCost-1);
-  for(var i=1;i<G.players.length;i++){
-    var ai=G.players[i];if(ai.dead)continue;
-    if(SANDBOX){ai.turnStone=MAX_STONE;ai.stone=MAX_STONE;ai.upgradeCost=0;}
-    else{ai.turnStone=Math.min(MAX_STONE,ai.turnStone+1);
-    var aiAoiBonus=0;for(var j=0;j<ai.board.length;j++){if(ai.board[j]&&ai.board[j].baseId==='aoi')aiAoiBonus+=ai.board[j].isSkin?4:2;}
-    ai.stone=ai.turnStone+aiAoiBonus;
-    if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);}
-  }
+  // 전체 prologue도 try로 감싸 — 한 곳 throw해도 rollShop/renderAll은 반드시 실행
+  // 이전: prologue throw → rollShop/renderAll 안 돌아 frozen shop 빈칸 미보충 + 버튼 먹통
+  try{
+    G.turn++;var p=G.players[0];
+    if(SANDBOX){p.stone=20;p.turnStone=20;p.upgradeCost=0;G.bonusStone=0;}
+    else{p.turnStone=Math.min(MAX_STONE,p.turnStone+1);
+    p.stone=p.turnStone+(G.bonusStone||0)+getAoiBonusStone();G.bonusStone=0;}
+    // 모모카 보너스로 보장하되 감시망 등으로 누적된 무료 리롤은 보존
+    G.freeRerolls=Math.max(G.freeRerolls||0, getMomokaFreeRerolls());
+    if(p.upgradeCost>0)p.upgradeCost=Math.max(0,p.upgradeCost-1);
+    for(var i=1;i<G.players.length;i++){
+      var ai=G.players[i];if(ai.dead)continue;
+      if(SANDBOX){ai.turnStone=MAX_STONE;ai.stone=MAX_STONE;ai.upgradeCost=0;}
+      else{ai.turnStone=Math.min(MAX_STONE,ai.turnStone+1);
+      var aiAoiBonus=0;for(var j=0;j<ai.board.length;j++){if(ai.board[j]&&ai.board[j].baseId==='aoi')aiAoiBonus+=ai.board[j].isSkin?4:2;}
+      ai.stone=ai.turnStone+aiAoiBonus;
+      if(ai.upgradeCost>0)ai.upgradeCost=Math.max(0,ai.upgradeCost-1);}
+    }
+  }catch(e){if(typeof console!=='undefined')console.error('[nextTurn:prologue]',e);}
   // 한 함수에서 throw해도 후속 함수 (rollShop/renderAll)는 계속 — 모바일 먹통 방지
   try{aiTurns();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:aiTurns]',e);}
   try{rollShop();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:rollShop]',e);}
+  // 마지막 안전망: rollShop이 frozen 분기 throw로 끝까지 못 채웠을 가능성에 대비
+  // shop에 null이 남아있고 frozen 해제됐으면 강제 채움 (얼리지 않은 상점은 정상 채워졌어야 함)
+  try{
+    if(G.shop && !G.frozen){
+      var _hasNull=false;
+      for(var _si=0;_si<G.shop.length;_si++){if(G.shop[_si]===null){_hasNull=true;break;}}
+      if(_hasNull){
+        G.frozen=true; // frozen 분기 재실행 (null만 채우는 안전 경로)
+        rollShop();
+      }
+    }
+  }catch(e){if(typeof console!=='undefined')console.error('[nextTurn:safetyRefill]',e);}
   try{renderAll();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:renderAll]',e);}
   try{saveGame();}catch(e){if(typeof console!=='undefined')console.error('[nextTurn:saveGame]',e);}
 }
