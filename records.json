@@ -6617,9 +6617,79 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T06:01:04",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 17,
+              "hp": 25,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive",
+                "reborn",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "칸나",
+              "baseId": "kanna",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kanna.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "칸나",
+              "baseId": "kanna",
+              "atk": 1,
+              "hp": 1,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kanna.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "미야코(수영복)",
+              "baseId": "miyako",
+              "atk": 17,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Miyako_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "미스즈",
+              "baseId": "misuzu",
+              "atk": 4,
+              "hp": 6,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Misuzu.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -6631,12 +6701,12 @@
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -6657,7 +6727,7 @@
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
@@ -6675,14 +6745,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 8,
-        "stars": 0,
-        "streak": 1,
+        "tier": 7,
+        "stars": 1,
+        "streak": 2,
         "legendPoints": 0
       },
-      "totalGames": 3,
-      "totalWins": 3,
-      "totalFirsts": 2
+      "totalGames": 4,
+      "totalWins": 4,
+      "totalFirsts": 3
     },
     "KUJIRH": {
       "records": [],
