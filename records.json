@@ -8800,9 +8800,80 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T05:45:56",
+          "placement": 1,
+          "turn": 10,
+          "tier": 6,
+          "board": [
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 31,
+              "hp": 26,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 69,
+              "hp": 67,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "카스미",
+              "baseId": "kasumi",
+              "atk": 14,
+              "hp": 16,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Kasumi.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아스나",
+              "baseId": "asuna",
+              "atk": 17,
+              "hp": 16,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Asuna.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "세나",
+              "baseId": "sena",
+              "atk": 17,
+              "hp": 14,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sena.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 6,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8830,7 +8901,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             },
             {
@@ -8869,8 +8940,8 @@
       ],
       "rank": {
         "tier": 4,
-        "stars": 0,
-        "streak": 0,
+        "stars": 1,
+        "streak": 1,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -8891,9 +8962,9 @@
         "yukino",
         "saori"
       ],
-      "totalGames": 8,
-      "totalWins": 7,
-      "totalFirsts": 7,
+      "totalGames": 9,
+      "totalWins": 8,
+      "totalFirsts": 8,
       "starterEnigmaGranted": true
     },
     "박민철": {
