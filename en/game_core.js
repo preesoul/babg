@@ -691,6 +691,25 @@ function syncRecruitedTier7FromPd(pd){
 // Mystery Release — called from quest window. Deducts from pd.points then saves to server.
 var _mysteryUnlocking=false;
 var _mysteryUnlockCooldown=0;
+// Mystery Release loading popup (shown while waiting for server response)
+function showMysteryLoadingPopup(){
+  if(document.getElementById('mystery-loading-popup'))return;
+  if(!document.getElementById('mystery-loading-style')){
+    var st=document.createElement('style');
+    st.id='mystery-loading-style';
+    st.textContent='@keyframes mysteryLoadingSpin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(st);
+  }
+  var ov=document.createElement('div');
+  ov.id='mystery-loading-popup';
+  ov.style.cssText='position:fixed;inset:0;z-index:950;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center';
+  ov.innerHTML='<div style="background:#1a2a3a;border:2px solid #ffd700;border-radius:12px;padding:32px 44px;text-align:center;box-shadow:0 0 24px rgba(255,215,0,0.3);max-width:80%"><div style="width:48px;height:48px;border:4px solid rgba(255,215,0,0.25);border-top-color:#ffd700;border-radius:50%;margin:0 auto 16px;animation:mysteryLoadingSpin 0.9s linear infinite"></div><div style="color:#ffd700;font-size:18px;font-weight:700;text-shadow:0 0 12px rgba(255,215,0,0.5);line-height:1.5">Calling student...</div></div>';
+  document.body.appendChild(ov);
+}
+function hideMysteryLoadingPopup(){
+  var el=document.getElementById('mystery-loading-popup');
+  if(el&&el.parentNode)el.parentNode.removeChild(el);
+}
 function doMysteryUnlock() {
   if(_mysteryUnlocking)return;
   // Cooldown: block re-call within 2 seconds after last release (prevent duplicate touch events)
@@ -698,17 +717,18 @@ function doMysteryUnlock() {
   if(now-_mysteryUnlockCooldown<2000)return;
   if(!window._babgLogin||!window._babgLogin.name){alert('Login is required.');return;}
   _mysteryUnlocking=true;
+  showMysteryLoadingPopup();
   var _retries=0;
   function _tryUnlock(){
     var unlocked = getUnlockedAbydos();
     var locked = MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
-    if(locked.length===0){_mysteryUnlocking=false;alert('No more Mystery Release cards to unlock.');return;}
+    if(locked.length===0){_mysteryUnlocking=false;hideMysteryLoadingPopup();alert('No more Mystery Release cards to unlock.');return;}
     fetchRecords(function(err,data,sha){
-      if(err||!data){_mysteryUnlocking=false;alert('Server connection failed. Please try again later.');return;}
+      if(err||!data){_mysteryUnlocking=false;hideMysteryLoadingPopup();alert('Server connection failed. Please try again later.');return;}
       var pd=data.players[window._babgLogin.name];
-      if(!pd){_mysteryUnlocking=false;alert('Player data not found.');return;}
+      if(!pd){_mysteryUnlocking=false;hideMysteryLoadingPopup();alert('Player data not found.');return;}
       if(!pd.points||pd.points<ENIGMA_UNLOCK_COST){
-        _mysteryUnlocking=false;alert('Insufficient Eligma.\nrequired: '+ENIGMA_UNLOCK_COST+'P / owned: '+(pd.points||0)+'P');return;
+        _mysteryUnlocking=false;hideMysteryLoadingPopup();alert('Insufficient Eligma.\nrequired: '+ENIGMA_UNLOCK_COST+'P / owned: '+(pd.points||0)+'P');return;
       }
       pd.points-=ENIGMA_UNLOCK_COST;
       // Merge lock list based on server data (reflect unlocks from other devices)
@@ -717,7 +737,7 @@ function doMysteryUnlock() {
         if(unlocked.indexOf(serverUnlocked[_ui])===-1) unlocked.push(serverUnlocked[_ui]);
       }
       var locked2=MYSTERY_CARD_POOL.filter(function(id){return unlocked.indexOf(id)===-1;});
-      if(locked2.length===0){_mysteryUnlocking=false;alert('No more Mystery Release cards to unlock.');pd.points+=ENIGMA_UNLOCK_COST;return;}
+      if(locked2.length===0){_mysteryUnlocking=false;hideMysteryLoadingPopup();alert('No more Mystery Release cards to unlock.');pd.points+=ENIGMA_UNLOCK_COST;return;}
       var pick=locked2[Math.floor(Math.random()*locked2.length)];
       unlocked.push(pick);
       pd.unlockedAbydos=unlocked.slice();
@@ -726,11 +746,13 @@ function doMysteryUnlock() {
           _retries++;
           if(_retries<=2){setTimeout(_tryUnlock,800);return;}
           _mysteryUnlocking=false;
+          hideMysteryLoadingPopup();
           alert('Save failed. Please try again later.');
           return;
         }
         _mysteryUnlocking=false;
         _mysteryUnlockCooldown=Date.now();
+        hideMysteryLoadingPopup();
         setUnlockedAbydos(unlocked);
         window._enigmaPointsCache=pd.points;
         var pickedName=pick,pickedImg='',pickedSchool='';
