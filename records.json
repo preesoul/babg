@@ -5919,7 +5919,7 @@
           ]
         }
       ],
-      "points": 26,
+      "points": 21,
       "questState": {
         "daily": {
           "date": "2026-04-09",
@@ -5995,7 +5995,8 @@
         "chise",
         "niya",
         "atsuko",
-        "kaho"
+        "kaho",
+        "miyako"
       ],
       "recruitedTier7": [
         "millennium_death_momoi",
