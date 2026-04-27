@@ -926,7 +926,7 @@ body{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scro
   <button class="btn btn-stone btn-big" id="btn-restart"><span class="btn-inner">다시 하기</span></button>
 </div>
 
-<script src="game_core.js?v=20260427p"></script>
+<script src="game_core.js?v=20260427q"></script>
 <script>
 document.addEventListener('contextmenu',function(e){e.preventDefault()});
 (function(){
@@ -1031,7 +1031,7 @@ function startCelebration(){
 }
 
 // ========== RENDER ==========
-function abilityTag(baseId) {
+function abilityTag(baseId, isSkin) {
   var tags='';
   if(BC_IDS[baseId])   tags+='<span class="ability-tag bc" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">첫인사</span>';
   if(DR_IDS[baseId])   tags+='<span class="ability-tag dr" data-ability="'+baseId+'" onclick="showAbilityPopup(\''+baseId+'\',event)">뒤끝</span>';
@@ -1482,7 +1482,7 @@ function cardHtml(m,idx,isBoard){
   html+='<div class="m-ability-summary">'+(mAbilStr||'&nbsp;')+'</div>';
   html+='<div class="name-banner">'+m.name+'</div>';
   var kwt=kwText(m);html+='<div class="keywords">'+(kwt||'&nbsp;')+'</div>';
-  var aTag=abilityTag(m.baseId);if(aTag)html+='<div class="m-abil-tag" style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
+  var aTag=abilityTag(m.baseId,m.isSkin);if(aTag)html+='<div class="m-abil-tag" style="text-align:center;padding:2px 6px;background:rgba(0,0,0,0.4)">'+aTag+'</div>';
   else html+='<div class="m-abil-tag" style="padding:2px 6px;background:rgba(0,0,0,0.4)">&nbsp;</div>';
   html+='<div class="stat-row"><div class="stat-atk" style="'+statColor(m.baseId,m.isSkin,'atk',m.atk)+'">'+m.atk+'</div><div class="stat-hp" style="'+statColor(m.baseId,m.isSkin,'hp',m.hp)+'">'+m.hp+'</div></div>';
   html+='</div>';
