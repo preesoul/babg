@@ -8759,9 +8759,97 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-27T00:37:47",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 30,
+              "hp": 34,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 30,
+              "hp": 27,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 19,
+              "hp": 19,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 30,
+              "hp": 29,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 40,
+              "hp": 40,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 24,
       "questState": {
         "daily": {
           "date": "2026-04-27",
@@ -8773,13 +8861,13 @@
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 54,
+              "completed": true
             },
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -8789,18 +8877,18 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ]
         },
@@ -8816,9 +8904,9 @@
         "_lastLoginDate": "2026-04-27"
       },
       "rank": {
-        "tier": 9,
-        "stars": 1,
-        "streak": 1,
+        "tier": 8,
+        "stars": 0,
+        "streak": 2,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -8826,7 +8914,10 @@
       ],
       "recruitedTier7": [
         "hkyk_saikyo"
-      ]
+      ],
+      "totalGames": 3,
+      "totalWins": 3,
+      "totalFirsts": 3
     }
   }
 }
