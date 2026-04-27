@@ -146,7 +146,7 @@ var CHARS = [
   {id:'subaru',  name:'스바루', school:'아리우스 분교', tier:2, atk:5,  hp:5,  kw:[],          skin:'스바루(메이드)',     img:'Subaru.png',         imgGold:'Subaru_(maid).png'},
   {id:'hiyori',  name:'히요리', school:'아리우스 분교', tier:3, atk:8,  hp:2,  kw:['ranged'],  skin:'히요리(수영복)',     img:'Hiyori.png',         imgGold:'Hiyori_(Swimsuit).png'},
   {id:'misaki',  name:'미사키', school:'아리우스 분교', tier:4, atk:9,  hp:2,  kw:['cleave'],  skin:'미사키(수영복)',     img:'Misaki.png',         imgGold:'Misaki_(Swimsuit).png'},
-  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:2,  hp:12, kw:['shield','poison'], locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
+  {id:'saori',   name:'사오리', school:'아리우스 분교', tier:5, atk:6,  hp:5,  kw:[],                 locked:true, skin:'사오리(수영복)', img:'Saori.png',          imgGold:'Saori_(Swimsuit).png'},
   {id:'atsuko',  name:'아츠코', school:'아리우스 분교', tier:6, atk:6,  hp:6,  kw:[],          skin:'아츠코(수영복)',     img:'Atsuko.png',         imgGold:'Atsuko_(Swimsuit).png'},
   {id:'mina',    name:'미나',   school:'산해경', tier:2, atk:2, hp:4, kw:['taunt'],          skin:'미나(리코더)',       img:'Mina.png',           imgGold:'Mina_(Recorder).png'},
   {id:'reijo',   name:'레이죠', school:'산해경', tier:3, atk:4, hp:2, kw:['windfury'],       skin:'레이죠(사복)',       img:'Reijo.png',          imgGold:'Reijo_(Casual).png'},
@@ -331,7 +331,7 @@ var DR_IDS  = {chinatsu:1, ako:1, hifumi:1, azusa:1, kasumi:1, nagusa:1, juri:1,
 var SOC_IDS = {kayoko:1, midori:1, momoi:1, mari:1, tsurugi:1, sakurako:1, rio:1, himari:1, mine:1, hibiki:1, makoto:1, kaya:1, kasumi:1, ibuki:1, akane:1, pina:1, michiru:1, eimi:1, gehenna_traingun:1, trinity_nagisa:1, millennium_nameless:1, millennium_death_momoi:1, hkyk_kuzunoha:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, nonomi:1, Shiroko_Terror:1, mina:1, rumi:1, mutsuki:1, red_winter_minori:1, shizuko:1, saori:1, misaki:1, atsuko:1, hiyori:1, subaru:1, arius_squad:1, saki:1, kanna:1, hinata:1, sena:1, misuzu:1, kazusa:1}; // 개전
 var SURV_IDS = {toki:1, neru:1, kirino:1, kurumi:1}; // 버티기
 var PASSIVE_IDS = {haine:1, momoka:1, ayumu:1, aoi:1, lin:1, asuna:1, hasumi:1, suzumi:1, mimori:1, utaha:1, gehenna_traingun:1, trinity_mika:1, trinity_seia:1, wakamo:1, millennium_cc:1, trinity_makeup:1, gehenna_prefect:1, gehenna_pandemonium:1, millennium_death_momoi:1, gehenna_p68:1, millennium_seminar:1, trinity_justice:1, trinity_nagisa:1, serika:1, shiroko:1, Shiroko_Terror:1, reijo:1, saya:1, shun:1, shanhai_kiki:1, haruka:1, Kei_usb:1, red_winter_minori:1, arius_squad:1, miyu:1, niko:1, miyako:1, yukino:1, yuuka:1, noa:1, reisa:1, hanako:1}; // 패시브 (영입 턴/상시) — shizuko는 개전(SOC)으로 변경됨 / kazusa는 개전(SOC)으로 변경됨 / hanako는 패시브로 변경됨
-var PRE_IDS = {aru:1, koyuki:1, koharu:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
+var PRE_IDS = {aru:1, koyuki:1, koharu:1, saori:1, trinity_mika:1, hkyk_kuzunoha:1, millennium_malkuth:1, millennium_death_momoi:1, Arisu_Kei:1}; // 선빵 능력 (공격 시 데미지 계산 전 발동)
 
 // 능력 설명 (CSV 기반)
 var ABILITY_DESCS = {
@@ -441,7 +441,7 @@ var ABILITY_DESCS = {
   reijo:    {type:'패시브',desc:'데미지를 주지 못하면,\n자신도 데미지를 받지 않습니다.',skinEffect:'사복 레이죠: 관통 추가',skinEffectDesc:'패시브: 데미지를 주지 못하면, 자신도 데미지를 받지 않습니다.\n<span style="color:#ffd700;font-weight:700">관통</span>을 추가로 가집니다.'},
   saya:     {type:'패시브',desc:'전투 중 효과를 받지 않습니다.',skinEffect:'사복 사야: 적의 효과만 면역',skinEffectDesc:'패시브: 전투 중 <span style="color:#ffd700;font-weight:700">적의</span> 효과를 받지 않습니다.'},
   // ===== 아리우스 분교 =====
-  saori:    {type:'개전',desc:'코인토스에 실패했다면, 기본 능력이 모두 삭제됩니다.',skinEffect:'',skinEffectDesc:'개전: 코인토스에 실패했다면, 기본 능력이 모두 삭제됩니다.'},
+  saori:    {type:'선빵',desc:'코인토스에 실패한 상대를 공격 시,\n전투 데미지를 계산하지 않고 쓰러뜨립니다.',skinEffect:'수영복 사오리: 그 상대의 능력도 삭제합니다',skinEffectDesc:'선빵: 코인토스에 실패한 상대를 공격 시,\n전투 데미지를 계산하지 않고 쓰러뜨립니다.\n<span style="color:#ffd700;font-weight:700">상대의 능력도 삭제</span>합니다.'},
   misaki:   {type:'개전',desc:'코인토스에 실패했다면, 파괴됩니다.',skinEffect:'수영복 미사키: 저격 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 파괴됩니다.\n<span style="color:#ffd700;font-weight:700">저격</span> 추가.'},
   atsuko:   {type:'개전',desc:'무작위 아군 3인의 개전 효과를 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·리오 다음) 발동합니다.',skinEffect:'수영복 아츠코: 아군 전체',skinEffectDesc:'개전: <span style="color:#ffd700;font-weight:700">아군 전체</span>의 개전 효과를 삭제합니다.\n이 효과는 가장 먼저(쿠즈노하·리오 다음) 발동합니다.'},
   hiyori:   {type:'개전',desc:'코인토스에 실패했다면, 공격할 수 없습니다.',skinEffect:'수영복 히요리: 질풍(연사) 추가',skinEffectDesc:'개전: 코인토스에 실패했다면, 공격할 수 없습니다.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
@@ -4660,20 +4660,7 @@ function triggerSOC(u, mySide, otherSide, log) {
     }
   }
   // ===== 아리우스 분교 (코인 의존) =====
-  else if(id==='saori'){
-    if(u._coinResult===false){
-      var basicKws=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct','invincible','ambush'];
-      var removed=[];var newKw=[];
-      for(var i=0;i<u.kw.length;i++){
-        if(basicKws.indexOf(u.kw[i])!==-1) removed.push(KW_LABELS[u.kw[i]]||u.kw[i]);
-        else newKw.push(u.kw[i]);
-      }
-      u.kw=newKw;
-      log.push({cls:'kill',text:'[개전] '+u.name+': 코인 실패! 기본 능력 삭제'+(removed.length>0?' ('+removed.join(', ')+')':'')});
-    } else {
-      log.push({cls:'soc',text:'[개전] '+u.name+': 코인 성공!'});
-    }
-  }
+  // 사오리: 개전 효과 제거됨 (선빵으로 변경) — triggerPreemptive에서 처리
   else if(id==='misaki'){
     // 스킨: 저격 추가
     if(u.isSkin&&u.kw.indexOf('ranged')===-1) u.kw.push('ranged');
@@ -6428,7 +6415,8 @@ function runBattle(boardA, boardB, startWithA, opts) {
       surviveEffects.push({type:'summon',token:ae.baseId,isSkin:unit.isSkin});
     }
     else if(unit.baseId==='neru'){
-      var pool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury','selfdestruct'];
+      // 자폭/무적 제외한 기본 능력만
+      var pool=['taunt','shield','poison','reborn','cleave','pierce','ranged','windfury'];
       var available=pool.filter(function(k){return !hasKw(unit,k);});
       if(available.length===0) return;
       var times=unit.isSkin?2:1;
@@ -6568,6 +6556,22 @@ function runBattle(boardA, boardB, startWithA, opts) {
         stripAbilities(target,log2);
         target.alive=false;target._killedBy=attacker;
         log2.push({cls:'kill',text:'[선빵] '+attacker.name+': '+target.name+' 사형 집행! 즉사!'});
+        resolveDeath(target,defArr,atkArr,log2,attacker);
+        return true;
+      }
+      return false;
+    }
+    if(attacker.baseId==='saori'){
+      // 사오리 선빵: 코인토스 실패한 상대를 즉사 (전투 데미지 계산 X)
+      // 수영복 사오리: 능력도 삭제
+      if(target._coinResult===false){
+        if(target.abilityImmune||target._sayaImmune||target._effectImmune){
+          log2.push({cls:'shield',text:'[선빵] '+target.name+': 면역!'});
+          return false;
+        }
+        if(attacker.isSkin) stripAbilities(target,log2);
+        target.alive=false;target._killedBy=attacker;
+        log2.push({cls:'kill',text:'[선빵] '+attacker.name+': '+target.name+' 코인 실패! 처형!'});
         resolveDeath(target,defArr,atkArr,log2,attacker);
         return true;
       }
