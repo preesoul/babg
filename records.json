@@ -6692,21 +6692,21 @@
       "points": 11,
       "questState": {
         "daily": {
-          "date": "2026-04-27",
+          "date": "2026-04-28",
           "quests": [
             {
-              "id": "gehenna10",
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "trinity10",
               "progress": 0,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
-            },
-            {
-              "id": "play3",
-              "progress": 2,
+              "progress": 0,
               "completed": false
             }
           ],
@@ -6741,7 +6741,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-27"
+        "_lastLoginDate": "2026-04-28"
       },
       "starterEnigmaGranted": true,
       "rank": {
