@@ -8439,80 +8439,6 @@
     "죠민철": {
       "records": [
         {
-          "date": "2026-04-25T14:38:36",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아리스&케이",
-              "baseId": "Arisu_Kei",
-              "atk": 52,
-              "hp": 44,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "ranged",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 2,
-              "hp": 6,
-              "tier": 4,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "코유키",
-              "baseId": "koyuki",
-              "atk": 1,
-              "hp": 1,
-              "tier": 2,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Koyuki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 4,
-              "hp": 4,
-              "tier": 3,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-25T15:00:01",
           "placement": 1,
           "turn": 16,
@@ -9132,9 +9058,74 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-28T11:16:27",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 49,
+              "hp": 50,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 15,
+              "hp": 16,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 17,
+              "hp": 17,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 38,
+              "hp": 46,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 9,
       "questState": {
         "daily": {
           "date": "2026-04-28",
@@ -9146,8 +9137,8 @@
             },
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -9162,7 +9153,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             },
             {
@@ -9202,8 +9193,8 @@
       ],
       "rank": {
         "tier": 1,
-        "stars": 0,
-        "streak": 4,
+        "stars": 3,
+        "streak": 5,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9228,9 +9219,9 @@
         "sakurako",
         "kaho"
       ],
-      "totalGames": 12,
-      "totalWins": 11,
-      "totalFirsts": 11,
+      "totalGames": 13,
+      "totalWins": 12,
+      "totalFirsts": 12,
       "starterEnigmaGranted": true
     },
     "박민철": {
