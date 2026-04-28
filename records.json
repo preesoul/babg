@@ -6687,26 +6687,104 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-04-28T02:15:27",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 27,
+              "hp": 17,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 13,
+              "hp": 13,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히후미(수영복)",
+              "baseId": "hifumi",
+              "atk": 31,
+              "hp": 33,
+              "tier": 3,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Hifumi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 11,
+              "hp": 14,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 17,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 11,
+      "points": 23,
       "questState": {
         "daily": {
           "date": "2026-04-28",
           "quests": [
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 59,
+              "completed": true
             },
             {
               "id": "trinity10",
-              "progress": 0,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -6727,7 +6805,7 @@
             },
             {
               "id": "skin10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -6745,14 +6823,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 7,
-        "stars": 1,
-        "streak": 2,
+        "tier": 5,
+        "stars": 0,
+        "streak": 3,
         "legendPoints": 0
       },
-      "totalGames": 4,
-      "totalWins": 4,
-      "totalFirsts": 3
+      "totalGames": 5,
+      "totalWins": 5,
+      "totalFirsts": 4
     },
     "KUJIRH": {
       "records": [],
