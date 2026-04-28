@@ -9128,22 +9128,22 @@
       "points": 9,
       "questState": {
         "daily": {
-          "date": "2026-04-28",
+          "date": "2026-04-29",
           "quests": [
             {
-              "id": "hyakkiyako10",
-              "progress": 12,
-              "completed": true
-            },
-            {
               "id": "play3",
-              "progress": 3,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 67,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover3",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -9177,7 +9177,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-28"
+        "_lastLoginDate": "2026-04-29"
       },
       "recruitedTier7": [
         "hkyk_saikyo",
