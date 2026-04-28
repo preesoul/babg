@@ -8439,77 +8439,6 @@
     "죠민철": {
       "records": [
         {
-          "date": "2026-04-25T15:00:01",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "와카모(수영복)",
-              "baseId": "wakamo",
-              "atk": 31,
-              "hp": 35,
-              "tier": 6,
-              "kw": [
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Wakamo_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 72,
-              "hp": 68,
-              "tier": 1,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 68,
-              "hp": 68,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미치루(드레스)",
-              "baseId": "michiru",
-              "atk": 61,
-              "hp": 61,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Michiru_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠바키(가이드)",
-              "baseId": "tsubaki",
-              "atk": 72,
-              "hp": 70,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Tsubaki_(Guide).png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T23:03:44",
           "placement": 1,
           "turn": 14,
@@ -9123,27 +9052,99 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-04-28T23:57:26",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 58,
+              "hp": 53,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "스즈미(마법소녀)",
+              "baseId": "suzumi",
+              "atk": 30,
+              "hp": 34,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Suzumi_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 8,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 9,
+              "hp": 10,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 26,
       "questState": {
         "daily": {
           "date": "2026-04-29",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -9153,8 +9154,8 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 9,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win3",
@@ -9192,9 +9193,9 @@
         "gehenna_pandemonium"
       ],
       "rank": {
-        "tier": 1,
-        "stars": 3,
-        "streak": 5,
+        "tier": 0,
+        "stars": 0,
+        "streak": 6,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9219,9 +9220,9 @@
         "sakurako",
         "kaho"
       ],
-      "totalGames": 13,
-      "totalWins": 12,
-      "totalFirsts": 12,
+      "totalGames": 14,
+      "totalWins": 13,
+      "totalFirsts": 13,
       "starterEnigmaGranted": true
     },
     "박민철": {
