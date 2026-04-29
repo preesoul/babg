@@ -6830,7 +6830,12 @@
       },
       "totalGames": 5,
       "totalWins": 5,
-      "totalFirsts": 4
+      "totalFirsts": 4,
+      "recruitedTier7": [
+        "gehenna_traingun",
+        "millennium_nameless",
+        "hkyk_saikyo"
+      ]
     },
     "KUJIRH": {
       "records": [],
