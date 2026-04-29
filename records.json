@@ -6842,7 +6842,7 @@
           ]
         }
       ],
-      "points": 45,
+      "points": 40,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -6912,7 +6912,8 @@
         "hkyk_saikyo"
       ],
       "unlockedAbydos": [
-        "satsuki"
+        "satsuki",
+        "sakurako"
       ]
     },
     "KUJIRH": {
