@@ -9458,9 +9458,76 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-04-29T02:27:21",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 3,
+              "hp": 6,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 31,
+              "hp": 33,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "보충수업부",
+              "baseId": "trinity_makeup",
+              "atk": 64,
+              "hp": 69,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Make_Up_Work_Club.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "아스나",
+              "baseId": "asuna",
+              "atk": 19,
+              "hp": 18,
+              "tier": 5,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Asuna.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "스즈미",
+              "baseId": "suzumi",
+              "atk": 15,
+              "hp": 15,
+              "tier": 3,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Suzumi.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 1,
+      "points": 13,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -9472,7 +9539,7 @@
             },
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -9488,13 +9555,13 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "hidden1",
@@ -9515,9 +9582,9 @@
         "_lastLoginDate": "2026-04-29"
       },
       "rank": {
-        "tier": 6,
-        "stars": 0,
-        "streak": 3,
+        "tier": 5,
+        "stars": 1,
+        "streak": 4,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9535,9 +9602,9 @@
         "hkyk_saikyo",
         "trinity_makeup"
       ],
-      "totalGames": 4,
-      "totalWins": 4,
-      "totalFirsts": 4,
+      "totalGames": 5,
+      "totalWins": 5,
+      "totalFirsts": 5,
       "starterEnigmaGranted": true
     },
     "김민철": {
