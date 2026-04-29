@@ -9392,22 +9392,22 @@
       "points": 4,
       "questState": {
         "daily": {
-          "date": "2026-04-27",
+          "date": "2026-04-29",
           "quests": [
             {
-              "id": "trinity10",
+              "id": "gehenna10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play3",
               "progress": 0,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 54,
-              "completed": true
-            },
-            {
-              "id": "skin3",
-              "progress": 3,
-              "completed": true
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -9441,7 +9441,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-27"
+        "_lastLoginDate": "2026-04-29"
       },
       "rank": {
         "tier": 8,
