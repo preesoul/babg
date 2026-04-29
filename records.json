@@ -6765,26 +6765,101 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-29T07:37:49",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 36,
+              "hp": 38,
+              "tier": 1,
+              "kw": [
+                "shield",
+                "taunt",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 37,
+              "hp": 37,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키(가이드)",
+              "baseId": "tsubaki",
+              "atk": 43,
+              "hp": 41,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Tsubaki_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 20,
+              "hp": 21,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 40,
+              "hp": 40,
+              "tier": 7,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 23,
+      "points": 50,
       "questState": {
         "daily": {
           "date": "2026-04-29",
           "quests": [
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -6795,17 +6870,17 @@
           "quests": [
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 2,
+              "progress": 5,
               "completed": false
             }
           ]
@@ -6823,14 +6898,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 5,
-        "stars": 0,
-        "streak": 3,
+        "tier": 4,
+        "stars": 1,
+        "streak": 4,
         "legendPoints": 0
       },
-      "totalGames": 5,
-      "totalWins": 5,
-      "totalFirsts": 4,
+      "totalGames": 6,
+      "totalWins": 6,
+      "totalFirsts": 5,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
