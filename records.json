@@ -6770,21 +6770,21 @@
       "points": 23,
       "questState": {
         "daily": {
-          "date": "2026-04-28",
+          "date": "2026-04-29",
           "quests": [
             {
-              "id": "kill10",
-              "progress": 59,
-              "completed": true
+              "id": "skin3",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "trinity10",
-              "progress": 10,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "discover3",
-              "progress": 2,
+              "id": "play3",
+              "progress": 0,
               "completed": false
             }
           ],
@@ -6819,7 +6819,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-28"
+        "_lastLoginDate": "2026-04-29"
       },
       "starterEnigmaGranted": true,
       "rank": {
