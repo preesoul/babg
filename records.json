@@ -9591,9 +9591,52 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-04-29T05:35:35",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 51,
+              "hp": 45,
+              "tier": 7,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나(사복)",
+              "baseId": "sena",
+              "atk": 15,
+              "hp": 9,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sena_(Casual).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -9621,7 +9664,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             },
             {
@@ -9648,9 +9691,9 @@
         "_lastLoginDate": "2026-04-29"
       },
       "rank": {
-        "tier": 4,
+        "tier": 3,
         "stars": 2,
-        "streak": 5,
+        "streak": 6,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9674,9 +9717,9 @@
         "trinity_mika",
         "gehenna_pandemonium"
       ],
-      "totalGames": 6,
-      "totalWins": 6,
-      "totalFirsts": 6,
+      "totalGames": 7,
+      "totalWins": 7,
+      "totalFirsts": 7,
       "starterEnigmaGranted": true
     },
     "김민철": {
