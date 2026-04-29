@@ -9387,27 +9387,98 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-04-29T00:17:55",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "치아키(수영복)",
+              "baseId": "chiaki",
+              "atk": 53,
+              "hp": 49,
+              "tier": 3,
+              "kw": [
+                "ranged",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Chiaki_(Swimsuit).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 41,
+              "hp": 31,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 40,
+              "hp": 28,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "마코토",
+              "baseId": "makoto",
+              "atk": 27,
+              "hp": 27,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Makoto.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이부키(수영복)",
+              "baseId": "ibuki",
+              "atk": 42,
+              "hp": 46,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ibuki_(Swimsuit).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 4,
+      "points": 16,
       "questState": {
         "daily": {
           "date": "2026-04-29",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 0,
-              "completed": false
+              "progress": 17,
+              "completed": true
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 60,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -9417,12 +9488,12 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -9444,9 +9515,9 @@
         "_lastLoginDate": "2026-04-29"
       },
       "rank": {
-        "tier": 8,
+        "tier": 6,
         "stars": 0,
-        "streak": 2,
+        "streak": 3,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9460,9 +9531,9 @@
       "recruitedTier7": [
         "hkyk_saikyo"
       ],
-      "totalGames": 3,
-      "totalWins": 3,
-      "totalFirsts": 3,
+      "totalGames": 4,
+      "totalWins": 4,
+      "totalFirsts": 4,
       "starterEnigmaGranted": true
     },
     "김민철": {
