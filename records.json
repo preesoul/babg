@@ -6842,7 +6842,7 @@
           ]
         }
       ],
-      "points": 50,
+      "points": 45,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -6910,6 +6910,9 @@
         "gehenna_traingun",
         "millennium_nameless",
         "hkyk_saikyo"
+      ],
+      "unlockedAbydos": [
+        "satsuki"
       ]
     },
     "KUJIRH": {
