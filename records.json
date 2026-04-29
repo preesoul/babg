@@ -9525,9 +9525,75 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-04-29T02:47:00",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 47,
+              "hp": 49,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "스즈미(마법소녀)",
+              "baseId": "suzumi",
+              "atk": 23,
+              "hp": 27,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Suzumi_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 19,
+              "hp": 21,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "노노미(수영복)",
+              "baseId": "nonomi",
+              "atk": 15,
+              "hp": 15,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Nonomi_(Swimsuit).png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 6,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 3,
+      "points": 10,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -9539,8 +9605,8 @@
             },
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -9555,7 +9621,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -9582,9 +9648,9 @@
         "_lastLoginDate": "2026-04-29"
       },
       "rank": {
-        "tier": 5,
-        "stars": 1,
-        "streak": 4,
+        "tier": 4,
+        "stars": 2,
+        "streak": 5,
         "legendPoints": 0
       },
       "unlockedAbydos": [
@@ -9605,9 +9671,9 @@
         "trinity_makeup",
         "trinity_mika"
       ],
-      "totalGames": 5,
-      "totalWins": 5,
-      "totalFirsts": 5,
+      "totalGames": 6,
+      "totalWins": 6,
+      "totalFirsts": 6,
       "starterEnigmaGranted": true
     },
     "김민철": {
