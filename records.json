@@ -9460,7 +9460,7 @@
           ]
         }
       ],
-      "points": 6,
+      "points": 1,
       "questState": {
         "daily": {
           "date": "2026-04-29",
@@ -9528,7 +9528,8 @@
         "miyu",
         "kaya",
         "sena",
-        "niya"
+        "niya",
+        "rio"
       ],
       "recruitedTier7": [
         "hkyk_saikyo"
