@@ -2785,11 +2785,13 @@ function getLinExtra(side){
   return extra;
 }
 // 에이미 패시브: 밀레니엄 소환 시 보너스
+// (실제로는 우타하 패시브. 함수명만 historical하게 'Eimi'.)
 function getEimiSummonBonus(side){
   var bonus=0;
   // side가 배열(전투중)이면 전투용, player 객체면 영입용
   if(Array.isArray(side)){
-    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='utaha')bonus+=side[i].isSkin?2:1;}
+    // 전투 중: 능력 삭제된 우타하는 카운트 X (리오 등의 strip 존중)
+    for(var i=0;i<side.length;i++){if(side[i].alive&&side[i].baseId==='utaha'&&!side[i]._abilitiesStripped)bonus+=side[i].isSkin?2:1;}
   } else {
     for(var i=0;i<side.board.length;i++){if(side.board[i]&&side.board[i].baseId==='utaha')bonus+=side.board[i].isSkin?2:1;}
   }
@@ -6510,6 +6512,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
     var hasCopiedPre=attacker._copiedAbilities&&attacker._copiedAbilities.some(function(c){return c.type==='pre';});
     if(!hasKw(attacker,'preemptive')&&!PRE_IDS[attacker.baseId]&&!hasCopiedPre) return false;
     if(_G.permanentAbilityBan) return false;
+    // 능력 삭제됨(리오 등) → 선빵 타이밍은 keep(공격은 먼저)되지만 specific 능력은 무효화.
+    // PRE_IDS 분기들이 baseId만 보고 발동하는 것 차단.
+    if(attacker._abilitiesStripped) return false;
     // ===== 선빵 능력 (PRE_IDS) =====
     if(attacker.baseId==='aru'){
       // 아루 신규: 적이 게헨나가 아니면 능력 삭제 (드레스 아루: 공/체 버프도 삭제)
