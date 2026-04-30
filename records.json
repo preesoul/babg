@@ -3287,82 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T12:14:48",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "유키노",
-              "baseId": "yukino",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yukino.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "호시노(수영복)",
-              "baseId": "hoshino",
-              "atk": 11,
-              "hp": 15,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "치아키",
-              "baseId": "chiaki",
-              "atk": 25,
-              "hp": 23,
-              "tier": 3,
-              "kw": [
-                "ranged",
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "Chiaki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이치카(수영복)",
-              "baseId": "ichika",
-              "atk": 43,
-              "hp": 35,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "reborn",
-                "ranged"
-              ],
-              "isSkin": true,
-              "img": "Ichika_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "노노미(수영복)",
-              "baseId": "nonomi",
-              "atk": 29,
-              "hp": 29,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Nonomi_(Swimsuit).png",
-              "school": "아비도스"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T12:26:16",
           "placement": 1,
           "turn": 17,
@@ -3996,26 +3920,96 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-30T08:02:02",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 51,
+              "hp": 39,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 17,
+              "hp": 14,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "네루(바니걸)",
+              "baseId": "neru",
+              "atk": 35,
+              "hp": 31,
+              "tier": 5,
+              "kw": [
+                "shield",
+                "survive",
+                "ambush",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Neru_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 8,
+              "hp": 12,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 18,
+              "hp": 18,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 71,
+      "points": 88,
       "questState": {
         "daily": {
           "date": "2026-04-30",
           "quests": [
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 59,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -4036,8 +4030,8 @@
             },
             {
               "id": "skin10",
-              "progress": 9,
-              "completed": false
+              "progress": 10,
+              "completed": true
             }
           ]
         },
@@ -4123,12 +4117,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 14
+        "streak": 1,
+        "legendPoints": 15
       },
-      "totalGames": 13,
-      "totalWins": 12,
-      "totalFirsts": 11,
+      "totalGames": 14,
+      "totalWins": 13,
+      "totalFirsts": 12,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
