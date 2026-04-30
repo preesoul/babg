@@ -3287,77 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T12:26:16",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "호시노(수영복)",
-              "baseId": "hoshino",
-              "atk": 38,
-              "hp": 46,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Hoshino_(Swimsuit).png",
-              "school": "아비도스"
-            },
-            {
-              "name": "유키노",
-              "baseId": "yukino",
-              "atk": 16,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yukino.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 50,
-              "hp": 45,
-              "tier": 6,
-              "kw": [
-                "ranged",
-                "poison",
-                "windfury",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "스즈미",
-              "baseId": "suzumi",
-              "atk": 4,
-              "hp": 6,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Suzumi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "칸나",
-              "baseId": "kanna",
-              "atk": 1,
-              "hp": 1,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kanna.png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T12:57:23",
           "placement": 1,
           "turn": 17,
@@ -3990,9 +3919,85 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-04-30T08:16:21",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 14,
+              "hp": 24,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 27,
+              "hp": 33,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "taunt",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 9,
+              "hp": 13,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 9,
+              "hp": 11,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 15,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 88,
+      "points": 95,
       "questState": {
         "daily": {
           "date": "2026-04-30",
@@ -4004,13 +4009,13 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 2,
+              "progress": 5,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 4,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4117,12 +4122,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 15
+        "streak": 2,
+        "legendPoints": 16
       },
-      "totalGames": 14,
-      "totalWins": 13,
-      "totalFirsts": 12,
+      "totalGames": 15,
+      "totalWins": 14,
+      "totalFirsts": 13,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
