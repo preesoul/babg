@@ -5254,85 +5254,6 @@
     "sen": {
       "records": [
         {
-          "date": "2026-04-07T15:43:56",
-          "placement": 1,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "마시로(수영복)",
-              "baseId": "mashiro",
-              "atk": 56,
-              "hp": 50,
-              "tier": 2,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Mashiro_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 21,
-              "hp": 21,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "카야(쿠데타)",
-              "baseId": "kaya",
-              "atk": 21,
-              "hp": 21,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaya_(Coup).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "코하루(수영복)",
-              "baseId": "koharu",
-              "atk": 45,
-              "hp": 43,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Koharu_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 35,
-              "hp": 37,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            }
-          ],
-          "pinned": true,
-          "_ownerName": "sen",
-          "_ownerRank": {
-            "tier": 4,
-            "stars": 2,
-            "streak": 0,
-            "legendPoints": 0
-          }
-        },
-        {
           "date": "2026-04-08T00:08:47",
           "placement": 1,
           "turn": 15,
@@ -5927,16 +5848,88 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-02T10:00:03",
+          "placement": 2,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "세리카",
+              "baseId": "serika",
+              "atk": 47,
+              "hp": 45,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Serika.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "토키",
+              "baseId": "toki",
+              "atk": 13,
+              "hp": 16,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Toki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 10,
+              "hp": 10,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 10,
+              "hp": 20,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 7,
+              "hp": 8,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 8,
+      "points": 10,
       "questState": {
         "daily": {
           "date": "2026-05-02",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
@@ -5957,7 +5950,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -6028,11 +6021,11 @@
       "rank": {
         "tier": 3,
         "stars": 0,
-        "streak": 1,
+        "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 11,
-      "totalWins": 10,
+      "totalGames": 12,
+      "totalWins": 11,
       "totalFirsts": 9
     },
     "마오비": {
