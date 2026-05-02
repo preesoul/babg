@@ -5932,22 +5932,22 @@
       "points": 8,
       "questState": {
         "daily": {
-          "date": "2026-04-27",
+          "date": "2026-05-02",
           "quests": [
             {
-              "id": "discover3",
-              "progress": 2,
+              "id": "millennium10",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "play3",
-              "progress": 1,
+              "id": "win1",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 53,
-              "completed": true
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -5981,7 +5981,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-27"
+        "_lastLoginDate": "2026-05-02"
       },
       "unlockedAbydos": [
         "kokona",
