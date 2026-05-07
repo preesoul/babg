@@ -6842,42 +6842,42 @@
       "points": 0,
       "questState": {
         "daily": {
-          "date": "2026-04-29",
+          "date": "2026-05-07",
           "quests": [
             {
-              "id": "skin3",
-              "progress": 3,
-              "completed": true
-            },
-            {
-              "id": "trinity10",
-              "progress": 1,
+              "id": "play3",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "play3",
-              "progress": 1,
+              "id": "discover3",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "kill10",
+              "progress": 0,
               "completed": false
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-04-27",
+          "weekStart": "2026-05-04",
           "quests": [
             {
-              "id": "hidden_win",
-              "progress": 1,
-              "completed": true
-            },
-            {
               "id": "hidden1",
-              "progress": 1,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "skin10",
-              "progress": 5,
+              "id": "hidden_win",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "discover10",
+              "progress": 0,
               "completed": false
             }
           ]
@@ -6891,7 +6891,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-04-29"
+        "_lastLoginDate": "2026-05-07"
       },
       "starterEnigmaGranted": true,
       "rank": {
