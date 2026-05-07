@@ -6895,27 +6895,108 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-07T10:38:25",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 46,
+              "hp": 46,
+              "tier": 7,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리",
+              "baseId": "yukari",
+              "atk": 23,
+              "hp": 22,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Yukari.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 30,
+              "hp": 26,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "피나(가이드)",
+              "baseId": "pina",
+              "atk": 39,
+              "hp": 41,
+              "tier": 1,
+              "kw": [
+                "shield",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Pina_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키(가이드)",
+              "baseId": "tsubaki",
+              "atk": 35,
+              "hp": 33,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Tsubaki_(Guide).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 2,
+      "points": 34,
       "questState": {
         "daily": {
           "date": "2026-05-07",
           "quests": [
             {
               "id": "play3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 9,
-              "completed": false
+              "progress": 62,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -6925,17 +7006,17 @@
           "quests": [
             {
               "id": "hidden1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             }
           ]
@@ -6954,13 +7035,13 @@
       "starterEnigmaGranted": true,
       "rank": {
         "tier": 4,
-        "stars": 0,
-        "streak": 0,
+        "stars": 1,
+        "streak": 1,
         "legendPoints": 0
       },
-      "totalGames": 7,
-      "totalWins": 6,
-      "totalFirsts": 5,
+      "totalGames": 8,
+      "totalWins": 7,
+      "totalFirsts": 6,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
