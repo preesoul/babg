@@ -6837,16 +6837,74 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-07T10:24:51",
+          "placement": 8,
+          "turn": 8,
+          "tier": 5,
+          "board": [
+            {
+              "name": "하이네",
+              "baseId": "haine",
+              "atk": 4,
+              "hp": 3,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Haine.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "피나",
+              "baseId": "pina",
+              "atk": 2,
+              "hp": 3,
+              "tier": 1,
+              "kw": [
+                "shield",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Pina.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 6,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나",
+              "baseId": "izuna",
+              "atk": 4,
+              "hp": 4,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Izuna.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 0,
+      "points": 2,
       "questState": {
         "daily": {
           "date": "2026-05-07",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -6856,7 +6914,7 @@
             },
             {
               "id": "kill10",
-              "progress": 0,
+              "progress": 9,
               "completed": false
             }
           ],
@@ -6896,11 +6954,11 @@
       "starterEnigmaGranted": true,
       "rank": {
         "tier": 4,
-        "stars": 1,
-        "streak": 4,
+        "stars": 0,
+        "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 6,
+      "totalGames": 7,
       "totalWins": 6,
       "totalFirsts": 5,
       "recruitedTier7": [
