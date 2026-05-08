@@ -4016,12 +4016,12 @@
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
+              "id": "play3",
               "progress": 0,
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-04",
