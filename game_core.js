@@ -5393,8 +5393,12 @@ function resolveStartOfCombat(a, b, log) {
       for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
     }
     // 츠루기: 다른 개전 효과를 모두 받은 후 마지막에 발동 (카야 제외)
+    // 트리니티 학생이므로 사쿠라코 영향(trinityRepeat) 받음
     for(var i=0;i<side.length;i++){
-      if(side[i].alive&&side[i].baseId==='tsurugi') triggerSOC(side[i],side,other,log);
+      if(side[i].alive&&side[i].baseId==='tsurugi'){
+        var _tsRepeat = (side[i].school==='트리니티') ? trinityRepeat : 1;
+        for(var _tsR=0;_tsR<_tsRepeat;_tsR++) triggerSOC(side[i],side,other,log);
+      }
     }
     // 카야는 개전 중 가장 마지막에 발동
     for(var i=0;i<side.length;i++){
