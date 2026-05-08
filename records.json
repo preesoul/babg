@@ -6981,22 +6981,22 @@
       "points": 9,
       "questState": {
         "daily": {
-          "date": "2026-05-07",
+          "date": "2026-05-08",
           "quests": [
             {
-              "id": "play3",
-              "progress": 2,
+              "id": "gehenna10",
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "discover3",
-              "progress": 3,
-              "completed": true
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 62,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -7030,7 +7030,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-07"
+        "_lastLoginDate": "2026-05-08"
       },
       "starterEnigmaGranted": true,
       "rank": {
