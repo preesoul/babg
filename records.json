@@ -6976,9 +6976,82 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-08T05:59:28",
+          "placement": 8,
+          "turn": 9,
+          "tier": 4,
+          "board": [
+            {
+              "name": "미사키",
+              "baseId": "misaki",
+              "atk": 15,
+              "hp": 8,
+              "tier": 4,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Misaki.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "미사키",
+              "baseId": "misaki",
+              "atk": 15,
+              "hp": 8,
+              "tier": 4,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Misaki.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "히요리",
+              "baseId": "hiyori",
+              "atk": 14,
+              "hp": 8,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Hiyori.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "코하루",
+              "baseId": "koharu",
+              "atk": 3,
+              "hp": 4,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koharu.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히요리",
+              "baseId": "hiyori",
+              "atk": 8,
+              "hp": 2,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Hiyori.png",
+              "school": "아리우스 분교"
+            }
+          ]
         }
       ],
-      "points": 9,
+      "points": 11,
       "questState": {
         "daily": {
           "date": "2026-05-08",
@@ -6990,12 +7063,12 @@
             },
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -7016,7 +7089,7 @@
             },
             {
               "id": "discover10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             }
           ]
@@ -7035,11 +7108,11 @@
       "starterEnigmaGranted": true,
       "rank": {
         "tier": 4,
-        "stars": 1,
-        "streak": 1,
+        "stars": 0,
+        "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 8,
+      "totalGames": 9,
       "totalWins": 7,
       "totalFirsts": 6,
       "recruitedTier7": [
