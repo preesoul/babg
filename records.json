@@ -7093,16 +7093,88 @@
               "school": "아비도스"
             }
           ]
+        },
+        {
+          "date": "2026-05-08T06:39:11",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "와카모",
+              "baseId": "wakamo",
+              "atk": 21,
+              "hp": 23,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Wakamo.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 18,
+              "hp": 16,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 58,
+              "hp": 58,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 61,
+              "hp": 61,
+              "tier": 7,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 47,
+              "hp": 45,
+              "tier": 2,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 13,
+      "points": 30,
       "questState": {
         "daily": {
           "date": "2026-05-08",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -7112,8 +7184,8 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 1,
-              "completed": false
+              "progress": 17,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -7133,8 +7205,8 @@
             },
             {
               "id": "discover10",
-              "progress": 8,
-              "completed": false
+              "progress": 11,
+              "completed": true
             }
           ]
         },
@@ -7152,13 +7224,13 @@
       "starterEnigmaGranted": true,
       "rank": {
         "tier": 4,
-        "stars": 0,
-        "streak": 0,
+        "stars": 1,
+        "streak": 1,
         "legendPoints": 0
       },
-      "totalGames": 10,
-      "totalWins": 7,
-      "totalFirsts": 6,
+      "totalGames": 11,
+      "totalWins": 8,
+      "totalFirsts": 7,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
