@@ -5348,6 +5348,22 @@ function resolveStartOfCombat(a, b, log) {
         break;
       }
     }
+    // 나기사 패시브 1: 트리니티 학생들을 대상으로 하는 능력치 추가 효과에 +10/+10 추가
+    // 구현: 나기사가 살아있으면 트리니티 아군 전원(나기사 자신 제외)에게 +10/+10 정적 버프
+    // (개전 발동 전에 적용되어 후속 SOC 효과의 베이스에 포함됨)
+    var _hasNagisa=false;
+    for(var _ngi=0;_ngi<side.length;_ngi++){
+      if(side[_ngi].alive&&side[_ngi].baseId==='trinity_nagisa'&&!side[_ngi]._abilitiesStripped&&!side[_ngi]._socStripped){_hasNagisa=true;break;}
+    }
+    if(_hasNagisa){
+      for(var _ngj=0;_ngj<side.length;_ngj++){
+        if(side[_ngj].alive&&side[_ngj].school==='트리니티'&&side[_ngj].baseId!=='trinity_nagisa'){
+          side[_ngj].atk+=10; side[_ngj].hp+=10;
+          if(side[_ngj].maxHp) side[_ngj].maxHp+=10;
+          log.push({cls:'soc',text:'[패시브] 나기사: '+side[_ngj].name+' +10/+10 ('+side[_ngj].atk+'/'+side[_ngj].hp+')'});
+        }
+      }
+    }
     // 리오: 다른 모든 개전보다 먼저 발동 (학교 통일)
     for(var i=0;i<side.length;i++){
       if(side[i].alive&&side[i].baseId==='rio') triggerSOC(side[i],side,other,log);
@@ -5383,21 +5399,28 @@ function resolveStartOfCombat(a, b, log) {
     }
     for(var i=0;i<side.length;i++){
       if(!side[i].alive||!SOC_IDS[side[i].baseId]||side[i].baseId==='sakurako'||side[i].baseId==='kaya'||side[i].baseId==='tsurugi'||side[i].baseId==='rio'||side[i].baseId==='hkyk_kuzunoha'||side[i].baseId==='shizuko'||side[i].baseId==='atsuko') continue;
-      if(side[i]._socStripped) continue; // 아츠코로 무력화된 카드 제외
+      if(side[i]._socStripped||side[i]._abilitiesStripped) continue; // 무력화된 카드 제외 (안전망)
       var repeat=(side[i].school==='트리니티')?trinityRepeat:1;
       // 밀레니엄 학교: 유우카(저티어)/노아(고티어) 패시브로 추가 발동
       if(side[i].school==='밀레니엄'){
         if(side[i].tier<=3) repeat *= milRepeatLow;
         else repeat *= milRepeatHigh;
       }
-      for(var r=0;r<repeat;r++) triggerSOC(side[i],side,other,log);
+      for(var r=0;r<repeat;r++){
+        // 추가 발동 가시화 (사쿠라코 trinityRepeat / 유우카·노아 milRepeat 효과 검증용)
+        if(repeat>1) log.push({cls:'soc',text:'  ⟳ '+side[i].name+' 개전 '+(r+1)+'/'+repeat+'회'});
+        triggerSOC(side[i],side,other,log);
+      }
     }
     // 츠루기: 다른 개전 효과를 모두 받은 후 마지막에 발동 (카야 제외)
     // 트리니티 학생이므로 사쿠라코 영향(trinityRepeat) 받음
     for(var i=0;i<side.length;i++){
-      if(side[i].alive&&side[i].baseId==='tsurugi'){
+      if(side[i].alive&&side[i].baseId==='tsurugi'&&!side[i]._socStripped&&!side[i]._abilitiesStripped){
         var _tsRepeat = (side[i].school==='트리니티') ? trinityRepeat : 1;
-        for(var _tsR=0;_tsR<_tsRepeat;_tsR++) triggerSOC(side[i],side,other,log);
+        for(var _tsR=0;_tsR<_tsRepeat;_tsR++){
+          if(_tsRepeat>1) log.push({cls:'soc',text:'  ⟳ '+side[i].name+' 개전 '+(_tsR+1)+'/'+_tsRepeat+'회'});
+          triggerSOC(side[i],side,other,log);
+        }
       }
     }
     // 카야는 개전 중 가장 마지막에 발동
