@@ -7049,16 +7049,60 @@
               "school": "아리우스 분교"
             }
           ]
+        },
+        {
+          "date": "2026-05-08T06:08:59",
+          "placement": 7,
+          "turn": 12,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시로코 테러",
+              "baseId": "Shiroko_Terror",
+              "atk": 58,
+              "hp": 54,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Shiroko_Terror.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 4,
+              "hp": 4,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            },
+            {
+              "name": "노노미",
+              "baseId": "nonomi",
+              "atk": 4,
+              "hp": 4,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Nonomi.png",
+              "school": "아비도스"
+            }
+          ]
         }
       ],
-      "points": 11,
+      "points": 13,
       "questState": {
         "daily": {
           "date": "2026-05-08",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 3,
               "completed": false
             },
             {
@@ -7089,7 +7133,7 @@
             },
             {
               "id": "discover10",
-              "progress": 4,
+              "progress": 8,
               "completed": false
             }
           ]
@@ -7112,7 +7156,7 @@
         "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 9,
+      "totalGames": 10,
       "totalWins": 7,
       "totalFirsts": 6,
       "recruitedTier7": [
