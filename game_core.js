@@ -5364,9 +5364,35 @@ function resolveStartOfCombat(a, b, log) {
         }
       }
     }
-    // 리오: 다른 모든 개전보다 먼저 발동 (학교 통일)
+    // 유우카(3T 이하 밀레니엄) / 노아(4T 이상 밀레니엄) 패시브 detection
+    // — 리오·일반 SOC가 모두 이 카운터를 사용. 리오 SOC 발동 전 미리 결정해야 함.
+    var milRepeatLow=1, milRepeatHigh=1;
+    var milYuukaLogged=false, milNoaLogged=false;
     for(var i=0;i<side.length;i++){
-      if(side[i].alive&&side[i].baseId==='rio') triggerSOC(side[i],side,other,log);
+      if(side[i].alive&&!side[i]._socStripped&&!side[i]._abilitiesStripped){
+        if(side[i].baseId==='yuuka' && milRepeatLow<2){
+          milRepeatLow=2;
+          if(!milYuukaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 3T 이하 밀레니엄 개전 두 번 발동!'});milYuukaLogged=true;}
+        }
+        if(side[i].baseId==='noa' && milRepeatHigh<2){
+          milRepeatHigh=2;
+          if(!milNoaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 4T 이상 밀레니엄 개전 두 번 발동!'});milNoaLogged=true;}
+        }
+      }
+    }
+    // 리오: 다른 모든 개전보다 먼저 발동 (능력 삭제) — 노아/유우카 패시브 영향 받음
+    for(var i=0;i<side.length;i++){
+      if(side[i].alive&&side[i].baseId==='rio'&&!side[i]._socStripped&&!side[i]._abilitiesStripped){
+        var rioRepeat=1;
+        if(side[i].school==='밀레니엄'){
+          if(side[i].tier<=3) rioRepeat=milRepeatLow;
+          else rioRepeat=milRepeatHigh;
+        }
+        for(var rR=0;rR<rioRepeat;rR++){
+          if(rioRepeat>1) log.push({cls:'soc',text:'  ⟳ '+side[i].name+' 개전 '+(rR+1)+'/'+rioRepeat+'회'});
+          triggerSOC(side[i],side,other,log);
+        }
+      }
     }
     // 아츠코: 리오 다음, 사쿠라코 전 발동 (아군 SOC 무력화)
     for(var i=0;i<side.length;i++){
@@ -5380,21 +5406,6 @@ function resolveStartOfCombat(a, b, log) {
         var extra=side[i].isSkin?3:2;
         trinityRepeat+=extra;
         log.push({cls:'soc',text:'[개전] '+side[i].name+': 트리니티 개전 +'+extra+'회!'});
-      }
-    }
-    // 유우카(3T 이하 밀레니엄) / 노아(4T 이상 밀레니엄): 두 번 발동 (중첩 X, fix 2회)
-    var milRepeatLow=1, milRepeatHigh=1;
-    var milYuukaLogged=false, milNoaLogged=false;
-    for(var i=0;i<side.length;i++){
-      if(side[i].alive&&!side[i]._socStripped&&!side[i]._abilitiesStripped){
-        if(side[i].baseId==='yuuka' && milRepeatLow<2){
-          milRepeatLow=2;
-          if(!milYuukaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 3T 이하 밀레니엄 개전 두 번 발동!'});milYuukaLogged=true;}
-        }
-        if(side[i].baseId==='noa' && milRepeatHigh<2){
-          milRepeatHigh=2;
-          if(!milNoaLogged){log.push({cls:'soc',text:'[패시브] '+side[i].name+': 4T 이상 밀레니엄 개전 두 번 발동!'});milNoaLogged=true;}
-        }
       }
     }
     for(var i=0;i<side.length;i++){
@@ -6460,16 +6471,7 @@ function runBattle(boardA, boardB, startWithA, opts) {
       }
     }
     // 레이사 SURV 효과 삭제 — PASSIVE로 변경됨 (아군 코인 base 부스트, decideCoinResults에서 처리)
-    else if(unit.baseId==='mimori'){
-      // 미모리 버티기: 상대 전체 공격력 -1 (황금 -2)
-      var debuff=unit.isSkin?2:1;
-      var oppSide=(side===a)?b:a;
-      for(var i=0;i<oppSide.length;i++){
-        if(oppSide[i].alive) oppSide[i].atk=Math.max(0,oppSide[i].atk-debuff);
-      }
-      log2.push({cls:'soc',text:'[버티기] '+unit.name+': 상대 전체 공격력 -'+debuff});
-      surviveEffects.push({type:'debuff',baseId:'mimori',amount:debuff});
-    }
+    // 미모리 SURV 효과 삭제 — PASSIVE로 통합 (피격 시 적 atk 1회 0)
     // 노아 SURV 효과 삭제 — PASSIVE로 변경됨 (4T+ 밀레니엄 SOC 두 번 발동)
     // ===== 발키리/SRT 버티기 =====
     else if(unit.baseId==='kirino'&&unit.isSkin){
