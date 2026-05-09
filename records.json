@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-27T04:09:16",
-          "placement": 2,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 10,
-              "hp": 20,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "히비키(치어리더)",
-              "baseId": "hibiki",
-              "atk": 11,
-              "hp": 9,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 23,
-              "hp": 29,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 10,
-              "hp": 10,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하",
-              "baseId": "utaha",
-              "atk": 15,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Utaha.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-30T08:02:02",
           "placement": 1,
           "turn": 16,
@@ -4001,21 +3931,88 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T15:12:01",
+          "placement": 3,
+          "turn": 14,
+          "tier": 5,
+          "board": [
+            {
+              "name": "코유키",
+              "baseId": "koyuki",
+              "atk": 3,
+              "hp": 4,
+              "tier": 2,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koyuki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미모리(수영복)",
+              "baseId": "mimori",
+              "atk": 32,
+              "hp": 38,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mimori_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 6,
+              "hp": 6,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 4,
+              "hp": 8,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 169,
+      "points": 176,
       "questState": {
         "daily": {
           "date": "2026-05-10",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
-              "completed": false
+              "progress": 11,
+              "completed": true
             },
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 4,
               "completed": false
             },
             {
@@ -4129,10 +4126,10 @@
         "tier": 0,
         "stars": 0,
         "streak": 0,
-        "legendPoints": 17
+        "legendPoints": 16
       },
-      "totalGames": 22,
-      "totalWins": 20,
+      "totalGames": 23,
+      "totalWins": 21,
       "totalFirsts": 17,
       "starterEnigmaGranted": true
     },
