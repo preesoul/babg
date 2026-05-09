@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-30T08:02:02",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기(수영복)",
-              "baseId": "tsurugi",
-              "atk": 51,
-              "hp": 39,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "코유키",
-              "baseId": "koyuki",
-              "atk": 17,
-              "hp": 14,
-              "tier": 2,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Koyuki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "네루(바니걸)",
-              "baseId": "neru",
-              "atk": 35,
-              "hp": 31,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Neru_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 8,
-              "hp": 12,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 18,
-              "hp": 18,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-30T08:16:21",
           "placement": 1,
           "turn": 17,
@@ -3998,9 +3928,74 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T15:23:28",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "밀레니엄 세미나",
+              "baseId": "millennium_seminar",
+              "atk": 51,
+              "hp": 57,
+              "tier": 7,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Seminar.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카(체육복)",
+              "baseId": "yuuka",
+              "atk": 27,
+              "hp": 27,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuuka_(Sportswear).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히비키",
+              "baseId": "hibiki",
+              "atk": 20,
+              "hp": 19,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hibiki.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히비키(치어리더)",
+              "baseId": "hibiki",
+              "atk": 52,
+              "hp": 52,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Hibiki_(Cheerleader).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "시즈코",
+              "baseId": "shizuko",
+              "atk": 7,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Shizuko.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 176,
+      "points": 183,
       "questState": {
         "daily": {
           "date": "2026-05-10",
@@ -4012,8 +4007,8 @@
             },
             {
               "id": "millennium10",
-              "progress": 4,
-              "completed": false
+              "progress": 20,
+              "completed": true
             },
             {
               "id": "trinity10",
@@ -4126,12 +4121,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 16
+        "streak": 1,
+        "legendPoints": 17
       },
-      "totalGames": 23,
-      "totalWins": 21,
-      "totalFirsts": 17,
+      "totalGames": 24,
+      "totalWins": 22,
+      "totalFirsts": 18,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
