@@ -3287,81 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T17:04:04",
-          "placement": 1,
-          "turn": 16,
-          "tier": 5,
-          "board": [
-            {
-              "name": "이치카(수영복)",
-              "baseId": "ichika",
-              "atk": 36,
-              "hp": 18,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "ranged"
-              ],
-              "isSkin": true,
-              "img": "Ichika_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "코하루(수영복)",
-              "baseId": "koharu",
-              "atk": 15,
-              "hp": 17,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Koharu_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "하나코",
-              "baseId": "hanako",
-              "atk": 5,
-              "hp": 8,
-              "tier": 4,
-              "kw": [
-                "poison",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Hanako.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나타(수영복)",
-              "baseId": "hinata",
-              "atk": 11,
-              "hp": 15,
-              "tier": 4,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hinata_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나타",
-              "baseId": "hinata",
-              "atk": 7,
-              "hp": 9,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hinata.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-27T03:52:31",
           "placement": 1,
           "turn": 15,
@@ -4008,9 +3933,82 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T10:55:52",
+          "placement": 1,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 30,
+              "hp": 30,
+              "tier": 7,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 7,
+              "hp": 5,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 11,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 13,
+              "hp": 13,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 155,
+      "points": 157,
       "questState": {
         "daily": {
           "date": "2026-05-09",
@@ -4048,7 +4046,7 @@
             },
             {
               "id": "skin10",
-              "progress": 5,
+              "progress": 7,
               "completed": false
             }
           ]
@@ -4135,12 +4133,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 17
+        "streak": 1,
+        "legendPoints": 18
       },
-      "totalGames": 20,
-      "totalWins": 18,
-      "totalFirsts": 16,
+      "totalGames": 21,
+      "totalWins": 19,
+      "totalFirsts": 17,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
