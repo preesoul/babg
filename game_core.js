@@ -385,7 +385,7 @@ var ABILITY_DESCS = {
   izuna:    {type:'첫인사',desc:'아군 전체 +1/+1 (자신 포함)',skinEffect:'수영복 이즈나: +2/+2',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+2</span> (자신 포함)'},
   tsukuyo:  {type:'첫인사',desc:'아군 전체 +1/+2 (자신 포함)',skinEffect:'드레스 츠쿠요: +2/+4',skinEffectDesc:'첫인사: 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+4</span>를 부여합니다. (자신 포함)'},
   yukari:   {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 유카리: 보호막 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">보호막</span>을 추가로 가집니다.'},
-  mimori:   {type:'패시브',desc:'자신을 공격한 적의 공격력을\n한 바퀴 동안 0으로 만듭니다.',skinEffect:'수영복 미모리: 이번 전투 동안',skinEffectDesc:'패시브: 자신을 공격한 적의 공격력을\n<span style="color:#ffd700;font-weight:700">이번 전투 동안</span> 0으로 만듭니다.'},
+  mimori:   {type:'패시브',desc:'자신이 공격당했을 경우,\n적 공격 1회 동안 공격력을 0으로 만듭니다.',skinEffect:'(추가 효과 없음)',skinEffectDesc:'패시브: 자신이 공격당했을 경우,\n적 공격 1회 동안 공격력을 0으로 만듭니다.'},
   renge:    {type:'선빵',desc:'<계승전> 카운터를 1 쌓습니다. (최대 7)',skinEffect:'수영복 렌게: 부활 추가',skinEffectDesc:'선빵: <계승전> 카운터를 1 쌓습니다.\n<span style="color:#ffd700;font-weight:700">부활</span>을 추가로 가집니다.'},
   shizuko:  {type:'개전',desc:'버프 받은 적 1명의 추가된 공격력과 체력을\n완전히 삭제합니다. (버프 받은 적 우선)\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.',skinEffect:'수영복 시즈코: 적 2명 대상',skinEffectDesc:'개전: 버프 받은 적 <span style="color:#ffd700;font-weight:700">2명</span>의 추가된 공격력과 체력을\n완전히 삭제합니다. (버프 받은 적 우선)\n이 효과는 모든 개전 후 가장 마지막에 발동합니다.'},
   tsubaki:  {type:'첫인사',desc:'아군 백귀야행 학생들 +2/+2 (본인 포함)',skinEffect:'가이드 츠바키: +4/+4',skinEffectDesc:'첫인사: 아군 백귀야행 학생들에게 <span style="color:#ffd700;font-weight:700">+4/+4</span>를 부여합니다. (본인 포함)'},
@@ -6350,14 +6350,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
     }
-    // 미모리 패시브: 자신을 공격한 적의 atk을 한 바퀴 동안 0으로 (황금: 이번 전투 동안)
+    // 미모리 패시브: 자신을 공격한 적의 atk을 다음 1회 공격 동안 0으로
     if(dst.baseId==='mimori'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&src!==dst){
-      var mimTurns=dst.isSkin?99:1;
       if(!src._mimoriDebuff||src._mimoriDebuff<=0){
-        src._mimoriOrigAtk=src.atk;src._mimoriDebuff=mimTurns;src.atk=0;
+        src._mimoriOrigAtk=src.atk;src._mimoriDebuff=1;src.atk=0;
         // 이번 공격 끝에서 즉시 감소되지 않도록 플래그 설정
         src._mimoriJustSet=true;
-        log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! ('+(mimTurns>=99?'전투 동안':mimTurns+'회')+')'});
+        log2.push({cls:'soc',text:'[패시브] '+dst.name+': '+src.name+' 공격력 0! (1회)'});
       }
     }
     if(hasKw(dst,'shield')){

@@ -346,7 +346,7 @@ var ABILITY_DESCS = {
   izuna:    {type:'Battlecry',desc:'All allies +1/+1 (including self)',skinEffect:'Swimsuit Izuna: +2/+2',skinEffectDesc:'Battlecry: All allies <span style="color:#ffd700;font-weight:700">+2/+2</span> (including self)'},
   tsukuyo:  {type:'Battlecry',desc:'All allies +1/+2 (including self)',skinEffect:'Dress Tsukuyo: +2/+4',skinEffectDesc:'Battlecry: Grants all allies <span style="color:#ffd700;font-weight:700">+2/+4</span>. (including self)'},
   yukari:   {type:'Preemptive',desc:'Stacks 1 <Succession> counter. (max 7)',skinEffect:'Swimsuit Yukari: Shield added',skinEffectDesc:'Preemptive: Stacks 1 <Succession> counter.\nAdditionally has <span style="color:#ffd700;font-weight:700">Shield</span>.'},
-  mimori:   {type:'Passive',desc:'Sets the ATK of the enemy that attacked her\nto 0 for one round.',skinEffect:'Swimsuit Mimori: for this battle',skinEffectDesc:'Passive: Sets the ATK of the enemy that attacked her\nto 0 <span style="color:#ffd700;font-weight:700">for this battle</span>.'},
+  mimori:   {type:'Passive',desc:'When attacked, sets the attacker\'s ATK\nto 0 for their next 1 attack.',skinEffect:'(no extra effect)',skinEffectDesc:'Passive: When attacked, sets the attacker\'s ATK\nto 0 for their next 1 attack.'},
   renge:    {type:'Preemptive',desc:'Stacks 1 <Succession> counter. (max 7)',skinEffect:'Swimsuit Renge: Reborn added',skinEffectDesc:'Preemptive: Stacks 1 <Succession> counter.\nAdditionally has <span style="color:#ffd700;font-weight:700">Reborn</span>.'},
   shizuko:  {type:'Passive',desc:'Battlecry triggers 2 times.',skinEffect:'Swimsuit Shizuko: triggers 4 times',skinEffectDesc:'Passive: Battlecry triggers <span style="color:#ffd700;font-weight:700">4</span> times.'},
   tsubaki:  {type:'Battlecry',desc:'Allied Hyakkiyako students +2/+2 (including self)',skinEffect:'Guide Tsubaki: +4/+4',skinEffectDesc:'Battlecry: Grants allied Hyakkiyako students <span style="color:#ffd700;font-weight:700">+4/+4</span>. (including self)'},
@@ -4253,12 +4253,13 @@ function runBattle(boardA, boardB, startWithA, opts) {
         }
       }
     }
-    // Mimori Passive: 자신을 attack한 enemy 's atk을 한 바퀴 동안 0으로 (golden: during this battle)
+    // Mimori Passive: when attacked, set attacker's atk to 0 for next 1 attack
     if(dst.baseId==='mimori'&&dst.alive&&!dst._abilitiesStripped&&!_G.permanentAbilityBan&&src!==dst){
-      var mimTurns=dst.isSkin?99:1;
       if(!src._mimoriDebuff||src._mimoriDebuff<=0){
-        src._mimoriOrigAtk=src.atk;src._mimoriDebuff=mimTurns;src.atk=0;
-        log2.push({cls:'soc',text:'[Passive] '+dst.name+': '+src.name+' ATK 0! ('+(mimTurns>=99?'during battle':mimTurns+' hits')+')'});
+        src._mimoriOrigAtk=src.atk;src._mimoriDebuff=1;src.atk=0;
+        // Skip immediate decrement on this same attack step
+        src._mimoriJustSet=true;
+        log2.push({cls:'soc',text:'[Passive] '+dst.name+': '+src.name+' ATK 0! (1 hit)'});
       }
     }
     if(hasKw(dst,'shield')){
@@ -4937,11 +4938,15 @@ function runBattle(boardA, boardB, startWithA, opts) {
           attacker.atk=attacker._suzumiOrigAtk;delete attacker._suzumiOrigAtk;delete attacker._suzumiDebuff;
         }
       }
-      // Mimori debuff Turn 감소
+      // Mimori debuff: skip decrement on the very attack that installed it
       if(attacker._mimoriDebuff>0&&attacker._mimoriDebuff<99){
-        attacker._mimoriDebuff--;
-        if(attacker._mimoriDebuff<=0&&attacker._mimoriOrigAtk!==undefined){
-          attacker.atk=attacker._mimoriOrigAtk;delete attacker._mimoriOrigAtk;delete attacker._mimoriDebuff;
+        if(attacker._mimoriJustSet){
+          delete attacker._mimoriJustSet;
+        } else {
+          attacker._mimoriDebuff--;
+          if(attacker._mimoriDebuff<=0&&attacker._mimoriOrigAtk!==undefined){
+            attacker.atk=attacker._mimoriOrigAtk;delete attacker._mimoriOrigAtk;delete attacker._mimoriDebuff;
+          }
         }
       }
       if(stepLog.length>0){
