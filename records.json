@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T16:06:34",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 23,
-              "hp": 23,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 64,
-              "hp": 62,
-              "tier": 5,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "아유무(승무원)",
-              "baseId": "ayumu",
-              "atk": 39,
-              "hp": 25,
-              "tier": 3,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Ayumu_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "츠바키",
-              "baseId": "tsubaki",
-              "atk": 29,
-              "hp": 26,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Tsubaki.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-04-26T16:21:50",
           "placement": 1,
           "turn": 14,
@@ -4004,9 +3934,87 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T10:33:29",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 43,
+              "hp": 33,
+              "tier": 6,
+              "kw": [
+                "cleave",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "히나",
+              "baseId": "hina",
+              "atk": 17,
+              "hp": 7,
+              "tier": 6,
+              "kw": [
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "Hina.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이오리",
+              "baseId": "iori",
+              "atk": 15,
+              "hp": 12,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Iori.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "이오리",
+              "baseId": "iori",
+              "atk": 27,
+              "hp": 20,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Iori.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 7,
+              "hp": 10,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 126,
+      "points": 138,
       "questState": {
         "daily": {
           "date": "2026-05-09",
@@ -4018,12 +4026,12 @@
             },
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -4034,17 +4042,17 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 7,
+              "progress": 9,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             }
           ]
@@ -4131,12 +4139,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 17
+        "streak": 1,
+        "legendPoints": 18
       },
-      "totalGames": 18,
-      "totalWins": 17,
-      "totalFirsts": 15,
+      "totalGames": 19,
+      "totalWins": 18,
+      "totalFirsts": 16,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
