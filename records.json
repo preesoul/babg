@@ -3287,82 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-30T08:16:21",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 14,
-              "hp": 24,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 27,
-              "hp": 33,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "shield",
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 9,
-              "hp": 13,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈(메이드)",
-              "baseId": "yuzu",
-              "atk": 9,
-              "hp": 11,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 15,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-07T04:22:01",
           "placement": 1,
           "turn": 18,
@@ -3993,9 +3917,75 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T22:59:23",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "키쿄",
+              "baseId": "kikyou",
+              "atk": 14,
+              "hp": 14,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Kikyou.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 13,
+              "hp": 12,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 40,
+              "hp": 38,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키",
+              "baseId": "tsubaki",
+              "atk": 77,
+              "hp": 76,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Tsubaki.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 183,
+      "points": 190,
       "questState": {
         "daily": {
           "date": "2026-05-10",
@@ -4012,8 +4002,8 @@
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 65,
+              "completed": true
             }
           ],
           "rerolled": true
@@ -4121,12 +4111,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 17
+        "streak": 2,
+        "legendPoints": 18
       },
-      "totalGames": 24,
-      "totalWins": 22,
-      "totalFirsts": 18,
+      "totalGames": 25,
+      "totalWins": 23,
+      "totalFirsts": 19,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
