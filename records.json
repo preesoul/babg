@@ -3287,74 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-27T03:52:31",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 34,
-              "hp": 34,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 11,
-              "hp": 11,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 14,
-              "hp": 14,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "보충수업부",
-              "baseId": "trinity_makeup",
-              "atk": 23,
-              "hp": 27,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Make_Up_Work_Club.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 11,
-              "hp": 11,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-04-27T04:09:16",
           "placement": 2,
           "turn": 14,
@@ -4006,16 +3938,79 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T11:06:53",
+          "placement": 3,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 15,
+              "hp": 15,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유우카(체육복)",
+              "baseId": "yuuka",
+              "atk": 37,
+              "hp": 33,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Yuuka_(Sportswear).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 2,
+              "hp": 6,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오(임전)",
+              "baseId": "rio",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Rio_(Battle).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히마리",
+              "baseId": "himari",
+              "atk": 6,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Himari.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 157,
+      "points": 169,
       "questState": {
         "daily": {
           "date": "2026-05-09",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 8,
               "completed": false
             },
             {
@@ -4046,8 +4041,8 @@
             },
             {
               "id": "skin10",
-              "progress": 7,
-              "completed": false
+              "progress": 10,
+              "completed": true
             }
           ]
         },
@@ -4133,11 +4128,11 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 18
+        "streak": 0,
+        "legendPoints": 17
       },
-      "totalGames": 21,
-      "totalWins": 19,
+      "totalGames": 22,
+      "totalWins": 20,
       "totalFirsts": 17,
       "starterEnigmaGranted": true
     },
