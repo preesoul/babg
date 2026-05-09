@@ -4011,12 +4011,12 @@
               "completed": true
             },
             {
-              "id": "trinity10",
+              "id": "kill10",
               "progress": 0,
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-04",
