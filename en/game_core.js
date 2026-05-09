@@ -331,7 +331,7 @@ var ABILITY_DESCS = {
   hinata:   {type:'Preemptive',desc:'Attacks 1~5 times.',skinEffect:'Swimsuit Hinata: Windfury added',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">Windfury</span>. Preemptive: Attacks 1~5 times.'},
   airship:  {type:'Deathrattle',desc:'Summons <Afro Makoto>.',skinEffect:''},
   // 7-star hidden
-  gehenna_prefect:        {type:'Passive / Deathrattle',hiddenCond:'Appears when Schale has Hina, Iori, Ako, and Chinatsu.',desc:'Appears by absorbing Hina, Iori, Ako, Chinatsu from Schale.\nAdds the sum of absorbed students\' ATK and HP respectively.\nDeathrattle: Permanently disappears this game.\nThen summons <Last Hina> (10/10, Cleave+Venomous).',skinEffect:'',quote:'Hina: Haa... let\'s finish this quickly.'},
+  gehenna_prefect:        {type:'Passive / Deathrattle',hiddenCond:'Appears when Schale has Hina, Iori, Ako, and Chinatsu.',desc:'Appears by absorbing Hina, Iori, Ako, Chinatsu from Schale.\nAdds the sum of absorbed students\' ATK and HP respectively.\nDeathrattle: Summons <Last Hina> (10/10, Cleave+Venomous).',skinEffect:'',quote:'Hina: Haa... let\'s finish this quickly.'},
   gehenna_pandemonium:    {type:'Passive / Deathrattle',hiddenCond:'Appears when Schale has Makoto, Satsuki, Iroha, Ibuki, and Chiaki.',desc:'Appears by absorbing Makoto, Satsuki, Iroha, Ibuki, Chiaki from Schale.\nBase stats 10/10 plus absorbed students\' ATK sum and HP sum.\nDeathrattle: Steals 2 random opponents for this battle.\nSummons golden Airship (Taunt) and golden Toramaru (Taunt).',skinEffect:'',quote:'Makoto: This time for sure, we\'ll wipe Trinity off the map of Kivotos!'},
   gehenna_traingun:       {type:'Passive / Battle Start / Deathrattle',hiddenCond:'Appears at Schedule Lv.6+, only Gehenna students recruited.',desc:'Does not attack.\nBattle Start: Deals 6 Cleave damage to all opponents.\nBattle Start trigger count increases each surviving battle.\nDeathrattle: Permanently disappears this game.',skinEffect:'',quote:'...Do not leave a single piece, a single fragment of what the <Thunder Emperor> left behind.'},
   trinity_mika:           {type:'Passive / Preemptive',hiddenCond:'Appears at Schedule Lv.6+, only Trinity students recruited.',desc:'Passive: Immune to damage and defeat from abilities/effects.\nCan only be defeated by battle damage.\nPreemptive: ATK is doubled when attacking Gehenna students.',skinEffect:'',quote:'Mika: Yep! You\'ve been waiting long, right? Now it\'s my turn to shine☆'},
@@ -3857,9 +3857,7 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   // ===== 7-star hidden Deathrattle =====
   else if(id==='gehenna_prefect'){
-    // Gehenna 선도부 DR: permanent 소멸 + Last Hina(10/10, Cleave+Venomous) summon
-    unit._permanentlyDestroyed=true;
-    log.push({cls:'kill',text:'[Deathrattle] '+unit.name+': permanently disappears from this game!'});
+    // Gehenna 선도부 DR: Last Hina(10/10, Cleave+Venomous) summon
     if(countAlive(mySide)<BATTLE_MAX){
       var hina=makeToken('hina_the_last');
       hina.alive=true;hina.poisonImmune=false;hina.isToken=true;hina._mySide=mySide;
@@ -5162,7 +5160,7 @@ function startBattle() {
         chosen.damageText='draw!';
       }
       if(p.hp<=0){p.dead=true;G.placement=G.aliveCount;G.aliveCount--;chosen._eliminated=true;}
-      var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia','gehenna_prefect'];
+      var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia'];
       if(chosen.steps.length>0){
         var finalSnap=chosen.steps[chosen.steps.length-1].snap;
         if(finalSnap&&finalSnap.a){

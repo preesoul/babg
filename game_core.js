@@ -370,7 +370,7 @@ var ABILITY_DESCS = {
   hinata:   {type:'개전',desc:'아군 트리니티 학생 전체에게 +3/+3 부여.',skinEffect:'수영복 히나타: +6/+6',skinEffectDesc:'개전: 아군 트리니티 학생 전체에게 <span style="color:#ffd700;font-weight:700">+6/+6</span> 부여.'},
   airship:  {type:'뒤끝',desc:'<파마머리 마코토>를 소환합니다.',skinEffect:''},
   // 7성 히든
-  gehenna_prefect:        {type:'패시브 / 뒤끝',hiddenCond:'샬레에 히나·이오리·아코·치나츠가 모두 있을 때 등장.',desc:'샬레의 히나, 이오리, 아코, 치나츠를 흡수하며 등장합니다.\n흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n뒤끝: 이번 게임에서 완전히 사라집니다.\n이후 <마지막 히나>(10/10, 광역+독사굴)를 소환합니다.',skinEffect:'',quote:'히나: 하아… 빨리 끝내지.'},
+  gehenna_prefect:        {type:'패시브 / 뒤끝',hiddenCond:'샬레에 히나·이오리·아코·치나츠가 모두 있을 때 등장.',desc:'샬레의 히나, 이오리, 아코, 치나츠를 흡수하며 등장합니다.\n흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n뒤끝: <마지막 히나>(10/10, 광역+독사굴)를 소환합니다.',skinEffect:'',quote:'히나: 하아… 빨리 끝내지.'},
   gehenna_pandemonium:    {type:'패시브 / 뒤끝',hiddenCond:'샬레에 마코토·사츠키·이로하·이부키·치아키가 모두 있을 때 등장.',desc:'샬레의 마코토, 사츠키, 이로하, 이부키, 치아키를 흡수하며 등장합니다.\n기본 능력치 10/10에 흡수한 학생들 각각의 공격력 합, 체력 합을 각각 더합니다.\n뒤끝: 상대 무작위 2인을 이번 전투동안 빼앗습니다.\n황금 비행선(지켜줌)과 황금 토라마루(지켜줌)를 소환합니다.',skinEffect:'',quote:'마코토: 이번에야말로 트리니티를 키보토스의 지도에서 없애버릴 때다!'},
   gehenna_traingun:       {type:'패시브 / 개전 / 뒤끝',hiddenCond:'스케쥴 Lv.6 이상, 게헨나 학생만 영입했을 때 등장.',desc:'공격하지 않습니다.\n개전: 상대 전체에 6의 광역 데미지.\n살아남은 전투마다 개전 발동 횟수가 증가합니다.\n뒤끝: 이번 게임에서 완전히 사라집니다.',skinEffect:'',quote:'…<뇌제>가 남긴 조각 하나, 파편 하나 남기지 마라.'},
   trinity_mika:           {type:'패시브 / 선빵',hiddenCond:'스케쥴 Lv.6 이상, 트리니티 학생만 영입했을 때 등장.',desc:'패시브: 능력/효과로 인한 데미지와 쓰러짐에 면역입니다.\n전투 데미지로만 쓰러뜨릴 수 있습니다.\n선빵: 공격 시 상대가 게헨나 출신이면 공격력이 두 배가 됩니다.',skinEffect:'',quote:'미카: 응! 오래 기다렸지? 이제 내가 활약할 차례인 거네☆'},
@@ -5728,9 +5728,7 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   // ===== 7성 히든 뒤끝 =====
   else if(id==='gehenna_prefect'){
-    // 게헨나 선도부 DR: 영구 소멸 + 마지막 히나(10/10, 광역+독사굴) 소환
-    unit._permanentlyDestroyed=true;
-    log.push({cls:'kill',text:'[뒤끝] '+unit.name+': 이번 게임에서 완전히 사라집니다!'});
+    // 게헨나 선도부 DR: 마지막 히나(10/10, 광역+독사굴) 소환
     if(countAlive(mySide)<BATTLE_MAX){
       var hina=makeToken('hina_the_last');
       hina.alive=true;hina.poisonImmune=false;hina.isToken=true;hina._mySide=mySide;
@@ -7446,7 +7444,7 @@ function startBattle() {
         chosen.damageText='무승부!';
       }
       if(p.hp<=0){p._ghostBoard=_snapshotForGhost(p);p._deathTurn=G.turn;p.dead=true;G.placement=G.aliveCount;G.aliveCount--;chosen._eliminated=true;}
-      var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia','gehenna_prefect'];
+      var PERMA_DESTROY_IDS=['gehenna_traingun','trinity_seia'];
       if(chosen.steps.length>0){
         var finalSnap=chosen.steps[chosen.steps.length-1].snap;
         if(finalSnap&&finalSnap.a){
@@ -7666,7 +7664,7 @@ function aiAutoBattles() {
   // 트레인건 영구 소멸 (전투 결과 기준)
   function _checkPermaDestroy(p, snapSide) {
     if(p.dead||!snapSide) return;
-    var PERMA=['gehenna_traingun','trinity_seia','gehenna_prefect'];
+    var PERMA=['gehenna_traingun','trinity_seia'];
     for(var i=0;i<snapSide.length;i++){
       if(!snapSide[i].alive && PERMA.indexOf(snapSide[i].baseId)!==-1){
         for(var j=p.board.length-1;j>=0;j--){
