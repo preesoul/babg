@@ -3287,83 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-04-26T16:21:50",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아리스&케이",
-              "baseId": "Arisu_Kei",
-              "atk": 51,
-              "hp": 51,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "ranged",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 20,
-              "hp": 30,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 19,
-              "hp": 19,
-              "tier": 6,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "우타하(치어리더)",
-              "baseId": "utaha",
-              "atk": 25,
-              "hp": 25,
-              "tier": 5,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": true,
-              "img": "Utaha_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈(메이드)",
-              "baseId": "yuzu",
-              "atk": 22,
-              "hp": 26,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
-            }
-          ],
-          "pinned": true
-        },
-        {
           "date": "2026-04-26T17:04:04",
           "placement": 1,
           "turn": 16,
@@ -4012,9 +3935,82 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-09T10:47:52",
+          "placement": 5,
+          "turn": 11,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아즈사",
+              "baseId": "azusa",
+              "atk": 15,
+              "hp": 15,
+              "tier": 4,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Azusa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 3,
+              "hp": 3,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이치카",
+              "baseId": "ichika",
+              "atk": 12,
+              "hp": 8,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "windfury",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ichika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미도리",
+              "baseId": "midori",
+              "atk": 13,
+              "hp": 11,
+              "tier": 1,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Midori.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 138,
+      "points": 155,
       "questState": {
         "daily": {
           "date": "2026-05-09",
@@ -4031,8 +4027,8 @@
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 4,
+              "completed": true
             }
           ],
           "rerolled": true
@@ -4042,8 +4038,8 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 9,
-              "completed": false
+              "progress": 11,
+              "completed": true
             },
             {
               "id": "win3",
@@ -4139,10 +4135,10 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 18
+        "streak": 0,
+        "legendPoints": 17
       },
-      "totalGames": 19,
+      "totalGames": 20,
       "totalWins": 18,
       "totalFirsts": 16,
       "starterEnigmaGranted": true
