@@ -6460,63 +6460,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-04-06T01:59:15",
-          "placement": 2,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 104,
-              "hp": 101,
-              "tier": 7,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "카요코",
-              "baseId": "kayoko",
-              "atk": 9,
-              "hp": 9,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kayoko.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "하루카(새해)",
-              "baseId": "haruka",
-              "atk": 27,
-              "hp": 29,
-              "tier": 1,
-              "kw": [
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Haruka_(New_Year).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마코토",
-              "baseId": "makoto",
-              "atk": 11,
-              "hp": 11,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Makoto.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-04-27T02:50:15",
           "placement": 1,
           "turn": 14,
@@ -7143,9 +7086,83 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-11T05:42:41",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "오토기",
+              "baseId": "otogi",
+              "atk": 16,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Otogi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "유키노",
+              "baseId": "yukino",
+              "atk": 14,
+              "hp": 10,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yukino.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 9,
+              "hp": 9,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 4,
+              "hp": 14,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive",
+                "poison",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "키리노(수영복)",
+              "baseId": "kirino",
+              "atk": 25,
+              "hp": 25,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Kirino_(Swimsuit).png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 30,
+      "points": 32,
       "questState": {
         "daily": {
           "date": "2026-05-11",
@@ -7157,12 +7174,12 @@
             },
             {
               "id": "skin3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -7173,17 +7190,17 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
@@ -7201,14 +7218,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 4,
-        "stars": 1,
-        "streak": 1,
+        "tier": 3,
+        "stars": 0,
+        "streak": 2,
         "legendPoints": 0
       },
-      "totalGames": 11,
-      "totalWins": 8,
-      "totalFirsts": 7,
+      "totalGames": 12,
+      "totalWins": 9,
+      "totalFirsts": 8,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
