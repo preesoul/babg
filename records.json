@@ -6460,81 +6460,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-04-29T07:37:49",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 36,
-              "hp": 38,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 37,
-              "hp": 37,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠바키(가이드)",
-              "baseId": "tsubaki",
-              "atk": 43,
-              "hp": 41,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Tsubaki_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "시즈코",
-              "baseId": "shizuko",
-              "atk": 20,
-              "hp": 21,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Shizuko.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 40,
-              "hp": 40,
-              "tier": 7,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-07T10:24:51",
           "placement": 8,
           "turn": 8,
@@ -7151,9 +7076,84 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-11T08:32:03",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "오토기",
+              "baseId": "otogi",
+              "atk": 14,
+              "hp": 13,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Otogi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "미스즈",
+              "baseId": "misuzu",
+              "atk": 20,
+              "hp": 22,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Misuzu.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 76,
+              "hp": 86,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "키리노(수영복)",
+              "baseId": "kirino",
+              "atk": 27,
+              "hp": 27,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "survive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kirino_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "코노카",
+              "baseId": "konoka",
+              "atk": 19,
+              "hp": 19,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Konoka.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 48,
+      "points": 60,
       "questState": {
         "daily": {
           "date": "2026-05-11",
@@ -7181,17 +7181,17 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 5,
+              "progress": 7,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "play10",
-              "progress": 4,
+              "progress": 5,
               "completed": false
             }
           ]
@@ -7210,13 +7210,13 @@
       "starterEnigmaGranted": true,
       "rank": {
         "tier": 3,
-        "stars": 0,
-        "streak": 1,
+        "stars": 2,
+        "streak": 2,
         "legendPoints": 0
       },
-      "totalGames": 15,
-      "totalWins": 11,
-      "totalFirsts": 9,
+      "totalGames": 16,
+      "totalWins": 12,
+      "totalFirsts": 10,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
