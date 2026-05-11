@@ -6460,83 +6460,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-04-27T02:50:15",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "네루",
-              "baseId": "neru",
-              "atk": 17,
-              "hp": 17,
-              "tier": 5,
-              "kw": [
-                "shield",
-                "survive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Neru.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네",
-              "baseId": "akane",
-              "atk": 14,
-              "hp": 16,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Akane.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카린",
-              "baseId": "karin",
-              "atk": 25,
-              "hp": 16,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce",
-                "poison",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Karin.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카린",
-              "baseId": "karin",
-              "atk": 8,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Karin.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키",
-              "baseId": "toki",
-              "atk": 27,
-              "hp": 32,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Toki.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-04-27T06:01:04",
           "placement": 1,
           "turn": 15,
@@ -7160,9 +7083,84 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-05-11T06:42:32",
+          "placement": 2,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카즈사(밴드)",
+              "baseId": "kazusa",
+              "atk": 27,
+              "hp": 17,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Kazusa_(Band).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 34,
+              "hp": 34,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "스즈미(마법소녀)",
+              "baseId": "suzumi",
+              "atk": 11,
+              "hp": 15,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Suzumi_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 10,
+              "hp": 10,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 32,
+      "points": 44,
       "questState": {
         "daily": {
           "date": "2026-05-11",
@@ -7174,13 +7172,13 @@
             },
             {
               "id": "skin3",
-              "progress": 1,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "discover3",
-              "progress": 2,
-              "completed": false
+              "progress": 6,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -7190,7 +7188,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 1,
+              "progress": 3,
               "completed": false
             },
             {
@@ -7200,7 +7198,7 @@
             },
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -7220,11 +7218,11 @@
       "rank": {
         "tier": 3,
         "stars": 0,
-        "streak": 2,
+        "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 12,
-      "totalWins": 9,
+      "totalGames": 13,
+      "totalWins": 10,
       "totalFirsts": 8,
       "recruitedTier7": [
         "gehenna_traingun",
