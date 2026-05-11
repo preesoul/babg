@@ -6460,76 +6460,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-04-27T06:01:04",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "쿠루미",
-              "baseId": "kurumi",
-              "atk": 17,
-              "hp": 25,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive",
-                "reborn",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Kurumi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "칸나",
-              "baseId": "kanna",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kanna.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "칸나",
-              "baseId": "kanna",
-              "atk": 1,
-              "hp": 1,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kanna.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "미야코(수영복)",
-              "baseId": "miyako",
-              "atk": 17,
-              "hp": 15,
-              "tier": 5,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Miyako_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "미스즈",
-              "baseId": "misuzu",
-              "atk": 4,
-              "hp": 6,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Misuzu.png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-04-28T02:15:27",
           "placement": 1,
           "turn": 16,
@@ -7158,9 +7088,78 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-11T06:49:23",
+          "placement": 7,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "아리스",
+              "baseId": "arisu",
+              "atk": 13,
+              "hp": 5,
+              "tier": 4,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Arisu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈",
+              "baseId": "yuzu",
+              "atk": 4,
+              "hp": 5,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Yuzu.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리",
+              "baseId": "midori",
+              "atk": 6,
+              "hp": 6,
+              "tier": 1,
+              "kw": [],
+              "isSkin": false,
+              "img": "Midori.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 9,
+              "hp": 15,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "모모이",
+              "baseId": "momoi",
+              "atk": 7,
+              "hp": 8,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Momoi.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 44,
+      "points": 46,
       "questState": {
         "daily": {
           "date": "2026-05-11",
@@ -7188,7 +7187,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             },
             {
@@ -7198,7 +7197,7 @@
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
@@ -7216,12 +7215,12 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 3,
-        "stars": 0,
+        "tier": 4,
+        "stars": 2,
         "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 13,
+      "totalGames": 14,
       "totalWins": 10,
       "totalFirsts": 8,
       "recruitedTier7": [
