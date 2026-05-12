@@ -6460,64 +6460,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-07T10:24:51",
-          "placement": 8,
-          "turn": 8,
-          "tier": 5,
-          "board": [
-            {
-              "name": "하이네",
-              "baseId": "haine",
-              "atk": 4,
-              "hp": 3,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Haine.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "피나",
-              "baseId": "pina",
-              "atk": 2,
-              "hp": 3,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Pina.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게",
-              "baseId": "renge",
-              "atk": 6,
-              "hp": 5,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Renge.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "이즈나",
-              "baseId": "izuna",
-              "atk": 4,
-              "hp": 4,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Izuna.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-07T10:38:25",
           "placement": 1,
           "turn": 15,
@@ -7151,21 +7093,96 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-05-12T06:24:38",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "슌(어린이)",
+              "baseId": "shun",
+              "atk": 30,
+              "hp": 22,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shun_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "루미(어린이)",
+              "baseId": "rumi",
+              "atk": 13,
+              "hp": 15,
+              "tier": 5,
+              "kw": [
+                "windfury",
+                "poison",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Rumi_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "키키",
+              "baseId": "shanhai_kiki",
+              "atk": 6,
+              "hp": 8,
+              "tier": 7,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "unique/Kiki.png",
+              "school": "산해경"
+            },
+            {
+              "name": "사야(사복)",
+              "baseId": "saya",
+              "atk": 15,
+              "hp": 17,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Saya_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 9,
+              "hp": 13,
+              "tier": 2,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            }
+          ]
         }
       ],
-      "points": 60,
+      "points": 67,
       "questState": {
         "daily": {
           "date": "2026-05-12",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -7191,7 +7208,7 @@
             },
             {
               "id": "play10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             }
           ]
@@ -7209,14 +7226,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 3,
+        "tier": 2,
         "stars": 2,
-        "streak": 2,
+        "streak": 3,
         "legendPoints": 0
       },
-      "totalGames": 16,
-      "totalWins": 12,
-      "totalFirsts": 10,
+      "totalGames": 17,
+      "totalWins": 13,
+      "totalFirsts": 11,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
