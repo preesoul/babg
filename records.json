@@ -7156,25 +7156,25 @@
       "points": 60,
       "questState": {
         "daily": {
-          "date": "2026-05-11",
+          "date": "2026-05-12",
           "quests": [
             {
-              "id": "kill10",
+              "id": "win1",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "play3",
               "progress": 0,
               "completed": false
             },
             {
               "id": "skin3",
-              "progress": 3,
-              "completed": true
-            },
-            {
-              "id": "discover3",
-              "progress": 6,
-              "completed": true
+              "progress": 0,
+              "completed": false
             }
           ],
-          "rerolled": true
+          "rerolled": false
         },
         "weekly": {
           "weekStart": "2026-05-11",
@@ -7205,7 +7205,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-11"
+        "_lastLoginDate": "2026-05-12"
       },
       "starterEnigmaGranted": true,
       "rank": {
