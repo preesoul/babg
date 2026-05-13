@@ -3287,79 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-09T10:47:52",
-          "placement": 5,
-          "turn": 11,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아즈사",
-              "baseId": "azusa",
-              "atk": 15,
-              "hp": 15,
-              "tier": 4,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Azusa.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리",
-              "baseId": "mari",
-              "atk": 3,
-              "hp": 3,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mari.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이치카",
-              "baseId": "ichika",
-              "atk": 12,
-              "hp": 8,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ichika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미도리",
-              "baseId": "midori",
-              "atk": 13,
-              "hp": 11,
-              "tier": 1,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Midori.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-09T10:55:52",
           "placement": 1,
           "turn": 13,
@@ -3969,12 +3896,85 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T21:31:20",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "주리(웨이트리스)",
+              "baseId": "juri",
+              "atk": 6,
+              "hp": 6,
+              "tier": 1,
+              "kw": [
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Juri_(maid).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "게헨나 선도부",
+              "baseId": "gehenna_prefect",
+              "atk": 34,
+              "hp": 29,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "cleave",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Gehenna_PrefectTeam.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 5,
+              "hp": 7,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 248,
+      "points": 260,
       "questState": {
         "daily": {
-          "date": "2026-05-13",
+          "date": "2026-05-14",
           "quests": [
             {
               "id": "win1",
@@ -3987,12 +3987,12 @@
               "completed": false
             },
             {
-              "id": "skin3",
-              "progress": 3,
+              "id": "gehenna10",
+              "progress": 15,
               "completed": true
             }
           ],
-          "rerolled": true
+          "rerolled": false
         },
         "weekly": {
           "weekStart": "2026-05-11",
@@ -4004,7 +4004,7 @@
             },
             {
               "id": "skin10",
-              "progress": 7,
+              "progress": 9,
               "completed": false
             },
             {
@@ -4097,12 +4097,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 6,
-        "legendPoints": 22
+        "streak": 7,
+        "legendPoints": 23
       },
-      "totalGames": 29,
-      "totalWins": 27,
-      "totalFirsts": 23,
+      "totalGames": 30,
+      "totalWins": 28,
+      "totalFirsts": 24,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
