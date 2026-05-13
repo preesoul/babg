@@ -3982,9 +3982,9 @@
               "completed": true
             },
             {
-              "id": "hyakkiyako10",
-              "progress": 17,
-              "completed": true
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "skin3",
@@ -3992,7 +3992,7 @@
               "completed": true
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-11",
