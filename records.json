@@ -3287,75 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-07T08:57:04",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "만마전",
-              "baseId": "gehenna_pandemonium",
-              "atk": 45,
-              "hp": 42,
-              "tier": 7,
-              "kw": [
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "피나",
-              "baseId": "pina",
-              "atk": 1,
-              "hp": 2,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Pina.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-08T13:18:14",
           "placement": 2,
           "turn": 16,
@@ -3975,27 +3906,97 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T00:07:17",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "와카모",
+              "baseId": "wakamo",
+              "atk": 13,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Wakamo.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 25,
+              "hp": 25,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "시즈코(수영복)",
+              "baseId": "shizuko",
+              "atk": 70,
+              "hp": 76,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Shizuko_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 7,
+              "hp": 7,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 207,
+      "points": 224,
       "questState": {
         "daily": {
           "date": "2026-05-13",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
-              "completed": false
+              "progress": 17,
+              "completed": true
             },
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4005,17 +4006,17 @@
           "quests": [
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 1,
+              "progress": 4,
               "completed": false
             },
             {
               "id": "discover10",
-              "progress": 3,
+              "progress": 7,
               "completed": false
             }
           ]
@@ -4103,12 +4104,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 3,
-        "legendPoints": 19
+        "streak": 4,
+        "legendPoints": 20
       },
-      "totalGames": 26,
-      "totalWins": 24,
-      "totalFirsts": 20,
+      "totalGames": 27,
+      "totalWins": 25,
+      "totalFirsts": 21,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
