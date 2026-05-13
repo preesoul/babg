@@ -6461,80 +6461,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-11T05:42:41",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "오토기",
-              "baseId": "otogi",
-              "atk": 16,
-              "hp": 11,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Otogi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "유키노",
-              "baseId": "yukino",
-              "atk": 14,
-              "hp": 10,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yukino.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "니코",
-              "baseId": "niko",
-              "atk": 9,
-              "hp": 9,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Niko.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미",
-              "baseId": "kurumi",
-              "atk": 4,
-              "hp": 14,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive",
-                "poison",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Kurumi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "키리노(수영복)",
-              "baseId": "kirino",
-              "atk": 25,
-              "hp": 25,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Kirino_(Swimsuit).png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-05-11T06:42:32",
           "placement": 2,
           "turn": 15,
@@ -7129,9 +7055,85 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T06:03:55",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "데스 모모이",
+              "baseId": "millennium_death_momoi",
+              "atk": 51,
+              "hp": 53,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Death_momoi.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유즈(메이드)",
+              "baseId": "yuzu",
+              "atk": 43,
+              "hp": 45,
+              "tier": 2,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Yuzu_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 43,
+              "hp": 43,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카(체육복)",
+              "baseId": "yuuka",
+              "atk": 47,
+              "hp": 47,
+              "tier": 3,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Yuuka_(Sportswear).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아리스&케이",
+              "baseId": "Arisu_Kei",
+              "atk": 94,
+              "hp": 86,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "ranged",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Arisu_Kei.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 95,
+      "points": 97,
       "questState": {
         "daily": {
           "date": "2026-05-13",
@@ -7148,7 +7150,7 @@
             },
             {
               "id": "skin3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ],
@@ -7159,7 +7161,7 @@
           "quests": [
             {
               "id": "skin10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             },
             {
@@ -7189,12 +7191,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 0
+        "streak": 2,
+        "legendPoints": 1
       },
-      "totalGames": 21,
-      "totalWins": 16,
-      "totalFirsts": 14,
+      "totalGames": 22,
+      "totalWins": 17,
+      "totalFirsts": 15,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
