@@ -3982,7 +3982,7 @@
               "completed": true
             },
             {
-              "id": "trinity10",
+              "id": "kill10",
               "progress": 0,
               "completed": false
             },
@@ -3992,7 +3992,7 @@
               "completed": true
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-11",
