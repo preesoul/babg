@@ -6461,50 +6461,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-08T06:08:59",
-          "placement": 7,
-          "turn": 12,
-          "tier": 6,
-          "board": [
-            {
-              "name": "시로코 테러",
-              "baseId": "Shiroko_Terror",
-              "atk": 58,
-              "hp": 54,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Shiroko_Terror.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "노노미",
-              "baseId": "nonomi",
-              "atk": 4,
-              "hp": 4,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Nonomi.png",
-              "school": "아비도스"
-            },
-            {
-              "name": "노노미",
-              "baseId": "nonomi",
-              "atk": 4,
-              "hp": 4,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Nonomi.png",
-              "school": "아비도스"
-            }
-          ]
-        },
-        {
           "date": "2026-05-08T06:39:11",
           "placement": 1,
           "turn": 16,
@@ -7136,9 +7092,52 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T05:02:05",
+          "placement": 7,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "보충수업부",
+              "baseId": "trinity_makeup",
+              "atk": 58,
+              "hp": 63,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Make_Up_Work_Club.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "레이사(마법소녀)",
+              "baseId": "reisa",
+              "atk": 7,
+              "hp": 9,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Reisa_(Magical).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "코하루",
+              "baseId": "koharu",
+              "atk": 1,
+              "hp": 2,
+              "tier": 1,
+              "kw": [
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "Koharu.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 76,
+      "points": 78,
       "questState": {
         "daily": {
           "date": "2026-05-13",
@@ -7176,7 +7175,7 @@
             },
             {
               "id": "play10",
-              "progress": 8,
+              "progress": 9,
               "completed": false
             }
           ]
@@ -7194,12 +7193,12 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 0,
-        "stars": 0,
-        "streak": 5,
+        "tier": 1,
+        "stars": 4,
+        "streak": 0,
         "legendPoints": 0
       },
-      "totalGames": 19,
+      "totalGames": 20,
       "totalWins": 15,
       "totalFirsts": 13,
       "recruitedTier7": [
