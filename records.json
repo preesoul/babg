@@ -6462,75 +6462,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-11T06:49:23",
-          "placement": 7,
-          "turn": 11,
-          "tier": 5,
-          "board": [
-            {
-              "name": "아리스",
-              "baseId": "arisu",
-              "atk": 13,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "Arisu.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈",
-              "baseId": "yuzu",
-              "atk": 4,
-              "hp": 5,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yuzu.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리",
-              "baseId": "midori",
-              "atk": 6,
-              "hp": 6,
-              "tier": 1,
-              "kw": [],
-              "isSkin": false,
-              "img": "Midori.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 9,
-              "hp": 15,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "모모이",
-              "baseId": "momoi",
-              "atk": 7,
-              "hp": 8,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Momoi.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-11T07:01:24",
           "placement": 1,
           "turn": 17,
@@ -7138,9 +7069,69 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T10:17:39",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 73,
+              "hp": 65,
+              "tier": 7,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아유무",
+              "baseId": "ayumu",
+              "atk": 11,
+              "hp": 8,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Ayumu.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 24,
+              "hp": 24,
+              "tier": 6,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 80,
+              "hp": 77,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "reborn",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 99,
+      "points": 101,
       "questState": {
         "daily": {
           "date": "2026-05-13",
@@ -7198,12 +7189,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 3,
-        "legendPoints": 2
+        "streak": 4,
+        "legendPoints": 3
       },
-      "totalGames": 23,
-      "totalWins": 18,
-      "totalFirsts": 16,
+      "totalGames": 24,
+      "totalWins": 19,
+      "totalFirsts": 17,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
