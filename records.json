@@ -6461,87 +6461,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-07T10:38:25",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 46,
-              "hp": 46,
-              "tier": 7,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리",
-              "baseId": "yukari",
-              "atk": 23,
-              "hp": 22,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Yukari.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게(수영복)",
-              "baseId": "renge",
-              "atk": 30,
-              "hp": 26,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn",
-                "poison",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "피나(가이드)",
-              "baseId": "pina",
-              "atk": 39,
-              "hp": 41,
-              "tier": 1,
-              "kw": [
-                "shield",
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Pina_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠바키(가이드)",
-              "baseId": "tsubaki",
-              "atk": 35,
-              "hp": 33,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Tsubaki_(Guide).png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-08T05:59:28",
           "placement": 8,
           "turn": 9,
@@ -7169,22 +7088,80 @@
               "school": "산해경"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T04:10:20",
+          "placement": 1,
+          "turn": 21,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아리우스 스쿼드",
+              "baseId": "arius_squad",
+              "atk": 127,
+              "hp": 100,
+              "tier": 7,
+              "kw": [
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "unique/Arius_squad.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "사오리",
+              "baseId": "saori",
+              "atk": 14,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Saori.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "아리우스 스쿼드",
+              "baseId": "arius_squad",
+              "atk": 127,
+              "hp": 100,
+              "tier": 7,
+              "kw": [
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "unique/Arius_squad.png",
+              "school": "아리우스 분교"
+            },
+            {
+              "name": "아츠코(수영복)",
+              "baseId": "atsuko",
+              "atk": 25,
+              "hp": 25,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Atsuko_(Swimsuit).png",
+              "school": "아리우스 분교"
+            }
+          ]
         }
       ],
-      "points": 67,
+      "points": 74,
       "questState": {
         "daily": {
           "date": "2026-05-13",
           "quests": [
             {
               "id": "discover3",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 53,
+              "completed": true
             },
             {
               "id": "skin3",
@@ -7209,7 +7186,7 @@
             },
             {
               "id": "play10",
-              "progress": 6,
+              "progress": 7,
               "completed": false
             }
           ]
@@ -7227,14 +7204,14 @@
       },
       "starterEnigmaGranted": true,
       "rank": {
-        "tier": 2,
+        "tier": 1,
         "stars": 2,
-        "streak": 3,
+        "streak": 4,
         "legendPoints": 0
       },
-      "totalGames": 17,
-      "totalWins": 13,
-      "totalFirsts": 11,
+      "totalGames": 18,
+      "totalWins": 14,
+      "totalFirsts": 12,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
