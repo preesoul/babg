@@ -3287,75 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-08T13:18:14",
-          "placement": 2,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 35,
-              "hp": 34,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠루기(수영복)",
-              "baseId": "tsurugi",
-              "atk": 29,
-              "hp": 25,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리",
-              "baseId": "mari",
-              "atk": 13,
-              "hp": 13,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mari.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코",
-              "baseId": "sakurako",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sakurako.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 10,
-              "hp": 10,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-09T10:33:29",
           "placement": 1,
           "turn": 14,
@@ -3976,9 +3907,79 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T09:49:16",
+          "placement": 1,
+          "turn": 15,
+          "tier": 5,
+          "board": [
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 20,
+              "hp": 19,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "치세",
+              "baseId": "chise",
+              "atk": 26,
+              "hp": 27,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Chise.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠루기",
+              "baseId": "tsurugi",
+              "atk": 33,
+              "hp": 37,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Tsurugi.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 43,
+              "hp": 43,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "카에데(가이드)",
+              "baseId": "kaede",
+              "atk": 23,
+              "hp": 23,
+              "tier": 1,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Kaede_(Guide).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 224,
+      "points": 246,
       "questState": {
         "daily": {
           "date": "2026-05-13",
@@ -4006,18 +4007,18 @@
           "quests": [
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 4,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "discover10",
-              "progress": 7,
-              "completed": false
+              "progress": 10,
+              "completed": true
             }
           ]
         },
@@ -4104,12 +4105,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 20
+        "streak": 5,
+        "legendPoints": 21
       },
-      "totalGames": 27,
-      "totalWins": 25,
-      "totalFirsts": 21,
+      "totalGames": 28,
+      "totalWins": 26,
+      "totalFirsts": 22,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
