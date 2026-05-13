@@ -2198,8 +2198,15 @@ function showDiscover(p) {
       var added = addToBoard(p, makeMinion(tmpl, false));
       if(!added){
         var newUnit = makeMinion(tmpl, false);
-        if(!p.bench){p.bench=newUnit;}
-        else{p.board.push(newUnit);triggerBattlecry(newUnit,p);}
+        if(!p.bench){
+          p.bench=newUnit;
+        } else if(p.board.length<MAX_BOARD){
+          p.board.push(newUnit);triggerBattlecry(newUnit,p);
+        } else {
+          // 보드 + 벤치 모두 가득 (코코나 BC가 트리플 중 벤치 채우는 케이스 등)
+          // → 정원 초과 방지를 위해 풀에 반환
+          returnToPool(tmpl.id);
+        }
       }
     }
     overlay.style.zIndex='';
@@ -5939,6 +5946,9 @@ function _doDR(unit, mySide, otherSide, log) {
   }
   else if(id==='arius_squad'){
     // 아리우스 스쿼드 뒤끝: 흡수한 사오리/미사키/아츠코/히요리를 흡수 당시 상태로 귀환
+    // 더블 DR 방지 (나구사/카스미 DR로 인한 강제 처치 → 자폭 자체 DR 순서로 두 번 발동되던 버그)
+    if(unit._ariusDRFired) return;
+    unit._ariusDRFired=true;
     var arAbsorbed=unit._ariusAbsorbed||(G._ariusAbsorbed||[]);
     if(arAbsorbed.length>0){
       for(var _ari=0;_ari<arAbsorbed.length;_ari++){
@@ -8788,7 +8798,11 @@ function saveGame(){
               _battlesSurvived:u._battlesSurvived||0,
               _hovercraftCounter:u._hovercraftCounter||0,
               _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,
-              _keiseisenBuffed:u._keiseisenBuffed||false};
+              _keiseisenBuffed:u._keiseisenBuffed||false,
+              // 흡수형 7성 스냅샷 (save/load 시 DR 복원용)
+              _ariusAbsorbed:u._ariusAbsorbed||null,
+              _p68Absorbed:u._p68Absorbed||null,
+              _shirokoAbsorbed:u._shirokoAbsorbed||null};
           }),
           bench:p.bench?{id:p.bench.id,baseId:p.bench.baseId,name:p.bench.name,school:p.bench.school,
             tier:p.bench.tier,atk:p.bench.atk,hp:p.bench.hp,maxHp:p.bench.maxHp||p.bench.hp,
@@ -8807,6 +8821,8 @@ function saveGame(){
       bunnyTossBonus:G.bunnyTossBonus||0,
       nonomiStoneSinceJoined:G.nonomiStoneSinceJoined||0,
       _shirokoTerrorAbsorbed:G._shirokoTerrorAbsorbed||[],
+      _p68Absorbed:G._p68Absorbed||null,
+      _ariusAbsorbed:G._ariusAbsorbed||null,
       matchups:G.matchups||{},lastMatchups:G.lastMatchups||{},_matchupsTurn:G._matchupsTurn||0,
       aiDifficulty:G.aiDifficulty,
       savedAt:Date.now()
@@ -8848,7 +8864,10 @@ function restoreGame(save){
           abilityImmune:u.abilityImmune||false,
           _battlesSurvived:u._battlesSurvived||0,
           _hovercraftCounter:u._hovercraftCounter||0,
-          _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false};
+          _akaneC4DR:u._akaneC4DR||false,_akaneC4Golden:u._akaneC4Golden||false,
+          _ariusAbsorbed:u._ariusAbsorbed||null,
+          _p68Absorbed:u._p68Absorbed||null,
+          _shirokoAbsorbed:u._shirokoAbsorbed||null};
       }),
       bench:p.bench?{id:p.bench.id,baseId:p.bench.baseId,name:p.bench.name,school:p.bench.school,
         tier:p.bench.tier,atk:p.bench.atk,hp:p.bench.hp,maxHp:p.bench.maxHp||p.bench.hp,
@@ -8875,6 +8894,8 @@ function restoreGame(save){
     bunnyTossBonus:save.bunnyTossBonus||0,
     nonomiStoneSinceJoined:save.nonomiStoneSinceJoined||0,
     _shirokoTerrorAbsorbed:save._shirokoTerrorAbsorbed||[],
+    _p68Absorbed:save._p68Absorbed||null,
+    _ariusAbsorbed:save._ariusAbsorbed||null,
     matchups:save.matchups||{},lastMatchups:save.lastMatchups||{},_matchupsTurn:save._matchupsTurn||0,
     aiDifficulty:(save.aiDifficulty!=null?save.aiDifficulty:_calcAiDifficulty(window._babgPlayerRank))};
   rollShop();
