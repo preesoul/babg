@@ -6461,81 +6461,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-11T06:42:32",
-          "placement": 2,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "카즈사(밴드)",
-              "baseId": "kazusa",
-              "atk": 27,
-              "hp": 17,
-              "tier": 2,
-              "kw": [
-                "pierce",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Kazusa_(Band).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 34,
-              "hp": 34,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "스즈미(마법소녀)",
-              "baseId": "suzumi",
-              "atk": 11,
-              "hp": 15,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Suzumi_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 10,
-              "hp": 10,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-11T06:49:23",
           "placement": 7,
           "turn": 11,
@@ -7131,9 +7056,90 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-13T09:44:53",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카린(버니걸)",
+              "baseId": "karin",
+              "atk": 36,
+              "hp": 24,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Karin_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 65,
+              "hp": 62,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield",
+                "windfury",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 10,
+              "hp": 20,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 13,
+              "hp": 13,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 17,
+              "hp": 31,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "taunt",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 97,
+      "points": 99,
       "questState": {
         "daily": {
           "date": "2026-05-13",
@@ -7191,12 +7197,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 2,
-        "legendPoints": 1
+        "streak": 3,
+        "legendPoints": 2
       },
-      "totalGames": 22,
-      "totalWins": 17,
-      "totalFirsts": 15,
+      "totalGames": 23,
+      "totalWins": 18,
+      "totalFirsts": 16,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
