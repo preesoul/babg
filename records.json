@@ -6454,81 +6454,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-11T08:32:03",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "오토기",
-              "baseId": "otogi",
-              "atk": 14,
-              "hp": 13,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Otogi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "미스즈",
-              "baseId": "misuzu",
-              "atk": 20,
-              "hp": 22,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Misuzu.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미",
-              "baseId": "kurumi",
-              "atk": 76,
-              "hp": 86,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": false,
-              "img": "Kurumi.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "키리노(수영복)",
-              "baseId": "kirino",
-              "atk": 27,
-              "hp": 27,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "survive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kirino_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "코노카",
-              "baseId": "konoka",
-              "atk": 19,
-              "hp": 19,
-              "tier": 5,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Konoka.png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-05-12T06:24:38",
           "placement": 1,
           "turn": 16,
@@ -7140,9 +7065,59 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-14T09:45:31",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "게헨나 선도부",
+              "baseId": "gehenna_prefect",
+              "atk": 113,
+              "hp": 105,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "windfury",
+                "cleave"
+              ],
+              "isSkin": false,
+              "img": "unique/Gehenna_PrefectTeam.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 77,
+              "hp": 75,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나(사복)",
+              "baseId": "sena",
+              "atk": 39,
+              "hp": 33,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Sena_(Casual).png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 103,
+      "points": 105,
       "questState": {
         "daily": {
           "date": "2026-05-14",
@@ -7200,12 +7175,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 5,
-        "legendPoints": 4
+        "streak": 6,
+        "legendPoints": 5
       },
-      "totalGames": 25,
-      "totalWins": 20,
-      "totalFirsts": 18,
+      "totalGames": 26,
+      "totalWins": 21,
+      "totalFirsts": 19,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
