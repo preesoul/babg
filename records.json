@@ -6454,78 +6454,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-11T07:01:24",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아루",
-              "baseId": "aru",
-              "atk": 46,
-              "hp": 45,
-              "tier": 5,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Aru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "이오리(수영복)",
-              "baseId": "iori",
-              "atk": 63,
-              "hp": 53,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "windfury",
-                "ranged"
-              ],
-              "isSkin": true,
-              "img": "Iori_(Swimsuit).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "토라마루",
-              "baseId": "iroha",
-              "atk": 47,
-              "hp": 43,
-              "tier": 0,
-              "kw": [],
-              "isSkin": false,
-              "img": "token/toramaru.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "마코토",
-              "baseId": "makoto",
-              "atk": 41,
-              "hp": 41,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Makoto.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "주리",
-              "baseId": "juri",
-              "atk": 44,
-              "hp": 44,
-              "tier": 1,
-              "kw": [
-                "reborn",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Juri.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-05-11T08:32:03",
           "placement": 1,
           "turn": 16,
@@ -7121,9 +7049,100 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-14T07:47:03",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사(수영복)",
+              "baseId": "nagusa",
+              "atk": 43,
+              "hp": 47,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Nagusa_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 33,
+              "hp": 33,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "reborn",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 29,
+              "hp": 27,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 31,
+              "hp": 29,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 44,
+              "hp": 44,
+              "tier": 7,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 101,
+      "points": 103,
       "questState": {
         "daily": {
           "date": "2026-05-14",
@@ -7181,12 +7200,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 3
+        "streak": 5,
+        "legendPoints": 4
       },
-      "totalGames": 24,
-      "totalWins": 19,
-      "totalFirsts": 17,
+      "totalGames": 25,
+      "totalWins": 20,
+      "totalFirsts": 18,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
