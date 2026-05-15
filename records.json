@@ -3982,7 +3982,7 @@
               "completed": false
             },
             {
-              "id": "hyakkiyako10",
+              "id": "gehenna10",
               "progress": 0,
               "completed": false
             },
@@ -3992,7 +3992,7 @@
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-11",
