@@ -3970,12 +3970,12 @@
               "completed": false
             },
             {
-              "id": "kill10",
+              "id": "skin3",
               "progress": 0,
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-11",
