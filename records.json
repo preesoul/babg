@@ -7120,15 +7120,15 @@
       "points": 105,
       "questState": {
         "daily": {
-          "date": "2026-05-14",
+          "date": "2026-05-15",
           "quests": [
             {
-              "id": "discover3",
+              "id": "trinity10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "millennium10",
+              "id": "kill10",
               "progress": 0,
               "completed": false
             },
@@ -7169,7 +7169,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-14"
+        "_lastLoginDate": "2026-05-15"
       },
       "starterEnigmaGranted": true,
       "rank": {
