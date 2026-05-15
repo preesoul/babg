@@ -6454,64 +6454,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T04:10:20",
-          "placement": 1,
-          "turn": 21,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아리우스 스쿼드",
-              "baseId": "arius_squad",
-              "atk": 127,
-              "hp": 100,
-              "tier": 7,
-              "kw": [
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "unique/Arius_squad.png",
-              "school": "아리우스 분교"
-            },
-            {
-              "name": "사오리",
-              "baseId": "saori",
-              "atk": 14,
-              "hp": 13,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Saori.png",
-              "school": "아리우스 분교"
-            },
-            {
-              "name": "아리우스 스쿼드",
-              "baseId": "arius_squad",
-              "atk": 127,
-              "hp": 100,
-              "tier": 7,
-              "kw": [
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "unique/Arius_squad.png",
-              "school": "아리우스 분교"
-            },
-            {
-              "name": "아츠코(수영복)",
-              "baseId": "atsuko",
-              "atk": 25,
-              "hp": 25,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Atsuko_(Swimsuit).png",
-              "school": "아리우스 분교"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T04:41:15",
           "placement": 1,
           "turn": 15,
@@ -7076,9 +7018,82 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-15T06:52:01",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 15,
+              "hp": 9,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "미스즈(바니걸)",
+              "baseId": "misuzu",
+              "atk": 13,
+              "hp": 17,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Misuzu_(Bunny_Girl).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "오토기(수영복)",
+              "baseId": "otogi",
+              "atk": 56,
+              "hp": 44,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "reborn",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Otogi_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "카야(쿠데타)",
+              "baseId": "kaya",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Kaya_(Coup).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 9,
+              "hp": 21,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 107,
+      "points": 114,
       "questState": {
         "daily": {
           "date": "2026-05-15",
@@ -7090,8 +7105,8 @@
             },
             {
               "id": "kill10",
-              "progress": 5,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
@@ -7136,12 +7151,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 7,
-        "legendPoints": 6
+        "streak": 8,
+        "legendPoints": 7
       },
-      "totalGames": 27,
-      "totalWins": 22,
-      "totalFirsts": 20,
+      "totalGames": 28,
+      "totalWins": 23,
+      "totalFirsts": 21,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
