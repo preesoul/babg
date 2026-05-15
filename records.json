@@ -6454,69 +6454,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T04:41:15",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "데스 모모이",
-              "baseId": "millennium_death_momoi",
-              "atk": 31,
-              "hp": 32,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury",
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 29,
-              "hp": 29,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈(메이드)",
-              "baseId": "yuzu",
-              "atk": 31,
-              "hp": 33,
-              "tier": 2,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아리스&케이",
-              "baseId": "Arisu_Kei",
-              "atk": 72,
-              "hp": 68,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "ranged",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T05:02:05",
           "placement": 7,
           "turn": 11,
@@ -7091,9 +7028,79 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-05-15T07:17:49",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 81,
+              "hp": 79,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 81,
+              "hp": 81,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 45,
+              "hp": 45,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키(가이드)",
+              "baseId": "tsubaki",
+              "atk": 78,
+              "hp": 76,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Tsubaki_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "치세(수영복)",
+              "baseId": "chise",
+              "atk": 59,
+              "hp": 61,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Chise_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 114,
+      "points": 116,
       "questState": {
         "daily": {
           "date": "2026-05-15",
@@ -7151,12 +7158,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 8,
-        "legendPoints": 7
+        "streak": 9,
+        "legendPoints": 8
       },
-      "totalGames": 28,
-      "totalWins": 23,
-      "totalFirsts": 21,
+      "totalGames": 29,
+      "totalWins": 24,
+      "totalFirsts": 22,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
