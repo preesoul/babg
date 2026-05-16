@@ -3287,71 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-09T15:23:28",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "밀레니엄 세미나",
-              "baseId": "millennium_seminar",
-              "atk": 51,
-              "hp": 57,
-              "tier": 7,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "unique/Seminar.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카(체육복)",
-              "baseId": "yuuka",
-              "atk": 27,
-              "hp": 27,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Yuuka_(Sportswear).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "히비키",
-              "baseId": "hibiki",
-              "atk": 20,
-              "hp": 19,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hibiki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "히비키(치어리더)",
-              "baseId": "hibiki",
-              "atk": 52,
-              "hp": 52,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Hibiki_(Cheerleader).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "시즈코",
-              "baseId": "shizuko",
-              "atk": 7,
-              "hp": 8,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Shizuko.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-09T22:59:23",
           "placement": 1,
           "turn": 16,
@@ -3966,9 +3901,69 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-16T11:10:15",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코(드레스)",
+              "baseId": "ako",
+              "atk": 9,
+              "hp": 13,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Ako_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "아코(드레스)",
+              "baseId": "ako",
+              "atk": 9,
+              "hp": 13,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Ako_(Dress).png",
+              "school": "게헨나"
+            },
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 3,
+              "hp": 6,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 50,
+              "hp": 50,
+              "tier": 7,
+              "kw": [
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 296,
+      "points": 298,
       "questState": {
         "daily": {
           "date": "2026-05-16",
@@ -4094,12 +4089,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 10,
-        "legendPoints": 26
+        "streak": 11,
+        "legendPoints": 27
       },
-      "totalGames": 33,
-      "totalWins": 31,
-      "totalFirsts": 27,
+      "totalGames": 34,
+      "totalWins": 32,
+      "totalFirsts": 28,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
