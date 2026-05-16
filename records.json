@@ -3287,69 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-09T11:06:53",
-          "placement": 3,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 15,
-              "hp": 15,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유우카(체육복)",
-              "baseId": "yuuka",
-              "atk": 37,
-              "hp": 33,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Yuuka_(Sportswear).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 2,
-              "hp": 6,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오(임전)",
-              "baseId": "rio",
-              "atk": 15,
-              "hp": 15,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Rio_(Battle).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "히마리",
-              "baseId": "himari",
-              "atk": 6,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Himari.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-09T15:12:01",
           "placement": 3,
           "turn": 14,
@@ -3952,9 +3889,83 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-16T00:09:30",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미야코",
+              "baseId": "miyako",
+              "atk": 22,
+              "hp": 19,
+              "tier": 5,
+              "kw": [
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Miyako.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "오토기(수영복)",
+              "baseId": "otogi",
+              "atk": 23,
+              "hp": 21,
+              "tier": 4,
+              "kw": [
+                "ranged",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Otogi_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "모에(수영복)",
+              "baseId": "moe",
+              "atk": 24,
+              "hp": 20,
+              "tier": 3,
+              "kw": [
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Moe_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "키리노(수영복)",
+              "baseId": "kirino",
+              "atk": 25,
+              "hp": 25,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Kirino_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "칸나",
+              "baseId": "kanna",
+              "atk": 1,
+              "hp": 1,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Kanna.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 287,
+      "points": 294,
       "questState": {
         "daily": {
           "date": "2026-05-16",
@@ -3966,13 +3977,13 @@
             },
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "skin3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             }
           ],
           "rerolled": true
@@ -4080,12 +4091,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 8,
-        "legendPoints": 24
+        "streak": 9,
+        "legendPoints": 25
       },
-      "totalGames": 31,
-      "totalWins": 29,
-      "totalFirsts": 25,
+      "totalGames": 32,
+      "totalWins": 30,
+      "totalFirsts": 26,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
