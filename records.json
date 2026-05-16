@@ -3287,73 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-11T04:01:56",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 17,
-              "hp": 17,
-              "tier": 6,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코(아이돌)",
-              "baseId": "sakurako",
-              "atk": 25,
-              "hp": 25,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Sakurako_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나타(수영복)",
-              "baseId": "hinata",
-              "atk": 17,
-              "hp": 21,
-              "tier": 4,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hinata_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(나기사 호스트)",
-              "baseId": "trinity_nagisa",
-              "atk": 20,
-              "hp": 20,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_nagisa.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T00:07:17",
           "placement": 1,
           "turn": 15,
@@ -3962,9 +3895,82 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-16T11:31:11",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 25,
+              "hp": 23,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 23,
+              "hp": 21,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 5,
+              "hp": 7,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 5,
+              "hp": 7,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 30,
+              "hp": 32,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 305,
+      "points": 312,
       "questState": {
         "daily": {
           "date": "2026-05-16",
@@ -3976,8 +3982,8 @@
             },
             {
               "id": "trinity10",
-              "progress": 1,
-              "completed": false
+              "progress": 14,
+              "completed": true
             },
             {
               "id": "skin3",
@@ -4090,12 +4096,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 12,
-        "legendPoints": 28
+        "streak": 13,
+        "legendPoints": 29
       },
-      "totalGames": 35,
-      "totalWins": 33,
-      "totalFirsts": 29,
+      "totalGames": 36,
+      "totalWins": 34,
+      "totalFirsts": 30,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
