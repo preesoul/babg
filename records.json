@@ -3287,73 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-09T15:12:01",
-          "placement": 3,
-          "turn": 14,
-          "tier": 5,
-          "board": [
-            {
-              "name": "코유키",
-              "baseId": "koyuki",
-              "atk": 3,
-              "hp": 4,
-              "tier": 2,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Koyuki.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미모리(수영복)",
-              "baseId": "mimori",
-              "atk": 32,
-              "hp": 38,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mimori_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유우카",
-              "baseId": "yuuka",
-              "atk": 6,
-              "hp": 6,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Yuuka.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "노아",
-              "baseId": "noa",
-              "atk": 4,
-              "hp": 8,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Noa.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 11,
-              "hp": 11,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-09T15:23:28",
           "placement": 1,
           "turn": 17,
@@ -3963,16 +3896,86 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-05-16T00:24:09",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "흥신소 68",
+              "baseId": "gehenna_p68",
+              "atk": 70,
+              "hp": 66,
+              "tier": 7,
+              "kw": [
+                "pierce",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Problem_solver_68.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "미유",
+              "baseId": "miyu",
+              "atk": 8,
+              "hp": 14,
+              "tier": 2,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Miyu.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "치나츠",
+              "baseId": "chinatsu",
+              "atk": 3,
+              "hp": 6,
+              "tier": 2,
+              "kw": [],
+              "isSkin": false,
+              "img": "Chinatsu.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "치아키",
+              "baseId": "chiaki",
+              "atk": 7,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Chiaki.png",
+              "school": "게헨나"
+            }
+          ]
         }
       ],
-      "points": 294,
+      "points": 296,
       "questState": {
         "daily": {
           "date": "2026-05-16",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 0,
+              "progress": 2,
               "completed": false
             },
             {
@@ -4091,12 +4094,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 9,
-        "legendPoints": 25
+        "streak": 10,
+        "legendPoints": 26
       },
-      "totalGames": 32,
-      "totalWins": 30,
-      "totalFirsts": 26,
+      "totalGames": 33,
+      "totalWins": 31,
+      "totalFirsts": 27,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
