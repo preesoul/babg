@@ -3287,72 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-09T22:59:23",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "키쿄",
-              "baseId": "kikyou",
-              "atk": 14,
-              "hp": 14,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "Kikyou.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게",
-              "baseId": "renge",
-              "atk": 13,
-              "hp": 12,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Renge.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리(수영복)",
-              "baseId": "yukari",
-              "atk": 40,
-              "hp": 38,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠바키",
-              "baseId": "tsubaki",
-              "atk": 77,
-              "hp": 76,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Tsubaki.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-11T04:01:56",
           "placement": 1,
           "turn": 16,
@@ -3961,17 +3895,84 @@
               "school": "게헨나"
             }
           ]
+        },
+        {
+          "date": "2026-05-16T11:20:47",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 42,
+              "hp": 35,
+              "tier": 6,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "카에데(가이드)",
+              "baseId": "kaede",
+              "atk": 39,
+              "hp": 39,
+              "tier": 1,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kaede_(Guide).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "이즈나(수영복)",
+              "baseId": "izuna",
+              "atk": 47,
+              "hp": 47,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Izuna_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 33,
+              "hp": 31,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 298,
+      "points": 305,
       "questState": {
         "daily": {
           "date": "2026-05-16",
           "quests": [
             {
               "id": "hyakkiyako10",
-              "progress": 2,
-              "completed": false
+              "progress": 15,
+              "completed": true
             },
             {
               "id": "trinity10",
@@ -4089,12 +4090,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 11,
-        "legendPoints": 27
+        "streak": 12,
+        "legendPoints": 28
       },
-      "totalGames": 34,
-      "totalWins": 32,
-      "totalFirsts": 28,
+      "totalGames": 35,
+      "totalWins": 33,
+      "totalFirsts": 29,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
