@@ -3973,25 +3973,25 @@
       "points": 312,
       "questState": {
         "daily": {
-          "date": "2026-05-16",
+          "date": "2026-05-17",
           "quests": [
             {
-              "id": "hyakkiyako10",
-              "progress": 15,
-              "completed": true
+              "id": "discover3",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "trinity10",
-              "progress": 14,
-              "completed": true
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "skin3",
-              "progress": 3,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             }
           ],
-          "rerolled": true
+          "rerolled": false
         },
         "weekly": {
           "weekStart": "2026-05-11",
@@ -4022,7 +4022,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-16"
+        "_lastLoginDate": "2026-05-17"
       },
       "recruitedTier7": [
         "trinity_mika",
