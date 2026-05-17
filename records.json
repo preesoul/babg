@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-13T00:07:17",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "와카모",
-              "baseId": "wakamo",
-              "atk": 13,
-              "hp": 15,
-              "tier": 6,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Wakamo.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 25,
-              "hp": 25,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "시즈코(수영복)",
-              "baseId": "shizuko",
-              "atk": 70,
-              "hp": 76,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Shizuko_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T09:49:16",
           "placement": 1,
           "turn": 15,
@@ -3968,26 +3898,101 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-17T01:49:28",
+          "placement": 2,
+          "turn": 19,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 42,
+              "hp": 38,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 51,
+              "hp": 49,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 29,
+              "hp": 33,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 51,
+              "hp": 51,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 22,
+              "hp": 24,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 312,
+      "points": 324,
       "questState": {
         "daily": {
           "date": "2026-05-17",
           "quests": [
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 71,
+              "completed": true
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -4096,11 +4101,11 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 13,
-        "legendPoints": 29
+        "streak": 0,
+        "legendPoints": 28
       },
-      "totalGames": 36,
-      "totalWins": 34,
+      "totalGames": 37,
+      "totalWins": 35,
       "totalFirsts": 30,
       "starterEnigmaGranted": true
     },
