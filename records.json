@@ -3985,20 +3985,20 @@
       "points": 326,
       "questState": {
         "daily": {
-          "date": "2026-05-18",
+          "date": "2026-05-22",
           "quests": [
             {
-              "id": "discover3",
-              "progress": 0,
-              "completed": false
-            },
-            {
-              "id": "hyakkiyako10",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
             {
               "id": "trinity10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "hyakkiyako10",
               "progress": 0,
               "completed": false
             }
@@ -4034,7 +4034,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-18"
+        "_lastLoginDate": "2026-05-22"
       },
       "recruitedTier7": [
         "trinity_mika",
