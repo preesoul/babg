@@ -3287,146 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-13T00:07:17",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "와카모",
-              "baseId": "wakamo",
-              "atk": 13,
-              "hp": 15,
-              "tier": 6,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Wakamo.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 25,
-              "hp": 25,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "시즈코(수영복)",
-              "baseId": "shizuko",
-              "atk": 70,
-              "hp": 76,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Shizuko_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 7,
-              "hp": 7,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
-          "date": "2026-05-13T09:49:16",
-          "placement": 1,
-          "turn": 15,
-          "tier": 5,
-          "board": [
-            {
-              "name": "우이",
-              "baseId": "ui",
-              "atk": 20,
-              "hp": 19,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ui.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "치세",
-              "baseId": "chise",
-              "atk": 26,
-              "hp": 27,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Chise.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 33,
-              "hp": 37,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 43,
-              "hp": 43,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "카에데(가이드)",
-              "baseId": "kaede",
-              "atk": 23,
-              "hp": 23,
-              "tier": 1,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": true,
-              "img": "Kaede_(Guide).png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T11:39:56",
           "placement": 1,
           "turn": 15,
@@ -3968,48 +3828,200 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-17T01:49:28",
+          "placement": 2,
+          "turn": 19,
+          "tier": 6,
+          "board": [
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 42,
+              "hp": 38,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "우이(수영복)",
+              "baseId": "ui",
+              "atk": 51,
+              "hp": 49,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Ui_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 29,
+              "hp": 33,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 51,
+              "hp": 51,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리",
+              "baseId": "mari",
+              "atk": 22,
+              "hp": 24,
+              "tier": 1,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Mari.png",
+              "school": "트리니티"
+            }
+          ]
+        },
+        {
+          "date": "2026-05-17T03:54:15",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 23,
+              "hp": 27,
+              "tier": 2,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            },
+            {
+              "name": "루미(어린이)",
+              "baseId": "rumi",
+              "atk": 33,
+              "hp": 35,
+              "tier": 5,
+              "kw": [
+                "reborn",
+                "shield",
+                "poison",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Rumi_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "슌",
+              "baseId": "shun",
+              "atk": 20,
+              "hp": 9,
+              "tier": 6,
+              "kw": [
+                "ranged"
+              ],
+              "isSkin": false,
+              "img": "Shun.png",
+              "school": "산해경"
+            },
+            {
+              "name": "레이죠",
+              "baseId": "reijo",
+              "atk": 16,
+              "hp": 14,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Reijo.png",
+              "school": "산해경"
+            },
+            {
+              "name": "레이죠",
+              "baseId": "reijo",
+              "atk": 16,
+              "hp": 14,
+              "tier": 3,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Reijo.png",
+              "school": "산해경"
+            }
+          ]
         }
       ],
-      "points": 312,
+      "points": 326,
       "questState": {
         "daily": {
-          "date": "2026-05-16",
+          "date": "2026-05-22",
           "quests": [
             {
-              "id": "hyakkiyako10",
-              "progress": 15,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "trinity10",
-              "progress": 14,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "skin3",
-              "progress": 3,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": true
         },
         "weekly": {
-          "weekStart": "2026-05-11",
+          "weekStart": "2026-05-18",
           "quests": [
             {
               "id": "win3",
-              "progress": 3,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "skin10",
-              "progress": 12,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "discover10",
-              "progress": 10,
-              "completed": true
+              "id": "play10",
+              "progress": 0,
+              "completed": false
             }
           ]
         },
@@ -4022,7 +4034,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-16"
+        "_lastLoginDate": "2026-05-22"
       },
       "recruitedTier7": [
         "trinity_mika",
@@ -4096,12 +4108,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 13,
+        "streak": 1,
         "legendPoints": 29
       },
-      "totalGames": 36,
-      "totalWins": 34,
-      "totalFirsts": 30,
+      "totalGames": 38,
+      "totalWins": 36,
+      "totalFirsts": 31,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
@@ -10151,6 +10163,11 @@
       "unlockedAbydos": [
         "miyu"
       ]
+    },
+    "으아아아백곰": {
+      "records": [],
+      "points": 5,
+      "starterEnigmaGranted": true
     }
   }
 }
