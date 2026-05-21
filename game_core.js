@@ -862,6 +862,69 @@ function doMysteryUnlock() {
   _tryUnlock();
 }
 
+// ========== 7성 조건 해방 시스템 ==========
+var TIER7_UNLOCK_COST = 10;
+var _tier7Unlocking = false;
+var _tier7UnlockCooldown = 0;
+
+function doTier7Unlock() {
+  if(_tier7Unlocking)return;
+  var now=Date.now();
+  if(now-_tier7UnlockCooldown<2000)return;
+  if(!window._babgLogin||!window._babgLogin.name){alert('로그인이 필요합니다.');return;}
+  _tier7Unlocking=true;
+  showMysteryLoadingPopup();
+  var _retries=0;
+  function _tryUnlock(){
+    var recruited=getRecruitedTier7();
+    var allIds=HIDDEN_CHARS.map(function(c){return c.id;});
+    allIds.push('hkyk_showdown');
+    var locked=allIds.filter(function(id){return recruited.indexOf(id)===-1;});
+    if(locked.length===0){_tier7Unlocking=false;hideMysteryLoadingPopup();alert('모든 7성 유니크가 이미 해금되었습니다.');return;}
+    fetchRecords(function(err,data,sha){
+      if(err||!data){_tier7Unlocking=false;hideMysteryLoadingPopup();alert('서버 연결 실패. 잠시 후 다시 시도해주세요.');return;}
+      var pd=data.players[window._babgLogin.name];
+      if(!pd){_tier7Unlocking=false;hideMysteryLoadingPopup();alert('플레이어 데이터를 찾을 수 없습니다.');return;}
+      if(!pd.points||pd.points<TIER7_UNLOCK_COST){
+        _tier7Unlocking=false;hideMysteryLoadingPopup();
+        alert('엘리그마가 부족합니다.\n필요: '+TIER7_UNLOCK_COST+'P / 보유: '+(pd.points||0)+'P');return;
+      }
+      pd.points-=TIER7_UNLOCK_COST;
+      var serverRecruited=pd.recruitedTier7||[];
+      for(var i=0;i<serverRecruited.length;i++){
+        if(recruited.indexOf(serverRecruited[i])===-1) recruited.push(serverRecruited[i]);
+      }
+      var locked2=allIds.filter(function(id){return recruited.indexOf(id)===-1;});
+      if(locked2.length===0){_tier7Unlocking=false;hideMysteryLoadingPopup();alert('모든 7성 유니크가 이미 해금되었습니다.');pd.points+=TIER7_UNLOCK_COST;return;}
+      var pick=locked2[Math.floor(Math.random()*locked2.length)];
+      recruited.push(pick);
+      pd.recruitedTier7=recruited.slice();
+      saveRecords(data,sha,function(saveErr){
+        if(saveErr){
+          _retries++;
+          if(_retries<=2){setTimeout(_tryUnlock,800);return;}
+          _tier7Unlocking=false;hideMysteryLoadingPopup();
+          alert('저장 실패. 잠시 후 다시 시도해주세요.');return;
+        }
+        _tier7Unlocking=false;
+        _tier7UnlockCooldown=Date.now();
+        hideMysteryLoadingPopup();
+        setRecruitedTier7(recruited);
+        window._enigmaPointsCache=pd.points;
+        var pickedName=pick,pickedImg='',pickedSchool='';
+        var hc=findHiddenChar(pick);
+        if(hc){pickedName=hc.name;pickedImg=hc.img;pickedSchool=hc.school||'';}
+        else if(pick==='hkyk_showdown'){pickedName='백화요란 계승전';pickedImg='unique/HKYK_Showdown.png';pickedSchool='백귀야행';}
+        if(typeof showUnlockPopup==='function') showUnlockPopup(pickedName,pickedImg,pickedSchool,pick);
+        else alert('[조건 해방] '+pickedName+' 해금!');
+        if(typeof renderQuestUI==='function') renderQuestUI();
+        if(typeof renderRoster==='function') renderRoster();
+      });
+    });
+  }
+  _tryUnlock();
+}
+
 // 개발용: 엘리그마 +10P (서버에 반영)
 function devAddEnigma() {
   if(!window._babgLogin||!window._babgLogin.name){alert('로그인 필요');return;}

@@ -3009,7 +3009,10 @@ function renderRoster(){
       // 관리자 계정: 모든 7성 공개
       var _t7AdminBypass=(window._babgLogin&&window._babgLogin.name==='preesoul');
       html+='<div class="roster-school-hdr" style="margin-top:24px;border-top:2px solid rgba(192,48,208,0.45);padding-top:12px">';
-      html+='<span class="roster-school-name" style="color:#e070ff">⭐ 7성 유니크</span></div>';
+      html+='<span class="roster-school-name" style="color:#e070ff">⭐ 7성 유니크</span>';
+      html+='<button onclick="doTier7Unlock()" style="margin-left:12px;padding:4px 12px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer">조건 해방</button>';
+      html+='<span style="color:#c4b5fd;font-size:11px;font-weight:600;margin-left:4px">(10엘리그마)</span>';
+      html+='</div>';
       var _t7BySchool={};
       _t7All.forEach(function(c){if(!_t7BySchool[c.school])_t7BySchool[c.school]=[];_t7BySchool[c.school].push(c);});
       html+='<div class="roster-cards-flow">';
