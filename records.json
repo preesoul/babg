@@ -3988,7 +3988,7 @@
           "date": "2026-05-22",
           "quests": [
             {
-              "id": "millennium10",
+              "id": "play3",
               "progress": 0,
               "completed": false
             },
@@ -4003,7 +4003,7 @@
               "completed": false
             }
           ],
-          "rerolled": false
+          "rerolled": true
         },
         "weekly": {
           "weekStart": "2026-05-18",
