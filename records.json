@@ -3287,62 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-15T10:36:43",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아코(드레스)",
-              "baseId": "ako",
-              "atk": 11,
-              "hp": 15,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Ako_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "만마전",
-              "baseId": "gehenna_pandemonium",
-              "atk": 59,
-              "hp": 53,
-              "tier": 7,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "사츠키",
-              "baseId": "satsuki",
-              "atk": 5,
-              "hp": 6,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Satsuki.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "세나",
-              "baseId": "sena",
-              "atk": 7,
-              "hp": 4,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Sena.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-05-16T00:09:30",
           "placement": 1,
           "turn": 14,
@@ -3990,17 +3934,89 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-05-22T00:47:19",
+          "placement": 2,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미유(수영복)",
+              "baseId": "miyu",
+              "atk": 10,
+              "hp": 18,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Miyu_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 16,
+              "hp": 26,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 7,
+              "hp": 7,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 9,
+              "hp": 9,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "칸나(수영복)",
+              "baseId": "kanna",
+              "atk": 5,
+              "hp": 5,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Kanna_(Swimsuit).png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 330,
+      "points": 337,
       "questState": {
         "daily": {
           "date": "2026-05-22",
           "quests": [
             {
               "id": "play3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "trinity10",
@@ -4025,12 +4041,12 @@
             },
             {
               "id": "skin10",
-              "progress": 3,
+              "progress": 5,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
@@ -4119,11 +4135,11 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 3,
-        "legendPoints": 31
+        "streak": 0,
+        "legendPoints": 30
       },
-      "totalGames": 40,
-      "totalWins": 38,
+      "totalGames": 41,
+      "totalWins": 39,
       "totalFirsts": 33,
       "starterEnigmaGranted": true
     },
