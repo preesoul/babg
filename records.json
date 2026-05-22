@@ -6487,49 +6487,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T05:02:05",
-          "placement": 7,
-          "turn": 11,
-          "tier": 5,
-          "board": [
-            {
-              "name": "보충수업부",
-              "baseId": "trinity_makeup",
-              "atk": 58,
-              "hp": 63,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Make_Up_Work_Club.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "레이사(마법소녀)",
-              "baseId": "reisa",
-              "atk": 7,
-              "hp": 9,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Reisa_(Magical).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "코하루",
-              "baseId": "koharu",
-              "atk": 1,
-              "hp": 2,
-              "tier": 1,
-              "kw": [
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "Koharu.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T05:27:53",
           "placement": 1,
           "turn": 15,
@@ -7131,9 +7088,88 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-22T06:27:28",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 34,
+              "hp": 32,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 28,
+              "hp": 28,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 29,
+              "hp": 27,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 44,
+              "hp": 44,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠바키",
+              "baseId": "tsubaki",
+              "atk": 20,
+              "hp": 19,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Tsubaki.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 116,
+      "points": 128,
       "questState": {
         "daily": {
           "date": "2026-05-22",
@@ -7166,13 +7202,13 @@
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             }
           ]
         },
@@ -7191,12 +7227,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 9,
-        "legendPoints": 8
+        "streak": 10,
+        "legendPoints": 9
       },
-      "totalGames": 29,
-      "totalWins": 24,
-      "totalFirsts": 22,
+      "totalGames": 30,
+      "totalWins": 25,
+      "totalFirsts": 23,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
