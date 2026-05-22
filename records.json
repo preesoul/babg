@@ -6487,72 +6487,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T05:27:53",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 107,
-              "hp": 105,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "미치루(드레스)",
-              "baseId": "michiru",
-              "atk": 107,
-              "hp": 107,
-              "tier": 5,
-              "kw": [],
-              "isSkin": true,
-              "img": "Michiru_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "린(승무원)",
-              "baseId": "lin",
-              "atk": 65,
-              "hp": 65,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Lin_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "이즈나(수영복)",
-              "baseId": "izuna",
-              "atk": 108,
-              "hp": 110,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Izuna_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "치세(수영복)",
-              "baseId": "chise",
-              "atk": 28,
-              "hp": 30,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Chise_(Swimsuit).png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T06:03:55",
           "placement": 1,
           "turn": 17,
@@ -7167,9 +7101,77 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-22T07:51:55",
+          "placement": 1,
+          "turn": 18,
+          "tier": 6,
+          "board": [
+            {
+              "name": "이름없는 신들의 왕녀",
+              "baseId": "millennium_nameless",
+              "atk": 42,
+              "hp": 38,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/millennium_Nameless_God.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "밀레니엄 세미나",
+              "baseId": "millennium_seminar",
+              "atk": 83,
+              "hp": 88,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Seminar.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히마리",
+              "baseId": "himari",
+              "atk": 10,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Himari.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "노아",
+              "baseId": "noa",
+              "atk": 6,
+              "hp": 10,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Noa.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 44,
+              "hp": 52,
+              "tier": 2,
+              "kw": [
+                "survive",
+                "shield",
+                "taunt",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 128,
+      "points": 130,
       "questState": {
         "daily": {
           "date": "2026-05-22",
@@ -7202,7 +7204,7 @@
             },
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -7227,12 +7229,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 10,
-        "legendPoints": 9
+        "streak": 11,
+        "legendPoints": 10
       },
-      "totalGames": 30,
-      "totalWins": 25,
-      "totalFirsts": 23,
+      "totalGames": 31,
+      "totalWins": 26,
+      "totalFirsts": 24,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
