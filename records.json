@@ -3287,80 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-16T00:09:30",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미야코",
-              "baseId": "miyako",
-              "atk": 22,
-              "hp": 19,
-              "tier": 5,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Miyako.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "오토기(수영복)",
-              "baseId": "otogi",
-              "atk": 23,
-              "hp": 21,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Otogi_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "모에(수영복)",
-              "baseId": "moe",
-              "atk": 24,
-              "hp": 20,
-              "tier": 3,
-              "kw": [
-                "pierce",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Moe_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "키리노(수영복)",
-              "baseId": "kirino",
-              "atk": 25,
-              "hp": 25,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Kirino_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "칸나",
-              "baseId": "kanna",
-              "atk": 1,
-              "hp": 1,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kanna.png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-05-16T00:24:09",
           "placement": 1,
           "turn": 14,
@@ -4006,9 +3932,78 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-05-22T00:55:00",
+          "placement": 7,
+          "turn": 11,
+          "tier": 5,
+          "board": [
+            {
+              "name": "아스나",
+              "baseId": "asuna",
+              "atk": 7,
+              "hp": 6,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Asuna.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "토키(바니걸)",
+              "baseId": "toki",
+              "atk": 9,
+              "hp": 15,
+              "tier": 2,
+              "kw": [
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Toki_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "아카네(버니걸)",
+              "baseId": "akane",
+              "atk": 5,
+              "hp": 9,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Akane_(Bunny_Girl).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 5,
+              "hp": 5,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 337,
+      "points": 339,
       "questState": {
         "daily": {
           "date": "2026-05-22",
@@ -4041,12 +4036,12 @@
             },
             {
               "id": "skin10",
-              "progress": 5,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 3,
+              "progress": 4,
               "completed": false
             }
           ]
@@ -4136,9 +4131,9 @@
         "tier": 0,
         "stars": 0,
         "streak": 0,
-        "legendPoints": 30
+        "legendPoints": 29
       },
-      "totalGames": 41,
+      "totalGames": 42,
       "totalWins": 39,
       "totalFirsts": 33,
       "starterEnigmaGranted": true
