@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-13T11:39:56",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "주리(웨이트리스)",
-              "baseId": "juri",
-              "atk": 11,
-              "hp": 7,
-              "tier": 1,
-              "kw": [
-                "taunt",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Juri_(maid).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아코(드레스)",
-              "baseId": "ako",
-              "atk": 7,
-              "hp": 11,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Ako_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "리오(임전)",
-              "baseId": "rio",
-              "atk": 15,
-              "hp": 15,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Rio_(Battle).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "카야",
-              "baseId": "kaya",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Kaya.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "린(승무원)",
-              "baseId": "lin",
-              "atk": 20,
-              "hp": 18,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Lin_(flight).png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T21:31:20",
           "placement": 1,
           "turn": 17,
@@ -3980,16 +3910,104 @@
               "school": "산해경"
             }
           ]
+        },
+        {
+          "date": "2026-05-22T00:16:28",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사",
+              "baseId": "nagusa",
+              "atk": 25,
+              "hp": 27,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "shield",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Nagusa.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 50,
+              "hp": 48,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 29,
+              "hp": 29,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게",
+              "baseId": "renge",
+              "atk": 30,
+              "hp": 29,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Renge.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "최강일각라이온",
+              "baseId": "hkyk_saikyo",
+              "atk": 50,
+              "hp": 50,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 316,
+      "points": 323,
       "questState": {
         "daily": {
           "date": "2026-05-22",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -3999,8 +4017,8 @@
             },
             {
               "id": "hyakkiyako10",
-              "progress": 0,
-              "completed": false
+              "progress": 10,
+              "completed": true
             }
           ],
           "rerolled": true
@@ -4010,17 +4028,17 @@
           "quests": [
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
@@ -4109,12 +4127,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 29
+        "streak": 2,
+        "legendPoints": 30
       },
-      "totalGames": 38,
-      "totalWins": 36,
-      "totalFirsts": 31,
+      "totalGames": 39,
+      "totalWins": 37,
+      "totalFirsts": 32,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
