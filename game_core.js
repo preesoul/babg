@@ -450,7 +450,7 @@ var ABILITY_DESCS = {
   // ===== 발키리/SRT =====
   kirino:  {type:'',desc:'',skinEffect:'수영복 키리노: 버티기 시 +2/+2',skinEffectDesc:'<span style="color:#ffd700;font-weight:700">버티기</span> 추가: 버틸 때마다 자신에게 <span style="color:#ffd700;font-weight:700">+2/+2</span>.'},
   fubuki:  {type:'첫인사',desc:'아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 부여합니다.',skinEffect:'수영복 후부키: 두 번 부여 후 자신 삭제',skinEffectDesc:'첫인사: 아군 학생 1인을 선택해\n자신의 현재 공격력과 체력만큼 <span style="color:#ffd700;font-weight:700">두 번</span> 부여한 뒤,\n<span style="color:#ffd700;font-weight:700">자신은 보드에서 삭제</span>됩니다.'},
-  miyu:    {type:'패시브',desc:'공격 시 공격력 대신\n자신의 체력으로 데미지를 계산합니다.',skinEffect:'수영복 미유: 연사 추가',skinEffectDesc:'패시브: 공격 시 공격력 대신 체력으로 계산.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
+  miyu:    {type:'패시브',desc:'공격 시 공격력과 체력 중\n높은 쪽으로 데미지를 계산합니다.',skinEffect:'수영복 미유: 연사 추가',skinEffectDesc:'패시브: 공격 시 공격력과 체력 중 높은 쪽으로 계산.\n<span style="color:#ffd700;font-weight:700">연사</span> 추가.'},
   moe:     {type:'뒤끝',desc:'자신을 공격한 대상에게\n자신의 공격력만큼 피해를 줍니다.\n(보호막에 막힙니다)',skinEffect:'수영복 모에: 뒤끝 관통',skinEffectDesc:'뒤끝: 자신을 공격한 대상에게 자신의 공격력만큼 피해.\n뒤끝 데미지에 <span style="color:#ffd700;font-weight:700">관통</span> 추가.'},
   saki:    {type:'개전',desc:'상대의 지켜줌 무작위 1인을 해제합니다.',skinEffect:'수영복 사키: 전원 해제',skinEffectDesc:'개전: 상대의 지켜줌을 <span style="color:#ffd700;font-weight:700">전원</span> 해제합니다.'},
   kurumi:  {type:'버티기',desc:'버틸 때마다 아군 전체에게 +1/+2 부여.',skinEffect:'사복 쿠루미: +2/+4',skinEffectDesc:'버티기: 버틸 때마다 아군 전체에게 <span style="color:#ffd700;font-weight:700">+2/+4</span> 부여.'},
@@ -6389,9 +6389,9 @@ function runBattle(boardA, boardB, startWithA, opts) {
 
   function dealHit(src,dst,log2,dmgOverride,isCombatDefense){
     var dmg=dmgOverride!==undefined?dmgOverride:src.atk;
-    // 미유 패시브: 공격 시 atk 대신 hp로 데미지 계산 (능력 데미지/오버라이드 제외)
+    // 미유 패시브: 공격력과 HP 중 높은 쪽으로 데미지 계산 (능력 데미지/오버라이드 제외)
     if(dmgOverride===undefined&&src.baseId==='miyu'&&!src._abilitiesStripped&&!_G.permanentAbilityBan){
-      dmg=Math.max(0,src.hp);
+      dmg=Math.max(src.atk,src.hp);
     }
     // invincible 키워드 (일반 무적)
     if(hasKw(dst,'invincible')){
