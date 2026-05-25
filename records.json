@@ -3287,66 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-16T11:10:15",
-          "placement": 1,
-          "turn": 16,
-          "tier": 6,
-          "board": [
-            {
-              "name": "아코(드레스)",
-              "baseId": "ako",
-              "atk": 9,
-              "hp": 13,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Ako_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아코(드레스)",
-              "baseId": "ako",
-              "atk": 9,
-              "hp": 13,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Ako_(Dress).png",
-              "school": "게헨나"
-            },
-            {
-              "name": "치나츠",
-              "baseId": "chinatsu",
-              "atk": 3,
-              "hp": 6,
-              "tier": 2,
-              "kw": [],
-              "isSkin": false,
-              "img": "Chinatsu.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 50,
-              "hp": 50,
-              "tier": 7,
-              "kw": [
-                "pierce"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-05-16T11:20:47",
           "placement": 1,
           "turn": 14,
@@ -4002,21 +3942,94 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-05-25T14:23:33",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 10,
+              "hp": 20,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "키키",
+              "baseId": "shanhai_kiki",
+              "atk": 20,
+              "hp": 22,
+              "tier": 7,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "unique/Kiki.png",
+              "school": "산해경"
+            },
+            {
+              "name": "슌(어린이)",
+              "baseId": "shun",
+              "atk": 31,
+              "hp": 25,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shun_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "사야(사복)",
+              "baseId": "saya",
+              "atk": 83,
+              "hp": 81,
+              "tier": 4,
+              "kw": [],
+              "isSkin": true,
+              "img": "Saya_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "미나(리코더)",
+              "baseId": "mina",
+              "atk": 19,
+              "hp": 23,
+              "tier": 2,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": true,
+              "img": "Mina_(Recorder).png",
+              "school": "산해경"
+            }
+          ]
         }
       ],
-      "points": 366,
+      "points": 368,
       "questState": {
         "daily": {
           "date": "2026-05-25",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "gehenna10",
-              "progress": 6,
+              "progress": 8,
               "completed": false
             },
             {
@@ -4042,7 +4055,7 @@
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -4131,12 +4144,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 30
+        "streak": 2,
+        "legendPoints": 31
       },
-      "totalGames": 43,
-      "totalWins": 40,
-      "totalFirsts": 34,
+      "totalGames": 44,
+      "totalWins": 41,
+      "totalFirsts": 35,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
