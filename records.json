@@ -4023,22 +4023,22 @@
       "points": 380,
       "questState": {
         "daily": {
-          "date": "2026-05-25",
+          "date": "2026-05-26",
           "quests": [
             {
-              "id": "millennium10",
-              "progress": 1,
-              "completed": false
-            },
-            {
               "id": "gehenna10",
-              "progress": 9,
+              "progress": 0,
               "completed": false
             },
             {
-              "id": "win1",
-              "progress": 1,
-              "completed": true
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "millennium10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
@@ -4072,7 +4072,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-25"
+        "_lastLoginDate": "2026-05-26"
       },
       "recruitedTier7": [
         "trinity_mika",
