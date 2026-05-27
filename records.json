@@ -6494,82 +6494,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T06:03:55",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "데스 모모이",
-              "baseId": "millennium_death_momoi",
-              "atk": 51,
-              "hp": 53,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury",
-                "preemptive",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Death_momoi.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유즈(메이드)",
-              "baseId": "yuzu",
-              "atk": 43,
-              "hp": 45,
-              "tier": 2,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": true,
-              "img": "Yuzu_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "미도리(메이드)",
-              "baseId": "midori",
-              "atk": 43,
-              "hp": 43,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Midori_(Maid).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "유우카(체육복)",
-              "baseId": "yuuka",
-              "atk": 47,
-              "hp": 47,
-              "tier": 3,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Yuuka_(Sportswear).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아리스&케이",
-              "baseId": "Arisu_Kei",
-              "atk": 94,
-              "hp": 86,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "ranged",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Arisu_Kei.png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T09:44:53",
           "placement": 1,
           "turn": 14,
@@ -7176,9 +7100,101 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-27T06:25:32",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "나구사(수영복)",
+              "baseId": "nagusa",
+              "atk": 33,
+              "hp": 33,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Nagusa_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "키쿄(수영복)",
+              "baseId": "kikyou",
+              "atk": 37,
+              "hp": 37,
+              "tier": 4,
+              "kw": [
+                "windfury",
+                "preemptive",
+                "ambush",
+                "reborn",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Kikyou_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "렌게(수영복)",
+              "baseId": "renge",
+              "atk": 33,
+              "hp": 31,
+              "tier": 3,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Renge_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "유카리(수영복)",
+              "baseId": "yukari",
+              "atk": 31,
+              "hp": 29,
+              "tier": 2,
+              "kw": [
+                "reborn",
+                "preemptive",
+                "shield",
+                "windfury",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Yukari_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "와카모(수영복)",
+              "baseId": "wakamo",
+              "atk": 19,
+              "hp": 23,
+              "tier": 6,
+              "kw": [
+                "preemptive",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Wakamo_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 130,
+      "points": 132,
       "questState": {
         "daily": {
           "date": "2026-05-27",
@@ -7195,7 +7211,7 @@
             },
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -7211,7 +7227,7 @@
             },
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -7236,12 +7252,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 11,
-        "legendPoints": 10
+        "streak": 12,
+        "legendPoints": 11
       },
-      "totalGames": 31,
-      "totalWins": 26,
-      "totalFirsts": 24,
+      "totalGames": 32,
+      "totalWins": 27,
+      "totalFirsts": 25,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
