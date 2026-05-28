@@ -6494,87 +6494,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T09:44:53",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "카린(버니걸)",
-              "baseId": "karin",
-              "atk": 36,
-              "hp": 24,
-              "tier": 4,
-              "kw": [
-                "ranged",
-                "pierce",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Karin_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "Cleaning&Clearing",
-              "baseId": "millennium_cc",
-              "atk": 65,
-              "hp": 62,
-              "tier": 7,
-              "kw": [
-                "ranged",
-                "shield",
-                "windfury",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Cleaning_Clearing.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 10,
-              "hp": 20,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 13,
-              "hp": 13,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 17,
-              "hp": 31,
-              "tier": 2,
-              "kw": [
-                "survive",
-                "taunt",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            }
-          ]
-        },
-        {
           "date": "2026-05-13T10:17:39",
           "placement": 1,
           "turn": 15,
@@ -7192,16 +7111,85 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-28T09:39:07",
+          "placement": 1,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "니야(임전)",
+              "baseId": "niya",
+              "atk": 54,
+              "hp": 52,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Niya_(Battle).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "츠쿠요(드레스)",
+              "baseId": "tsukuyo",
+              "atk": 104,
+              "hp": 102,
+              "tier": 2,
+              "kw": [],
+              "isSkin": true,
+              "img": "Tsukuyo_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "미치루(드레스)",
+              "baseId": "michiru",
+              "atk": 68,
+              "hp": 68,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Michiru_(Dress).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "치세(수영복)",
+              "baseId": "chise",
+              "atk": 54,
+              "hp": 56,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Chise_(Swimsuit).png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "치세(수영복)",
+              "baseId": "chise",
+              "atk": 54,
+              "hp": 56,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Chise_(Swimsuit).png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 132,
+      "points": 139,
       "questState": {
         "daily": {
           "date": "2026-05-28",
           "quests": [
             {
               "id": "gehenna10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -7211,8 +7199,8 @@
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 43,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -7222,12 +7210,12 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -7252,12 +7240,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 12,
-        "legendPoints": 11
+        "streak": 13,
+        "legendPoints": 12
       },
-      "totalGames": 32,
-      "totalWins": 27,
-      "totalFirsts": 25,
+      "totalGames": 33,
+      "totalWins": 28,
+      "totalFirsts": 26,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
