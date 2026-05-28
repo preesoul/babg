@@ -7197,7 +7197,7 @@
       "points": 132,
       "questState": {
         "daily": {
-          "date": "2026-05-27",
+          "date": "2026-05-28",
           "quests": [
             {
               "id": "gehenna10",
@@ -7205,13 +7205,13 @@
               "completed": false
             },
             {
-              "id": "discover3",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "play3",
-              "progress": 1,
+              "id": "kill10",
+              "progress": 0,
               "completed": false
             }
           ],
@@ -7246,7 +7246,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-05-27"
+        "_lastLoginDate": "2026-05-28"
       },
       "starterEnigmaGranted": true,
       "rank": {
