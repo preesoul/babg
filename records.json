@@ -7214,7 +7214,7 @@
           ]
         }
       ],
-      "points": 161,
+      "points": 151,
       "questState": {
         "daily": {
           "date": "2026-05-29",
@@ -7301,7 +7301,8 @@
         "trinity_nagisa",
         "*",
         "red_winter_minori",
-        "hkyk_kuzunoha"
+        "hkyk_kuzunoha",
+        "hkyk_showdown"
       ],
       "unlockedAbydos": [
         "satsuki",
