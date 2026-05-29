@@ -6494,66 +6494,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-13T10:17:39",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "만마전",
-              "baseId": "gehenna_pandemonium",
-              "atk": 73,
-              "hp": 65,
-              "tier": 7,
-              "kw": [
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Gehenna_pandemonium_Society.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아유무",
-              "baseId": "ayumu",
-              "atk": 11,
-              "hp": 8,
-              "tier": 3,
-              "kw": [],
-              "isSkin": false,
-              "img": "Ayumu.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 24,
-              "hp": 24,
-              "tier": 6,
-              "kw": [
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 80,
-              "hp": 77,
-              "tier": 7,
-              "kw": [
-                "pierce",
-                "reborn",
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-05-14T07:47:03",
           "placement": 1,
           "turn": 15,
@@ -7180,26 +7120,121 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-05-29T02:23:36",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 136,
+              "hp": 114,
+              "tier": 1,
+              "kw": [
+                "poison",
+                "shield",
+                "reborn",
+                "pierce",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "미도리(메이드)",
+              "baseId": "midori",
+              "atk": 140,
+              "hp": 114,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "poison",
+                "shield",
+                "windfury",
+                "reborn",
+                "selfdestruct",
+                "ranged"
+              ],
+              "isSkin": true,
+              "img": "Midori_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "모모이(메이드)",
+              "baseId": "momoi",
+              "atk": 146,
+              "hp": 154,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "shield",
+                "windfury",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Momoi_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "모모이(메이드)",
+              "baseId": "momoi",
+              "atk": 149,
+              "hp": 161,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "reborn",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Momoi_(Maid).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "유우카",
+              "baseId": "yuuka",
+              "atk": 100,
+              "hp": 108,
+              "tier": 3,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "windfury",
+                "poison",
+                "pierce"
+              ],
+              "isSkin": false,
+              "img": "Yuuka.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 139,
+      "points": 171,
       "questState": {
         "daily": {
-          "date": "2026-05-28",
+          "date": "2026-05-29",
           "quests": [
             {
-              "id": "gehenna10",
+              "id": "hyakkiyako10",
+              "progress": 6,
+              "completed": false
+            },
+            {
+              "id": "discover3",
+              "progress": 9,
+              "completed": true
+            },
+            {
+              "id": "win1",
               "progress": 1,
-              "completed": false
-            },
-            {
-              "id": "millennium10",
-              "progress": 0,
-              "completed": false
-            },
-            {
-              "id": "kill10",
-              "progress": 43,
               "completed": true
             }
           ],
@@ -7210,17 +7245,17 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 1,
-              "completed": false
+              "progress": 10,
+              "completed": true
             },
             {
               "id": "win3",
-              "progress": 2,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 9,
               "completed": false
             }
           ]
@@ -7240,12 +7275,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 13,
-        "legendPoints": 12
+        "streak": 14,
+        "legendPoints": 13
       },
-      "totalGames": 33,
-      "totalWins": 28,
-      "totalFirsts": 26,
+      "totalGames": 34,
+      "totalWins": 29,
+      "totalFirsts": 27,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
