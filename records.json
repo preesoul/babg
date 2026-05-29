@@ -3287,83 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-17T03:54:15",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미나(리코더)",
-              "baseId": "mina",
-              "atk": 23,
-              "hp": 27,
-              "tier": 2,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Mina_(Recorder).png",
-              "school": "산해경"
-            },
-            {
-              "name": "루미(어린이)",
-              "baseId": "rumi",
-              "atk": 33,
-              "hp": 35,
-              "tier": 5,
-              "kw": [
-                "reborn",
-                "shield",
-                "poison",
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Rumi_(Kid).png",
-              "school": "산해경"
-            },
-            {
-              "name": "슌",
-              "baseId": "shun",
-              "atk": 20,
-              "hp": 9,
-              "tier": 6,
-              "kw": [
-                "ranged"
-              ],
-              "isSkin": false,
-              "img": "Shun.png",
-              "school": "산해경"
-            },
-            {
-              "name": "레이죠",
-              "baseId": "reijo",
-              "atk": 16,
-              "hp": 14,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Reijo.png",
-              "school": "산해경"
-            },
-            {
-              "name": "레이죠",
-              "baseId": "reijo",
-              "atk": 16,
-              "hp": 14,
-              "tier": 3,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "Reijo.png",
-              "school": "산해경"
-            }
-          ]
-        },
-        {
           "date": "2026-05-22T00:16:28",
           "placement": 1,
           "turn": 16,
@@ -4005,9 +3928,78 @@
               "school": "총학생회"
             }
           ]
+        },
+        {
+          "date": "2026-05-29T12:53:39",
+          "placement": 1,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "쿠루미(사복)",
+              "baseId": "kurumi",
+              "atk": 47,
+              "hp": 59,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": true,
+              "img": "Kurumi_(Private).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 37,
+              "hp": 45,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "아유무(승무원)",
+              "baseId": "ayumu",
+              "atk": 42,
+              "hp": 34,
+              "tier": 3,
+              "kw": [],
+              "isSkin": true,
+              "img": "Ayumu_(flight).png",
+              "school": "총학생회"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 27,
+              "hp": 27,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코",
+              "baseId": "niko",
+              "atk": 27,
+              "hp": 27,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Niko.png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 404,
+      "points": 406,
       "questState": {
         "daily": {
           "date": "2026-05-29",
@@ -4134,12 +4126,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 5,
-        "legendPoints": 34
+        "streak": 6,
+        "legendPoints": 35
       },
-      "totalGames": 47,
-      "totalWins": 44,
-      "totalFirsts": 38,
+      "totalGames": 48,
+      "totalWins": 45,
+      "totalFirsts": 39,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
