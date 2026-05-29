@@ -3287,81 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-17T01:49:28",
-          "placement": 2,
-          "turn": 19,
-          "tier": 6,
-          "board": [
-            {
-              "name": "시미코(악의 간부)",
-              "baseId": "shimiko",
-              "atk": 42,
-              "hp": 38,
-              "tier": 2,
-              "kw": [
-                "cleave",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Shimiko_Evil_boss.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "우이(수영복)",
-              "baseId": "ui",
-              "atk": 51,
-              "hp": 49,
-              "tier": 5,
-              "kw": [
-                "preemptive",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Ui_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나타(수영복)",
-              "baseId": "hinata",
-              "atk": 29,
-              "hp": 33,
-              "tier": 4,
-              "kw": [
-                "windfury"
-              ],
-              "isSkin": true,
-              "img": "Hinata_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "츠루기(수영복)",
-              "baseId": "tsurugi",
-              "atk": 51,
-              "hp": 51,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsurugi_(Swimsuit).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리",
-              "baseId": "mari",
-              "atk": 22,
-              "hp": 24,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Mari.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-17T03:54:15",
           "placement": 1,
           "turn": 17,
@@ -4008,22 +3933,94 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-05-29T05:14:38",
+          "placement": 1,
+          "turn": 14,
+          "tier": 6,
+          "board": [
+            {
+              "name": "슌(어린이)",
+              "baseId": "shun",
+              "atk": 21,
+              "hp": 15,
+              "tier": 6,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shun_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "키키",
+              "baseId": "shanhai_kiki",
+              "atk": 17,
+              "hp": 23,
+              "tier": 7,
+              "kw": [
+                "ambush",
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "unique/Kiki.png",
+              "school": "산해경"
+            },
+            {
+              "name": "레이죠(사복)",
+              "baseId": "reijo",
+              "atk": 9,
+              "hp": 5,
+              "tier": 3,
+              "kw": [
+                "windfury",
+                "pierce"
+              ],
+              "isSkin": true,
+              "img": "Reijo_(Casual).png",
+              "school": "산해경"
+            },
+            {
+              "name": "루미(어린이)",
+              "baseId": "rumi",
+              "atk": 11,
+              "hp": 13,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Rumi_(Kid).png",
+              "school": "산해경"
+            },
+            {
+              "name": "린",
+              "baseId": "lin",
+              "atk": 8,
+              "hp": 8,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Lin.png",
+              "school": "총학생회"
+            }
+          ]
         }
       ],
-      "points": 392,
+      "points": 404,
       "questState": {
         "daily": {
           "date": "2026-05-29",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 55,
+              "completed": true
             },
             {
               "id": "millennium10",
@@ -4137,12 +4134,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 4,
-        "legendPoints": 33
+        "streak": 5,
+        "legendPoints": 34
       },
-      "totalGames": 46,
-      "totalWins": 43,
-      "totalFirsts": 37,
+      "totalGames": 47,
+      "totalWins": 44,
+      "totalFirsts": 38,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
