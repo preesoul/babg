@@ -3287,71 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-22T00:29:21",
-          "placement": 1,
-          "turn": 13,
-          "tier": 6,
-          "board": [
-            {
-              "name": "츠루기",
-              "baseId": "tsurugi",
-              "atk": 13,
-              "hp": 13,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Tsurugi.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "마리(아이돌)",
-              "baseId": "mari",
-              "atk": 20,
-              "hp": 22,
-              "tier": 1,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mari_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "히나타",
-              "baseId": "hinata",
-              "atk": 9,
-              "hp": 11,
-              "tier": 4,
-              "kw": [],
-              "isSkin": false,
-              "img": "Hinata.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "사쿠라코(아이돌)",
-              "baseId": "sakurako",
-              "atk": 15,
-              "hp": 15,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Sakurako_(Idol).png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(세이아 호스트)",
-              "baseId": "trinity_seia",
-              "atk": 0,
-              "hp": 2,
-              "tier": 7,
-              "kw": [],
-              "isSkin": false,
-              "img": "unique/Trinity_seia.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-22T00:47:19",
           "placement": 2,
           "turn": 18,
@@ -3963,27 +3898,101 @@
               "school": "산해경"
             }
           ]
+        },
+        {
+          "date": "2026-05-30T10:32:45",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "카즈사(밴드)",
+              "baseId": "kazusa",
+              "atk": 22,
+              "hp": 16,
+              "tier": 2,
+              "kw": [
+                "pierce",
+                "windfury",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Kazusa_(Band).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 7,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코(아이돌)",
+              "baseId": "sakurako",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sakurako_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네",
+              "baseId": "mine",
+              "atk": 6,
+              "hp": 6,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn",
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Mine.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 408,
+      "points": 425,
       "questState": {
         "daily": {
           "date": "2026-05-30",
           "quests": [
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 4,
+              "completed": true
             },
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 60,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4092,12 +4101,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 7,
-        "legendPoints": 36
+        "streak": 8,
+        "legendPoints": 37
       },
-      "totalGames": 49,
-      "totalWins": 46,
-      "totalFirsts": 40,
+      "totalGames": 50,
+      "totalWins": 47,
+      "totalFirsts": 41,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
