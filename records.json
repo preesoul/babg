@@ -6458,97 +6458,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-14T07:47:03",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "나구사(수영복)",
-              "baseId": "nagusa",
-              "atk": 43,
-              "hp": 47,
-              "tier": 6,
-              "kw": [
-                "preemptive",
-                "reborn",
-                "shield",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Nagusa_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "키쿄(수영복)",
-              "baseId": "kikyou",
-              "atk": 33,
-              "hp": 33,
-              "tier": 4,
-              "kw": [
-                "windfury",
-                "preemptive",
-                "ambush",
-                "reborn",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Kikyou_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "유카리(수영복)",
-              "baseId": "yukari",
-              "atk": 29,
-              "hp": 27,
-              "tier": 2,
-              "kw": [
-                "reborn",
-                "preemptive",
-                "shield",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Yukari_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "렌게(수영복)",
-              "baseId": "renge",
-              "atk": 31,
-              "hp": 29,
-              "tier": 3,
-              "kw": [
-                "shield",
-                "preemptive",
-                "reborn",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Renge_(Swimsuit).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "최강일각라이온",
-              "baseId": "hkyk_saikyo",
-              "atk": 44,
-              "hp": 44,
-              "tier": 7,
-              "kw": [
-                "taunt",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "unique/HKYK_Saikyo_ikaku_raion.png",
-              "school": "백귀야행"
-            }
-          ]
-        },
-        {
           "date": "2026-05-14T09:45:31",
           "placement": 1,
           "turn": 15,
@@ -7179,17 +7088,94 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-06-04T08:13:04",
+          "placement": 1,
+          "turn": 11,
+          "tier": 6,
+          "board": [
+            {
+              "name": "티파티(세이아 호스트)",
+              "baseId": "trinity_seia",
+              "atk": 45,
+              "hp": 49,
+              "tier": 7,
+              "kw": [
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_seia.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(미카 호스트)",
+              "baseId": "trinity_mika",
+              "atk": 69,
+              "hp": 67,
+              "tier": 7,
+              "kw": [
+                "reborn",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Trinity_mika.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 34,
+              "hp": 34,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "마리(아이돌)",
+              "baseId": "mari",
+              "atk": 48,
+              "hp": 54,
+              "tier": 1,
+              "kw": [
+                "taunt",
+                "reborn",
+                "shield",
+                "poison"
+              ],
+              "isSkin": true,
+              "img": "Mari_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "미네(아이돌)",
+              "baseId": "mine",
+              "atk": 49,
+              "hp": 45,
+              "tier": 6,
+              "kw": [
+                "taunt",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": true,
+              "img": "Mine_(Idol).png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 151,
+      "points": 173,
       "questState": {
         "daily": {
           "date": "2026-06-04",
           "quests": [
             {
               "id": "win1",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "discover3",
@@ -7198,8 +7184,8 @@
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 27,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -7214,8 +7200,8 @@
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "skin10",
@@ -7239,12 +7225,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 14,
-        "legendPoints": 13
+        "streak": 15,
+        "legendPoints": 14
       },
-      "totalGames": 34,
-      "totalWins": 29,
-      "totalFirsts": 27,
+      "totalGames": 35,
+      "totalWins": 30,
+      "totalFirsts": 28,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
