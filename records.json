@@ -6458,56 +6458,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-14T09:45:31",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "게헨나 선도부",
-              "baseId": "gehenna_prefect",
-              "atk": 113,
-              "hp": 105,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury",
-                "cleave"
-              ],
-              "isSkin": false,
-              "img": "unique/Gehenna_PrefectTeam.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 77,
-              "hp": 75,
-              "tier": 7,
-              "kw": [
-                "pierce",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "세나(사복)",
-              "baseId": "sena",
-              "atk": 39,
-              "hp": 33,
-              "tier": 5,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Sena_(Casual).png",
-              "school": "게헨나"
-            }
-          ]
-        },
-        {
           "date": "2026-05-15T05:46:12",
           "placement": 1,
           "turn": 14,
@@ -7165,9 +7115,36 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-06-04T08:48:03",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "쿠즈노하",
+              "baseId": "hkyk_kuzunoha",
+              "atk": 261,
+              "hp": 252,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "poison",
+                "reborn",
+                "taunt",
+                "windfury",
+                "ranged",
+                "selfdestruct"
+              ],
+              "isSkin": false,
+              "img": "unique/HKYK_Kuzunoha.png",
+              "school": "백귀야행"
+            }
+          ]
         }
       ],
-      "points": 173,
+      "points": 190,
       "questState": {
         "daily": {
           "date": "2026-06-04",
@@ -7179,8 +7156,8 @@
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 13,
+              "completed": true
             },
             {
               "id": "kill10",
@@ -7195,8 +7172,8 @@
           "quests": [
             {
               "id": "discover10",
-              "progress": 0,
-              "completed": false
+              "progress": 13,
+              "completed": true
             },
             {
               "id": "hidden_win",
@@ -7205,7 +7182,7 @@
             },
             {
               "id": "skin10",
-              "progress": 0,
+              "progress": 4,
               "completed": false
             }
           ]
@@ -7225,12 +7202,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 15,
-        "legendPoints": 14
+        "streak": 16,
+        "legendPoints": 15
       },
-      "totalGames": 35,
-      "totalWins": 30,
-      "totalFirsts": 28,
+      "totalGames": 36,
+      "totalWins": 31,
+      "totalFirsts": 29,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
