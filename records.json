@@ -7147,42 +7147,42 @@
       "points": 190,
       "questState": {
         "daily": {
-          "date": "2026-06-04",
+          "date": "2026-06-09",
           "quests": [
             {
-              "id": "win1",
-              "progress": 1,
-              "completed": true
+              "id": "hyakkiyako10",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "discover3",
-              "progress": 13,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "kill10",
-              "progress": 27,
-              "completed": true
+              "id": "trinity10",
+              "progress": 0,
+              "completed": false
             }
           ],
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-06-01",
+          "weekStart": "2026-06-08",
           "quests": [
             {
               "id": "discover10",
-              "progress": 13,
-              "completed": true
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "hidden_win",
-              "progress": 1,
-              "completed": true
+              "id": "play10",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "skin10",
-              "progress": 4,
+              "id": "hidden1",
+              "progress": 0,
               "completed": false
             }
           ]
@@ -7196,7 +7196,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-06-04"
+        "_lastLoginDate": "2026-06-09"
       },
       "starterEnigmaGranted": true,
       "rank": {
