@@ -6458,42 +6458,6 @@
     "닉네임": {
       "records": [
         {
-          "date": "2026-05-15T05:46:12",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "정의실현부",
-              "baseId": "trinity_justice",
-              "atk": 72,
-              "hp": 52,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "windfury"
-              ],
-              "isSkin": false,
-              "img": "unique/Justice_Task_Force.png",
-              "school": "트리니티"
-            },
-            {
-              "name": "티파티(미카 호스트)",
-              "baseId": "trinity_mika",
-              "atk": 40,
-              "hp": 40,
-              "tier": 7,
-              "kw": [
-                "reborn",
-                "poison"
-              ],
-              "isSkin": false,
-              "img": "unique/Trinity_mika.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-15T06:52:01",
           "placement": 1,
           "turn": 16,
@@ -7142,16 +7106,94 @@
               "school": "백귀야행"
             }
           ]
+        },
+        {
+          "date": "2026-06-10T05:41:58",
+          "placement": 1,
+          "turn": 13,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 56,
+              "hp": 66,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 466,
+              "hp": 474,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 458,
+              "hp": 466,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "히마리(임전)",
+              "baseId": "himari",
+              "atk": 68,
+              "hp": 72,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Himari_(Battle).png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "우타하(치어리더)",
+              "baseId": "utaha",
+              "atk": 14,
+              "hp": 16,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": true,
+              "img": "Utaha_(Cheerleader).png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 190,
+      "points": 192,
       "questState": {
         "daily": {
           "date": "2026-06-10",
           "quests": [
             {
               "id": "play3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -7177,7 +7219,7 @@
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -7202,12 +7244,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 16,
-        "legendPoints": 15
+        "streak": 17,
+        "legendPoints": 16
       },
-      "totalGames": 36,
-      "totalWins": 31,
-      "totalFirsts": 29,
+      "totalGames": 37,
+      "totalWins": 32,
+      "totalFirsts": 30,
       "recruitedTier7": [
         "gehenna_traingun",
         "millennium_nameless",
