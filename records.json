@@ -7147,20 +7147,20 @@
       "points": 190,
       "questState": {
         "daily": {
-          "date": "2026-06-09",
+          "date": "2026-06-10",
           "quests": [
             {
-              "id": "hyakkiyako10",
+              "id": "play3",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "discover3",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "trinity10",
+              "id": "skin3",
               "progress": 0,
               "completed": false
             }
@@ -7196,7 +7196,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-06-09"
+        "_lastLoginDate": "2026-06-10"
       },
       "starterEnigmaGranted": true,
       "rank": {
