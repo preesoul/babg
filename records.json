@@ -3287,78 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-22T00:47:19",
-          "placement": 2,
-          "turn": 18,
-          "tier": 6,
-          "board": [
-            {
-              "name": "미유(수영복)",
-              "baseId": "miyu",
-              "atk": 10,
-              "hp": 18,
-              "tier": 2,
-              "kw": [
-                "ranged",
-                "windfury",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Miyu_(Swimsuit).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "쿠루미(사복)",
-              "baseId": "kurumi",
-              "atk": 16,
-              "hp": 26,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "survive",
-                "shield",
-                "poison"
-              ],
-              "isSkin": true,
-              "img": "Kurumi_(Private).png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "니코",
-              "baseId": "niko",
-              "atk": 7,
-              "hp": 7,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Niko.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "리오",
-              "baseId": "rio",
-              "atk": 9,
-              "hp": 9,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Rio.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "칸나(수영복)",
-              "baseId": "kanna",
-              "atk": 5,
-              "hp": 5,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kanna_(Swimsuit).png",
-              "school": "발키리/SRT"
-            }
-          ]
-        },
-        {
           "date": "2026-05-22T00:55:00",
           "placement": 7,
           "turn": 11,
@@ -3972,9 +3900,83 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-06-14T22:30:22",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "미유(수영복)",
+              "baseId": "miyu",
+              "atk": 28,
+              "hp": 38,
+              "tier": 2,
+              "kw": [
+                "ranged",
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Miyu_(Swimsuit).png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "칸나",
+              "baseId": "kanna",
+              "atk": 3,
+              "hp": 3,
+              "tier": 6,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Kanna.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 14,
+              "hp": 20,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "쿠루미",
+              "baseId": "kurumi",
+              "atk": 12,
+              "hp": 18,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "survive"
+              ],
+              "isSkin": false,
+              "img": "Kurumi.png",
+              "school": "발키리/SRT"
+            },
+            {
+              "name": "니코(사복)",
+              "baseId": "niko",
+              "atk": 17,
+              "hp": 17,
+              "tier": 5,
+              "kw": [],
+              "isSkin": true,
+              "img": "Niko_(Private).png",
+              "school": "발키리/SRT"
+            }
+          ]
         }
       ],
-      "points": 425,
+      "points": 437,
       "questState": {
         "daily": {
           "date": "2026-06-15",
@@ -3986,13 +3988,13 @@
             },
             {
               "id": "discover3",
-              "progress": 0,
-              "completed": false
+              "progress": 3,
+              "completed": true
             },
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 61,
+              "completed": true
             }
           ],
           "rerolled": false
@@ -4002,7 +4004,7 @@
           "quests": [
             {
               "id": "win3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -4012,7 +4014,7 @@
             },
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ]
@@ -4101,12 +4103,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 8,
-        "legendPoints": 37
+        "streak": 9,
+        "legendPoints": 38
       },
-      "totalGames": 50,
-      "totalWins": 47,
-      "totalFirsts": 41,
+      "totalGames": 51,
+      "totalWins": 48,
+      "totalFirsts": 42,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
