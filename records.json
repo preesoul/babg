@@ -3982,17 +3982,17 @@
       "points": 449,
       "questState": {
         "daily": {
-          "date": "2026-06-17",
+          "date": "2026-06-18",
           "quests": [
             {
-              "id": "kill10",
-              "progress": 57,
-              "completed": true
+              "id": "play3",
+              "progress": 0,
+              "completed": false
             },
             {
-              "id": "trinity10",
-              "progress": 14,
-              "completed": true
+              "id": "win1",
+              "progress": 0,
+              "completed": false
             },
             {
               "id": "hyakkiyako10",
@@ -4031,7 +4031,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-06-17"
+        "_lastLoginDate": "2026-06-18"
       },
       "recruitedTier7": [
         "trinity_mika",
