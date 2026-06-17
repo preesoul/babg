@@ -3287,75 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-22T00:55:00",
-          "placement": 7,
-          "turn": 11,
-          "tier": 5,
-          "board": [
-            {
-              "name": "아스나",
-              "baseId": "asuna",
-              "atk": 7,
-              "hp": 6,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Asuna.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "토키(바니걸)",
-              "baseId": "toki",
-              "atk": 9,
-              "hp": 15,
-              "tier": 2,
-              "kw": [
-                "survive"
-              ],
-              "isSkin": true,
-              "img": "Toki_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "아카네(버니걸)",
-              "baseId": "akane",
-              "atk": 5,
-              "hp": 9,
-              "tier": 3,
-              "kw": [],
-              "isSkin": true,
-              "img": "Akane_(Bunny_Girl).png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "니코",
-              "baseId": "niko",
-              "atk": 5,
-              "hp": 5,
-              "tier": 5,
-              "kw": [],
-              "isSkin": false,
-              "img": "Niko.png",
-              "school": "발키리/SRT"
-            },
-            {
-              "name": "미네",
-              "baseId": "mine",
-              "atk": 6,
-              "hp": 6,
-              "tier": 6,
-              "kw": [
-                "taunt",
-                "shield",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Mine.png",
-              "school": "트리니티"
-            }
-          ]
-        },
-        {
           "date": "2026-05-25T14:11:56",
           "placement": 1,
           "turn": 15,
@@ -3974,22 +3905,94 @@
               "school": "발키리/SRT"
             }
           ]
+        },
+        {
+          "date": "2026-06-17T06:13:24",
+          "placement": 2,
+          "turn": 17,
+          "tier": 6,
+          "board": [
+            {
+              "name": "우이",
+              "baseId": "ui",
+              "atk": 28,
+              "hp": 23,
+              "tier": 5,
+              "kw": [
+                "preemptive",
+                "shield",
+                "windfury"
+              ],
+              "isSkin": false,
+              "img": "Ui.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "시미코(악의 간부)",
+              "baseId": "shimiko",
+              "atk": 34,
+              "hp": 26,
+              "tier": 2,
+              "kw": [
+                "cleave",
+                "shield"
+              ],
+              "isSkin": true,
+              "img": "Shimiko_Evil_boss.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타(수영복)",
+              "baseId": "hinata",
+              "atk": 62,
+              "hp": 70,
+              "tier": 4,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Hinata_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코",
+              "baseId": "sakurako",
+              "atk": 11,
+              "hp": 11,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sakurako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히후미",
+              "baseId": "hifumi",
+              "atk": 3,
+              "hp": 4,
+              "tier": 3,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hifumi.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 437,
+      "points": 449,
       "questState": {
         "daily": {
           "date": "2026-06-17",
           "quests": [
             {
               "id": "kill10",
-              "progress": 0,
-              "completed": false
+              "progress": 57,
+              "completed": true
             },
             {
               "id": "trinity10",
-              "progress": 0,
-              "completed": false
+              "progress": 14,
+              "completed": true
             },
             {
               "id": "hyakkiyako10",
@@ -4014,7 +4017,7 @@
             },
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             }
           ]
@@ -4103,11 +4106,11 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 9,
-        "legendPoints": 38
+        "streak": 0,
+        "legendPoints": 37
       },
-      "totalGames": 51,
-      "totalWins": 48,
+      "totalGames": 52,
+      "totalWins": 49,
       "totalFirsts": 42,
       "starterEnigmaGranted": true
     },
