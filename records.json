@@ -3287,77 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-25T14:11:56",
-          "placement": 1,
-          "turn": 15,
-          "tier": 6,
-          "board": [
-            {
-              "name": "흥신소 68",
-              "baseId": "gehenna_p68",
-              "atk": 67,
-              "hp": 62,
-              "tier": 7,
-              "kw": [
-                "pierce",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "unique/Problem_solver_68.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아코",
-              "baseId": "ako",
-              "atk": 13,
-              "hp": 15,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Ako.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "아코",
-              "baseId": "ako",
-              "atk": 3,
-              "hp": 5,
-              "tier": 4,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": false,
-              "img": "Ako.png",
-              "school": "게헨나"
-            },
-            {
-              "name": "린(승무원)",
-              "baseId": "lin",
-              "atk": 17,
-              "hp": 17,
-              "tier": 6,
-              "kw": [],
-              "isSkin": true,
-              "img": "Lin_(flight).png",
-              "school": "총학생회"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 8,
-              "hp": 8,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-05-25T14:23:33",
           "placement": 1,
           "turn": 14,
@@ -3977,21 +3906,88 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-06-19T14:12:39",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "아코",
+              "baseId": "ako",
+              "atk": 9,
+              "hp": 11,
+              "tier": 4,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "Ako.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "만마전",
+              "baseId": "gehenna_pandemonium",
+              "atk": 56,
+              "hp": 52,
+              "tier": 7,
+              "kw": [
+                "taunt"
+              ],
+              "isSkin": false,
+              "img": "unique/Gehenna_pandemonium_Society.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "세나",
+              "baseId": "sena",
+              "atk": 11,
+              "hp": 8,
+              "tier": 5,
+              "kw": [],
+              "isSkin": false,
+              "img": "Sena.png",
+              "school": "게헨나"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 13,
+              "hp": 13,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "리오",
+              "baseId": "rio",
+              "atk": 13,
+              "hp": 13,
+              "tier": 6,
+              "kw": [],
+              "isSkin": false,
+              "img": "Rio.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 449,
+      "points": 461,
       "questState": {
         "daily": {
           "date": "2026-06-19",
           "quests": [
             {
               "id": "millennium10",
-              "progress": 0,
+              "progress": 6,
               "completed": false
             },
             {
               "id": "skin3",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
@@ -4007,17 +4003,17 @@
           "quests": [
             {
               "id": "win3",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "play10",
-              "progress": 2,
+              "progress": 3,
               "completed": false
             }
           ]
@@ -4106,12 +4102,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 0,
-        "legendPoints": 37
+        "streak": 1,
+        "legendPoints": 38
       },
-      "totalGames": 52,
-      "totalWins": 49,
-      "totalFirsts": 42,
+      "totalGames": 53,
+      "totalWins": 50,
+      "totalFirsts": 43,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
