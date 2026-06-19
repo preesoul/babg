@@ -3982,15 +3982,15 @@
       "points": 449,
       "questState": {
         "daily": {
-          "date": "2026-06-18",
+          "date": "2026-06-19",
           "quests": [
             {
-              "id": "play3",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "win1",
+              "id": "skin3",
               "progress": 0,
               "completed": false
             },
@@ -4031,7 +4031,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-06-18"
+        "_lastLoginDate": "2026-06-19"
       },
       "recruitedTier7": [
         "trinity_mika",
