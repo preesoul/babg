@@ -3978,10 +3978,10 @@
       "points": 461,
       "questState": {
         "daily": {
-          "date": "2026-08-11",
+          "date": "2026-10-13",
           "quests": [
             {
-              "id": "play3",
+              "id": "discover3",
               "progress": 0,
               "completed": false
             },
@@ -3991,7 +3991,7 @@
               "completed": false
             },
             {
-              "id": "trinity10",
+              "id": "win1",
               "progress": 0,
               "completed": false
             }
@@ -3999,13 +3999,8 @@
           "rerolled": false
         },
         "weekly": {
-          "weekStart": "2026-08-10",
+          "weekStart": "2026-10-12",
           "quests": [
-            {
-              "id": "discover10",
-              "progress": 0,
-              "completed": false
-            },
             {
               "id": "play10",
               "progress": 0,
@@ -4013,6 +4008,11 @@
             },
             {
               "id": "win3",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "skin10",
               "progress": 0,
               "completed": false
             }
@@ -4027,7 +4027,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-08-11"
+        "_lastLoginDate": "2026-10-13"
       },
       "recruitedTier7": [
         "trinity_mika",
