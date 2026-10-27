@@ -3287,79 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-25T14:23:33",
-          "placement": 1,
-          "turn": 14,
-          "tier": 6,
-          "board": [
-            {
-              "name": "말쿠트",
-              "baseId": "millennium_malkuth",
-              "atk": 10,
-              "hp": 20,
-              "tier": 7,
-              "kw": [
-                "shield",
-                "preemptive"
-              ],
-              "isSkin": false,
-              "img": "unique/Millennium_Malkuth.png",
-              "school": "밀레니엄"
-            },
-            {
-              "name": "키키",
-              "baseId": "shanhai_kiki",
-              "atk": 20,
-              "hp": 22,
-              "tier": 7,
-              "kw": [
-                "ambush"
-              ],
-              "isSkin": false,
-              "img": "unique/Kiki.png",
-              "school": "산해경"
-            },
-            {
-              "name": "슌(어린이)",
-              "baseId": "shun",
-              "atk": 31,
-              "hp": 25,
-              "tier": 6,
-              "kw": [
-                "ranged",
-                "shield"
-              ],
-              "isSkin": true,
-              "img": "Shun_(Kid).png",
-              "school": "산해경"
-            },
-            {
-              "name": "사야(사복)",
-              "baseId": "saya",
-              "atk": 83,
-              "hp": 81,
-              "tier": 4,
-              "kw": [],
-              "isSkin": true,
-              "img": "Saya_(Casual).png",
-              "school": "산해경"
-            },
-            {
-              "name": "미나(리코더)",
-              "baseId": "mina",
-              "atk": 19,
-              "hp": 23,
-              "tier": 2,
-              "kw": [
-                "taunt"
-              ],
-              "isSkin": true,
-              "img": "Mina_(Recorder).png",
-              "school": "산해경"
-            }
-          ]
-        },
-        {
           "date": "2026-05-25T14:39:42",
           "placement": 1,
           "turn": 17,
@@ -3973,9 +3900,74 @@
               "school": "밀레니엄"
             }
           ]
+        },
+        {
+          "date": "2026-10-27T06:12:04",
+          "placement": 1,
+          "turn": 15,
+          "tier": 6,
+          "board": [
+            {
+              "name": "츠루기(수영복)",
+              "baseId": "tsurugi",
+              "atk": 19,
+              "hp": 19,
+              "tier": 6,
+              "kw": [
+                "windfury"
+              ],
+              "isSkin": true,
+              "img": "Tsurugi_(Swimsuit).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 3,
+              "hp": 5,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "히나타",
+              "baseId": "hinata",
+              "atk": 13,
+              "hp": 15,
+              "tier": 4,
+              "kw": [],
+              "isSkin": false,
+              "img": "Hinata.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "사쿠라코(아이돌)",
+              "baseId": "sakurako",
+              "atk": 15,
+              "hp": 15,
+              "tier": 6,
+              "kw": [],
+              "isSkin": true,
+              "img": "Sakurako_(Idol).png",
+              "school": "트리니티"
+            },
+            {
+              "name": "티파티(나기사 호스트)",
+              "baseId": "trinity_nagisa",
+              "atk": 10,
+              "hp": 10,
+              "tier": 7,
+              "kw": [],
+              "isSkin": false,
+              "img": "unique/Trinity_nagisa.png",
+              "school": "트리니티"
+            }
+          ]
         }
       ],
-      "points": 461,
+      "points": 473,
       "questState": {
         "daily": {
           "date": "2026-10-27",
@@ -4003,13 +3995,13 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             },
             {
               "id": "hidden_win",
-              "progress": 0,
-              "completed": false
+              "progress": 1,
+              "completed": true
             },
             {
               "id": "skin10",
@@ -4102,12 +4094,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 1,
-        "legendPoints": 38
+        "streak": 2,
+        "legendPoints": 39
       },
-      "totalGames": 53,
-      "totalWins": 50,
-      "totalFirsts": 43,
+      "totalGames": 54,
+      "totalWins": 51,
+      "totalFirsts": 44,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
