@@ -3287,76 +3287,6 @@
     "남민철": {
       "records": [
         {
-          "date": "2026-05-25T14:39:42",
-          "placement": 1,
-          "turn": 17,
-          "tier": 6,
-          "board": [
-            {
-              "name": "치세",
-              "baseId": "chise",
-              "atk": 20,
-              "hp": 21,
-              "tier": 4,
-              "kw": [
-                "taunt",
-                "reborn"
-              ],
-              "isSkin": false,
-              "img": "Chise.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "와카모",
-              "baseId": "wakamo",
-              "atk": 61,
-              "hp": 63,
-              "tier": 6,
-              "kw": [
-                "preemptive",
-                "windfury",
-                "shield"
-              ],
-              "isSkin": false,
-              "img": "Wakamo.png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "츠쿠요(드레스)",
-              "baseId": "tsukuyo",
-              "atk": 44,
-              "hp": 42,
-              "tier": 2,
-              "kw": [],
-              "isSkin": true,
-              "img": "Tsukuyo_(Dress).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "카에데(가이드)",
-              "baseId": "kaede",
-              "atk": 27,
-              "hp": 27,
-              "tier": 1,
-              "kw": [],
-              "isSkin": true,
-              "img": "Kaede_(Guide).png",
-              "school": "백귀야행"
-            },
-            {
-              "name": "린",
-              "baseId": "lin",
-              "atk": 14,
-              "hp": 14,
-              "tier": 6,
-              "kw": [],
-              "isSkin": false,
-              "img": "Lin.png",
-              "school": "총학생회"
-            }
-          ]
-        },
-        {
           "date": "2026-05-26T01:59:49",
           "placement": 1,
           "turn": 17,
@@ -3965,9 +3895,86 @@
               "school": "트리니티"
             }
           ]
+        },
+        {
+          "date": "2026-10-27T06:24:36",
+          "placement": 1,
+          "turn": 16,
+          "tier": 6,
+          "board": [
+            {
+              "name": "말쿠트",
+              "baseId": "millennium_malkuth",
+              "atk": 10,
+              "hp": 20,
+              "tier": 7,
+              "kw": [
+                "shield",
+                "preemptive",
+                "reborn"
+              ],
+              "isSkin": false,
+              "img": "unique/Millennium_Malkuth.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "Cleaning&Clearing",
+              "baseId": "millennium_cc",
+              "atk": 63,
+              "hp": 64,
+              "tier": 7,
+              "kw": [
+                "ranged",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "unique/Cleaning_Clearing.png",
+              "school": "밀레니엄"
+            },
+            {
+              "name": "하나코",
+              "baseId": "hanako",
+              "atk": 9,
+              "hp": 12,
+              "tier": 4,
+              "kw": [
+                "poison"
+              ],
+              "isSkin": false,
+              "img": "Hanako.png",
+              "school": "트리니티"
+            },
+            {
+              "name": "츠바키",
+              "baseId": "tsubaki",
+              "atk": 13,
+              "hp": 12,
+              "tier": 4,
+              "kw": [
+                "taunt",
+                "shield"
+              ],
+              "isSkin": false,
+              "img": "Tsubaki.png",
+              "school": "백귀야행"
+            },
+            {
+              "name": "우타하",
+              "baseId": "utaha",
+              "atk": 11,
+              "hp": 11,
+              "tier": 5,
+              "kw": [
+                "ambush"
+              ],
+              "isSkin": false,
+              "img": "Utaha.png",
+              "school": "밀레니엄"
+            }
+          ]
         }
       ],
-      "points": 473,
+      "points": 475,
       "questState": {
         "daily": {
           "date": "2026-10-27",
@@ -3984,7 +3991,7 @@
             },
             {
               "id": "trinity10",
-              "progress": 0,
+              "progress": 1,
               "completed": false
             }
           ],
@@ -3995,7 +4002,7 @@
           "quests": [
             {
               "id": "play10",
-              "progress": 1,
+              "progress": 2,
               "completed": false
             },
             {
@@ -4094,12 +4101,12 @@
       "rank": {
         "tier": 0,
         "stars": 0,
-        "streak": 2,
-        "legendPoints": 39
+        "streak": 3,
+        "legendPoints": 40
       },
-      "totalGames": 54,
-      "totalWins": 51,
-      "totalFirsts": 44,
+      "totalGames": 55,
+      "totalWins": 52,
+      "totalFirsts": 45,
       "starterEnigmaGranted": true
     },
     "킹갓프리소울": {
