@@ -3977,21 +3977,21 @@
       "points": 475,
       "questState": {
         "daily": {
-          "date": "2026-10-27",
+          "date": "2026-10-28",
           "quests": [
-            {
-              "id": "discover3",
-              "progress": 0,
-              "completed": false
-            },
             {
               "id": "skin3",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "trinity10",
-              "progress": 1,
+              "id": "kill10",
+              "progress": 0,
+              "completed": false
+            },
+            {
+              "id": "win1",
+              "progress": 0,
               "completed": false
             }
           ],
@@ -4026,7 +4026,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-10-27"
+        "_lastLoginDate": "2026-10-28"
       },
       "recruitedTier7": [
         "trinity_mika",
