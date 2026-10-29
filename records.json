@@ -3977,20 +3977,20 @@
       "points": 475,
       "questState": {
         "daily": {
-          "date": "2026-10-28",
+          "date": "2026-10-29",
           "quests": [
             {
-              "id": "skin3",
+              "id": "millennium10",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "kill10",
+              "id": "discover3",
               "progress": 0,
               "completed": false
             },
             {
-              "id": "win1",
+              "id": "gehenna10",
               "progress": 0,
               "completed": false
             }
@@ -4026,7 +4026,7 @@
             }
           ]
         },
-        "_lastLoginDate": "2026-10-28"
+        "_lastLoginDate": "2026-10-29"
       },
       "recruitedTier7": [
         "trinity_mika",
